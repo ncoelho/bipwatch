@@ -18,6 +18,7 @@ site/            Astro site: BIP pages and a static JSON API
 ## Commands
 
 ```sh
+nvm use                                # Node from .nvmrc (Astro needs >=22.23.4)
 npm install
 npm run validate                       # schema and consistency checks
 npm run validate -- --bips ../bips     # also match spec quotes against a clone of bitcoin/bips
