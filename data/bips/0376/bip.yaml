@@ -12,6 +12,9 @@ discussion:
   - date: 2024-05-17
     url: https://delvingbitcoin.org/t/bip352-psbt-support/877/30
     title: Original discussion (Delving Bitcoin)
+  - date: 2025-12-05
+    url: https://gist.github.com/nymius/b3dd0b8a08c6735d617e6216b73c4260
+    title: First draft
   - date: 2025-12-15
     url: https://gnusha.org/pi/bitcoindev/R53cG3TeXgXDUUS4kH_q226GlaFCjI0DZVT6mdTQzSQdj3RnNqWA-bFT7uGgGQFJG6938kDGvDJVoFQj8ItEMsJ6NyOjCTvpVEarYiyW6-8=@proton.me/
     title: "[BIP Proposal] Add PSBT_IN_SP_TWEAK field"
