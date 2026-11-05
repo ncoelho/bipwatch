@@ -23,7 +23,15 @@ const report = (level: Level, file: string, msg: string) => findings.push({ leve
 
 const args = process.argv.slice(2);
 const bipsFlag = args.indexOf('--bips');
-const bipsRepo = bipsFlag >= 0 ? resolve(args[bipsFlag + 1] ?? '') : process.env.BIPS_REPO;
+// npm runs workspace scripts from packages/data, so resolve relative paths
+// against the directory the user ran npm from (INIT_CWD).
+const invokedFrom = process.env.INIT_CWD ?? process.cwd();
+const bipsArg = bipsFlag >= 0 ? args[bipsFlag + 1] : process.env.BIPS_REPO;
+const bipsRepo = bipsArg ? resolve(invokedFrom, bipsArg) : undefined;
+if (bipsRepo && !existsSync(join(bipsRepo, '.git'))) {
+  console.error(`ERROR  --bips ${bipsArg}: no git repository at ${bipsRepo}`);
+  process.exit(1);
+}
 
 const dataDir = findDataDir();
 const rel = (p: string) => p.replace(dataDir + '/', 'data/');
