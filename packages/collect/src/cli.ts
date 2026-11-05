@@ -5,11 +5,13 @@ import { runCollector } from './run.ts';
 import type { Collector, SourceId } from './types.ts';
 import { bipsRepoCollector } from './collectors/bips-repo.ts';
 import { delvingCollector } from './collectors/delving.ts';
+import { mailingListCollector } from './collectors/mailing-list.ts';
 
 /** Collectors are registered here as they are written (SPEC 6.1). */
 const COLLECTORS: Partial<Record<SourceId, () => Collector>> = {
   'bips-repo': () => bipsRepoCollector(),
   delving: () => delvingCollector(),
+  'mailing-list': () => mailingListCollector(),
 };
 const ALL: SourceId[] = ['bips-repo', 'github', 'delving', 'mailing-list'];
 

@@ -121,4 +121,32 @@ describe.skipIf(!url)('Postgres integration (Neon)', () => {
     expect(last.rows[0].error).toContain('upstream went away');
     expect(last.rows[0].cursor_after).toBe('2');
   });
+
+  const more = [
+    ...POSTS,
+    { id: 'p3', topic: 't2', title: 'BIP 341 notes', body: 'a' },
+    { id: 'p4', topic: 't2', title: 'BIP 341 notes', body: 'b' },
+    { id: 'p5', topic: 't3', title: 'BIP 340 notes', body: 'c' },
+  ];
+
+  it('keeps committed batches when a later batch fails, without advancing the cursor', async () => {
+    const r = await runCollector(pool, fixtureCollector(more, 4), ctx, { batchSize: 1 });
+    expect(r).toMatchObject({ ok: false, items_seen: 2, items_new: 2, cursor_after: '2' });
+    expect(await count('raw_items')).toBe(4);
+  });
+
+  it('stores across batch boundaries and skips what earlier batches stored', async () => {
+    const r = await runCollector(pool, fixtureCollector(more), ctx, { batchSize: 2 });
+    expect(r).toMatchObject({ ok: true, items_seen: 3, items_new: 1, cursor_after: '5' });
+    expect(await count('raw_items')).toBe(5);
+    const { rows } = await pool.query(
+      `SELECT d.external_id, m.bip FROM bip_mentions m JOIN documents d ON d.id = m.document_id
+        WHERE d.external_id IN ('p3', 'p4', 'p5') ORDER BY 1`,
+    );
+    expect(rows).toEqual([
+      { external_id: 'p3', bip: 341 },
+      { external_id: 'p4', bip: 341 },
+      { external_id: 'p5', bip: 340 },
+    ]);
+  });
 });

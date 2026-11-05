@@ -1,0 +1,829 @@
+MIME-Version: 1.0
+References: <CAPv7TjbXm953U2h+-12MfJ24YqOM5Kcq77_xFTjVK+R2nf-nYg@mail.gmail.com>
+ <CAGpPWDa1QfN53a_-9Dhee58T6_zk3S0bZJhZbiDpXndzzv0nTA@mail.gmail.com>
+ <CAPv7TjZrFH6Hjm46N2ikWdoP0cAAQqu=jRKVA5iiSLJ50XNWDA@mail.gmail.com>
+In-Reply-To: <CAPv7TjZrFH6Hjm46N2ikWdoP0cAAQqu=jRKVA5iiSLJ50XNWDA@mail.gmail.com>
+From: Billy <fx@example.test>
+Date: Wed, 30 Mar 2022 00:58:18 -0500
+Message-ID: <CAGpPWDbiUOxrMwm9rdxpcDeOAPuMh_hKhrYJMjM5DFY0=a57Fg@mail.gmail.com>
+To: Ruben Somsen <rx@example.test>
+Content-Type: multipart/alternative; boundary="000000000000618c6105db693c34"
+Cc: Bitcoin Protocol Discussion <bx@example.test>
+Subject: Re: [bitcoin-dev]
+	=?utf-8?q?Silent_Payments_=E2=80=93_Non-interactive?=
+	=?utf-8?q?_private_payments_with_no_on-chain_overhead?=
+List-Id: Bitcoin Protocol Discussion <bitcoin-dev.lists.linuxfoundation.org>
+
+--000000000000618c6105db693c34
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+>  the sender can get in trouble too if they send money
+
+Good point.
+
+> how well this can be optimized without resorting to reducing anonymity
+
+Complete shot in the dark, but I wonder if something akin to compact block
+filters could be done to support this case. If, for example, the tweaked
+key were defined without hashing, I think something like that could be done=
+:
+
+X'  =3D  i*X*G + X  =3D  x*I*G + X
+
+Your compact-block-filter-like things could then store a set of each `item =
+=3D
+{recipient: X' % N, sender: I%N}`, and a light client would download this
+data and do the following to detect a likely payment for each filter item:
+
+item.recipient - X%N =3D=3D x*item.sender*G
+
+You can then scale N to the proper tradeoff between filter size and false
+positives. I suppose this might make it possible to deprivitize a tweaked
+key by checking to see what non-tweaked keys evenly divide it. Perhaps
+that's what hashing was being used to solve. What if we added the shared
+diffie hellman secret modulo N to remove this correlation:
+
+X' =3D i*X*G + X + (i*X)%N =3D  x*I*G + X + (x*I)%N
+
+Then for each `item =3D {recipient: X' % N, sender: I%N}`, we detect via
+`item.recipient - X%N =3D=3D x*item.sender*(1+G)`. Is my math right here? I=
+'m
+thinking this should work because (a+b%N)%N =3D=3D (a%N + b%N)%N.
+
+
+
+On Tue, Mar 29, 2022 at 10:36 AM Ruben Somsen <rx@example.test> wrote:
+
+> Hi Billy,
+>
+> Thanks for taking a look.
+>
+> >Maybe it would have been more accurate to say no *extra* on chain overhe=
+ad
+>
+> I can see how it can be misinterpreted. I updated the gist to be more
+> specific.
+>
+> >primary benefit of this is privacy for the recipient
+>
+> Fair, but just wanted to note the sender can get in trouble too if they
+> send money to e.g. blacklisted addresses.
+>
+> >there could be a standard that [...] reduces the anonymity set a bit
+>
+> This has occurred to me but I am reluctant to make that trade-off. It
+> seems best to first see how well this can be optimized without resorting =
+to
+> reducing anonymity, and it's hard to analyze exactly how impactful the
+> anonymity degradation is (I suspect it's worse than you think because it
+> can help strengthen existing heuristics about output ownership).
+>
+> Cheers,
+> Ruben
+>
+>
+>
+> On Tue, Mar 29, 2022 at 4:57 PM Billy <fx@example.test> wrote:
+>
+>> Hi Ruben,
+>>
+>> Very interesting protocol. This reminds me of how monero stealth
+>> addresses work, which gives monero the same downsides regarding light
+>> clients (among other things). I was a bit confused by the following:
+>>
+>> > without requiring any interaction or on-chain overhead
+>>
+>> After reading through, I have to assume it was rather misleading to say
+>> "no on-chain overhead". This still requires an on-chain transaction to b=
+e
+>> sent to the tweaked address, I believe. Maybe it would have been more
+>> accurate to say no *extra* on chain overhead (over a normal transaction)=
+?
+>>
+>> It seems the primary benefit of this is privacy for the recipient. To
+>> that end, it seems like a pretty useful protocol. It's definitely a leve=
+l
+>> of privacy one would only care about if they might receive a lot money
+>> related to that address. However of course someone might not know they'l=
+l
+>> receive an amount of money they want to be private until they receive it=
+.
+>> So the inability to easily do this without a full node is slightly less
+>> than ideal. But it's another good reason to run a full node.
+>>
+>> Perhaps there could be a standard that can identify tweaked address, suc=
+h
+>> that only those addresses can be downloaded and checked by light clients=
+.
+>> It reduces the anonymity set a bit, but it would probably still be
+>> sufficient.
+>>
+>>
+>>
+>> On Mon, Mar 28, 2022, 10:29 Ruben Somsen via bitcoin-dev <
+>> bx@example.test> wrote:
+>>
+>>> Hi all,
+>>>
+>>> I'm publishing a new scheme for private non-interactive address
+>>> generation without on-chain overhead. It has upsides as well as downsid=
+es,
+>>> so I suspect the main discussion will revolve around whether this is wo=
+rth
+>>> pursuing or not. There is a list of open questions at the end.
+>>>
+>>> I added the full write-up in plain text below, though I recommend
+>>> reading the gist for improved formatting and in order to benefit from
+>>> potential future edits:
+>>> https://gist.github.com/RubenSomsen/c43b79517e7cb701ebf77eec6dbb46b8
+>>>
+>>> Cheers,
+>>> Ruben
+>>>
+>>>
+>>>
+>>> Silent Payments
+>>>
+>>> Receive private payments from anyone on a single static address without
+>>> requiring any interaction or on-chain overhead
+>>>
+>>>
+>>>
+>>> OVERVIEW
+>>>
+>>>
+>>> The recipient generates a so-called silent payment address and makes it
+>>> publicly known. The sender then takes a public key from one of their ch=
+osen
+>>> inputs for the payment, and uses it to derive a shared secret that is t=
+hen
+>>> used to tweak the silent payment address. The recipient detects the pay=
+ment
+>>> by scanning every transaction in the blockchain.
+>>>
+>>> Compared to previous schemes[1], this scheme avoids using the Bitcoin
+>>> blockchain as a messaging layer[2] and requires no interaction between
+>>> sender and recipient[3] (other than needing to know the silent payment
+>>> address). The main downsides are the scanning requirement, the lack of
+>>> light client support, and the requirement to control your own input(s).=
+ An
+>>> example use case would be private one-time donations.
+>>>
+>>> While most of the individual parts of this idea aren=E2=80=99t novel, t=
+he
+>>> resulting protocol has never been seriously considered and may be
+>>> reasonably viable, particularly if we limit ourselves to detecting only
+>>> unspent payments by scanning the UTXO set. We=E2=80=99ll start by descr=
+ibing a
+>>> basic scheme, and then introduce a few improvements.
+>>>
+>>>
+>>>
+>>> BASIC SCHEME
+>>>
+>>>
+>>> The recipient publishes their silent payment address, a single 32 byte
+>>> public key:
+>>> X =3D x*G
+>>>
+>>> The sender picks an input containing a public key:
+>>> I =3D i*G
+>>>
+>>> The sender tweaks the silent payment address with the public key of
+>>> their input:
+>>> X' =3D hash(i*X)*G + X
+>>>
+>>> Since i*X =3D=3D x*I (Diffie-Hellman Key Exchange), the recipient can d=
+etect
+>>> the payment by calculating hash(x*I)*G + X for each input key I in the
+>>> blockchain and seeing if it matches an output in the corresponding
+>>> transaction.
+>>>
+>>>
+>>>
+>>> IMPROVEMENTS
+>>>
+>>>
+>>> UTXO set scanning
+>>>
+>>> If we forgo detection of historic transactions and only focus on the
+>>> current balance, we can limit the protocol to only scanning the
+>>> transactions that are part of the UTXO set when restoring from backup,
+>>> which may be faster.
+>>>
+>>> Jonas Nick was kind enough to go through the numbers and run a benchmar=
+k
+>>> of hash(x*I)*G + X on his 3.9GHz Intel=C2=AE Core=E2=84=A2 i7-7820HQ CP=
+U, which took
+>>> roughly 72 microseconds per calculation on a single core. The UTXO set
+>>> currently has 80 million entries, the average transaction has 2.3 input=
+s,
+>>> which puts us at 2.3*80000000*72/1000/1000/60 =3D 221 minutes for a sin=
+gle
+>>> core (under 2 hours for two cores).
+>>>
+>>> What these numbers do not take into account is database lookups. We nee=
+d
+>>> to fetch the transaction of every UTXO, as well as every transaction fo=
+r
+>>> every subsequent input in order to extract the relevant public key,
+>>> resulting in (1+2.3)*80000000 =3D 264 million lookups. How slow this is=
+ and
+>>> what can be done to improve it is an open question.
+>>>
+>>> Once we=E2=80=99re at the tip, every new unspent output will have to be=
+ scanned.
+>>> It=E2=80=99s theoretically possible to scan e.g. once a day and skip tr=
+ansactions
+>>> with fully spent outputs, but that would probably not be worth the adde=
+d
+>>> complexity. If we only scan transactions with taproot outputs, we can
+>>> further limit our efforts, but this advantage is expected to dissipate =
+once
+>>> taproot use becomes more common.
+>>>
+>>>
+>>> Variant using all inputs
+>>>
+>>> Instead of tweaking the silent payment address with one input, we could
+>>> instead tweak it with the combination of all input keys of a transactio=
+n.
+>>> The benefit is that this further lowers the scanning cost, since now we
+>>> only need to calculate one tweak per transaction, instead of one tweak =
+per
+>>> input, which is roughly half the work, though database lookups remain
+>>> unaffected.
+>>>
+>>> The downside is that if you want to combine your inputs with those of
+>>> others (i.e. coinjoin), every participant has to be willing to assist y=
+ou
+>>> in following the Silent Payment protocol in order to let you make your
+>>> payment. There are also privacy considerations which are discussed in t=
+he
+>>> =E2=80=9CPreventing input linkage=E2=80=9D section.
+>>>
+>>> Concretely, if there are three inputs (I1, I2, I3), the scheme becomes:
+>>> hash(i1*X + i2*X + i3*X)*G + X =3D=3D hash(x*(I1+I2+I3))*G + X.
+>>>
+>>>
+>>> Scanning key
+>>>
+>>> We can extend the silent payment address with a scanning key, which
+>>> allows for separation of detecting and spending payments. We redefine t=
+he
+>>> silent payment address as the concatenation of X_scan, X_spend, and
+>>> derivation becomes X' =3D hash(i*X_scan)*G + X_spend. This allows your
+>>> internet-connected node to hold the private key of X_scan to detect
+>>> incoming payments, while your hardware wallet controls X_spend to make
+>>> payments. If X_scan is compromised, privacy is lost, but your funds are=
+ not.
+>>>
+>>>
+>>> Address reuse prevention
+>>>
+>>> If the sender sends more than one payment, and the chosen input has the
+>>> same key due to address reuse, then the recipient address will also be =
+the
+>>> same. To prevent this, we can hash the txid and index of the input, to
+>>> ensure each address is unique, resulting in X' =3D hash(i*X,txid,index)=
+*G +
+>>> X. Note this would make light client support harder.
+>>>
+>>>
+>>>
+>>> NOTEWORTHY DETAILS
+>>>
+>>>
+>>> Light clients
+>>>
+>>> Light clients cannot easily be supported due to the need for scanning.
+>>> The best we could do is give up on address reuse prevention (so we don=
+=E2=80=99t
+>>> require the txid and index), only consider unspent taproot outputs, and
+>>> download a standardized list of relevant input keys for each block over
+>>> wifi each night when charging. These input keys can then be tweaked, an=
+d
+>>> the results can be matched against compact block filters. Possible, but=
+ not
+>>> simple.
+>>>
+>>>
+>>> Effect on BIP32 HD keys
+>>>
+>>> One side-benefit of silent payments is that BIP32 HD keys[4] won=E2=80=
+=99t be
+>>> needed for address generation, since every address will automatically b=
+e
+>>> unique. This also means we won=E2=80=99t have to deal with a gap limit.
+>>>
+>>>
+>>> Different inputs
+>>>
+>>> While the simplest thing would be to only support one input type (e.g.
+>>> taproot key spend), this would also mean only a subset of users can mak=
+e
+>>> payments to silent addresses, so this seems undesirable. The protocol
+>>> should ideally support any input containing at least one public key, an=
+d
+>>> simply pick the first key if more than one is present.
+>>>
+>>> Pay-to-(witness-)public-key-hash inputs actually end up being easiest t=
+o
+>>> scan, since the public key is present in the input script, instead of t=
+he
+>>> output script of the previous transaction (which requires one extra
+>>> transaction lookup).
+>>>
+>>>
+>>> Signature nonce instead of input key
+>>>
+>>> Another consideration was to tweak the silent payment address with the
+>>> signature nonce[5], but unfortunately this breaks compatibility with Mu=
+Sig2
+>>> and MuSig-DN, since in those schemes the signature nonce changes depend=
+ing
+>>> on the transaction hash. If we let the output address depend on the non=
+ce,
+>>> then the transaction hash will change, causing a circular reference.
+>>>
+>>>
+>>> Sending wallet compatibility
+>>>
+>>> Any wallet that wants to support making silent payments needs to suppor=
+t
+>>> a new address format, pick inputs for the payment, tweak the silent pay=
+ment
+>>> address using the private key of one of the chosen inputs, and then pro=
+ceed
+>>> to sign the transaction. The scanning requirement is not relevant to th=
+e
+>>> sender, only the recipient.
+>>>
+>>>
+>>>
+>>> PREVENTING INPUT LINKAGE
+>>>
+>>>
+>>> A potential weakness of Silent Payments is that the input is linked to
+>>> the output. A coinjoin transaction with multiple inputs from other user=
+s
+>>> can normally obfuscate the sender input from the recipient, but Silent
+>>> Payments reveal that link. This weakness can be mitigated with the =E2=
+=80=9Cvariant
+>>> using all inputs=E2=80=9D, but this variant introduces a different weak=
+ness =E2=80=93 you
+>>> now require all other coinjoin users to tweak the silent payment addres=
+s,
+>>> which means you=E2=80=99re revealing the intended recipient to them.
+>>>
+>>> Luckily, a blinding scheme[6] exists that allows us to hide the silent
+>>> payment address from the other participants. Concretely, let=E2=80=99s =
+say there
+>>> are two inputs, I1 and I2, and the latter one is ours. We add a secret
+>>> blinding factor to the silent payment address, X + blinding_factor*G =
+=3D X',
+>>> then we receive X1' =3D i1*X' (together with a DLEQ to prove correctnes=
+s, see
+>>> full write-up[6]) from the owner of the first input and remove the blin=
+ding
+>>> factor with X1' - blinding_factor*I1 =3D X1 (which is equal to i1*X).
+>>> Finally, we calculate the tweaked address with hash(X1 + i2*X)*G + X. T=
+he
+>>> recipient can simply recognize the payment with hash(x*(I1+I2))*G + X. =
+Note
+>>> that the owner of the first input cannot reconstruct the resulting addr=
+ess
+>>> because they don=E2=80=99t know i2*X.
+>>>
+>>> The blinding protocol above solves our coinjoin privacy concerns (at th=
+e
+>>> expense of more interaction complexity), but we=E2=80=99re left with on=
+e more issue
+>>> =E2=80=93 what if you want to make a silent payment, but you control no=
+ne of the
+>>> inputs (e.g. sending from an exchange)? In this scenario we can still
+>>> utilize the blinding protocol, but now the third party sender can try t=
+o
+>>> uncover the intended recipient by brute forcing their inputs on all kno=
+wn
+>>> silent payment addresses (i.e. calculate hash(i*X)*G + X for every publ=
+icly
+>>> known X). While this is computationally expensive, it=E2=80=99s by no m=
+eans
+>>> impossible. No solution is known at this time, so as it stands this is =
+a
+>>> limitation of the protocol =E2=80=93 the sender must control one of the=
+ inputs in
+>>> order to be fully private.
+>>>
+>>>
+>>>
+>>> COMPARISON
+>>>
+>>>
+>>> These are the most important protocols that provide similar
+>>> functionality with slightly different tradeoffs. All of them provide fr=
+esh
+>>> address generation and are compatible with one-time seed backups. The m=
+ain
+>>> benefits of the protocols listed below are that there is no scanning
+>>> requirement, better light client support, and they don=E2=80=99t requir=
+e control
+>>> over the inputs of the transaction.
+>>>
+>>>
+>>> Payment code sharing
+>>>
+>>> This is BIP47[2]. An OP_RETURN message is sent on-chain to the recipien=
+t
+>>> to establish a shared secret prior to making payments. Using the blockc=
+hain
+>>> as a messaging layer like this is generally considered an inefficient u=
+se
+>>> of on-chain resources. This concern can theoretically be alleviated by
+>>> using other means of communicating, but data availability needs to be
+>>> guaranteed to ensure the recipient doesn=E2=80=99t lose access to the f=
+unds.
+>>> Another concern is that the input(s) used to establish the shared secre=
+t
+>>> may leak privacy if not kept separate.
+>>>
+>>>
+>>> Xpub sharing
+>>>
+>>> Upon first payment, hand out an xpub instead of an address in order to
+>>> enable repeat payments. I believe Kixunil=E2=80=99s recently published =
+scheme[3] is
+>>> equivalent to this and could be implemented with relative ease. It=E2=
+=80=99s
+>>> unclear how practical this protocol is, as it assumes sender and recipi=
+ent
+>>> are able to interact once, yet subsequent interaction is impossible.
+>>>
+>>>
+>>> Regular address sharing
+>>>
+>>> This is how Bitcoin is commonly used today and may therefore be obvious=
+,
+>>> but it does satisfy similar privacy requirements. The sender interacts =
+with
+>>> the recipient each time they want to make a payment, and requests a new
+>>> address. The main downside is that it requires interaction for every si=
+ngle
+>>> payment.
+>>>
+>>>
+>>>
+>>> OPEN QUESTIONS
+>>>
+>>>
+>>> Exactly how slow are the required database lookups? Is there a better
+>>> approach?
+>>>
+>>> Is there any way to make light client support more viable?
+>>>
+>>> What is preferred =E2=80=93 single input tweaking (revealing an input t=
+o the
+>>> recipient) or using all inputs (increased coinjoin complexity)?
+>>>
+>>> Are there any security issues with the proposed cryptography?
+>>>
+>>> In general, compared to alternatives, is this scheme worth the added
+>>> complexity?
+>>>
+>>>
+>>>
+>>> ACKNOWLEDGEMENTS
+>>>
+>>>
+>>> Thanks to Kixunil, Calvin Kim, and Jonas Nick, holihawt and Lloyd
+>>> Fournier for their help/comments, as well as all the authors of previou=
+s
+>>> schemes. Any mistakes are my own.
+>>>
+>>>
+>>>
+>>> REFERENCES
+>>>
+>>>
+>>> [1] Stealth Payments, Peter Todd:
+>>> https://github.com/genjix/bips/blob/master/bip-stealth.mediawiki =E2=86=
+=A9=EF=B8=8E
+>>>
+>>> [2] BIP47 payment codes, Justus Ranvier:
+>>> https://github.com/bitcoin/bips/blob/master/bip-0047.mediawiki
+>>>
+>>> [3] Reusable taproot addresses, Kixunil:
+>>> https://gist.github.com/Kixunil/0ddb3a9cdec33342b97431e438252c0a
+>>>
+>>> [4] BIP32 HD keys, Pieter Wuille:
+>>> https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki
+>>>
+>>> [5] 2020-01-23 ##taproot-bip-review, starting at 18:25:
+>>> https://gnusha.org/taproot-bip-review/2020-01-23.log
+>>>
+>>> [6] Blind Diffie-Hellman Key Exchange, David Wagner:
+>>> https://gist.github.com/RubenSomsen/be7a4760dd4596d06963d67baf140406
+>>> _______________________________________________
+>>> bitcoin-dev mailing list
+>>> bx@example.test
+>>> https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev
+>>>
+>>
+
+--000000000000618c6105db693c34
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">&gt;=C2=A0
+
+the sender can get in trouble too if they send money<div><br></div><div>Goo=
+d point.=C2=A0</div><div><br></div><div>&gt; how well this can be optimized=
+ without resorting to reducing anonymity</div><div><br></div><div>Complete =
+shot in the dark, but I wonder if something akin to compact block filters c=
+ould be done to support this case. If, for example, the tweaked key were de=
+fined without hashing, I think something like that could be done:</div><div=
+><br></div><div>X&#39;=C2=A0
+
+<span style=3D"color:rgb(255,153,0)">=3D</span>=C2=A0=C2=A0i*X*G + X=C2=A0
+
+<span style=3D"color:rgb(255,153,0)">=3D</span>=C2=A0 x*I*G=C2=A0+ X</div><=
+div><br></div><div>Your compact-block-filter-like things could then store a=
+ set of each `item <font color=3D"#ff9900">=3D</font> {recipient: X&#39; % =
+N, sender: I%N}`, and a light client would download this data and do the fo=
+llowing to detect a likely payment for each filter item:</div><div><br></di=
+v><div>item.recipient - X%N=C2=A0<span style=3D"color:rgb(255,153,0)">=3D</=
+span><span style=3D"color:rgb(255,153,0)">=3D</span>=C2=A0x*item.sender*G</=
+div><div><br></div><div>You can then scale N to the proper tradeoff between=
+ filter size and false positives. I suppose this might make it possible to =
+deprivitize a tweaked key by checking to see what non-tweaked keys evenly d=
+ivide it. Perhaps that&#39;s what hashing was being used to solve. What if =
+we added the shared diffie hellman secret modulo N to remove this correlati=
+on:</div><div><br></div><div>X&#39; <font color=3D"#ff9900">=3D</font> i*X*=
+G + X=C2=A0+ (i*X)%N=C2=A0<font color=3D"#ff9900">=3D</font>=C2=A0 x*I*G=C2=
+=A0+ X=C2=A0+ (x*I)%N</div><div></div><div><br></div><div>Then for each `it=
+em=C2=A0<span style=3D"color:rgb(255,153,0)">=3D</span>=C2=A0{recipient: X&=
+#39; % N, sender: I%N}`, we detect via `item.recipient - X%N=C2=A0<span sty=
+le=3D"color:rgb(255,153,0)">=3D</span><span style=3D"color:rgb(255,153,0)">=
+=3D</span>=C2=A0x*item.sender*(1+G)`. Is my math right here? I&#39;m thinki=
+ng this should work because (a+b%N)%N=C2=A0<span style=3D"color:rgb(255,153=
+,0)">=3D</span><span style=3D"color:rgb(255,153,0)">=3D</span>=C2=A0(a%N=C2=
+=A0+ b%N)%N.=C2=A0</div><div><br></div><div><br></div></div><br><div class=
+=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Mar 29, 2022=
+ at 10:36 AM Ruben Somsen &lt;<a href=3D"mailto:rx@example.test">rsomsen@=
+gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex"><div dir=3D"ltr">Hi Billy,<div><br></div><div>Thanks for taking =
+a look.</div><div><br></div><div>&gt;Maybe it would have been more accurate=
+ to say no *extra* on chain overhead</div><div><br></div><div>I can see how=
+ it can be misinterpreted. I updated the gist to be more specific.</div><di=
+v><br></div><div>&gt;primary benefit of this is privacy for the recipient</=
+div><div><br></div><div>Fair, but just wanted to note the sender can get in=
+ trouble too if they send money=C2=A0to e.g. blacklisted addresses.</div><d=
+iv><br></div><div>&gt;there could be a standard that [...] reduces the anon=
+ymity set a bit</div><div><br></div><div>This has occurred to me but I am r=
+eluctant to make that trade-off. It seems best to first see how well this c=
+an be optimized without resorting to reducing anonymity, and it&#39;s hard =
+to analyze exactly how impactful the anonymity degradation is (I suspect it=
+&#39;s worse than you think because it can help strengthen existing heurist=
+ics about output ownership).</div><div><br></div><div>Cheers,</div><div>Rub=
+en</div><div><br></div><div><br></div></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Tue, Mar 29, 2022 at 4:57 PM Billy=
+ &lt;<a href=3D"mailto:fx@example.test" target=3D"_blank">fresheneesz=
+@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex"><div dir=3D"auto"><div dir=3D"auto">Hi Ruben,=C2=A0</div><div di=
+r=3D"auto"><br></div><div dir=3D"auto">Very interesting protocol. This remi=
+nds me of how monero stealth addresses work, which gives monero the same do=
+wnsides regarding light clients (among other things). I was a bit confused =
+by the following:</div><div dir=3D"auto"><br></div><div>&gt;=C2=A0<span sty=
+le=3D"font-size:12.8px">without requiring any interaction or on-chain overh=
+ead</span></div><div dir=3D"auto"><span style=3D"font-size:12.8px"><br></sp=
+an></div><div dir=3D"auto">After reading through, I have to assume it was r=
+ather misleading to say &quot;no on-chain overhead&quot;. This still requir=
+es an on-chain transaction to be sent to the tweaked address, I believe. Ma=
+ybe it would have been more accurate to say no *extra* on chain overhead (o=
+ver a normal transaction)?</div><div dir=3D"auto"><br></div><div dir=3D"aut=
+o">It seems the primary benefit of this is privacy for the recipient. To th=
+at end, it seems like a pretty useful protocol. It&#39;s definitely a level=
+ of privacy one would only care about if they might receive a lot money rel=
+ated to that address. However of course someone might not know they&#39;ll =
+receive an amount of money they want to be private until they receive it. S=
+o the inability to easily do this without a full node is slightly less than=
+ ideal. But it&#39;s another good reason to run a full node.</div><div dir=
+=3D"auto"><br></div><div dir=3D"auto">Perhaps there could be a standard tha=
+t can identify tweaked address, such that only those addresses can be downl=
+oaded and checked by light clients. It reduces the anonymity set a bit, but=
+ it would probably still be sufficient.=C2=A0</div><div dir=3D"auto"><br></=
+div><div dir=3D"auto"><br><br><div class=3D"gmail_quote" dir=3D"auto"><div =
+dir=3D"ltr" class=3D"gmail_attr">On Mon, Mar 28, 2022, 10:29 Ruben Somsen v=
+ia bitcoin-dev &lt;<a href=3D"mailto:bx@example.test"=
+ rel=3D"noreferrer" target=3D"_blank">bx@example.test=
+</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
+0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
+<div dir=3D"ltr">Hi all,<br><br>I&#39;m publishing a new scheme for private=
+ non-interactive address generation without on-chain overhead. It has upsid=
+es as well as downsides, so I suspect the main discussion will revolve arou=
+nd whether this is worth pursuing or not. There is a list of open questions=
+ at the end.<br><br>I added the full write-up in plain text below, though I=
+ recommend reading the gist for improved formatting and in order to benefit=
+ from potential future edits: <a href=3D"https://gist.github.com/RubenSomse=
+n/c43b79517e7cb701ebf77eec6dbb46b8" rel=3D"noreferrer noreferrer" target=3D=
+"_blank">https://gist.github.com/RubenSomsen/c43b79517e7cb701ebf77eec6dbb46=
+b8</a><br><br>Cheers,<br>Ruben<br><br><br><br>Silent Payments<br><br>Receiv=
+e private payments from anyone on a single static address without requiring=
+ any interaction or on-chain overhead<br><br><br><br>OVERVIEW<br><br><br>Th=
+e recipient generates a so-called silent payment address and makes it publi=
+cly known. The sender then takes a public key from one of their chosen inpu=
+ts for the payment, and uses it to derive a shared secret that is then used=
+ to tweak the silent payment address. The recipient detects the payment by =
+scanning every transaction in the blockchain.<br><br>Compared to previous s=
+chemes[1], this scheme avoids using the Bitcoin blockchain as a messaging l=
+ayer[2] and requires no interaction between sender and recipient[3] (other =
+than needing to know the silent payment address). The main downsides are th=
+e scanning requirement, the lack of light client support, and the requireme=
+nt to control your own input(s). An example use case would be private one-t=
+ime donations.<br><br>While most of the individual parts of this idea aren=
+=E2=80=99t novel, the resulting protocol has never been seriously considere=
+d and may be reasonably viable, particularly if we limit ourselves to detec=
+ting only unspent payments by scanning the UTXO set. We=E2=80=99ll start by=
+ describing a basic scheme, and then introduce a few improvements.<br><br><=
+br><br>BASIC SCHEME<br><br><br>The recipient publishes their silent payment=
+ address, a single 32 byte public key:<br>X =3D x*G<br><br>The sender picks=
+ an input containing a public key:<br>I =3D i*G<br><br>The sender tweaks th=
+e silent payment address with the public key of their input: <br>X&#39; =3D=
+ hash(i*X)*G + X<br><br>Since i*X =3D=3D x*I (Diffie-Hellman Key Exchange),=
+ the recipient can detect the payment by calculating hash(x*I)*G + X for ea=
+ch input key I in the blockchain and seeing if it matches an output in the =
+corresponding transaction.<br><br><br><br>IMPROVEMENTS<br><br><br>UTXO set =
+scanning<br><br>If we forgo detection of historic transactions and only foc=
+us on the current balance, we can limit the protocol to only scanning the t=
+ransactions that are part of the UTXO set when restoring from backup, which=
+ may be faster.<br><br>Jonas Nick was kind enough to go through the numbers=
+ and run a benchmark of hash(x*I)*G + X on his 3.9GHz Intel=C2=AE Core=E2=
+=84=A2 i7-7820HQ CPU, which took roughly 72 microseconds per calculation on=
+ a single core. The UTXO set currently has 80 million entries, the average =
+transaction has 2.3 inputs, which puts us at 2.3*80000000*72/1000/1000/60 =
+=3D 221 minutes for a single core (under 2 hours for two cores).<br><br>Wha=
+t these numbers do not take into account is database lookups. We need to fe=
+tch the transaction of every UTXO, as well as every transaction for every s=
+ubsequent input in order to extract the relevant public key, resulting in (=
+1+2.3)*80000000 =3D 264 million lookups. How slow this is and what can be d=
+one to improve it is an open question.<br><br>Once we=E2=80=99re at the tip=
+, every new unspent output will have to be scanned. It=E2=80=99s theoretica=
+lly possible to scan e.g. once a day and skip transactions with fully spent=
+ outputs, but that would probably not be worth the added complexity. If we =
+only scan transactions with taproot outputs, we can further limit our effor=
+ts, but this advantage is expected to dissipate once taproot use becomes mo=
+re common.<br><br><br>Variant using all inputs<br><br>Instead of tweaking t=
+he silent payment address with one input, we could instead tweak it with th=
+e combination of all input keys of a transaction. The benefit is that this =
+further lowers the scanning cost, since now we only need to calculate one t=
+weak per transaction, instead of one tweak per input, which is roughly half=
+ the work, though database lookups remain unaffected.<br><br>The downside i=
+s that if you want to combine your inputs with those of others (i.e. coinjo=
+in), every participant has to be willing to assist you in following the Sil=
+ent Payment protocol in order to let you make your payment. There are also =
+privacy considerations which are discussed in the =E2=80=9CPreventing input=
+ linkage=E2=80=9D section.<br><br>Concretely, if there are three inputs (I1=
+, I2, I3), the scheme becomes: hash(i1*X + i2*X + i3*X)*G + X =3D=3D hash(x=
+*(I1+I2+I3))*G + X.<br><br><br>Scanning key<br><br>We can extend the silent=
+ payment address with a scanning key, which allows for separation of detect=
+ing and spending payments. We redefine the silent payment address as the co=
+ncatenation of X_scan, X_spend, and derivation becomes X&#39; =3D hash(i*X_=
+scan)*G + X_spend. This allows your internet-connected node to hold the pri=
+vate key of X_scan to detect incoming payments, while your hardware wallet =
+controls X_spend to make payments. If X_scan is compromised, privacy is los=
+t, but your funds are not.<br><br><br>Address reuse prevention<br><br>If th=
+e sender sends more than one payment, and the chosen input has the same key=
+ due to address reuse, then the recipient address will also be the same. To=
+ prevent this, we can hash the txid and index of the input, to ensure each =
+address is unique, resulting in X&#39; =3D hash(i*X,txid,index)*G + X. Note=
+ this would make light client support harder.<br><br><br><br>NOTEWORTHY DET=
+AILS<br><br><br>Light clients<br><br>Light clients cannot easily be support=
+ed due to the need for scanning. The best we could do is give up on address=
+ reuse prevention (so we don=E2=80=99t require the txid and index), only co=
+nsider unspent taproot outputs, and download a standardized list of relevan=
+t input keys for each block over wifi each night when charging. These input=
+ keys can then be tweaked, and the results can be matched against compact b=
+lock filters. Possible, but not simple.<br><br><br>Effect on BIP32 HD keys<=
+br><br>One side-benefit of silent payments is that BIP32 HD keys[4] won=E2=
+=80=99t be needed for address generation, since every address will automati=
+cally be unique. This also means we won=E2=80=99t have to deal with a gap l=
+imit.<br><br><br>Different inputs<br><br>While the simplest thing would be =
+to only support one input type (e.g. taproot key spend), this would also me=
+an only a subset of users can make payments to silent addresses, so this se=
+ems undesirable. The protocol should ideally support any input containing a=
+t least one public key, and simply pick the first key if more than one is p=
+resent.<br><br>Pay-to-(witness-)public-key-hash inputs actually end up bein=
+g easiest to scan, since the public key is present in the input script, ins=
+tead of the output script of the previous transaction (which requires one e=
+xtra transaction lookup).<br><br><br>Signature nonce instead of input key<b=
+r><br>Another consideration was to tweak the silent payment address with th=
+e signature nonce[5], but unfortunately this breaks compatibility with MuSi=
+g2 and MuSig-DN, since in those schemes the signature nonce changes dependi=
+ng on the transaction hash. If we let the output address depend on the nonc=
+e, then the transaction hash will change, causing a circular reference.<br>=
+<br><br>Sending wallet compatibility<br><br>Any wallet that wants to suppor=
+t making silent payments needs to support a new address format, pick inputs=
+ for the payment, tweak the silent payment address using the private key of=
+ one of the chosen inputs, and then proceed to sign the transaction. The sc=
+anning requirement is not relevant to the sender, only the recipient.<br><b=
+r><br><br>PREVENTING INPUT LINKAGE<br><br><br>A potential weakness of Silen=
+t Payments is that the input is linked to the output. A coinjoin transactio=
+n with multiple inputs from other users can normally obfuscate the sender i=
+nput from the recipient, but Silent Payments reveal that link. This weaknes=
+s can be mitigated with the =E2=80=9Cvariant using all inputs=E2=80=9D, but=
+ this variant introduces a different weakness =E2=80=93 you now require all=
+ other coinjoin users to tweak the silent payment address, which means you=
+=E2=80=99re revealing the intended recipient to them.<br><br>Luckily, a bli=
+nding scheme[6] exists that allows us to hide the silent payment address fr=
+om the other participants. Concretely, let=E2=80=99s say there are two inpu=
+ts, I1 and I2, and the latter one is ours. We add a secret blinding factor =
+to the silent payment address, X + blinding_factor*G =3D X&#39;, then we re=
+ceive X1&#39; =3D i1*X&#39; (together with a DLEQ to prove correctness, see=
+ full write-up[6]) from the owner of the first input and remove the blindin=
+g factor with X1&#39; - blinding_factor*I1 =3D X1 (which is equal to i1*X).=
+ Finally, we calculate the tweaked address with hash(X1 + i2*X)*G + X. The =
+recipient can simply recognize the payment with hash(x*(I1+I2))*G + X. Note=
+ that the owner of the first input cannot reconstruct the resulting address=
+ because they don=E2=80=99t know i2*X.<br><br>The blinding protocol above s=
+olves our coinjoin privacy concerns (at the expense of more interaction com=
+plexity), but we=E2=80=99re left with one more issue =E2=80=93 what if you =
+want to make a silent payment, but you control none of the inputs (e.g. sen=
+ding from an exchange)? In this scenario we can still utilize the blinding =
+protocol, but now the third party sender can try to uncover the intended re=
+cipient by brute forcing their inputs on all known silent payment addresses=
+ (i.e. calculate hash(i*X)*G + X for every publicly known X). While this is=
+ computationally expensive, it=E2=80=99s by no means impossible. No solutio=
+n is known at this time, so as it stands this is a limitation of the protoc=
+ol =E2=80=93 the sender must control one of the inputs in order to be fully=
+ private.<br><br><br><br>COMPARISON<br><br><br>These are the most important=
+ protocols that provide similar functionality with slightly different trade=
+offs. All of them provide fresh address generation and are compatible with =
+one-time seed backups. The main benefits of the protocols listed below are =
+that there is no scanning requirement, better light client support, and the=
+y don=E2=80=99t require control over the inputs of the transaction.<br><br>=
+<br>Payment code sharing<br><br>This is BIP47[2]. An OP_RETURN message is s=
+ent on-chain to the recipient to establish a shared secret prior to making =
+payments. Using the blockchain as a messaging layer like this is generally =
+considered an inefficient use of on-chain resources. This concern can theor=
+etically be alleviated by using other means of communicating, but data avai=
+lability needs to be guaranteed to ensure the recipient doesn=E2=80=99t los=
+e access to the funds. Another concern is that the input(s) used to establi=
+sh the shared secret may leak privacy if not kept separate.<br><br><br>Xpub=
+ sharing<br><br>Upon first payment, hand out an xpub instead of an address =
+in order to enable repeat payments. I believe Kixunil=E2=80=99s recently pu=
+blished scheme[3] is equivalent to this and could be implemented with relat=
+ive ease. It=E2=80=99s unclear how practical this protocol is, as it assume=
+s sender and recipient are able to interact once, yet subsequent interactio=
+n is impossible.<br><br><br>Regular address sharing<br><br>This is how Bitc=
+oin is commonly used today and may therefore be obvious, but it does satisf=
+y similar privacy requirements. The sender interacts with the recipient eac=
+h time they want to make a payment, and requests a new address. The main do=
+wnside is that it requires interaction for every single payment.<br><br><br=
+><br>OPEN QUESTIONS<br><br><br>Exactly how slow are the required database l=
+ookups? Is there a better approach?<div><br>Is there any way to make light =
+client support more viable?<br><br>What is preferred =E2=80=93 single input=
+ tweaking (revealing an input to the recipient) or using all inputs (increa=
+sed coinjoin complexity)?<br><br>Are there any security issues with the pro=
+posed cryptography?<br><br>In general, compared to alternatives, is this sc=
+heme worth the added complexity?<br><br><br><br>ACKNOWLEDGEMENTS<br><br><br=
+>Thanks to Kixunil, Calvin Kim, and Jonas Nick, holihawt and Lloyd Fournier=
+ for their help/comments, as well as all the authors of previous schemes. A=
+ny mistakes are my own.<br><br><br><br>REFERENCES<br><br><br>[1] Stealth Pa=
+yments, Peter Todd: <a href=3D"https://github.com/genjix/bips/blob/master/b=
+ip-stealth.mediawiki" rel=3D"noreferrer noreferrer" target=3D"_blank">https=
+://github.com/genjix/bips/blob/master/bip-stealth.mediawiki</a> =E2=86=A9=
+=EF=B8=8E<br><br>[2] BIP47 payment codes, Justus Ranvier: <a href=3D"https:=
+//github.com/bitcoin/bips/blob/master/bip-0047.mediawiki" rel=3D"noreferrer=
+ noreferrer" target=3D"_blank">https://github.com/bitcoin/bips/blob/master/=
+bip-0047.mediawiki</a><br><br>[3] Reusable taproot addresses, Kixunil: <a h=
+ref=3D"https://gist.github.com/Kixunil/0ddb3a9cdec33342b97431e438252c0a" re=
+l=3D"noreferrer noreferrer" target=3D"_blank">https://gist.github.com/Kixun=
+il/0ddb3a9cdec33342b97431e438252c0a</a><br><br>[4] BIP32 HD keys, Pieter Wu=
+ille: <a href=3D"https://github.com/bitcoin/bips/blob/master/bip-0032.media=
+wiki" rel=3D"noreferrer noreferrer" target=3D"_blank">https://github.com/bi=
+tcoin/bips/blob/master/bip-0032.mediawiki</a><br><br>[5] 2020-01-23 ##tapro=
+ot-bip-review, starting at 18:25: <a href=3D"https://gnusha.org/taproot-bip=
+-review/2020-01-23.log" rel=3D"noreferrer noreferrer" target=3D"_blank">htt=
+ps://gnusha.org/taproot-bip-review/2020-01-23.log</a><br><br>[6] Blind Diff=
+ie-Hellman Key Exchange, David Wagner: <a href=3D"https://gist.github.com/R=
+ubenSomsen/be7a4760dd4596d06963d67baf140406" rel=3D"noreferrer noreferrer" =
+target=3D"_blank">https://gist.github.com/RubenSomsen/be7a4760dd4596d06963d=
+67baf140406</a><br></div></div>
+_______________________________________________<br>
+bitcoin-dev mailing list<br>
+<a href=3D"mailto:bx@example.test" rel=3D"noreferrer =
+noreferrer" target=3D"_blank">bx@example.test</a><br>
+<a href=3D"https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev" =
+rel=3D"noreferrer noreferrer noreferrer" target=3D"_blank">https://lists.li=
+nuxfoundation.org/mailman/listinfo/bitcoin-dev</a><br>
+</blockquote></div></div></div>
+</blockquote></div>
+</blockquote></div>
+
+--000000000000618c6105db693c34--
+
+

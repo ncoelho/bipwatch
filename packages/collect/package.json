@@ -18,6 +18,7 @@
   "dependencies": {
     "@bipwatch/data": "*",
     "pg": "8.13.1",
+    "postal-mime": "2.4.4",
     "yaml": "2.8.1"
   },
   "devDependencies": {

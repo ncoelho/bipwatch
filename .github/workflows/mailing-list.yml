@@ -1,0 +1,46 @@
+name: mailing-list
+
+# SPEC 6.1: hourly, archive new bitcoin-dev messages from the public-inbox
+# mirror at gnusha.org and index their BIP mentions.
+
+on:
+  schedule:
+    - cron: '41 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: mailing-list
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+
+      # The archive is a 130 MB git repo. Keep the clone in a cache refreshed
+      # weekly; each run then only fetches what is new.
+      - name: Cache key for this week
+        id: week
+        run: echo "key=bitcoindev-archive-$(date -u +%G-%V)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/../bitcoindev-archive.git
+          key: ${{ steps.week.outputs.key }}
+          restore-keys: bitcoindev-archive-
+
+      - name: Collect messages into Postgres
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::warning::DATABASE_URL secret is not set; skipping collection"
+            exit 0
+          fi
+          npm run collect -- --source mailing-list

@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import type pg from 'pg';
 import { detectMentions, type MentionContext } from './mentions.ts';
-import type { Collector, RawItem, RawItemInput } from './types.ts';
+import type { Collector, DocumentInput, RawItem, RawItemInput } from './types.ts';
 
 export interface RunResult {
   source: string;
@@ -12,6 +12,9 @@ export interface RunResult {
   cursor_after: string | null;
   error?: string;
 }
+
+/** Items stored per transaction. Each batch is a handful of round trips. */
+export const BATCH_SIZE = 200;
 
 export function contentHash(source: string, item: RawItemInput): string {
   return createHash('sha256')
@@ -30,16 +33,19 @@ export async function lastCursor(db: pg.Pool, source: string): Promise<string | 
 }
 
 /**
- * Runs one collector from its stored cursor. Every raw item is stored with
- * its documents and mentions in one transaction. If the run fails part way,
- * the items already stored stay (they are deduplicated by content_hash), but
- * the run is recorded as failed and the cursor does not advance.
+ * Runs one collector from its stored cursor. Items are stored in batches,
+ * each batch (raw items, documents, mentions) in one transaction, and are
+ * deduplicated by content_hash. A run that fails is recorded as failed and
+ * does not advance the cursor (SPEC 6.1); batches it already committed stay,
+ * and the next run skips them by hash.
  */
 export async function runCollector(
   db: pg.Pool,
   collector: Collector,
   ctx: MentionContext,
+  opts: { batchSize?: number } = {},
 ): Promise<RunResult> {
+  const batchSize = opts.batchSize ?? BATCH_SIZE;
   const cursorBefore = await lastCursor(db, collector.source);
   const { rows } = await db.query<{ id: number }>(
     'INSERT INTO source_runs (source, cursor_before) VALUES ($1, $2) RETURNING id',
@@ -55,15 +61,26 @@ export async function runCollector(
     cursor_after: cursorBefore,
   };
 
+  let batch: RawItemInput[] = [];
+  let batchCursor: string | null = cursorBefore;
+  const flush = async () => {
+    if (!batch.length) return;
+    result.items_new += await storeBatch(db, collector, batch, ctx);
+    result.cursor_after = batchCursor;
+    batch = [];
+  };
+
   try {
     for await (const { item, cursor } of collector.fetch(cursorBefore)) {
       result.items_seen++;
-      if (await storeItem(db, collector, item, ctx)) result.items_new++;
-      result.cursor_after = cursor;
+      batch.push(item);
+      batchCursor = cursor;
+      if (batch.length >= batchSize) await flush();
     }
+    await flush();
     result.ok = true;
   } catch (err) {
-    result.error = err instanceof Error ? err.stack ?? err.message : String(err);
+    result.error = err instanceof Error ? (err.stack ?? err.message) : String(err);
   }
 
   await db.query(
@@ -82,57 +99,98 @@ export async function runCollector(
   return result;
 }
 
-/** Stores one raw item. Returns false when it was already archived. */
-async function storeItem(
+/** VALUES ($1,$2,...),(...) for `rows` rows of `cols` columns. */
+function placeholders(rows: number, cols: number, casts: string[] = []): string {
+  const out: string[] = [];
+  for (let r = 0; r < rows; r++) {
+    const cells: string[] = [];
+    for (let c = 0; c < cols; c++) cells.push(`$${r * cols + c + 1}${casts[c] ?? ''}`);
+    out.push(`(${cells.join(', ')})`);
+  }
+  return out.join(', ');
+}
+
+/** Postgres allows 65535 parameters per statement. */
+function chunks<T>(xs: T[], cols: number): T[][] {
+  const size = Math.max(1, Math.floor(60000 / cols));
+  const out: T[][] = [];
+  for (let i = 0; i < xs.length; i += size) out.push(xs.slice(i, i + size));
+  return out;
+}
+
+/**
+ * Stores a batch of raw items with their documents and mentions in one
+ * transaction. Items already archived (same content_hash) are skipped.
+ * Returns how many raw items were new.
+ */
+async function storeBatch(
   db: pg.Pool,
   collector: Collector,
-  input: RawItemInput,
+  items: RawItemInput[],
   ctx: MentionContext,
-): Promise<boolean> {
-  const hash = contentHash(collector.source, input);
+): Promise<number> {
+  // Same hash twice in one batch: keep the first.
+  const byHash = new Map<string, RawItemInput>();
+  for (const item of items) {
+    const h = contentHash(collector.source, item);
+    if (!byHash.has(h)) byHash.set(h, item);
+  }
+  const hashed = [...byHash.entries()];
+
   const client = await db.connect();
   try {
     await client.query('BEGIN');
-    const inserted = await client.query<{ id: number; fetched_at: Date }>(
-      `INSERT INTO raw_items (source, external_id, url, content_hash, content_type, body, meta)
-       VALUES ($1, $2, $3, $4, $5, $6, $7)
-       ON CONFLICT (content_hash) DO NOTHING
-       RETURNING id, fetched_at`,
-      [
-        collector.source,
-        input.external_id,
-        input.url ?? null,
-        hash,
-        input.content_type,
-        input.body,
-        input.meta ?? {},
-      ],
-    );
-    if (inserted.rowCount === 0) {
-      await client.query('ROLLBACK');
-      return false;
+
+    const inserted: RawItem[] = [];
+    for (const part of chunks(hashed, 7)) {
+      const { rows } = await client.query<{ id: number; content_hash: string; fetched_at: Date }>(
+        `INSERT INTO raw_items (source, external_id, url, content_hash, content_type, body, meta)
+         VALUES ${placeholders(part.length, 7, ['', '', '', '', '', '', '::jsonb'])}
+         ON CONFLICT (content_hash) DO NOTHING
+         RETURNING id, content_hash, fetched_at`,
+        part.flatMap(([hash, it]) => [
+          collector.source,
+          it.external_id,
+          it.url ?? null,
+          hash,
+          it.content_type,
+          it.body,
+          JSON.stringify(it.meta ?? {}),
+        ]),
+      );
+      for (const r of rows) {
+        const it = byHash.get(r.content_hash)!;
+        inserted.push({
+          ...it,
+          id: r.id,
+          source: collector.source,
+          content_hash: r.content_hash,
+          fetched_at: r.fetched_at,
+          meta: it.meta ?? {},
+        });
+      }
     }
 
-    const raw: RawItem = {
-      ...input,
-      id: inserted.rows[0].id,
-      source: collector.source,
-      content_hash: hash,
-      fetched_at: inserted.rows[0].fetched_at,
-      meta: input.meta ?? {},
-    };
+    // Documents from the new raw items. A later item in the batch wins when
+    // two produce the same document (an edit fetched twice).
+    const docs = new Map<string, { raw: RawItem; doc: DocumentInput }>();
+    for (const raw of inserted.sort((a, b) => a.id - b.id)) {
+      for (const doc of collector.normalize(raw)) docs.set(doc.external_id, { raw, doc });
+    }
+    const docList = [...docs.values()];
 
-    for (const doc of collector.normalize(raw)) {
-      const { rows } = await client.query<{ id: number }>(
+    const docIds = new Map<string, number>();
+    for (const part of chunks(docList, 9)) {
+      const { rows } = await client.query<{ id: number; external_id: string }>(
         `INSERT INTO documents
            (raw_item_id, source, external_id, thread_key, author, posted_at, title, body_text, url)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+         VALUES ${placeholders(part.length, 9)}
          ON CONFLICT (source, external_id) DO UPDATE SET
            raw_item_id = EXCLUDED.raw_item_id, thread_key = EXCLUDED.thread_key,
            author = EXCLUDED.author, posted_at = EXCLUDED.posted_at, title = EXCLUDED.title,
            body_text = EXCLUDED.body_text, url = EXCLUDED.url
-         RETURNING id`,
-        [
+         RETURNING id, external_id`,
+        part.flatMap(({ raw, doc }) => [
           raw.id,
           collector.source,
           doc.external_id,
@@ -142,22 +200,31 @@ async function storeItem(
           doc.title ?? null,
           doc.body_text,
           doc.url ?? null,
-        ],
+        ]),
       );
-      const docId = rows[0].id;
-      await client.query('DELETE FROM bip_mentions WHERE document_id = $1', [docId]);
-      for (const m of detectMentions(
-        { title: doc.title, body: doc.body_text, thread_title: doc.thread_title },
-        ctx,
-      )) {
+      for (const r of rows) docIds.set(r.external_id, r.id);
+    }
+
+    if (docIds.size) {
+      await client.query('DELETE FROM bip_mentions WHERE document_id = ANY($1::bigint[])', [
+        [...docIds.values()],
+      ]);
+      const mentions = docList.flatMap(({ doc }) =>
+        detectMentions({ title: doc.title, body: doc.body_text, thread_title: doc.thread_title }, ctx).map(
+          (m) => [docIds.get(doc.external_id)!, m.bip, m.method, m.snippet],
+        ),
+      );
+      for (const part of chunks(mentions, 4)) {
         await client.query(
-          'INSERT INTO bip_mentions (document_id, bip, method, snippet) VALUES ($1, $2, $3, $4)',
-          [docId, m.bip, m.method, m.snippet],
+          `INSERT INTO bip_mentions (document_id, bip, method, snippet)
+           VALUES ${placeholders(part.length, 4)}`,
+          part.flat(),
         );
       }
     }
+
     await client.query('COMMIT');
-    return true;
+    return inserted.length;
   } catch (err) {
     await client.query('ROLLBACK');
     throw err;
