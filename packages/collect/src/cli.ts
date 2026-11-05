@@ -4,10 +4,12 @@ import { buildMentionContext } from './mentions.ts';
 import { runCollector } from './run.ts';
 import type { Collector, SourceId } from './types.ts';
 import { bipsRepoCollector } from './collectors/bips-repo.ts';
+import { delvingCollector } from './collectors/delving.ts';
 
 /** Collectors are registered here as they are written (SPEC 6.1). */
 const COLLECTORS: Partial<Record<SourceId, () => Collector>> = {
   'bips-repo': () => bipsRepoCollector(),
+  delving: () => delvingCollector(),
 };
 const ALL: SourceId[] = ['bips-repo', 'github', 'delving', 'mailing-list'];
 

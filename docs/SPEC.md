@@ -280,7 +280,7 @@ Goal: every new item from the four text sources lands in Postgres, is normalized
 
 **Postgres host:** Neon (decided 2026-11-05), project `frosty-forest-51716423`, branch `production`, Postgres 18 with pgvector available. `neon.ts` holds the project config; `neon env pull` writes `DATABASE_URL` (pooled, used by collectors) and `DATABASE_URL_UNPOOLED` (used by migrations) to `.env.local`. CI gets `DATABASE_URL` as a repository secret. `001_init.sql` is applied to `production`.
 
-**Progress:** done: package, migrations (`001_init.sql`), runner (cursor, `source_runs`, idempotent storage), mention detection with tests, `bipwatch.aliases`, Neon wiring with an integration test (`npm run test:db --workspace @bipwatch/collect`), the `bips-repo` collector, header sync and its workflow (`.github/workflows/bips-repo.yml`). Not done: `github`, `delving`, `mailing-list`, their workflows, freshness. `documents` also has `external_id` (unique per source) so edited posts update their row.
+**Progress:** done: package, migrations (`001_init.sql`), runner (cursor, `source_runs`, idempotent storage), mention detection with tests, `bipwatch.aliases`, Neon wiring with an integration test (`npm run test:db --workspace @bipwatch/collect`), the `bips-repo` collector, header sync and its workflow (`.github/workflows/bips-repo.yml`). The `delving` collector and its workflow (`.github/workflows/delving.yml`). Not done: `github`, `mailing-list`, their workflows, freshness. `documents` also has `external_id` (unique per source) so edited posts update their row.
 
 **Package:** `packages/collect` (`@bipwatch/collect`), TypeScript, run with `tsx`. CLI: `npm run collect -- --source <id>` and `--all`.
 
@@ -314,6 +314,7 @@ Re-running any collector with the same cursor must not create duplicates (`conte
   - The workflow runs both every 30 minutes. The sync job validates and builds before opening the PR, opens it with the `BOT_TOKEN` secret (a fine-grained PAT; PRs opened with `GITHUB_TOKEN` would not trigger CI), and enables squash auto-merge. A ruleset on `main` requires the `validate` check, so auto-merge waits for CI. Secrets: `DATABASE_URL`, `BOT_TOKEN`.
 - `github`: PRs, issues and review comments on bitcoin/bips, plus repos named in implementation claims' `subject.url`. Poll by `updated_at`. Token from `GITHUB_TOKEN`.
 - `delving`: Discourse JSON endpoints (latest topics, then new posts per topic). Store each post.
+  - Built on `/posts.json` instead (site-wide public posts, newest first, paged with `?before=<id>`), which returns each post's Markdown `raw` and its topic title in one call. The cursor is the highest stored post id; the first run backfilled the whole forum. Only stable fields are stored, so counters like reads do not change the hash. `[quote]` blocks are dropped from `body_text` so quoting a post does not count as mentioning its BIPs; the raw item keeps them. Edits to old posts are not picked up. Requests wait 300 ms and back off on 429/5xx.
 - `mailing-list`: the public-inbox archive at gnusha.org/pi/bitcoindev. Check which endpoints it exposes (Atom feed for new messages, per-thread mbox) before writing the parser. Key on Message-ID.
 
 **Mention detection (code only):**

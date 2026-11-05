@@ -1,0 +1,55 @@
+{
+ "latest_posts": [
+  {
+   "id": 8985,
+   "topic_id": 1052,
+   "topic_slug": "stats-on-compact-block-reconstructions",
+   "topic_title": "Stats on compact block reconstructions",
+   "post_number": 64,
+   "username": "edil.medeiros",
+   "name": "Edil Medeiros",
+   "created_at": "2026-11-05T00:22:37.344Z",
+   "updated_at": "2026-11-05T00:40:20.253Z",
+   "raw": "[quote=\"0xB10C, post:24, topic:1052\"]\nThis seems promising in regards to predictably prefilling transactions in our compact block announcements. My assumption would be that if we prefill:\n\n* transactions we had to request\n* transactions we took from our extra pool\n* and prefilled transactions we didn’t have in our mempool (i.e. prefilled txns that were announced to use and ended up being useful)\n\n[/quote]\n\nJust came across with this paper ( <https://link.springer.com/article/10.1007/s11227-024-06468-0> ) where the authors do exactly what b10c proposes. The draft PR on Core ( https://github.com/bitcoin/bitcoin/pull/35558 ) is a bit more sophisticated as it also considers the TCP window when building the prefilling.\n\nThe most interesting part is the evaluation on section 7. They spawn 20 nodes on mainnet, half are considered sender nodes and the other half receiver nodes. \"Importantly, receiver nodes were exclusively connected to their respective sender nodes to ensure they received the correct variant of the compact block relay. This design ensures fairness and consistency in evaluating relay performance across the network. In addition, all participating nodes were directly connected to the main Bitcoin mainnet. This ensured that our observations mirrored real-world conditions.\"\n\nNot sure about this claim, but still interesting to compare with what @m4ycon has done in https://github.com/m4ycon/prefill-compact-blocks-review .\n\nA different paper (https://onlinelibrary.wiley.com/doi/10.1002/nem.2262 - gated by a paywall, DM me to get a copy) proposes to prioritize in the `prefilledtxn` field txs high higher fee, higher size, and less time siting in the local mempool. As we would expect, the authors find that prefilling the most recently received mempool txs substantially reduces the probability of needing `getblocktxn`, whereas prioritizing by transaction fee or size produces little improvement.\n\nThe methodologies are quite different and hard to compare directly, but it feels to me that prefilling based on previous compact blocks misses is a pretty good heuristic.",
+   "post_url": "/t/stats-on-compact-block-reconstructions/1052/64",
+   "post_type": 1,
+   "hidden": false,
+   "deleted_at": null,
+   "reply_to_post_number": 24
+  },
+  {
+   "id": 6631,
+   "topic_id": 877,
+   "topic_slug": "bip352-psbt-support",
+   "topic_title": "BIP352: PSBT support",
+   "post_number": 32,
+   "username": "nymius",
+   "name": "",
+   "created_at": "2026-01-16T13:40:24.859Z",
+   "updated_at": "2026-01-16T13:40:24.859Z",
+   "raw": "I have been working on a BIP Draft for the above changes.\n\nYou can have a look in:\n\n* [github gist: PSBT_IN_SP_TWEAK for spending silent payment outputs](https://gist.github.com/nymius/b3dd0b8a08c6735d617e6216b73c4260)\n* [mailing list post: \\[BIP Proposal\\] Add PSBT_IN_SP_TWEAK field](https://groups.google.com/g/bitcoindev/c/Kap7NMwzl2k)\n\nFeedback is welcome.",
+   "post_url": "/t/bip352-psbt-support/877/32",
+   "post_type": 1,
+   "hidden": false,
+   "deleted_at": null,
+   "reply_to_post_number": 31
+  },
+  {
+   "id": 2441,
+   "topic_id": 877,
+   "topic_slug": "bip352-psbt-support",
+   "topic_title": "BIP352: PSBT support",
+   "post_number": 1,
+   "username": "josibake",
+   "name": "josie",
+   "created_at": "2024-05-17T11:48:32.947Z",
+   "updated_at": "2024-05-17T11:51:04.620Z",
+   "raw": "Started having some conversations about how to support sending and spending silent payment outputs in PSBTs, felt like a good time for a delving post to get some more eyes on it! Also, I am in no way an expert on PSBTs, so likely to make a lot of errors here.\n\n## Spending\n\nSpending seems the easiest to support and might be possible today by using the `PSBT_IN_PROPRIETARY` type. This would include the `shared_secret_tweak` (32 bytes) and the spend public key (33 bytes). The spend public key is used to get the spend private key and the spend private key is tweaked with the `shared_secret_tweak` when signing. The label tweak (if used) would already be added to the `shared_secret_tweak`.\n\nAlternatively, we could create new field(s), something like `PSBT_IN_BIP352_TWEAK`, for example. Not sure if its possible to update the existing BIP174/370 or if we would need a new BIP for this.\n\n## Sending\n\nThis is a bit more complicated. Constraints introduced when sending to a silent payments address are:\n\n* The generated outputs depend on the inputs, so must be regenerated if the inputs change\n* Generating the outputs requires access to the private keys*\n* There constraints around what types of inputs are allowed in a silent payments transaction\n\ndelvingless-andrewtoth started a draft BIP for sending support here: https://gist.github.com/andrewtoth/dc26f683010cd53aca8e477504c49260.\n\nThe biggest change is the draft proposes a new `OutputGenerator` role: \n\n> The OutputGenerator role is only present for PSBTv3. The OutputGenerator must have access to all private keys for all inputs used for shared secret derivation. If the Has Silent Payments Flag is set to False, this role may be omitted. If there is not at least 1 eligible input for silent payment output generation, then the OutputGenerator must fail. The OutputGenerator generates the output scripts for all silent payment outputs using PSBT_OUT_SILENT_PAYMENT_CODE. It updates all PSBT_OUT_SCRIPT fields for all silent payment outputs with the appropriate outputs. It sets the Silent Payments Modifiable Flag to False. It sets the Inputs Modifiable to False. TODO: It may also generate a DLEQ proof using all the public keys of the inputs used for shared secret derivation and add it to the PSBT field PSBT_GLOBAL_SILENT_PAYMENTS_DLEQ_PROOF.\n>\n> A single entity is likely to be both an OutputGenerator and Signer.\n\nThis is nice in the sense that all of the silent payments logic can be encapsulated in this new role, requiring minimal changes to the other roles. The only change required for the signer would be to verify this new field, `DLEQ_PROOF`, which is a of verifying the outputs were created correctly without needing access to the private keys uses to create them. There are additional constraints listed in the draft for each of the other roles.\n\n### Access to the private keys\n\nIt's also worth mentioning that the `OutputGenerator` *might* not need access to the private keys, but can accept something like an \"ECDH share\": \n\n$$\na_{sum} = a_1 + a_2 + ... + a_n \\\\\na_{sum} \\cdot B_{scan} = a_1 \\cdot B_{scan} + a_2 \\cdot B_{scan} + ... + a_n \\cdot B_{scan}\n$$\n\nSo a signing device could return the ECDH share for a private key, instead of the full private key. Mentioning this as theoretically possible because this is not something that is provably secure and there are definite reasons to *not* have a signing device respond to Diffie-Hellman requests.",
+   "post_url": "/t/bip352-psbt-support/877/1",
+   "post_type": 1,
+   "hidden": false,
+   "deleted_at": null,
+   "reply_to_post_number": null
+  }
+ ]
+}
