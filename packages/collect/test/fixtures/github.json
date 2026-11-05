@@ -1,0 +1,492 @@
+{
+ "bips_prs": [
+  {
+   "__typename": "PullRequest",
+   "number": 2337,
+   "title": "BIP352: add taproot key-path spend with annex vector",
+   "body": "Add a BIP-352 test vector where a taproot input is spent via the key path with an annex (2-item witness). The annex must be stripped before deciding between key-path and script-path spends, so the input is still eligible and all expected values match the plain key-path case.",
+   "url": "https://github.com/bitcoin/bips/pull/2337",
+   "state": "MERGED",
+   "createdAt": "2026-10-23T07:56:11Z",
+   "updatedAt": "2026-10-27T02:41:59Z",
+   "author": {
+    "login": "Eunovo"
+   },
+   "labels": {
+    "nodes": [
+     {
+      "name": "Tests"
+     }
+    ]
+   },
+   "files": {
+    "nodes": [
+     {
+      "path": "bip-0352.mediawiki"
+     },
+     {
+      "path": "bip-0352/send_and_receive_test_vectors.json"
+     }
+    ]
+   },
+   "reviews": {
+    "nodes": [
+     {
+      "databaseId": 5634221608,
+      "author": {
+       "login": "jonatack"
+      },
+      "state": "COMMENTED",
+      "body": "Concept ACK\r\n\r\nAgree with @fametrano's stronger annex (0x50 + BIP-341 NUMS point H), see suggestions below.",
+      "submittedAt": "2026-10-23T20:45:09Z",
+      "url": "https://github.com/bitcoin/bips/pull/2337#pullrequestreview-5634221608"
+     },
+     {
+      "databaseId": 5637164480,
+      "author": {
+       "login": "Eunovo"
+      },
+      "state": "COMMENTED",
+      "body": "",
+      "submittedAt": "2026-10-24T06:30:38Z",
+      "url": "https://github.com/bitcoin/bips/pull/2337#pullrequestreview-5637164480"
+     },
+     {
+      "databaseId": 5637164836,
+      "author": {
+       "login": "Eunovo"
+      },
+      "state": "COMMENTED",
+      "body": "",
+      "submittedAt": "2026-10-24T06:30:46Z",
+      "url": "https://github.com/bitcoin/bips/pull/2337#pullrequestreview-5637164836"
+     },
+     {
+      "databaseId": 5645001421,
+      "author": {
+       "login": "T10876"
+      },
+      "state": "COMMENTED",
+      "body": "",
+      "submittedAt": "2026-10-25T20:08:40Z",
+      "url": "https://github.com/bitcoin/bips/pull/2337#pullrequestreview-5645001421"
+     },
+     {
+      "databaseId": 5650000396,
+      "author": {
+       "login": "theStack"
+      },
+      "state": "APPROVED",
+      "body": "ACK b19b13964424bc59a6add5fe51ba7ada671f904b",
+      "submittedAt": "2026-10-26T09:41:23Z",
+      "url": "https://github.com/bitcoin/bips/pull/2337#pullrequestreview-5650000396"
+     },
+     {
+      "databaseId": 5661396899,
+      "author": {
+       "login": "theStack"
+      },
+      "state": "APPROVED",
+      "body": "re-ACK f827c440636a93e6033a4e10705ca7762594265b",
+      "submittedAt": "2026-10-27T02:01:24Z",
+      "url": "https://github.com/bitcoin/bips/pull/2337#pullrequestreview-5661396899"
+     }
+    ]
+   },
+   "mergedAt": "2026-10-27T02:41:59Z",
+   "comments": {
+    "nodes": [
+     {
+      "databaseId": 6361922744,
+      "author": {
+       "login": "theStack"
+      },
+      "body": "Concept ACK",
+      "createdAt": "2026-10-23T09:35:02Z",
+      "updatedAt": "2026-10-23T09:35:02Z",
+      "url": "https://github.com/bitcoin/bips/pull/2337#issuecomment-6361922744"
+     },
+     {
+      "databaseId": 6368598124,
+      "author": {
+       "login": "fametrano"
+      },
+      "body": "btclib-wallet, a BIP352 implementation I maintain, reproduces the new vector at 48493fa: sending and receiving both match the expected values.\n\nI ran its BIP352 tests at commit 3b88201 with this file in place of its copy of the vectors, and all tests on the new vector pass.\n\nThe vector does not catch a missing annex strip, though. With the strip removed from btclib-wallet, those tests still pass: the annex `0x5000` is taken for a control block, but not one with the NUMS internal key, so the input stays eligible. With the annex set to `0x50` followed by BIP341's NUMS key H, `0x5050929b74c1a04954b78b4b6035e97a5e078a5a0f28ec96d547bfee9ace803ac0`, the same change fails on both sending and receiving, and the unmodified code still matches the expected values. Only the witness changes; its signature has to be redone, since BIP341 signs the annex.\n",
+      "createdAt": "2026-10-23T15:35:32Z",
+      "updatedAt": "2026-10-23T15:35:32Z",
+      "url": "https://github.com/bitcoin/bips/pull/2337#issuecomment-6368598124"
+     },
+     {
+      "databaseId": 6380939268,
+      "author": {
+       "login": "Eunovo"
+      },
+      "body": "> The vector does not catch a missing annex strip, though. With the strip removed from btclib-wallet, those tests still pass: the annex `0x5000` is taken for a control block, but not one with the NUMS internal key, so the input stays eligible. With the annex set to `0x50` followed by BIP341's NUMS key H, `0x5050929b74c1a04954b78b4b6035e97a5e078a5a0f28ec96d547bfee9ace803ac0`, the same change fails on both sending and receiving, and the unmodified code still matches the expected values. Only the witness changes; its signature has to be redone, since BIP341 signs the annex.\r\n\r\nThanks for the review. Done!",
+      "createdAt": "2026-10-24T06:32:09Z",
+      "updatedAt": "2026-10-24T06:32:09Z",
+      "url": "https://github.com/bitcoin/bips/pull/2337#issuecomment-6380939268"
+     },
+     {
+      "databaseId": 6393229781,
+      "author": {
+       "login": "theStack"
+      },
+      "body": "LGTM, can you rebase on master (this PR branch is still based on BIP-352 version 1.1.0 from March), and add a small changelog entry with bumped PATCH version? (see e.g. https://github.com/bitcoin/bips/pull/2142 for an example).",
+      "createdAt": "2026-10-25T04:02:51Z",
+      "updatedAt": "2026-10-25T04:02:51Z",
+      "url": "https://github.com/bitcoin/bips/pull/2337#issuecomment-6393229781"
+     },
+     {
+      "databaseId": 6416967779,
+      "author": {
+       "login": "jonatack"
+      },
+      "body": "@Eunovo would you please update the Version header on line 16 in your last commit and squash.",
+      "createdAt": "2026-10-26T13:17:46Z",
+      "updatedAt": "2026-10-26T13:17:46Z",
+      "url": "https://github.com/bitcoin/bips/pull/2337#issuecomment-6416967779"
+     }
+    ]
+   }
+  },
+  {
+   "__typename": "PullRequest",
+   "number": 2302,
+   "title": "bip352: fix up undefined index in Overview section",
+   "body": "Notation-only changes to the overview section. They are:\r\n\r\nP<sub>i</sub> -> P<sub>k</sub>. The index i is never defined, and the output is derived from the counter k.\r\n\r\nDefine A = a·G right after a is redefined as the sum of the input private keys. Then use A in input_hash = hash(outpoint<sub>L</sub> || A) instead of (a·G). The BIP uses uppercase for public keys, and this was the only place where a public key appeared in the middle of an operation as (a·G). It also matches the sender spec, which writes \"A = a·G\".",
+   "url": "https://github.com/bitcoin/bips/pull/2302",
+   "state": "MERGED",
+   "createdAt": "2026-09-24T21:06:26Z",
+   "updatedAt": "2026-09-25T17:30:06Z",
+   "author": {
+    "login": "ViniciusCestarii"
+   },
+   "labels": {
+    "nodes": [
+     {
+      "name": "Fixups"
+     }
+    ]
+   },
+   "files": {
+    "nodes": [
+     {
+      "path": "bip-0352.mediawiki"
+     }
+    ]
+   },
+   "reviews": {
+    "nodes": [
+     {
+      "databaseId": 5310343170,
+      "author": {
+       "login": "jonatack"
+      },
+      "state": "COMMENTED",
+      "body": "",
+      "submittedAt": "2026-09-24T21:19:03Z",
+      "url": "https://github.com/bitcoin/bips/pull/2302#pullrequestreview-5310343170"
+     },
+     {
+      "databaseId": 5310399917,
+      "author": {
+       "login": "jonatack"
+      },
+      "state": "COMMENTED",
+      "body": "",
+      "submittedAt": "2026-09-24T21:23:34Z",
+      "url": "https://github.com/bitcoin/bips/pull/2302#pullrequestreview-5310399917"
+     },
+     {
+      "databaseId": 5310760794,
+      "author": {
+       "login": "ViniciusCestarii"
+      },
+      "state": "COMMENTED",
+      "body": "",
+      "submittedAt": "2026-09-24T22:03:01Z",
+      "url": "https://github.com/bitcoin/bips/pull/2302#pullrequestreview-5310760794"
+     },
+     {
+      "databaseId": 5310856698,
+      "author": {
+       "login": "ViniciusCestarii"
+      },
+      "state": "COMMENTED",
+      "body": "",
+      "submittedAt": "2026-09-24T22:14:56Z",
+      "url": "https://github.com/bitcoin/bips/pull/2302#pullrequestreview-5310856698"
+     }
+    ]
+   },
+   "mergedAt": "2026-09-25T16:04:52Z",
+   "comments": {
+    "nodes": [
+     {
+      "databaseId": 5835487811,
+      "author": {
+       "login": "jonatack"
+      },
+      "body": "ACK, thank you for the rapid responses.",
+      "createdAt": "2026-09-25T16:04:43Z",
+      "updatedAt": "2026-09-25T16:04:43Z",
+      "url": "https://github.com/bitcoin/bips/pull/2302#issuecomment-5835487811"
+     },
+     {
+      "databaseId": 5836659509,
+      "author": {
+       "login": "ViniciusCestarii"
+      },
+      "body": "Thanks for the rapid response and review as well!",
+      "createdAt": "2026-09-25T17:30:06Z",
+      "updatedAt": "2026-09-25T17:30:06Z",
+      "url": "https://github.com/bitcoin/bips/pull/2302#issuecomment-5836659509"
+     }
+    ]
+   }
+  }
+ ],
+ "bips_comments": [
+  {
+   "id": 6361922744,
+   "user": {
+    "login": "theStack"
+   },
+   "body": "Concept ACK",
+   "created_at": "2026-10-23T09:35:02Z",
+   "updated_at": "2026-10-23T09:35:02Z",
+   "html_url": "https://github.com/bitcoin/bips/pull/2337#issuecomment-6361922744",
+   "issue_url": "https://api.github.com/repos/bitcoin/bips/issues/2337"
+  },
+  {
+   "id": 6368598124,
+   "user": {
+    "login": "fametrano"
+   },
+   "body": "btclib-wallet, a BIP352 implementation I maintain, reproduces the new vector at 48493fa: sending and receiving both match the expected values.\n\nI ran its BIP352 tests at commit 3b88201 with this file in place of its copy of the vectors, and all tests on the new vector pass.\n\nThe vector does not catch a missing annex strip, though. With the strip removed from btclib-wallet, those tests still pass: the annex `0x5000` is taken for a control block, but not one with the NUMS internal key, so the input stays eligible. With the annex set to `0x50` followed by BIP341's NUMS key H, `0x5050929b74c1a04954b78b4b6035e97a5e078a5a0f28ec96d547bfee9ace803ac0`, the same change fails on both sending and receiving, and the unmodified code still matches the expected values. Only the witness changes; its signature has to be redone, since BIP341 signs the annex.\n",
+   "created_at": "2026-10-23T15:35:32Z",
+   "updated_at": "2026-10-23T15:35:32Z",
+   "html_url": "https://github.com/bitcoin/bips/pull/2337#issuecomment-6368598124",
+   "issue_url": "https://api.github.com/repos/bitcoin/bips/issues/2337"
+  },
+  {
+   "id": 6380939268,
+   "user": {
+    "login": "Eunovo"
+   },
+   "body": "> The vector does not catch a missing annex strip, though. With the strip removed from btclib-wallet, those tests still pass: the annex `0x5000` is taken for a control block, but not one with the NUMS internal key, so the input stays eligible. With the annex set to `0x50` followed by BIP341's NUMS key H, `0x5050929b74c1a04954b78b4b6035e97a5e078a5a0f28ec96d547bfee9ace803ac0`, the same change fails on both sending and receiving, and the unmodified code still matches the expected values. Only the witness changes; its signature has to be redone, since BIP341 signs the annex.\r\n\r\nThanks for the review. Done!",
+   "created_at": "2026-10-24T06:32:09Z",
+   "updated_at": "2026-10-24T06:32:09Z",
+   "html_url": "https://github.com/bitcoin/bips/pull/2337#issuecomment-6380939268",
+   "issue_url": "https://api.github.com/repos/bitcoin/bips/issues/2337"
+  },
+  {
+   "id": 6393229781,
+   "user": {
+    "login": "theStack"
+   },
+   "body": "LGTM, can you rebase on master (this PR branch is still based on BIP-352 version 1.1.0 from March), and add a small changelog entry with bumped PATCH version? (see e.g. https://github.com/bitcoin/bips/pull/2142 for an example).",
+   "created_at": "2026-10-25T04:02:51Z",
+   "updated_at": "2026-10-25T04:02:51Z",
+   "html_url": "https://github.com/bitcoin/bips/pull/2337#issuecomment-6393229781",
+   "issue_url": "https://api.github.com/repos/bitcoin/bips/issues/2337"
+  },
+  {
+   "id": 6416967779,
+   "user": {
+    "login": "jonatack"
+   },
+   "body": "@Eunovo would you please update the Version header on line 16 in your last commit and squash.",
+   "created_at": "2026-10-26T13:17:46Z",
+   "updated_at": "2026-10-26T13:17:46Z",
+   "html_url": "https://github.com/bitcoin/bips/pull/2337#issuecomment-6416967779",
+   "issue_url": "https://api.github.com/repos/bitcoin/bips/issues/2337"
+  }
+ ],
+ "bips_review_comments": [
+  {
+   "id": 4364054446,
+   "user": {
+    "login": "jonatack"
+   },
+   "body": "```suggestion\n                            \"txinwitness\": \"0240c459b671370d12cfb5acee76da7e3ba7cc29b0b4653e3af8388591082660137d087fdc8e89a612cd5d15be0febe61fc7cdcf3161a26e599a4514aa5c3e86f47b215050929b74c1a04954b78b4b6035e97a5e078a5a0f28ec96d547bfee9ace803ac0\",\n```",
+   "created_at": "2026-10-23T20:42:08Z",
+   "updated_at": "2026-10-23T20:45:09Z",
+   "html_url": "https://github.com/bitcoin/bips/pull/2337#discussion_r4364054446",
+   "pull_request_url": "https://api.github.com/repos/bitcoin/bips/pulls/2337",
+   "path": "bip-0352/send_and_receive_test_vectors.json",
+   "commit_id": "48493fad2ccaf70610b9888c59c02aa548245ed2"
+  },
+  {
+   "id": 4364058863,
+   "user": {
+    "login": "jonatack"
+   },
+   "body": "```suggestion\n                            \"txinwitness\": \"0240c459b671370d12cfb5acee76da7e3ba7cc29b0b4653e3af8388591082660137d087fdc8e89a612cd5d15be0febe61fc7cdcf3161a26e599a4514aa5c3e86f47b215050929b74c1a04954b78b4b6035e97a5e078a5a0f28ec96d547bfee9ace803ac0\",\n```",
+   "created_at": "2026-10-23T20:42:40Z",
+   "updated_at": "2026-10-23T20:45:09Z",
+   "html_url": "https://github.com/bitcoin/bips/pull/2337#discussion_r4364058863",
+   "pull_request_url": "https://api.github.com/repos/bitcoin/bips/pulls/2337",
+   "path": "bip-0352/send_and_receive_test_vectors.json",
+   "commit_id": "48493fad2ccaf70610b9888c59c02aa548245ed2"
+  },
+  {
+   "id": 4366257839,
+   "user": {
+    "login": "Eunovo"
+   },
+   "body": "Done.",
+   "created_at": "2026-10-24T06:30:37Z",
+   "updated_at": "2026-10-24T06:30:38Z",
+   "html_url": "https://github.com/bitcoin/bips/pull/2337#discussion_r4366257839",
+   "pull_request_url": "https://api.github.com/repos/bitcoin/bips/pulls/2337",
+   "path": "bip-0352/send_and_receive_test_vectors.json",
+   "commit_id": "48493fad2ccaf70610b9888c59c02aa548245ed2"
+  },
+  {
+   "id": 4366258105,
+   "user": {
+    "login": "Eunovo"
+   },
+   "body": "Done.",
+   "created_at": "2026-10-24T06:30:46Z",
+   "updated_at": "2026-10-24T06:30:46Z",
+   "html_url": "https://github.com/bitcoin/bips/pull/2337#discussion_r4366258105",
+   "pull_request_url": "https://api.github.com/repos/bitcoin/bips/pulls/2337",
+   "path": "bip-0352/send_and_receive_test_vectors.json",
+   "commit_id": "48493fad2ccaf70610b9888c59c02aa548245ed2"
+  },
+  {
+   "id": 4372218587,
+   "user": {
+    "login": "T10876"
+   },
+   "body": "تم\n",
+   "created_at": "2026-10-25T20:08:15Z",
+   "updated_at": "2026-10-25T21:46:28Z",
+   "html_url": "https://github.com/bitcoin/bips/pull/2337#discussion_r4372218587",
+   "pull_request_url": "https://api.github.com/repos/bitcoin/bips/pulls/2337",
+   "path": "bip-0352.mediawiki",
+   "commit_id": "f827c440636a93e6033a4e10705ca7762594265b"
+  },
+  {
+   "id": 4372219303,
+   "user": {
+    "login": "T10876"
+   },
+   "body": "نم",
+   "created_at": "2026-10-25T20:08:28Z",
+   "updated_at": "2026-10-25T21:46:36Z",
+   "html_url": "https://github.com/bitcoin/bips/pull/2337#discussion_r4372219303",
+   "pull_request_url": "https://api.github.com/repos/bitcoin/bips/pulls/2337",
+   "path": "bip-0352/send_and_receive_test_vectors.json",
+   "commit_id": "f827c440636a93e6033a4e10705ca7762594265b"
+  }
+ ],
+ "core_pr": {
+  "__typename": "PullRequest",
+  "number": 35301,
+  "title": "Silent Payments: Implement bip352 (take 2)",
+  "body": "This PR is part of integrating silent payments into Bitcoin Core. It is the second iteration of https://github.com/bitcoin/bitcoin/pull/28122, now based on https://github.com/bitcoin-core/secp256k1/pull/1765.\r\n\r\nThis project is tracked in https://github.com/bitcoin/bitcoin/issues/28536.\r\n\r\nBIP352\r\nThis PR focuses strictly on the BIP logic and attempts to separate it from the wallet and transaction implementation details. This is accomplished by working directly with public and private keys, instead of needing a wallet backend and transactions for testing. Labels for the receiver are optional and thus deferred for a later PR.\r\n\r\nTest vectors from the BIP are included as unit tests.",
+  "url": "https://github.com/bitcoin/bitcoin/pull/35301",
+  "state": "MERGED",
+  "createdAt": "2026-05-16T03:46:01Z",
+  "updatedAt": "2026-09-24T16:59:50Z",
+  "author": {
+   "login": "Eunovo"
+  },
+  "labels": {
+   "nodes": []
+  },
+  "files": {
+   "nodes": [
+    {
+     "path": "src/CMakeLists.txt"
+    },
+    {
+     "path": "src/bech32.h"
+    },
+    {
+     "path": "src/common/bip352.cpp"
+    }
+   ]
+  },
+  "reviews": {
+   "nodes": [
+    {
+     "databaseId": 4333061125,
+     "author": {
+      "login": "theStack"
+     },
+     "state": "COMMENTED",
+     "body": "Thanks for the quick follow-up! Left a few more comments, most of them being nits. Mostly reviewed the parts around the SP module API calls so far, will take a closer look at higher-level parts of the protocol (particularly the pubkey extraction logic in `GetPubKeyFromInput`) within the next days.",
+     "submittedAt": "2026-05-22T15:22:47Z",
+     "url": "https://github.com/bitcoin/bitcoin/pull/35301#pullrequestreview-4333061125"
+    },
+    {
+     "databaseId": 4376785137,
+     "author": {
+      "login": "w0xlt"
+     },
+     "state": "COMMENTED",
+     "body": "A few review comments:",
+     "submittedAt": "2026-05-28T00:58:28Z",
+     "url": "https://github.com/bitcoin/bitcoin/pull/35301#pullrequestreview-4376785137"
+    }
+   ]
+  },
+  "mergedAt": "2026-09-23T23:18:34Z",
+  "comments": {
+   "nodes": [
+    {
+     "databaseId": 4465438957,
+     "author": {
+      "login": "DrahtBot"
+     },
+     "body": "<!--e57a25ab6845829454e8d69fc972939a-->\n\nThe following sections might be updated with supplementary metadata relevant to reviewers and maintainers.\n\n<!--006a51241073e994b41acfe9ec718e94-->\n### Code Coverage & Benchmarks\nFor details see: https://corecheck.dev/bitcoin/bitcoin/pulls/35301.\n<!--021abf342d371248e50ceaed478a90ca-->\n### Reviews\nSee [the guideline](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md#code-review) and [AI policy](https://github.com/bitcoin/bitcoin/blob/master/doc/AI_POLICY.md) for information on the review process.\n| Type | Reviewers |\n| ---- | --------- |\n| ACK | [theStack](https://github.com/bitcoin/bitcoin/pull/35301#pullrequestreview-5292457038), [rustaceanrob](https://github.com/bitcoin/bitcoin/pull/35301#issuecomment-5797944696), [achow101](https://github.com/bitcoin/bitcoin/pull/35301#pullrequestreview-5296707524) |\n| Concept ACK | [w0xlt](https://github.com/bitcoin/bitcoin/pull/35301#issuecomment-4490760075), [rkrux](https://github.com/bitcoin/bitcoin/pull/35301#issuecomment-4490966505), [josibake](https://github.com/bitcoin/bitcoin/pull/35301#issuecomment-5280606718) |\n\nIf your review is incorrectly listed, please copy-paste <code>&lt;!--meta-tag:bot-skip--&gt;</code> into the comment that the bot should ignore.\n<!--174a7506f384e20aa4161008e828411d-->\n### Conflicts\nReviewers, this pull request conflicts with the following ones:\n\n* [#36188](https://github.com/bitcoin/bitcoin/pull/36188) (crypto: plug hardware optimized SHA256 into libsecp256k1's context by furszy)\n* [#35793](https://github.com/bitcoin/bitcoin/pull/35793) (Implement BIP 54 (Consensus Cleanup) without mainnet activation by darosior)\n* [#35642](https://github.com/bitcoin/bitcoin/pull/35642) (headersync: do parameter search at runtime by sipa)\n\nIf you consider this pull request important, please also help to review the conflicting pull requests. Ideally, start with the one that should be merged first.\n<!--5faf32d7da4f0f540f40219e4f7537a3-->\n### LLM Linter (✨ experimental)\n\n\n\nPossible places where named args for integral literals may be used (e.g. `func(x, /*named_arg=*/0)` in C++, and `func(x, named_arg=0)` in Python):\n\n- [CKey::Set(hex_data.begin(), hex_data.end(), true)] in [src/test/bip352_tests.cpp]\n\n\n\n<sup>2026-09-23 10:57:00</sup>\n",
+     "createdAt": "2026-05-16T03:46:10Z",
+     "updatedAt": "2026-09-23T22:58:16Z",
+     "url": "https://github.com/bitcoin/bitcoin/pull/35301#issuecomment-4465438957"
+    },
+    {
+     "databaseId": 4490760075,
+     "author": {
+      "login": "w0xlt"
+     },
+     "body": "Concept ACK",
+     "createdAt": "2026-05-19T18:21:52Z",
+     "updatedAt": "2026-05-19T18:21:52Z",
+     "url": "https://github.com/bitcoin/bitcoin/pull/35301#issuecomment-4490760075"
+    }
+   ]
+  }
+ },
+ "core_review_comments": [
+  {
+   "id": 3255922097,
+   "user": {
+    "login": "theStack"
+   },
+   "body": "in 6355a904945d0d5704032e464f20a69a5d82a91b: Since #34225 (commit f36d89f4363a25f7948a0f7096201ef8e15045d8), the sign context can be accessed via `GetSecp256k1SignContext`, i.e. by using this in the API calls below, this line and the symbol visibility change in key.cpp are not needed anymore",
+   "created_at": "2026-05-18T01:43:50Z",
+   "updated_at": "2026-05-18T02:37:38Z",
+   "html_url": "https://github.com/bitcoin/bitcoin/pull/35301#discussion_r3255922097",
+   "pull_request_url": "https://api.github.com/repos/bitcoin/bitcoin/pulls/35301",
+   "path": "src/common/bip352.cpp",
+   "commit_id": "6355a904945d0d5704032e464f20a69a5d82a91b"
+  },
+  {
+   "id": 3255958806,
+   "user": {
+    "login": "theStack"
+   },
+   "body": "in 6355a904945d0d5704032e464f20a69a5d82a91b: typo: s/uint156/uint256/",
+   "created_at": "2026-05-18T01:59:35Z",
+   "updated_at": "2026-05-18T02:37:38Z",
+   "html_url": "https://github.com/bitcoin/bitcoin/pull/35301#discussion_r3255958806",
+   "pull_request_url": "https://api.github.com/repos/bitcoin/bitcoin/pulls/35301",
+   "path": "src/common/bip352.h",
+   "commit_id": "6355a904945d0d5704032e464f20a69a5d82a91b"
+  }
+ ]
+}

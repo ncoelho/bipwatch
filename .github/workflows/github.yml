@@ -1,0 +1,39 @@
+name: github
+
+# SPEC 6.1: hourly, archive bitcoin/bips pull requests, reviews and comments,
+# plus the PRs and issues claims link to in other repos.
+
+on:
+  schedule:
+    - cron: '13 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: github
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Collect PRs and comments into Postgres
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          # Read-only access to public repos is all this needs.
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::warning::DATABASE_URL secret is not set; skipping collection"
+            exit 0
+          fi
+          npm run collect -- --source github
