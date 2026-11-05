@@ -1,7 +1,8 @@
 name: github
 
 # SPEC 6.1: hourly, archive bitcoin/bips pull requests, reviews and comments,
-# plus the PRs and issues claims link to in other repos.
+# plus the PRs and issues claims link to in other repos. Runs on the
+# workflow's read-only token; no secret beyond DATABASE_URL.
 
 on:
   schedule:
