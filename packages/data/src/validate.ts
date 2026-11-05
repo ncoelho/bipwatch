@@ -135,6 +135,8 @@ for (const folder of folders) {
     }
     if (bip.bipwatch.tracked && (!bip.bipwatch.category || !bip.bipwatch.template))
       report('error', rel(bipFile), 'tracked BIPs need bipwatch.category and bipwatch.template');
+    if (!bip.bipwatch.tracked && bip.bipwatch.aliases?.length)
+      report('warn', rel(bipFile), 'bipwatch.aliases is only used for tracked BIPs');
   }
 
   // claims

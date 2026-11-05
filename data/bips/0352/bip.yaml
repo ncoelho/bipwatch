@@ -44,3 +44,8 @@ bipwatch:
     fresh taproot output for the receiver from their own inputs, so there is no
     notification transaction and no link between payments. The cost is that
     receivers have to scan the chain to find what they were paid.
+  # Matched by the collectors' mention index. "BIP 352" and links are
+  # detected without aliases.
+  aliases:
+    - silent payments
+    - silent payment

@@ -1,0 +1,27 @@
+{
+  "name": "@bipwatch/collect",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Collectors, raw archive and BIP-mention index for BipWatch.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "collect": "tsx --env-file-if-exists=../../.env src/cli.ts",
+    "migrate": "tsx --env-file-if-exists=../../.env src/migrate.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bipwatch/data": "*",
+    "pg": "8.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.30",
+    "@types/pg": "8.11.10",
+    "tsx": "4.20.3",
+    "typescript": "5.8.3",
+    "vitest": "3.2.4"
+  }
+}

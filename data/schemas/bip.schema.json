@@ -86,7 +86,13 @@
           "description": "What 'deployed' means for this BIP.",
           "enum": ["activation-and-usage", "wallet-coverage", "node-coverage", "service-coverage", "not-applicable"]
         },
-        "summary": { "type": "string", "maxLength": 400 }
+        "summary": { "type": "string", "maxLength": 400 },
+        "aliases": {
+          "description": "Names the BIP goes by in discussion, used by the collectors' mention index. Only matched for tracked BIPs. Matched case-insensitively on word boundaries, so avoid common words.",
+          "type": "array",
+          "items": { "type": "string", "minLength": 3 },
+          "uniqueItems": true
+        }
       }
     }
   }

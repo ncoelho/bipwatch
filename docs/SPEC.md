@@ -195,6 +195,7 @@ data/                       open data layer (CC0)
   bips/0352/                tracked: bip.yaml, needs.yaml, claims/*.yaml (18)
   bips/0375, 0376, 0392/    companions, bip.yaml only, untracked
 packages/data/              @bipwatch/data: loader (src/index.ts), types, validator CLI
+packages/collect/           @bipwatch/collect: migrations, runner, mention index (6.1, in progress)
 site/                       Astro 7.4.2 static site
   src/pages/index.astro     tracked proposals + rest of dataset
   src/pages/bip/[number]    picks a stage template per BIP
@@ -277,7 +278,9 @@ The build order is: (1) schemas and seed, done; (2) static site, done; **(3) col
 
 Goal: every new item from the four text sources lands in Postgres, is normalized, and is linked to the BIPs it mentions. Status changes on tracked BIPs reach `data/` automatically.
 
-**Open decision before starting:** Postgres host (Neon or Supabase), or local Docker first. Ask the owner.
+**Postgres host:** Neon (decided 2026-11-05). `DATABASE_URL` comes from `.env` locally and a repository secret in CI.
+
+**Progress:** done: package, migrations (`001_init.sql`), runner (cursor, `source_runs`, idempotent storage), mention detection with tests, `bipwatch.aliases`. Not done: the four collectors, scheduled workflows, freshness. `documents` also has `external_id` (unique per source) so edited posts update their row.
 
 **Package:** `packages/collect` (`@bipwatch/collect`), TypeScript, run with `tsx`. CLI: `npm run collect -- --source <id>` and `--all`.
 

@@ -2,7 +2,7 @@ name: Validate data
 
 on:
   pull_request:
-    paths: ['data/**', 'packages/data/**']
+    paths: ['data/**', 'packages/data/**', 'packages/collect/**', 'package-lock.json']
   push:
     branches: [main]
 
@@ -24,3 +24,5 @@ jobs:
       - run: npm ci
       - run: npm run validate -- --bips ../bips
       - run: npm run typecheck --workspace @bipwatch/data
+      - run: npm run typecheck --workspace @bipwatch/collect
+      - run: npm test

@@ -35,6 +35,7 @@ export interface BipRecord {
     template?: Template;
     adoption_measure?: string;
     summary?: string;
+    aliases?: string[];
   };
 }
 

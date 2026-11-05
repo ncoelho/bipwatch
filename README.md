@@ -11,6 +11,7 @@ The full product and technical spec, including decisions and next work, is in [`
 ```
 data/            the open data layer (CC0); see data/README.md
 packages/data/   TypeScript loader + validator for data/
+packages/collect/ collectors, Postgres archive and BIP-mention index
 site/            Astro site: BIP pages and a static JSON API
 .github/         CI: validate on every PR, build on main + nightly
 ```
@@ -24,7 +25,12 @@ npm run validate                       # schema and consistency checks
 npm run validate -- --bips ../bips     # also match spec quotes against a clone of bitcoin/bips
 npm run dev                            # local site at http://localhost:4321
 npm run build                          # validate, then build site/dist
+npm test                               # unit tests (collectors, mention index)
+npm run migrate                        # apply SQL migrations to DATABASE_URL (Neon)
+npm run collect -- --source delving    # run one collector, or --all
 ```
+
+Collectors read `DATABASE_URL` and `GITHUB_TOKEN` from the environment or from `.env` (see `.env.example`).
 
 To check spec quotes locally, clone bitcoin/bips next to this repo:
 

@@ -11,7 +11,10 @@
   "scripts": {
     "validate": "npm run validate --workspace @bipwatch/data --",
     "dev": "npm run dev --workspace site",
-    "build": "npm run validate && npm run build --workspace site"
+    "build": "npm run validate && npm run build --workspace site",
+    "test": "npm test --workspaces --if-present",
+    "migrate": "npm run migrate --workspace @bipwatch/collect --",
+    "collect": "npm run collect --workspace @bipwatch/collect --"
   },
   "engines": {
     "node": ">=22.23.4"
