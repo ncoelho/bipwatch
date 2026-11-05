@@ -31,7 +31,9 @@ jobs:
         run: echo "key=bitcoindev-archive-$(date -u +%G-%V)" >> "$GITHUB_OUTPUT"
       - uses: actions/cache@v4
         with:
-          path: ${{ github.workspace }}/../bitcoindev-archive.git
+          # runner.workspace is the checkout's parent, where the collector
+          # keeps the clone (actions/cache rejects paths containing "..").
+          path: ${{ runner.workspace }}/bitcoindev-archive.git
           key: ${{ steps.week.outputs.key }}
           restore-keys: bitcoindev-archive-
 
