@@ -280,7 +280,7 @@ Goal: every new item from the four text sources lands in Postgres, is normalized
 
 **Postgres host:** Neon (decided 2026-11-05), project `frosty-forest-51716423`, branch `production`, Postgres 18 with pgvector available. `neon.ts` holds the project config; `neon env pull` writes `DATABASE_URL` (pooled, used by collectors) and `DATABASE_URL_UNPOOLED` (used by migrations) to `.env.local`. CI gets `DATABASE_URL` as a repository secret. `001_init.sql` is applied to `production`.
 
-**Progress:** done: package, migrations (`001_init.sql`), runner (cursor, `source_runs`, idempotent storage), mention detection with tests, `bipwatch.aliases`, Neon wiring with an integration test (`npm run test:db --workspace @bipwatch/collect`), the `bips-repo` collector, header sync and its workflow (`.github/workflows/bips-repo.yml`). All four collectors and their workflows (`bips-repo`, `delving`, `mailing-list`, `github`). The runner stores items in batches of 200 (one transaction each, multi-row inserts). Not done: freshness. `documents` also has `external_id` (unique per source) so edited posts update their row.
+**Progress:** done: package, migrations (`001_init.sql`), runner (cursor, `source_runs`, idempotent storage), mention detection with tests, `bipwatch.aliases`, Neon wiring with an integration test (`npm run test:db --workspace @bipwatch/collect`), the `bips-repo` collector, header sync and its workflow (`.github/workflows/bips-repo.yml`). All four collectors and their workflows (`bips-repo`, `delving`, `mailing-list`, `github`), and the freshness monitor. The runner stores items in batches of 200 (one transaction each, multi-row inserts). Open: done-when item 5 (24 hours of green scheduled runs; started 2026-11-05). `documents` also has `external_id` (unique per source) so edited posts update their row.
 
 **Package:** `packages/collect` (`@bipwatch/collect`), TypeScript, run with `tsx`. CLI: `npm run collect -- --source <id>` and `--all`.
 
@@ -331,6 +331,7 @@ Re-running any collector with the same cursor must not create duplicates (`conte
 **Scheduling:** one workflow per cadence in `.github/workflows/collect-*.yml`, `DATABASE_URL` and `GITHUB_TOKEN` as repository secrets, using `concurrency` so runs of the same source never overlap.
 
 **Freshness:** `npm run freshness` reads `source_runs` and exits non-zero when a source has not succeeded within twice its cadence. Export the last success per source to `data/freshness.json` at build time so pages can show "updated N min ago".
+  - Built in `packages/collect/src/freshness.ts`, cadences: bips-repo and delving 30 min, github and mailing-list 60 min. `.github/workflows/freshness.yml` runs the check hourly at :55, so a stale source shows up as a failed run (GitHub emails the owner). `build.yml` exports `data/freshness.json` (git-ignored; sources, last success, stale flag, document counts, no error text) before building; the home page shows it in a "Sources" section with relative times computed in the browser, and `/api/freshness.json` serves it. The page is only as current as the last build, so this matters once deploys run often.
 
 **Tests:** vitest with recorded fixtures (a real Delving topic JSON, a real mbox message, a real bips commit diff). Normalizers and mention detection must be covered by unit tests; network calls must not run in tests.
 

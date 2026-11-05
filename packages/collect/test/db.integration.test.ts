@@ -4,6 +4,7 @@
 import pg from 'pg';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { strictSsl } from '../src/db.ts';
+import { readSourceRows } from '../src/freshness.ts';
 import { migrate } from '../src/migrate.ts';
 import type { MentionContext } from '../src/mentions.ts';
 import { runCollector } from '../src/run.ts';
@@ -148,5 +149,14 @@ describe.skipIf(!url)('Postgres integration (Neon)', () => {
       { external_id: 'p4', bip: 341 },
       { external_id: 'p5', bip: 340 },
     ]);
+  });
+
+  it('reads the last success, last failure and document count per source', async () => {
+    const rows = await readSourceRows(pool);
+    const delving = rows.find((r) => r.source === 'delving')!;
+    expect(delving.last_success).toBeInstanceOf(Date);
+    expect(delving.last_failure).toBeInstanceOf(Date);
+    expect(delving.documents).toBe(await count('documents'));
+    expect(rows.find((r) => r.source === 'github')).toMatchObject({ last_success: null, documents: 0 });
   });
 });

@@ -1,0 +1,66 @@
+---
+import { loadFreshness } from '@bipwatch/data';
+
+// When each collector last succeeded, from data/freshness.json (written at
+// build time from Postgres). Renders nothing when the build had no database.
+const freshness = loadFreshness();
+const fmt = new Intl.NumberFormat('en');
+const utc = (iso: string) => `${iso.slice(0, 16).replace('T', ' ')} UTC`;
+---
+{freshness && (
+  <section class="fresh" aria-labelledby="fresh-h">
+    <h2 id="fresh-h">Sources</h2>
+    <p class="muted note">The archive BipWatch reads from, and when each source was last collected.</p>
+    <ul>
+      {freshness.sources.map((s) => (
+        <li>
+          <span class="name">{s.label}</span>
+          <span class="count tnum mono">{fmt.format(s.documents)}</span>
+          {s.last_success ? (
+            <time class="when mono" datetime={s.last_success} title={utc(s.last_success)}>{utc(s.last_success)}</time>
+          ) : (
+            <span class="when mono">never</span>
+          )}
+          {s.stale && <span class="pill warn">delayed</span>}
+        </li>
+      ))}
+    </ul>
+    <p class="mono gen">checked <time datetime={freshness.generated_at}>{utc(freshness.generated_at)}</time> · <a href="/api/freshness.json">freshness.json</a></p>
+  </section>
+)}
+
+<script>
+  // Turn absolute times into "N min ago" in the reader's clock.
+  const rel = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+  for (const el of document.querySelectorAll<HTMLTimeElement>('.fresh time[datetime]')) {
+    const mins = Math.round((Date.parse(el.dateTime) - Date.now()) / 60000);
+    if (Number.isNaN(mins)) continue;
+    el.textContent =
+      Math.abs(mins) < 90
+        ? rel.format(mins, 'minute')
+        : Math.abs(mins) < 48 * 60
+          ? rel.format(Math.round(mins / 60), 'hour')
+          : rel.format(Math.round(mins / 1440), 'day');
+  }
+</script>
+
+<style>
+  .fresh { display: flex; flex-direction: column; gap: 10px; max-width: 760px; }
+  .fresh h2 { font-size: 18px; }
+  .note { font-size: 14px; }
+  ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  li {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto auto auto; align-items: center; gap: 4px 14px;
+    padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px;
+  }
+  .name { min-width: 0; }
+  .count { color: var(--muted); font-size: 13px; text-align: right; }
+  .when { color: var(--faint); font-size: 13px; min-width: 9ch; text-align: right; }
+  .gen { color: var(--faint); font-size: 12px; }
+  .gen a { color: inherit; }
+  @media (max-width: 480px) {
+    li { grid-template-columns: minmax(0, 1fr) auto; }
+    .count { grid-column: 2; }
+    .when { grid-column: 1 / -1; text-align: left; }
+  }
+</style>

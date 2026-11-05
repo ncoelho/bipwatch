@@ -11,6 +11,7 @@ schemas/                 JSON Schemas (draft 2020-12) for every file below
 bips/<NNNN>/bip.yaml     spec header facts + BipWatch classification
 bips/<NNNN>/claims/*.yaml   one sourced claim per file
 bips/<NNNN>/needs.yaml   0-5 needs assessment, citing claim ids
+freshness.json           generated at build time (not committed): when each collector last succeeded
 ```
 
 One claim per file keeps pull requests small and conflict-free when many are opened at once.

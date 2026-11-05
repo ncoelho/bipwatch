@@ -15,7 +15,8 @@
     "test": "npm test --workspaces --if-present",
     "migrate": "npm run migrate --workspace @bipwatch/collect --",
     "collect": "npm run collect --workspace @bipwatch/collect --",
-    "sync-headers": "npm run sync-headers --workspace @bipwatch/collect --"
+    "sync-headers": "npm run sync-headers --workspace @bipwatch/collect --",
+    "freshness": "npm run freshness --workspace @bipwatch/collect --"
   },
   "engines": {
     "node": ">=22.23.4"

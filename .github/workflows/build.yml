@@ -17,6 +17,15 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
+      # data/freshness.json feeds the "Sources" section and /api/freshness.json.
+      # Without the secret the site builds without it.
+      - name: Export collector freshness
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -n "$DATABASE_URL" ]; then
+            npm run freshness -- --export data/freshness.json --no-fail
+          fi
       - run: npm run build
       - uses: actions/upload-artifact@v4
         with:

@@ -31,6 +31,7 @@ npm run migrate                        # apply SQL migrations to Neon (uses the 
 npm run test:db --workspace @bipwatch/collect   # runner + migrations against Neon, in a throwaway schema
 npm run collect -- --source bips-repo  # run one collector (bips-repo, delving, mailing-list, github), or --all
 npm run sync-headers -- --bips ../bips # re-sync bip.yaml facts from spec headers (--dry-run to preview)
+npm run freshness                      # fail if a collector is overdue; --export data/freshness.json for the site
 ```
 
 Collectors read `DATABASE_URL` (pooled), `DATABASE_URL_UNPOOLED` (migrations) and `GITHUB_TOKEN` (locally: `export GITHUB_TOKEN=$(gh auth token)`) from the environment, `.env.local` (written by `neon env pull`) or `.env` (see `.env.example`). `neon.ts` declares the Neon project config.
@@ -46,6 +47,7 @@ git clone --filter=blob:none --no-checkout https://github.com/bitcoin/bips.git .
 - `/` tracked proposals and the rest of the dataset
 - `/bip/<n>/` one page per BIP, rendered with its stage template (only `complete` exists so far)
 - `/api/bips.json` and `/api/bips/<n>.json` the same data the pages use
+- `/api/freshness.json` when each collector last succeeded (empty when built without a database)
 
 ## Adding a claim by hand
 

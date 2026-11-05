@@ -1,7 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { parse } from 'yaml';
-import type { BipBundle, BipRecord, Claim, NeedsAssessment } from './types.ts';
+import type { BipBundle, BipRecord, Claim, Freshness, NeedsAssessment } from './types.ts';
 
 export * from './types.ts';
 
@@ -55,4 +55,10 @@ export function loadBip(folder: string, dataDir = findDataDir()): BipBundle {
 
 export function loadAll(dataDir = findDataDir()): BipBundle[] {
   return listBipFolders(dataDir).map((f) => loadBip(f, dataDir));
+}
+
+/** data/freshness.json if a build exported it, else null. */
+export function loadFreshness(dataDir = findDataDir()): Freshness | null {
+  const file = join(dataDir, 'freshness.json');
+  return existsSync(file) ? (JSON.parse(readFileSync(file, 'utf8')) as Freshness) : null;
 }

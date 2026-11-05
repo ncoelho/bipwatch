@@ -1,0 +1,35 @@
+name: freshness
+
+# SPEC 6.1 freshness monitor: fails (and GitHub emails the repo owner) when a
+# collector has not succeeded within twice its cadence. Runs after the
+# hourly collectors (github :13, mailing-list :41) have had time to finish.
+
+on:
+  schedule:
+    - cron: '55 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: freshness
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Check every source succeeded recently
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::warning::DATABASE_URL secret is not set; skipping the check"
+            exit 0
+          fi
+          npm run freshness

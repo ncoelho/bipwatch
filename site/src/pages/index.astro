@@ -2,6 +2,7 @@
 import { loadAll } from '@bipwatch/data';
 import Base from '../layouts/Base.astro';
 import Dots from '../components/Dots.astro';
+import Freshness from '../components/Freshness.astro';
 import { CATEGORY_LABEL, bipHref, isPending } from '../lib/view.ts';
 
 const all = loadAll();
@@ -61,6 +62,8 @@ const others = all.filter((b) => !b.bip.bipwatch.tracked);
         </ul>
       </section>
     )}
+
+    <Freshness />
   </div>
 </Base>
 

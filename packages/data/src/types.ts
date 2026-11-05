@@ -113,3 +113,21 @@ export interface BipBundle {
   claims: Claim[];
   needs: NeedsAssessment | null;
 }
+
+/** data/freshness.json: when each collector last succeeded. Written by
+ * `npm run freshness -- --export` at build time; not committed. */
+export interface SourceFreshness {
+  source: string;
+  label: string;
+  cadence_minutes: number;
+  /** ISO time of the last successful run, null if it never succeeded. */
+  last_success: string | null;
+  /** True when the last success is older than twice the cadence. */
+  stale: boolean;
+  documents: number;
+}
+
+export interface Freshness {
+  generated_at: string;
+  sources: SourceFreshness[];
+}
