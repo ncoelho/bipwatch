@@ -3,3 +3,5 @@ site/dist/
 site/.astro/
 .DS_Store
 .env
+.neon
+.env.local

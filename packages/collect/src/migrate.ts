@@ -1,12 +1,12 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { connect } from './db.ts';
+import { connectDirect } from './db.ts';
 
 const MIGRATIONS_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'migrations');
 
 /** Applies every migrations/*.sql not yet recorded, each in its own transaction. */
-export async function migrate(pool = connect()): Promise<string[]> {
+export async function migrate(pool = connectDirect()): Promise<string[]> {
   await pool.query(`CREATE TABLE IF NOT EXISTS schema_migrations (
     name text PRIMARY KEY,
     applied_at timestamptz NOT NULL DEFAULT now()
@@ -36,9 +36,9 @@ export async function migrate(pool = connect()): Promise<string[]> {
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  let pool: ReturnType<typeof connect>;
+  let pool: ReturnType<typeof connectDirect>;
   try {
-    pool = connect();
+    pool = connectDirect();
   } catch (err) {
     console.error((err as Error).message);
     process.exit(1);

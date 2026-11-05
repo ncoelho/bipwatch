@@ -278,9 +278,9 @@ The build order is: (1) schemas and seed, done; (2) static site, done; **(3) col
 
 Goal: every new item from the four text sources lands in Postgres, is normalized, and is linked to the BIPs it mentions. Status changes on tracked BIPs reach `data/` automatically.
 
-**Postgres host:** Neon (decided 2026-11-05). `DATABASE_URL` comes from `.env` locally and a repository secret in CI.
+**Postgres host:** Neon (decided 2026-11-05), project `frosty-forest-51716423`, branch `production`, Postgres 18 with pgvector available. `neon.ts` holds the project config; `neon env pull` writes `DATABASE_URL` (pooled, used by collectors) and `DATABASE_URL_UNPOOLED` (used by migrations) to `.env.local`. CI gets `DATABASE_URL` as a repository secret. `001_init.sql` is applied to `production`.
 
-**Progress:** done: package, migrations (`001_init.sql`), runner (cursor, `source_runs`, idempotent storage), mention detection with tests, `bipwatch.aliases`. Not done: the four collectors, scheduled workflows, freshness. `documents` also has `external_id` (unique per source) so edited posts update their row.
+**Progress:** done: package, migrations (`001_init.sql`), runner (cursor, `source_runs`, idempotent storage), mention detection with tests, `bipwatch.aliases`, Neon wiring with an integration test (`npm run test:db --workspace @bipwatch/collect`). Not done: the four collectors, scheduled workflows, freshness. `documents` also has `external_id` (unique per source) so edited posts update their row.
 
 **Package:** `packages/collect` (`@bipwatch/collect`), TypeScript, run with `tsx`. CLI: `npm run collect -- --source <id>` and `--all`.
 

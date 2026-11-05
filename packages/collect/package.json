@@ -8,10 +8,11 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "collect": "tsx --env-file-if-exists=../../.env src/cli.ts",
-    "migrate": "tsx --env-file-if-exists=../../.env src/migrate.ts",
+    "collect": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env src/cli.ts",
+    "migrate": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env src/migrate.ts",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:db": "node --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env ../../node_modules/vitest/vitest.mjs run test/db.integration.test.ts"
   },
   "dependencies": {
     "@bipwatch/data": "*",

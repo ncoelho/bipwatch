@@ -26,11 +26,13 @@ npm run validate -- --bips ../bips     # also match spec quotes against a clone 
 npm run dev                            # local site at http://localhost:4321
 npm run build                          # validate, then build site/dist
 npm test                               # unit tests (collectors, mention index)
-npm run migrate                        # apply SQL migrations to DATABASE_URL (Neon)
+neon env pull                          # Neon DATABASE_URL(_UNPOOLED) into .env.local (after `neon login`)
+npm run migrate                        # apply SQL migrations to Neon (uses the unpooled URL)
+npm run test:db --workspace @bipwatch/collect   # runner + migrations against Neon, in a throwaway schema
 npm run collect -- --source delving    # run one collector, or --all
 ```
 
-Collectors read `DATABASE_URL` and `GITHUB_TOKEN` from the environment or from `.env` (see `.env.example`).
+Collectors read `DATABASE_URL` (pooled), `DATABASE_URL_UNPOOLED` (migrations) and `GITHUB_TOKEN` from the environment, `.env.local` (written by `neon env pull`) or `.env` (see `.env.example`). `neon.ts` declares the Neon project config.
 
 To check spec quotes locally, clone bitcoin/bips next to this repo:
 
