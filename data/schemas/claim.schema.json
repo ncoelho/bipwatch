@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bipwatch.com/schemas/claim.schema.json",
+  "title": "Claim",
+  "description": "One sourced statement about a BIP. One file per claim at bips/<NNNN>/claims/<id>.yaml, so bot pull requests never conflict.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "bip", "kind", "statement", "source", "provenance"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "maxLength": 80 },
+    "bip": { "type": "integer", "minimum": 1 },
+    "kind": {
+      "enum": ["problem", "evidence", "tradeoff", "open-question", "objection", "stance", "implementation", "adoption"]
+    },
+    "statement": {
+      "description": "The claim in BipWatch's own words. The quote is the proof, the statement is the reading.",
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 500
+    },
+    "status": {
+      "description": "Lifecycle of objections and open questions.",
+      "enum": ["open", "addressed", "disputed", "unknown"]
+    },
+    "stance": {
+      "description": "Bitcoin Core review vocabulary.",
+      "enum": ["concept-ack", "approach-ack", "ack", "nack", "conditional", "needs-research"]
+    },
+    "condition": { "type": "string", "description": "Required when stance is conditional." },
+    "subject": {
+      "description": "Who or what the claim is about: the implementer, or the person or org taking a stance.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type"],
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "enum": ["wallet", "hardware-wallet", "library", "node", "service", "indexer", "person", "org"] },
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" }
+      }
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {
+        "state": { "enum": ["shipped", "partial", "in-review", "planned", "not-supported", "proof-of-concept"] },
+        "send": { "type": "boolean" },
+        "receive": { "type": "boolean" },
+        "scanning": { "type": "string", "description": "How the implementation detects incoming payments, where relevant." },
+        "platforms": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "applies_to_version": {
+      "description": "Spec version the claim was made against. Used to flag stale stances when the spec changes materially.",
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "type", "retrieved"],
+      "properties": {
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "type": {
+          "description": "primary: the spec, the author, or the implementer. secondary: an aggregator or press.",
+          "enum": ["spec", "mailing-list", "forum", "github", "release-notes", "chain", "aggregator", "press"]
+        },
+        "title": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "retrieved": { "type": "string", "format": "date" },
+        "revision": {
+          "description": "Git commit of the source when it is versioned (the spec, a repo file).",
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "quote": {
+          "description": "Verbatim text from the source. Keep it short. Must match the source exactly.",
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 300
+        },
+        "verified": {
+          "description": "True once code has matched the quote against the archived source byte for byte.",
+          "type": "boolean"
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["extracted_by", "extracted", "reviewed_by"],
+      "properties": {
+        "extracted_by": {
+          "description": "human:<handle>, or model:<model-id> for LLM extraction.",
+          "type": "string",
+          "pattern": "^(human|model|bot):[A-Za-z0-9._-]+$"
+        },
+        "extracted": { "type": "string", "format": "date" },
+        "reviewed_by": {
+          "description": "Handle of the person who approved it. null while the claim is pending review.",
+          "type": ["string", "null"]
+        },
+        "reviewed": { "type": ["string", "null"], "format": "date" }
+      }
+    },
+    "tags": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "kind": { "enum": ["problem", "evidence", "tradeoff", "open-question", "objection", "stance"] } } },
+      "then": { "properties": { "source": { "type": "object", "required": ["quote"] } } }
+    },
+    {
+      "if": { "properties": { "kind": { "enum": ["open-question", "objection"] } } },
+      "then": { "required": ["status"] }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "stance" } } },
+      "then": { "required": ["stance", "subject", "applies_to_version"] }
+    },
+    {
+      "if": { "properties": { "stance": { "const": "conditional" } }, "required": ["stance"] },
+      "then": { "required": ["condition"] }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "implementation" } } },
+      "then": { "required": ["subject", "implementation"] }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+id: problem-interaction-required
+bip: 352
+kind: problem
+statement: >-
+  Getting a fresh address for every payment usually means the receiver has to
+  interact with the sender first, which is often impractical.
+applies_to_version: 1.1.2
+source:
+  url: https://github.com/bitcoin/bips/blob/f827c440636a93e6033a4e10705ca7762594265b/bip-0352.mediawiki#motivation
+  type: spec
+  title: BIP 352, Motivation
+  retrieved: 2026-11-05
+  revision: f827c440636a93e6033a4e10705ca7762594265b
+  quote: interaction is often infeasible and in many cases undesirable
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-05
+  reviewed_by: null
+tags: [privacy, address-reuse]

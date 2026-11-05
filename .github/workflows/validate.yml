@@ -1,0 +1,26 @@
+name: Validate data
+
+on:
+  pull_request:
+    paths: ['data/**', 'packages/data/**']
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Spec quotes are matched against bitcoin/bips at the revision each claim cites.
+      - name: Fetch bitcoin/bips history
+        run: git clone --filter=blob:none --no-checkout https://github.com/bitcoin/bips.git ../bips
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run validate -- --bips ../bips
+      - run: npm run typecheck --workspace @bipwatch/data

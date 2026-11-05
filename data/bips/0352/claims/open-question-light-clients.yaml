@@ -1,0 +1,21 @@
+id: open-question-light-clients
+bip: 352
+kind: open-question
+status: open
+statement: >-
+  How light clients should receive silent payments is left out of scope. The
+  spec sketches ideas in Appendix A and calls it open research.
+applies_to_version: 1.1.2
+source:
+  url: https://github.com/bitcoin/bips/blob/f827c440636a93e6033a4e10705ca7762594265b/bip-0352.mediawiki#appendix-a-light-client-support
+  type: spec
+  title: BIP 352, Motivation and Appendix A
+  retrieved: 2026-11-05
+  revision: f827c440636a93e6033a4e10705ca7762594265b
+  quote: light client support is considered an area of open research
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-05
+  reviewed_by: null
+tags: [light-clients, scanning]

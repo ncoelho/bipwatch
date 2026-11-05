@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bipwatch.com/schemas/bip.schema.json",
+  "title": "BIP record",
+  "description": "Facts about one BIP, copied from its spec header, plus BipWatch's own classification. One file per BIP at bips/<NNNN>/bip.yaml.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["number", "title", "layer", "type", "status", "authors", "spec", "bipwatch"],
+  "properties": {
+    "number": { "type": "integer", "minimum": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "layer": {
+      "description": "Layer header from the spec. Absent in some older BIPs.",
+      "enum": ["Consensus (soft fork)", "Consensus (hard fork)", "Peer Services", "API/RPC", "Applications", null]
+    },
+    "type": { "enum": ["Specification", "Informational", "Process"] },
+    "status": {
+      "description": "Official status under BIP 3.",
+      "enum": ["Draft", "Complete", "Deployed", "Closed"]
+    },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "assigned": { "type": "string", "format": "date" },
+    "license": { "type": "string" },
+    "authors": {
+      "description": "Names only. Email addresses stay in the spec.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "requires": { "type": "array", "items": { "type": "integer" }, "uniqueItems": true },
+    "related": {
+      "description": "Companion or follow-up BIPs that build on this one.",
+      "type": "array",
+      "items": { "type": "integer" },
+      "uniqueItems": true
+    },
+    "discussion": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url"],
+        "properties": {
+          "date": { "type": "string", "format": "date" },
+          "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+          "title": { "type": "string" }
+        }
+      }
+    },
+    "spec": {
+      "description": "Where the canonical text lives and which revision this record was synced against.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repo", "path", "revision", "synced"],
+      "properties": {
+        "repo": { "const": "bitcoin/bips" },
+        "path": { "type": "string", "pattern": "^bip-\\d{4}\\.(mediawiki|md)$" },
+        "revision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "synced": { "type": "string", "format": "date" }
+      }
+    },
+    "bipwatch": {
+      "description": "BipWatch's own classification. Not part of the official BIP.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tracked"],
+      "properties": {
+        "tracked": { "type": "boolean", "description": "True for BIPs that get a full living page." },
+        "category": {
+          "enum": [
+            "idea",
+            "in-development",
+            "needs-consensus",
+            "ready-to-build",
+            "live-patchy-adoption",
+            "standard-everywhere",
+            "fading",
+            "closed-replaced"
+          ]
+        },
+        "template": {
+          "description": "Stage template used to render the page.",
+          "enum": ["idea", "draft", "complete", "deployed", "closed"]
+        },
+        "adoption_measure": {
+          "description": "What 'deployed' means for this BIP.",
+          "enum": ["activation-and-usage", "wallet-coverage", "node-coverage", "service-coverage", "not-applicable"]
+        },
+        "summary": { "type": "string", "maxLength": 400 }
+      }
+    }
+  }
+}

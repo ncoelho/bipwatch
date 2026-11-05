@@ -1,0 +1,20 @@
+id: problem-notification-footprint
+bip: 352
+kind: problem
+statement: >-
+  Earlier static-address schemes send a notification transaction onchain,
+  which makes one-time payments more expensive and leaves a visible trace.
+applies_to_version: 1.1.2
+source:
+  url: https://github.com/bitcoin/bips/blob/f827c440636a93e6033a4e10705ca7762594265b/bip-0352.mediawiki#motivation
+  type: spec
+  title: BIP 352, Motivation
+  retrieved: 2026-11-05
+  revision: f827c440636a93e6033a4e10705ca7762594265b
+  quote: at the expense of increased costs for one-time payments and a noticeable footprint in the blockchain
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-05
+  reviewed_by: null
+tags: [privacy, fees]

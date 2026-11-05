@@ -1,0 +1,28 @@
+id: impl-bitcoin-core
+bip: 352
+kind: implementation
+statement: >-
+  Wallet support in Bitcoin Core is in review as PR #35301, the second attempt
+  after #28122. It depends on the silent payments module in libsecp256k1
+  (secp256k1#1765) landing first.
+subject:
+  name: Bitcoin Core
+  type: node
+  url: https://github.com/bitcoin/bitcoin/pull/35301
+implementation:
+  state: in-review
+  send: false
+  receive: false
+source:
+  # Read through the b10c GitHub mirror; canonical PR is linked in subject.url.
+  url: https://mirror.b10c.me/bitcoin-bitcoin/35301/
+  type: github
+  title: "Silent Payments: Implement bip352 (take 2) #35301"
+  date: 2026-05-16
+  retrieved: 2026-11-05
+  quote: It is the second iteration of #28122, now based on bitcoin-core/secp256k1#1765.
+  verified: false
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-05
+  reviewed_by: null

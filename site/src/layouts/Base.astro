@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'An open layer of data, metadata and evidence on top of the Bitcoin BIP repository.' } = Astro.props;
+const built = new Date().toISOString().slice(0, 10);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" />
+    <link rel="alternate" type="application/json" href="/api/bips.json" title="BipWatch open data" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="shell bar">
+        <a class="mark" href="/">bip<span>watch</span></a>
+        <nav>
+          <a href="/">Proposals</a>
+          <a href="/api/bips.json">Open data</a>
+        </nav>
+      </div>
+    </header>
+    <main><slot /></main>
+    <footer class="shell foot">
+      <span>Data is CC0. Every claim links to its source.</span>
+      <span class="mono">built {built}</span>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .top { border-bottom: 1px solid var(--line); background: var(--panel); padding-top: env(safe-area-inset-top, 0px); }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; }
+  .mark { font-family: var(--mono); font-weight: 500; font-size: 16px; text-decoration: none; letter-spacing: -0.02em; }
+  .mark span { color: var(--accent); }
+  nav { display: flex; gap: 18px; font-size: 14px; }
+  nav a { text-decoration: none; color: var(--muted); }
+  nav a:hover { color: var(--fg); }
+  main { padding-block: 36px 64px; }
+  .foot {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
+    border-top: 1px solid var(--line); padding-block: 18px calc(28px + env(safe-area-inset-bottom, 0px));
+    color: var(--faint); font-size: 13px;
+  }
+</style>

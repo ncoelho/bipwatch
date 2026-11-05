@@ -1,0 +1,20 @@
+number: 392
+title: Silent Payment Output Script Descriptors
+layer: Applications
+type: Specification
+status: Draft
+assigned: 2026-02-06
+license: BSD-2-Clause
+authors:
+  - Craig Raw
+requires: [341, 350, 352, 380]
+discussion:
+  - url: https://groups.google.com/g/bitcoindev/c/bP6ktUyCOJI
+spec:
+  repo: bitcoin/bips
+  path: bip-0392.mediawiki
+  revision: 351ceef2747e46078efaa073246fce54d52e665d
+  synced: 2026-11-05
+bipwatch:
+  tracked: false
+  category: in-development

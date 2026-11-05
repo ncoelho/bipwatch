@@ -1,0 +1,71 @@
+# Draft assessment, pending review. Scores are 0-5, where 5 means no help needed.
+bip: 352
+assessed: 2026-11-05
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-05
+  reviewed_by: null
+dimensions:
+  problem_evidence:
+    score: 3
+    rationale: >-
+      The spec states the problems clearly. What's missing is outside evidence
+      that people hit them today, such as address reuse on donation pages or
+      the cost of notification-based schemes.
+    evidence:
+      - problem-interaction-required
+      - problem-notification-footprint
+      - problem-sender-linkability
+    help_wanted:
+      - Measure address reuse among public donation and tip addresses
+  technical_maturity:
+    score: 4
+    rationale: >-
+      Complete at version 1.1.2, with a reference implementation and test
+      vectors. Collaborative use across owners still has no security proof.
+    evidence:
+      - impl-reference-implementation
+      - open-question-collaborative-security
+  ux_exploration:
+    score: 2
+    rationale: >-
+      Wallets receive in different ways (on-device, an Electrum server, a
+      dedicated indexer), and there is no shared pattern yet for scan progress
+      or for explaining a reusable sp1 address.
+    evidence:
+      - tradeoff-receiver-scanning
+      - impl-cake-wallet
+      - impl-sparrow
+      - impl-silentium
+    help_wanted:
+      - Compare receive and scan-progress flows across shipping wallets
+      - Explore how to present a reusable sp1 address to new users
+  implementations:
+    score: 3
+    rationale: >-
+      Several wallets send and a few receive. Hardware wallets can only send,
+      and Bitcoin Core support is still in review.
+    evidence:
+      - impl-cake-wallet
+      - impl-sparrow
+      - impl-nunchuk
+      - impl-bitbox02
+      - impl-wasabi
+      - impl-electrum
+      - impl-bitcoin-core
+    help_wanted:
+      - Review Bitcoin Core PR 35301 and secp256k1 PR 1765
+      - Replace aggregator sources with release notes from each wallet
+  ecosystem_awareness:
+    score: null
+    rationale: No evidence collected yet on how many merchants, exchanges or users know about silent payments.
+    evidence: []
+  coordination:
+    score: 2
+    rationale: >-
+      Light clients need tweak data from someone, and there is no agreed
+      trustless way to serve it. The companion PSBT and descriptor BIPs are
+      still drafts.
+    evidence:
+      - open-question-trustless-tweak-data
+      - open-question-light-clients

@@ -1,0 +1,19 @@
+{
+  "name": "bipwatch",
+  "private": true,
+  "version": "0.1.0",
+  "description": "An open layer of data, metadata and evidence on top of the Bitcoin BIP repository.",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "site"
+  ],
+  "scripts": {
+    "validate": "npm run validate --workspace @bipwatch/data --",
+    "dev": "npm run dev --workspace site",
+    "build": "npm run validate && npm run build --workspace site"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

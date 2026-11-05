@@ -1,0 +1,46 @@
+# Copied from the spec header at spec.revision. Re-sync when the spec changes.
+number: 352
+title: Silent Payments
+layer: Applications
+type: Specification
+status: Complete
+version: 1.1.2
+assigned: 2023-03-09
+license: BSD-2-Clause
+authors:
+  - josibake
+  - Ruben Somsen
+  - Sebastian Falbesoner
+requires: [340, 341, 350]
+related: [375, 376, 392]
+discussion:
+  - date: 2022-03-13
+    url: https://gist.github.com/RubenSomsen/c43b79517e7cb701ebf77eec6dbb46b8
+    title: Original proposal (gist)
+  - date: 2022-03-28
+    url: https://gnusha.org/pi/bitcoindev/CAPv7TjbXm953U2h+-12MfJ24YqOM5Kcq77_xFTjVK+R2nf-nYg@mail.gmail.com/
+    title: "Silent Payments – Non-interactive private payments with no on-chain overhead"
+  - date: 2022-10-11
+    url: https://gnusha.org/pi/bitcoindev/P_21MLHGJicZ-hkbC4DGu86c5BtNKiH8spY4TOw5FJsfimdi_6VyHzU_y-s1mZsOcC2FA3EW_6w6W5qfV9dRK_7AvTAxDlwVfU-yhWZPEuo=@protonmail.com/
+    title: Silent Payment v4 (coinjoin support added)
+  - date: 2023-08-04
+    url: https://gnusha.org/pi/bitcoindev/ZM03twumu88V2NFH@petertodd.org/
+    title: BIP-352 Silent Payments addresses should have an expiration time
+spec:
+  repo: bitcoin/bips
+  path: bip-0352.mediawiki
+  revision: f827c440636a93e6033a4e10705ca7762594265b
+  synced: 2026-11-05
+
+bipwatch:
+  tracked: true
+  category: ready-to-build
+  template: complete
+  # Silent payment outputs look like any taproot output, so adoption is
+  # measured by which wallets can send and receive, not by onchain counts.
+  adoption_measure: wallet-coverage
+  summary: >-
+    A reusable payment address that never shows up onchain. Senders derive a
+    fresh taproot output for the receiver from their own inputs, so there is no
+    notification transaction and no link between payments. The cost is that
+    receivers have to scan the chain to find what they were paid.

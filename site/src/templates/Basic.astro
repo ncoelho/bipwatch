@@ -1,0 +1,32 @@
+---
+// Fallback for BIPs that are in the dataset but not tracked with a full page yet.
+import type { BipBundle } from '@bipwatch/data';
+import { CATEGORY_LABEL, bipHref, pad } from '../lib/view.ts';
+
+interface Props { bundle: BipBundle; known: Set<number>; }
+const { bundle, known } = Astro.props;
+const { bip } = bundle;
+const link = (n: number) => (known.has(n) ? bipHref(n) : `https://github.com/bitcoin/bips/blob/master/bip-${pad(n)}.mediawiki`);
+const specUrl = `https://github.com/${bip.spec.repo}/blob/${bip.spec.revision}/${bip.spec.path}`;
+---
+<article class="shell page">
+  <span class="eyebrow">BIP {bip.number} · {bip.layer ?? 'No layer'}</span>
+  <h1>{bip.title}</h1>
+  <div class="pills">
+    <span class="pill">Official status: {bip.status}</span>
+    {bip.bipwatch.category && <span class="pill accent">{CATEGORY_LABEL[bip.bipwatch.category]}</span>}
+    {bip.version && <span class="pill">v{bip.version}</span>}
+  </div>
+  <p class="muted">Authors: {bip.authors.join(', ')}{bip.assigned && ` · assigned ${bip.assigned}`}</p>
+  {bip.requires?.length ? (
+    <p class="muted">Requires {bip.requires.map((n, i) => <>{i > 0 && ', '}<a href={link(n)}>BIP {n}</a></>)}</p>
+  ) : null}
+  <p class="note">BipWatch doesn't track this proposal in depth yet, so this page only shows its spec header. <a href={specUrl}>Read the spec</a>.</p>
+</article>
+
+<style>
+  .page { display: flex; flex-direction: column; gap: 14px; max-width: 760px; }
+  h1 { font-size: clamp(28px, 4.5vw, 40px); line-height: 1.1; }
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .note { margin-top: 12px; padding: 12px 14px; border: 1px dashed var(--line-strong); border-radius: 8px; color: var(--muted); font-size: 14px; }
+</style>

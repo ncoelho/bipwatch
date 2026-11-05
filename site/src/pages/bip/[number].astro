@@ -1,0 +1,22 @@
+---
+import { loadAll } from '@bipwatch/data';
+import Base from '../../layouts/Base.astro';
+import Complete from '../../templates/Complete.astro';
+import Basic from '../../templates/Basic.astro';
+
+export function getStaticPaths() {
+  const all = loadAll();
+  const known = new Set(all.map((b) => b.bip.number));
+  return all.map((bundle) => ({ params: { number: String(bundle.bip.number) }, props: { bundle, known } }));
+}
+
+const { bundle, known } = Astro.props;
+const { bip } = bundle;
+
+// Pick the stage template. Only Complete exists so far; the others fall back to Basic.
+const TEMPLATES = { complete: Complete } as const;
+const Template = (bip.bipwatch.tracked && bip.bipwatch.template && TEMPLATES[bip.bipwatch.template as keyof typeof TEMPLATES]) || Basic;
+---
+<Base title={`BIP ${bip.number}: ${bip.title} · BipWatch`} description={bip.bipwatch.summary}>
+  <Template bundle={bundle} known={known} />
+</Base>

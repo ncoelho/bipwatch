@@ -1,0 +1,26 @@
+id: impl-reference-implementation
+bip: 352
+kind: implementation
+statement: >-
+  The spec ships a Python reference implementation alongside send and receive
+  test vectors, which other implementations can test against.
+subject:
+  name: BIP 352 reference implementation
+  type: library
+  url: https://github.com/bitcoin/bips/tree/f827c440636a93e6033a4e10705ca7762594265b/bip-0352
+implementation:
+  state: shipped
+  send: true
+  receive: true
+applies_to_version: 1.1.2
+source:
+  url: https://github.com/bitcoin/bips/tree/f827c440636a93e6033a4e10705ca7762594265b/bip-0352
+  type: spec
+  title: bip-0352/reference.py and send_and_receive_test_vectors.json
+  retrieved: 2026-11-05
+  revision: f827c440636a93e6033a4e10705ca7762594265b
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-05
+  reviewed_by: null
+tags: [test-vectors]

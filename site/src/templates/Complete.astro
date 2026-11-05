@@ -1,0 +1,216 @@
+---
+// Stage template for Complete BIPs. The page answers one question:
+// "is it getting built?" Implementations sit near the top; the problem
+// statement and open questions follow.
+import type { BipBundle } from '@bipwatch/data';
+import { NEED_DIMENSIONS } from '@bipwatch/data';
+import Dots from '../components/Dots.astro';
+import Source from '../components/Source.astro';
+import {
+  CATEGORY_LABEL, DIMENSION_LABEL, STATE_LABEL, STATE_ORDER,
+  bipHref, byKind, isPending, pad,
+} from '../lib/view.ts';
+
+interface Props { bundle: BipBundle; known: Set<number>; }
+const { bundle, known } = Astro.props;
+const { bip, needs } = bundle;
+
+const impls = byKind(bundle, 'implementation').sort(
+  (a, b) => STATE_ORDER.indexOf(a.implementation!.state) - STATE_ORDER.indexOf(b.implementation!.state)
+    || a.subject!.name.localeCompare(b.subject!.name),
+);
+const sendCount = impls.filter((c) => c.implementation!.send).length;
+const receiveCount = impls.filter((c) => c.implementation!.receive).length;
+const problems = byKind(bundle, 'problem');
+const open = byKind(bundle, 'tradeoff', 'open-question', 'objection');
+const evidence = byKind(bundle, 'evidence');
+const pendingCount = bundle.claims.filter(isPending).length;
+
+const STATUS_PILL: Record<string, string> = { open: 'accent', addressed: 'good', disputed: 'warn', unknown: '' };
+const KIND_LABEL: Record<string, string> = { tradeoff: 'Trade-off', 'open-question': 'Open question', objection: 'Objection' };
+const bipLink = (n: number) => (known.has(n) ? bipHref(n) : `https://github.com/bitcoin/bips/blob/master/bip-${pad(n)}.mediawiki`);
+---
+<article class="shell page">
+  <header class="hero">
+    <span class="eyebrow">BIP {bip.number} · {bip.layer ?? 'No layer'}</span>
+    <h1>{bip.title}</h1>
+    <div class="pills">
+      <span class="pill">Official status: {bip.status}</span>
+      {bip.bipwatch.category && <span class="pill accent">{CATEGORY_LABEL[bip.bipwatch.category]}</span>}
+      {bip.version && <span class="pill">v{bip.version}</span>}
+      {bip.bipwatch.adoption_measure === 'wallet-coverage' && <span class="pill layer">Adoption measured by wallet coverage</span>}
+    </div>
+    {bip.bipwatch.summary && <p class="lede">{bip.bipwatch.summary}</p>}
+    <dl class="facts">
+      <div><dt>Authors</dt><dd>{bip.authors.join(', ')}</dd></div>
+      {bip.assigned && <div><dt>Assigned</dt><dd class="tnum">{bip.assigned}</dd></div>}
+      {bip.requires?.length ? <div><dt>Requires</dt><dd>{bip.requires.map((n, i) => <>{i > 0 && ', '}<a href={bipLink(n)}>BIP {n}</a></>)}</dd></div> : null}
+      {bip.related?.length ? <div><dt>Companions</dt><dd>{bip.related.map((n, i) => <>{i > 0 && ', '}<a href={bipLink(n)}>BIP {n}</a></>)}</dd></div> : null}
+    </dl>
+    {pendingCount > 0 && (
+      <p class="notice">{pendingCount} of {bundle.claims.length} claims on this page are pending review. They were extracted automatically and link to their sources.</p>
+    )}
+  </header>
+
+  {needs && (
+    <section id="needs">
+      <div class="sec-head">
+        <h2>What it needs</h2>
+        <p class="muted">Each dimension is scored 0 to 5, where 5 means no help is needed. {isPending(needs) && <span class="pill warn">Draft, pending review</span>}</p>
+      </div>
+      <ul class="needs">
+        {NEED_DIMENSIONS.map((dim) => {
+          const d = needs.dimensions[dim];
+          return (
+            <li>
+              <div class="need-top">
+                <h3>{DIMENSION_LABEL[dim]}</h3>
+                <Dots score={d.score} />
+              </div>
+              <p class="muted">{d.rationale}</p>
+              {d.help_wanted?.length ? (
+                <ul class="asks">{d.help_wanted.map((h) => <li>{h}</li>)}</ul>
+              ) : null}
+              {d.evidence.length > 0 && <p class="ev">Based on {d.evidence.map((id, i) => <>{i > 0 && ', '}<a href={`#${id}`}>{id}</a></>)}</p>}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  )}
+
+  <section id="implementations">
+    <div class="sec-head">
+      <h2>Who implements it</h2>
+      <p class="muted tnum">{sendCount} of {impls.length} tracked implementations can send · {receiveCount} can receive</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Implementation</th><th>State</th><th>Send</th><th>Receive</th><th>Scanning</th><th>Source</th></tr></thead>
+        <tbody>
+          {impls.map((c) => {
+            const i = c.implementation!;
+            return (
+              <tr id={c.id}>
+                <td><b>{c.subject!.name}</b><span class="sub">{c.subject!.type.replace('-', ' ')}</span></td>
+                <td><span class:list={['pill', { good: i.state === 'shipped', warn: i.state === 'partial' || i.state === 'proof-of-concept' }]}>{STATE_LABEL[i.state]}</span></td>
+                <td class="yn">{i.send === undefined ? '–' : i.send ? 'Yes' : 'No'}</td>
+                <td class="yn">{i.receive === undefined ? '–' : i.receive ? 'Yes' : 'No'}</td>
+                <td class="muted">{i.scanning ?? '–'}</td>
+                <td class="srccell"><Source claim={c} showQuote={false} /></td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  {problems.length > 0 && (
+    <section id="problem">
+      <div class="sec-head"><h2>Why it exists</h2></div>
+      <ul class="claims">
+        {problems.map((c) => <li id={c.id}><p>{c.statement}</p><Source claim={c} /></li>)}
+      </ul>
+    </section>
+  )}
+
+  {open.length > 0 && (
+    <section id="open">
+      <div class="sec-head"><h2>Trade-offs and open questions</h2></div>
+      <ul class="claims">
+        {open.map((c) => (
+          <li id={c.id}>
+            <div class="claim-top">
+              <span class="kind">{KIND_LABEL[c.kind]}</span>
+              {c.status && <span class:list={['pill', STATUS_PILL[c.status]]}>{c.status}</span>}
+              {c.subject && <span class="muted by">raised by {c.subject.name}</span>}
+            </div>
+            <p>{c.statement}</p>
+            <Source claim={c} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {evidence.length > 0 && (
+    <section id="evidence">
+      <div class="sec-head"><h2>Evidence</h2></div>
+      <ul class="claims">
+        {evidence.map((c) => <li id={c.id}><p>{c.statement}</p><Source claim={c} /></li>)}
+      </ul>
+    </section>
+  )}
+
+  {bip.discussion?.length ? (
+    <section id="discussion">
+      <div class="sec-head"><h2>Discussion history</h2><p class="muted">From the spec's Discussion header.</p></div>
+      <ol class="timeline">
+        {bip.discussion.map((d) => (
+          <li><span class="mono tnum">{d.date ?? '–'}</span><a href={d.url} rel="noopener">{d.title ?? new URL(d.url).hostname}</a></li>
+        ))}
+      </ol>
+    </section>
+  ) : null}
+
+  <aside class="spec-note">
+    Synced against <a href={`https://github.com/${bip.spec.repo}/blob/${bip.spec.revision}/${bip.spec.path}`} class="mono">{bip.spec.path}@{bip.spec.revision.slice(0, 7)}</a> on {bip.spec.synced}.
+    Raw data: <a href={`/api/bips/${bip.number}.json`}>/api/bips/{bip.number}.json</a>
+  </aside>
+</article>
+
+<style>
+  .page { display: flex; flex-direction: column; gap: 48px; }
+  .hero { display: flex; flex-direction: column; gap: 14px; max-width: 760px; }
+  .hero h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.05; letter-spacing: -0.02em; }
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .lede { font-size: 17px; color: var(--muted); max-width: 64ch; }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px 24px; margin: 4px 0 0; }
+  .facts div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); }
+  dd { margin: 0; font-size: 14px; }
+  .notice { font-size: 13px; color: var(--accent); background: var(--accent-soft); border-radius: 8px; padding: 10px 12px; }
+
+  section { display: flex; flex-direction: column; gap: 16px; }
+  .sec-head { display: flex; flex-direction: column; gap: 4px; }
+  .sec-head h2 { font-size: 22px; }
+  .sec-head p { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; }
+
+  .needs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+  .needs > li { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .need-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .need-top h3 { font-size: 15px; }
+  .needs p { font-size: 14px; }
+  .asks { margin: 0; padding-left: 18px; font-size: 13px; }
+  .asks li::marker { color: var(--accent); }
+  .ev { font-size: 12px; color: var(--faint); overflow-wrap: anywhere; }
+  .ev a { color: var(--faint); font-family: var(--mono); font-size: 11px; }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+  table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); background: var(--band); }
+  tr:last-child td { border-bottom: none; }
+  td b { display: block; font-weight: 600; }
+  .sub { font-size: 12px; color: var(--faint); }
+  .yn { font-family: var(--mono); font-size: 13px; }
+  .srccell { min-width: 240px; }
+  tr:target { background: var(--accent-soft); }
+
+  .claims { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; max-width: 760px; }
+  .claims > li { padding: 16px 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; scroll-margin-top: 24px; }
+  .claims > li:first-child { padding-top: 0; }
+  .claims > li:target { background: var(--accent-soft); padding-inline: 12px; border-radius: 8px; }
+  .claim-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .kind { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); }
+  .by { font-size: 13px; }
+
+  .timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; max-width: 760px; }
+  .timeline li { display: grid; grid-template-columns: 96px 1fr; gap: 12px; font-size: 14px; }
+  .timeline a { overflow-wrap: anywhere; }
+  .timeline span { color: var(--faint); font-size: 13px; }
+
+  .spec-note { font-size: 13px; color: var(--faint); border-top: 1px solid var(--line); padding-top: 16px; overflow-wrap: anywhere; }
+  @media (max-width: 520px) { .timeline li { grid-template-columns: 1fr; gap: 0; } }
+</style>

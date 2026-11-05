@@ -1,0 +1,38 @@
+---
+// Evidence line under a claim: the quote, where it came from, and its review state.
+import type { Claim } from '@bipwatch/data';
+import { SOURCE_LABEL, isPending, isSecondary } from '../lib/view.ts';
+
+interface Props { claim: Claim; showQuote?: boolean; }
+const { claim, showQuote = true } = Astro.props;
+const s = claim.source;
+const host = new URL(s.url).hostname.replace(/^www\./, '');
+---
+<div class="src">
+  {showQuote && s.quote && <blockquote>{s.quote}</blockquote>}
+  <div class="meta">
+    <a href={s.url} rel="noopener">{s.title ?? host}</a>
+    <span class="sep">·</span>
+    <span>{SOURCE_LABEL[s.type]}</span>
+    {s.revision && <span class="mono rev" title={s.revision}>@{s.revision.slice(0, 7)}</span>}
+    {isSecondary(claim) && <span class="flag warn">secondary source</span>}
+    {s.quote && (s.verified ? <span class="flag ok">quote verified</span> : <span class="flag">quote unverified</span>)}
+    {isPending(claim) ? <span class="flag pend">pending review</span> : <span class="flag ok">reviewed by {claim.provenance.reviewed_by}</span>}
+  </div>
+</div>
+
+<style>
+  .src { display: flex; flex-direction: column; gap: 6px; }
+  blockquote {
+    margin: 0; padding-left: 12px; border-left: 2px solid var(--line-strong);
+    color: var(--muted); font-size: 14px;
+  }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 12px; color: var(--faint); }
+  .meta a { color: var(--muted); overflow-wrap: anywhere; }
+  .sep { color: var(--line-strong); }
+  .rev { font-size: 11px; }
+  .flag { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.03em; padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line); }
+  .flag.ok { color: var(--good); border-color: var(--good); }
+  .flag.warn { color: var(--warn); border-color: var(--warn); }
+  .flag.pend { color: var(--accent); border-color: var(--accent); }
+</style>

@@ -1,0 +1,25 @@
+number: 376
+title: Spending Silent Payment outputs with PSBTs
+layer: Applications
+type: Specification
+status: Draft
+assigned: 2026-02-05
+license: BSD-2-Clause
+authors:
+  - nymius
+requires: [352, 370, 371]
+discussion:
+  - date: 2024-05-17
+    url: https://delvingbitcoin.org/t/bip352-psbt-support/877/30
+    title: Original discussion (Delving Bitcoin)
+  - date: 2025-12-15
+    url: https://gnusha.org/pi/bitcoindev/R53cG3TeXgXDUUS4kH_q226GlaFCjI0DZVT6mdTQzSQdj3RnNqWA-bFT7uGgGQFJG6938kDGvDJVoFQj8ItEMsJ6NyOjCTvpVEarYiyW6-8=@proton.me/
+    title: "[BIP Proposal] Add PSBT_IN_SP_TWEAK field"
+spec:
+  repo: bitcoin/bips
+  path: bip-0376.mediawiki
+  revision: c8cbc9804e4a9695ed118c9306b20795eacfdc00
+  synced: 2026-11-05
+bipwatch:
+  tracked: false
+  category: in-development

@@ -1,0 +1,18 @@
+---
+// 0-5 dot scale. null renders as "not assessed" rather than zero.
+interface Props { score: number | null; }
+const { score } = Astro.props;
+const label = score === null ? 'Not assessed' : `${score} of 5`;
+---
+<span class="dots" role="img" aria-label={label} title={label}>
+  {[0, 1, 2, 3, 4].map((i) => (
+    <i class:list={[{ on: score !== null && i < score, unknown: score === null }]} />
+  ))}
+</span>
+
+<style>
+  .dots { display: inline-flex; gap: 4px; }
+  i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--line-strong); display: block; }
+  i.on { background: var(--accent); border-color: var(--accent); }
+  i.unknown { border-style: dashed; }
+</style>

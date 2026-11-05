@@ -1,0 +1,23 @@
+number: 375
+title: Sending Silent Payments with PSBTs
+layer: Applications
+type: Specification
+status: Draft
+version: 0.1.2
+assigned: 2025-01-08
+license: BSD-2-Clause
+authors:
+  - Andrew Toth
+  - Ava Chow
+  - josibake
+requires: [352, 370, 374]
+discussion:
+  - url: https://groups.google.com/g/bitcoindev/c/5G5wzqUXyk4
+spec:
+  repo: bitcoin/bips
+  path: bip-0375.mediawiki
+  revision: 61ff3f1361838fa7eb671e650b4e614207ca9df7
+  synced: 2026-11-05
+bipwatch:
+  tracked: false
+  category: in-development

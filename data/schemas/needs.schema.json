@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bipwatch.com/schemas/needs.schema.json",
+  "title": "Needs assessment",
+  "description": "What a BIP is missing, scored 0-5 per dimension. Every score must cite claims in the same BIP folder. bips/<NNNN>/needs.yaml.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["bip", "assessed", "provenance", "dimensions"],
+  "properties": {
+    "bip": { "type": "integer", "minimum": 1 },
+    "assessed": { "type": "string", "format": "date" },
+    "provenance": { "$ref": "claim.schema.json#/properties/provenance" },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "problem_evidence",
+        "technical_maturity",
+        "ux_exploration",
+        "implementations",
+        "ecosystem_awareness",
+        "coordination"
+      ],
+      "properties": {
+        "problem_evidence": { "$ref": "#/$defs/dimension" },
+        "technical_maturity": { "$ref": "#/$defs/dimension" },
+        "ux_exploration": { "$ref": "#/$defs/dimension" },
+        "implementations": { "$ref": "#/$defs/dimension" },
+        "ecosystem_awareness": { "$ref": "#/$defs/dimension" },
+        "coordination": { "$ref": "#/$defs/dimension" }
+      }
+    }
+  },
+  "$defs": {
+    "dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "rationale", "evidence"],
+      "properties": {
+        "score": {
+          "description": "0 = nothing there, 5 = no help needed. null when there is not enough evidence to score.",
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 5
+        },
+        "rationale": { "type": "string", "minLength": 10, "maxLength": 400 },
+        "evidence": {
+          "description": "Claim ids from the same BIP folder.",
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "help_wanted": {
+          "description": "Concrete asks shown on the help-wanted view.",
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

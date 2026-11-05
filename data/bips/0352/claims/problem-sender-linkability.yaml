@@ -1,0 +1,20 @@
+id: problem-sender-linkability
+bip: 352
+kind: problem
+statement: >-
+  With notification-based schemes the receiver can tie together every payment
+  that comes from the same sender.
+applies_to_version: 1.1.2
+source:
+  url: https://github.com/bitcoin/bips/blob/f827c440636a93e6033a4e10705ca7762594265b/bip-0352.mediawiki#motivation
+  type: spec
+  title: BIP 352, Motivation
+  retrieved: 2026-11-05
+  revision: f827c440636a93e6033a4e10705ca7762594265b
+  quote: Notification schemes also allow the receiver to link all payments from the same sender
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-05
+  reviewed_by: null
+tags: [privacy]
