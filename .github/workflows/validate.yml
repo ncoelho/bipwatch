@@ -1,8 +1,9 @@
 name: Validate data
 
 on:
+  # Every PR, so it can be a required check on main (a path filter would
+  # leave PRs outside those paths waiting forever).
   pull_request:
-    paths: ['data/**', 'packages/data/**', 'packages/collect/**', 'package-lock.json']
   push:
     branches: [main]
 

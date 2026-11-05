@@ -52,8 +52,9 @@ jobs:
           npm run sync-headers -- --bips ../bips --summary "$RUNNER_TEMP/sync-summary.md"
           if [ -f "$RUNNER_TEMP/sync-summary.md" ]; then echo "changed=true" >> "$GITHUB_OUTPUT"; fi
 
-      # Pull requests opened with GITHUB_TOKEN do not trigger other workflows,
-      # so the checks CI would run happen here, before the PR is opened.
+      # Fail early here so a broken sync never opens a PR. The PR itself is
+      # opened with BOT_TOKEN, so the normal "Validate data" check runs on it
+      # too and gates auto-merge.
       - name: Validate and build the changed data
         if: steps.sync.outputs.changed == 'true'
         run: |
@@ -61,9 +62,11 @@ jobs:
           npm run build --workspace site
 
       - name: Open or update the pull request
+        id: cpr
         if: steps.sync.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
+          token: ${{ secrets.BOT_TOKEN }}
           branch: bot/sync-headers
           delete-branch: true
           add-paths: data/bips/*/bip.yaml
@@ -71,3 +74,11 @@ jobs:
           title: Re-sync BIP headers from bitcoin/bips
           body-path: ${{ runner.temp }}/sync-summary.md
           labels: auto-accept
+
+      # SPEC 6.1: header-sync PRs may merge on their own once CI passes. Needs
+      # a required status check on main, or GitHub has nothing to wait for.
+      - name: Enable auto-merge
+        if: steps.cpr.outputs.pull-request-number && steps.cpr.outputs.pull-request-operation != 'closed'
+        env:
+          GH_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: gh pr merge "${{ steps.cpr.outputs.pull-request-number }}" --repo "$GITHUB_REPOSITORY" --auto --squash --delete-branch
