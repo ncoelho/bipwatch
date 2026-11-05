@@ -207,6 +207,7 @@ docs/SPEC.md                this file
 Commands:
 
 ```sh
+nvm use                               # Node 22.23.4 from .nvmrc (Astro 7.4.2 needs >=22.23.4)
 npm install
 npm run validate                      # schema + consistency
 npm run validate -- --bips ../bips    # + match spec quotes at the cited revision
@@ -245,6 +246,7 @@ The quote check needs a clone of bitcoin/bips next to this repo:
 
 ### Known gotchas
 
+- Node is pinned in `.nvmrc` (22.23.4) and `engines`; both CI workflows read `.nvmrc`. Astro 7.4.2 refuses to start on older Node. Bump all three together when upgrading Astro.
 - npm runs workspace scripts from `packages/data`; the validator resolves `--bips` against `INIT_CWD`.
 - Ajv runs in strict mode with `strictRequired: false` (if/then blocks require parent properties) and `allowUnionTypes: true`.
 - `@bipwatch/data` ships TypeScript source; the site sets `vite.ssr.noExternal` for it. The loader finds `data/` by walking up from the working directory; `BIPWATCH_DATA` overrides that.
