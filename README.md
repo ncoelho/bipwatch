@@ -4,6 +4,8 @@ An open layer for Bitcoin development and Bitcoin Improvement Proposals: data, m
 
 Git holds the truth (`data/`), the site is a static render of it (`site/`). Collectors, Postgres and LLM extraction come next and will write to `data/` through pull requests.
 
+The full product and technical spec, including decisions and next work, is in [`docs/SPEC.md`](docs/SPEC.md).
+
 ## Repo
 
 ```
