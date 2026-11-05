@@ -12,11 +12,13 @@
     "migrate": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env src/migrate.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "test:db": "node --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env ../../node_modules/vitest/vitest.mjs run test/db.integration.test.ts"
+    "test:db": "node --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env ../../node_modules/vitest/vitest.mjs run test/db.integration.test.ts",
+    "sync-headers": "tsx src/sync-headers.ts"
   },
   "dependencies": {
     "@bipwatch/data": "*",
-    "pg": "8.13.1"
+    "pg": "8.13.1",
+    "yaml": "2.8.1"
   },
   "devDependencies": {
     "@types/node": "22.15.30",

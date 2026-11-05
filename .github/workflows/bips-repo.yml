@@ -1,0 +1,73 @@
+name: bips-repo
+
+# SPEC 6.1: every 30 minutes, archive new bitcoin/bips commits that touch a BIP
+# we hold a record for, and open a pull request when a spec header changed.
+
+on:
+  schedule:
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: bips-repo
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Collect commits into Postgres
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::warning::DATABASE_URL secret is not set; skipping collection"
+            exit 0
+          fi
+          npm run collect -- --source bips-repo
+
+  sync-headers:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch bitcoin/bips history
+        run: git clone --filter=blob:none --no-checkout https://github.com/bitcoin/bips.git ../bips
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Re-sync bip.yaml facts from spec headers
+        id: sync
+        run: |
+          npm run sync-headers -- --bips ../bips --summary "$RUNNER_TEMP/sync-summary.md"
+          if [ -f "$RUNNER_TEMP/sync-summary.md" ]; then echo "changed=true" >> "$GITHUB_OUTPUT"; fi
+
+      # Pull requests opened with GITHUB_TOKEN do not trigger other workflows,
+      # so the checks CI would run happen here, before the PR is opened.
+      - name: Validate and build the changed data
+        if: steps.sync.outputs.changed == 'true'
+        run: |
+          npm run validate -- --bips ../bips
+          npm run build --workspace site
+
+      - name: Open or update the pull request
+        if: steps.sync.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: bot/sync-headers
+          delete-branch: true
+          add-paths: data/bips/*/bip.yaml
+          commit-message: Re-sync BIP headers from bitcoin/bips
+          title: Re-sync BIP headers from bitcoin/bips
+          body-path: ${{ runner.temp }}/sync-summary.md
+          labels: auto-accept

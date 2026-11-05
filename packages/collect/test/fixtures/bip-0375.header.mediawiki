@@ -1,0 +1,16 @@
+<pre>
+  BIP: 375
+  Layer: Applications
+  Title: Sending Silent Payments with PSBTs
+  Authors: Andrew Toth <andrewstoth@gmail.com>
+           Ava Chow <me@achow101.com>
+           josibake <josibake@protonmail.com>
+  Deputies: macgyver <macgyver.sp@pm.me>
+  Status: Draft
+  Type: Specification
+  Assigned: 2025-01-08
+  License: BSD-2-Clause
+  Discussion: https://groups.google.com/g/bitcoindev/c/5G5wzqUXyk4
+  Version: 0.1.2
+  Requires: 352, 370, 374
+</pre>

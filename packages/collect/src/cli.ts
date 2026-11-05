@@ -3,9 +3,12 @@ import { connect } from './db.ts';
 import { buildMentionContext } from './mentions.ts';
 import { runCollector } from './run.ts';
 import type { Collector, SourceId } from './types.ts';
+import { bipsRepoCollector } from './collectors/bips-repo.ts';
 
 /** Collectors are registered here as they are written (SPEC 6.1). */
-const COLLECTORS: Partial<Record<SourceId, () => Collector>> = {};
+const COLLECTORS: Partial<Record<SourceId, () => Collector>> = {
+  'bips-repo': () => bipsRepoCollector(),
+};
 const ALL: SourceId[] = ['bips-repo', 'github', 'delving', 'mailing-list'];
 
 const { values } = parseArgs({

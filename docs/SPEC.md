@@ -280,7 +280,7 @@ Goal: every new item from the four text sources lands in Postgres, is normalized
 
 **Postgres host:** Neon (decided 2026-11-05), project `frosty-forest-51716423`, branch `production`, Postgres 18 with pgvector available. `neon.ts` holds the project config; `neon env pull` writes `DATABASE_URL` (pooled, used by collectors) and `DATABASE_URL_UNPOOLED` (used by migrations) to `.env.local`. CI gets `DATABASE_URL` as a repository secret. `001_init.sql` is applied to `production`.
 
-**Progress:** done: package, migrations (`001_init.sql`), runner (cursor, `source_runs`, idempotent storage), mention detection with tests, `bipwatch.aliases`, Neon wiring with an integration test (`npm run test:db --workspace @bipwatch/collect`). Not done: the four collectors, scheduled workflows, freshness. `documents` also has `external_id` (unique per source) so edited posts update their row.
+**Progress:** done: package, migrations (`001_init.sql`), runner (cursor, `source_runs`, idempotent storage), mention detection with tests, `bipwatch.aliases`, Neon wiring with an integration test (`npm run test:db --workspace @bipwatch/collect`), the `bips-repo` collector, header sync and its workflow (`.github/workflows/bips-repo.yml`). Not done: `github`, `delving`, `mailing-list`, their workflows, freshness. `documents` also has `external_id` (unique per source) so edited posts update their row.
 
 **Package:** `packages/collect` (`@bipwatch/collect`), TypeScript, run with `tsx`. CLI: `npm run collect -- --source <id>` and `--all`.
 
@@ -309,6 +309,9 @@ Re-running any collector with the same cursor must not create duplicates (`conte
 **Sources:**
 
 - `bips-repo`: git fetch of bitcoin/bips. For each new commit touching a tracked BIP's file, store the diff. If the header changed (status, version, authors, requires), regenerate that `bip.yaml` and open a PR labelled `auto-accept`. These PRs may auto-merge once CI passes.
+  - Built as two parts. The collector (`src/collectors/bips-repo.ts`) archives every commit touching the spec file or companion folder of **any** BIP under `data/bips`, not only tracked ones, because every `bip.yaml` copies header facts. The cursor is the last stored commit; a BIP added to `data/` later needs a cursor reset to backfill. Documents link each changed file at the commit, so mentions come from links and the message, not from spec text inside the diff. Merge commits are kept for their PR numbers.
+  - `npm run sync-headers` (`src/sync-headers.ts`) compares each record's facts (title, layer, type, status, version, assigned, license, authors, requires, discussion) with the header at `origin/master`, follows mediawiki/markdown renames, and rewrites only the changed fields as text edits, so comments and formatting stay. `spec.revision` moves to the last commit touching the spec. Discussion entries are matched by URL so hand-written titles survive.
+  - The workflow runs both every 30 minutes. A PR opened with `GITHUB_TOKEN` does not trigger other workflows, so the sync job validates and builds before opening it. Auto-merge is not wired: it needs the repo setting "Allow GitHub Actions to create and approve pull requests", and CI on bot PRs needs a PAT or GitHub App token.
 - `github`: PRs, issues and review comments on bitcoin/bips, plus repos named in implementation claims' `subject.url`. Poll by `updated_at`. Token from `GITHUB_TOKEN`.
 - `delving`: Discourse JSON endpoints (latest topics, then new posts per topic). Store each post.
 - `mailing-list`: the public-inbox archive at gnusha.org/pi/bitcoindev. Check which endpoints it exposes (Atom feed for new messages, per-thread mbox) before writing the parser. Key on Message-ID.

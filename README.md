@@ -29,7 +29,8 @@ npm test                               # unit tests (collectors, mention index)
 neon env pull                          # Neon DATABASE_URL(_UNPOOLED) into .env.local (after `neon login`)
 npm run migrate                        # apply SQL migrations to Neon (uses the unpooled URL)
 npm run test:db --workspace @bipwatch/collect   # runner + migrations against Neon, in a throwaway schema
-npm run collect -- --source delving    # run one collector, or --all
+npm run collect -- --source bips-repo  # run one collector, or --all
+npm run sync-headers -- --bips ../bips # re-sync bip.yaml facts from spec headers (--dry-run to preview)
 ```
 
 Collectors read `DATABASE_URL` (pooled), `DATABASE_URL_UNPOOLED` (migrations) and `GITHUB_TOKEN` from the environment, `.env.local` (written by `neon env pull`) or `.env` (see `.env.example`). `neon.ts` declares the Neon project config.
