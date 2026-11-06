@@ -14,14 +14,18 @@ const utc = (iso: string) => `${iso.slice(0, 16).replace('T', ' ')} UTC`;
     <ul>
       {freshness.sources.map((s) => (
         <li>
-          <span class="name">{s.label}</span>
-          <span class="count tnum mono">{fmt.format(s.documents)}</span>
-          {s.last_success ? (
-            <time class="when mono" datetime={s.last_success} title={utc(s.last_success)}>{utc(s.last_success)}</time>
-          ) : (
-            <span class="when mono">never</span>
-          )}
-          {s.stale && <span class="pill warn">delayed</span>}
+          <div class="what">
+            <span class="name">{s.label}</span>
+            <span class="count"><span class="tnum mono">{fmt.format(s.documents)}</span>{s.unit && ` ${s.unit}`}</span>
+          </div>
+          <div class="state">
+            {s.stale && <span class="pill warn">delayed</span>}
+            {s.last_success ? (
+              <time class="when mono" datetime={s.last_success} title={utc(s.last_success)}>{utc(s.last_success)}</time>
+            ) : (
+              <span class="when mono">never</span>
+            )}
+          </div>
         </li>
       ))}
     </ul>
@@ -50,17 +54,14 @@ const utc = (iso: string) => `${iso.slice(0, 16).replace('T', ' ')} UTC`;
   .note { font-size: 14px; }
   ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
   li {
-    display: grid; grid-template-columns: minmax(0, 1fr) auto auto auto; align-items: center; gap: 4px 14px;
+    display: flex; justify-content: space-between; align-items: center; gap: 6px 16px; flex-wrap: wrap;
     padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px;
   }
-  .name { min-width: 0; }
-  .count { color: var(--muted); font-size: 13px; text-align: right; }
-  .when { color: var(--faint); font-size: 13px; min-width: 9ch; text-align: right; }
+  .what { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .count { color: var(--muted); font-size: 13px; }
+  .count .mono { color: var(--fg); }
+  .state { display: flex; align-items: center; gap: 8px; }
+  .when { color: var(--faint); font-size: 13px; }
   .gen { color: var(--faint); font-size: 12px; }
   .gen a { color: inherit; }
-  @media (max-width: 480px) {
-    li { grid-template-columns: minmax(0, 1fr) auto; }
-    .count { grid-column: 2; }
-    .when { grid-column: 1 / -1; text-align: left; }
-  }
 </style>

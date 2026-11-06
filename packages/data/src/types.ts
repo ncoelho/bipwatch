@@ -128,6 +128,8 @@ export interface SourceFreshness {
   /** True when the last success is older than twice the cadence. */
   stale: boolean;
   documents: number;
+  /** What `documents` counts, plural ("posts", "commits to BIPs we follow"). */
+  unit?: string;
 }
 
 export interface Freshness {

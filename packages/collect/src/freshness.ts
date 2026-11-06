@@ -14,11 +14,13 @@ import type { SourceId } from './types.ts';
  * writes data/freshness.json for the site (no error text, nothing private).
  */
 
-export const SOURCES: { source: SourceId; label: string; cadence_minutes: number }[] = [
-  { source: 'bips-repo', label: 'BIP repository', cadence_minutes: 30 },
-  { source: 'github', label: 'GitHub', cadence_minutes: 60 },
-  { source: 'delving', label: 'Delving Bitcoin', cadence_minutes: 30 },
-  { source: 'mailing-list', label: 'bitcoin-dev mailing list', cadence_minutes: 60 },
+/** `unit` says what a source's document count counts; they differ per source. */
+export const SOURCES: { source: SourceId; label: string; unit: string; cadence_minutes: number }[] = [
+  // Only commits that touch a BIP with a record under data/bips, not the whole repository.
+  { source: 'bips-repo', label: 'BIP repository', unit: 'commits to BIPs we follow', cadence_minutes: 30 },
+  { source: 'github', label: 'GitHub', unit: 'pull requests, reviews and comments', cadence_minutes: 60 },
+  { source: 'delving', label: 'Delving Bitcoin', unit: 'posts', cadence_minutes: 30 },
+  { source: 'mailing-list', label: 'bitcoin-dev mailing list', unit: 'messages', cadence_minutes: 60 },
 ];
 
 export interface SourceRow {
@@ -37,7 +39,7 @@ export interface FreshnessReport extends Freshness {
 export function computeFreshness(rows: SourceRow[], now: Date): FreshnessReport {
   const byId = new Map(rows.map((r) => [r.source, r]));
   const detail: FreshnessReport['detail'] = {};
-  const sources: SourceFreshness[] = SOURCES.map(({ source, label, cadence_minutes }) => {
+  const sources: SourceFreshness[] = SOURCES.map(({ source, label, unit, cadence_minutes }) => {
     const r = byId.get(source);
     const last = r?.last_success ?? null;
     const age = last ? (now.getTime() - last.getTime()) / 60000 : null;
@@ -52,6 +54,7 @@ export function computeFreshness(rows: SourceRow[], now: Date): FreshnessReport 
       last_success: last?.toISOString() ?? null,
       stale: age === null || age > 2 * cadence_minutes,
       documents: r?.documents ?? 0,
+      unit,
     };
   });
   return { generated_at: now.toISOString(), sources, detail };
@@ -85,7 +88,7 @@ export function formatReport(report: FreshnessReport): string {
     const age = d.age_minutes === null ? 'never' : `${d.age_minutes} min ago`;
     const fail =
       d.last_failure && (!s.last_success || d.last_failure > s.last_success) ? ` · last run failed ${d.last_failure}` : '';
-    return `${s.stale ? 'STALE' : 'ok   '}  ${s.source.padEnd(13)} ${age.padEnd(12)} (limit ${2 * s.cadence_minutes} min) · ${s.documents} documents${fail}`;
+    return `${s.stale ? 'STALE' : 'ok   '}  ${s.source.padEnd(13)} ${age.padEnd(12)} (limit ${2 * s.cadence_minutes} min) · ${s.documents} ${s.unit}${fail}`;
   });
   return lines.join('\n');
 }
