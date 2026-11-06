@@ -1,0 +1,27 @@
+id: stance-thestack-2f912cbb
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2337
+  title: "BIP352: add taproot key-path spend with annex vector"
+statement: theStack approved the pull request adding a BIP 352 test vector for a
+  taproot key-path spend with an annex. He asked only for a rebase on master and
+  a changelog entry with a bumped patch version.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.1.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2337#issuecomment-6393229781
+  type: github
+  title: "BIP352: add taproot key-path spend with annex vector"
+  date: 2026-10-25
+  retrieved: 2026-11-06
+  quote: LGTM, can you rebase on master
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

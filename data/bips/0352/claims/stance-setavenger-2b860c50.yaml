@@ -1,0 +1,25 @@
+id: stance-setavenger-2b860c50
+bip: 352
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: setavenger recommends that the nostr stealth address scheme reuse
+  Silent Payments (BIP 352) key derivation rather than inventing new logic. He
+  argues it removes footguns, allows fallback to on-chain scanning, and improves
+  wallet interoperability.
+subject:
+  name: setavenger
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/stealth-addresses-using-nostr/1816/8
+  type: forum
+  title: Stealth addresses using nostr
+  date: 2025-09-29
+  retrieved: 2026-11-06
+  quote: Use Silent Payments logic instead of new stealth address specific logic
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

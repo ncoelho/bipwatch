@@ -1,0 +1,28 @@
+id: stance-josibake-fb387899
+bip: 352
+kind: stance
+stance: ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bips/pull/1616
+  title: "BIP-352: use own ripemd160 for reference implementation"
+statement: josibake ACKed a pull request that makes the BIP-352 reference
+  implementation use its own RIPEMD160 code rather than relying on an external
+  library.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1616#pullrequestreview-2149585516
+  type: github
+  title: "BIP-352: use own ripemd160 for reference implementation"
+  date: 2024-06-29
+  retrieved: 2026-11-06
+  quote: ACK
+    https://github.com/bitcoin/bips/pull/1616/commits/ec7743d0a70aa1ff92bcbb554099a54194bf725d
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

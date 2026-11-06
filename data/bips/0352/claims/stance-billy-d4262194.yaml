@@ -1,0 +1,26 @@
+id: stance-billy-d4262194
+bip: 352
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Billy finds the silent payments protocol interesting and useful for
+  recipient privacy. He notes the downside that light clients cannot easily use
+  it without a full node.
+subject:
+  name: Billy
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAGpPWDa1QfN53a_-9Dhee58T6_zk3S0bZJhZbiDpXndzzv0nTA@mail.gmail.com/
+  type: mailing-list
+  title: Silent Payments – Non-interactive private payments with no on-chain overhead
+  date: 2022-03-29
+  retrieved: 2026-11-06
+  quote: |-
+    It seems the primary benefit of this is privacy for the recipient. To that
+    end, it seems like a pretty useful protocol.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

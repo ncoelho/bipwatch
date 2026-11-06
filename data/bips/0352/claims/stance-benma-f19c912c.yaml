@@ -1,0 +1,28 @@
+id: stance-benma-f19c912c
+bip: 352
+kind: stance
+stance: approach-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1458
+  title: "BIP 352: Silent Payments"
+statement: benma supports the proposed amendment to BIP 352 to use the hash of
+  the lexicographically smallest input. He says it would work for hardware
+  wallets and sees no problems with it.
+subject:
+  name: benma
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1360648873
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-10-16
+  retrieved: 2026-11-06
+  quote: using the hash of the lexicographically smallest input would work for
+    hardware wallets, I don't see any problems with this approach.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

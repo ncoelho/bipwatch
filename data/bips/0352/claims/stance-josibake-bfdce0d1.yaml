@@ -1,0 +1,30 @@
+id: stance-josibake-bfdce0d1
+bip: 352
+kind: stance
+stance: concept-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1458
+  title: "BIP 352: Silent Payments"
+statement: josibake argues that BIP 352 should drop P2PK from its eligible input
+  script templates, which would let it rule out hybrid and uncompressed public
+  keys altogether. His reasoning is that such outputs are rarely used today and
+  holders could still move those coins with a one-time transaction.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1445962480
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2024-01-09
+  retrieved: 2026-11-06
+  quote: I think we actually should drop P2PK. Doing so would allow us to get rid
+    of hybrid keys and uncompressed public keys altogether by having our script
+    templates only allow for compressed public keys.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

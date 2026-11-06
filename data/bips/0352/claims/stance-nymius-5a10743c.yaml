@@ -1,0 +1,31 @@
+id: stance-nymius-5a10743c
+bip: 352
+kind: stance
+stance: concept-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2106
+  title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
+statement: nymius gave a concept ACK to the change introducing a per-group
+  recipient limit K_max (2323) in BIP 352, saying the scanning time increase is
+  linear, performance stays in the same order of magnitude, and it reduces
+  wallet fingerprinting chances.
+subject:
+  name: nymius
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2106#pullrequestreview-3867245547
+  type: github
+  title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
+  date: 2026-02-27
+  retrieved: 2026-11-06
+  quote: "cACK 311cc661dceb649375e829c7cf8f0afdb1c37c43: I agree with the limit.
+    The increase in scanning time is linear, the performance is still in the
+    same order of magnitude, and decreases the chances of wallet
+    fingerprinting."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

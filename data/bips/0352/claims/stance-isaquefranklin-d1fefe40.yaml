@@ -1,0 +1,33 @@
+id: stance-isaquefranklin-d1fefe40
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2153
+  title: "bip352: clarify/fix specification to disallow sender to create outputs
+    the receiver can't find"
+statement: IsaqueFranklin supports the suggested changes to the BIP 352 pull
+  request that prevents senders from creating outputs the receiver cannot find.
+  He says they resolve his earlier concerns and remove the ambiguity around
+  `k_max` and the number of outputs.
+subject:
+  name: IsaqueFranklin
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2153#issuecomment-4758394497
+  type: github
+  title: "bip352: clarify/fix specification to disallow sender to create outputs
+    the receiver can't find"
+  date: 2026-06-20
+  retrieved: 2026-11-06
+  quote: I also fully agree with the suggestion, the changes address the points I
+    raised in my previous comment and I agree they do remove the ambiguity
+    regarding the `k_max` and the number of outputs that we encountered in the
+    bip text.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

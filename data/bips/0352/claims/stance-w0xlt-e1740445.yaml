@@ -1,0 +1,26 @@
+id: stance-w0xlt-e1740445
+bip: 352
+kind: stance
+stance: concept-ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bitcoin/pull/35301
+  title: "Silent Payments: Implement bip352 (take 2)"
+statement: w0xlt gave a Concept ACK to the pull request implementing BIP 352
+  silent payments (take 2), supporting the idea of adding this implementation.
+subject:
+  name: w0xlt
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35301#issuecomment-4490760075
+  type: github
+  title: "Silent Payments: Implement bip352 (take 2)"
+  date: 2026-05-19
+  retrieved: 2026-11-06
+  quote: Concept ACK
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

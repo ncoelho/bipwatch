@@ -1,0 +1,31 @@
+id: stance-jonatack-6a7cab9c
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1620
+  title: "BIP-352: handle invalid privkey / pubkey sums for sending / scanning,
+    add changelog"
+statement: jonatack ACKed the pull request that amends BIP 352 to handle invalid
+  private/public key sums when sending and scanning, and adds a changelog. He
+  noted that the only change since the BIP author approved it was the changelog
+  ordering.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1620#issuecomment-2184171457
+  type: github
+  title: "BIP-352: handle invalid privkey / pubkey sums for sending / scanning,
+    add changelog"
+  date: 2024-06-22
+  retrieved: 2026-11-06
+  quote: ACK 496e4295e76579b75dbafbd8a6c6e49948cc0d8d, only change since BIP
+    author approval
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

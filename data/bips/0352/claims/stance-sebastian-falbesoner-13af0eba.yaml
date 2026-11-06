@@ -1,0 +1,27 @@
+id: stance-sebastian-falbesoner-13af0eba
+bip: 352
+kind: stance
+stance: ack
+scope: change
+statement: Sebastian Falbesoner authored a change to BIP 352 adding a per-group
+  recipient limit K_max of 2323. He argues that, although it is technically
+  backwards incompatible, no existing Silent Payments wallet sends to that many
+  recipients, so it is safe to introduce.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/commit/f665c2c1429175427a98a97b236371b12644866a
+  type: github
+  title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
+  date: 2026-01-30
+  retrieved: 2026-11-06
+  quote: |-
+    the K_max limit should be safe to
+    introduce, without any negative effects in the wallet ecosystem.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

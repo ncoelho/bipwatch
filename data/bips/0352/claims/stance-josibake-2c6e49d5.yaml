@@ -1,0 +1,30 @@
+id: stance-josibake-2c6e49d5
+bip: 352
+kind: stance
+stance: approach-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1458
+  title: "BIP 352: Silent Payments"
+statement: josibake favors changing the BIP 352 input commitment to hash only
+  the lexicographically lowest outpoint. He argues that hashing and summing each
+  outpoint makes collisions easier and adds scanning work, while sorting and
+  concatenating all outpoints is too complex for memory-constrained hardware
+  wallets.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1360613737
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-10-16
+  retrieved: 2026-11-06
+  quote: Taking all of that into account, I think hashing the lexicographically
+    lowest outpoint is likely the best solution.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

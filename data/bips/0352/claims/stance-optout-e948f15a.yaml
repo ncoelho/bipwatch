@@ -1,0 +1,27 @@
+id: stance-optout-e948f15a
+bip: 352
+kind: stance
+stance: concept-ack
+scope: change
+statement: optout supports the idea of extending BIP 352 silent payments to
+  coinbase outputs. They say it would fix address reuse and privacy leaks for
+  miners paid directly from the coinbase, such as Ocean miners, but they have
+  not yet reviewed the proposed input/nonce details.
+subject:
+  name: optout
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-coinbase/2833/6
+  type: forum
+  title: Silent Payments coinbase
+  date: 2026-09-24
+  retrieved: 2026-11-06
+  quote: "The drawbacks are clear: address reuse, privacy leak by connecting
+    subsequent payments to the same miner, ability to observe their spending.
+    Silent payment would make a lot of sense."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

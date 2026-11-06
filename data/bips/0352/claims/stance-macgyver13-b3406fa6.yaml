@@ -1,0 +1,27 @@
+id: stance-macgyver13-b3406fa6
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2087
+  title: "BIP-352: vendor secp256k1lab and use it for reference implementation"
+statement: macgyver13 approved the bitcoin/bips change that vendors secp256k1lab
+  and switches BIP 352's reference implementation to use it, after running the
+  send-and-receive test vectors and seeing them all pass.
+subject:
+  name: macgyver13
+  type: person
+applies_to_version: 1.1.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2087#issuecomment-3985966053
+  type: github
+  title: "BIP-352: vendor secp256k1lab and use it for reference implementation"
+  date: 2026-03-02
+  retrieved: 2026-11-06
+  quote: ACK 345f762
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

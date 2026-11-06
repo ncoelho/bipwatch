@@ -1,0 +1,28 @@
+id: stance-fametrano-972bbea0
+bip: 352
+kind: stance
+stance: ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bips/pull/2288
+  title: "BIP352: align reference address decoding with silent payment rules"
+statement: fametrano approved the change to BIP 352's reference address decoder
+  that aligns it with the spec (bech32m only, 66 bytes for v0, truncation for
+  v1-v30, fail on v31), after running the tests and cross-checking 33 addresses
+  against an independent decoder.
+subject:
+  name: fametrano
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2288#issuecomment-5972688262
+  type: github
+  title: "BIP352: align reference address decoding with silent payment rules"
+  date: 2026-10-03
+  retrieved: 2026-11-06
+  quote: ACK c39bae2a3b65d34b0fb064fb32dacbf5a514a62f
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

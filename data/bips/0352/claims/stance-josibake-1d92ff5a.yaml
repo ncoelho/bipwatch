@@ -1,0 +1,30 @@
+id: stance-josibake-1d92ff5a
+bip: 352
+kind: stance
+stance: approach-ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bitcoin/pull/35301
+  title: "Silent Payments: Implement bip352 (take 2)"
+statement: josibake favors the proposed alternative Bitcoin Core API for the BIP
+  352 implementation, which uses a new SilentPaymentsReceiver class. He finds it
+  simpler, with fewer footguns for callers and a clearer flow, and thinks the PR
+  should go in that direction.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35301#issuecomment-5494021239
+  type: github
+  title: "Silent Payments: Implement bip352 (take 2)"
+  date: 2026-09-01
+  retrieved: 2026-11-06
+  quote: Feels much simpler, and also agree that it provides less footguns for the
+    callers and a more clear flow. Good stuff! I think its a good direction to
+    go on this PR.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

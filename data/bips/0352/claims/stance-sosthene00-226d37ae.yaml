@@ -1,0 +1,27 @@
+id: stance-sosthene00-226d37ae
+bip: 352
+kind: stance
+stance: concept-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2106
+  title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
+statement: Sosthene00 concept-ACKs adding a limit on the per-recipient k in BIP
+  352, while considering the attack largely theoretical. He suggests 1000 as a
+  reasonable cap that bounds scanning time without interfering with policy.
+subject:
+  name: Sosthene00
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2106#issuecomment-3942508310
+  type: github
+  title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
+  date: 2026-02-23
+  retrieved: 2026-11-06
+  quote: First, I concept ACK a limit on _k_.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

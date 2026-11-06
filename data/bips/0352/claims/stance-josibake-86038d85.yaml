@@ -1,0 +1,30 @@
+id: stance-josibake-86038d85
+bip: 352
+kind: stance
+stance: nack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1458
+  title: "BIP 352: Silent Payments"
+statement: josibake opposes the suggested amendment to encode silent payments as
+  a BIP21 URI extension instead of a new address format. He argues that a
+  fallback static address encourages address reuse and harms the privacy of
+  silent payment users, and that a required parameter is no better than a new
+  address. He proposes keeping the sp1 bech32m encoding.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#issuecomment-1630498315
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-07-11
+  retrieved: 2026-11-06
+  quote: Keep the `sp1qxxx` bech32m encoding and add it to BIP21 once there is
+    widespread support for sending to silent payment addresses
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

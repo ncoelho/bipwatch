@@ -1,0 +1,28 @@
+id: stance-murchandamus-7d236cb9
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2055
+  title: "BIP-352: limit number of recipients to 2^32-1"
+statement: murchandamus considers the change limiting the number of silent
+  payment recipients to 2^32-1 ready to merge, though he would like sign-off
+  from one of the BIP authors first.
+subject:
+  name: murchandamus
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2055#pullrequestreview-3657914256
+  type: github
+  title: "BIP-352: limit number of recipients to 2^32-1"
+  date: 2026-01-13
+  retrieved: 2026-11-06
+  quote: This seems ready to go, but I would prefer to get sign-off from one of
+    the BIP authors
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

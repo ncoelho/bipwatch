@@ -1,0 +1,31 @@
+id: stance-ruben-somsen-1ed9d820
+bip: 352
+kind: stance
+stance: concept-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1458
+  title: "BIP 352: Silent Payments"
+statement: RubenSomsen supports having Silent Payments handle P2PK inputs. He
+  argues the implementation burden is minimal because it is a simple script that
+  only affects recipients, who already run full nodes, and that a significant
+  amount of coins (mostly from early miners) is locked in P2PK.
+subject:
+  name: Ruben Somsen
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1395697830
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-11-16
+  retrieved: 2026-11-06
+  quote: The implementation burden seems very minimal considering it's a simple
+    script and only concerns recipients which already rely on full nodes anyway.
+    In terms of value a significant amount of coins (mostly early miners) is
+    locked up in p2pk.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

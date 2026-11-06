@@ -1,0 +1,26 @@
+id: stance-vostrnad-e1c242b7
+bip: 352
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: vostrnad says they really like the Silent Payments proposal after
+  light review, noting that being able to implement only the sending side easily
+  should accelerate wallet adoption.
+subject:
+  name: vostrnad
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#pullrequestreview-1468505256
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-07
+  retrieved: 2026-11-06
+  quote: Some light review so far, but I'm really liking the proposal. Being able
+    to easily implement just the sending part will no doubt greatly accelerate
+    adoption by wallets.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

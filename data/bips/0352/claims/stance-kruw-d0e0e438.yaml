@@ -1,0 +1,25 @@
+id: stance-kruw-d0e0e438
+bip: 352
+kind: stance
+stance: nack
+scope: proposal
+statement: Kruw argues against the case for silent payments, saying that because
+  generating a new address is trivial and every transaction already gets its own
+  pseudonym, the motivation for silent payments is undermined.
+subject:
+  name: Kruw
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://delvingbitcoin.org/t/state-of-the-transaction-privacy-work-in-bitcoin/2622/17
+  type: forum
+  title: State of the transaction privacy work in Bitcoin
+  date: 2026-06-23
+  retrieved: 2026-11-06
+  quote: The fact that generating a new address is trivial is one that undermines
+    the argument for silent payments, not strengthens it.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

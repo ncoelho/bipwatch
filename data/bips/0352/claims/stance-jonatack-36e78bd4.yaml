@@ -1,0 +1,27 @@
+id: stance-jonatack-36e78bd4
+bip: 352
+kind: stance
+stance: concept-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2337
+  title: "BIP352: add taproot key-path spend with annex vector"
+statement: jonatack gave a Concept ACK to the pull request adding a test vector
+  for a taproot key-path spend with an annex to BIP 352, and suggested using a
+  stronger annex (0x50 plus the BIP-341 NUMS point H).
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2337#pullrequestreview-5634221608
+  type: github
+  title: "BIP352: add taproot key-path spend with annex vector"
+  date: 2026-10-23
+  retrieved: 2026-11-06
+  quote: Concept ACK
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

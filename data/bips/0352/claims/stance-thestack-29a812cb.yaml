@@ -1,0 +1,31 @@
+id: stance-thestack-29a812cb
+bip: 352
+kind: stance
+stance: approach-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2106
+  title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
+statement: theStack agrees that setting the per-group recipient limit K_max to
+  2324, the theoretical maximum for standard-sized transactions, would be the
+  safest choice. He considers the resulting worst-case scanning time still
+  acceptable and is open to raising the limit to that value.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2106#issuecomment-3961384931
+  type: github
+  title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
+  date: 2026-02-25
+  retrieved: 2026-11-06
+  quote: I do agree that K_max = 2324 would be the safest choice in that regard,
+    with a resulting worst-case scanning time that is still acceptable (even
+    without further optimizations). Curious what others think, but I wouldn't
+    mind bumping the limit.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

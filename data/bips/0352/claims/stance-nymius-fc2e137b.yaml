@@ -1,0 +1,29 @@
+id: stance-nymius-fc2e137b
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2106
+  title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
+statement: nymius ACKed the later commits of the K_max recipient-limit change,
+  including its new test vector, after running the full tests without issues and
+  checking that the test vector file size is reasonable.
+subject:
+  name: nymius
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2106#pullrequestreview-3867245547
+  type: github
+  title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
+  date: 2026-02-27
+  retrieved: 2026-11-06
+  quote: |-
+    ACK 8f7adfd9451d64a435eaefe9b9432c4ba6f52adb..4dac93cfe4bffe299b9eb74a23f11f85f02f0490:
+    Checked full test execution: didn't have any issues.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

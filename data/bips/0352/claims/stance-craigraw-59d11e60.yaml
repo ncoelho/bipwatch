@@ -1,0 +1,26 @@
+id: stance-craigraw-59d11e60
+bip: 352
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Craig Raw supports Silent Payments, arguing it solves the address
+  reuse problem by removing the difficulty of sharing and validating a new
+  address for every payment.
+subject:
+  name: Craig Raw
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://delvingbitcoin.org/t/state-of-the-transaction-privacy-work-in-bitcoin/2622/20
+  type: forum
+  title: State of the transaction privacy work in Bitcoin
+  date: 2026-06-23
+  retrieved: 2026-11-06
+  quote: Address reuse is currently near 70% because it's difficult to
+    share/validate a new address for every payment. Silent Payments removes this
+    problem
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

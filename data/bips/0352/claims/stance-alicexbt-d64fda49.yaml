@@ -1,0 +1,25 @@
+id: stance-alicexbt-d64fda49
+bip: 352
+kind: stance
+stance: approach-ack
+scope: change
+statement: alicexbt approved the silent payments v4 change that uses all
+  transaction inputs, while saying they did not understand how it would benefit
+  coinjoin.
+subject:
+  name: alicexbt
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/XxDzawKpNd-w31EPhjsQhW2VIjUOOAixK2X9RvZAB-Z-uFnasDCyLc5GlJ1HptXsuIggz7ee4tKMSxRsqMj8eoZUPgKuRFNqlejjObn43-4=@protonmail.com/
+  type: mailing-list
+  title: Silent Payment v4 (coinjoin support added)
+  date: 2022-10-12
+  retrieved: 2026-11-06
+  quote: All inputs being used sounds good although I do not understand how it
+    would benefit coinjoin.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

@@ -1,0 +1,30 @@
+id: stance-josibake-9d966c78
+bip: 352
+kind: stance
+stance: nack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1458
+  title: "BIP 352: Silent Payments"
+statement: josibake opposes TheBlueMatt's suggestion to define an `sp=` BIP21
+  URI parameter for silent payments. He argues the bech32m `sp` HRP already
+  identifies the address, so `bitcoin:sp1q...` should be used instead, and that
+  mixing a silent payment address with a reused on-chain address in a static URI
+  can harm sender privacy.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#issuecomment-1964368897
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2024-02-26
+  retrieved: 2026-11-06
+  quote: thinking about this more, I don't think an `sp=` extension is the right
+    way to go here.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

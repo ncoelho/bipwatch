@@ -1,0 +1,29 @@
+id: stance-jonatack-34068751
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1620
+  title: "BIP-352: handle invalid privkey / pubkey sums for sending / scanning,
+    add changelog"
+statement: jonatack gave a light ACK to the BIP-352 change that handles invalid
+  private/public key sums during sending and scanning and adds a changelog,
+  after running the reference test vectors successfully.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1620#pullrequestreview-2130373601
+  type: github
+  title: "BIP-352: handle invalid privkey / pubkey sums for sending / scanning,
+    add changelog"
+  date: 2024-06-20
+  retrieved: 2026-11-06
+  quote: Light LGTM ACK
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

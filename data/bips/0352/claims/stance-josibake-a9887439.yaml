@@ -1,0 +1,30 @@
+id: stance-josibake-a9887439
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1620
+  title: "BIP-352: handle invalid privkey / pubkey sums for sending / scanning,
+    add changelog"
+statement: josibake approved the change to BIP 352 that handles invalid
+  private/public key sums during sending and scanning. He suggested also adding
+  a sender-side test case for the new a = 0 check.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1620#pullrequestreview-2132673655
+  type: github
+  title: "BIP-352: handle invalid privkey / pubkey sums for sending / scanning,
+    add changelog"
+  date: 2024-06-21
+  retrieved: 2026-11-06
+  quote: Looks good! Since we are now checking for `a = 0`, I think its worth
+    adding a test case for the sender side, as well.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

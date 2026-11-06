@@ -1,0 +1,28 @@
+id: stance-thestack-5e93f7da
+bip: 352
+kind: stance
+stance: nack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2055
+  title: "BIP-352: limit number of recipients to 2^32-1"
+statement: theStack closed their own pull request that would have limited the
+  total number of BIP-352 recipients to 2^32-1. After further discussion on
+  another pull request, they are no longer convinced the change makes sense as
+  written.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2055#issuecomment-3976282361
+  type: github
+  title: "BIP-352: limit number of recipients to 2^32-1"
+  date: 2026-02-28
+  retrieved: 2026-11-06
+  quote: Closing this one now, as I'm no longer convinced the change as-is makes sense
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

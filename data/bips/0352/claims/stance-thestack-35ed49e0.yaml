@@ -1,0 +1,29 @@
+id: stance-thestack-35ed49e0
+bip: 352
+kind: stance
+stance: approach-ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bitcoin/pull/35301
+  title: "Silent Payments: Implement bip352 (take 2)"
+statement: theStack said the Bitcoin Core BIP352 silent payments implementation
+  (take 2) looks good overall. They left further findings on labels and the
+  label cache, and suggested a dedicated serialized-label type, possibly in a
+  follow-up.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35301#pullrequestreview-4395937072
+  type: github
+  title: "Silent Payments: Implement bip352 (take 2)"
+  date: 2026-05-30
+  retrieved: 2026-11-06
+  quote: Looks good overall, left just some more findings regarding labels and the
+    label cache.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

@@ -1,0 +1,34 @@
+id: stance-jonatack-b58869aa
+bip: 352
+kind: stance
+stance: ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bips/pull/1616
+  title: "BIP-352: use own ripemd160 for reference implementation"
+statement: jonatack approved the change making the BIP 352 reference
+  implementation use its own ripemd160 module. He checked that it matches
+  Bitcoin Core's test framework version and that the test vectors still run as
+  before.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1616#pullrequestreview-2149637802
+  type: github
+  title: "BIP-352: use own ripemd160 for reference implementation"
+  date: 2024-06-29
+  retrieved: 2026-11-06
+  quote: >-
+    ACK
+
+
+    `bip-0352/ripemd160.py` matches
+    `bitcoin/test/functional/test/framework/crypto/ripemd160.py` and
+    `./reference.py send_and_receive_test_vectors.json` runs as before.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null
