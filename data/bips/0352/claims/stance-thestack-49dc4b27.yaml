@@ -1,0 +1,27 @@
+id: stance-thestack-49dc4b27
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2087
+  title: "BIP-352: vendor secp256k1lab and use it for reference implementation"
+statement: theStack, after a further self-review, considers ready for merge
+  their bitcoin/bips pull request that vendors secp256k1lab and uses it for the
+  BIP-352 reference implementation.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.1.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2087#issuecomment-4012047699
+  type: github
+  title: "BIP-352: vendor secp256k1lab and use it for reference implementation"
+  date: 2026-03-06
+  retrieved: 2026-11-06
+  quote: Took another look today, and I consider it ready for merge.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

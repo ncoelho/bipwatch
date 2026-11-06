@@ -1,0 +1,30 @@
+id: stance-josibake-bb62f0c9
+bip: 352
+kind: stance
+stance: nack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1916
+  title: "BIP352: fix byte unpacking and avoid mutable default argument"
+statement: josibake opposes this PR changing BIP 352's reference Python code
+  (byte unpacking and mutable default argument), because altering reference and
+  test-vector code can alarm downstream users and the existing code is correct
+  enough for readability against the spec.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/1916#issuecomment-3244713151
+  type: github
+  title: "BIP352: fix byte unpacking and avoid mutable default argument"
+  date: 2025-09-02
+  retrieved: 2026-11-06
+  quote: Its a NACK from me on this PR only because changing reference code and
+    code related to the test vectors can (rightly) raise a lot of alarms for
+    downstream projects using these test vectors.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

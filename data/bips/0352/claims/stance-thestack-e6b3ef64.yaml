@@ -1,0 +1,27 @@
+id: stance-thestack-e6b3ef64
+bip: 352
+kind: stance
+stance: conditional
+condition: A suggested corner-case fix in the silent payments scanning wrapper is applied.
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bitcoin/pull/35301
+  title: "Silent Payments: Implement bip352 (take 2)"
+statement: theStack considers the BIP 352 implementation pull request good,
+  provided a corner-case fix in the silent payments scanning wrapper is made.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35301#pullrequestreview-4921671910
+  type: github
+  title: "Silent Payments: Implement bip352 (take 2)"
+  date: 2026-08-12
+  retrieved: 2026-11-06
+  quote: LGTM, modulo one suggested corner-case fix in the SP scanning wrapper
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

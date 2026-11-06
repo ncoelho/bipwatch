@@ -1,0 +1,30 @@
+id: stance-thestack-ced2b19a
+bip: 352
+kind: stance
+stance: nack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1707
+  title: "BIP352: Add support for Pay-to-Anchor (P2A) in get_pubkey_from_input"
+statement: theStack argued against the proposed change adding Pay-to-Anchor
+  (P2A) handling to get_pubkey_from_input in BIP 352's reference code. P2A
+  outputs intentionally contain no keys, so the function already returns an
+  empty key and the explicit handling would be a no-op.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1707#pullrequestreview-2488844836
+  type: github
+  title: "BIP352: Add support for Pay-to-Anchor (P2A) in get_pubkey_from_input"
+  date: 2024-12-09
+  retrieved: 2026-11-06
+  quote: I think there is no gain in handling this case explicitly, as we'd end up
+    in the "nothing matched" (`return ECPubKey()`) case anyway, so it would be a
+    no-op.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

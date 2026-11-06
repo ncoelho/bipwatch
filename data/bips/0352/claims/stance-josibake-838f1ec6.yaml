@@ -1,0 +1,28 @@
+id: stance-josibake-838f1ec6
+bip: 352
+kind: stance
+stance: approach-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1458
+  title: "BIP 352: Silent Payments"
+statement: josibake supports amending BIP 352 to hash only one outpoint, using
+  RubenSomsen's proposed `hash(outpoint || A)·A` construction. He sees no issues
+  with it and says it addresses the light-client size concern of the alternative
+  proposal.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1416760553
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-12-06
+  retrieved: 2026-11-06
+  quote: I don't see any issues with your proposal of `hash(outpoint || A)·A`.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

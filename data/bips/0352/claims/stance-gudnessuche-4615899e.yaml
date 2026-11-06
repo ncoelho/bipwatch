@@ -1,0 +1,24 @@
+id: stance-gudnessuche-4615899e
+bip: 352
+kind: stance
+stance: ack
+scope: proposal
+statement: Gudnessuche considers BIP 352 sufficient and its cryptography sound.
+  They note that several wallets (CakeWallet, DanaWallet, SeedSigner, Bitbox02)
+  already ship it in production.
+subject:
+  name: Gudnessuche
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1737#issuecomment-2588072275
+  type: github
+  title: Update BIP-352 status to Final
+  date: 2025-01-13
+  retrieved: 2026-11-06
+  quote: The cryptography Josie and Ruben put out is sound!!!!!!!!
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

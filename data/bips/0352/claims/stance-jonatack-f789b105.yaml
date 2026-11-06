@@ -1,0 +1,29 @@
+id: stance-jonatack-f789b105
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2279
+  title: "bip-0352: do not require the optional expected argument"
+statement: jonatack approved a change to BIP 352's reference.py that stops
+  requiring the optional expected argument. He called it a tightly scoped
+  robustness fix that makes the reference code more usable outside its own test
+  harness.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2279#pullrequestreview-5274297728
+  type: github
+  title: "bip-0352: do not require the optional expected argument"
+  date: 2026-09-22
+  retrieved: 2026-11-06
+  quote: ACK, tightly scoped robustness fix that makes reference.py more usable
+    outside its own test harness.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

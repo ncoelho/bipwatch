@@ -1,0 +1,26 @@
+id: stance-ruben-somsen-95585dd7
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1908
+  title: "BIP352: add warning against omitting outputs"
+statement: RubenSomsen approved a pull request adding a warning to BIP 352
+  against omitting outputs.
+subject:
+  name: Ruben Somsen
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/1908#issuecomment-3151421751
+  type: github
+  title: "BIP352: add warning against omitting outputs"
+  date: 2025-08-04
+  retrieved: 2026-11-06
+  quote: ACK
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

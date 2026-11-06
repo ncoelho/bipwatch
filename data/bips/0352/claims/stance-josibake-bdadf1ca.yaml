@@ -1,0 +1,33 @@
+id: stance-josibake-bdadf1ca
+bip: 352
+kind: stance
+stance: conditional
+condition: The PR should be a minimal, text-only clarification that groups one
+  B_m entry per output to be created and applies the K_max limit to those
+  entries, rather than a substantive fix.
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2153
+  title: "bip352: clarify/fix specification to disallow sender to create outputs
+    the receiver can't find"
+statement: josibake, the BIP 352 author, agrees the grouping and K_max text in
+  the sender algorithm is ambiguous and worth clarifying. He thinks the PR's
+  claims are overblown and proposes his own minimal wording instead.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2153#issuecomment-4717075507
+  type: github
+  title: "bip352: clarify/fix specification to disallow sender to create outputs
+    the receiver can't find"
+  date: 2026-06-16
+  retrieved: 2026-11-06
+  quote: I do think the claims in the PR are a bit overblown, but will agree there
+    is some ambiguity in the text.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

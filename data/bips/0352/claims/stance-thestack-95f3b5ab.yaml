@@ -1,0 +1,27 @@
+id: stance-thestack-95f3b5ab
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2337
+  title: "BIP352: add taproot key-path spend with annex vector"
+statement: theStack approved a pull request adding a BIP 352 test vector for a
+  taproot key-path spend with an annex. This is review of that change, not a
+  position on Silent Payments as a whole.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.1.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2337#pullrequestreview-5650000396
+  type: github
+  title: "BIP352: add taproot key-path spend with annex vector"
+  date: 2026-10-26
+  retrieved: 2026-11-06
+  quote: ACK b19b13964424bc59a6add5fe51ba7ada671f904b
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

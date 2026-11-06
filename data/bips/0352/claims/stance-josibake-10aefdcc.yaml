@@ -1,0 +1,25 @@
+id: stance-josibake-10aefdcc
+bip: 352
+kind: stance
+stance: ack
+scope: proposal
+statement: josibake, a BIP 352 author, says that after a final round of review
+  with RubenSomsen they consider the Silent Payments protocol final, and asks
+  that the BIP be merged.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#issuecomment-1910303244
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2024-01-25
+  retrieved: 2026-11-06
+  quote: "@RubenSomsen and I have also done a final round of review and are
+    considering the protocol final."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

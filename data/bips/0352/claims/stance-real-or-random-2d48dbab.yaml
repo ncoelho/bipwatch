@@ -1,0 +1,27 @@
+id: stance-real-or-random-2d48dbab
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2106
+  title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
+statement: real-or-random approved the text changes of the PR introducing a
+  per-group recipient limit K_max in BIP 352, while asking others to
+  double-check the chosen number.
+subject:
+  name: real-or-random
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2106#issuecomment-3974757859
+  type: github
+  title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
+  date: 2026-02-27
+  retrieved: 2026-11-06
+  quote: LGTM (I only reviewed the text changes)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

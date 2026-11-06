@@ -1,0 +1,30 @@
+id: stance-yudis-bit-22cf5ea3
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2330
+  title: "BIP-352: add test vectors for skipped inputs and label edge cases"
+statement: Yudis-bit approved the pull request adding BIP-352 test vectors for
+  skipped inputs and label edge cases, after testing that all 34 vectors pass
+  against reference.py, and agreed with removing three consensus-invalid cases.
+subject:
+  name: Yudis-bit
+  type: person
+applies_to_version: 1.1.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2330#pullrequestreview-5793934726
+  type: github
+  title: "BIP-352: add test vectors for skipped inputs and label edge cases"
+  date: 2026-11-06
+  retrieved: 2026-11-06
+  quote: |-
+    ACK d85c71c574d263eaf2c5c0ecd0f8a3ab07985243
+
+    Tested against reference.py and all 34 vectors pass.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

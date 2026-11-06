@@ -1,0 +1,25 @@
+id: stance-brandon-black-8e8a4cf0
+bip: 352
+kind: stance
+stance: concept-ack
+scope: change
+statement: Brandon Black supports the proposed amendment to add an expiration
+  time to BIP 352 silent payment addresses, arguing that non-expiring addresses
+  are a significant risk to users. He suggests a variable-length compact
+  encoding for the expiration.
+subject:
+  name: Brandon Black
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/ZM17RTXV7M5tVt6N@console/
+  type: mailing-list
+  title: BIP-352 Silent Payments addresses should have an expiration time
+  date: 2023-08-04
+  retrieved: 2026-11-06
+  quote: I agree. Non-expiring addresses are a significant risk to bitcoin users.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

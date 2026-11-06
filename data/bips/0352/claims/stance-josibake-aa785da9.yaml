@@ -1,0 +1,29 @@
+id: stance-josibake-aa785da9
+bip: 352
+kind: stance
+stance: needs-research
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1458
+  title: "BIP 352: Silent Payments"
+statement: josibake, the BIP author, leans toward benma's suggested change that
+  would avoid sorting outpoints before hashing, calling it less brittle. He
+  wants to benchmark its effect on full-node scanning time before deciding.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1342972004
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-10-02
+  retrieved: 2026-11-06
+  quote: I'm leaning toward your suggestion (assuming there are no issues
+    cryptographically). Not needing a sort feels less brittle than needing to
+    worry about having the outpoints in the right order before hashing.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

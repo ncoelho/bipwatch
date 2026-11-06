@@ -1,0 +1,32 @@
+id: stance-josibake-263c49a6
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1620
+  title: "BIP-352: handle invalid privkey / pubkey sums for sending / scanning,
+    add changelog"
+statement: josibake approved the BIP-352 pull request that specifies handling of
+  invalid private/public key sums during sending and scanning and adds a
+  changelog, saying the test cases look good.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1620#pullrequestreview-2133754731
+  type: github
+  title: "BIP-352: handle invalid privkey / pubkey sums for sending / scanning,
+    add changelog"
+  date: 2024-06-22
+  retrieved: 2026-11-06
+  quote: |-
+    ACK https://github.com/bitcoin/bips/pull/1620/commits/4c0c3d7d77113507e32187dac662023e85f9c0d8
+
+    Test cases look good
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: stance-josibake-f8b7b142
+bip: 352
+kind: stance
+stance: nack
+scope: change
+statement: josibake opposes the proposed amendment to add expiration times to
+  BIP352 silent payment addresses. He considers expiration a separate, general
+  problem outside BIP352's scope, and argues that it weakens privacy, cannot be
+  enforced, and can cause recipients to miss payments.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/Xypmhu6s58gWgRNoFzBDhbtvcEt8DomdJcLe1RIbesEKOx1MO5TBHTLDENqedTbN9DPZT5MNSpA-xMiiSDDb-hVnx-YgIAqCtrGHoCrqxsE=@protonmail.com/
+  type: mailing-list
+  title: BIP-352 Silent Payments addresses should have an expiration time
+  date: 2023-08-06
+  retrieved: 2026-11-06
+  quote: In summary, expiration dates are a separate problem, outside the scope of
+    what BIP352 is trying to address.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

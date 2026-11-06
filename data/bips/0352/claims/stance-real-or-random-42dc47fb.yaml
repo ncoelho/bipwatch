@@ -1,0 +1,27 @@
+id: stance-real-or-random-42dc47fb
+bip: 352
+kind: stance
+stance: concept-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1458
+  title: "BIP 352: Silent Payments"
+statement: real-or-random supports dropping the sorting of outpoints from the
+  BIP 352 input hashing. Absent a concrete hardware-wallet concern, they think
+  the sorting adds too much complexity for an unclear benefit.
+subject:
+  name: real-or-random
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1355127382
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-10-11
+  retrieved: 2026-11-06
+  quote: I agree that a simple and clean solution is just to drop the sorting.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

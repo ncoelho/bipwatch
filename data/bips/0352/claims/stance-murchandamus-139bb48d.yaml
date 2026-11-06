@@ -1,0 +1,27 @@
+id: stance-murchandamus-139bb48d
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2134
+  title: "BIP-352: warn against stopping scan due to wallet policy filtering"
+statement: murchandamus approved the BIP 352 change that adds a warning against
+  stopping the scan because of wallet policy filtering, while deferring the
+  merge until theStack has reviewed it.
+subject:
+  name: murchandamus
+  type: person
+applies_to_version: 1.1.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2134#pullrequestreview-4069304448
+  type: github
+  title: "BIP-352: warn against stopping scan due to wallet policy filtering"
+  date: 2026-04-07
+  retrieved: 2026-11-06
+  quote: LGTM, waiting for @theStack to review, though.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

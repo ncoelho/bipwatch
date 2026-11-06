@@ -1,0 +1,27 @@
+id: stance-peter-todd-50353b55
+bip: 352
+kind: stance
+stance: concept-ack
+scope: change
+statement: Peter Todd argues BIP 352 should be amended so Silent Payment
+  addresses carry an expiration date, for example a 2–3 byte field counting days
+  since an epoch. His reason is that these addresses are meant to be reused, so
+  funds sent to an address from a lost or compromised wallet can be lost
+  forever.
+subject:
+  name: Peter Todd
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/ZM03twumu88V2NFH@petertodd.org/
+  type: mailing-list
+  title: BIP-352 Silent Payments addresses should have an expiration time
+  date: 2023-08-04
+  retrieved: 2026-11-06
+  quote: Failing to make Silent Payment addresses eventually expire in a
+    reasonable amount of time is thus a particularly harmful mistake.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

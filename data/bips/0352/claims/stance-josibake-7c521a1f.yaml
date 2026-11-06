@@ -1,0 +1,30 @@
+id: stance-josibake-7c521a1f
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1458
+  title: "BIP 352: Silent Payments"
+statement: josibake supports switching silent payment addresses from x-only to
+  33-byte compressed public keys. Their test cases showed that tracking parity
+  between sender and receiver, especially with labels, is hard, and the extra
+  byte keeps things simple and saves computation when scanning. They updated the
+  specification accordingly.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1243572575
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-27
+  retrieved: 2026-11-06
+  quote: I think the extra byte is definitely worth adding to keep things simple
+    and save on computation when scanning.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

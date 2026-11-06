@@ -1,0 +1,32 @@
+id: stance-ruben-somsen-1da75b93
+bip: 352
+kind: stance
+stance: approach-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2106
+  title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
+statement: RubenSomsen supports the proposed change to BIP 352 that adds a
+  per-group recipient limit K_max (2323). He considers the concern that about 23
+  users could be targeted per block to be minor, and prefers limiting K because
+  it keeps constraints on silent payment transactions to a minimum and so avoids
+  incompatibilities with other protocols.
+subject:
+  name: Ruben Somsen
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2106#issuecomment-3953690363
+  type: github
+  title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
+  date: 2026-02-24
+  retrieved: 2026-11-06
+  quote: The reasons why we'd prefer limiting K has already been mentioned, but my
+    generalized take is that we want to minimize the number of constraints we
+    put on SP transactions to ensure no incompatibilities occur with other
+    protocols (including future ones).
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

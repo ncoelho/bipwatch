@@ -1,0 +1,25 @@
+id: stance-erik-aronesty-0dd2db5f
+bip: 352
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Erik Aronesty favors the silent payments address format using
+  separate spend and scan keys (00 || X_spend || X_scan) along with mandatory
+  address reuse prevention, arguing it is better to start strict since loosening
+  later is easier than tightening.
+subject:
+  name: Erik Aronesty
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAJowKgJmBfa9Vtq25rZKbf4jt_Rev80sakAMpxMKAiX_Q-Xfig@mail.gmail.com/
+  type: mailing-list
+  title: Silent Payments – Non-interactive private payments with no on-chain overhead
+  date: 2022-05-25
+  retrieved: 2026-11-06
+  quote: i like the  00 || X_spend || X_scan + mandate address reuse prevention.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

@@ -1,0 +1,29 @@
+id: stance-murchandamus-9c31ffa0
+bip: 352
+kind: stance
+stance: nack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1737
+  title: Update BIP-352 status to Final
+statement: murchandamus opposes the change moving BIP 352 to Final status,
+  arguing it is premature because adoption is limited, there is only one
+  implementation, and the authors' own implementation is still in progress.
+subject:
+  name: murchandamus
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1737#issuecomment-2588035258
+  type: github
+  title: Update BIP-352 status to Final
+  date: 2025-01-13
+  retrieved: 2026-11-06
+  quote: BIP 352 doesn’t seem widely adopted yet, afaia there is only a single
+    implementation, and especially the implementation the BIP’s authors are
+    contributing to is still in progress, so moving it to final seems premature.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

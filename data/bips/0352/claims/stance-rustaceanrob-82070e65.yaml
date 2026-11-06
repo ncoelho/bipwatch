@@ -1,0 +1,29 @@
+id: stance-rustaceanrob-82070e65
+bip: 352
+kind: stance
+stance: approach-ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bitcoin/pull/35301
+  title: "Silent Payments: Implement bip352 (take 2)"
+statement: rustaceanrob considers the API of the Bitcoin Core BIP 352
+  implementation PR very solid. He suggests narrowing the PR to adding the
+  module and passing the BIP test vectors, and deferring integration choices
+  such as a CTxDestination variant to the send PR.
+subject:
+  name: rustaceanrob
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35301#pullrequestreview-5152785997
+  type: github
+  title: "Silent Payments: Implement bip352 (take 2)"
+  date: 2026-09-09
+  retrieved: 2026-11-06
+  quote: I think the current API is very solid and the next stage should determine
+    how it is integrated.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null

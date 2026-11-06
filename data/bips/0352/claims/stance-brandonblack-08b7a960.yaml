@@ -1,0 +1,24 @@
+id: stance-brandonblack-08b7a960
+bip: 352
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: brandonblack welcomed the Silent Payments proposal advancing and sees
+  it as a powerful way of transacting privately, suggesting minor changes could
+  make it compatible with MuSig2 Taproot keypaths.
+subject:
+  name: Brandon Black
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#pullrequestreview-1466163601
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-06
+  retrieved: 2026-11-06
+  quote: Glad to see this proposal advancing!
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-06
+  reviewed_by: null
