@@ -1,0 +1,146 @@
+---
+// Who has taken a position, and on what (SPEC 2, consensus signaling module,
+// first version: sourced public statements only). Never a tally: every
+// position is shown with who said it, the quote, and the spec version it was
+// made against. Review of one amendment or of an implementation is kept apart
+// from positions on the proposal.
+import type { BipBundle, Claim } from '@bipwatch/data';
+import Source from './Source.astro';
+import { STANCE_LABEL, isPending, isStale, positionsOnChanges, positionsOnProposal, versionLabel } from '../lib/view.ts';
+
+interface Props { bundle: BipBundle; }
+const { bundle } = Astro.props;
+const current = bundle.bip.version;
+const stances = bundle.claims.filter((c) => c.kind === 'stance');
+const proposal = positionsOnProposal(stances);
+const changes = positionsOnChanges(stances, 'change');
+const impls = positionsOnChanges(stances, 'implementation');
+const allPending = stances.length > 0 && stances.every(isPending);
+const people = new Set(stances.map((c) => c.subject!.name)).size;
+const label = (c: Claim) => STANCE_LABEL[c.stance!];
+---
+{stances.length > 0 && (
+  <section id="positions">
+    <div class="sec-head">
+      <h2>Who has taken a position</h2>
+      <p class="muted">
+        {people} people in public discussion, each position with its quote and source and pinned to the spec version it was made against.
+        This is a record of who has spoken, not a vote; who has not spoken is not shown yet.
+        {allPending && <span class="pill warn">All {stances.length} pending review</span>}
+      </p>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <h3>On the proposal</h3>
+        <p class="muted">Positions on BIP {bundle.bip.number} as a whole or its approach. Latest per person.</p>
+      </div>
+      <ul class="pos">
+        {proposal.map(({ latest: c, earlier }) => (
+          <li id={c.id}>
+            <div class="pos-top">
+              <b>{c.subject!.name}</b>
+              <span class="st">{label(c)}</span>
+              <span class="when mono tnum">{c.source.date}</span>
+              <span class="ver">{versionLabel(c.applies_to_version)}</span>
+              {isStale(c.applies_to_version, current) && <span class="flag" title={`The spec is now at v${current}`}>spec changed since</span>}
+            </div>
+            <p>{c.statement}</p>
+            {c.condition && <p class="cond"><span>Condition</span> {c.condition}</p>}
+            <Source claim={c} />
+            {earlier.length > 0 && (
+              <p class="earlier">Earlier: {earlier.map((e, i) => <>{i > 0 && ', '}<a href={e.source.url} rel="noopener">{label(e)}</a> <span class="mono tnum">{e.source.date}</span></>)}</p>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {[
+      { title: 'On changes to the spec', note: 'Review of single amendments. An ACK here approves that change, not the BIP.', groups: changes },
+      { title: 'On implementations', note: 'Review of code that implements the BIP, not of the spec.', groups: impls },
+    ].filter((b) => b.groups.length).map((b) => (
+      <div class="block">
+        <div class="block-head">
+          <h3>{b.title}</h3>
+          <p class="muted">{b.note} {b.groups.length} {b.groups.length === 1 ? 'change' : 'changes'}, newest first.</p>
+        </div>
+        <ul class="groups">
+          {b.groups.map((g) => (
+            <li>
+              <details>
+                <summary>
+                  <span class="g-title">{g.title}</span>
+                  <span class="g-meta mono tnum">{g.last} · {g.stances.length} {g.stances.length === 1 ? 'position' : 'positions'}</span>
+                  <span class="chips">
+                    {g.stances.map((c) => <span class="chip">{c.subject!.name} <span class="st">{label(c)}</span></span>)}
+                  </span>
+                </summary>
+                <p class="g-link"><a href={g.url} rel="noopener">{g.linked ? 'Pull request' : 'Discussion'}: {g.url.replace(/^https:\/\//, '')}</a></p>
+                <ul class="pos inner">
+                  {g.stances.map((c) => (
+                    <li id={c.id}>
+                      <div class="pos-top">
+                        <b>{c.subject!.name}</b>
+                        <span class="st">{label(c)}</span>
+                        <span class="when mono tnum">{c.source.date}</span>
+                        <span class="ver">{versionLabel(c.applies_to_version)}</span>
+                      </div>
+                      <p>{c.statement}</p>
+                      {c.condition && <p class="cond"><span>Condition</span> {c.condition}</p>}
+                      <Source claim={c} />
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </section>
+)}
+
+<style>
+  .block { display: flex; flex-direction: column; gap: 10px; }
+  .block-head { display: flex; flex-direction: column; gap: 2px; }
+  .block-head h3 { font-size: 16px; }
+  .block-head p { font-size: 13px; }
+
+  .pos { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; max-width: 760px; }
+  .pos > li { padding: 14px 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; scroll-margin-top: 24px; min-width: 0; }
+  .pos > li:first-child { padding-top: 4px; }
+  .pos > li:target { background: var(--accent-soft); padding-inline: 12px; border-radius: 8px; }
+  .pos p { font-size: 14px; }
+  .pos-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-size: 14px; }
+  .st {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em; white-space: nowrap;
+    padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line-strong); color: var(--fg);
+  }
+  .when, .ver { font-size: 12px; color: var(--faint); }
+  .flag { font-family: var(--mono); font-size: 10.5px; padding: 1px 6px; border-radius: 4px; border: 1px solid var(--warn); color: var(--warn); }
+  .cond { font-size: 13px !important; color: var(--muted); }
+  .cond span { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--faint); margin-right: 6px; }
+  .earlier { font-size: 12px !important; color: var(--faint); }
+  .earlier a { color: var(--muted); }
+
+  .groups { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid var(--line); max-width: 760px; }
+  .groups > li { border-bottom: 1px solid var(--line); min-width: 0; }
+  summary { cursor: pointer; padding: 12px 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: '▸'; position: absolute; margin-left: -16px; color: var(--faint); font-size: 12px; }
+  details[open] > summary::before { content: '▾'; }
+  details { position: relative; padding-left: 16px; }
+  .g-title { font-size: 14px; font-weight: 500; min-width: 0; overflow-wrap: anywhere; }
+  .g-meta { font-size: 12px; color: var(--faint); white-space: nowrap; }
+  .chips { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font-size: 12px; color: var(--muted); display: inline-flex; align-items: baseline; gap: 4px; }
+  .chip .st { font-size: 10.5px; color: var(--muted); }
+  .g-link { font-size: 12px; margin: 0 0 4px; overflow-wrap: anywhere; }
+  .g-link a { color: var(--muted); }
+  .inner > li:last-child { border-bottom: none; }
+  @media (max-width: 520px) {
+    summary { grid-template-columns: 1fr; }
+    .g-meta { white-space: normal; }
+  }
+</style>

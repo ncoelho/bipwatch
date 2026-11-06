@@ -5,6 +5,7 @@
 import type { BipBundle } from '@bipwatch/data';
 import { NEED_DIMENSIONS } from '@bipwatch/data';
 import Dots from '../components/Dots.astro';
+import Positions from '../components/Positions.astro';
 import Source from '../components/Source.astro';
 import {
   CATEGORY_LABEL, DIMENSION_LABEL, STATE_LABEL, STATE_ORDER,
@@ -105,6 +106,8 @@ const bipLink = (n: number) => (known.has(n) ? bipHref(n) : `https://github.com/
       </table>
     </div>
   </section>
+
+  <Positions bundle={bundle} />
 
   {problems.length > 0 && (
     <section id="problem">

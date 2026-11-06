@@ -91,6 +91,7 @@ For BIPs in `needs-consensus`. Design decisions already made:
 - Show coverage ("4 of the 10 largest pools have said anything"), not support ratios.
 - Economic node identity and weight: published reserve addresses with BIP-322 signatures are the strongest mechanism. Self-reported volumes and node counts are unreliable; exclude them or show ranges.
 - v1 ships only sourced statements and signed attestations.
+- **First version built (2026-11-06)**, `site/src/components/Positions.astro`, on the `complete` template as "Who has taken a position". It shows stance claims only (sourced statements; no signed attestations, chain data or stakeholder groups yet), in three blocks: positions on the proposal (latest per person, earlier ones listed under it), on changes to the spec, and on implementations (grouped by pull request or discussion thread, collapsed, newest first). No counts per stance and no colours that read as a score. Each position shows its quote, source, review state and the spec version it was made against; proposal positions get a "spec changed since" flag when the spec's MAJOR or MINOR version moved after them (BIP 352's changelog makes PATCH non-material). Not yet: stakeholder groups, coverage ("4 of the 10 largest pools"), who has not spoken, objections with status alongside.
 
 ---
 

@@ -35,13 +35,13 @@ site/  static pages + JSON API
 - Tracking a new BIP uses its whole history: mentions are re-tagged when aliases change, its full commit history is collected, and extraction starts from the beginning of the archive for it.
 
 **In progress**
-- BIP 352 is the one tracked BIP, with 18 hand-written claims and a needs assessment, all pending review.
-- LLM extraction (SPEC 6.2): the `stance` task (v2) is running over the ~1,580 archived documents about BIP 352. Each stance is scoped to the proposal, one change to its text, or an implementation, so an ACK of an amendment is not shown as support for the BIP. Its claims will land as files for review; the pull-request bot is not built yet.
+- BIP 352 is the one tracked BIP, with 18 hand-written claims, 106 extracted stances and a needs assessment, all pending review.
+- LLM extraction (SPEC 6.2): the `stance` task (v2) ran over the ~1,580 archived documents about BIP 352 and its 106 stances were merged (#3), all pending review. Each is scoped to the proposal, one change to its text, or an implementation, so an ACK of an amendment is not shown as support for the BIP. The BIP 352 page shows them under "Who has taken a position". The pull-request bot that opens such PRs on its own is not built yet.
 
 **Not started**
 - Deployment (Cloudflare Pages, bipwatch.com). The site builds on every push but is not published.
 - The other initial BIPs (353, 54, 448, and two still to choose).
-- Stage templates other than `complete`, and the consensus signaling module that will show stances.
+- Stage templates other than `complete`, and the rest of the consensus signaling module (stakeholder groups, coverage, signed attestations).
 - Chain and network series for consensus BIPs; signed contribution intake.
 
 ## Repo

@@ -56,3 +56,78 @@ export const API_VERSION = 1;
 export function toApi(b: BipBundle) {
   return { api_version: API_VERSION, bip: b.bip, needs: b.needs, claims: b.claims };
 }
+
+// ---- stances (SPEC 2, consensus signaling module) ------------------------------
+
+export const STANCE_LABEL: Record<NonNullable<Claim['stance']>, string> = {
+  'concept-ack': 'Concept ACK',
+  'approach-ack': 'Approach ACK',
+  ack: 'ACK',
+  nack: 'NACK',
+  conditional: 'Conditional',
+  'needs-research': 'Needs research',
+};
+
+const minor = (v: string) => v.split('.').slice(0, 2).map(Number);
+
+/**
+ * A position may be stale when the spec changed materially after it: a MAJOR
+ * or MINOR bump (BIP 352's changelog: MINOR changes an algorithm's inputs or
+ * outputs; PATCH is clarifications and test vectors). 0.0.0 means the position
+ * predates any versioned spec.
+ */
+export function isStale(madeAgainst: string | undefined, current: string | undefined): boolean {
+  if (!madeAgainst || !current) return false;
+  const [a1, a2] = minor(madeAgainst);
+  const [c1, c2] = minor(current);
+  return a1 < c1 || (a1 === c1 && a2 < c2);
+}
+
+export const versionLabel = (v: string | undefined) =>
+  !v ? 'version unknown' : v === '0.0.0' ? 'before the spec was versioned' : `spec v${v}`;
+
+const byDateDesc = (a: Claim, b: Claim) => (b.source.date ?? '').localeCompare(a.source.date ?? '');
+
+/** Proposal-scoped stances: each person's latest, with their earlier ones. */
+export function positionsOnProposal(claims: Claim[]): { latest: Claim; earlier: Claim[] }[] {
+  const byPerson = new Map<string, Claim[]>();
+  for (const c of claims.filter((c) => c.kind === 'stance' && c.scope === 'proposal')) {
+    const k = c.subject!.name;
+    byPerson.set(k, [...(byPerson.get(k) ?? []), c]);
+  }
+  return [...byPerson.values()]
+    .map((cs) => cs.sort(byDateDesc))
+    .map(([latest, ...earlier]) => ({ latest, earlier }))
+    .sort((a, b) => byDateDesc(a.latest, b.latest));
+}
+
+/**
+ * Change- or implementation-scoped stances grouped by what they are about:
+ * the linked pull request, or (unlinked, e.g. an amendment argued on the
+ * list) the discussion thread they came from. Newest activity first.
+ */
+export function positionsOnChanges(
+  claims: Claim[],
+  scope: 'change' | 'implementation',
+): { key: string; title: string; url: string; linked: boolean; last: string; stances: Claim[] }[] {
+  const groups = new Map<string, Claim[]>();
+  for (const c of claims.filter((c) => c.kind === 'stance' && c.scope === scope)) {
+    const key = c.change?.url ?? `thread:${c.source.title ?? c.source.url}`;
+    groups.set(key, [...(groups.get(key) ?? []), c]);
+  }
+  return [...groups.entries()]
+    .map(([key, stances]) => {
+      stances.sort((a, b) => (a.source.date ?? '').localeCompare(b.source.date ?? ''));
+      const first = stances[0];
+      const linked = !!first.change;
+      return {
+        key,
+        linked,
+        title: first.change?.title ?? first.source.title ?? 'Discussion',
+        url: first.change?.url ?? first.source.url,
+        last: stances.at(-1)!.source.date ?? '',
+        stances,
+      };
+    })
+    .sort((a, b) => b.last.localeCompare(a.last));
+}
