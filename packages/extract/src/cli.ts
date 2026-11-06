@@ -83,62 +83,70 @@ for (const bip of wanted) {
   bips.set(bip.number, { bip, versionAt: (d) => versionAt(timeline, d) });
 }
 
-const cursor = await lastCursor(pool, task.id, task.version);
-const runId = await startRun(pool, { task: task.id, version: task.version, model: task.model, dryRun, cursor });
 const today = new Date().toISOString().slice(0, 10);
 const validator = makeValidator(bundles.flatMap((b) => b.claims), dataDir);
-console.log(
-  `${task.id} v${task.version} · ${task.model} · BIPs ${wanted.map((b) => b.number).join(', ')} · after document ${cursor} · limit ${limit} · budget ${budget} tokens${dryRun ? ' · dry run' : ''}`,
-);
+let failed = false;
 
-try {
-  const summary = await runTask({
-    task,
-    docs: selectDocs(pool, {
-      bips: [...bips.keys()],
-      // A document list is a fixed sample: ignore the cursor.
-      afterId: ids.length ? 0 : cursor,
-      limit: ids.length ? ids.length : limit,
-      sources: values.source,
-      ids,
-    }),
-    model,
-    bips,
-    validator,
-    today,
-    budgetTokens: budget,
-    onDoc: async (r) => {
-      await logDoc(pool, runId, r);
-      for (const c of r.claims) {
-        const where = dryRun ? '(dry run)' : writeClaim(dataDir, c).replace(`${dataDir}/`, 'data/');
-        console.log(`+ ${c.kind} ${c.stance ?? ''}${c.scope ? ` (${c.scope})` : ''} BIP ${c.bip} · ${c.subject?.name} · ${where}`);
-        if (dryRun) {
-          console.log(`    statement: ${c.statement}`);
-          if (c.condition) console.log(`    condition: ${c.condition}`);
-          console.log(`    quote:     ${JSON.stringify(c.source.quote)}`);
-          console.log(`    source:    ${c.source.url} (${c.source.date ?? 'no date'}, spec ${c.applies_to_version})`);
-          if (c.change) console.log(`    change:    ${c.change.url}${c.change.title ? ` (${c.change.title})` : ''}`);
-        }
-      }
-      if (dryRun) {
-        for (const rej of r.rejected) {
-          console.log(`- rejected (attempt ${rej.attempt}) document ${r.document_id}: ${rej.errors.join('; ')}`);
-          if (rej.claim?.source?.quote) console.log(`    quote:     ${JSON.stringify(rej.claim.source.quote)}`);
-        }
-      }
-      if (r.outcome !== 'claims' && r.outcome !== 'none') {
-        console.log(`  document ${r.document_id}: ${r.outcome}${r.rejected.length ? ` (${r.rejected.at(-1)!.errors.join('; ')})` : ''}`);
-      }
-    },
-  });
-  await finishRun(pool, runId, dryRun ? { ...summary, last_document_id: cursor } : summary, cursor);
+// One run per BIP, each from that BIP's own cursor, so a newly tracked BIP
+// starts from the beginning of the archive. --limit and --budget apply to
+// each BIP's run.
+for (const ctx of bips.values()) {
+  const bip = ctx.bip.number;
+  const cursor = await lastCursor(pool, task.id, task.version, bip);
+  const runId = await startRun(pool, { task: task.id, version: task.version, model: task.model, dryRun, cursor, bip });
   console.log(
-    `Done (${summary.stopped_by}): ${summary.docs_seen} documents · ${summary.claims_written} claims · ${summary.usage.input_tokens} input + ${summary.usage.output_tokens} output tokens · run ${runId}`,
+    `${task.id} v${task.version} · ${task.model} · BIP ${bip} · after document ${cursor} · limit ${limit} · budget ${budget} tokens${dryRun ? ' · dry run' : ''}`,
   );
-} catch (err) {
-  await finishRun(pool, runId, null, cursor, (err as Error).stack ?? String(err));
-  console.error((err as Error).message);
-  process.exitCode = 1;
-} finally {
-  await pool.end();
+  try {
+    const summary = await runTask({
+      task,
+      docs: selectDocs(pool, {
+        bips: [bip],
+        // A document list is a fixed sample: ignore the cursor.
+        afterId: ids.length ? 0 : cursor,
+        limit: ids.length ? ids.length : limit,
+        sources: values.source,
+        ids,
+      }),
+      model,
+      bips: new Map([[bip, ctx]]),
+      validator,
+      today,
+      budgetTokens: budget,
+      onDoc: async (r) => {
+        await logDoc(pool, runId, r);
+        for (const c of r.claims) {
+          const where = dryRun ? '(dry run)' : writeClaim(dataDir, c).replace(`${dataDir}/`, 'data/');
+          console.log(`+ ${c.kind} ${c.stance ?? ''}${c.scope ? ` (${c.scope})` : ''} BIP ${c.bip} · ${c.subject?.name} · ${where}`);
+          if (dryRun) {
+            console.log(`    statement: ${c.statement}`);
+            if (c.condition) console.log(`    condition: ${c.condition}`);
+            console.log(`    quote:     ${JSON.stringify(c.source.quote)}`);
+            console.log(`    source:    ${c.source.url} (${c.source.date ?? 'no date'}, spec ${c.applies_to_version})`);
+            if (c.change) console.log(`    change:    ${c.change.url}${c.change.title ? ` (${c.change.title})` : ''}`);
+          }
+        }
+        if (dryRun) {
+          for (const rej of r.rejected) {
+            console.log(`- rejected (attempt ${rej.attempt}) document ${r.document_id}: ${rej.errors.join('; ')}`);
+            if (rej.claim?.source?.quote) console.log(`    quote:     ${JSON.stringify(rej.claim.source.quote)}`);
+          }
+        }
+        if (r.outcome !== 'claims' && r.outcome !== 'none') {
+          console.log(`  document ${r.document_id}: ${r.outcome}${r.rejected.length ? ` (${r.rejected.at(-1)!.errors.join('; ')})` : ''}`);
+        }
+      },
+    });
+    await finishRun(pool, runId, dryRun ? { ...summary, last_document_id: cursor } : summary, cursor);
+    console.log(
+      `Done (${summary.stopped_by}): ${summary.docs_seen} documents · ${summary.claims_written} claims · ${summary.usage.input_tokens} input + ${summary.usage.output_tokens} output tokens · run ${runId}`,
+    );
+  } catch (err) {
+    await finishRun(pool, runId, null, cursor, (err as Error).stack ?? String(err));
+    console.error((err as Error).message);
+    failed = true;
+    break;
+  }
 }
+await pool.end();
+process.exitCode = failed ? 1 : 0;

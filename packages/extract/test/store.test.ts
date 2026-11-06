@@ -85,25 +85,26 @@ describe.skipIf(!url)('extract store (Neon)', () => {
   });
 
   it('tracks runs and resumes after the last ok non-dry run', async () => {
-    expect(await lastCursor(pool, 'stance', 1)).toBe(0);
-    const dry = await startRun(pool, { task: 'stance', version: 1, model: 'm', dryRun: true, cursor: 0 });
+    expect(await lastCursor(pool, 'stance', 1, 352)).toBe(0);
+    const dry = await startRun(pool, { task: 'stance', version: 1, model: 'm', dryRun: true, cursor: 0, bip: 352 });
     await finishRun(pool, dry, { docs_seen: 2, claims_written: 1, usage: { input_tokens: 5, output_tokens: 1 }, stopped_by: 'done', last_document_id: 0 }, 0);
-    expect(await lastCursor(pool, 'stance', 1)).toBe(0);
+    expect(await lastCursor(pool, 'stance', 1, 352)).toBe(0);
 
-    const id = await startRun(pool, { task: 'stance', version: 1, model: 'm', dryRun: false, cursor: 0 });
+    const id = await startRun(pool, { task: 'stance', version: 1, model: 'm', dryRun: false, cursor: 0, bip: 352 });
     await logDoc(pool, id, {
       document_id: 1, outcome: 'claims', attempts: 1, claims: [claim], rejected: [],
       usage: { input_tokens: 5, output_tokens: 1 },
     });
     await finishRun(pool, id, { docs_seen: 1, claims_written: 1, usage: { input_tokens: 5, output_tokens: 1 }, stopped_by: 'budget', last_document_id: 1 }, 0);
-    expect(await lastCursor(pool, 'stance', 1)).toBe(1);
+    expect(await lastCursor(pool, 'stance', 1, 352)).toBe(1);
 
-    const failed = await startRun(pool, { task: 'stance', version: 1, model: 'm', dryRun: false, cursor: 1 });
+    const failed = await startRun(pool, { task: 'stance', version: 1, model: 'm', dryRun: false, cursor: 1, bip: 352 });
     await finishRun(pool, failed, null, 1, 'boom');
-    expect(await lastCursor(pool, 'stance', 1)).toBe(1);
+    expect(await lastCursor(pool, 'stance', 1, 352)).toBe(1);
 
-    // A new task version starts from the beginning.
-    expect(await lastCursor(pool, 'stance', 2)).toBe(0);
+    // A new task version, or another BIP, starts from the beginning.
+    expect(await lastCursor(pool, 'stance', 2, 352)).toBe(0);
+    expect(await lastCursor(pool, 'stance', 1, 54)).toBe(0);
 
     const { rows } = await pool.query(`SELECT outcome, claim_ids FROM extract_log WHERE run_id = $1`, [id]);
     expect(rows).toEqual([{ outcome: 'claims', claim_ids: [claim.id] }]);

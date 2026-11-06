@@ -1,0 +1,40 @@
+name: reindex-mentions
+
+# When a BIP becomes tracked or its aliases change, re-tag the whole archive
+# so the new mention rules apply to history, not only to new documents.
+# --if-changed compares a stored fingerprint of the rules and does nothing
+# (no archive read) when they are the same, e.g. after a header re-sync.
+
+on:
+  push:
+    branches: [main]
+    paths: ['data/bips/*/bip.yaml']
+  workflow_dispatch:
+
+concurrency:
+  group: reindex-mentions
+  cancel-in-progress: false
+
+jobs:
+  reindex:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Apply migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then echo "::warning::DATABASE_URL secret is not set; skipping"; exit 0; fi
+          npm run migrate
+      - name: Re-tag the archive if the mention rules changed
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then exit 0; fi
+          npm run reindex-mentions -- --if-changed

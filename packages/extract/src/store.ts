@@ -43,26 +43,28 @@ export async function* selectDocs(
 }
 
 /**
- * Where the next run of a task starts: the last ok, non-dry run's cursor for
- * this task version. A new version (new prompt or schema) starts over.
+ * Where the next run of a task for one BIP starts: the last ok, non-dry run's
+ * cursor for this task version and BIP. A new version (new prompt or schema)
+ * or a newly tracked BIP starts from the beginning of the archive.
  */
-export async function lastCursor(db: pg.Pool, task: string, version: number): Promise<number> {
+export async function lastCursor(db: pg.Pool, task: string, version: number, bip: number): Promise<number> {
   const { rows } = await db.query<{ cursor_after: string | null }>(
-    `SELECT cursor_after FROM extract_runs WHERE task = $1 AND task_version = $2 AND ok AND NOT dry_run
+    `SELECT cursor_after FROM extract_runs
+      WHERE task = $1 AND task_version = $2 AND bip = $3 AND ok AND NOT dry_run
       ORDER BY finished_at DESC LIMIT 1`,
-    [task, version],
+    [task, version, bip],
   );
   return Number(rows[0]?.cursor_after ?? 0);
 }
 
 export async function startRun(
   db: pg.Pool,
-  r: { task: string; version: number; model: string; dryRun: boolean; cursor: number },
+  r: { task: string; version: number; model: string; dryRun: boolean; cursor: number; bip: number },
 ): Promise<number> {
   const { rows } = await db.query<{ id: string }>(
-    `INSERT INTO extract_runs (task, task_version, model, dry_run, cursor_before)
-     VALUES ($1, $2, $3, $4, $5) RETURNING id`,
-    [r.task, r.version, r.model, r.dryRun, r.cursor],
+    `INSERT INTO extract_runs (task, task_version, model, dry_run, cursor_before, bip)
+     VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`,
+    [r.task, r.version, r.model, r.dryRun, r.cursor, r.bip],
   );
   return Number(rows[0].id);
 }

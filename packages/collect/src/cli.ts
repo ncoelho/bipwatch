@@ -2,20 +2,8 @@ import { parseArgs } from 'node:util';
 import { connect } from './db.ts';
 import { buildMentionContext } from './mentions.ts';
 import { runCollector } from './run.ts';
-import type { Collector, SourceId } from './types.ts';
-import { bipsRepoCollector } from './collectors/bips-repo.ts';
-import { delvingCollector } from './collectors/delving.ts';
-import { mailingListCollector } from './collectors/mailing-list.ts';
-import { githubCollector } from './collectors/github.ts';
-
-/** Collectors are registered here as they are written (SPEC 6.1). */
-const COLLECTORS: Partial<Record<SourceId, () => Collector>> = {
-  'bips-repo': () => bipsRepoCollector(),
-  delving: () => delvingCollector(),
-  'mailing-list': () => mailingListCollector(),
-  github: () => githubCollector(),
-};
-const ALL: SourceId[] = ['bips-repo', 'github', 'delving', 'mailing-list'];
+import type { SourceId } from './types.ts';
+import { ALL_SOURCES as ALL, COLLECTORS } from './collectors/index.ts';
 
 const { values } = parseArgs({
   options: { source: { type: 'string', multiple: true }, all: { type: 'boolean' } },

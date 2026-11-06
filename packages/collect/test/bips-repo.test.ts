@@ -43,8 +43,8 @@ function commit(files: Record<string, string>, message: string): string {
   return g(origin, 'rev-parse', 'HEAD');
 }
 
-async function collect(cursor: string | null) {
-  const c = bipsRepoCollector({ dir: clone, remote: origin, watched });
+async function collect(cursor: string | null, w: WatchedBip[] = watched) {
+  const c = bipsRepoCollector({ dir: clone, remote: origin, watched: w });
   const out: { item: RawItemInput; cursor: string }[] = [];
   for await (const x of c.fetch(cursor)) out.push(x);
   return { c, out };
@@ -82,7 +82,10 @@ describe('bips-repo collector', () => {
   it('clones on first run and yields only commits touching watched BIPs, oldest first', async () => {
     const { out } = await collect(null);
     expect(out.map((x) => x.item.external_id)).toEqual([shas.add, shas.vectors]);
-    expect(out.map((x) => x.cursor)).toEqual([shas.add, shas.vectors]);
+    expect(out.map((x) => JSON.parse(x.cursor))).toEqual([
+      { sha: shas.add, bips: [352] },
+      { sha: shas.vectors, bips: [352] },
+    ]);
     expect(out[1].item.meta).toMatchObject({
       author: 'Ruben Somsen',
       subject: 'BIP352: add test vectors',
@@ -131,5 +134,26 @@ describe('bips-repo collector', () => {
   it('maps files to BIPs', () => {
     expect(bipsForFiles(['bip-0352/x.json', 'bip-0352.md', 'bip-0035.mediawiki'], watched)).toEqual([352]);
     expect(bipsForFiles(['bip-03520.mediawiki'], watched)).toEqual([]);
+  });
+
+  it('fetches the whole history of a BIP added to the record later', async () => {
+    const both: WatchedBip[] = [...watched, { number: 999, paths: ['bip-0999.mediawiki', 'bip-0999.md', 'bip-0999/'] }];
+    shas.newer = commit({ 'bip-0352.mediawiki': `${header352}\nmore\n` }, 'BIP352: another edit');
+    // The cursor from a run that covered only BIP 352, at shas.edit.
+    const cursor = JSON.stringify({ sha: shas.edit, bips: [352] });
+    const { out } = await collect(cursor, both);
+    // BIP 999's commit from before the cursor, then 352's commit after it.
+    expect(out.map((x) => x.item.external_id)).toEqual([shas.other, shas.newer]);
+    expect(out.map((x) => JSON.parse(x.cursor))).toEqual([
+      { sha: shas.edit, bips: [352, 999] }, // history-only: the sha stays put
+      { sha: shas.newer, bips: [352, 999] },
+    ]);
+    // Next run: nothing new for either BIP.
+    expect((await collect(out.at(-1)!.cursor, both)).out).toEqual([]);
+  });
+
+  it('reads a bare-sha cursor as covering every BIP watched now', async () => {
+    const { out } = await collect(shas.newer);
+    expect(out).toEqual([]);
   });
 });

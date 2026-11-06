@@ -33,6 +33,7 @@ npm run test:db --workspace @bipwatch/collect   # runner + migrations against Ne
 npm run collect -- --source bips-repo  # run one collector (bips-repo, delving, mailing-list, github), or --all
 npm run sync-headers -- --bips ../bips # re-sync bip.yaml facts from spec headers (--dry-run to preview)
 npm run freshness                      # fail if a collector is overdue; --export data/freshness.json for the site
+npm run reindex-mentions -- --if-changed   # re-tag the archive after a BIP's aliases or tracking change
 npm run extract -- --task stance --limit 20 --dry-run   # LLM extraction (needs Claude API credentials; spends tokens)
 ```
 

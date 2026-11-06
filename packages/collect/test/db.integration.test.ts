@@ -5,6 +5,7 @@ import pg from 'pg';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { strictSsl } from '../src/db.ts';
 import { readSourceRows } from '../src/freshness.ts';
+import { contextFingerprint, reindexSource, saveFingerprint, storedFingerprint } from '../src/reindex.ts';
 import { migrate } from '../src/migrate.ts';
 import type { MentionContext } from '../src/mentions.ts';
 import { runCollector } from '../src/run.ts';
@@ -75,7 +76,7 @@ describe.skipIf(!url)('Postgres integration (Neon)', () => {
   });
 
   it('applies migrations once', async () => {
-    expect(await migrate(pool)).toEqual(['001_init.sql', '002_extract.sql']);
+    expect(await migrate(pool)).toEqual(['001_init.sql', '002_extract.sql', '003_extract_bip.sql', '004_index_state.sql']);
     expect(await migrate(pool)).toEqual([]);
   });
 
@@ -158,5 +159,47 @@ describe.skipIf(!url)('Postgres integration (Neon)', () => {
     expect(delving.last_failure).toBeInstanceOf(Date);
     expect(delving.documents).toBe(await count('documents'));
     expect(rows.find((r) => r.source === 'github')).toMatchObject({ last_success: null, documents: 0 });
+  });
+
+  it('re-tags archived documents when aliases change, from their raw items', async () => {
+    const tagged = async (bip: number) =>
+      (
+        await pool.query(
+          `SELECT d.external_id, m.method FROM bip_mentions m JOIN documents d ON d.id = m.document_id
+            WHERE m.bip = $1 ORDER BY 1, 2`,
+          [bip],
+        )
+      ).rows;
+    const before352 = await tagged(352);
+    expect(await tagged(360)).toEqual([]);
+
+    // A newly tracked BIP 360 known as "scanning cost": p1's title and p2's
+    // thread title mention it; neither says "BIP 360".
+    const newCtx: MentionContext = { aliases: new Map([...ctx.aliases, ['scanning cost', 360]]) };
+    const r = await reindexSource(pool, fixtureCollector(), newCtx);
+    expect(r).toMatchObject({ source: 'delving', unmatched: 0 });
+    expect(r.documents).toBe(await count('documents'));
+    expect(r.changed).toEqual([{ bip: 360, before: 0, after: 2 }]);
+    expect(await tagged(360)).toEqual([
+      { external_id: 'p1', method: 'alias' },
+      { external_id: 'p2', method: 'thread-title' },
+    ]);
+    expect(await tagged(352)).toEqual(before352);
+
+    // Running again with the same rules changes nothing.
+    const again = await reindexSource(pool, fixtureCollector(), newCtx);
+    expect(again.changed).toEqual([]);
+    expect(again.mentions_after).toBe(r.mentions_after);
+  });
+
+  it('remembers which mention rules the archive was tagged with', async () => {
+    expect(await storedFingerprint(pool)).toBeNull();
+    const fp = contextFingerprint(ctx);
+    await saveFingerprint(pool, fp);
+    expect(await storedFingerprint(pool)).toBe(fp);
+    // Same aliases in another order: same fingerprint. A new alias: different.
+    const reordered: MentionContext = { aliases: new Map([...ctx.aliases].reverse()) };
+    expect(contextFingerprint(reordered)).toBe(fp);
+    expect(contextFingerprint({ aliases: new Map([...ctx.aliases, ['scanning cost', 360]]) })).not.toBe(fp);
   });
 });
