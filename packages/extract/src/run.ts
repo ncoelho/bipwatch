@@ -162,7 +162,7 @@ export async function runTask<Out>(opts: RunOptions<Out>): Promise<RunSummary> {
       messages.push({
         role: 'user',
         content: [
-          'Some of the stances you returned failed validation:',
+          'Some of the items you returned failed validation:',
           ...failures.map(
             (f, i) => `${i + 1}. quote ${JSON.stringify(f.claim.source.quote)}: ${f.errors.join('; ')}`,
           ),

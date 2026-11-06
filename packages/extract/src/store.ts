@@ -13,14 +13,14 @@ import type { InputDoc } from './types.ts';
  */
 export async function* selectDocs(
   db: pg.Pool,
-  opts: { bips: number[]; afterId: number; limit: number; pageSize?: number; sources?: string[] },
+  opts: { bips: number[]; afterId: number; limit: number; pageSize?: number; sources?: string[]; ids?: number[] },
 ): AsyncGenerator<InputDoc> {
   let after = opts.afterId;
   let left = opts.limit;
   const page = opts.pageSize ?? 100;
   while (left > 0) {
     const { rows } = await db.query<InputDoc & { posted_at: Date | null }>(
-      `SELECT d.id::int AS id, d.source, d.external_id, d.title, d.author, d.posted_at, d.body_text, d.url,
+      `SELECT d.id::int AS id, d.source, d.external_id, d.thread_key, d.title, d.author, d.posted_at, d.body_text, d.url,
               (SELECT t.title FROM documents t
                 WHERE t.source = d.source AND t.thread_key = d.thread_key AND t.title IS NOT NULL
                 ORDER BY t.posted_at NULLS LAST, t.id LIMIT 1) AS thread_title,
@@ -28,11 +28,12 @@ export async function* selectDocs(
          FROM documents d
          JOIN raw_items r ON r.id = d.raw_item_id
          JOIN bip_mentions m ON m.document_id = d.id AND m.bip = ANY($1::int[])
-        WHERE d.id > $2 AND ($4::text[] IS NULL OR d.source = ANY($4::text[])) AND d.author IS NOT NULL AND d.url IS NOT NULL AND length(trim(d.body_text)) > 0
+        WHERE d.id > $2 AND ($4::text[] IS NULL OR d.source = ANY($4::text[]))
+          AND ($5::bigint[] IS NULL OR d.id = ANY($5::bigint[])) AND d.author IS NOT NULL AND d.url IS NOT NULL AND length(trim(d.body_text)) > 0
         GROUP BY d.id
         ORDER BY d.id
         LIMIT $3`,
-      [opts.bips, after, Math.min(page, left), opts.sources?.length ? opts.sources : null],
+      [opts.bips, after, Math.min(page, left), opts.sources?.length ? opts.sources : null, opts.ids?.length ? opts.ids : null],
     );
     if (!rows.length) return;
     for (const r of rows) yield r;
@@ -41,12 +42,15 @@ export async function* selectDocs(
   }
 }
 
-/** Where the next run of a task starts: the last ok, non-dry run's cursor. */
-export async function lastCursor(db: pg.Pool, task: string): Promise<number> {
+/**
+ * Where the next run of a task starts: the last ok, non-dry run's cursor for
+ * this task version. A new version (new prompt or schema) starts over.
+ */
+export async function lastCursor(db: pg.Pool, task: string, version: number): Promise<number> {
   const { rows } = await db.query<{ cursor_after: string | null }>(
-    `SELECT cursor_after FROM extract_runs WHERE task = $1 AND ok AND NOT dry_run
+    `SELECT cursor_after FROM extract_runs WHERE task = $1 AND task_version = $2 AND ok AND NOT dry_run
       ORDER BY finished_at DESC LIMIT 1`,
-    [task],
+    [task, version],
   );
   return Number(rows[0]?.cursor_after ?? 0);
 }
@@ -107,11 +111,14 @@ export async function finishRun(
 
 /** Field order for claim files, so diffs stay readable. */
 const ORDER: (keyof Claim)[] = [
-  'id', 'bip', 'kind', 'status', 'stance', 'condition', 'statement', 'subject',
+  'id', 'bip', 'kind', 'status', 'stance', 'condition', 'scope', 'change', 'statement', 'subject',
   'implementation', 'applies_to_version', 'source', 'provenance', 'tags',
 ];
 
 export function claimYaml(c: Claim): string {
+  const missing = Object.keys(c).filter((k) => !ORDER.includes(k as keyof Claim));
+  // A field added to the schema but not here would be dropped silently.
+  if (missing.length) throw new Error(`claimYaml: no position for ${missing.join(', ')}`);
   const ordered = Object.fromEntries(
     ORDER.filter((k) => c[k] !== undefined).map((k) => [k, c[k]]),
   );

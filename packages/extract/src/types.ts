@@ -5,6 +5,8 @@ export interface InputDoc {
   id: number;
   source: 'bips-repo' | 'github' | 'delving' | 'mailing-list';
   external_id: string;
+  /** Source thread id; for GitHub "owner/repo#123". */
+  thread_key: string | null;
   title: string | null;
   thread_title: string | null;
   author: string | null;

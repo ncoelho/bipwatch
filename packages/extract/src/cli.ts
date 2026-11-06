@@ -19,6 +19,8 @@ const USAGE = `Usage: npm run extract -- --task <id> [--bip <n>] [--limit <docs>
              prints each proposed claim and each rejection in full
   --source   with --dry-run only: sample one source (bips-repo, github, delving, mailing-list);
              may be repeated
+  --doc      with --dry-run only: run on these document ids (repeat, or comma-separated),
+             e.g. to compare a new prompt version on documents an older one handled
 
 Each run starts after the last document a previous (non-dry) run processed.
 Claims are written to data/bips/<NNNN>/claims/ with reviewed_by: null.`;
@@ -31,6 +33,7 @@ const { values } = parseArgs({
     budget: { type: 'string', default: '200000' },
     'dry-run': { type: 'boolean', default: false },
     source: { type: 'string', multiple: true },
+    doc: { type: 'string', multiple: true },
     help: { type: 'boolean', default: false },
   },
 });
@@ -50,9 +53,10 @@ if (!wanted.length) {
   process.exit(2);
 }
 const dryRun = values['dry-run'];
-if (values.source?.length && !dryRun) {
-  // A filtered real run would move the cursor past other sources' documents.
-  console.error('--source only works with --dry-run.');
+const ids = (values.doc ?? []).flatMap((d) => d.split(',')).map(Number).filter(Number.isInteger);
+if ((values.source?.length || ids.length) && !dryRun) {
+  // A filtered real run would move the cursor past other documents.
+  console.error('--source and --doc only work with --dry-run.');
   process.exit(2);
 }
 const limit = Number(values.limit);
@@ -79,7 +83,7 @@ for (const bip of wanted) {
   bips.set(bip.number, { bip, versionAt: (d) => versionAt(timeline, d) });
 }
 
-const cursor = await lastCursor(pool, task.id);
+const cursor = await lastCursor(pool, task.id, task.version);
 const runId = await startRun(pool, { task: task.id, version: task.version, model: task.model, dryRun, cursor });
 const today = new Date().toISOString().slice(0, 10);
 const validator = makeValidator(bundles.flatMap((b) => b.claims), dataDir);
@@ -90,7 +94,14 @@ console.log(
 try {
   const summary = await runTask({
     task,
-    docs: selectDocs(pool, { bips: [...bips.keys()], afterId: cursor, limit, sources: values.source }),
+    docs: selectDocs(pool, {
+      bips: [...bips.keys()],
+      // A document list is a fixed sample: ignore the cursor.
+      afterId: ids.length ? 0 : cursor,
+      limit: ids.length ? ids.length : limit,
+      sources: values.source,
+      ids,
+    }),
     model,
     bips,
     validator,
@@ -100,12 +111,13 @@ try {
       await logDoc(pool, runId, r);
       for (const c of r.claims) {
         const where = dryRun ? '(dry run)' : writeClaim(dataDir, c).replace(`${dataDir}/`, 'data/');
-        console.log(`+ ${c.kind} ${c.stance ?? ''} BIP ${c.bip} · ${c.subject?.name} · ${where}`);
+        console.log(`+ ${c.kind} ${c.stance ?? ''}${c.scope ? ` (${c.scope})` : ''} BIP ${c.bip} · ${c.subject?.name} · ${where}`);
         if (dryRun) {
           console.log(`    statement: ${c.statement}`);
           if (c.condition) console.log(`    condition: ${c.condition}`);
           console.log(`    quote:     ${JSON.stringify(c.source.quote)}`);
           console.log(`    source:    ${c.source.url} (${c.source.date ?? 'no date'}, spec ${c.applies_to_version})`);
+          if (c.change) console.log(`    change:    ${c.change.url}${c.change.title ? ` (${c.change.title})` : ''}`);
         }
       }
       if (dryRun) {

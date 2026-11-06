@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { loadAll } from '@bipwatch/data';
-import { stanceTask } from '../src/tasks/stance/index.ts';
+import { StanceOutput, stanceTask } from '../src/tasks/stance/index.ts';
 import { makeValidator, normalize } from '../src/validate.ts';
 import { bips, doc } from './helpers.ts';
 
@@ -9,6 +9,7 @@ const BODY = 'I think this is a great direction.\n\nConcept ACK on silent\npayme
 const stance = (over = {}) => ({
   bip: 352,
   stance: 'concept-ack' as const,
+  scope: 'proposal' as const,
   condition: null,
   statement: 'Alice Example supports the idea of silent payments but is worried about scanning cost.',
   quote: 'Concept ACK on silent payments',
@@ -53,6 +54,40 @@ describe('stance task', () => {
   });
 });
 
+describe('stance v2 scope', () => {
+  const prDoc = doc(3, 'ACK 3795b71', {
+    source: 'github',
+    thread_key: 'bitcoin/bips#2055',
+    thread_title: 'BIP352: limit the number of recipients',
+    author: 'RubenSomsen',
+    url: 'https://github.com/bitcoin/bips/pull/2055#issuecomment-1',
+  });
+
+  it('links a change-scoped stance to its pull request', () => {
+    const [c] = stanceTask.toClaims({ stances: [stance({ stance: 'ack', scope: 'change', quote: 'ACK 3795b71' })] }, prDoc, ctx);
+    expect(c.scope).toBe('change');
+    expect(c.change).toEqual({ url: 'https://github.com/bitcoin/bips/pull/2055', title: 'BIP352: limit the number of recipients' });
+    expect(makeValidator([]).validate(c, prDoc)).toEqual([]);
+  });
+
+  it('gives proposal-scoped stances no change link', () => {
+    const [c] = stanceTask.toClaims({ stances: [stance({ quote: 'ACK 3795b71' })] }, prDoc, ctx);
+    expect(c).not.toHaveProperty('change');
+  });
+
+  it('maps logins to the person in people.yaml', () => {
+    const [c] = stanceTask.toClaims({ stances: [stance({ scope: 'change', quote: 'ACK 3795b71' })] }, prDoc, ctx);
+    expect(c.subject).toEqual({ name: 'Ruben Somsen', type: 'person' });
+    expect(c.id).toMatch(/^stance-ruben-somsen-/);
+  });
+
+  it('asks the model for a scope', () => {
+    expect(stanceTask.version).toBe(2);
+    expect(stanceTask.system).toContain('is review of that change, not a position on the proposal');
+    expect(StanceOutput.safeParse({ stances: [{ ...stance(), scope: 'everything' }] }).success).toBe(false);
+  });
+});
+
 describe('validator', () => {
   const v = () => makeValidator([]);
   const claimFor = (over = {}) => stanceTask.toClaims({ stances: [stance(over)] }, doc(1, BODY), ctx)[0];
@@ -85,6 +120,14 @@ describe('validator', () => {
     expect(val.validate({ ...c, id: 'stance-other' }, doc(1, BODY))).toContain(
       'duplicate: a claim with the same kind, subject and quote exists',
     );
+  });
+
+  it('treats the same short quote on another source as a new claim', () => {
+    const val = v();
+    const c = claimFor({ quote: 'Concept ACK' });
+    val.remember(c);
+    const other = { ...c, id: 'stance-other', source: { ...c.source, url: 'https://github.com/bitcoin/bips/pull/1#x' } };
+    expect(val.validate(other, doc(1, BODY))).toEqual([]);
   });
 
   it('knows every claim already in data/', () => {

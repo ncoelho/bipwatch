@@ -20,9 +20,18 @@ export type ClaimValidator = (claim: Claim, doc: InputDoc) => string[];
 /** Collapses runs of whitespace so a wrapped line still matches. */
 export const normalize = (s: string) => s.replace(/\s+/g, ' ').trim();
 
-/** Fingerprint used for duplicate detection. */
+/**
+ * Fingerprint used for duplicate detection: SPEC 6.2's kind, subject and
+ * quote, plus the source URL, so the same short quote ("ACK") from the same
+ * person on two different pull requests is two claims, not a duplicate.
+ */
 export function claimKey(c: Pick<Claim, 'kind' | 'subject' | 'source'>): string {
-  return [c.kind, normalize(c.subject?.name ?? '').toLowerCase(), normalize(c.source.quote ?? '')].join('\u0000');
+  return [
+    c.kind,
+    normalize(c.subject?.name ?? '').toLowerCase(),
+    normalize(c.source.quote ?? ''),
+    c.source.url,
+  ].join('\u0000');
 }
 
 export function schemaValidator(dataDir = findDataDir()) {

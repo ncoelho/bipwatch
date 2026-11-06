@@ -3,7 +3,7 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
-import { specVersionTimeline, versionAt } from '../src/version.ts';
+import { changelogTimeline, specVersionTimeline, versionAt } from '../src/version.ts';
 import { BIP352 } from './helpers.ts';
 
 const repo = mkdtempSync(join(tmpdir(), 'bipwatch-version-'));
@@ -30,5 +30,43 @@ describe('spec version at a date', () => {
     expect(versionAt(t, new Date('2025-06-01'))).toBe('1.0.0');
     expect(versionAt(t, new Date('2026-11-01'))).toBe('1.1.2');
     expect(versionAt(t, null)).toBe('1.1.2');
+  });
+});
+
+describe('changelog timeline', () => {
+  it('reads mediawiki and markdown changelogs, oldest first', () => {
+    const wiki = [
+      'text',
+      '== Changelog ==',
+      '',
+      'Intro.',
+      '',
+      "* '''1.0.1''' (2024-06-22):",
+      '** fix',
+      "* '''1.0.0''' (2024-05-08):",
+      '** Initial',
+      '',
+      '== Acknowledgements ==',
+      "* '''9.9.9''' (2030-01-01): not a changelog entry",
+    ].join('\n');
+    const t = changelogTimeline(wiki);
+    expect(t.map((x) => x.version)).toEqual(['1.0.0', '1.0.1']);
+    expect(versionAt(t, new Date('2024-03-01'))).toBe('0.0.0');
+    expect(versionAt(t, new Date('2025-12-12'))).toBe('1.0.1');
+    const md = '## Changelog\n\n* __1.0.0__ (2026-05-22):\n    * Complete.\n\n[^0]: note';
+    expect(changelogTimeline(md)).toEqual([{ at: Date.parse('2026-05-22T00:00:00Z'), version: '1.0.0' }]);
+    expect(changelogTimeline('no changelog here')).toEqual([]);
+  });
+
+  it('prefers the changelog over header history', async () => {
+    writeFileSync(
+      join(repo, 'bip-0352.mediawiki'),
+      "<pre>\n  BIP: 352\n  Title: Silent Payments\n  Status: Draft\n  Type: Specification\n  Version: 1.1.2\n</pre>\n== Changelog ==\n* '''1.1.2''' (2026-10-25):\n* '''1.0.0''' (2024-05-08):\n",
+    );
+    const env = { ...process.env, GIT_AUTHOR_NAME: 't', GIT_AUTHOR_EMAIL: 't@x.test', GIT_COMMITTER_NAME: 't', GIT_COMMITTER_EMAIL: 't@x.test' };
+    execFileSync('git', ['-C', repo, 'commit', '-qam', 'changelog'], { env });
+    const t = await specVersionTimeline(repo, BIP352, 'master');
+    expect(t.map((x) => x.version)).toEqual(['1.0.0', '1.1.2']);
+    expect(versionAt(t, new Date('2025-06-01'))).toBe('1.0.0');
   });
 });

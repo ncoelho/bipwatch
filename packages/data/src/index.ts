@@ -1,7 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { parse } from 'yaml';
-import type { BipBundle, BipRecord, Claim, Freshness, NeedsAssessment } from './types.ts';
+import type { BipBundle, BipRecord, Claim, Freshness, NeedsAssessment, People } from './types.ts';
 
 export * from './types.ts';
 
@@ -61,4 +61,23 @@ export function loadAll(dataDir = findDataDir()): BipBundle[] {
 export function loadFreshness(dataDir = findDataDir()): Freshness | null {
   const file = join(dataDir, 'freshness.json');
   return existsSync(file) ? (JSON.parse(readFileSync(file, 'utf8')) as Freshness) : null;
+}
+
+/** data/people.yaml, or an empty list. */
+export function loadPeople(dataDir = findDataDir()): People {
+  const file = join(dataDir, 'people.yaml');
+  return existsSync(file) ? readYaml<People>(file) : { people: [] };
+}
+
+/**
+ * Maps any known name or login to the person's canonical name; unknown names
+ * come back unchanged.
+ */
+export function canonicalName(people: People): (name: string) => string {
+  const byAlias = new Map<string, string>();
+  for (const p of people.people) {
+    byAlias.set(p.name.toLowerCase(), p.name);
+    for (const a of p.aliases) byAlias.set(a.toLowerCase(), p.name);
+  }
+  return (name) => byAlias.get(name.trim().toLowerCase()) ?? name;
 }

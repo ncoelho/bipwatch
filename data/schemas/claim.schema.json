@@ -27,6 +27,20 @@
       "enum": ["concept-ack", "approach-ack", "ack", "nack", "conditional", "needs-research"]
     },
     "condition": { "type": "string", "description": "Required when stance is conditional." },
+    "scope": {
+      "description": "Stances only: what the position is about. proposal: the BIP as a whole or its approach. change: one edit to the BIP's text, usually a bitcoin/bips pull request amending it. implementation: code that implements the BIP. An ACK of an amendment is review of that change, not support for the proposal.",
+      "enum": ["proposal", "change", "implementation"]
+    },
+    "change": {
+      "description": "For change- and implementation-scoped stances: the pull request or proposed change the stance is about, when it has a link.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url"],
+      "properties": {
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "title": { "type": "string" }
+      }
+    },
     "subject": {
       "description": "Who or what the claim is about: the implementer, or the person or org taking a stance.",
       "type": "object",
@@ -116,7 +130,7 @@
     },
     {
       "if": { "properties": { "kind": { "const": "stance" } } },
-      "then": { "required": ["stance", "subject", "applies_to_version"] }
+      "then": { "required": ["stance", "scope", "subject", "applies_to_version"] }
     },
     {
       "if": { "properties": { "stance": { "const": "conditional" } }, "required": ["stance"] },

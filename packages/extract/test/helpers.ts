@@ -23,6 +23,7 @@ export function doc(id: number, body: string, over: Partial<InputDoc> = {}): Inp
     id,
     source: 'mailing-list',
     external_id: `msg-${id}@example.test`,
+    thread_key: null,
     title: 'Silent Payments – Non-interactive private payments',
     thread_title: `Silent Payments thread ${id}`,
     author: 'Alice Example',
@@ -34,7 +35,7 @@ export function doc(id: number, body: string, over: Partial<InputDoc> = {}): Inp
   };
 }
 
-type Stance = { bip: number; stance: string; condition: string | null; statement: string; quote: string };
+type Stance = { bip: number; stance: string; scope?: string; condition: string | null; statement: string; quote: string };
 
 /** A model that answers from a script, keyed by document id and attempt. */
 export function scriptedModel(script: Record<string, Stance[] | 'refusal' | Error>) {
@@ -49,7 +50,7 @@ export function scriptedModel(script: Record<string, Stance[] | 'refusal' | Erro
       const usage = { input_tokens: 1000, output_tokens: 100 };
       if (answer instanceof Error) throw answer;
       if (answer === 'refusal') return { output: null, stop: 'refusal', text: '', usage, model: req.model };
-      const output = { stances: answer } as Out;
+      const output = { stances: answer.map((s) => ({ scope: 'proposal', ...s })) } as Out;
       return { output, stop: 'ok', text: JSON.stringify(output), usage, model: req.model };
     },
   };

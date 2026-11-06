@@ -64,6 +64,9 @@ export interface Claim {
   status?: 'open' | 'addressed' | 'disputed' | 'unknown';
   stance?: 'concept-ack' | 'approach-ack' | 'ack' | 'nack' | 'conditional' | 'needs-research';
   condition?: string;
+  /** Stances only: the proposal, one change to its text, or an implementation. */
+  scope?: 'proposal' | 'change' | 'implementation';
+  change?: { url: string; title?: string };
   subject?: { name: string; type: string; url?: string };
   implementation?: {
     state: 'shipped' | 'partial' | 'in-review' | 'planned' | 'not-supported' | 'proof-of-concept';
@@ -130,4 +133,9 @@ export interface SourceFreshness {
 export interface Freshness {
   generated_at: string;
   sources: SourceFreshness[];
+}
+
+/** data/people.yaml: one identity per person with several names or logins. */
+export interface People {
+  people: { name: string; aliases: string[] }[];
 }

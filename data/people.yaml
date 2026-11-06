@@ -1,0 +1,9 @@
+# One identity per person who appears under more than one name or login.
+# Claims use `name`; extractors map every alias to it (case-insensitive).
+# Names and public handles only, never email addresses. Add an entry when
+# the same person shows up twice, and only when it is clearly the same person.
+people:
+  - name: Peter Todd
+    aliases: [petertodd]
+  - name: Ruben Somsen
+    aliases: [RubenSomsen]

@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import type { Claim } from '@bipwatch/data';
+import { canonicalName, loadPeople, type Claim } from '@bipwatch/data';
 import { z } from 'zod';
 import { slug, SOURCE_LABEL, SOURCE_TYPE, type Task } from '../../task.ts';
 
@@ -12,12 +12,14 @@ import { slug, SOURCE_LABEL, SOURCE_TYPE, type Task } from '../../task.ts';
  */
 
 export const STANCES = ['concept-ack', 'approach-ack', 'ack', 'nack', 'conditional', 'needs-research'] as const;
+export const SCOPES = ['proposal', 'change', 'implementation'] as const;
 
 export const StanceOutput = z.object({
   stances: z.array(
     z.object({
       bip: z.number().int(),
       stance: z.enum(STANCES),
+      scope: z.enum(SCOPES),
       condition: z.string().nullable(),
       statement: z.string(),
       quote: z.string(),
@@ -26,8 +28,18 @@ export const StanceOutput = z.object({
 });
 export type StanceOutput = z.infer<typeof StanceOutput>;
 
-const VERSION = 1;
+// v2 (2026-11-06): adds scope, so an ACK of one amendment is not recorded as
+// support for the proposal; editorial approvals are excluded at every scope.
+const VERSION = 2;
 const system = readFileSync(new URL(`./prompt.v${VERSION}.md`, import.meta.url), 'utf8');
+
+/** The pull request a GitHub document belongs to, from its thread key ("owner/repo#123"). */
+export function pullRequestUrl(threadKey: string | null): string | undefined {
+  const m = threadKey?.match(/^([\w.-]+\/[\w.-]+)#(\d+)$/);
+  return m ? `https://github.com/${m[1]}/pull/${m[2]}` : undefined;
+}
+
+const canonical = canonicalName(loadPeople());
 
 export const stanceTask: Task<StanceOutput> = {
   id: 'stance',
@@ -61,17 +73,21 @@ export const stanceTask: Task<StanceOutput> = {
   },
 
   toClaims(output, doc, ctx) {
+    const author = canonical(doc.author ?? 'unknown');
     return output.stances.map((s): Claim => {
       const bip = ctx.bips.get(s.bip);
+      const pr = doc.source === 'github' && s.scope !== 'proposal' ? pullRequestUrl(doc.thread_key) : undefined;
       const hash = createHash('sha256').update(`${doc.external_id}\0${s.quote}`).digest('hex').slice(0, 8);
       return {
-        id: `stance-${slug(doc.author ?? 'unknown', 32)}-${hash}`,
+        id: `stance-${slug(author, 32)}-${hash}`,
         bip: s.bip,
         kind: 'stance',
         stance: s.stance,
         ...(s.stance === 'conditional' && s.condition ? { condition: s.condition } : {}),
+        scope: s.scope,
+        ...(pr ? { change: { url: pr, ...(doc.thread_title ? { title: doc.thread_title } : {}) } } : {}),
         statement: s.statement.trim(),
-        subject: { name: doc.author ?? 'unknown', type: 'person' },
+        subject: { name: author, type: 'person' },
         // An unknown BIP number fails validation below; any valid version keeps the schema check on the bip.
         applies_to_version: bip ? bip.versionAt(doc.posted_at) : '0.0.0',
         source: {

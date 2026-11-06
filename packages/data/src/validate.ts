@@ -14,7 +14,7 @@ import { basename, join, resolve } from 'node:path';
 import { parse } from 'yaml';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
-import { findDataDir, folderFor } from './index.ts';
+import { canonicalName, findDataDir, folderFor, loadPeople } from './index.ts';
 import type { BipRecord, Claim, NeedsAssessment } from './types.ts';
 
 type Level = 'error' | 'warn';
@@ -54,6 +54,7 @@ const validators = {
   bip: ajv.getSchema('bip.schema.json')!,
   claim: ajv.getSchema('claim.schema.json')!,
   needs: ajv.getSchema('needs.schema.json')!,
+  people: ajv.getSchema('people.schema.json')!,
 };
 
 function check<T>(kind: keyof typeof validators, file: string): T | null {
@@ -102,6 +103,22 @@ function specText(revision: string, path: string): string | null {
   }
   return specCache.get(key)!;
 }
+
+// ---- people --------------------------------------------------------------------
+const peopleFile = join(dataDir, 'people.yaml');
+if (existsSync(peopleFile)) {
+  const people = check<{ people: { name: string; aliases: string[] }[] }>('people', peopleFile);
+  const seen = new Map<string, string>();
+  for (const p of people?.people ?? []) {
+    for (const n of [p.name, ...p.aliases]) {
+      const key = n.toLowerCase();
+      if (seen.has(key) && seen.get(key) !== p.name)
+        report('error', rel(peopleFile), `"${n}" belongs to both ${seen.get(key)} and ${p.name}`);
+      seen.set(key, p.name);
+    }
+  }
+}
+const canonical = canonicalName(loadPeople(dataDir));
 
 // ---- walk the data -------------------------------------------------------------
 const bipsDir = join(dataDir, 'bips');
@@ -156,6 +173,12 @@ for (const folder of folders) {
 
       if (claim.provenance.reviewed_by === null && claim.provenance.reviewed)
         report('error', rel(file), 'reviewed date set without a reviewer');
+      if (claim.kind !== 'stance' && (claim.scope || claim.change))
+        report('error', rel(file), 'scope and change are for stance claims only');
+      if (claim.change && claim.scope === 'proposal')
+        report('error', rel(file), 'a proposal-scoped stance has no change; use scope change or implementation');
+      if (claim.subject && canonical(claim.subject.name) !== claim.subject.name)
+        report('error', rel(file), `subject "${claim.subject.name}" is an alias in people.yaml; use "${canonical(claim.subject.name)}"`);
 
       const s = claim.source;
       if (s.type === 'spec') {
@@ -170,8 +193,11 @@ for (const folder of folders) {
             if (!s.verified) report('warn', rel(file), 'quote matches the spec; set source.verified: true');
           }
         }
-      } else if (s.verified) {
-        report('warn', rel(file), `verified: true but there is no archive yet to check ${s.type} sources against`);
+      } else if (s.verified && !/^(model|bot):/.test(claim.provenance.extracted_by)) {
+        // Extractors match quotes against the archived document before writing
+        // a claim; this checkout cannot re-check that, but a hand-set flag has
+        // nothing behind it.
+        report('warn', rel(file), `verified: true on a ${s.type} source set by hand; only an extractor that matched the archived document should set it`);
       }
     }
   }

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bipwatch.com/schemas/people.schema.json",
+  "title": "People",
+  "description": "One identity per person who appears in claims under more than one name or login (a mailing list name and a GitHub login, say). Claims use `name`; extractors map aliases to it. Names and public handles only, never email addresses.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["people"],
+  "properties": {
+    "people": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "aliases"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1, "description": "How BipWatch shows this person." },
+          "aliases": {
+            "description": "Other names and logins the same person uses. Matched case-insensitively.",
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    }
+  }
+}
