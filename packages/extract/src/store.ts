@@ -13,7 +13,7 @@ import type { InputDoc } from './types.ts';
  */
 export async function* selectDocs(
   db: pg.Pool,
-  opts: { bips: number[]; afterId: number; limit: number; pageSize?: number },
+  opts: { bips: number[]; afterId: number; limit: number; pageSize?: number; sources?: string[] },
 ): AsyncGenerator<InputDoc> {
   let after = opts.afterId;
   let left = opts.limit;
@@ -28,11 +28,11 @@ export async function* selectDocs(
          FROM documents d
          JOIN raw_items r ON r.id = d.raw_item_id
          JOIN bip_mentions m ON m.document_id = d.id AND m.bip = ANY($1::int[])
-        WHERE d.id > $2 AND d.author IS NOT NULL AND d.url IS NOT NULL AND length(trim(d.body_text)) > 0
+        WHERE d.id > $2 AND ($4::text[] IS NULL OR d.source = ANY($4::text[])) AND d.author IS NOT NULL AND d.url IS NOT NULL AND length(trim(d.body_text)) > 0
         GROUP BY d.id
         ORDER BY d.id
         LIMIT $3`,
-      [opts.bips, after, Math.min(page, left)],
+      [opts.bips, after, Math.min(page, left), opts.sources?.length ? opts.sources : null],
     );
     if (!rows.length) return;
     for (const r of rows) yield r;

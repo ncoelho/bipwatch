@@ -9,13 +9,16 @@ import type { BipContext } from './types.ts';
 import { makeValidator } from './validate.ts';
 import { specVersionTimeline, versionAt } from './version.ts';
 
-const USAGE = `Usage: npm run extract -- --task <id> [--bip <n>] [--limit <docs>] [--budget <tokens>] [--dry-run]
+const USAGE = `Usage: npm run extract -- --task <id> [--bip <n>] [--limit <docs>] [--budget <tokens>] [--dry-run [--source <id>]]
 
   --task     ${Object.keys(TASKS).join(', ')}
   --bip      only documents mentioning this tracked BIP (default: every tracked BIP)
   --limit    at most this many documents (default 50)
   --budget   stop starting documents after this many tokens, input + output (default 200000)
-  --dry-run  call the model and validate, but write no files and keep the cursor
+  --dry-run  call the model and validate, but write no files and keep the cursor;
+             prints each proposed claim and each rejection in full
+  --source   with --dry-run only: sample one source (bips-repo, github, delving, mailing-list);
+             may be repeated
 
 Each run starts after the last document a previous (non-dry) run processed.
 Claims are written to data/bips/<NNNN>/claims/ with reviewed_by: null.`;
@@ -27,6 +30,7 @@ const { values } = parseArgs({
     limit: { type: 'string', default: '50' },
     budget: { type: 'string', default: '200000' },
     'dry-run': { type: 'boolean', default: false },
+    source: { type: 'string', multiple: true },
     help: { type: 'boolean', default: false },
   },
 });
@@ -46,6 +50,11 @@ if (!wanted.length) {
   process.exit(2);
 }
 const dryRun = values['dry-run'];
+if (values.source?.length && !dryRun) {
+  // A filtered real run would move the cursor past other sources' documents.
+  console.error('--source only works with --dry-run.');
+  process.exit(2);
+}
 const limit = Number(values.limit);
 const budget = Number(values.budget);
 
@@ -81,7 +90,7 @@ console.log(
 try {
   const summary = await runTask({
     task,
-    docs: selectDocs(pool, { bips: [...bips.keys()], afterId: cursor, limit }),
+    docs: selectDocs(pool, { bips: [...bips.keys()], afterId: cursor, limit, sources: values.source }),
     model,
     bips,
     validator,
@@ -92,6 +101,18 @@ try {
       for (const c of r.claims) {
         const where = dryRun ? '(dry run)' : writeClaim(dataDir, c).replace(`${dataDir}/`, 'data/');
         console.log(`+ ${c.kind} ${c.stance ?? ''} BIP ${c.bip} · ${c.subject?.name} · ${where}`);
+        if (dryRun) {
+          console.log(`    statement: ${c.statement}`);
+          if (c.condition) console.log(`    condition: ${c.condition}`);
+          console.log(`    quote:     ${JSON.stringify(c.source.quote)}`);
+          console.log(`    source:    ${c.source.url} (${c.source.date ?? 'no date'}, spec ${c.applies_to_version})`);
+        }
+      }
+      if (dryRun) {
+        for (const rej of r.rejected) {
+          console.log(`- rejected (attempt ${rej.attempt}) document ${r.document_id}: ${rej.errors.join('; ')}`);
+          if (rej.claim?.source?.quote) console.log(`    quote:     ${JSON.stringify(rej.claim.source.quote)}`);
+        }
       }
       if (r.outcome !== 'claims' && r.outcome !== 'none') {
         console.log(`  document ${r.document_id}: ${r.outcome}${r.rejected.length ? ` (${r.rejected.at(-1)!.errors.join('; ')})` : ''}`);

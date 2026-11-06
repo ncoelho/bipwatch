@@ -6,3 +6,4 @@ site/.astro/
 .neon
 .env.local
 data/freshness.json
+.env.anthropic
