@@ -12,6 +12,7 @@ The full product and technical spec, including decisions and next work, is in [`
 data/            the open data layer (CC0); see data/README.md
 packages/data/   TypeScript loader + validator for data/
 packages/collect/ collectors, Postgres archive and BIP-mention index
+packages/extract/ LLM extractors that propose claims (SPEC 6.2)
 site/            Astro site: BIP pages and a static JSON API
 .github/         CI: validate on every PR, build on main + nightly
 ```
@@ -32,6 +33,7 @@ npm run test:db --workspace @bipwatch/collect   # runner + migrations against Ne
 npm run collect -- --source bips-repo  # run one collector (bips-repo, delving, mailing-list, github), or --all
 npm run sync-headers -- --bips ../bips # re-sync bip.yaml facts from spec headers (--dry-run to preview)
 npm run freshness                      # fail if a collector is overdue; --export data/freshness.json for the site
+npm run extract -- --task stance --limit 20 --dry-run   # LLM extraction (needs Claude API credentials; spends tokens)
 ```
 
 Collectors read `DATABASE_URL` (pooled), `DATABASE_URL_UNPOOLED` (migrations) and `GITHUB_TOKEN` (locally: `export GITHUB_TOKEN=$(gh auth token)`) from the environment, `.env.local` (written by `neon env pull`) or `.env` (see `.env.example`). `neon.ts` declares the Neon project config.
@@ -60,7 +62,7 @@ git clone --filter=blob:none --no-checkout https://github.com/bitcoin/bips.git .
 - [x] Data schemas and validator
 - [x] BIP 352 hand-filled record (18 claims, needs assessment, pending review)
 - [x] Static site and JSON API
-- [ ] Collectors for the BIP repo, GitHub, Delving Bitcoin and the mailing list
+- [x] Collectors for the BIP repo, GitHub, Delving Bitcoin and the mailing list
 - [ ] LLM extractors behind a pull-request review queue
 - [ ] Chain and network series for consensus BIPs
 - [ ] Signed contribution intake

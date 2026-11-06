@@ -3,3 +3,5 @@ export { buildMentionContext, detectMentions, type MentionContext } from './ment
 export { connect, connectDirect } from './db.ts';
 export { migrate } from './migrate.ts';
 export { contentHash, lastCursor, runCollector, type RunResult } from './run.ts';
+export { bipsRepoDir, git, showFile, updateBipsRepo } from './bips/git.ts';
+export { parseHeader, type SpecHeader } from './bips/header.ts';

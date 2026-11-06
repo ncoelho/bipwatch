@@ -1,0 +1,32 @@
+{
+  "name": "@bipwatch/extract",
+  "version": "0.1.0",
+  "private": true,
+  "description": "LLM extractors that propose claims from the archive (SPEC 6.2).",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "extract": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env src/cli.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "1.1.0",
+    "@bipwatch/collect": "*",
+    "@bipwatch/data": "*",
+    "ajv": "8.17.1",
+    "ajv-formats": "3.0.1",
+    "pg": "8.13.1",
+    "yaml": "2.8.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.30",
+    "@types/pg": "8.11.10",
+    "tsx": "4.20.3",
+    "typescript": "5.8.3",
+    "vitest": "3.2.4"
+  }
+}

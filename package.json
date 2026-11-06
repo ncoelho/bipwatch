@@ -16,7 +16,8 @@
     "migrate": "npm run migrate --workspace @bipwatch/collect --",
     "collect": "npm run collect --workspace @bipwatch/collect --",
     "sync-headers": "npm run sync-headers --workspace @bipwatch/collect --",
-    "freshness": "npm run freshness --workspace @bipwatch/collect --"
+    "freshness": "npm run freshness --workspace @bipwatch/collect --",
+    "extract": "npm run extract --workspace @bipwatch/extract --"
   },
   "engines": {
     "node": ">=22.23.4"

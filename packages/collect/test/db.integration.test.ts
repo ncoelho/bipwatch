@@ -75,7 +75,7 @@ describe.skipIf(!url)('Postgres integration (Neon)', () => {
   });
 
   it('applies migrations once', async () => {
-    expect(await migrate(pool)).toEqual(['001_init.sql']);
+    expect(await migrate(pool)).toEqual(['001_init.sql', '002_extract.sql']);
     expect(await migrate(pool)).toEqual([]);
   });
 

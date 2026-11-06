@@ -353,6 +353,14 @@ Re-running any collector with the same cursor must not create duplicates (`conte
 - Track, per task, how often reviewers edit or reject claims. That becomes the eval set.
 - Embeddings (pgvector) are added here, for retrieving context and for related-discussion links.
 
+**Progress (2026-11-06):** `packages/extract` with the first task, `stance`, built and tested against a scripted model; not yet run against the Claude API (no credentials configured yet, and a full pass spends money, so it waits for the owner).
+- `npm run extract -- --task stance [--bip 352] [--limit 50] [--budget 200000] [--dry-run]`. Selects documents that mention a tracked BIP and have an author, joined to `raw_items`, after the last run's cursor (document id), in id order. `--dry-run` calls the model and validates but writes nothing and keeps the cursor.
+- Each task is a module with a versioned prompt file (`src/tasks/stance/prompt.v1.md`), a zod output schema and a `toClaims` mapping. The model only judges what the author says; code sets `subject` (the document's author, so a stance is never attributed to someone who did not write it), `source`, `provenance` (`model:<id>`, `reviewed_by: null`) and `applies_to_version`, which is the spec header's Version at the document's date from the bitcoin/bips history (`0.0.0` when no versioned spec existed yet; BIP 352's 2022 threads predate it).
+- Model call: `claude-opus-5-5`, effort `medium`, structured output (`client.beta.messages.parse` with `betaZodOutputFormat`), system prompt cached across documents, and server-side refusal fallback (`fallbacks: "default"`) so a classifier false positive on security discussion is retried on another model.
+- Validator: claim schema, `source.quote` verbatim in `body_text` (whitespace normalized only), BIP is one the document mentions, no claim with the same kind, subject and quote. One retry shows the model its errors; failures are dropped and logged.
+- Bookkeeping in `002_extract.sql`: `extract_runs` (task, version, model, tokens, cursor, how it stopped) and `extract_log` (per document: outcome, attempts, claim ids, rejected proposals with errors), which is the start of the eval set. The token budget is a hard stop between documents. Only transient API errors (connection, rate limit, 5xx) skip a document; anything else stops the run.
+- Not done: the PR bot (one PR per BIP per run), Batches for backfills, the other tasks, reviewer-edit tracking, embeddings.
+
 ### 6.3 Chain and network series
 
 Only for consensus BIPs (54, 448 and later picks). Version-bit signaling per retarget window from block headers, node client-version shares from a crawler, written to Postgres and exported as daily CSV into `data/series/`. Not needed for BIP 352, whose adoption is wallet coverage.

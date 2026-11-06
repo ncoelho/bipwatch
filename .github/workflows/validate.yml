@@ -26,4 +26,5 @@ jobs:
       - run: npm run validate -- --bips ../bips
       - run: npm run typecheck --workspace @bipwatch/data
       - run: npm run typecheck --workspace @bipwatch/collect
+      - run: npm run typecheck --workspace @bipwatch/extract
       - run: npm test
