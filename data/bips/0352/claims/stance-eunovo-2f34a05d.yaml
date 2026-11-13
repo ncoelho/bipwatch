@@ -1,0 +1,28 @@
+id: stance-eunovo-2f34a05d
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2348
+  title: "bip-0352: fix input encodings in test vectors"
+statement: Eunovo tested and approved a change fixing input encodings in the BIP
+  352 test vectors (Taproot control parity mismatch for the NUMS point vector
+  and the missing sighash byte for legacy scripts), reporting that all vectors
+  passed against Bitcoin Core's bip352 module.
+subject:
+  name: Eunovo
+  type: person
+applies_to_version: 1.1.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2348#pullrequestreview-5800776629
+  type: github
+  title: "bip-0352: fix input encodings in test vectors"
+  date: 2026-11-06
+  retrieved: 2026-11-13
+  quote: "APPROVED: tACK"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

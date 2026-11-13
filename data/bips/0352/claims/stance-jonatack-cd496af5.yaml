@@ -1,0 +1,26 @@
+id: stance-jonatack-cd496af5
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2330
+  title: "BIP-352: add test vectors for skipped inputs and label edge cases"
+statement: jonatack approved the pull request adding BIP 352 test vectors for
+  skipped inputs and label edge cases.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 1.1.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2330#pullrequestreview-5828951317
+  type: github
+  title: "BIP-352: add test vectors for skipped inputs and label edge cases"
+  date: 2026-11-09
+  retrieved: 2026-11-13
+  quote: ACK
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null
