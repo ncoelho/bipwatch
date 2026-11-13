@@ -1,0 +1,26 @@
+id: task-setavenger-043f628d
+bip: 352
+kind: task
+status: open
+area: spec
+part_of: nostr notifications
+statement: Consider adding a timestamp hint to silent payment notifications so
+  receivers can limit the range of block filters they search to locate the
+  output.
+subject:
+  name: setavenger
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-notifications-via-nostr/2203/5
+  type: forum
+  title: Silent Payments notifications via Nostr
+  date: 2026-02-14
+  retrieved: 2026-11-13
+  quote: A timestamp as a hint could make this more feasible to limit the probable
+    range.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

@@ -1,0 +1,25 @@
+id: open-question-junderw-bab098b4
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+part_of: BIP 392
+statement: Decide whether the silent payment key export format should include a
+  wallet birthday and a maximum label value as scanning hints.
+subject:
+  name: junderw
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/bip352-private-key-formats/2080/9
+  type: forum
+  title: BIP352 private key formats
+  date: 2025-11-12
+  retrieved: 2026-11-13
+  quote: I think birthday and max label should be included as a hint to aide in
+    scanners.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

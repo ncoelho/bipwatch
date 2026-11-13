@@ -1,0 +1,26 @@
+id: task-matt-corallo-a4e56ce1
+bip: 352
+kind: task
+status: open
+area: spec
+part_of: bip21 update
+statement: Make the BIP 21 URI body optional so silent payment URIs can be
+  shared without a standard on-chain fallback address.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/93c14d4f-10f3-48af-9756-7e39d61ba3d4@mattcorallo.com/
+  type: mailing-list
+  title: BIP 21 Updates
+  date: 2024-05-30
+  retrieved: 2026-11-13
+  quote: as future payment schemes (and existing ones like Silent Payments) may
+    wish to not have the standard on-chain fallback, I'm also proposing the body
+    of the URI be made optional.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

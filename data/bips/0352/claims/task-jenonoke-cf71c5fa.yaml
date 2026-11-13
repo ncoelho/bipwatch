@@ -1,0 +1,26 @@
+id: task-jenonoke-cf71c5fa
+bip: 352
+kind: task
+status: open
+area: spec
+part_of: silent payments coinbase
+statement: Specify an explicit encoding and versioning for the sender data in
+  the coinbase scriptSig so future coinbase-tag formats cannot be mistaken for
+  SPc data.
+subject:
+  name: jenonoke
+  type: person
+applies_to_version: 1.1.2
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-coinbase/2833/8
+  type: forum
+  title: Silent Payments coinbase
+  date: 2026-10-26
+  retrieved: 2026-11-13
+  quote: I’d make the encoding and versioning explicit, so future coinbase-tag
+    formats can’t be mistaken for SPc data.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

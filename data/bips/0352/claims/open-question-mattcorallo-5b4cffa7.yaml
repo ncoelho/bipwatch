@@ -1,0 +1,27 @@
+id: open-question-mattcorallo-5b4cffa7
+bip: 352
+kind: open-question
+status: open
+area: research
+part_of: bip21 update
+statement: Check whether existing BIP21 URI parsers fail on parameters without
+  an '=' before allowing silent payment addresses to appear as bare HRP-prefixed
+  parameters in the URI.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/revisiting-bip21/630/11
+  type: forum
+  title: Revisiting BIP21
+  date: 2024-03-01
+  retrieved: 2026-11-13
+  quote: not sure if any existing implementations try to parse parameters as K/V
+    and fail if there's no =. Its nice to avoid a few extra characters in QR
+    codes, but not sure its worth that risk.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

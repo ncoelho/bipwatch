@@ -1,0 +1,27 @@
+id: objection-andrewtoth-95f8a051
+bip: 352
+kind: objection
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Design the PSBT ECDH share and proof fields so that the number of
+  proofs does not grow as inputs times outputs, which could be too much data for
+  coinjoins.
+subject:
+  name: Andrew Toth
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/8
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-05-29
+  retrieved: 2026-11-13
+  quote: If we can't have a running proof sum, the PSBT will have worst case
+    inputs * outputs number of proofs. This could be too much data for
+    coinjoins, but should be fine for regular transactions.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

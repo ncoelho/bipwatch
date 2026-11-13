@@ -1,0 +1,27 @@
+id: open-question-nymius-87ae4c17
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+part_of: BIP 376
+statement: Decide whether the 33-byte spend public key should reuse
+  PSBT_IN_TAP_INTERNAL_KEY by dropping its first byte, or get a new dedicated
+  PSBT field.
+subject:
+  name: nymius
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/31
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2025-11-13
+  retrieved: 2026-11-13
+  quote: Spend public keys are 33 bytes, but by dropping the first byte it fits
+    inside `PSBT_IN_TAP_INTERNAL_KEY` at the cost of having to check the
+    matching with the public key before signing.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

@@ -17,12 +17,14 @@ people:
     aliases: [murchandamus]
   - name: Matthew Zipkin
     aliases: [pinheadmz]
+  - name: Andrew Toth
+    aliases: [andrewtoth]
   # Authors of the focus BIPs (added 2026-11-13). Each posts on GitHub or
   # Delving under the login and on the list or in spec headers by name.
   - name: Antoine Poinsot
     aliases: [darosior]
   - name: Matt Corallo
-    aliases: [TheBlueMatt]
+    aliases: [TheBlueMatt, MattCorallo]
   - name: Gregory Sanders
     aliases: [instagibbs]
   - name: Steven Roose

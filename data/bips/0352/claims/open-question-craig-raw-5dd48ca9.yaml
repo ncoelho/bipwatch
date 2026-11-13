@@ -1,0 +1,27 @@
+id: open-question-craig-raw-5dd48ca9
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+part_of: BIP 392
+statement: Decide whether the sp() descriptor should carry an optional wallet
+  birthday argument, given how costly it is to scan from Taproot activation.
+subject:
+  name: Craig Raw
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAPR5oBPH=mbv4N3_4vuCcf+mDTCiT52WDb=qQ6KNuT=6Qr5tKA@mail.gmail.com/
+  type: mailing-list
+  title: "[BIP Proposal] Add sp() output descriptor format for BIP352"
+  date: 2025-12-04
+  retrieved: 2026-11-13
+  quote: |-
+    This, combined with
+    the significant computational burden which other descriptors do not have to
+    bear, is reason enough I think to include it here as an optional argument.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

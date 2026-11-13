@@ -1,0 +1,27 @@
+id: open-question-andrewtoth-3fbfe546
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Decide whether ECDH shares and DLEQ proofs should be global PSBT
+  fields rather than per-input fields, to avoid duplicating them per input and
+  reduce verification work.
+subject:
+  name: Andrew Toth
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/22
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-18
+  retrieved: 2026-11-13
+  quote: How about adding the shares and proofs as globals, and the key data would
+    be the scan key followed by the set of input outpoints instead of input
+    indexes?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

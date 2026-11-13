@@ -1,0 +1,27 @@
+id: open-question-josibake-06b8b74f
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Determine whether a silent payment PSBT carries enough prevout
+  information to verify that no input spends a segwit version greater than 1
+  output.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/3
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-05-20
+  retrieved: 2026-11-13
+  quote: does the PSBT provide enough information about the prevout for us to
+    ensure the output being spent is not a segwit witness version > 1, for
+    example?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

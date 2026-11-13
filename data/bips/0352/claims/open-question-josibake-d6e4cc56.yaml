@@ -1,0 +1,27 @@
+id: open-question-josibake-d6e4cc56
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Decide whether signers controlling multiple inputs may consolidate
+  ECDH shares and DLEQ proofs instead of providing one per input, to avoid
+  tripling their ECC work.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/21
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-18
+  retrieved: 2026-11-13
+  quote: If we allow the signer to consolidate the shares / proofs, this would be
+    one ECDH, one proof, and 10 signatures. One alternative is to allow the
+    proof to be duplicated for inputs belong to the same signer.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

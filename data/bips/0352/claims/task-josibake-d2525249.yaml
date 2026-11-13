@@ -1,0 +1,28 @@
+id: task-josibake-d2525249
+bip: 352
+kind: task
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Specify a deterministic ordering (lexicographic by scan and spend
+  key) of silent payment outputs sharing a scan key so all signers derive the
+  same k values.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/21
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-18
+  retrieved: 2026-11-13
+  quote: each signer will need to sort the silent payment address by scan public
+    key and spend public key, in lexicographic order. This guarantees that
+    everyone gets the same values for `k` when creating multiple outputs for the
+    same scan public key.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

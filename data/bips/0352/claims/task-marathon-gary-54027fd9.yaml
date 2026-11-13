@@ -1,0 +1,27 @@
+id: task-marathon-gary-54027fd9
+bip: 352
+kind: task
+status: open
+area: spec
+part_of: silent payments coinbase
+statement: Define a separate wallet scanning profile for silent payments
+  coinbase outputs, since the sender data that identifies ownership sits in a
+  different place than in standard silent payment transactions.
+subject:
+  name: marathon-gary
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-coinbase/2833/4
+  type: forum
+  title: Silent Payments coinbase
+  date: 2026-08-31
+  retrieved: 2026-11-13
+  quote: This would require a new scanning profile for wallets. The data that
+    indicates ownership of your wallet is in a different location than standard
+    silent payments.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

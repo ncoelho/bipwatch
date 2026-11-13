@@ -1,0 +1,27 @@
+id: task-andrewtoth-a8daa452
+bip: 352
+kind: task
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Specify how PSBT roles must handle ANYONECANPAY sighashes on inputs
+  when silent payment outputs are present, and whether PSBT_GLOBAL_TX_MODIFIABLE
+  needs a Has Silent Payments flag.
+subject:
+  name: Andrew Toth
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/14
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-14
+  retrieved: 2026-11-13
+  quote: Constructors also need to check if there are any ANYONECANPAY sighashes
+    on any inputs before adding a silent payment, and updaters need to check as
+    well
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: open-question-andrewtoth-3daddc26
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Decide whether to add a 'Has Silent Payments' flag to
+  PSBT_GLOBAL_TX_MODIFIABLE, so Constructors and Updaters avoid mixing
+  ANYONECANPAY signatures with silent payment outputs.
+subject:
+  name: Andrew Toth
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/22
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-18
+  retrieved: 2026-11-13
+  quote: we shouldn't extend the `PSBT_GLOBAL_TX_MODIFIABLE` to have a Has Silent
+    Payments flag to track this state in the same way
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

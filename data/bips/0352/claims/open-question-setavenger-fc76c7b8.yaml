@@ -1,0 +1,24 @@
+id: open-question-setavenger-fc76c7b8
+bip: 352
+kind: open-question
+status: open
+area: spec
+part_of: nostr notifications
+statement: Decide whether silent payment notifications should include the
+  relevant outputs alongside the txid, tweak and optional blockhash.
+subject:
+  name: setavenger
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-notifications-via-nostr/2203/1
+  type: forum
+  title: Silent Payments notifications via Nostr
+  date: 2026-01-15
+  retrieved: 2026-11-13
+  quote: One could also add the relevant outputs to this as well.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

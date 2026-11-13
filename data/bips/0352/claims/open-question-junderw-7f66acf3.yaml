@@ -1,0 +1,26 @@
+id: open-question-junderw-7f66acf3
+bip: 352
+kind: open-question
+status: addressed
+area: ux
+part_of: BIP 392
+statement: Decide whether the scan and spend keys should be encoded together as
+  a single bech32m string so users cannot mix up key parts from different
+  wallets.
+subject:
+  name: junderw
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/bip352-private-key-formats/2080/9
+  type: forum
+  title: BIP352 private key formats
+  date: 2025-11-12
+  retrieved: 2026-11-13
+  quote: Thoughts on encoding scan+spend into one unit while leaving birthday and
+    maxlabel as ints?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

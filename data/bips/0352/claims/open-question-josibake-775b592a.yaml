@@ -1,0 +1,25 @@
+id: open-question-josibake-775b592a
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Decide whether the silent payments PSBT format should carry a running
+  (aggregated) proof sum or a separate DLEQ proof for each input.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/7
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-05-28
+  retrieved: 2026-11-13
+  quote: a running proof sum would be ideal. Also seems fine to include a proof
+    with each input.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

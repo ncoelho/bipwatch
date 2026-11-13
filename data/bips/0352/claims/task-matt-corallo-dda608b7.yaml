@@ -1,0 +1,26 @@
+id: task-matt-corallo-dda608b7
+bip: 352
+kind: task
+status: open
+area: spec
+part_of: bip21 update
+statement: Define a standard BIP 21 query parameter so wallets know which
+  parameter carries a silent payment address.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/93c14d4f-10f3-48af-9756-7e39d61ba3d4@mattcorallo.com/
+  type: mailing-list
+  title: BIP 21 Updates
+  date: 2024-05-30
+  retrieved: 2026-11-13
+  quote: there needs to be a standard way to decide which query parameter
+    describes which payment instruction, and BIP 21 should document this
+    in-practice usage.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

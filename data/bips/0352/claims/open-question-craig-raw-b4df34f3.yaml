@@ -1,0 +1,28 @@
+id: open-question-craig-raw-b4df34f3
+bip: 352
+kind: open-question
+status: open
+area: spec
+part_of: BIP 392
+statement: Decide whether the silent payment descriptor format should carry
+  optional wallet birthday and max label fields, with defaults (block height
+  842579 and the change label only) when they are omitted.
+subject:
+  name: Craig Raw
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/bip352-private-key-formats/2080/11
+  type: forum
+  title: BIP352 private key formats
+  date: 2025-11-13
+  retrieved: 2026-11-13
+  quote: As to leaving birthday and maxlabel as ints in an output descriptor
+    format, I think these would be useful but suggest making them optional,
+    where reasonable defaults (block height 842579 and one change label) are
+    assumed if not supplied.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

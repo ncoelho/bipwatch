@@ -1,0 +1,27 @@
+id: open-question-andrewtoth-a528d4d1
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Decide whether the signer's ECDH shares and DLEQ proofs for multiple
+  inputs can be combined into one share and proof per scan key and set of
+  inputs, for example a global field keyed by scan key plus input indexes.
+subject:
+  name: Andrew Toth
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/14
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-14
+  retrieved: 2026-11-13
+  quote: Can we combine these into having one proof for each scan key and set of
+    inputs? Perhaps a global field where key data is 33 bytes scan followed by
+    set of indexes?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

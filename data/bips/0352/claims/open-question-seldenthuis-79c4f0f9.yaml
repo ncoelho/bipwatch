@@ -1,0 +1,26 @@
+id: open-question-seldenthuis-79c4f0f9
+bip: 352
+kind: open-question
+status: addressed
+area: research
+part_of: silent payments coinbase
+statement: Determine whether the growing BIP34 height push (4–5 bytes) in the
+  coinbase scriptSig, alongside the 34-byte A_send, meaningfully constrains
+  extranonce sizing within the 100-byte limit.
+subject:
+  name: Seldenthuis
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-coinbase/2833/3
+  type: forum
+  title: Silent Payments coinbase
+  date: 2026-08-29
+  retrieved: 2026-11-13
+  quote: So the actual budget right now is closer to 100 - 4 (BIP34) - 34 (A_send)
+    = 62 bytes for the extranonce
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

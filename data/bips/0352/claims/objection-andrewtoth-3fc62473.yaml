@@ -1,0 +1,28 @@
+id: objection-andrewtoth-3fc62473
+bip: 352
+kind: objection
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Prevent silent payment PSBT signers from using ANYONECANPAY, since an
+  SP-unaware constructor could add inputs that change the shared secret and
+  invalidate already-signed silent payment outputs.
+subject:
+  name: Andrew Toth
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/16
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-14
+  retrieved: 2026-11-13
+  quote: if signing with ANYONECANPAY, even with SIGHASH_ALL, then Inputs
+    Modifiable will not be set to False. So another SP unaware constructor can
+    add a new input that modifies the shared secret and invalidates the already
+    signed outputs.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

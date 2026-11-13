@@ -1,0 +1,26 @@
+id: objection-achow101-2f2ce21b
+bip: 352
+kind: objection
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Avoid PSBT silent payment fields that depend on input ordering or
+  lists of input indexes, since inputs can be added or removed while Inputs
+  Modifiable is set.
+subject:
+  name: achow101
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/15
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-14
+  retrieved: 2026-11-13
+  quote: Having any field that includes a list of indexes could become messed up
+    by an unaware constructor that adds an input in the wrong place.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

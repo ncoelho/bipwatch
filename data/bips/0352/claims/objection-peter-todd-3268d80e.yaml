@@ -1,0 +1,25 @@
+id: objection-peter-todd-3268d80e
+bip: 352
+kind: objection
+status: addressed
+area: spec
+statement: Decide whether silent payment addresses should carry an expiration
+  time that clients enforce, to keep funds from going to lost-key, deceased or
+  compromised recipients.
+subject:
+  name: Peter Todd
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/ZNVPWBd3+06Su01h@petertodd.org/
+  type: mailing-list
+  title: BIP-352 Silent Payments addresses should have an expiration time
+  date: 2023-08-10
+  retrieved: 2026-11-13
+  quote: For them to work in almost all cases it is more than sufficient to just
+    standardize them and enforce them in the client.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

@@ -1,0 +1,27 @@
+id: task-josibake-92eac588
+bip: 352
+kind: task
+status: open
+area: ux
+part_of: bip21 update
+statement: Specify how silent payment addresses are carried in BIP21 payment
+  URIs, either through a dedicated extension key or an updated BIP21 that allows
+  self-identifying addresses as fallback options.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/revisiting-bip21/630/1
+  type: forum
+  title: Revisiting BIP21
+  date: 2024-03-01
+  retrieved: 2026-11-13
+  quote: Recently had a discussion on
+    [BIP352](https://github.com/bitcoin/bips/pull/1458#issuecomment-1954819980)
+    regarding specifying a BIP21 extension for silent payment addresses
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: task-sebastian-falbesoner-e1c9a1f3
+bip: 352
+kind: task
+status: addressed
+area: coordination
+statement: Gather feedback from silent payment wallet developers on whether the
+  backwards-incompatible K_max limit affects existing wallets or future use
+  cases.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/b8edb433-c7b8-4d79-b710-e89a578eb42cn@googlegroups.com/
+  type: mailing-list
+  title: "BIP-352: Limiting the number of per-group recipients (K_max)"
+  date: 2026-02-04
+  retrieved: 2026-11-13
+  quote: If you have any concerns or feedback for this change, either for
+    currently existing wallets or potential future use-cases that you could
+    think of, please comment there.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

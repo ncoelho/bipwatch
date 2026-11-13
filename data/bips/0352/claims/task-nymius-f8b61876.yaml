@@ -1,0 +1,25 @@
+id: task-nymius-f8b61876
+bip: 352
+kind: task
+status: open
+area: spec
+part_of: BIP 392
+statement: Consider encoding a range or limit for the number of labels in use
+  within the silent payment key string, to help wallets scan.
+subject:
+  name: nymius
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/bip352-private-key-formats/2080/3
+  type: forum
+  title: BIP352 private key formats
+  date: 2025-10-27
+  retrieved: 2026-11-13
+  quote: For (2), it may also be useful to encode a range or limit for the number
+    of applicable labels on the string itself.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

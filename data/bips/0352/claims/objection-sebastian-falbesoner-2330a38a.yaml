@@ -1,0 +1,25 @@
+id: objection-sebastian-falbesoner-2330a38a
+bip: 352
+kind: objection
+status: addressed
+area: spec
+statement: Mitigate the very poor scanning performance for adversarial
+  transactions with many outputs to the same scan key, e.g. by adding a
+  per-group recipient limit K_max.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/b8edb433-c7b8-4d79-b710-e89a578eb42cn@googlegroups.com/
+  type: mailing-list
+  title: "BIP-352: Limiting the number of per-group recipients (K_max)"
+  date: 2026-02-04
+  retrieved: 2026-11-13
+  quote: we discovered that the scanning approach suggested in BIP-352 [2] suffers
+    from very poor performance for adversarial transactions [3].
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

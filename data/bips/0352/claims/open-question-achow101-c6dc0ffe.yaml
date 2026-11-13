@@ -1,0 +1,27 @@
+id: open-question-achow101-c6dc0ffe
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Decide how the PSBT silent payments spec handles ANYONECANPAY
+  signatures, for example by restricting when silent payment outputs can be
+  added or which sighash types signers may use.
+subject:
+  name: achow101
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/15
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-14
+  retrieved: 2026-11-13
+  quote: it wasn't necessary to make any special consideration for ANYONECANPAY if
+    we require that silent payments outputs can only be added if there are no
+    inputs yet, or inputs with no signatures, or Inputs Modifiable is not set.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

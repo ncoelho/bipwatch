@@ -1,0 +1,26 @@
+id: task-setavenger-0a96e184
+bip: 352
+kind: task
+status: open
+area: spec
+part_of: nostr notifications
+statement: Specify the notification message fields, with a mandatory minimal
+  identifier and an optional tweak that the receiver may discard if untrusted.
+subject:
+  name: setavenger
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-notifications-via-nostr/2203/3
+  type: forum
+  title: Silent Payments notifications via Nostr
+  date: 2026-01-18
+  retrieved: 2026-11-13
+  quote: the tweak should be allowed in. Maybe only in an optional capacity where
+    it can be discarded if Bob or his wallet don't trust it. The txid would be
+    mandatory as the "absolute minimal" component.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

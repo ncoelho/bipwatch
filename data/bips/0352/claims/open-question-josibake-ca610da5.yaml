@@ -1,0 +1,26 @@
+id: open-question-josibake-ca610da5
+bip: 352
+kind: open-question
+status: open
+area: spec
+part_of: light-client index
+statement: Decide whether the light-client protocol should always serve tweak
+  data and filters together.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-light-client-protocol/891/3
+  type: forum
+  title: "Silent Payments: Light Client Protocol"
+  date: 2024-05-22
+  retrieved: 2026-11-13
+  quote: is there every a reason a client would want the tweak data and not a
+    filter or vice versa? If not, seems better to always give them to the client
+    together.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

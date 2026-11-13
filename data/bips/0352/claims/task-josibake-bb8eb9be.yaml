@@ -1,0 +1,24 @@
+id: task-josibake-bb8eb9be
+bip: 352
+kind: task
+status: open
+area: spec
+part_of: light-client index
+statement: Make the dust limit for returned tweak data a client-set parameter in
+  the light-client protocol rather than a fixed server value.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-light-client-protocol/891/3
+  type: forum
+  title: "Silent Payments: Light Client Protocol"
+  date: 2024-05-22
+  retrieved: 2026-11-13
+  quote: Ideally, this is a parameter set by the client.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

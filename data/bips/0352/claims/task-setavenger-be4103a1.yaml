@@ -1,0 +1,28 @@
+id: task-setavenger-be4103a1
+bip: 352
+kind: task
+status: addressed
+area: spec
+part_of: nostr notifications
+statement: Specify a nostr-based out-of-band notification scheme for silent
+  payments in which the sender sends the txid and optionally the tweak or
+  derived pubkeys, so the receiver only has to validate them instead of
+  scanning.
+subject:
+  name: setavenger
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/stealth-addresses-using-nostr/1816/8
+  type: forum
+  title: Stealth addresses using nostr
+  date: 2025-09-29
+  retrieved: 2026-11-13
+  quote: The notification message could contain the tweak of the transaction made
+    to Bob. So Alice would send a Txid and optionally the tweak (`input_hash *
+    A`) and/or the computed pubkeys for the transaction she made.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

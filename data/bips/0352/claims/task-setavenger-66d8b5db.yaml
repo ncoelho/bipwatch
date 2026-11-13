@@ -1,0 +1,26 @@
+id: task-setavenger-66d8b5db
+bip: 352
+kind: task
+status: open
+area: review
+part_of: light-client index
+statement: Review the early draft of the BIP352 light client specification,
+  which covers the tweak index, cut-through, taproot-only filters and simplified
+  UTXO endpoints.
+subject:
+  name: setavenger
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-light-client-protocol/891/1
+  type: forum
+  title: "Silent Payments: Light Client Protocol"
+  date: 2024-05-21
+  retrieved: 2026-11-13
+  quote: Now that an early draft exists I would like to get more people involved
+    in the process.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

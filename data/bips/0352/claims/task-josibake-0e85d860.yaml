@@ -1,0 +1,27 @@
+id: task-josibake-0e85d860
+bip: 352
+kind: task
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Add a DLEQ proof to the PSBT sending spec so signers can verify
+  silent payment outputs were generated correctly without access to the private
+  keys.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/1
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-05-17
+  retrieved: 2026-11-13
+  quote: "TODO: It may also generate a DLEQ proof using all the public keys of the
+    inputs used for shared secret derivation and add it to the PSBT field
+    PSBT_GLOBAL_SILENT_PAYMENTS_DLEQ_PROOF."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

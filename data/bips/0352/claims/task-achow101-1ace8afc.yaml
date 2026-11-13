@@ -1,0 +1,26 @@
+id: task-achow101-1ace8afc
+bip: 352
+kind: task
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Specify that constructors may only add silent payment outputs when no
+  inputs spend segwit v2+ outputs, and that signers must reject PSBTs with
+  silent payment outputs and segwit v2+ inputs.
+subject:
+  name: achow101
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/13
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-13
+  retrieved: 2026-11-13
+  quote: Signers will also need to validate that if there are any silent payments
+    v0 outputs, there are no segwit v2+ inputs.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

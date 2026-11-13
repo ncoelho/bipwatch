@@ -1,0 +1,26 @@
+id: open-question-junderw-c19b81cb
+bip: 352
+kind: open-question
+status: open
+area: spec
+part_of: BIP 392
+statement: Decide whether exported silent payment key formats should also encode
+  a wallet birthday block height and the labels in use, so that scanners know
+  where to start and which labels to check on import.
+subject:
+  name: junderw
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/bip352-private-key-formats/2080/4
+  type: forum
+  title: BIP352 private key formats
+  date: 2025-11-01
+  retrieved: 2026-11-13
+  quote: Perhaps 2 and 3 should encode a block number for their “birthday” which
+    would be the key asserting “no need to check below this block”
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

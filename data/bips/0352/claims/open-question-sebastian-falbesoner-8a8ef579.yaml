@@ -1,0 +1,25 @@
+id: open-question-sebastian-falbesoner-8a8ef579
+bip: 352
+kind: open-question
+status: open
+area: spec
+part_of: BIP 392
+statement: Decide whether the sp() descriptor format should allow label ranges,
+  given that BIP-style label-cache scanning keeps the cost flat for large
+  numbers of labels.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/59b1879d-b43d-41ac-9b3e-3e65cf31d4e5n@googlegroups.com/
+  type: mailing-list
+  title: "[BIP Proposal] Add sp() output descriptor format for BIP352"
+  date: 2025-12-22
+  retrieved: 2026-11-13
+  quote: Hence, I'd be in favor of allowing label ranges in the SP descriptor format.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null
