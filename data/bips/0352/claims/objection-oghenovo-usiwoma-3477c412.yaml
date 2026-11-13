@@ -2,7 +2,7 @@ id: objection-oghenovo-usiwoma-3477c412
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 part_of: BIP 392
 statement: Decide whether the sp() descriptor needs new spscan/spspend key
   encodings or can use existing key formats as sp(scankey,spendkey).

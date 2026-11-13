@@ -2,7 +2,7 @@ id: objection-poyuholu-ed501259
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: writing
 part_of: multiparty silent payments
 statement: Fix the multiparty silent payments protocol equations so the ECDH
   share and aggregated responses apply the accumulated parity factor g to each

@@ -2,7 +2,7 @@ id: task-zenul-abidin-fd89aaf2
 bip: 352
 kind: task
 status: open
-area: implementation
+area: engineering
 part_of: electrum silent payments plugin
 statement: Extend the Electrum silent payments sender plugin to support
   hardware, watch-only, imported-key, multisig and 2FA wallets.

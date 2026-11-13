@@ -2,7 +2,7 @@ id: task-andrewtoth-a8daa452
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Specify how PSBT roles must handle ANYONECANPAY sighashes on inputs
   when silent payment outputs are present, and whether PSBT_GLOBAL_TX_MODIFIABLE

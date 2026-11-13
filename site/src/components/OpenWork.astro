@@ -1,8 +1,10 @@
 ---
 // What needs doing (SPEC 1, the main job): tasks, open questions and
-// objections raised in public discussion, grouped by area of work. Open items
-// lead; ones the spec or later discussion already settled are folded away
-// under each area. Every item names who raised it and links its quote.
+// objections raised in public discussion, grouped by type of work (who would
+// pick it up), then by piece of work: the BIP itself, a companion BIP, or a
+// project built for it. Open items lead; ones the spec or later discussion
+// already settled are folded away under each piece. Every item names who
+// raised it and links its quote.
 import type { BipBundle } from '@bipwatch/data';
 import WorkItem from './WorkItem.astro';
 import { AREA_LABEL, isPending, openWork } from '../lib/view.ts';
@@ -11,30 +13,29 @@ interface Props { bundle: BipBundle; }
 const { bundle } = Astro.props;
 const current = bundle.bip.version;
 const groups = openWork(bundle.claims);
-const openCount = groups.reduce((n, g) => n + g.open.length, 0);
-const doneCount = groups.reduce((n, g) => n + g.addressed.length, 0);
-const all = groups.flatMap((g) => [...g.open, ...g.addressed]);
+const openCount = groups.reduce((n, g) => n + g.open, 0);
+const doneCount = groups.reduce((n, g) => n + g.addressed, 0);
+const all = groups.flatMap((g) => g.pieces.flatMap((p) => [...p.open, ...p.addressed]));
 const allPending = all.length > 0 && all.every(isPending);
-const parts = [...new Set(all.flatMap((c) => (c.part_of ? [c.part_of] : [])))].sort();
 const title = (g: (typeof groups)[number]) => (g.area ? AREA_LABEL[g.area] : 'Other');
 const anchor = (g: (typeof groups)[number]) => `work-${g.area ?? 'other'}`;
+const pieceName = (part: string | null) => part ?? `BIP ${bundle.bip.number} itself`;
 ---
 {all.length > 0 && (
   <section id="work">
     <div class="sec-head">
       <h2>What needs doing</h2>
       <p class="muted tnum">
-        {openCount} open {openCount === 1 ? 'item' : 'items'}{doneCount > 0 && `, ${doneCount} already addressed`}: tasks, questions and objections raised in public discussion, by area of work.
+        {openCount} open {openCount === 1 ? 'item' : 'items'}{doneCount > 0 && `, ${doneCount} already addressed`}: tasks, questions and objections raised in public discussion, by type of work and then by the piece it belongs to, which may be the BIP itself, a companion BIP or a project built for it.
         Each links the message it came from.
-        {parts.length > 0 && <>{' '}Besides the BIP itself, this includes work on {parts.join(', ')}.</>}
         {allPending && <span class="pill warn">All pending review</span>}
       </p>
     </div>
 
-    <nav class="areas" aria-label="Areas of work">
+    <nav class="areas" aria-label="Types of work">
       {groups.map((g) => (
-        <a href={`#${anchor(g)}`} class:list={['chip', { quiet: g.open.length === 0 }]}>
-          {title(g)} <span class="mono tnum">{g.open.length}</span>
+        <a href={`#${anchor(g)}`} class:list={['chip', { quiet: g.open === 0 }]}>
+          {title(g)} <span class="mono tnum">{g.open}</span>
         </a>
       ))}
     </nav>
@@ -43,17 +44,25 @@ const anchor = (g: (typeof groups)[number]) => `work-${g.area ?? 'other'}`;
       <div class="block" id={anchor(g)}>
         <div class="block-head">
           <h3>{title(g)}</h3>
-          <p class="muted tnum">{g.open.length} open{g.addressed.length > 0 && ` · ${g.addressed.length} addressed`}</p>
+          <p class="muted tnum">{g.open} open{g.addressed > 0 && ` · ${g.addressed} addressed`}</p>
         </div>
-        {g.open.length > 0 && (
-          <ul class="items">{g.open.map((c) => <WorkItem claim={c} current={current} />)}</ul>
-        )}
-        {g.addressed.length > 0 && (
-          <details class="done">
-            <summary>{g.addressed.length} already addressed</summary>
-            <ul class="items">{g.addressed.map((c) => <WorkItem claim={c} current={current} />)}</ul>
-          </details>
-        )}
+        {g.pieces.map((p) => (
+          <div class="piece">
+            <h4>
+              <span class:list={['pname', { itself: p.part_of === null }]}>{pieceName(p.part_of)}</span>
+              <span class="muted tnum">{p.open.length} open{p.addressed.length > 0 && ` · ${p.addressed.length} addressed`}</span>
+            </h4>
+            {p.open.length > 0 && (
+              <ul class="items">{p.open.map((c) => <WorkItem claim={c} current={current} />)}</ul>
+            )}
+            {p.addressed.length > 0 && (
+              <details class="done">
+                <summary>{p.addressed.length} already addressed</summary>
+                <ul class="items">{p.addressed.map((c) => <WorkItem claim={c} current={current} />)}</ul>
+              </details>
+            )}
+          </div>
+        ))}
       </div>
     ))}
   </section>
@@ -72,12 +81,15 @@ const anchor = (g: (typeof groups)[number]) => `work-${g.area ?? 'other'}`;
   .chip span { font-size: 11.5px; color: var(--accent); }
   .chip.quiet { color: var(--faint); border-color: var(--line); }
   .chip.quiet span { color: var(--faint); }
-  .block { display: flex; flex-direction: column; gap: 6px; scroll-margin-top: 24px; }
-  .block-head { display: flex; align-items: baseline; gap: 10px; }
-  .block-head h3 { font-size: 16px; }
+  .block { display: flex; flex-direction: column; gap: 10px; scroll-margin-top: 24px; padding-top: 8px; }
+  .block-head { display: flex; align-items: baseline; gap: 10px; border-bottom: 1px solid var(--line-strong); padding-bottom: 6px; max-width: 760px; }
+  .block-head h3 { font-size: 18px; }
   .block-head p { font-size: 12px; }
-  .items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; max-width: 760px; }
-  .done { max-width: 760px; }
-  .done summary { cursor: pointer; font-size: 13px; color: var(--muted); padding: 8px 0; }
+  .piece { display: flex; flex-direction: column; gap: 2px; max-width: 760px; padding-left: 12px; border-left: 2px solid var(--line); min-width: 0; }
+  h4 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-size: 14px; font-weight: 600; padding-top: 4px; }
+  h4 .muted { font-size: 12px; font-weight: 400; }
+  .pname.itself { color: var(--accent); }
+  .items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .done summary { cursor: pointer; font-size: 13px; color: var(--muted); padding: 6px 0; }
   .done[open] summary { border-bottom: 1px solid var(--line); }
 </style>

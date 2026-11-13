@@ -39,7 +39,11 @@ export interface BipRecord {
   };
 }
 
-export const WORK_AREAS = ['spec', 'review', 'implementation', 'testing', 'research', 'ux', 'coordination', 'activation'] as const;
+/**
+ * Types of work, by the kind of contributor who would pick it up (owner,
+ * 2026-11-13). In page order.
+ */
+export const WORK_AREAS = ['design', 'writing', 'engineering', 'testing', 'review', 'research', 'ux', 'coordination', 'activation'] as const;
 export type WorkArea = (typeof WORK_AREAS)[number];
 
 export type ClaimKind =

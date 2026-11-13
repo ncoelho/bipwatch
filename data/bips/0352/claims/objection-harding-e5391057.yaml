@@ -2,7 +2,7 @@ id: objection-harding-e5391057
 bip: 352
 kind: objection
 status: open
-area: spec
+area: design
 part_of: light-client index
 statement: Mitigate dust-spamming deanonymization in the light-client protocol,
   where a server operator pays a target silent payment address and tracks which

@@ -2,7 +2,7 @@ id: objection-oghenovo-usiwoma-06da7109
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 part_of: BIP 392
 statement: Decide whether the sp() descriptor should carry a wallet birthday
   argument, given that other descriptors do not and wallets can store the

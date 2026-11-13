@@ -2,7 +2,7 @@ id: task-pieter-wuille-c471b2fe
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 392
 statement: Allow silent payment descriptors to include an encoding with private
   key material, treated as equivalent to the public version while also conveying

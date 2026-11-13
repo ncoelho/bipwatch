@@ -2,7 +2,7 @@ id: open-question-josibake-cb125485
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: "Decide how ECDH shares and DLEQ proofs are structured in PSBTs: one
   global proof, a proof per input, or a proof per group of inputs. The trade-off

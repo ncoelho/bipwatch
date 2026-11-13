@@ -2,7 +2,7 @@ id: open-question-josibake-775b592a
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Decide whether the silent payments PSBT format should carry a running
   (aggregated) proof sum or a separate DLEQ proof for each input.

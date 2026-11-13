@@ -2,7 +2,7 @@ id: open-question-nymius-87ae4c17
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 376
 statement: Decide whether the 33-byte spend public key should reuse
   PSBT_IN_TAP_INTERNAL_KEY by dropping its first byte, or get a new dedicated

@@ -2,7 +2,7 @@ id: objection-peter-todd-3268d80e
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 statement: Decide whether silent payment addresses should carry an expiration
   time that clients enforce, to keep funds from going to lost-key, deceased or
   compromised recipients.

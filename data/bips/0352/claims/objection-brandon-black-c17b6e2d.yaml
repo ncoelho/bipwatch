@@ -2,7 +2,7 @@ id: objection-brandon-black-c17b6e2d
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 statement: Decide whether silent payment addresses should carry an expiration
   time, and if so how to encode it compactly, given that non-expiring addresses
   are a risk to users.

@@ -2,7 +2,7 @@ id: open-question-ruben-somsen-528fa703
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 statement: Decide whether silent payment addresses should embed a sunset
   (expiration) date in the address format.
 subject:

@@ -2,7 +2,7 @@ id: task-josibake-e7015cc6
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: light-client index
 statement: Change the light-client index response so it returns outputs grouped
   by txid (and drops repeated per-UTXO block fields), to cut client bandwidth

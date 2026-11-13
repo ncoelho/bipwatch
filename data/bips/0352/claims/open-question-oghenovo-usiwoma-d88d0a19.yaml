@@ -2,7 +2,7 @@ id: open-question-oghenovo-usiwoma-d88d0a19
 bip: 352
 kind: open-question
 status: open
-area: spec
+area: design
 statement: Decide whether BIP 352 should define a maximum number of labels that
   wallets must scan for during recovery, instead of only recommending a large
   number such as 100k.

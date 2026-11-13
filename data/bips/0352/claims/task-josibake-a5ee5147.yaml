@@ -2,7 +2,7 @@ id: task-josibake-a5ee5147
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 376
 statement: Specify PSBT support for spending silent payment outputs.
 subject:

@@ -2,7 +2,7 @@ id: task-josibake-d2525249
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Specify a deterministic ordering (lexicographic by scan and spend
   key) of silent payment outputs sharing a scan key so all signers derive the

@@ -2,7 +2,7 @@ id: task-jenonoke-cf71c5fa
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: silent payments coinbase
 statement: Specify an explicit encoding and versioning for the sender data in
   the coinbase scriptSig so future coinbase-tag formats cannot be mistaken for

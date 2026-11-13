@@ -2,7 +2,7 @@ id: open-question-oghenovo-usiwoma-59f0f52e
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 392
 statement: Decide how sp() descriptors should encode the labels to scan for, for
   example as a single bitmask number instead of a variable-length list.

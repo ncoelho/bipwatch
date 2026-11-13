@@ -2,7 +2,7 @@ id: open-question-oghenovo-usiwoma-c7b84083
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 392
 statement: Decide how labels should be represented in the sp() descriptor, for
   example by recording only the highest label so the wallet scans labels 1

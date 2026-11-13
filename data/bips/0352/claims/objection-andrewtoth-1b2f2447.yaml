@@ -2,7 +2,7 @@ id: objection-andrewtoth-1b2f2447
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Avoid duplicating a group ECDH proof on each PSBT input, since a
   constructor swapping or removing an input would silently invalidate it and

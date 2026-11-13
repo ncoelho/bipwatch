@@ -2,7 +2,7 @@ id: open-question-andrewtoth-afd2a128
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Decide how a signer can verify that other signers contributed correct
   ECDH shares when sending to silent payments via PSBT, e.g. via a running DLEQ

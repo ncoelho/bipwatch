@@ -2,7 +2,7 @@ id: open-question-josibake-06b8b74f
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Determine whether a silent payment PSBT carries enough prevout
   information to verify that no input spends a segwit version greater than 1

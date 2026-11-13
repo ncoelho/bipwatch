@@ -58,35 +58,52 @@ export const WORK_KINDS: Claim['kind'][] = ['task', 'open-question', 'objection'
 export const WORK_KIND_LABEL: Record<string, string> = { task: 'Task', 'open-question': 'Open question', objection: 'Objection' };
 
 export const AREA_LABEL: Record<WorkArea, string> = {
-  spec: 'Spec',
-  review: 'Review',
-  implementation: 'Implementation',
+  design: 'Protocol design',
+  writing: 'Spec writing',
+  engineering: 'Engineering',
   testing: 'Testing',
+  review: 'Review',
   research: 'Research',
-  ux: 'UX',
+  ux: 'UX and design',
   coordination: 'Coordination',
   activation: 'Activation',
 };
 
-export interface WorkGroup { area: WorkArea | null; open: Claim[]; addressed: Claim[]; }
+/** Work on one piece (the BIP itself when part_of is null) within a type of work. */
+export interface WorkPiece { part_of: string | null; open: Claim[]; addressed: Claim[]; }
+export interface WorkGroup { area: WorkArea | null; open: number; addressed: number; pieces: WorkPiece[]; }
 
 /**
- * Tasks, open questions and objections grouped by area of work, in the
- * schema's area order (unassigned last). Within a group: open items first,
- * newest first; addressed and disputed items are kept apart so the page
- * leads with what is left to do.
+ * Tasks, open questions and objections grouped by type of work, in the
+ * schema's order (unassigned last, types with nothing open after the rest),
+ * then by piece: the BIP itself first, then the piece with most open work.
+ * Within a piece, open items newest first; addressed and disputed ones are
+ * kept apart so the page leads with what is left to do.
  */
 export function openWork(claims: Claim[]): WorkGroup[] {
   const items = claims.filter((c) => WORK_KINDS.includes(c.kind));
   const newest = (a: Claim, b: Claim) => (b.source.date ?? '').localeCompare(a.source.date ?? '');
   const isOpen = (c: Claim) => c.status !== 'addressed';
   return [...WORK_AREAS, null]
-    .map((area) => {
+    .map((area): WorkGroup => {
       const inArea = items.filter((c) => (c.area ?? null) === area).sort(newest);
-      return { area, open: inArea.filter(isOpen), addressed: inArea.filter((c) => !isOpen(c)) };
+      const parts = [...new Set(inArea.map((c) => c.part_of ?? null))];
+      const pieces = parts
+        .map((part_of) => {
+          const mine = inArea.filter((c) => (c.part_of ?? null) === part_of);
+          return { part_of, open: mine.filter(isOpen), addressed: mine.filter((c) => !isOpen(c)) };
+        })
+        .sort((a, b) =>
+          Number(a.part_of !== null) - Number(b.part_of !== null) ||
+          b.open.length - a.open.length ||
+          b.addressed.length - a.addressed.length ||
+          (a.part_of ?? '').localeCompare(b.part_of ?? ''),
+        );
+      const open = pieces.reduce((n, p) => n + p.open.length, 0);
+      return { area, open, addressed: inArea.length - open, pieces };
     })
-    .filter((g) => g.open.length + g.addressed.length > 0)
-    .sort((a, b) => Number(b.open.length > 0) - Number(a.open.length > 0));
+    .filter((g) => g.pieces.length > 0)
+    .sort((a, b) => Number(b.open > 0) - Number(a.open > 0));
 }
 
 /** Public JSON shape. Bump when the shape changes in a breaking way. */

@@ -2,7 +2,7 @@ id: task-achow101-7d122eef
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Define per-input ECDH share and DLEQ proof PSBT fields and a
   per-output silent payment info field, so PSBTv2 can carry silent payment

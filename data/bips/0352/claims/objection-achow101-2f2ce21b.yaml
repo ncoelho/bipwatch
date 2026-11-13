@@ -2,7 +2,7 @@ id: objection-achow101-2f2ce21b
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Avoid PSBT silent payment fields that depend on input ordering or
   lists of input indexes, since inputs can be added or removed while Inputs

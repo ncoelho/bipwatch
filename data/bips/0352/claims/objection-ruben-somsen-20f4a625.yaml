@@ -2,7 +2,7 @@ id: objection-ruben-somsen-20f4a625
 bip: 352
 kind: objection
 status: open
-area: spec
+area: design
 part_of: nostr notifications
 statement: "Rework the Nostr notification message design: receivers would have
   to verify the sender-supplied tweak data on every payment, which needs extra

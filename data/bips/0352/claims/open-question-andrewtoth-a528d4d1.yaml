@@ -2,7 +2,7 @@ id: open-question-andrewtoth-a528d4d1
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Decide whether the signer's ECDH shares and DLEQ proofs for multiple
   inputs can be combined into one share and proof per scan key and set of

@@ -2,7 +2,7 @@ id: task-jenonoke-7e64b664
 bip: 352
 kind: task
 status: open
-area: implementation
+area: engineering
 part_of: silent payments coinbase
 statement: Build receiver scanners that extract A_send from the coinbase
   scriptSig and apply the SPc derivation instead of treating the transaction as

@@ -2,7 +2,7 @@ id: open-question-andrewtoth-1855f74c
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Decide how a silent-payment PSBT keeps inputs spending SegWit version
   > 1 outputs out, given that the Constructor only adds the outpoint and the

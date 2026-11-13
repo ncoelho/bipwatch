@@ -2,7 +2,7 @@ id: open-question-sebastian-falbesoner-be215168
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 statement: Decide the concrete value of the K_max per-group recipient limit,
   replacing the placeholder of 1000.
 subject:

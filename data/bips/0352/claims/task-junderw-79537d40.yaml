@@ -2,7 +2,7 @@ id: task-junderw-79537d40
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 392
 statement: "Define standard string encodings for silent payment key material:
   scan private key with spend public key (for delegated scanning, e.g.

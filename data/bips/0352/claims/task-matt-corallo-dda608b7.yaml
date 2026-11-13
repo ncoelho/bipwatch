@@ -2,7 +2,7 @@ id: task-matt-corallo-dda608b7
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: bip21 update
 statement: Define a standard BIP 21 query parameter so wallets know which
   parameter carries a silent payment address.

@@ -2,7 +2,7 @@ id: open-question-craig-raw-b4df34f3
 bip: 352
 kind: open-question
 status: open
-area: spec
+area: design
 part_of: BIP 392
 statement: Decide whether the silent payment descriptor format should carry
   optional wallet birthday and max label fields, with defaults (block height

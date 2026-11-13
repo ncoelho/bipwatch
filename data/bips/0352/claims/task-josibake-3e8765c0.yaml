@@ -2,7 +2,7 @@ id: task-josibake-3e8765c0
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: light-client index
 statement: Standardize an index that serves silent payment tweak data to light clients.
 subject:

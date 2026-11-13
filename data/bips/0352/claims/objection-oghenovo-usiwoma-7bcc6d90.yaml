@@ -2,7 +2,7 @@ id: objection-oghenovo-usiwoma-7bcc6d90
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 part_of: BIP 392
 statement: Resolve the objection to introducing new key encodings
   (spscan/spspend) for the sp() descriptor instead of reusing existing key

@@ -2,7 +2,7 @@ id: open-question-nymius-b3721a65
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 376
 statement: Decide whether the PSBT tweak field for spending should be a general
   raw taproot tweak field or one scoped only to silent payments.

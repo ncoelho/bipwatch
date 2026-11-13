@@ -2,7 +2,7 @@ id: open-question-craig-raw-5dd48ca9
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 392
 statement: Decide whether the sp() descriptor should carry an optional wallet
   birthday argument, given how costly it is to scan from Taproot activation.

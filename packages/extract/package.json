@@ -9,6 +9,7 @@
   },
   "scripts": {
     "extract": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env --env-file-if-exists=../../.env.anthropic src/cli.ts",
+    "relabel-areas": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env --env-file-if-exists=../../.env.anthropic src/relabel-areas.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },

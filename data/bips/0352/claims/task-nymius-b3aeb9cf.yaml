@@ -2,7 +2,7 @@ id: task-nymius-b3aeb9cf
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 376
 statement: Specify a PSBTv2 per-input field carrying the silent payment tweak so
   that silent payment outputs can be spent with PSBTs.

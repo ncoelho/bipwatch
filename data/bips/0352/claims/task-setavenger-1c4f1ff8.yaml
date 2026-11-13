@@ -2,7 +2,7 @@ id: task-setavenger-1c4f1ff8
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: light-client index
 statement: Merge the separate tweak-fetching and filter-fetching steps of the
   silent payments light client protocol into a single step, since skipping

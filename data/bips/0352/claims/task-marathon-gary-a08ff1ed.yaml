@@ -2,7 +2,7 @@ id: task-marathon-gary-a08ff1ed
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: silent payments coinbase
 statement: Extend the proposed Stratum v2 non-custodial payouts spec with the
   pool tag requirements Silent Payments coinbase needs, so it works with

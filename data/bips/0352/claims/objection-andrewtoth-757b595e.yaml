@@ -2,7 +2,7 @@ id: objection-andrewtoth-757b595e
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Make silent-payment-aware PSBT signers refuse ANYONECANPAY when
   silent payment outputs are present. Otherwise an outside observer could strip

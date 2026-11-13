@@ -2,7 +2,7 @@ id: open-question-achow101-c6dc0ffe
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Decide how the PSBT silent payments spec handles ANYONECANPAY
   signatures, for example by restricting when silent payment outputs can be

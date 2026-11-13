@@ -2,7 +2,7 @@ id: objection-andrewtoth-3fc62473
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Prevent silent payment PSBT signers from using ANYONECANPAY, since an
   SP-unaware constructor could add inputs that change the shared secret and

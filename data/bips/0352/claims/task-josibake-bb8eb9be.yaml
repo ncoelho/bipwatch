@@ -2,7 +2,7 @@ id: task-josibake-bb8eb9be
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: light-client index
 statement: Make the dust limit for returned tweak data a client-set parameter in
   the light-client protocol rather than a fixed server value.

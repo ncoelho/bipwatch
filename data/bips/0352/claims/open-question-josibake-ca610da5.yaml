@@ -2,7 +2,7 @@ id: open-question-josibake-ca610da5
 bip: 352
 kind: open-question
 status: open
-area: spec
+area: design
 part_of: light-client index
 statement: Decide whether the light-client protocol should always serve tweak
   data and filters together.

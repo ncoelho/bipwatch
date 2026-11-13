@@ -2,7 +2,7 @@ id: task-junderw-4bc7dd62
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: writing
 part_of: BIP 392
 statement: Make the silent payment output descriptor definition state clearly
   that the descriptor alone cannot generate outputs without data from the

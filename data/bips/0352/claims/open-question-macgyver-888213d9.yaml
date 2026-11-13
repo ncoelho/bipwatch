@@ -2,7 +2,7 @@ id: open-question-macgyver-888213d9
 bip: 352
 kind: open-question
 status: open
-area: spec
+area: design
 part_of: aggdleq
 statement: Work out how AggDLEQ would operate for air-gapped signers that
   exchange data only via PSBTs, without a live coordinator channel.

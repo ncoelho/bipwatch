@@ -2,7 +2,7 @@ id: open-question-andrewtoth-3daddc26
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Decide whether to add a 'Has Silent Payments' flag to
   PSBT_GLOBAL_TX_MODIFIABLE, so Constructors and Updaters avoid mixing

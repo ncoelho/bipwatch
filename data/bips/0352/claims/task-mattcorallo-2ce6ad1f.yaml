@@ -2,7 +2,7 @@ id: task-mattcorallo-2ce6ad1f
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: bip21 update
 statement: Define how silent payment addresses go in a revised BIP21 URI, for
   example under a dedicated query key such as "sp" that names the address type.

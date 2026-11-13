@@ -2,7 +2,7 @@ id: task-securitybrahh-0cbe2023
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: light-client index
 statement: Settle a server spec for silent payments tweak data so Electrum-based
   wallets can implement sending and receiving.

@@ -2,7 +2,7 @@ id: task-setavenger-043f628d
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: nostr notifications
 statement: Consider adding a timestamp hint to silent payment notifications so
   receivers can limit the range of block filters they search to locate the
