@@ -56,12 +56,18 @@ export async function* selectDocs(
  * cursor for this task version and BIP. A new version (new prompt or schema)
  * or a newly tracked BIP starts from the beginning of the archive.
  */
-export async function lastCursor(db: pg.Pool, task: string, version: number, bip: number): Promise<number> {
+export async function lastCursor(
+  db: pg.Pool,
+  task: string,
+  version: number,
+  bip: number,
+  continuesFrom: number[] = [],
+): Promise<number> {
   const { rows } = await db.query<{ cursor_after: string | null }>(
     `SELECT cursor_after FROM extract_runs
-      WHERE task = $1 AND task_version = $2 AND bip = $3 AND ok AND NOT dry_run
+      WHERE task = $1 AND task_version = ANY($2::int[]) AND bip = $3 AND ok AND NOT dry_run
       ORDER BY finished_at DESC LIMIT 1`,
-    [task, version, bip],
+    [task, [version, ...continuesFrom], bip],
   );
   return Number(rows[0]?.cursor_after ?? 0);
 }

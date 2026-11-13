@@ -114,6 +114,8 @@ describe.skipIf(!url)('extract store (Neon)', () => {
     // A new task version, or another BIP, starts from the beginning.
     expect(await lastCursor(pool, 'stance', 2, 352)).toBe(0);
     expect(await lastCursor(pool, 'stance', 1, 54)).toBe(0);
+    // ...unless it declares that it continues an earlier version.
+    expect(await lastCursor(pool, 'stance', 2, 352, [1])).toBe(1);
 
     const { rows } = await pool.query(`SELECT outcome, claim_ids FROM extract_log WHERE run_id = $1`, [id]);
     expect(rows).toEqual([{ outcome: 'claims', claim_ids: [claim.id] }]);

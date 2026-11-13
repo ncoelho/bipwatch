@@ -1,14 +1,17 @@
 name: extract
 
-# SPEC 6.2 review queue: every day, run the stance extractor over documents
-# archived since the last run, separately for each tracked BIP, and open one
-# pull request per BIP with the claims it proposed. Nothing reaches data/
+# SPEC 6.2 review queue: every day, run each extractor (open work, then
+# stances) over documents archived since its last run, separately for each
+# tracked BIP, and open one pull request per BIP and task with the claims it
+# proposed. Nothing reaches data/
 # until a person merges; merging adds the claims as pending review.
 #
 # Off until the repository variable EXTRACT_ENABLED is "true". It also needs
 # the ANTHROPIC_API_KEY secret (plus DATABASE_URL and BOT_TOKEN, already set).
-# Spend is capped per BIP per run by EXTRACT_BUDGET_TOKENS (input + output
-# tokens, default 300000) and EXTRACT_LIMIT_DOCS (default 200).
+# Spend is capped per BIP and task per run by EXTRACT_BUDGET_TOKENS (billed
+# tokens: cache reads count 0.1, writes 1.25; default 300000) and
+# EXTRACT_LIMIT_DOCS (default 200). Open work costs about 6.6k per document
+# with its cached spec context, stances far less.
 
 on:
   schedule:
@@ -18,6 +21,12 @@ on:
       bip:
         description: Only this BIP number (default every tracked BIP)
         required: false
+      task:
+        description: Which task to run
+        required: false
+        type: choice
+        default: both
+        options: [both, work, stance]
 
 concurrency:
   group: extract
@@ -30,6 +39,7 @@ jobs:
     timeout-minutes: 10
     outputs:
       bips: ${{ steps.list.outputs.bips }}
+      tasks: ${{ steps.list.outputs.tasks }}
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
@@ -37,6 +47,7 @@ jobs:
         id: list
         env:
           ONLY: ${{ inputs.bip }}
+          TASK: ${{ inputs.task }}
         run: |
           tracked=$(npm run --silent tracked-bips)
           if [ -n "$ONLY" ]; then
@@ -45,10 +56,14 @@ jobs:
             fi
             tracked="[$ONLY]"
           fi
+          tasks='["work","stance"]'
+          if [ -n "$TASK" ] && [ "$TASK" != both ]; then tasks="[\"$TASK\"]"; fi
           echo "bips=$tracked" >> "$GITHUB_OUTPUT"
-          echo "Extracting for BIPs $tracked"
+          echo "tasks=$tasks" >> "$GITHUB_OUTPUT"
+          echo "Extracting $tasks for BIPs $tracked"
 
-  stance:
+  extract:
+    name: ${{ matrix.task }} · BIP ${{ matrix.bip }}
     needs: plan
     if: needs.plan.outputs.bips != '[]'
     runs-on: ubuntu-latest
@@ -61,6 +76,7 @@ jobs:
       max-parallel: 2
       matrix:
         bip: ${{ fromJSON(needs.plan.outputs.bips) }}
+        task: ${{ fromJSON(needs.plan.outputs.tasks) }}
     steps:
       - uses: actions/checkout@v7
       - name: Fetch bitcoin/bips history
@@ -68,7 +84,7 @@ jobs:
         run: git clone --filter=blob:none --no-checkout https://github.com/bitcoin/bips.git ../bips
       - uses: ./.github/actions/setup
 
-      - name: Propose stances for BIP ${{ matrix.bip }}
+      - name: Propose ${{ matrix.task }} claims for BIP ${{ matrix.bip }}
         id: run
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -79,7 +95,7 @@ jobs:
           if [ -z "$ANTHROPIC_API_KEY" ] || [ -z "$DATABASE_URL" ]; then
             echo "::error::EXTRACT_ENABLED is true but ANTHROPIC_API_KEY or DATABASE_URL is not set"; exit 1
           fi
-          npm run extract -- --task stance --bip ${{ matrix.bip }} \
+          npm run extract -- --task ${{ matrix.task }} --bip ${{ matrix.bip }} \
             --limit "$LIMIT" --budget "$BUDGET" --summary "$RUNNER_TEMP/summary.md"
           if [ -f "$RUNNER_TEMP/summary.md" ]; then echo "claims=true" >> "$GITHUB_OUTPUT"; fi
 
@@ -95,9 +111,9 @@ jobs:
         with:
           # BOT_TOKEN so the required validate check runs on the PR.
           token: ${{ secrets.BOT_TOKEN }}
-          branch: bot/stance/bip-${{ matrix.bip }}/run-${{ github.run_id }}
+          branch: bot/${{ matrix.task }}/bip-${{ matrix.bip }}/run-${{ github.run_id }}
           add-paths: data/bips/*/claims/*.yaml
-          commit-message: 'BIP ${{ matrix.bip }}: new stances from the archive, pending review'
-          title: 'BIP ${{ matrix.bip }}: new stances from the archive, pending review'
+          commit-message: 'BIP ${{ matrix.bip }}: new ${{ matrix.task == ''work'' && ''open work'' || ''stances'' }} from the archive, pending review'
+          title: 'BIP ${{ matrix.bip }}: new ${{ matrix.task == ''work'' && ''open work'' || ''stances'' }} from the archive, pending review'
           body-path: ${{ runner.temp }}/summary.md
           labels: claims

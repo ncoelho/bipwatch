@@ -112,7 +112,7 @@ const runInfos: RunInfo[] = [];
 // each BIP's run.
 for (const ctx of bips.values()) {
   const bip = ctx.bip.number;
-  const cursor = await lastCursor(pool, task.id, task.version, bip);
+  const cursor = await lastCursor(pool, task.id, task.version, bip, task.continuesFrom);
   const runId = await startRun(pool, { task: task.id, version: task.version, model: task.model, dryRun, cursor, bip });
   console.log(
     `${task.id} v${task.version} · ${task.model} · BIP ${bip} · after document ${cursor} · limit ${limit} · budget ${budget} tokens${dryRun ? ' · dry run' : ''}`,

@@ -28,6 +28,8 @@ Prompt v3 (same day) also records work on what the BIP needs to be used: compani
 
 Prompt v4 (same day, owner's request): the `area` values are types of work by contributor. `spec` split into `design` (deciding how it works) and `writing` (editing the document), and `implementation` became `engineering`; the 105 existing `spec` items were relabelled by `npm run relabel-areas` (statement and quote only, 18k tokens), giving 101 design and 4 writing. Pages group by type of work, then by piece (the BIP itself first).
 
+The daily extraction bot (`.github/workflows/extract.yml`) runs both tasks, open work and stances, for every tracked BIP, one pull request per BIP and task. Work v4 declares `continuesFrom: [3]`, so it carries on from v3's cursor instead of re-reading documents (a task version only does this when its change does not call for re-reading).
+
 ### Principles
 
 These came out of the design work and should constrain every implementation decision.

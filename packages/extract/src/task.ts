@@ -20,6 +20,12 @@ export interface Task<Out> {
   id: string;
   /** Bump with every prompt or schema change; recorded on each run. */
   version: number;
+  /**
+   * Earlier versions whose cursor this one continues from, when a change
+   * does not call for re-reading documents they already covered (e.g. only
+   * labels were renamed). Normally empty: a new version starts over.
+   */
+  continuesFrom?: number[];
   kind: ClaimKind;
   model: string;
   effort: 'low' | 'medium' | 'high' | 'xhigh' | 'max';

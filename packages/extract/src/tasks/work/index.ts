@@ -72,6 +72,8 @@ const canonical = canonicalName(loadPeople());
 export const workTask: Task<WorkOutput> = {
   id: 'work',
   version: VERSION,
+  // v4 only renamed areas, so it carries on where v3 stopped.
+  continuesFrom: [3],
   kind: 'task',
   model: 'claude-opus-5-5',
   effort: 'medium',
