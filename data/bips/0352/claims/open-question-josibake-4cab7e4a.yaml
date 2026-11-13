@@ -2,7 +2,7 @@ id: open-question-josibake-4cab7e4a
 bip: 352
 kind: open-question
 status: open
-area: spec
+area: design
 part_of: light-client index
 statement: Decide whether silent payment light clients should fetch full blocks
   over the Bitcoin p2p network or simplified UTXO data from a server, weighing

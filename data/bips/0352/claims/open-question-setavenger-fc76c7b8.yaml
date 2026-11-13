@@ -2,7 +2,7 @@ id: open-question-setavenger-fc76c7b8
 bip: 352
 kind: open-question
 status: open
-area: spec
+area: design
 part_of: nostr notifications
 statement: Decide whether silent payment notifications should include the
   relevant outputs alongside the txid, tweak and optional blockhash.

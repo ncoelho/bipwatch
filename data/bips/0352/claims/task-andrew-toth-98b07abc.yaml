@@ -2,7 +2,7 @@ id: task-andrew-toth-98b07abc
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Specify the DLEQ proof that signers attach so that other PSBT
   participants can verify ECDH shares.

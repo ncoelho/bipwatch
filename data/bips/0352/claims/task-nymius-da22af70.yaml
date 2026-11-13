@@ -2,7 +2,7 @@ id: task-nymius-da22af70
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 376
 statement: Specify PSBT fields that let a signer spend silent payment outputs by
   carrying the silent payment tweak, which the existing sending specification

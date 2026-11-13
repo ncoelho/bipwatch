@@ -2,7 +2,7 @@ id: task-setavenger-be4103a1
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: nostr notifications
 statement: Specify a nostr-based out-of-band notification scheme for silent
   payments in which the sender sends the txid and optionally the tweak or

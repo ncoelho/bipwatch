@@ -12,12 +12,11 @@ const STATUS_PILL: Record<string, string> = { open: 'accent', addressed: 'good',
 <li id={c.id}>
   <div class="top">
     <span class="kind">{WORK_KIND_LABEL[c.kind]}</span>
-    {c.part_of && <span class="part" title="Work on a companion BIP or project that moves this one forward">{c.part_of}</span>}
     {c.status && c.status !== 'open' && <span class:list={['pill', STATUS_PILL[c.status]]}>{c.status}</span>}
     {c.subject && <span class="by">raised by <b>{c.subject.name}</b></span>}
     {c.source.date && <span class="when mono tnum">{c.source.date}</span>}
-    {c.applies_to_version && <span class="ver">{versionLabel(c.applies_to_version)}</span>}
-    {c.status !== 'addressed' && isStale(c.applies_to_version, current) && (
+    {c.applies_to_version && !c.part_of && <span class="ver">{versionLabel(c.applies_to_version)}</span>}
+    {c.status !== 'addressed' && !c.part_of && isStale(c.applies_to_version, current) && (
       <span class="flag" title={`The spec is now at v${current}`}>spec changed since</span>
     )}
   </div>
@@ -31,7 +30,6 @@ const STATUS_PILL: Record<string, string> = { open: 'accent', addressed: 'good',
   p { font-size: 14px; }
   .top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-size: 13px; }
   .kind { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--faint); }
-  .part { font-size: 12px; padding: 0 7px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
   .by { color: var(--muted); }
   .by b { color: var(--fg); font-weight: 500; }
   .when, .ver { font-size: 12px; color: var(--faint); }

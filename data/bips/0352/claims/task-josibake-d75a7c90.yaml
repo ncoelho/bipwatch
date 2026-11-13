@@ -2,7 +2,7 @@ id: task-josibake-d75a7c90
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: writing
 part_of: BIP 375
 statement: Specify that a signer must fail if a provided sighash type is
   unacceptable for silent payment transactions, with a footnote explaining which

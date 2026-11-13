@@ -2,7 +2,7 @@ id: open-question-ruben-somsen-5b976ea6
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 statement: Decide whether the sender tweaks the silent payment address with a
   single input or with the sum of all inputs.
 subject:

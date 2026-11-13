@@ -2,7 +2,7 @@ id: task-andrewtoth-f230d329
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Add a global ECDH share and DLEQ proof, keyed by scan key, for a
   signer that controls all inputs. Signers that control only some inputs keep

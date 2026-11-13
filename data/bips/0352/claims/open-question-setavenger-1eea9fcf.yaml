@@ -2,7 +2,7 @@ id: open-question-setavenger-1eea9fcf
 bip: 352
 kind: open-question
 status: open
-area: spec
+area: design
 part_of: nostr notifications
 statement: Decide whether the sender should wait for the transaction to confirm
   before sending a silent payment notification, since this determines what

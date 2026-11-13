@@ -2,7 +2,7 @@ id: task-josibake-0e85d860
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Add a DLEQ proof to the PSBT sending spec so signers can verify
   silent payment outputs were generated correctly without access to the private

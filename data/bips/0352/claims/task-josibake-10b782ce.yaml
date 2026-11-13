@@ -2,7 +2,7 @@ id: task-josibake-10b782ce
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Specify signer rules for silent payment PSBTs so signers never rely
   on ANYONECANPAY and independently derive and verify the silent payment output

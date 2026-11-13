@@ -2,7 +2,7 @@ id: task-josibake-67845f99
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 376
 statement: Define PSBT input fields for spending silent payment outputs that
   carry the shared secret tweak and identify the spend key, either as new fields

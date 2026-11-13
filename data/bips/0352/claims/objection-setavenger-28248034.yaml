@@ -2,7 +2,7 @@ id: objection-setavenger-28248034
 bip: 352
 kind: objection
 status: open
-area: spec
+area: design
 part_of: nostr notifications
 statement: Require receiving wallets to validate notified outputs against the
   chain (e.g. via scanning the transaction) rather than trusting them, since RBF

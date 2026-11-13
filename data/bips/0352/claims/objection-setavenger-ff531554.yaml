@@ -2,7 +2,7 @@ id: objection-setavenger-ff531554
 bip: 352
 kind: objection
 status: open
-area: spec
+area: design
 part_of: nostr notifications
 statement: Add DoS mitigations and validation of notification contents against
   the chain to the Nostr silent payment notification write-up, which currently

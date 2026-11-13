@@ -2,7 +2,7 @@ id: task-achow101-1ace8afc
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Specify that constructors may only add silent payment outputs when no
   inputs spend segwit v2+ outputs, and that signers must reject PSBTs with

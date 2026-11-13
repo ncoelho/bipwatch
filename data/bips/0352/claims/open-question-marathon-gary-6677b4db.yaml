@@ -2,7 +2,7 @@ id: open-question-marathon-gary-6677b4db
 bip: 352
 kind: open-question
 status: open
-area: spec
+area: design
 part_of: silent payments coinbase
 statement: "Decide how to rotate the Ark mailbox id per epoch so the server
   cannot link all payouts: either independent per-epoch registered keys or

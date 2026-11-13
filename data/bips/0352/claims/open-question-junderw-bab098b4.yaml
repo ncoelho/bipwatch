@@ -2,7 +2,7 @@ id: open-question-junderw-bab098b4
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 392
 statement: Decide whether the silent payment key export format should include a
   wallet birthday and a maximum label value as scanning hints.

@@ -2,7 +2,7 @@ id: open-question-junderw-c19b81cb
 bip: 352
 kind: open-question
 status: open
-area: spec
+area: design
 part_of: BIP 392
 statement: Decide whether exported silent payment key formats should also encode
   a wallet birthday block height and the labels in use, so that scanners know

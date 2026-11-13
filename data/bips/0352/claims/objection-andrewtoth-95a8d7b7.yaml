@@ -2,7 +2,7 @@ id: objection-andrewtoth-95a8d7b7
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Specify that a signer must not sign inputs with ANYONECANPAY when a
   PSBT has silent payment outputs, because an outside observer could strip or

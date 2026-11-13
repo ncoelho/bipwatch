@@ -2,7 +2,7 @@ id: open-question-setavenger-2ee3a59e
 bip: 352
 kind: open-question
 status: open
-area: spec
+area: design
 part_of: light-client index
 statement: Decide whether grouping UTXOs by txid for silent payment scanning
   should be done by the light-client indexer or on the client side, and what

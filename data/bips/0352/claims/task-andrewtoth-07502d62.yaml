@@ -2,7 +2,7 @@ id: task-andrewtoth-07502d62
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Require PSBT signers to fail when any sighash type other than
   SIGHASH_ALL is used and the transaction has silent payment outputs.

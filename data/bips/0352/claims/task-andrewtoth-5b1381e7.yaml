@@ -2,7 +2,7 @@ id: task-andrewtoth-5b1381e7
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Let a signer that controls all inputs provide a single consolidated
   ECDH share and proof, so a hardware wallet spending many inputs does not have

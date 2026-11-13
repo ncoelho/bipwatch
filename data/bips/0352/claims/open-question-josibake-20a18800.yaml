@@ -2,7 +2,7 @@ id: open-question-josibake-20a18800
 bip: 352
 kind: open-question
 status: open
-area: spec
+area: design
 part_of: light-client index
 statement: Decide whether light clients should fetch simplified UTXOs or simply
   download the full block once a filter match occurs.

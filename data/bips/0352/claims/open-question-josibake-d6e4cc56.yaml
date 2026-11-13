@@ -2,7 +2,7 @@ id: open-question-josibake-d6e4cc56
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Decide whether signers controlling multiple inputs may consolidate
   ECDH shares and DLEQ proofs instead of providing one per input, to avoid

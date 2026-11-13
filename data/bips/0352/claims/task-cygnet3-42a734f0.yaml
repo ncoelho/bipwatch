@@ -2,7 +2,7 @@ id: task-cygnet3-42a734f0
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: light-client index
 statement: Change the light-client protocol's utxos endpoint to return outputs
   grouped by txid, so clients can scan all outputs of a transaction together to

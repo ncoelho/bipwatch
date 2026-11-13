@@ -2,7 +2,7 @@ id: objection-sebastian-falbesoner-2330a38a
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 statement: Mitigate the very poor scanning performance for adversarial
   transactions with many outputs to the same scan key, e.g. by adding a
   per-group recipient limit K_max.

@@ -2,7 +2,7 @@ id: open-question-nymius-af8fe33c
 bip: 352
 kind: open-question
 status: open
-area: spec
+area: design
 part_of: BIP 392
 statement: Decide whether to define a self-contained per-output spending key
   format (e.g. tweak plus b_spend), since b_scan and b_spend alone cannot spend

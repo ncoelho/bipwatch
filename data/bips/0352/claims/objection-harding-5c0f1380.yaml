@@ -2,7 +2,7 @@ id: objection-harding-5c0f1380
 bip: 352
 kind: objection
 status: open
-area: spec
+area: design
 part_of: light-client index
 statement: Address the attack where a malicious filter server reuses the inputs
   of its own honest payment to build a fake filter matching the victim's silent

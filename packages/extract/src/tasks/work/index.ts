@@ -35,7 +35,9 @@ export type WorkOutput = z.infer<typeof WorkOutput>;
 // v3 (2026-11-13): records companion and ecosystem work too (PSBT fields,
 // light-client index, wallet support), named in part_of, since untracked
 // companions would otherwise hide the work that moves the BIP forward.
-const VERSION = 3;
+// v4 (2026-11-13): areas are types of work by contributor; "spec" splits
+// into design (deciding how it works) and writing (editing the document).
+const VERSION = 4;
 const MAX_SPEC_CHARS = 120_000;
 const MAX_COMPANION_CHARS = 60_000;
 

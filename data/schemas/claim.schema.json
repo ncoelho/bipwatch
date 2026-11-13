@@ -19,8 +19,8 @@
       "maxLength": 500
     },
     "area": {
-      "description": "For tasks, open questions and objections: the kind of work it calls for. spec: the text or design of the BIP itself; review: reading and ACKing the spec or a change; implementation: code (reference, node, wallet, library); testing: test vectors, tests, fuzzing; research: analysis, benchmarks, security arguments, data; ux: how users and wallets meet it (formats, naming, flows); coordination: agreement across projects or ecosystem; activation: deployment of a consensus change (signaling, parameters, miner and node readiness).",
-      "enum": ["spec", "review", "implementation", "testing", "research", "ux", "coordination", "activation"]
+      "description": "For tasks, open questions and objections: the type of work, by who would pick it up. design: deciding how the protocol should work (open design decisions, alternatives, parameters); writing: editing the spec document itself (clarifications, warnings, missing sections, wording that changes meaning); engineering: code (reference implementation, node, wallet, library, server); testing: test vectors, tests, fuzzing; review: reading and checking a spec, a change or code; research: analysis, benchmarks, security arguments, data; ux: how users and wallets meet it (flows, formats, naming, design); coordination: agreement across projects or the ecosystem, outreach; activation: deployment of a consensus change (signaling, parameters, miner and node readiness).",
+      "enum": ["design", "writing", "engineering", "testing", "review", "research", "ux", "coordination", "activation"]
     },
     "part_of": {
       "description": "For tasks, open questions and objections about work outside the BIP's own text that moves it forward: the companion BIP or project it belongs to, e.g. \"BIP 375\" or \"light-client index\". Absent when the item is about the BIP itself.",

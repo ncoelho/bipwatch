@@ -2,7 +2,7 @@ id: task-zenul-abidin-388313e9
 bip: 352
 kind: task
 status: open
-area: implementation
+area: engineering
 part_of: electrum silent payments plugin
 statement: Add support for Taproot inputs, batching, payjoin and swaps to the
   Electrum silent payments sender plugin.

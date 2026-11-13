@@ -2,7 +2,7 @@ id: objection-harding-df38e2c3
 bip: 352
 kind: objection
 status: open
-area: spec
+area: design
 part_of: light-client index
 statement: Redesign the light-client protocol's transaction-fetching step so
   that a server lying about tweaks or filters cannot force a match and unmask

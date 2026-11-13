@@ -2,7 +2,7 @@ id: task-craig-raw-f95af1c5
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 392
 statement: Define a key format that encodes the silent payment version, scan key
   and spend key as a single unit, so the keys cannot be swapped by mistake.

@@ -2,7 +2,7 @@ id: task-cygnet3-43878209
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: light-client index
 statement: Simplify the light-client index UTXO response format by grouping
   outputs per transaction and dropping the redundant txid field from each output

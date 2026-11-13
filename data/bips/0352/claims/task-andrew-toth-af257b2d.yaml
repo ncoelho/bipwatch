@@ -2,7 +2,7 @@ id: task-andrew-toth-af257b2d
 bip: 352
 kind: task
 status: addressed
-area: implementation
+area: engineering
 part_of: BIP 375
 statement: Provide a reference implementation for sending silent payments with PSBTs.
 subject:

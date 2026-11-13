@@ -2,7 +2,7 @@ id: task-nymius-f8b61876
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: BIP 392
 statement: Consider encoding a range or limit for the number of labels in use
   within the silent payment key string, to help wallets scan.

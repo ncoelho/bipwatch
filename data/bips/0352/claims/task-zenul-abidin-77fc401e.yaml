@@ -2,7 +2,7 @@ id: task-zenul-abidin-77fc401e
 bip: 352
 kind: task
 status: open
-area: implementation
+area: engineering
 part_of: electrum silent payments plugin
 statement: Add unsigned transaction preview/export and deferred signing to the
   Electrum silent payments sender plugin.

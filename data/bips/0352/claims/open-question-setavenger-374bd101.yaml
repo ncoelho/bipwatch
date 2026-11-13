@@ -2,7 +2,7 @@ id: open-question-setavenger-374bd101
 bip: 352
 kind: open-question
 status: open
-area: spec
+area: design
 part_of: nostr notifications
 statement: Decide how notifications should resist spam and DoS from fake or
   computationally expensive messages, for example with Merkle proofs or NIP-13

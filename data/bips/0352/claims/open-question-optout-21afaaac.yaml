@@ -2,7 +2,7 @@ id: open-question-optout-21afaaac
 bip: 352
 kind: open-question
 status: open
-area: spec
+area: design
 part_of: silent payments coinbase
 statement: Decide whether silent payments for coinbase outputs should be
   specified as an amendment to BIP 352 or as a separate new BIP, and which parts

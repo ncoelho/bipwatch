@@ -2,7 +2,7 @@ id: open-question-billy-30992684
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 statement: Decide whether silent payment outputs should be made identifiable by
   a standard marker so light clients only download and check those, at the cost
   of a smaller anonymity set.

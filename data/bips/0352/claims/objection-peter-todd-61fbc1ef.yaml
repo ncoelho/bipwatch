@@ -2,7 +2,7 @@ id: objection-peter-todd-61fbc1ef
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 statement: Decide whether silent payment addresses should carry an expiration
   date field (e.g. 3 bytes of days since an epoch) so that wallets refuse to pay
   expired addresses.

@@ -2,7 +2,7 @@ id: task-marathon-gary-54027fd9
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: silent payments coinbase
 statement: Define a separate wallet scanning profile for silent payments
   coinbase outputs, since the sender data that identifies ownership sits in a

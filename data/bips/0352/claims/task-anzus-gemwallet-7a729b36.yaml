@@ -2,7 +2,7 @@ id: task-anzus-gemwallet-7a729b36
 bip: 352
 kind: task
 status: open
-area: spec
+area: writing
 part_of: silent payments coinbase
 statement: Add a compatibility section to the silent payments coinbase proposal
   explaining whether existing Silent Payments wallets can detect coinbase

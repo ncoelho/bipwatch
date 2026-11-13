@@ -60,7 +60,7 @@ describe('prSummary', () => {
     const items = Array.from({ length: 600 }, (_, i) => ({
       bip: 352,
       kind: 'task' as const,
-      area: 'spec' as const,
+      area: 'design' as const,
       status: i % 3 === 0 ? ('open' as const) : ('addressed' as const),
       part_of: null,
       statement: `Item ${i} ${long}`,

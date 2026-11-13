@@ -2,7 +2,7 @@ id: open-question-peter-todd-c5a7d8aa
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 statement: Decide whether silent payment addresses should carry an expiration
   time and, if so, how to encode it (e.g. a fixed-granularity day count versus a
   variable-granularity encoding).

@@ -2,7 +2,7 @@ id: task-josibake-3bf4a6bc
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 392
 statement: Specify an output script descriptor for silent payments.
 subject:

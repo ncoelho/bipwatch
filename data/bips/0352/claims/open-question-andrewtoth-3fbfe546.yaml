@@ -2,7 +2,7 @@ id: open-question-andrewtoth-3fbfe546
 bip: 352
 kind: open-question
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Decide whether ECDH shares and DLEQ proofs should be global PSBT
   fields rather than per-input fields, to avoid duplicating them per input and

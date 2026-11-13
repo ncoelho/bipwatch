@@ -2,7 +2,7 @@ id: task-andrew-toth-8014f334
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 376
 statement: Define a PSBT input field that carries the silent payment tweak data
   needed to spend silent payment outputs.

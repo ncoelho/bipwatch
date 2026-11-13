@@ -2,7 +2,7 @@ id: objection-andrewtoth-95f8a051
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Design the PSBT ECDH share and proof fields so that the number of
   proofs does not grow as inputs times outputs, which could be too much data for

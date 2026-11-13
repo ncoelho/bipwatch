@@ -2,7 +2,7 @@ id: task-setavenger-0a96e184
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: nostr notifications
 statement: Specify the notification message fields, with a mandatory minimal
   identifier and an optional tweak that the receiver may discard if untrusted.

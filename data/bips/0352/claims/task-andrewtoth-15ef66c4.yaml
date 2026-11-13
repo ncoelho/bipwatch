@@ -2,7 +2,7 @@ id: task-andrewtoth-15ef66c4
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Change the PSBT Signer rule so that, when silent payment outputs are
   present and no sighash type is given, the signer must sign with SIGHASH_ALL.

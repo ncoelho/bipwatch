@@ -2,7 +2,7 @@ id: objection-andrewtoth-af356f42
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Account for the fact that ECDH shares and DLEQ proofs must be
   computed per distinct scan key, so the PSBT design can need up to

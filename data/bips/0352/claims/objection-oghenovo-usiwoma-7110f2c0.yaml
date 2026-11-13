@@ -2,7 +2,7 @@ id: objection-oghenovo-usiwoma-7110f2c0
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 part_of: BIP 392
 statement: Decide whether the silent payments version should be indicated by the
   descriptor prefix rather than by the key encoding.

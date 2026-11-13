@@ -2,7 +2,7 @@ id: open-question-sebastian-falbesoner-8a8ef579
 bip: 352
 kind: open-question
 status: open
-area: spec
+area: design
 part_of: BIP 392
 statement: Decide whether the sp() descriptor format should allow label ranges,
   given that BIP-style label-cache scanning keeps the cost flat for large

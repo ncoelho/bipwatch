@@ -2,7 +2,7 @@ id: task-marathon-gary-9d98b1f6
 bip: 352
 kind: task
 status: open
-area: implementation
+area: engineering
 part_of: silent payments coinbase
 statement: Extend the bark wallet keystore so that it recognizes and stores
   tweaked silent-payment-derived VTXO keys for Ark-tier coinbase payouts,

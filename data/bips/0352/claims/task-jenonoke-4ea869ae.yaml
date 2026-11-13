@@ -2,7 +2,7 @@ id: task-jenonoke-4ea869ae
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: silent payments coinbase
 statement: Specify how SPc receiving wallets handle same-height competing blocks
   during a reorg.

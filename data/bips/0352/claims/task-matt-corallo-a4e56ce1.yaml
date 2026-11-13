@@ -2,7 +2,7 @@ id: task-matt-corallo-a4e56ce1
 bip: 352
 kind: task
 status: open
-area: spec
+area: design
 part_of: bip21 update
 statement: Make the BIP 21 URI body optional so silent payment URIs can be
   shared without a standard on-chain fallback address.

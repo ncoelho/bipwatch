@@ -2,7 +2,7 @@ id: objection-ruben-somsen-ca000c97
 bip: 352
 kind: objection
 status: open
-area: spec
+area: design
 part_of: nostr notifications
 statement: Decide whether notification validation should fully trust the sender
   or fully verify, since partially checking notification data may not be safe

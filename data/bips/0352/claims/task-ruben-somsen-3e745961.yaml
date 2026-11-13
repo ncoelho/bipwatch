@@ -2,7 +2,7 @@ id: task-ruben-somsen-3e745961
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 statement: Specify how the label identifier is communicated to the sender, for
   example by including it in the silent payment address format.
 subject:

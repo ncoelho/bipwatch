@@ -2,7 +2,7 @@ id: task-josibake-f4734d1d
 bip: 352
 kind: task
 status: addressed
-area: spec
+area: design
 part_of: BIP 375
 statement: Require silent-payment-aware PSBT signers never to sign with
   ANYONECANPAY when silent payment outputs are present.

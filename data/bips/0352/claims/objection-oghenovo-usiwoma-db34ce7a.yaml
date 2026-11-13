@@ -2,7 +2,7 @@ id: objection-oghenovo-usiwoma-db34ce7a
 bip: 352
 kind: objection
 status: addressed
-area: spec
+area: design
 part_of: BIP 392
 statement: Decide whether sp() descriptors need new spscan/spspend key formats
   or can rely on existing key formats such as master keys with derivation paths.
