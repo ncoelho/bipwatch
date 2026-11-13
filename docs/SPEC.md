@@ -385,7 +385,7 @@ A small Cloudflare Worker that accepts a statement signed with nostr, PGP or BIP
 ### Also pending
 
 - Templates `idea`, `draft`, `deployed`, `closed`, and the consensus signaling module.
-- Deploy step in `build.yml` is built (Cloudflare Pages, wrangler); it needs the `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets, then the bipwatch.com custom domain.
+- Deploy step in `build.yml` is built (Cloudflare Pages, wrangler) and on hold (owner, 2026-11-13: not ready to publish). It runs only when the repository variable `DEPLOY_ENABLED` is `true` and needs the `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets; then the bipwatch.com custom domain.
 - Choose the remaining two BIPs, and seed 353, 54 and 448 the same way as 352.
 - Replace the aggregator sources in the 352 seed with primary ones.
 - Review the 352 claims and needs scores (set `reviewed_by`).

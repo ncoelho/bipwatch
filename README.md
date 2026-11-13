@@ -39,7 +39,7 @@ site/  static pages + JSON API
 - LLM extraction (SPEC 6.2): the `stance` task (v2) ran over the ~1,580 archived documents about BIP 352 and its 106 stances were merged (#3), all pending review. Each is scoped to the proposal, one change to its text, or an implementation, so an ACK of an amendment is not shown as support for the BIP. The BIP 352 page shows them under "Who has taken a position". The pull-request bot that opens such PRs on its own is not built yet.
 
 **Not started**
-- Deployment goes live once the Cloudflare secrets are added (see Deployment below).
+- Deployment is on hold until the project is ready. The deploy step exists but is switched off (see Deployment below).
 - The other initial BIPs (353, 54, 448, and two still to choose).
 - Stage templates other than `complete`, and the rest of the consensus signaling module (stakeholder groups, coverage, signed attestations).
 - Chain and network series for consensus BIPs; signed contribution intake.
@@ -76,16 +76,20 @@ Credentials, all git-ignored:
 | `ANTHROPIC_API_KEY` | `.env.anthropic` (owner-only; not touched by `neon env pull`) | extraction only |
 | `GITHUB_TOKEN` | `export GITHUB_TOKEN=$(gh auth token)` | the `github` collector |
 
-In CI the repository has these secrets: `DATABASE_URL`, `BOT_TOKEN` (a fine-grained token the header-sync bot opens pull requests with, so `validate` runs on them and auto-merge works), and for deployment `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. A ruleset on `main` requires `validate`; repository admins can bypass it.
+In CI the repository has these secrets: `DATABASE_URL` and `BOT_TOKEN` (a fine-grained token the header-sync bot opens pull requests with, so `validate` runs on them and auto-merge works). Deployment will add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. A ruleset on `main` requires `validate`; repository admins can bypass it.
 
 npm is pinned to 11.21.1 (`packageManager` in `package.json`; Node 22's bundled npm 10 crashes resolving vitest 4's peer dependencies). Every workflow sets up Node and npm through `.github/actions/setup`.
 
 ## Deployment
 
-`build.yml` builds the site on every push to `main` and every 6 hours, then uploads `site/dist` to Cloudflare Pages (project `bipwatch`, created on the first deploy) with `wrangler`. It needs two repository secrets:
+**On hold:** the project is not ready to be published. `build.yml` builds the site on every push to `main` and nightly; its deploy step is switched off.
 
-1. `CLOUDFLARE_ACCOUNT_ID`: shown in the Cloudflare dashboard (Workers & Pages, right-hand column).
-2. `CLOUDFLARE_API_TOKEN`: My Profile → API Tokens → Create token → custom token with **Account · Cloudflare Pages · Edit**, limited to that account.
+The deploy step uploads `site/dist` to Cloudflare Pages (project `bipwatch`, created on the first deploy) with `wrangler`. To switch it on:
+
+1. Add the repository secret `CLOUDFLARE_ACCOUNT_ID`: shown in the Cloudflare dashboard (Workers & Pages, right-hand column).
+2. Add the repository secret `CLOUDFLARE_API_TOKEN`: My Profile → API Tokens → Create token → custom token with **Account · Cloudflare Pages · Edit**, limited to that account.
+3. Add the repository variable `DEPLOY_ENABLED` with the value `true` (Settings → Secrets and variables → Actions → Variables). Without it nothing is published, even with the secrets in place; with it, missing secrets fail the build.
+4. Consider building every few hours instead of nightly, so the Sources section stays current on the live site.
 
 The site is then at `https://bipwatch.pages.dev`. For `bipwatch.com`, add it as a custom domain on the Pages project (Workers & Pages → bipwatch → Custom domains); Cloudflare sets the DNS record if the domain's DNS is on Cloudflare.
 
@@ -157,7 +161,7 @@ A claim is reviewed when a person sets `provenance.reviewed_by` to their handle 
 - [x] Header sync with self-merging pull requests
 - [ ] LLM extractors behind a pull-request review queue (stance task built; review queue bot not yet)
 - [ ] Review of the BIP 352 claims
-- [ ] Deployment (workflow ready; waiting on the Cloudflare secrets)
+- [ ] Deployment (workflow ready, on hold until the project is ready)
 - [ ] Remaining initial BIPs
 - [ ] Chain and network series for consensus BIPs
 - [ ] Signed contribution intake

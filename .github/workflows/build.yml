@@ -4,10 +4,10 @@ on:
   push:
     branches: [main]
   schedule:
-    # Every 6 hours, so the Sources section (when each collector last ran)
-    # stays reasonably current on the live site, and anything merged without
-    # a push trigger is picked up.
-    - cron: '17 */6 * * *'
+    # Nightly, picks up anything merged without a push trigger. When the site
+    # is deployed, consider every few hours so the Sources section stays
+    # current on the live site.
+    - cron: '17 3 * * *'
   workflow_dispatch:
 
 concurrency:
@@ -37,20 +37,22 @@ jobs:
           path: site/dist
 
       # Cloudflare Pages, project "bipwatch", by direct upload of site/dist.
-      # Needs two repository secrets: CLOUDFLARE_API_TOKEN (a token with the
-      # "Cloudflare Pages: Edit" permission) and CLOUDFLARE_ACCOUNT_ID. Until
-      # both exist the build still runs and the deploy is skipped.
+      # Off until the repository variable DEPLOY_ENABLED is set to "true"
+      # (Settings → Secrets and variables → Actions → Variables). It also
+      # needs two repository secrets: CLOUDFLARE_API_TOKEN (a token with the
+      # "Cloudflare Pages: Edit" permission) and CLOUDFLARE_ACCOUNT_ID.
       - name: Deploy to Cloudflare Pages
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && vars.DEPLOY_ENABLED == 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           WRANGLER: wrangler@4.156.0
           PROJECT: bipwatch
         run: |
+          # Deploying was switched on, so missing credentials are an error.
           if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
-            echo "::warning::CLOUDFLARE_API_TOKEN or CLOUDFLARE_ACCOUNT_ID is not set; skipping the deploy"
-            exit 0
+            echo "::error::DEPLOY_ENABLED is true but CLOUDFLARE_API_TOKEN or CLOUDFLARE_ACCOUNT_ID is not set"
+            exit 1
           fi
           # First deploy: create the project (production branch main).
           if ! npx --yes "$WRANGLER" pages project list | grep -qw "$PROJECT"; then
