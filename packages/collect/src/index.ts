@@ -1,7 +1,7 @@
 export * from './types.ts';
 export { buildMentionContext, detectMentions, type MentionContext } from './mentions.ts';
-export { connect, connectDirect } from './db.ts';
+export { connect, connectDirect, withErrorHandler } from './db.ts';
 export { migrate } from './migrate.ts';
-export { contentHash, lastCursor, runCollector, type RunResult } from './run.ts';
+export { closeAbandonedRuns, contentHash, lastCursor, runCollector, type RunResult } from './run.ts';
 export { bipsRepoDir, git, showFile, updateBipsRepo } from './bips/git.ts';
 export { parseHeader, type SpecHeader } from './bips/header.ts';

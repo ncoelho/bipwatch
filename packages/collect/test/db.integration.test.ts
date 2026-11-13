@@ -8,7 +8,7 @@ import { readSourceRows } from '../src/freshness.ts';
 import { contextFingerprint, reindexSource, saveFingerprint, storedFingerprint } from '../src/reindex.ts';
 import { migrate } from '../src/migrate.ts';
 import type { MentionContext } from '../src/mentions.ts';
-import { runCollector } from '../src/run.ts';
+import { closeAbandonedRuns, runCollector } from '../src/run.ts';
 import type { Collector, RawItem } from '../src/types.ts';
 
 const rawUrl = process.env.DATABASE_URL_UNPOOLED ?? process.env.DATABASE_URL;
@@ -201,5 +201,22 @@ describe.skipIf(!url)('Postgres integration (Neon)', () => {
     const reordered: MentionContext = { aliases: new Map([...ctx.aliases].reverse()) };
     expect(contextFingerprint(reordered)).toBe(fp);
     expect(contextFingerprint({ aliases: new Map([...ctx.aliases, ['scanning cost', 360]]) })).not.toBe(fp);
+  });
+
+  it('marks runs left open for over an hour as abandoned', async () => {
+    await pool.query(`INSERT INTO source_runs (source, started_at) VALUES ('delving', now() - interval '2 hours'), ('delving', now())`);
+    expect(await closeAbandonedRuns(pool, 'delving')).toBe(1);
+    const { rows } = await pool.query(`SELECT ok, error FROM source_runs WHERE ok IS FALSE AND error LIKE 'abandoned%'`);
+    expect(rows).toHaveLength(1);
+    // The run started just now is left alone.
+    expect((await pool.query(`SELECT count(*) FROM source_runs WHERE ok IS NULL`)).rows[0].count).toBe('1');
+  });
+
+  it('refreshes stored documents when normalize() changes', async () => {
+    await pool.query(`UPDATE documents SET author = 'stale name' WHERE external_id = 'p1'`);
+    const r = await reindexSource(pool, fixtureCollector(), ctx);
+    expect(r.refreshed).toBe(1);
+    expect((await pool.query(`SELECT author FROM documents WHERE external_id = 'p1'`)).rows[0].author).toBeNull();
+    expect((await reindexSource(pool, fixtureCollector(), ctx)).refreshed).toBe(0);
   });
 });

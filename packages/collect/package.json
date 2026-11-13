@@ -21,13 +21,13 @@
     "@bipwatch/data": "*",
     "pg": "8.13.1",
     "postal-mime": "2.4.4",
-    "yaml": "2.8.1"
+    "yaml": "2.9.1"
   },
   "devDependencies": {
     "@types/node": "22.15.30",
     "@types/pg": "8.11.10",
     "tsx": "4.20.3",
     "typescript": "5.8.3",
-    "vitest": "3.2.4"
+    "vitest": "3.2.7"
   }
 }

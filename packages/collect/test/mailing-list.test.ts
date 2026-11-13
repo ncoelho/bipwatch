@@ -8,7 +8,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { cleanSubject, escapeMid, messageIds, ownText, parseMessage } from '../src/email.ts';
+import { cleanSender, cleanSubject, escapeMid, messageIds, ownText, parseMessage } from '../src/email.ts';
 import { mailingListCollector, messageUrl } from '../src/collectors/mailing-list.ts';
 import { detectMentions, type MentionContext } from '../src/mentions.ts';
 import type { RawItem, RawItemInput } from '../src/types.ts';
@@ -133,6 +133,15 @@ describe('email helpers', () => {
     const m = (await parseMessage(fixture('ml-2011-first.eml')))!;
     expect(m).toMatchObject({ message_id: FIRST, list: 'bitcoin-development.lists.sourceforge.net' });
     expect(m.references).toEqual([]);
+  });
+
+  it('undoes the Google Groups "via" sender rewrite', () => {
+    expect(cleanSender("'Antoine Poinsot' via Bitcoin Development Mailing List")).toBe('Antoine Poinsot');
+    expect(cleanSender("'Russell O'Connor' via Bitcoin Development Mailing List")).toBe("Russell O'Connor");
+    expect(cleanSender('dathonohm via Bitcoin Development Mailing List')).toBe('dathonohm');
+    expect(cleanSender('Ruben Somsen')).toBe('Ruben Somsen');
+    expect(cleanSender('Paul via Satellite')).toBe('Paul via Satellite');
+    expect(cleanSender('  ')).toBeNull();
   });
 
   it('cleans list tags and reply prefixes from subjects', () => {

@@ -22,6 +22,23 @@ export function contentHash(source: string, item: RawItemInput): string {
     .digest('hex');
 }
 
+/**
+ * A run whose process died (killed, crashed, runner lost) never writes its
+ * result and stays ok = NULL. Mark this source's runs that have been open for
+ * over an hour as failed, so they show up as failures instead of lingering.
+ * Workflow timeouts are 30 minutes, so an hour-old open run cannot be live.
+ */
+export async function closeAbandonedRuns(db: pg.Pool, source: string): Promise<number> {
+  const { rowCount } = await db.query(
+    `UPDATE source_runs
+        SET ok = false, finished_at = now(),
+            error = 'abandoned: the process ended before recording a result'
+      WHERE source = $1 AND ok IS NULL AND started_at < now() - interval '1 hour'`,
+    [source],
+  );
+  return rowCount ?? 0;
+}
+
 /** Cursor of the last successful run, or null on first run. */
 export async function lastCursor(db: pg.Pool, source: string): Promise<string | null> {
   const { rows } = await db.query<{ cursor_after: string | null }>(
@@ -46,6 +63,7 @@ export async function runCollector(
   opts: { batchSize?: number } = {},
 ): Promise<RunResult> {
   const batchSize = opts.batchSize ?? BATCH_SIZE;
+  await closeAbandonedRuns(db, collector.source);
   const cursorBefore = await lastCursor(db, collector.source);
   const { rows } = await db.query<{ id: number }>(
     'INSERT INTO source_runs (source, cursor_before) VALUES ($1, $2) RETURNING id',

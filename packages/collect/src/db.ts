@@ -11,7 +11,22 @@ const MISSING =
  */
 export function connect(url = process.env.DATABASE_URL): pg.Pool {
   if (!url) throw new Error(`DATABASE_URL ${MISSING}`);
-  return new pg.Pool({ connectionString: strictSsl(url), max: 4 });
+  return withErrorHandler(new pg.Pool({ connectionString: strictSsl(url), max: 4 }));
+}
+
+/**
+ * Neon can close an idle connection (compute restart, scale to zero, pooler
+ * recycling). pg reports that as an 'error' event on the pool, and an
+ * 'error' event without a listener ends the Node process: on 2026-11-09 a
+ * mailing-list run died that way mid-run and left an unfinished row. With a
+ * listener the pool drops the dead client and opens a new one on the next
+ * query; a query that was in flight still fails normally.
+ */
+export function withErrorHandler(pool: pg.Pool): pg.Pool {
+  pool.on('error', (err) => {
+    console.warn(`Postgres: idle connection closed (${err.message}); it will be replaced.`);
+  });
+  return pool;
 }
 
 /**
@@ -31,7 +46,7 @@ export function strictSsl(url: string): string {
 export function connectDirect(): pg.Pool {
   const url = process.env.DATABASE_URL_UNPOOLED ?? process.env.DATABASE_URL;
   if (!url) throw new Error(`DATABASE_URL_UNPOOLED or DATABASE_URL ${MISSING}`);
-  return new pg.Pool({ connectionString: strictSsl(url), max: 1 });
+  return withErrorHandler(new pg.Pool({ connectionString: strictSsl(url), max: 1 }));
 }
 
 export type Db = pg.Pool | pg.PoolClient;

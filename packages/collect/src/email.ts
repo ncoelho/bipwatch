@@ -14,6 +14,19 @@ export interface ListMessage {
 
 const stripAngles = (s: string) => s.trim().replace(/^<|>$/g, '');
 
+/**
+ * Google Groups rewrites the sender of messages from domains with strict
+ * DMARC to "'Name' via Bitcoin Development Mailing List" (sometimes without
+ * the quotes). The person is the part before " via"; quotes inside the name
+ * ("'Russell O'Connor' via ...") are kept.
+ */
+const VIA_GROUP = /^\s*'?(.+?)'?\s+via\s+(?:Bitcoin Development Mailing List|bitcoindev)\s*$/i;
+export function cleanSender(name: string | null | undefined): string | null {
+  const n = name?.trim();
+  if (!n) return null;
+  return n.match(VIA_GROUP)?.[1].trim() || n;
+}
+
 /** All <id> tokens in a References / In-Reply-To header. */
 export function messageIds(header: string | undefined): string[] {
   if (!header) return [];
@@ -49,7 +62,7 @@ export async function parseMessage(raw: Buffer | string): Promise<ListMessage | 
     message_id: id,
     ...(inReplyTo ? { in_reply_to: inReplyTo } : {}),
     references,
-    from: email.from?.name?.trim() || null,
+    from: cleanSender(email.from?.name),
     ...(email.date ? { date: new Date(email.date).toISOString() } : {}),
     subject: (email.subject ?? '').replace(/\s+/g, ' ').trim(),
     ...(listId ? { list: messageIds(listId)[0] ?? listId.trim() } : {}),

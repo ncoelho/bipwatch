@@ -4,7 +4,7 @@ import { existsSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { promisify } from 'node:util';
 import { findDataDir } from '@bipwatch/data';
-import { cleanSubject, escapeMid, ownText, parseMessage, threadRoot, type ListMessage } from '../email.ts';
+import { cleanSender, cleanSubject, escapeMid, ownText, parseMessage, threadRoot, type ListMessage } from '../email.ts';
 import type { Collector, DocumentInput, RawItem } from '../types.ts';
 
 /**
@@ -168,7 +168,8 @@ export function mailingListCollector(opts: { dir?: string; remote?: string; ref?
           external_id: m.message_id,
           thread_key: threadRoot(m),
           title: cleanSubject(m.subject) || undefined,
-          author: m.from ?? undefined,
+          // Raw items stored before the via-cleanup still hold the rewritten name.
+          author: cleanSender(m.from) ?? undefined,
           posted_at: m.date ? new Date(m.date) : undefined,
           body_text: ownText(m.text),
           url: raw.url ?? messageUrl(m.message_id),

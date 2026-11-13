@@ -16,7 +16,11 @@ import type { Collector, RawItem, SourceId } from './types.ts';
  *
  * Each document is re-derived by its collector's own normalize() from the
  * raw item it came from, so thread titles and bodies are exactly what the
- * collector produced; only the mention rules are new. Nothing is fetched.
+ * collector produces today. Nothing is fetched. When a collector's
+ * normalize() has changed since a document was stored (a parser fix, such as
+ * undoing the Google Groups "via" sender rewrite), the stored document is
+ * updated to match, so a fix applies to the whole archive, not only to new
+ * documents.
  */
 
 export interface ReindexResult {
@@ -26,6 +30,8 @@ export interface ReindexResult {
   mentions_after: number;
   /** Documents whose collector no longer produces them from their raw item. */
   unmatched: number;
+  /** Documents whose stored fields differed from normalize() and were updated. */
+  refreshed: number;
   /** Per-BIP change in tagged documents, only where it changed. */
   changed: { bip: number; before: number; after: number }[];
 }
@@ -81,6 +87,7 @@ export async function reindexSource(
     mentions_before: await mentionCount(db, source),
     mentions_after: 0,
     unmatched: 0,
+    refreshed: 0,
     changed: [],
   };
 
@@ -103,13 +110,19 @@ export async function reindexSource(
       const raw: RawItem = { ...r, id: Number(r.id) };
       byRaw.set(raw.id, new Map(collector.normalize(raw).map((d) => [d.external_id, d])));
     }
-    const { rows: docs } = await db.query<{ id: string; external_id: string; raw_item_id: string }>(
-      `SELECT id, external_id, raw_item_id FROM documents WHERE source = $1 AND raw_item_id = ANY($2::bigint[])`,
+    type Row = {
+      id: string; external_id: string; raw_item_id: string; thread_key: string | null; author: string | null;
+      posted_at: Date | null; title: string | null; body_text: string; url: string | null;
+    };
+    const { rows: docs } = await db.query<Row>(
+      `SELECT id, external_id, raw_item_id, thread_key, author, posted_at, title, body_text, url
+         FROM documents WHERE source = $1 AND raw_item_id = ANY($2::bigint[])`,
       [source, [...byRaw.keys()]],
     );
 
     const ids: number[] = [];
     const values: unknown[] = [];
+    const updates: unknown[][] = [];
     for (const d of docs) {
       const input = byRaw.get(Number(d.raw_item_id))?.get(d.external_id);
       if (!input) {
@@ -117,6 +130,22 @@ export async function reindexSource(
         continue;
       }
       ids.push(Number(d.id));
+      const now = {
+        thread_key: input.thread_key ?? null,
+        author: input.author ?? null,
+        posted_at: input.posted_at ? new Date(input.posted_at).getTime() : null,
+        title: input.title ?? null,
+        body_text: input.body_text,
+        url: input.url ?? null,
+      };
+      const stored = { ...d, posted_at: d.posted_at ? new Date(d.posted_at).getTime() : null };
+      if ((Object.keys(now) as (keyof typeof now)[]).some((k) => now[k] !== stored[k])) {
+        updates.push([
+          Number(d.id), now.thread_key, now.author,
+          now.posted_at === null ? null : new Date(now.posted_at).toISOString(),
+          now.title, now.body_text, now.url,
+        ]);
+      }
       for (const m of detectMentions(
         { title: input.title, body: input.body_text, thread_title: input.thread_title },
         ctx,
@@ -129,6 +158,18 @@ export async function reindexSource(
     const client = await db.connect();
     try {
       await client.query('BEGIN');
+      if (updates.length) {
+        const col = (i: number) => updates.map((u) => u[i]);
+        await client.query(
+          `UPDATE documents d SET thread_key = v.thread_key, author = v.author, posted_at = v.posted_at,
+                  title = v.title, body_text = v.body_text, url = v.url
+             FROM unnest($1::bigint[], $2::text[], $3::text[], $4::timestamptz[], $5::text[], $6::text[], $7::text[])
+                  AS v(id, thread_key, author, posted_at, title, body_text, url)
+            WHERE d.id = v.id`,
+          [col(0), col(1), col(2), col(3), col(4), col(5), col(6)],
+        );
+        result.refreshed += updates.length;
+      }
       await client.query('DELETE FROM bip_mentions WHERE document_id = ANY($1::bigint[])', [ids]);
       for (let i = 0; i < values.length; i += 4 * 10_000) {
         const part = values.slice(i, i + 4 * 10_000);
@@ -190,6 +231,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       console.log(
         `${s}: ${r.documents} documents · mentions ${r.mentions_before} → ${r.mentions_after}` +
           (r.unmatched ? ` · ${r.unmatched} unmatched` : '') +
+          (r.refreshed ? ` · ${r.refreshed} documents refreshed` : '') +
           (r.changed.length ? ` · ${r.changed.length} BIPs changed: ${diff}` : ' · no BIP changed'),
       );
     }

@@ -308,7 +308,7 @@ interface Collector {
 }
 ```
 
-Re-running any collector with the same cursor must not create duplicates (`content_hash` upsert). A failed run records `ok = false` and its error, and does not advance the cursor.
+Re-running any collector with the same cursor must not create duplicates (`content_hash` upsert). A failed run records `ok = false` and its error, and does not advance the cursor. A run whose process died before recording a result is marked failed ("abandoned") by the next run of that source once it has been open for an hour. Pools have an `error` listener, so Neon closing an idle connection no longer ends the process.
 
 **Sources:**
 
@@ -323,7 +323,7 @@ Re-running any collector with the same cursor must not create duplicates (`conte
 - `delving`: Discourse JSON endpoints (latest topics, then new posts per topic). Store each post.
   - Built on `/posts.json` instead (site-wide public posts, newest first, paged with `?before=<id>`), which returns each post's Markdown `raw` and its topic title in one call. The cursor is the highest stored post id; the first run backfilled the whole forum. Only stable fields are stored, so counters like reads do not change the hash. `[quote]` blocks are dropped from `body_text` so quoting a post does not count as mentioning its BIPs; the raw item keeps them. Edits to old posts are not picked up. Requests wait 300 ms and back off on 429/5xx.
 - `mailing-list`: the public-inbox archive at gnusha.org/pi/bitcoindev. Check which endpoints it exposes (Atom feed for new messages, per-thread mbox) before writing the parser. Key on Message-ID.
-  - Built on the archive's git mirror (`git://gnusha.org/pi-bitcoindev`, public-inbox v1: one commit per message, 2011 to now, about 25k messages). A bare clone sits next to the repo (`../bitcoindev-archive.git`, or `BITCOINDEV_ARCHIVE`); CI caches it weekly. The cursor is the last commit stored. Messages are parsed with postal-mime and stored reduced: Message-ID, In-Reply-To, References, sender name (no address), date, subject, list and plain text; transport headers and attachments are dropped to keep Neon small. `thread_key` is the first References id. `body_text` drops quoted lines, the "wrote:" attribution and list footers. HTTPS cloning from gnusha.org broke off locally ("early EOF"); git:// worked.
+  - Built on the archive's git mirror (`git://gnusha.org/pi-bitcoindev`, public-inbox v1: one commit per message, 2011 to now, about 25k messages). A bare clone sits next to the repo (`../bitcoindev-archive.git`, or `BITCOINDEV_ARCHIVE`); CI caches it weekly. The cursor is the last commit stored. Messages are parsed with postal-mime and stored reduced: Message-ID, In-Reply-To, References, sender name (no address), date, subject, list and plain text; transport headers and attachments are dropped to keep Neon small. `thread_key` is the first References id. `body_text` drops quoted lines, the "wrote:" attribution and list footers. Google Groups rewrites senders from strict-DMARC domains to "'Name' via Bitcoin Development Mailing List"; the sender name is taken from before " via" (since 2026-11-13; 457 archived messages were corrected by a re-index). HTTPS cloning from gnusha.org broke off locally ("early EOF"); git:// worked.
 
 **Mention detection (code only):**
 
@@ -332,7 +332,7 @@ Re-running any collector with the same cursor must not create duplicates (`conte
 - Aliases: add an optional `aliases` list to `bip.yaml` (schema change: e.g. 352 gets "silent payments", "sp1", "BIP352"). Alias matches count only for tracked BIPs.
 - Thread inheritance: a reply inherits mentions from its thread title.
 
-**Re-indexing mentions:** mentions are tagged when a document is stored, with the aliases of the BIPs tracked then. `npm run reindex-mentions` re-derives every archived document with its collector's own `normalize()` from its raw item and re-tags it with the current rules (nothing is fetched). A fingerprint of the alias set is kept in `index_state`; `--if-changed` skips the run when the rules are unchanged. `.github/workflows/reindex-mentions.yml` runs it on every push to `main` that touches a `bip.yaml`.
+**Re-indexing mentions:** mentions are tagged when a document is stored, with the aliases of the BIPs tracked then. `npm run reindex-mentions` re-derives every archived document with its collector's own `normalize()` from its raw item and re-tags it with the current rules (nothing is fetched). A fingerprint of the alias set is kept in `index_state`; `--if-changed` skips the run when the rules are unchanged. When a collector's `normalize()` has changed (a parser fix), the re-index also updates the stored document fields, so the fix covers the whole archive; run it for that source after such a change. `.github/workflows/reindex-mentions.yml` runs it on every push to `main` that touches a `bip.yaml`.
 
 **Tracking a new BIP (all history is used):**
 1. Add `data/bips/<NNNN>/bip.yaml` with `tracked: true`, `category`, `template` and `aliases` (names people use for it in discussion), and merge it.
