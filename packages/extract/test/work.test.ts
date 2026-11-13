@@ -71,6 +71,7 @@ describe('work task context', () => {
     expect(text).toContain('whose own work is not recorded here: BIP 375, BIP 376, BIP 340.');
     expect(text).toContain('<spec bip="352">\n== Abstract ==\nSilent payments.\n</spec>');
     expect(workTask.version).toBe(2);
+    expect(workTask.skipSources).toEqual(['bips-repo']);
     expect(workTask.system).toContain('A design question the current spec settles');
   });
 });

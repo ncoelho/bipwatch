@@ -117,6 +117,7 @@ for (const ctx of bips.values()) {
         afterId: ids.length ? 0 : cursor,
         limit: ids.length ? ids.length : limit,
         sources: values.source,
+        skipSources: task.skipSources,
         ids,
       }),
       model,

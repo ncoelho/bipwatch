@@ -13,7 +13,7 @@ import type { InputDoc } from './types.ts';
  */
 export async function* selectDocs(
   db: pg.Pool,
-  opts: { bips: number[]; afterId: number; limit: number; pageSize?: number; sources?: string[]; ids?: number[] },
+  opts: { bips: number[]; afterId: number; limit: number; pageSize?: number; sources?: string[]; skipSources?: string[]; ids?: number[] },
 ): AsyncGenerator<InputDoc> {
   let after = opts.afterId;
   let left = opts.limit;
@@ -36,11 +36,13 @@ export async function* selectDocs(
          JOIN raw_items r ON r.id = d.raw_item_id
          JOIN bip_mentions m ON m.document_id = d.id AND m.bip = ANY($1::int[])
         WHERE d.id > $2 AND ($4::text[] IS NULL OR d.source = ANY($4::text[]))
-          AND ($5::bigint[] IS NULL OR d.id = ANY($5::bigint[])) AND d.author IS NOT NULL AND d.url IS NOT NULL AND length(trim(d.body_text)) > 0
+          AND ($5::bigint[] IS NULL OR d.id = ANY($5::bigint[]))
+          AND ($6::text[] IS NULL OR d.source <> ALL($6::text[])) AND d.author IS NOT NULL AND d.url IS NOT NULL AND length(trim(d.body_text)) > 0
         GROUP BY d.id
         ORDER BY d.id
         LIMIT $3`,
-      [opts.bips, after, Math.min(page, left), opts.sources?.length ? opts.sources : null, opts.ids?.length ? opts.ids : null],
+      [opts.bips, after, Math.min(page, left), opts.sources?.length ? opts.sources : null, opts.ids?.length ? opts.ids : null,
+       opts.skipSources?.length ? opts.skipSources : null],
     );
     if (!rows.length) return;
     for (const r of rows) yield r;

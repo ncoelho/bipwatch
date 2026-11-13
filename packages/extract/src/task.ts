@@ -26,6 +26,11 @@ export interface Task<Out> {
   /** Stable system prompt (cached across documents). */
   system: string;
   schema: z.ZodType<Out>;
+  /**
+   * Sources this task never reads, decided by code so no tokens are spent on
+   * them (e.g. commit messages record work already done).
+   */
+  skipSources?: string[];
   /** Documents longer than this are logged as too_long and skipped. */
   maxDocChars: number;
   userMessage(doc: InputDoc, bips: BipContext[]): string;

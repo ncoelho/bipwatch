@@ -45,6 +45,9 @@ export const workTask: Task<WorkOutput> = {
   system,
   schema: WorkOutput,
   maxDocChars: 60_000,
+  // Commit messages in the BIPs repo say what was changed, never what is
+  // left to do; the current spec text already reflects them.
+  skipSources: ['bips-repo'],
 
   context(bips) {
     return bips

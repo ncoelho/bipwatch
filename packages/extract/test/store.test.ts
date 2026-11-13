@@ -82,13 +82,15 @@ describe.skipIf(!url)('extract store (Neon)', () => {
       [1, 'alice', 'BIP352 thread', [352]],
       [2, 'bob', 'BIP352 thread', [352]],
     ]);
-    // Later replies in the same thread come along as context for status.
     // Later replies in the same thread, oldest first, including authorless
     // ones (skipped as sources of claims, but still context for status).
     expect(docs[0].later).toBe('bob (2026-01-03): NACK\n\n? (2026-01-05): anon');
     expect(docs[1].later).toBe('? (2026-01-05): anon');
     expect(await all(selectDocs(pool, { bips: [352], afterId: 1, limit: 10 }))).toHaveLength(1);
     expect(await all(selectDocs(pool, { bips: [352], afterId: 0, limit: 1 }))).toHaveLength(1);
+    // A task's skipped sources are never selected.
+    expect(await all(selectDocs(pool, { bips: [352], afterId: 0, limit: 10, skipSources: ['delving'] }))).toHaveLength(0);
+    expect(await all(selectDocs(pool, { bips: [352], afterId: 0, limit: 10, skipSources: ['bips-repo'] }))).toHaveLength(2);
   });
 
   it('tracks runs and resumes after the last ok non-dry run', async () => {
