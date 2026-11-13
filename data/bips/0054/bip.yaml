@@ -1,0 +1,32 @@
+# Copied from the spec header at spec.revision. Re-sync when the spec changes.
+number: 54
+title: Consensus Cleanup
+layer: Consensus (soft fork)
+type: Specification
+status: Complete
+assigned: 2025-04-11
+license: CC0-1.0
+authors:
+  - Antoine Poinsot
+  - Matt Corallo
+spec:
+  repo: bitcoin/bips
+  path: bip-0054.md
+  revision: 927b6de9915c9262615a6399de51b200f81e5aa4
+  synced: 2026-11-13
+
+bipwatch:
+  tracked: true
+  category: needs-consensus
+  template: complete
+  # Consensus change: what it needs is activation, and adoption means activation plus use.
+  adoption_measure: activation-and-usage
+  summary: >-
+    A soft fork that bundles four long-standing fixes: it closes the timewarp
+    attack, caps the worst-case time to validate a block, removes Merkle tree
+    weaknesses, and makes duplicate transactions impossible without BIP 30
+    checks. The specification is complete; what it still needs is activation.
+  # Matched by the mention index; "BIP <n>" and spec links are found without them.
+  aliases:
+    - consensus cleanup
+    - great consensus cleanup

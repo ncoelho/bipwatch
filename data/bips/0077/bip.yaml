@@ -1,0 +1,38 @@
+# Copied from the spec header at spec.revision. Re-sync when the spec changes.
+number: 77
+title: Async Payjoin
+layer: Applications
+type: Specification
+status: Draft
+version: 0.2.0
+assigned: 2023-08-08
+license: BSD-2-Clause
+authors:
+  - Dan Gould
+  - Yuval Kogman
+requires: [21, 78, 173, 174]
+discussion:
+  - url: "https://github.com/bitcoin/bips/pull/1483"
+  - url: "https://gnusha.org/pi/bitcoindev/7B11AE34-27A7-46ED-95BF-66CA13BA26F3@ngould.dev/#t"
+  - url: "https://gnusha.org/pi/bitcoindev/3C0A6E4C-444E-4E75-829C-1A21D8EE40E0@ngould.dev/#t"
+spec:
+  repo: bitcoin/bips
+  path: bip-0077.md
+  revision: 9997e005765d516b40a6646317ff78b5175f630b
+  synced: 2026-11-13
+
+bipwatch:
+  tracked: true
+  category: in-development
+  template: draft
+  # Adoption is wallet and service support for sending and receiving.
+  adoption_measure: wallet-coverage
+  summary: >-
+    A second, asynchronous version of payjoin (BIP 78). An untrusted directory
+    server relays encrypted messages, so the receiver no longer has to run a
+    public server and the two sides need not be online at the same time to build
+    a batched transaction.
+  # Matched by the mention index; "BIP <n>" and spec links are found without them.
+  aliases:
+    - async payjoin
+    - payjoin v2

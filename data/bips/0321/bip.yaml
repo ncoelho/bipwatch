@@ -1,0 +1,27 @@
+# Copied from the spec header at spec.revision. Re-sync when the spec changes.
+number: 321
+title: URI Scheme
+layer: Applications
+type: Specification
+status: Complete
+assigned: 2024-11-15
+license: BSD-2-Clause
+authors:
+  - Matt Corallo
+related: [353]
+spec:
+  repo: bitcoin/bips
+  path: bip-0321.mediawiki
+  revision: 644e484d4a8376cb8ba564a449999148aaaaf8f5
+  synced: 2026-11-13
+
+bipwatch:
+  tracked: true
+  category: ready-to-build
+  template: complete
+  # Replaces BIP 21. Mentions of "BIP 21" are not counted here; no alias is safe.
+  adoption_measure: wallet-coverage
+  summary: >-
+    A replacement for BIP 21's bitcoin: URI scheme that matches how such URIs
+    are used today: modern address types, standard query parameters, guidance
+    for adding new payment instructions, and an optional proof of payment.

@@ -35,7 +35,7 @@ site/  static pages + JSON API
 - Tracking a new BIP uses its whole history: mentions are re-tagged when aliases change, its full commit history is collected, and extraction starts from the beginning of the archive for it.
 
 **In progress**
-- BIP 352 is the one tracked BIP, with 18 hand-written claims, 106 extracted stances and a needs assessment, all pending review.
+- Tracked BIPs: 352 (18 hand-written claims, 108 extracted stances and a needs assessment, all pending review), and since 2026-11-13 the other focus BIPs, 54, 448, 360, 77, 353 and 321, with records only so far.
 - LLM extraction (SPEC 6.2): the `stance` task (v2) ran over the ~1,580 archived documents about BIP 352 and its stances were merged (#3, #5), all pending review. A daily workflow that opens one pull request per tracked BIP with new stances is built and switched off (see Extraction below). Each is scoped to the proposal, one change to its text, or an implementation, so an ACK of an amendment is not shown as support for the BIP. The BIP 352 page shows them under "Who has taken a position". The pull-request bot that opens such PRs on its own is not built yet.
 
 **Not started**
@@ -174,7 +174,7 @@ A claim is reviewed when a person sets `provenance.reviewed_by` to their handle 
 - [ ] LLM extractors behind a pull-request review queue (stance task and daily PR bot built; bot switched off; other tasks not yet)
 - [ ] Review of the BIP 352 claims
 - [ ] Deployment (workflow ready, on hold until the project is ready)
-- [ ] Seed the focus BIPs: 54, 448, 360, 77, 353 + 321 (352 is done)
+- [x] Track the focus BIPs: 54, 448, 360, 352, 77, 353 + 321 (records; claims and needs assessments to come)
 - [ ] Chain and network series for consensus BIPs
 - [ ] Signed contribution intake
 

@@ -1,0 +1,36 @@
+# Copied from the spec header at spec.revision. Re-sync when the spec changes.
+number: 360
+title: Pay-to-Merkle-Root (P2MR)
+layer: Consensus (soft fork)
+type: Specification
+status: Draft
+version: 0.12.1
+assigned: 2024-12-18
+license: BSD-3-Clause
+authors:
+  - Hunter Beast
+  - Ethan Heilman
+  - Isabel Foxen Duke
+requires: [340, 341, 342]
+spec:
+  repo: bitcoin/bips
+  path: bip-0360.mediawiki
+  revision: e7263a4cfe500c89e4269889244606953691ca33
+  synced: 2026-11-13
+
+bipwatch:
+  tracked: true
+  category: in-development
+  template: draft
+  # Earlier drafts were called Pay to Quantum Resistant Hash (P2QRH).
+  adoption_measure: activation-and-usage
+  summary: >-
+    A new output type, Pay-to-Merkle-Root, that works like taproot without the
+    key path spend, so coins can only be spent through a script tree. The aim is
+    resistance to long-exposure attacks by future quantum computers and to
+    future breaks of Bitcoin's elliptic curve cryptography.
+  # Matched by the mention index; "BIP <n>" and spec links are found without them.
+  aliases:
+    - pay-to-merkle-root
+    - p2mr
+    - p2qrh

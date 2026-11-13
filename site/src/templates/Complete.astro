@@ -80,6 +80,7 @@ const bipLink = (n: number) => (known.has(n) ? bipHref(n) : `https://github.com/
     </section>
   )}
 
+  {impls.length > 0 && (
   <section id="implementations">
     <div class="sec-head">
       <h2>Who implements it</h2>
@@ -106,6 +107,7 @@ const bipLink = (n: number) => (known.has(n) ? bipHref(n) : `https://github.com/
       </table>
     </div>
   </section>
+  )}
 
   <Positions bundle={bundle} />
 

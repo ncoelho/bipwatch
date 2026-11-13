@@ -13,3 +13,23 @@ people:
     aliases: [brandonblack]
   - name: Craig Raw
     aliases: [craigraw]
+  # Authors of the focus BIPs (added 2026-11-13). Each posts on GitHub or
+  # Delving under the login and on the list or in spec headers by name.
+  - name: Antoine Poinsot
+    aliases: [darosior]
+  - name: Matt Corallo
+    aliases: [TheBlueMatt]
+  - name: Gregory Sanders
+    aliases: [instagibbs]
+  - name: Steven Roose
+    aliases: [stevenroose]
+  - name: Ethan Heilman
+    aliases: [EthanHeilman]
+  - name: Hunter Beast
+    aliases: [cryptoquick]
+  - name: Dan Gould
+    aliases: [DanGould]
+  - name: Yuval Kogman
+    aliases: [nothingmuch]
+  - name: Bastien Teinturier
+    aliases: [t-bast]

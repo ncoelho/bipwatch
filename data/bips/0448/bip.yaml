@@ -1,0 +1,34 @@
+# Copied from the spec header at spec.revision. Re-sync when the spec changes.
+number: 448
+title: Taproot-native (Re)bindable Transactions
+layer: Consensus (soft fork)
+type: Specification
+status: Draft
+assigned: 2026-03-11
+license: CC0-1.0
+authors:
+  - Gregory Sanders
+  - Antoine Poinsot
+  - Steven Roose
+related: [348, 349, 446]
+spec:
+  repo: bitcoin/bips
+  path: bip-0448.md
+  revision: 2778442c21cef2290ae3e0c843d9f3179aa1cdd0
+  synced: 2026-11-13
+
+bipwatch:
+  tracked: true
+  category: in-development
+  template: draft
+  # Bundles three opcodes, each with its own BIP (related below).
+  adoption_measure: activation-and-usage
+  summary: >-
+    Proposes enabling three Tapscript operations together: OP_TEMPLATEHASH (BIP
+    446), OP_CHECKSIGFROMSTACK (BIP 348) and OP_INTERNALKEY (BIP 349). The
+    authors' aim is to improve existing second-layer protocols and make new ones
+    practical.
+  # Matched by the mention index; "BIP <n>" and spec links are found without them.
+  aliases:
+    - rebindable transactions
+    - (re)bindable transactions

@@ -33,14 +33,14 @@ Chosen by the owner on 2026-11-13: three consensus proposals and three applicati
 
 | BIP | Title (from the spec header) | Layer | Status | Record |
 |---|---|---|---|---|
-| 54 | Consensus Cleanup | Consensus (soft fork) | Complete | to seed |
-| 448 | Taproot-native (Re)bindable Transactions | Consensus (soft fork) | Draft | to seed |
-| 360 | Pay-to-Merkle-Root (P2MR) | Consensus (soft fork) | Draft | to seed |
-| 352 | Silent Payments | Applications | Complete | tracked (seeded) |
-| 77 | Async Payjoin | Applications | Draft | to seed |
-| 353 + 321 | DNS Payment Instructions + URI Scheme | Applications | Complete | to seed (as a pair) |
+| 54 | Consensus Cleanup | Consensus (soft fork) | Complete | tracked |
+| 448 | Taproot-native (Re)bindable Transactions | Consensus (soft fork) | Draft | tracked |
+| 360 | Pay-to-Merkle-Root (P2MR) | Consensus (soft fork) | Draft | tracked |
+| 352 | Silent Payments | Applications | Complete | tracked |
+| 77 | Async Payjoin | Applications | Draft | tracked |
+| 353 + 321 | DNS Payment Instructions + URI Scheme | Applications | Complete | tracked (as a pair) |
 
-Seeding each one follows "Tracking a new BIP" in 6.1. 448, 360 and 77 are Drafts, so they need the `draft` stage template; 54 and 448 and 360 are consensus changes, so they are where the consensus signaling module and the chain series (6.3) matter.
+All are tracked since 2026-11-13: `bip.yaml` facts generated from each spec header (the header sync confirms they match), with a BipWatch category, stage template, adoption measure, summary and aliases written by hand (summaries and aliases pending owner review). `people.yaml` maps the authors' GitHub logins to their names. None has claims or a needs assessment yet; the extraction bot backfills stances from the archive (about 2,250 documents across the six, roughly $20 over a week at the default daily cap). 448, 360 and 77 are Drafts, so they need the `draft` stage template; 54 and 448 and 360 are consensus changes, so they are where the consensus signaling module and the chain series (6.3) matter.
 
 ---
 

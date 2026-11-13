@@ -1,0 +1,36 @@
+# Copied from the spec header at spec.revision. Re-sync when the spec changes.
+number: 353
+title: DNS Payment Instructions
+layer: Applications
+type: Specification
+status: Complete
+assigned: 2024-02-10
+license: CC0-1.0
+authors:
+  - Matt Corallo
+  - Bastien Teinturier
+related: [321]
+discussion:
+  - date: 2024-02-13
+    url: "https://groups.google.com/g/bitcoindev/c/uATaflkYglQ"
+    title: Mapping Human-Readable Names to Payment Instructions
+spec:
+  repo: bitcoin/bips
+  path: bip-0353.mediawiki
+  revision: 58f1e33d961e8ae3bf65fe496fa35d850302e476
+  synced: 2026-11-13
+
+bipwatch:
+  tracked: true
+  category: ready-to-build
+  template: complete
+  # Tracked as a pair with BIP 321, whose URIs it publishes in DNS.
+  adoption_measure: wallet-coverage
+  summary: >-
+    A standard format for publishing a bitcoin: URI in a DNSSEC-signed DNS TXT
+    record, so a human-readable name can resolve to payment instructions that
+    are checked against the DNS chain of trust rather than taken on a resolver's
+    word.
+  # Matched by the mention index; "BIP <n>" and spec links are found without them.
+  aliases:
+    - dns payment instructions
