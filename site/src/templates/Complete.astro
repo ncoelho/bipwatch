@@ -1,10 +1,11 @@
 ---
-// Stage template for Complete BIPs. The page answers one question:
-// "is it getting built?" Implementations sit near the top; the problem
-// statement and open questions follow.
+// Stage template for Complete BIPs. What still needs doing leads (the site's
+// main job); then "is it getting built?" with implementations near the top,
+// and the problem statement and trade-offs after.
 import type { BipBundle } from '@bipwatch/data';
 import { NEED_DIMENSIONS } from '@bipwatch/data';
 import Dots from '../components/Dots.astro';
+import OpenWork from '../components/OpenWork.astro';
 import Positions from '../components/Positions.astro';
 import Source from '../components/Source.astro';
 import {
@@ -23,12 +24,10 @@ const impls = byKind(bundle, 'implementation').sort(
 const sendCount = impls.filter((c) => c.implementation!.send).length;
 const receiveCount = impls.filter((c) => c.implementation!.receive).length;
 const problems = byKind(bundle, 'problem');
-const open = byKind(bundle, 'tradeoff', 'open-question', 'objection');
+const tradeoffs = byKind(bundle, 'tradeoff');
 const evidence = byKind(bundle, 'evidence');
 const pendingCount = bundle.claims.filter(isPending).length;
 
-const STATUS_PILL: Record<string, string> = { open: 'accent', addressed: 'good', disputed: 'warn', unknown: '' };
-const KIND_LABEL: Record<string, string> = { tradeoff: 'Trade-off', 'open-question': 'Open question', objection: 'Objection' };
 const bipLink = (n: number) => (known.has(n) ? bipHref(n) : `https://github.com/bitcoin/bips/blob/master/bip-${pad(n)}.mediawiki`);
 ---
 <article class="shell page">
@@ -52,6 +51,8 @@ const bipLink = (n: number) => (known.has(n) ? bipHref(n) : `https://github.com/
       <p class="notice">{pendingCount} of {bundle.claims.length} claims on this page are pending review. They were extracted automatically and link to their sources.</p>
     )}
   </header>
+
+  <OpenWork bundle={bundle} />
 
   {needs && (
     <section id="needs">
@@ -120,21 +121,11 @@ const bipLink = (n: number) => (known.has(n) ? bipHref(n) : `https://github.com/
     </section>
   )}
 
-  {open.length > 0 && (
-    <section id="open">
-      <div class="sec-head"><h2>Trade-offs and open questions</h2></div>
+  {tradeoffs.length > 0 && (
+    <section id="tradeoffs">
+      <div class="sec-head"><h2>Trade-offs</h2></div>
       <ul class="claims">
-        {open.map((c) => (
-          <li id={c.id}>
-            <div class="claim-top">
-              <span class="kind">{KIND_LABEL[c.kind]}</span>
-              {c.status && <span class:list={['pill', STATUS_PILL[c.status]]}>{c.status}</span>}
-              {c.subject && <span class="muted by">raised by {c.subject.name}</span>}
-            </div>
-            <p>{c.statement}</p>
-            <Source claim={c} />
-          </li>
-        ))}
+        {tradeoffs.map((c) => <li id={c.id}><p>{c.statement}</p><Source claim={c} /></li>)}
       </ul>
     </section>
   )}
@@ -207,9 +198,6 @@ const bipLink = (n: number) => (known.has(n) ? bipHref(n) : `https://github.com/
   .claims > li { padding: 16px 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; scroll-margin-top: 24px; }
   .claims > li:first-child { padding-top: 0; }
   .claims > li:target { background: var(--accent-soft); padding-inline: 12px; border-radius: 8px; }
-  .claim-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-  .kind { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); }
-  .by { font-size: 13px; }
 
   .timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; max-width: 760px; }
   .timeline li { display: grid; grid-template-columns: 96px 1fr; gap: 12px; font-size: 14px; }

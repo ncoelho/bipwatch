@@ -173,6 +173,8 @@ for (const folder of folders) {
 
       if (claim.provenance.reviewed_by === null && claim.provenance.reviewed)
         report('error', rel(file), 'reviewed date set without a reviewer');
+      if (claim.area && !['task', 'open-question', 'objection'].includes(claim.kind))
+        report('error', rel(file), 'area is for tasks, open questions and objections only');
       if (claim.kind !== 'stance' && (claim.scope || claim.change))
         report('error', rel(file), 'scope and change are for stance claims only');
       if (claim.change && claim.scope === 'proposal')

@@ -2,7 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import type { Claim } from '@bipwatch/data';
 import type { ModelClient } from './model.ts';
 import type { ClaimContext, Task } from './task.ts';
-import type { BipContext, InputDoc, Outcome, Usage } from './types.ts';
+import { billedTokens, type BipContext, type InputDoc, type Outcome, type Usage } from './types.ts';
 import type { ClaimValidator } from './validate.ts';
 
 export interface DocResult {
@@ -40,8 +40,10 @@ export interface RunSummary {
 const add = (a: Usage, b: Usage): Usage => ({
   input_tokens: a.input_tokens + b.input_tokens,
   output_tokens: a.output_tokens + b.output_tokens,
+  cache_read_tokens: (a.cache_read_tokens ?? 0) + (b.cache_read_tokens ?? 0),
+  cache_write_tokens: (a.cache_write_tokens ?? 0) + (b.cache_write_tokens ?? 0),
 });
-const total = (u: Usage) => u.input_tokens + u.output_tokens;
+const total = billedTokens;
 
 /**
  * Only failures that may pass on the next document are logged and skipped:
@@ -113,7 +115,7 @@ export async function runTask<Out>(opts: RunOptions<Out>): Promise<RunSummary> {
         res = await model.run({
           model: task.model,
           effort: task.effort,
-          system: task.system,
+          system: task.context ? `${task.system}\n\n${task.context(docBips)}` : task.system,
           messages,
           schema: task.schema,
         });

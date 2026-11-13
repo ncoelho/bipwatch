@@ -10,7 +10,7 @@ statement: murchandamus opposes the change moving BIP 352 to Final status,
   arguing it is premature because adoption is limited, there is only one
   implementation, and the authors' own implementation is still in progress.
 subject:
-  name: murchandamus
+  name: Murch
   type: person
 applies_to_version: 1.0.1
 source:

@@ -29,6 +29,12 @@ export interface Task<Out> {
   /** Documents longer than this are logged as too_long and skipped. */
   maxDocChars: number;
   userMessage(doc: InputDoc, bips: BipContext[]): string;
+  /**
+   * Extra system text for a run, from the BIPs it covers (e.g. the current
+   * spec). Runs are per BIP, so it is the same for every document and is
+   * cached with the system prompt.
+   */
+  context?(bips: BipContext[]): string;
   toClaims(output: Out, doc: InputDoc, ctx: ClaimContext): Claim[];
 }
 

@@ -1,5 +1,5 @@
 import { parseArgs } from 'node:util';
-import { bipsRepoDir, connect, updateBipsRepo } from '@bipwatch/collect';
+import { bipsRepoDir, connect, showFile, updateBipsRepo } from '@bipwatch/collect';
 import { findDataDir, loadAll } from '@bipwatch/data';
 import { claudeClient } from './model.ts';
 import { runTask } from './run.ts';
@@ -9,7 +9,7 @@ import type { Claim } from '@bipwatch/data';
 import { finishRun, lastCursor, logDoc, selectDocs, startRun, writeClaim } from './store.ts';
 import { prSummary, type RunInfo } from './summary.ts';
 import { TASKS } from './tasks/index.ts';
-import type { BipContext } from './types.ts';
+import { billedTokens, type BipContext } from './types.ts';
 import { makeValidator } from './validate.ts';
 import { specVersionTimeline, versionAt } from './version.ts';
 
@@ -18,7 +18,8 @@ const USAGE = `Usage: npm run extract -- --task <id> [--bip <n>] [--limit <docs>
   --task     ${Object.keys(TASKS).join(', ')}
   --bip      only documents mentioning this tracked BIP (default: every tracked BIP)
   --limit    at most this many documents (default 50)
-  --budget   stop starting documents after this many tokens, input + output (default 200000)
+  --budget   stop starting documents after this many tokens (default 200000): input as billed
+             (cache reads at 0.1x, cache writes at 1.25x) plus output
   --dry-run  call the model and validate, but write no files and keep the cursor;
              prints each proposed claim and each rejection in full
   --source   with --dry-run only: sample one source (bips-repo, github, delving, mailing-list);
@@ -87,7 +88,8 @@ await updateBipsRepo(bipsDir);
 const bips = new Map<number, BipContext>();
 for (const bip of wanted) {
   const timeline = await specVersionTimeline(bipsDir, bip);
-  bips.set(bip.number, { bip, versionAt: (d) => versionAt(timeline, d) });
+  const specText = (await showFile(bipsDir, bip.spec.revision, bip.spec.path)) ?? undefined;
+  bips.set(bip.number, { bip, versionAt: (d) => versionAt(timeline, d), specText });
 }
 
 const today = new Date().toISOString().slice(0, 10);
@@ -127,7 +129,8 @@ for (const ctx of bips.values()) {
         for (const c of r.claims) {
           const where = dryRun ? '(dry run)' : writeClaim(dataDir, c).replace(`${dataDir}/`, 'data/');
           if (!dryRun) written.push(c);
-          console.log(`+ ${c.kind} ${c.stance ?? ''}${c.scope ? ` (${c.scope})` : ''} BIP ${c.bip} · ${c.subject?.name} · ${where}`);
+          const detail = c.kind === 'stance' ? `${c.stance}${c.scope ? ` (${c.scope})` : ''}` : `${c.area} · ${c.status}`;
+          console.log(`+ ${c.kind} ${detail} BIP ${c.bip} · ${c.subject?.name} · ${where}`);
           if (dryRun) {
             console.log(`    statement: ${c.statement}`);
             if (c.condition) console.log(`    condition: ${c.condition}`);
@@ -156,7 +159,7 @@ for (const ctx of bips.values()) {
       outputTokens: summary.usage.output_tokens,
     });
     console.log(
-      `Done (${summary.stopped_by}): ${summary.docs_seen} documents · ${summary.claims_written} claims · ${summary.usage.input_tokens} input + ${summary.usage.output_tokens} output tokens · run ${runId}`,
+      `Done (${summary.stopped_by}): ${summary.docs_seen} documents · ${summary.claims_written} claims · ${summary.usage.input_tokens} input (${summary.usage.cache_read_tokens ?? 0} cache read, ${summary.usage.cache_write_tokens ?? 0} cache write) + ${summary.usage.output_tokens} output tokens · ${billedTokens(summary.usage)} counted against the budget · run ${runId}`,
     );
   } catch (err) {
     await finishRun(pool, runId, null, cursor, (err as Error).stack ?? String(err));

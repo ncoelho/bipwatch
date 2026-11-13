@@ -39,12 +39,16 @@ export interface BipRecord {
   };
 }
 
+export const WORK_AREAS = ['spec', 'review', 'implementation', 'testing', 'research', 'ux', 'coordination', 'activation'] as const;
+export type WorkArea = (typeof WORK_AREAS)[number];
+
 export type ClaimKind =
   | 'problem'
   | 'evidence'
   | 'tradeoff'
   | 'open-question'
   | 'objection'
+  | 'task'
   | 'stance'
   | 'implementation'
   | 'adoption';
@@ -62,6 +66,8 @@ export interface Claim {
   kind: ClaimKind;
   statement: string;
   status?: 'open' | 'addressed' | 'disputed' | 'unknown';
+  /** Tasks, open questions and objections: the kind of work it calls for. */
+  area?: WorkArea;
   stance?: 'concept-ack' | 'approach-ack' | 'ack' | 'nack' | 'conditional' | 'needs-research';
   condition?: string;
   /** Stances only: the proposal, one change to its text, or an implementation. */

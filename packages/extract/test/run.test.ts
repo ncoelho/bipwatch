@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { describe, expect, it } from 'vitest';
 import { runTask, type DocResult } from '../src/run.ts';
+import { billedTokens } from '../src/types.ts';
 import { stanceTask } from '../src/tasks/stance/index.ts';
 import { makeValidator } from '../src/validate.ts';
 import { bips, doc, scriptedModel } from './helpers.ts';
@@ -40,7 +41,7 @@ describe('runTask', () => {
     expect(results[2].attempts).toBe(2);
     expect(results[2].rejected[0].errors[0]).toMatch(/^quote:/);
     expect(summary).toMatchObject({ docs_seen: 3, claims_written: 1, stopped_by: 'done', last_document_id: 3 });
-    expect(summary.usage).toEqual({ input_tokens: 4000, output_tokens: 400 });
+    expect(summary.usage).toMatchObject({ input_tokens: 4000, output_tokens: 400 });
   });
 
   it('retries once with the errors, keeping what already passed', async () => {
@@ -101,5 +102,13 @@ describe('runTask', () => {
     const { calls } = await run([doc(13, 'a'), doc(14, 'b')], {});
     expect(calls[0].system).toBe(calls[1].system);
     expect(calls[0].system).toContain('precision matters far more than coverage');
+  });
+
+  it('counts cached input at its billed weight', () => {
+    // 25,000-token spec read from cache, 1,000 new input, 200 output.
+    expect(billedTokens({ input_tokens: 26000, output_tokens: 200, cache_read_tokens: 25000, cache_write_tokens: 0 })).toBe(3700);
+    // First request writes the cache.
+    expect(billedTokens({ input_tokens: 26000, output_tokens: 200, cache_read_tokens: 0, cache_write_tokens: 25000 })).toBe(32450);
+    expect(billedTokens({ input_tokens: 1000, output_tokens: 100 })).toBe(1100);
   });
 });

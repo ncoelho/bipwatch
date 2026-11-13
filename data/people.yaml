@@ -13,6 +13,10 @@ people:
     aliases: [brandonblack]
   - name: Craig Raw
     aliases: [craigraw]
+  - name: Murch
+    aliases: [murchandamus]
+  - name: Matthew Zipkin
+    aliases: [pinheadmz]
   # Authors of the focus BIPs (added 2026-11-13). Each posts on GitHub or
   # Delving under the login and on the list or in spec headers by name.
   - name: Antoine Poinsot

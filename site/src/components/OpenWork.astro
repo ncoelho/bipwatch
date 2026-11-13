@@ -1,0 +1,81 @@
+---
+// What needs doing (SPEC 1, the main job): tasks, open questions and
+// objections raised in public discussion, grouped by area of work. Open items
+// lead; ones the spec or later discussion already settled are folded away
+// under each area. Every item names who raised it and links its quote.
+import type { BipBundle } from '@bipwatch/data';
+import WorkItem from './WorkItem.astro';
+import { AREA_LABEL, isPending, openWork } from '../lib/view.ts';
+
+interface Props { bundle: BipBundle; }
+const { bundle } = Astro.props;
+const current = bundle.bip.version;
+const groups = openWork(bundle.claims);
+const openCount = groups.reduce((n, g) => n + g.open.length, 0);
+const doneCount = groups.reduce((n, g) => n + g.addressed.length, 0);
+const all = groups.flatMap((g) => [...g.open, ...g.addressed]);
+const allPending = all.length > 0 && all.every(isPending);
+const title = (g: (typeof groups)[number]) => (g.area ? AREA_LABEL[g.area] : 'Other');
+const anchor = (g: (typeof groups)[number]) => `work-${g.area ?? 'other'}`;
+---
+{all.length > 0 && (
+  <section id="work">
+    <div class="sec-head">
+      <h2>What needs doing</h2>
+      <p class="muted tnum">
+        {openCount} open {openCount === 1 ? 'item' : 'items'}{doneCount > 0 && `, ${doneCount} already addressed`}: tasks, questions and objections raised in public discussion, by area of work.
+        Each links the message it came from.
+        {allPending && <span class="pill warn">All pending review</span>}
+      </p>
+    </div>
+
+    <nav class="areas" aria-label="Areas of work">
+      {groups.map((g) => (
+        <a href={`#${anchor(g)}`} class:list={['chip', { quiet: g.open.length === 0 }]}>
+          {title(g)} <span class="mono tnum">{g.open.length}</span>
+        </a>
+      ))}
+    </nav>
+
+    {groups.map((g) => (
+      <div class="block" id={anchor(g)}>
+        <div class="block-head">
+          <h3>{title(g)}</h3>
+          <p class="muted tnum">{g.open.length} open{g.addressed.length > 0 && ` · ${g.addressed.length} addressed`}</p>
+        </div>
+        {g.open.length > 0 && (
+          <ul class="items">{g.open.map((c) => <WorkItem claim={c} current={current} />)}</ul>
+        )}
+        {g.addressed.length > 0 && (
+          <details class="done">
+            <summary>{g.addressed.length} already addressed</summary>
+            <ul class="items">{g.addressed.map((c) => <WorkItem claim={c} current={current} />)}</ul>
+          </details>
+        )}
+      </div>
+    ))}
+  </section>
+)}
+
+<style>
+  section { display: flex; flex-direction: column; gap: 16px; }
+  .sec-head { display: flex; flex-direction: column; gap: 4px; }
+  .sec-head h2 { font-size: 22px; }
+  .sec-head p { font-size: 14px; max-width: 72ch; }
+  .areas { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font-size: 13px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line-strong);
+    color: var(--fg); text-decoration: none; display: inline-flex; gap: 6px; align-items: baseline;
+  }
+  .chip span { font-size: 11.5px; color: var(--accent); }
+  .chip.quiet { color: var(--faint); border-color: var(--line); }
+  .chip.quiet span { color: var(--faint); }
+  .block { display: flex; flex-direction: column; gap: 6px; scroll-margin-top: 24px; }
+  .block-head { display: flex; align-items: baseline; gap: 10px; }
+  .block-head h3 { font-size: 16px; }
+  .block-head p { font-size: 12px; }
+  .items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; max-width: 760px; }
+  .done { max-width: 760px; }
+  .done summary { cursor: pointer; font-size: 13px; color: var(--muted); padding: 8px 0; }
+  .done[open] summary { border-bottom: 1px solid var(--line); }
+</style>

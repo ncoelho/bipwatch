@@ -24,7 +24,14 @@ export async function* selectDocs(
               (SELECT t.title FROM documents t
                 WHERE t.source = d.source AND t.thread_key = d.thread_key AND t.title IS NOT NULL
                 ORDER BY t.posted_at NULLS LAST, t.id LIMIT 1) AS thread_title,
-              array_agg(DISTINCT m.bip ORDER BY m.bip) AS bips
+              array_agg(DISTINCT m.bip ORDER BY m.bip) AS bips,
+              -- Up to 8 later messages in the thread, as context for status.
+              (SELECT left(string_agg(coalesce(l.author, '?') || ' (' || coalesce(l.posted_at::date::text, '?') || '): '
+                                      || left(regexp_replace(l.body_text, '\s+', ' ', 'g'), 700), E'\n\n' ORDER BY l.posted_at), 6000)
+                 FROM (SELECT * FROM documents l2
+                        WHERE l2.source = d.source AND l2.thread_key = d.thread_key AND l2.id <> d.id
+                          AND l2.posted_at > d.posted_at
+                        ORDER BY l2.posted_at LIMIT 8) l) AS later
          FROM documents d
          JOIN raw_items r ON r.id = d.raw_item_id
          JOIN bip_mentions m ON m.document_id = d.id AND m.bip = ANY($1::int[])
@@ -113,7 +120,7 @@ export async function finishRun(
 
 /** Field order for claim files, so diffs stay readable. */
 const ORDER: (keyof Claim)[] = [
-  'id', 'bip', 'kind', 'status', 'stance', 'condition', 'scope', 'change', 'statement', 'subject',
+  'id', 'bip', 'kind', 'status', 'area', 'stance', 'condition', 'scope', 'change', 'statement', 'subject',
   'implementation', 'applies_to_version', 'source', 'provenance', 'tags',
 ];
 

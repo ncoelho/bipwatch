@@ -1,5 +1,5 @@
 // Labels and small helpers shared by pages. All data comes from @bipwatch/data.
-import type { BipBundle, Category, Claim, NeedDimension } from '@bipwatch/data';
+import { WORK_AREAS, type BipBundle, type Category, type Claim, type NeedDimension, type WorkArea } from '@bipwatch/data';
 
 export const CATEGORY_LABEL: Record<Category, string> = {
   idea: 'Idea',
@@ -50,6 +50,44 @@ export const byKind = (b: BipBundle, ...kinds: Claim['kind'][]) => b.claims.filt
 
 export const pad = (n: number) => String(n).padStart(4, '0');
 export const bipHref = (n: number) => `/bip/${n}/`;
+
+// ---- open work (SPEC 1, the main job) -----------------------------------------
+
+export const WORK_KINDS: Claim['kind'][] = ['task', 'open-question', 'objection'];
+
+export const WORK_KIND_LABEL: Record<string, string> = { task: 'Task', 'open-question': 'Open question', objection: 'Objection' };
+
+export const AREA_LABEL: Record<WorkArea, string> = {
+  spec: 'Spec',
+  review: 'Review',
+  implementation: 'Implementation',
+  testing: 'Testing',
+  research: 'Research',
+  ux: 'UX',
+  coordination: 'Coordination',
+  activation: 'Activation',
+};
+
+export interface WorkGroup { area: WorkArea | null; open: Claim[]; addressed: Claim[]; }
+
+/**
+ * Tasks, open questions and objections grouped by area of work, in the
+ * schema's area order (unassigned last). Within a group: open items first,
+ * newest first; addressed and disputed items are kept apart so the page
+ * leads with what is left to do.
+ */
+export function openWork(claims: Claim[]): WorkGroup[] {
+  const items = claims.filter((c) => WORK_KINDS.includes(c.kind));
+  const newest = (a: Claim, b: Claim) => (b.source.date ?? '').localeCompare(a.source.date ?? '');
+  const isOpen = (c: Claim) => c.status !== 'addressed';
+  return [...WORK_AREAS, null]
+    .map((area) => {
+      const inArea = items.filter((c) => (c.area ?? null) === area).sort(newest);
+      return { area, open: inArea.filter(isOpen), addressed: inArea.filter((c) => !isOpen(c)) };
+    })
+    .filter((g) => g.open.length + g.addressed.length > 0)
+    .sort((a, b) => Number(b.open.length > 0) - Number(a.open.length > 0));
+}
 
 /** Public JSON shape. Bump when the shape changes in a breaking way. */
 export const API_VERSION = 1;

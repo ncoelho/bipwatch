@@ -16,6 +16,14 @@ It is an **open layer of data, metadata and evidence on top of the BIP repositor
 
 That layer is rendered through **stage templates**, so each page answers the question that matters for the proposal's stage of life.
 
+### The main job: what is there to do
+
+The site's most important job (owner, 2026-11-13) is to show **what work would move each BIP forward**: which tasks, in which areas (the spec itself, review, implementation, testing, research, UX, ecosystem coordination, activation), raised by whom, and whether they are still open. A visitor who wants to help should leave a BIP page knowing what to pick up.
+
+Everything else serves that. Stances matter as input: a conditional stance names a task, a NACK or "needs research" names a blocker, and for consensus BIPs who has not yet spoken is itself the work. Extraction priorities follow from this: open work (tasks, open questions, objections, each with an area and a status) comes before more stances.
+
+Status (2026-11-13): claims have a `task` kind and an `area` field. The `work` extractor (`npm run extract -- --task work`, prompt v2) reads each document with the current spec text (cached) and the later replies in its thread, so it can mark items the spec or the thread already settled as `addressed`; work on companion BIPs is left to them. A dry run on 21 BIP 352 documents gave 10 items at about 4.7k billed-equivalent tokens per document. BIP pages show the items under "What needs doing", by area, open first. The stance bot is paused (`EXTRACT_ENABLED=false`) until the work task joins it.
+
 ### Principles
 
 These came out of the design work and should constrain every implementation decision.

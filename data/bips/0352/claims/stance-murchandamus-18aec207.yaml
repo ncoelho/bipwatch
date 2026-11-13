@@ -9,7 +9,7 @@ change:
 statement: murchandamus approved the pull request amending BIP 352 to introduce
   a per-group recipient limit K_max of 2323.
 subject:
-  name: murchandamus
+  name: Murch
   type: person
 applies_to_version: 1.1.0
 source:

@@ -10,7 +10,7 @@ statement: murchandamus approved the BIP 352 change that adds a warning against
   stopping the scan because of wallet policy filtering, while deferring the
   merge until theStack has reviewed it.
 subject:
-  name: murchandamus
+  name: Murch
   type: person
 applies_to_version: 1.1.0
 source:

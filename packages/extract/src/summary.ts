@@ -41,17 +41,20 @@ export function prSummary(opts: {
   return [
     `${claims.length} ${claims.length === 1 ? 'claim' : 'claims'} proposed by the \`${task.id}\` extractor (v${task.version}, \`model:${task.model}\`) from ${docs} newly archived ${docs === 1 ? 'document' : 'documents'}. **All have \`reviewed_by: null\`.** Merging adds them to the record as pending; edit or delete any file here first if it is wrong.`,
     '',
-    proposal
-      ? `**${proposal} ${proposal === 1 ? 'is a position' : 'are positions'} on the proposal itself**: check ${proposal === 1 ? 'it' : 'those'} first; the BIP page shows them under "On the proposal".`
-      : 'None is a position on the proposal itself: all are reviews of a change or an implementation.',
+    claims.every((c) => c.kind !== 'stance')
+      ? `Open work: ${claims.filter((c) => c.status === 'open').length} open, ${claims.filter((c) => c.status === 'addressed').length} already addressed. Check each statement is a real, specific piece of work the quote supports.`
+      : proposal
+        ? `**${proposal} ${proposal === 1 ? 'is a position' : 'are positions'} on the proposal itself**: check ${proposal === 1 ? 'it' : 'those'} first; the BIP page shows them under "On the proposal".`
+        : 'None is a position on the proposal itself: all are reviews of a change or an implementation.',
     '',
     'Checked by code before writing: the quote matches the archived document; the subject is the document\'s author (mapped through `people.yaml`); the spec version is the one in force on that date.',
     '',
-    '| Stance | Who | Statement and quote | Source | Claim file |',
+    `| ${claims.every((c) => c.kind !== 'stance') ? 'Item' : 'Stance'} | Who | Statement and quote | Source | Claim file |`,
     '|---|---|---|---|---|',
     ...sorted.map((c) => {
       const src = `[${c.source.type} ${c.source.date ?? ''}](${c.source.url})${c.change ? ` · [PR](${c.change.url})` : ''}`;
-      return `| \`${c.stance}\` (${c.scope}) | ${cell(c.subject?.name ?? '')} | ${cell(cut(c.statement, 200))}<br>“${cell(cut(c.source.quote ?? '', 140))}” | ${src} | \`data/bips/${String(c.bip).padStart(4, '0')}/claims/${c.id}.yaml\` |`;
+      const what = c.kind === 'stance' ? `\`${c.stance}\` (${c.scope})` : `\`${c.kind}\` · ${c.area} · ${c.status}`;
+      return `| ${what} | ${cell(c.subject?.name ?? '')} | ${cell(cut(c.statement, 200))}<br>“${cell(cut(c.source.quote ?? '', 140))}” | ${src} | \`data/bips/${String(c.bip).padStart(4, '0')}/claims/${c.id}.yaml\` |`;
     }),
     '',
     `Extraction ${runs.map((r) => `run ${r.runId} (BIP ${r.bip})`).join(', ')}: ${tokensIn.toLocaleString('en')} input + ${tokensOut.toLocaleString('en')} output tokens. Per-document outcomes and rejected proposals are in \`extract_log\`.`,

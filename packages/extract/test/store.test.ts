@@ -53,6 +53,7 @@ describe.skipIf(!url)('extract store (Neon)', () => {
              (2, 'delving', 'p2', 't1', 'bob',   NULL,           'NACK',        'https://x.test/2'),
              (3, 'delving', 'p3', 't2', 'carol', 'Taproot',      'ACK 341',     'https://x.test/3'),
              (4, 'delving', 'p4', 't1', NULL,    NULL,           'anon',        'https://x.test/4')`);
+    await pool.query(`UPDATE documents SET posted_at = '2026-01-01'::timestamptz + (id || ' days')::interval`);
     await pool.query(`INSERT INTO bip_mentions (document_id, bip, method, snippet)
       VALUES (1, 352, 'number', 's'), (2, 352, 'thread-title', 's'), (3, 341, 'number', 's'), (4, 352, 'number', 's')`);
   });
@@ -75,11 +76,17 @@ describe.skipIf(!url)('extract store (Neon)', () => {
       author: string;
       thread_title: string;
       bips: number[];
+      later: string | null;
     }[];
     expect(docs.map((d) => [d.id, d.author, d.thread_title, d.bips])).toEqual([
       [1, 'alice', 'BIP352 thread', [352]],
       [2, 'bob', 'BIP352 thread', [352]],
     ]);
+    // Later replies in the same thread come along as context for status.
+    // Later replies in the same thread, oldest first, including authorless
+    // ones (skipped as sources of claims, but still context for status).
+    expect(docs[0].later).toBe('bob (2026-01-03): NACK\n\n? (2026-01-05): anon');
+    expect(docs[1].later).toBe('? (2026-01-05): anon');
     expect(await all(selectDocs(pool, { bips: [352], afterId: 1, limit: 10 }))).toHaveLength(1);
     expect(await all(selectDocs(pool, { bips: [352], afterId: 0, limit: 1 }))).toHaveLength(1);
   });

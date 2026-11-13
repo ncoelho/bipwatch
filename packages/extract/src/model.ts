@@ -51,6 +51,8 @@ export function claudeClient(client = new Anthropic()): ModelClient {
         input_tokens:
           (u.input_tokens ?? 0) + (u.cache_creation_input_tokens ?? 0) + (u.cache_read_input_tokens ?? 0),
         output_tokens: u.output_tokens ?? 0,
+        cache_read_tokens: u.cache_read_input_tokens ?? 0,
+        cache_write_tokens: u.cache_creation_input_tokens ?? 0,
       };
       const text = response.content
         .filter((b): b is Anthropic.Beta.BetaTextBlock => b.type === 'text')

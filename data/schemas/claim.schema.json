@@ -10,7 +10,7 @@
     "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "maxLength": 80 },
     "bip": { "type": "integer", "minimum": 1 },
     "kind": {
-      "enum": ["problem", "evidence", "tradeoff", "open-question", "objection", "stance", "implementation", "adoption"]
+      "enum": ["problem", "evidence", "tradeoff", "open-question", "objection", "task", "stance", "implementation", "adoption"]
     },
     "statement": {
       "description": "The claim in BipWatch's own words. The quote is the proof, the statement is the reading.",
@@ -18,8 +18,12 @@
       "minLength": 10,
       "maxLength": 500
     },
+    "area": {
+      "description": "For tasks, open questions and objections: the kind of work it calls for. spec: the text or design of the BIP itself; review: reading and ACKing the spec or a change; implementation: code (reference, node, wallet, library); testing: test vectors, tests, fuzzing; research: analysis, benchmarks, security arguments, data; ux: how users and wallets meet it (formats, naming, flows); coordination: agreement across projects or ecosystem; activation: deployment of a consensus change (signaling, parameters, miner and node readiness).",
+      "enum": ["spec", "review", "implementation", "testing", "research", "ux", "coordination", "activation"]
+    },
     "status": {
-      "description": "Lifecycle of objections and open questions.",
+      "description": "Lifecycle of tasks, objections and open questions: open (raised, not yet resolved as far as BipWatch knows), addressed (resolved, with the source showing it), disputed, unknown.",
       "enum": ["open", "addressed", "disputed", "unknown"]
     },
     "stance": {
@@ -121,12 +125,16 @@
   },
   "allOf": [
     {
-      "if": { "properties": { "kind": { "enum": ["problem", "evidence", "tradeoff", "open-question", "objection", "stance"] } } },
+      "if": { "properties": { "kind": { "enum": ["problem", "evidence", "tradeoff", "open-question", "objection", "task", "stance"] } } },
       "then": { "properties": { "source": { "type": "object", "required": ["quote"] } } }
     },
     {
-      "if": { "properties": { "kind": { "enum": ["open-question", "objection"] } } },
+      "if": { "properties": { "kind": { "enum": ["open-question", "objection", "task"] } } },
       "then": { "required": ["status"] }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "task" } } },
+      "then": { "required": ["area"] }
     },
     {
       "if": { "properties": { "kind": { "const": "stance" } } },
