@@ -95,8 +95,22 @@ export function formatReport(report: FreshnessReport): string {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const { values } = parseArgs({
-    options: { export: { type: 'string' }, 'no-fail': { type: 'boolean' } },
+    options: {
+      export: { type: 'string' },
+      'no-fail': { type: 'boolean' },
+      // For `npm run dev` / `npm run build`: refresh the snapshot when a
+      // database is reachable, otherwise keep whatever snapshot exists and
+      // exit 0, so a fork or an offline machine still builds.
+      optional: { type: 'boolean' },
+    },
   });
+  const optional = values.optional ?? false;
+  const skip = (why: string) => {
+    console.log(`Sources snapshot not refreshed: ${why}. The site uses the existing data/freshness.json, if any.`);
+    process.exit(0);
+  };
+  if (optional && !process.env.DATABASE_URL) skip('no DATABASE_URL configured');
+
   let pool: pg.Pool;
   try {
     pool = connect();
@@ -105,7 +119,13 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     process.exit(1);
   }
   try {
-    const report = computeFreshness(await readSourceRows(pool), new Date());
+    const rows = optional
+      ? await Promise.race([
+          readSourceRows(pool),
+          new Promise<never>((_, reject) => setTimeout(() => reject(new Error('database did not answer within 20 s')), 20_000)),
+        ])
+      : await readSourceRows(pool);
+    const report = computeFreshness(rows, new Date());
     console.log(formatReport(report));
     if (values.export) {
       const file = resolve(process.env.INIT_CWD ?? process.cwd(), values.export);
@@ -114,14 +134,18 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       console.log(`Wrote ${file}`);
     }
     const stale = report.sources.filter((s) => s.stale).map((s) => s.source);
-    if (stale.length && !values['no-fail']) {
+    if (stale.length && !values['no-fail'] && !optional) {
       console.error(`Stale: ${stale.join(', ')}`);
       process.exitCode = 1;
     }
   } catch (err) {
+    if (optional) {
+      await pool.end().catch(() => {});
+      skip((err as Error).message);
+    }
     console.error((err as Error).message);
     process.exitCode = 1;
   } finally {
-    await pool.end();
+    await pool.end().catch(() => {});
   }
 }

@@ -18,7 +18,10 @@
     "sync-headers": "npm run sync-headers --workspace @bipwatch/collect --",
     "freshness": "npm run freshness --workspace @bipwatch/collect --",
     "extract": "npm run extract --workspace @bipwatch/extract --",
-    "reindex-mentions": "npm run reindex-mentions --workspace @bipwatch/collect --"
+    "reindex-mentions": "npm run reindex-mentions --workspace @bipwatch/collect --",
+    "freshness:snapshot": "npm run freshness --silent -- --export data/freshness.json --optional",
+    "predev": "npm run freshness:snapshot",
+    "prebuild": "npm run freshness:snapshot"
   },
   "engines": {
     "node": ">=22.23.4",

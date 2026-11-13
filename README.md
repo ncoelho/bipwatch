@@ -101,6 +101,8 @@ Data and site:
 npm run validate -- --bips ../bips     # schemas, consistency, spec quotes at their cited revision
 npm run dev                            # local site at http://localhost:4321
 npm run build                          # validate, then build site/dist
+# Both refresh data/freshness.json (the Sources section) first when a
+# database is configured and reachable; otherwise they keep the old snapshot.
 npm test                               # unit tests
 ```
 
