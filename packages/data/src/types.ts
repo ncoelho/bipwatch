@@ -68,6 +68,11 @@ export interface Claim {
   status?: 'open' | 'addressed' | 'disputed' | 'unknown';
   /** Tasks, open questions and objections: the kind of work it calls for. */
   area?: WorkArea;
+  /**
+   * Tasks, open questions and objections: the companion BIP or project the
+   * work belongs to (e.g. "BIP 375"), when it is not the BIP's own text.
+   */
+  part_of?: string;
   stance?: 'concept-ack' | 'approach-ack' | 'ack' | 'nack' | 'conditional' | 'needs-research';
   condition?: string;
   /** Stances only: the proposal, one change to its text, or an implementation. */

@@ -15,6 +15,7 @@ const openCount = groups.reduce((n, g) => n + g.open.length, 0);
 const doneCount = groups.reduce((n, g) => n + g.addressed.length, 0);
 const all = groups.flatMap((g) => [...g.open, ...g.addressed]);
 const allPending = all.length > 0 && all.every(isPending);
+const parts = [...new Set(all.flatMap((c) => (c.part_of ? [c.part_of] : [])))].sort();
 const title = (g: (typeof groups)[number]) => (g.area ? AREA_LABEL[g.area] : 'Other');
 const anchor = (g: (typeof groups)[number]) => `work-${g.area ?? 'other'}`;
 ---
@@ -25,6 +26,7 @@ const anchor = (g: (typeof groups)[number]) => `work-${g.area ?? 'other'}`;
       <p class="muted tnum">
         {openCount} open {openCount === 1 ? 'item' : 'items'}{doneCount > 0 && `, ${doneCount} already addressed`}: tasks, questions and objections raised in public discussion, by area of work.
         Each links the message it came from.
+        {parts.length > 0 && <>{' '}Besides the BIP itself, this includes work on {parts.join(', ')}.</>}
         {allPending && <span class="pill warn">All pending review</span>}
       </p>
     </div>

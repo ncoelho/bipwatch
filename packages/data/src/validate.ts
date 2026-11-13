@@ -175,6 +175,10 @@ for (const folder of folders) {
         report('error', rel(file), 'reviewed date set without a reviewer');
       if (claim.area && !['task', 'open-question', 'objection'].includes(claim.kind))
         report('error', rel(file), 'area is for tasks, open questions and objections only');
+      if (claim.part_of && !['task', 'open-question', 'objection'].includes(claim.kind))
+        report('error', rel(file), 'part_of is for tasks, open questions and objections only');
+      if (claim.part_of && new RegExp(`^BIP[ -]?0*${claim.bip}$`, 'i').test(claim.part_of.trim()))
+        report('error', rel(file), 'part_of names the BIP itself; leave it out');
       if (claim.kind !== 'stance' && (claim.scope || claim.change))
         report('error', rel(file), 'scope and change are for stance claims only');
       if (claim.change && claim.scope === 'proposal')

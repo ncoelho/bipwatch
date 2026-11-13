@@ -21,6 +21,7 @@ export const WorkOutput = z.object({
       bip: z.number().int(),
       kind: z.enum(WORK_KINDS),
       area: z.enum(WORK_AREAS),
+      part_of: z.string().nullable(),
       status: z.enum(['open', 'addressed']),
       statement: z.string(),
       quote: z.string(),
@@ -31,8 +32,38 @@ export type WorkOutput = z.infer<typeof WorkOutput>;
 
 // v2 (2026-11-13): judges status against the current spec text as well as
 // later replies, and leaves companion BIPs' work to them.
-const VERSION = 2;
+// v3 (2026-11-13): records companion and ecosystem work too (PSBT fields,
+// light-client index, wallet support), named in part_of, since untracked
+// companions would otherwise hide the work that moves the BIP forward.
+const VERSION = 3;
 const MAX_SPEC_CHARS = 120_000;
+const MAX_COMPANION_CHARS = 60_000;
+
+/** Comparison key for part_of names: case, spaces and hyphens ignored. */
+const nameKey = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+/**
+ * part_of as written: "BIP 375" for numbered BIPs; otherwise the spelling
+ * already in use when one matches, else lower case with "light client"
+ * hyphenated. Null when it names the BIP itself.
+ */
+export function normalisePartOf(raw: string | null | undefined, bip: number, known: Iterable<string>): string | null {
+  const v = raw?.trim().replace(/\s+/g, ' ');
+  if (!v) return null;
+  const num = v.match(/^BIP[ -]?0*(\d+)$/i);
+  if (num) return Number(num[1]) === bip ? null : `BIP ${Number(num[1])}`;
+  for (const k of known) if (nameKey(k) === nameKey(v)) return k;
+  return v.toLowerCase().replace(/\blight client\b/g, 'light-client');
+}
+
+// Names used so far, per BIP: seeded from existing claims, grown during a run
+// so later documents reuse the names earlier ones introduced.
+const namesInUse = new Map<number, Set<string>>();
+const names = (bip: number, seed: string[] = []) => {
+  let set = namesInUse.get(bip);
+  if (!set) namesInUse.set(bip, (set = new Set(seed)));
+  return set;
+};
 const system = readFileSync(new URL(`./prompt.v${VERSION}.md`, import.meta.url), 'utf8');
 const canonical = canonicalName(loadPeople());
 
@@ -51,16 +82,23 @@ export const workTask: Task<WorkOutput> = {
 
   context(bips) {
     return bips
-      .map(({ bip, specText }) => {
+      .map(({ bip, specText, companions: texts = [] }) => {
         const companions = [...(bip.related ?? []), ...(bip.requires ?? [])];
         const text = specText ? specText.slice(0, MAX_SPEC_CHARS) : '(not available)';
         return [
           `Current text of BIP ${bip.number} (${bip.title}), revision ${bip.spec.revision.slice(0, 7)}, for judging status:`,
-          companions.length ? `Its companion and required BIPs, whose own work is not recorded here: ${companions.map((n) => `BIP ${n}`).join(', ')}.` : '',
+          companions.length ? `Its companion and required BIPs (name one in part_of when work belongs to it): ${companions.map((n) => `BIP ${n}`).join(', ')}.` : null,
           `<spec bip="${bip.number}">`,
           text,
           '</spec>',
-        ].filter(Boolean).join('\n');
+          ...texts.flatMap((c) => [
+            '',
+            `Current text of companion BIP ${c.number}, for judging the status of work that belongs to it:`,
+            `<spec bip="${c.number}">`,
+            c.text.slice(0, MAX_COMPANION_CHARS),
+            '</spec>',
+          ]),
+        ].filter((l) => l !== null).join('\n');
       })
       .join('\n\n');
   },
@@ -76,6 +114,11 @@ export const workTask: Task<WorkOutput> = {
       ...(doc.thread_title ? [`Thread: ${doc.thread_title}`] : []),
       ...(doc.title && doc.title !== doc.thread_title ? [`Title: ${doc.title}`] : []),
       '',
+      ...bips.flatMap(({ bip, workNames }) => {
+        const used = [...names(bip.number, workNames)];
+        return used.length ? [`part_of names already used for BIP ${bip.number} (reuse one when it fits): ${used.join('; ')}`] : [];
+      }),
+      '',
       '<document>',
       doc.body_text,
       '</document>',
@@ -90,6 +133,9 @@ export const workTask: Task<WorkOutput> = {
     const author = canonical(doc.author ?? 'unknown');
     return output.items.map((it): Claim => {
       const bip = ctx.bips.get(it.bip);
+      const known = names(it.bip, bip?.workNames);
+      const part_of = normalisePartOf(it.part_of, it.bip, known);
+      if (part_of) known.add(part_of);
       const hash = createHash('sha256').update(`${doc.external_id}\0${it.kind}\0${it.quote}`).digest('hex').slice(0, 8);
       return {
         id: `${it.kind}-${slug(author, 32)}-${hash}`,
@@ -97,6 +143,7 @@ export const workTask: Task<WorkOutput> = {
         kind: it.kind,
         status: it.status,
         area: it.area,
+        ...(part_of ? { part_of } : {}),
         statement: it.statement.trim(),
         subject: { name: author, type: 'person' },
         ...(bip ? { applies_to_version: bip.versionAt(doc.posted_at) } : {}),

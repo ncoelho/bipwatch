@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { WorkOutput, workTask } from '../src/tasks/work/index.ts';
+import { normalisePartOf, WorkOutput, workTask } from '../src/tasks/work/index.ts';
 import { makeValidator } from '../src/validate.ts';
 import { bips, doc } from './helpers.ts';
 
@@ -11,6 +11,7 @@ const item = (over = {}) => ({
   kind: 'task' as const,
   area: 'testing' as const,
   status: 'addressed' as const,
+  part_of: null as string | null,
   statement: 'Add test vectors covering label edge cases.',
   quote: 'This still needs test vectors for the label edge cases.',
   ...over,
@@ -48,6 +49,20 @@ describe('work task', () => {
     for (const c of claims) expect(v.validate(c, d)).toEqual([]);
   });
 
+  it('names companion work in part_of, normalised, and never the BIP itself', () => {
+    const claims = workTask.toClaims(
+      { items: [item({ part_of: 'bip-0375' }), item({ part_of: ' Light client  index ' }), item({ part_of: 'BIP 352' }), item(), item({ part_of: 'light-client-index' })] },
+      d,
+      ctx,
+    );
+    // The second spelling of the same name reuses the first one seen.
+    expect(claims.map((c) => c.part_of)).toEqual(['BIP 375', 'light-client index', undefined, undefined, 'light-client index']);
+    // Later documents are told which names are in use.
+    expect(workTask.userMessage(d, [...bips.values()])).toContain('part_of names already used for BIP 352 (reuse one when it fits): BIP 375; light-client index');
+    const v = makeValidator([]);
+    expect(v.validate(claims[0], d)).toEqual([]);
+  });
+
   it('rejects a quote taken from the later replies', () => {
     const [c] = workTask.toClaims({ items: [item({ quote: 'I added label test vectors in the latest push.' })] }, d, ctx);
     expect(makeValidator([]).validate(c, d)).toEqual([
@@ -63,14 +78,25 @@ describe('work task', () => {
   });
 });
 
+describe('normalisePartOf', () => {
+  it('reuses known spellings and drops the BIP itself', () => {
+    expect(normalisePartOf('Light-Client Index', 352, ['light-client index'])).toBe('light-client index');
+    expect(normalisePartOf('BIP-0352', 352, [])).toBeNull();
+    expect(normalisePartOf('bip375', 352, [])).toBe('BIP 375');
+    expect(normalisePartOf('Light client protocol', 352, [])).toBe('light-client protocol');
+    expect(normalisePartOf('  ', 352, [])).toBeNull();
+  });
+});
+
 describe('work task context', () => {
   it('gives the model the current spec and names the companions', () => {
     const [ctxBip] = [...bips.values()];
-    const text = workTask.context!([{ ...ctxBip, bip: { ...ctxBip.bip, related: [375, 376], requires: [340] }, specText: '== Abstract ==\nSilent payments.' }]);
+    const text = workTask.context!([{ ...ctxBip, bip: { ...ctxBip.bip, related: [375, 376], requires: [340] }, specText: '== Abstract ==\nSilent payments.', companions: [{ number: 375, text: 'PSBT fields.' }] }]);
     expect(text).toContain('Current text of BIP 352 (Silent Payments)');
-    expect(text).toContain('whose own work is not recorded here: BIP 375, BIP 376, BIP 340.');
+    expect(text).toContain('(name one in part_of when work belongs to it): BIP 375, BIP 376, BIP 340.');
     expect(text).toContain('<spec bip="352">\n== Abstract ==\nSilent payments.\n</spec>');
-    expect(workTask.version).toBe(2);
+    expect(text).toContain('Current text of companion BIP 375, for judging the status of work that belongs to it:\n<spec bip="375">\nPSBT fields.\n</spec>');
+    expect(workTask.version).toBe(3);
     expect(workTask.skipSources).toEqual(['bips-repo']);
     expect(workTask.system).toContain('A design question the current spec settles');
   });

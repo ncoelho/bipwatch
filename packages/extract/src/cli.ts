@@ -84,12 +84,21 @@ try {
 
 // Spec version timelines come from the bitcoin/bips clone used by the collector.
 const bipsDir = bipsRepoDir();
-await updateBipsRepo(bipsDir);
+const tip = await updateBipsRepo(bipsDir);
 const bips = new Map<number, BipContext>();
 for (const bip of wanted) {
   const timeline = await specVersionTimeline(bipsDir, bip);
   const specText = (await showFile(bipsDir, bip.spec.revision, bip.spec.path)) ?? undefined;
-  bips.set(bip.number, { bip, versionAt: (d) => versionAt(timeline, d), specText });
+  const companions = [];
+  for (const n of bip.related ?? []) {
+    const name = `bip-${String(n).padStart(4, '0')}`;
+    const text = (await showFile(bipsDir, tip, `${name}.mediawiki`)) ?? (await showFile(bipsDir, tip, `${name}.md`));
+    if (text) companions.push({ number: n, text });
+  }
+  const workNames = [
+    ...new Set(bundles.find((b) => b.bip.number === bip.number)?.claims.flatMap((c) => (c.part_of ? [c.part_of] : [])) ?? []),
+  ];
+  bips.set(bip.number, { bip, versionAt: (d) => versionAt(timeline, d), specText, companions, workNames });
 }
 
 const today = new Date().toISOString().slice(0, 10);
@@ -130,7 +139,7 @@ for (const ctx of bips.values()) {
         for (const c of r.claims) {
           const where = dryRun ? '(dry run)' : writeClaim(dataDir, c).replace(`${dataDir}/`, 'data/');
           if (!dryRun) written.push(c);
-          const detail = c.kind === 'stance' ? `${c.stance}${c.scope ? ` (${c.scope})` : ''}` : `${c.area} · ${c.status}`;
+          const detail = c.kind === 'stance' ? `${c.stance}${c.scope ? ` (${c.scope})` : ''}` : `${c.area}${c.part_of ? ` [${c.part_of}]` : ''} · ${c.status}`;
           console.log(`+ ${c.kind} ${detail} BIP ${c.bip} · ${c.subject?.name} · ${where}`);
           if (dryRun) {
             console.log(`    statement: ${c.statement}`);

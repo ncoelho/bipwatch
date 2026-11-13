@@ -24,6 +24,8 @@ Everything else serves that. Stances matter as input: a conditional stance names
 
 Status (2026-11-13): claims have a `task` kind and an `area` field. The `work` extractor (`npm run extract -- --task work`, prompt v2) reads each document with the current spec text (cached) and the later replies in its thread, so it can mark items the spec or the thread already settled as `addressed`; work on companion BIPs is left to them. A dry run on 21 BIP 352 documents gave 10 items at about 4.7k billed-equivalent tokens per document. BIP pages show the items under "What needs doing", by area, open first. The stance bot is paused (`EXTRACT_ENABLED=false`) until the work task joins it.
 
+Prompt v3 (same day) also records work on what the BIP needs to be used: companion BIPs (BIP 375 and 376 for PSBTs), draft specs built for it (the light-client specification) and ecosystem support, each named in a claim's `part_of`. The companions' current text is cached context for judging their status, names already in use are passed back so they stay consistent, and commit messages are skipped. A 30-document BIP 352 dry run gave 34 items at about 8k billed-equivalent tokens per document.
+
 ### Principles
 
 These came out of the design work and should constrain every implementation decision.

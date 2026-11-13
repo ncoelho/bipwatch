@@ -122,7 +122,7 @@ export async function finishRun(
 
 /** Field order for claim files, so diffs stay readable. */
 const ORDER: (keyof Claim)[] = [
-  'id', 'bip', 'kind', 'status', 'area', 'stance', 'condition', 'scope', 'change', 'statement', 'subject',
+  'id', 'bip', 'kind', 'status', 'area', 'part_of', 'stance', 'condition', 'scope', 'change', 'statement', 'subject',
   'implementation', 'applies_to_version', 'source', 'provenance', 'tags',
 ];
 

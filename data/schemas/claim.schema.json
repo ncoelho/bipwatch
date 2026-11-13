@@ -22,6 +22,12 @@
       "description": "For tasks, open questions and objections: the kind of work it calls for. spec: the text or design of the BIP itself; review: reading and ACKing the spec or a change; implementation: code (reference, node, wallet, library); testing: test vectors, tests, fuzzing; research: analysis, benchmarks, security arguments, data; ux: how users and wallets meet it (formats, naming, flows); coordination: agreement across projects or ecosystem; activation: deployment of a consensus change (signaling, parameters, miner and node readiness).",
       "enum": ["spec", "review", "implementation", "testing", "research", "ux", "coordination", "activation"]
     },
+    "part_of": {
+      "description": "For tasks, open questions and objections about work outside the BIP's own text that moves it forward: the companion BIP or project it belongs to, e.g. \"BIP 375\" or \"light-client index\". Absent when the item is about the BIP itself.",
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 60
+    },
     "status": {
       "description": "Lifecycle of tasks, objections and open questions: open (raised, not yet resolved as far as BipWatch knows), addressed (resolved, with the source showing it), disputed, unknown.",
       "enum": ["open", "addressed", "disputed", "unknown"]

@@ -25,6 +25,10 @@ export interface BipContext {
   versionAt: (date: Date | null) => string;
   /** The spec's text at its current revision, for tasks that judge against it. */
   specText?: string;
+  /** Current text of its companion (related) BIPs, at the bips repo tip. */
+  companions?: { number: number; text: string }[];
+  /** Names already used in part_of on this BIP's claims, to reuse. */
+  workNames?: string[];
 }
 
 /** A claim as the pipeline writes it: full schema, plus where it came from. */
