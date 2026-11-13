@@ -18,6 +18,9 @@ export interface RunInfo {
 const STANCE_ORDER = ['nack', 'conditional', 'needs-research', 'concept-ack', 'approach-ack', 'ack'];
 const SCOPE_ORDER = ['proposal', 'change', 'implementation'];
 
+/** GitHub rejects PR bodies over 65,536 characters; keep a margin. */
+export const MAX_BODY_CHARS = 60_000;
+
 const cell = (s: string) => s.replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
 const cut = (s: string, n: number) => (s.length > n ? `${s.slice(0, n - 1)}…` : s);
 
@@ -29,6 +32,8 @@ export function prSummary(opts: {
   const { claims, runs, task } = opts;
   const sorted = [...claims].sort(
     (a, b) =>
+      // Open work before addressed, so a cut table keeps what matters most.
+      Number(a.status === 'addressed') - Number(b.status === 'addressed') ||
       SCOPE_ORDER.indexOf(a.scope ?? '') - SCOPE_ORDER.indexOf(b.scope ?? '') ||
       STANCE_ORDER.indexOf(a.stance ?? '') - STANCE_ORDER.indexOf(b.stance ?? '') ||
       (a.source.date ?? '').localeCompare(b.source.date ?? ''),
@@ -38,7 +43,7 @@ export function prSummary(opts: {
   const tokensOut = runs.reduce((n, r) => n + r.outputTokens, 0);
   const proposal = claims.filter((c) => c.scope === 'proposal').length;
 
-  return [
+  const head = [
     `${claims.length} ${claims.length === 1 ? 'claim' : 'claims'} proposed by the \`${task.id}\` extractor (v${task.version}, \`model:${task.model}\`) from ${docs} newly archived ${docs === 1 ? 'document' : 'documents'}. **All have \`reviewed_by: null\`.** Merging adds them to the record as pending; edit or delete any file here first if it is wrong.`,
     '',
     claims.every((c) => c.kind !== 'stance')
@@ -51,14 +56,38 @@ export function prSummary(opts: {
     '',
     `| ${claims.every((c) => c.kind !== 'stance') ? 'Item' : 'Stance'} | Who | Statement and quote | Source | Claim file |`,
     '|---|---|---|---|---|',
-    ...sorted.map((c) => {
-      const src = `[${c.source.type} ${c.source.date ?? ''}](${c.source.url})${c.change ? ` · [PR](${c.change.url})` : ''}`;
-      const what = c.kind === 'stance' ? `\`${c.stance}\` (${c.scope})` : `\`${c.kind}\` · ${c.area}${c.part_of ? ` (${c.part_of})` : ''} · ${c.status}`;
-      return `| ${what} | ${cell(c.subject?.name ?? '')} | ${cell(cut(c.statement, 200))}<br>“${cell(cut(c.source.quote ?? '', 140))}” | ${src} | \`data/bips/${String(c.bip).padStart(4, '0')}/claims/${c.id}.yaml\` |`;
-    }),
+  ];
+  const tail = [
     '',
     `Extraction ${runs.map((r) => `run ${r.runId} (BIP ${r.bip})`).join(', ')}: ${tokensIn.toLocaleString('en')} input + ${tokensOut.toLocaleString('en')} output tokens. Per-document outcomes and rejected proposals are in \`extract_log\`.`,
     '',
     '🤖 Opened by the extraction workflow',
-  ].join('\n');
+  ];
+  const row = (c: Claim) => {
+    const src = `[${c.source.type} ${c.source.date ?? ''}](${c.source.url})${c.change ? ` · [PR](${c.change.url})` : ''}`;
+    const what = c.kind === 'stance' ? `\`${c.stance}\` (${c.scope})` : `\`${c.kind}\` · ${c.area}${c.part_of ? ` (${c.part_of})` : ''} · ${c.status}`;
+    return `| ${what} | ${cell(c.subject?.name ?? '')} | ${cell(cut(c.statement, 200))}<br>“${cell(cut(c.source.quote ?? '', 140))}” | ${src} | \`data/bips/${String(c.bip).padStart(4, '0')}/claims/${c.id}.yaml\` |`;
+  };
+
+  // Rows in priority order until the next one would not fit.
+  let size = [...head, ...tail].join('\n').length + 200;
+  const rows: string[] = [];
+  for (const c of sorted) {
+    const r = row(c);
+    if (size + r.length + 1 > MAX_BODY_CHARS) break;
+    rows.push(r);
+    size += r.length + 1;
+  }
+  const left = sorted.slice(rows.length);
+  const note = left.length
+    ? [
+        '',
+        `…and ${left.length} more not listed here (a PR description is limited in length)${
+          left.every((c) => c.kind !== 'stance')
+            ? `: ${left.filter((c) => c.status === 'open').length} open, ${left.filter((c) => c.status === 'addressed').length} addressed`
+            : ''
+        }. They are in the changed files.`,
+      ]
+    : [];
+  return [...head, ...rows, ...note, ...tail].join('\n');
 }

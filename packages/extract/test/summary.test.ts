@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { prSummary } from '../src/summary.ts';
+import { MAX_BODY_CHARS, prSummary } from '../src/summary.ts';
+import { workTask } from '../src/tasks/work/index.ts';
 import { stanceTask } from '../src/tasks/stance/index.ts';
 import { bips, doc } from './helpers.ts';
 
@@ -52,5 +53,33 @@ describe('prSummary', () => {
 
   it('reports the run and its tokens', () => {
     expect(body).toContain('Extraction run 27 (BIP 352): 38,291 input + 696 output tokens');
+  });
+
+  it('fits the GitHub length limit, listing open work first and counting what it left out', () => {
+    const long = 'x'.repeat(300);
+    const items = Array.from({ length: 600 }, (_, i) => ({
+      bip: 352,
+      kind: 'task' as const,
+      area: 'spec' as const,
+      status: i % 3 === 0 ? ('open' as const) : ('addressed' as const),
+      part_of: null,
+      statement: `Item ${i} ${long}`,
+      quote: `quote ${i} ${long}`,
+    }));
+    const claims = workTask.toClaims({ items }, doc(3, 'body'), ctx);
+    const big = prSummary({
+      claims,
+      runs: [{ bip: 352, runId: 35, docs: 200, inputTokens: 1, outputTokens: 1 }],
+      task: { id: workTask.id, version: workTask.version, model: workTask.model },
+    });
+    expect(big.length).toBeLessThanOrEqual(MAX_BODY_CHARS);
+    const rows = big.split('\n').filter((l) => l.startsWith('| `'));
+    // 200 open items do not all fit: every listed row is open work.
+    expect(rows.length).toBeGreaterThan(50);
+    expect(rows.every((r) => r.includes('· open |'))).toBe(true);
+    const left = 600 - rows.length;
+    expect(big).toContain(`…and ${left} more not listed here`);
+    expect(big).toContain(`: ${200 - rows.length} open, 400 addressed. They are in the changed files.`);
+    expect(big).toContain('🤖 Opened by the extraction workflow');
   });
 });
