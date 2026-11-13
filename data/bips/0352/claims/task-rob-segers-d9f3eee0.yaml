@@ -1,0 +1,25 @@
+id: task-rob-segers-d9f3eee0
+bip: 352
+kind: task
+status: open
+area: writing
+part_of: light-client index
+statement: Add to the light-client spec the conclusion that clients should fetch
+  the full block when an output matches.
+subject:
+  name: Rob Segers
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://gnusha.org/pi/bitcoindev/6871d475-fbd4-4455-954d-20a369fba471n@googlegroups.com/
+  type: mailing-list
+  title: "Silent payments light clients: measurements and index commitments"
+  date: 2026-09-02
+  retrieved: 2026-11-13
+  quote: harding's full-block-on-match conclusion from the thread never made it
+    back into the spec text.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

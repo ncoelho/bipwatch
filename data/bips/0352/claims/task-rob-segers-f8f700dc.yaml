@@ -1,0 +1,27 @@
+id: task-rob-segers-f8f700dc
+bip: 352
+kind: task
+status: open
+area: writing
+part_of: light-client index
+statement: "Update the light-client and index-server specifications to match the
+  shipping v2 oracle: no filter endpoints, unsalted 8-byte x-only pubkey
+  prefixes for spent outputs, and gRPC instead of JSON."
+subject:
+  name: Rob Segers
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://gnusha.org/pi/bitcoindev/6871d475-fbd4-4455-954d-20a369fba471n@googlegroups.com/
+  type: mailing-list
+  title: "Silent payments light clients: measurements and index commitments"
+  date: 2026-09-02
+  retrieved: 2026-11-13
+  quote: v2 has no filter endpoints, spent outputs are unsalted 8-byte x-only
+    pubkey prefixes where the spec says salted outpoint hashes, JSON is
+    deprecated for gRPC
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

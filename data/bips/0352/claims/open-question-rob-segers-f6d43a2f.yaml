@@ -1,0 +1,27 @@
+id: open-question-rob-segers-f6d43a2f
+bip: 352
+kind: open-question
+status: open
+area: design
+part_of: light-client index
+statement: Decide how a light client can verify that an index server gave it
+  every tweak for a block, so a server that omits a tweak cannot silently cause
+  the receiver to miss funds.
+subject:
+  name: Rob Segers
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://gnusha.org/pi/bitcoindev/6871d475-fbd4-4455-954d-20a369fba471n@googlegroups.com/
+  type: mailing-list
+  title: "Silent payments light clients: measurements and index commitments"
+  date: 2026-09-02
+  retrieved: 2026-11-13
+  quote: The index-server spec asks how a wallet knows it received all tweaks for
+    a block. Today it can't, and a server that omits one silently loses the
+    receiver money.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null
