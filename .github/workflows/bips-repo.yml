@@ -16,12 +16,8 @@ jobs:
   collect:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-      - run: npm ci
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
       - name: Collect commits into Postgres
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -38,14 +34,10 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Fetch bitcoin/bips history
         run: git clone --filter=blob:none --no-checkout https://github.com/bitcoin/bips.git ../bips
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-      - run: npm ci
+      - uses: ./.github/actions/setup
       - name: Re-sync bip.yaml facts from spec headers
         id: sync
         run: |
@@ -64,7 +56,7 @@ jobs:
       - name: Open or update the pull request
         id: cpr
         if: steps.sync.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.BOT_TOKEN }}
           branch: bot/sync-headers

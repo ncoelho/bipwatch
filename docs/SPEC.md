@@ -167,7 +167,7 @@ flowchart TD
 | Review | Bot opens one PR per BIP per run against `data/`; merge is approval | Public audit trail, no admin UI to build |
 | Jobs | GitHub Actions scheduled workflows in v1 | Free, logged, no server. Move to a worker with pg-boss when anything needs to run every few minutes |
 | Site | Astro, static output, React islands later for charts | Nothing to run in production |
-| Hosting | Cloudflare Pages (not yet wired) | Static CDN; Workers later for intake |
+| Hosting | Cloudflare Pages, direct upload from `build.yml` with wrangler (project `bipwatch`) | Static CDN; Workers later for intake |
 | Chain data | Public explorer API for headers, crawler data for node versions in v1 | Own Bitcoin Core node with ZMQ once an activation is live |
 | Language | TypeScript end to end | Shared types between collectors, schemas and site |
 
@@ -385,7 +385,7 @@ A small Cloudflare Worker that accepts a statement signed with nostr, PGP or BIP
 ### Also pending
 
 - Templates `idea`, `draft`, `deployed`, `closed`, and the consensus signaling module.
-- Deploy step in `build.yml` (Cloudflare Pages) and the bipwatch.com domain.
+- Deploy step in `build.yml` is built (Cloudflare Pages, wrangler); it needs the `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets, then the bipwatch.com custom domain.
 - Choose the remaining two BIPs, and seed 353, 54 and 448 the same way as 352.
 - Replace the aggregator sources in the 352 seed with primary ones.
 - Review the 352 claims and needs scores (set `reviewed_by`).

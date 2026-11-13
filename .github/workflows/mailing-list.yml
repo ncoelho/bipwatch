@@ -17,19 +17,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-      - run: npm ci
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
 
       # The archive is a 130 MB git repo. Keep the clone in a cache refreshed
       # weekly; each run then only fetches what is new.
       - name: Cache key for this week
         id: week
         run: echo "key=bitcoindev-archive-$(date -u +%G-%V)" >> "$GITHUB_OUTPUT"
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         with:
           # runner.workspace is the checkout's parent, where the collector
           # keeps the clone (actions/cache rejects paths containing "..").

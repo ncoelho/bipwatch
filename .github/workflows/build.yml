@@ -4,19 +4,23 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: '17 3 * * *' # nightly, picks up anything merged without a push trigger
+    # Every 6 hours, so the Sources section (when each collector last ran)
+    # stays reasonably current on the live site, and anything merged without
+    # a push trigger is picked up.
+    - cron: '17 */6 * * *'
   workflow_dispatch:
+
+concurrency:
+  group: build-site
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-      - run: npm ci
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
       # data/freshness.json feeds the "Sources" section and /api/freshness.json.
       # Without the secret the site builds without it.
       - name: Export collector freshness
@@ -27,8 +31,31 @@ jobs:
             npm run freshness -- --export data/freshness.json --no-fail
           fi
       - run: npm run build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: site
           path: site/dist
-      # Deploy step goes here once hosting is chosen (Cloudflare Pages in the plan).
+
+      # Cloudflare Pages, project "bipwatch", by direct upload of site/dist.
+      # Needs two repository secrets: CLOUDFLARE_API_TOKEN (a token with the
+      # "Cloudflare Pages: Edit" permission) and CLOUDFLARE_ACCOUNT_ID. Until
+      # both exist the build still runs and the deploy is skipped.
+      - name: Deploy to Cloudflare Pages
+        if: github.ref == 'refs/heads/main'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          WRANGLER: wrangler@4.156.0
+          PROJECT: bipwatch
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::warning::CLOUDFLARE_API_TOKEN or CLOUDFLARE_ACCOUNT_ID is not set; skipping the deploy"
+            exit 0
+          fi
+          # First deploy: create the project (production branch main).
+          if ! npx --yes "$WRANGLER" pages project list | grep -qw "$PROJECT"; then
+            npx --yes "$WRANGLER" pages project create "$PROJECT" --production-branch=main
+          fi
+          npx --yes "$WRANGLER" pages deploy site/dist \
+            --project-name="$PROJECT" --branch=main \
+            --commit-hash="$GITHUB_SHA" --commit-message="$(git log -1 --format=%s)"

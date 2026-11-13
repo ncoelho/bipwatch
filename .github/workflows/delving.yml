@@ -17,12 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-      - run: npm ci
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
       - name: Collect posts into Postgres
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}

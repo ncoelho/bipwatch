@@ -1,0 +1,18 @@
+name: Set up Node and npm
+description: >-
+  Node from .nvmrc, the npm version pinned in package.json's packageManager
+  (the lock file is written by that npm; Node 22's bundled npm 10 crashes
+  resolving vitest 4's peer dependencies), then a clean install from the lock.
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v7
+      with:
+        node-version-file: .nvmrc
+        cache: npm
+    - name: Use the pinned npm
+      shell: bash
+      run: npm install -g "$(node -p "require('./package.json').packageManager")" && npm --version
+    - name: Install dependencies
+      shell: bash
+      run: npm ci
