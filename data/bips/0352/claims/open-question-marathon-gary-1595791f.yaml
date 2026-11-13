@@ -1,0 +1,27 @@
+id: open-question-marathon-gary-1595791f
+bip: 352
+kind: open-question
+status: open
+area: research
+part_of: silent payments coinbase
+statement: Find ways to keep coinbase silent payment payouts from being
+  identified by their amounts, since steady hashrate makes miners recognizable
+  across blocks.
+subject:
+  name: marathon-gary
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-coinbase/2833/1
+  type: forum
+  title: Silent Payments coinbase
+  date: 2026-08-24
+  retrieved: 2026-11-13
+  quote: SPc does not mitigate amount fingerprinting. Steady/consistent hashrate
+    for a given pool could make miners identifiable across blocks the pool
+    finds.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

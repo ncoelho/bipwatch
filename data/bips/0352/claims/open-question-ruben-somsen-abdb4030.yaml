@@ -1,0 +1,26 @@
+id: open-question-ruben-somsen-abdb4030
+bip: 352
+kind: open-question
+status: open
+area: research
+part_of: light-client index
+statement: Estimate the size of a per-block filter containing all taproot output
+  keys, which light clients would use to check derived silent payment outputs.
+subject:
+  name: Ruben Somsen
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAPv7TjYaOGZSugAa486yWvNsaEWKNu30t86eknWcBXmNqYgdkw@mail.gmail.com/
+  type: mailing-list
+  title: Silent Payments – Non-interactive private payments with no on-chain overhead
+  date: 2022-03-31
+  retrieved: 2026-11-13
+  quote: |-
+    The server also creates a block filter containing all taproot output keys
+    (unsure what the size would be)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

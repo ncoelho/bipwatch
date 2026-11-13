@@ -1,0 +1,25 @@
+id: task-josibake-10b782ce
+bip: 352
+kind: task
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Specify signer rules for silent payment PSBTs so signers never rely
+  on ANYONECANPAY and independently derive and verify the silent payment output
+  scripts before signing.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/23
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-20
+  retrieved: 2026-11-13
+  quote: "Hence, I think it's sufficient to say a silent payments signer must:"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

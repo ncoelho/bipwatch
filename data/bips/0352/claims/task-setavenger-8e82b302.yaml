@@ -1,0 +1,27 @@
+id: task-setavenger-8e82b302
+bip: 352
+kind: task
+status: open
+area: research
+part_of: light-client index
+statement: Benchmark the client-side cost of converting ungrouped UTXO data into
+  outputs grouped by txid, to decide whether the index must serve outputs
+  already grouped.
+subject:
+  name: setavenger
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-light-client-protocol/891/9
+  type: forum
+  title: "Silent Payments: Light Client Protocol"
+  date: 2024-05-23
+  retrieved: 2026-11-13
+  quote: I think we should benchmark these approaches to see how they compare.
+    Then we can better say whether grouping should be a hard requirement on the
+    indexing side.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

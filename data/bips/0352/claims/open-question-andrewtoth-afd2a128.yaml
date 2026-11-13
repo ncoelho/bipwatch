@@ -1,0 +1,27 @@
+id: open-question-andrewtoth-afd2a128
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Decide how a signer can verify that other signers contributed correct
+  ECDH shares when sending to silent payments via PSBT, e.g. via a running DLEQ
+  proof sum or per-input proofs.
+subject:
+  name: Andrew Toth
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/6
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-05-27
+  retrieved: 2026-11-13
+  quote: But, how does each signer know that the other signers have added their
+    correct share to the sum for each output? Can we have a running DLEQ proof
+    sum as well?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

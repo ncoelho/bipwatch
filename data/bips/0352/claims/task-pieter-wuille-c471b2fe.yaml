@@ -1,0 +1,27 @@
+id: task-pieter-wuille-c471b2fe
+bip: 352
+kind: task
+status: addressed
+area: spec
+part_of: BIP 392
+statement: Allow silent payment descriptors to include an encoding with private
+  key material, treated as equivalent to the public version while also conveying
+  the private keys.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/bip352-private-key-formats/2080/8
+  type: forum
+  title: BIP352 private key formats
+  date: 2025-11-12
+  retrieved: 2026-11-13
+  quote: allowing some encoding that includes private key material, permitting it
+    in descriptors, and treating it as equivalent to the corresponding public
+    version, but also conveying the included private keys.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

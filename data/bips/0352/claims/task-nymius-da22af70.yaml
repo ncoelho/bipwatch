@@ -1,0 +1,27 @@
+id: task-nymius-da22af70
+bip: 352
+kind: task
+status: addressed
+area: spec
+part_of: BIP 376
+statement: Specify PSBT fields that let a signer spend silent payment outputs by
+  carrying the silent payment tweak, which the existing sending specification
+  left out.
+subject:
+  name: nymius
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/31
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2025-11-13
+  retrieved: 2026-11-13
+  quote: I would like to resurrect this post to talk about silent payment
+    spending, something that was left out of the currently proposed
+    specifications, although initially mentioned.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

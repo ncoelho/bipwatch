@@ -1,0 +1,29 @@
+id: open-question-josibake-cb125485
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+part_of: BIP 375
+statement: "Decide how ECDH shares and DLEQ proofs are structured in PSBTs: one
+  global proof, a proof per input, or a proof per group of inputs. The trade-off
+  is signer compute for ECC multiplications against PSBT size and signer
+  memory."
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/27
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-21
+  retrieved: 2026-11-13
+  quote: That being said, I'm not sure which is better. If a signer has low
+    compute power, doing 30 ECC mults can be annoying. On the flipside, if the
+    signer has low memory and we want to require a signer to verify proofs on
+    each input before signing, the inline proofs for each input seems better.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

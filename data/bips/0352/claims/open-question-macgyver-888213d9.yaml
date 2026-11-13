@@ -1,0 +1,25 @@
+id: open-question-macgyver-888213d9
+bip: 352
+kind: open-question
+status: open
+area: spec
+part_of: aggdleq
+statement: Work out how AggDLEQ would operate for air-gapped signers that
+  exchange data only via PSBTs, without a live coordinator channel.
+subject:
+  name: macgyver
+  type: person
+applies_to_version: 1.1.2
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-for-multiparty-wallets/2960/4
+  type: forum
+  title: Silent Payments for Multiparty Wallets
+  date: 2026-10-29
+  retrieved: 2026-11-13
+  quote: Have you considered how AggDLEQ would work without a live coordinator
+    channel?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

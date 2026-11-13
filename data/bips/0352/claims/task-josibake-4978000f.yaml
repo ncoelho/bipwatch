@@ -1,0 +1,26 @@
+id: task-josibake-4978000f
+bip: 352
+kind: task
+status: addressed
+area: spec
+part_of: BIP 376
+statement: Define PSBT fields for spending silent payment outputs that carry the
+  shared secret tweak and identify which spend private key each input's tweak
+  applies to.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/3
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-05-20
+  retrieved: 2026-11-13
+  quote: In the PSBT you need the `shared_secret_tweak` and also a way to specify
+    *which* spend private key to tweak.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

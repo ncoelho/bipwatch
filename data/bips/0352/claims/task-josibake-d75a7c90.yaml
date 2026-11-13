@@ -1,0 +1,28 @@
+id: task-josibake-d75a7c90
+bip: 352
+kind: task
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Specify that a signer must fail if a provided sighash type is
+  unacceptable for silent payment transactions, with a footnote explaining which
+  sighash types are unacceptable.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/27
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-21
+  retrieved: 2026-11-13
+  quote: I think "If a sighash type is provided, the signer must check that the
+    sighash is acceptable. If unacceptable, they must fail" is sufficient,
+    perhaps with a footnote that explains what unacceptable is for a silent
+    payments transaction?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

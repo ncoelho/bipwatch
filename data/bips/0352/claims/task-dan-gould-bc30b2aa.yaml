@@ -1,0 +1,27 @@
+id: task-dan-gould-bc30b2aa
+bip: 352
+kind: task
+status: open
+area: ux
+part_of: bip21 update
+statement: Decide whether BIP 352 should recommend that wallets request silent
+  payments through BIP 21 URIs carrying a `req-exp=` expiration parameter, so
+  that payment requests can expire.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/D9DABB64-2277-43B2-8C37-CBFFF674C8A5@ngould.dev/
+  type: mailing-list
+  title: BIP-352 Silent Payments addresses should have an expiration time
+  date: 2023-08-08
+  retrieved: 2026-11-13
+  quote: New address specifications like Silent Payments could recommend wallets
+    request payments using BIP 21 URI and `req-exp=` to begin to solve this
+    problem in general.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

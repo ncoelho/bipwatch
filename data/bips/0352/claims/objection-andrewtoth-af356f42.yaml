@@ -1,0 +1,26 @@
+id: objection-andrewtoth-af356f42
+bip: 352
+kind: objection
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Account for the fact that ECDH shares and DLEQ proofs must be
+  computed per distinct scan key, so the PSBT design can need up to
+  inputs-times-outputs proofs, and structure the fields to keep this manageable.
+subject:
+  name: Andrew Toth
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/10
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-02
+  retrieved: 2026-11-13
+  quote: there would be input * output many proofs in worst case where each input
+    has a unique signer and each output has a unique Bscan.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

@@ -1,0 +1,27 @@
+id: task-jenonoke-7e64b664
+bip: 352
+kind: task
+status: open
+area: implementation
+part_of: silent payments coinbase
+statement: Build receiver scanners that extract A_send from the coinbase
+  scriptSig and apply the SPc derivation instead of treating the transaction as
+  ordinary BIP352.
+subject:
+  name: jenonoke
+  type: person
+applies_to_version: 1.1.2
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-coinbase/2833/8
+  type: forum
+  title: Silent Payments coinbase
+  date: 2026-10-26
+  retrieved: 2026-11-13
+  quote: an SPc receiver needs a scanner that extracts `A_send` from the coinbase
+    scriptSig and applies the SPc derivation, rather than treating the
+    transaction as ordinary BIP352
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

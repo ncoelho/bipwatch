@@ -1,0 +1,25 @@
+id: task-junderw-79537d40
+bip: 352
+kind: task
+status: addressed
+area: spec
+part_of: BIP 392
+statement: "Define standard string encodings for silent payment key material:
+  scan private key with spend public key (for delegated scanning, e.g.
+  BTCPayServer) and scan plus spend private keys (for spending)."
+subject:
+  name: junderw
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/bip352-private-key-formats/2080/1
+  type: forum
+  title: BIP352 private key formats
+  date: 2025-10-25
+  retrieved: 2026-11-13
+  quote: "I think it would be a good idea to define a string format for:"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

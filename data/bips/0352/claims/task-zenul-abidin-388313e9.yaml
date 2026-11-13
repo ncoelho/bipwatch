@@ -1,0 +1,24 @@
+id: task-zenul-abidin-388313e9
+bip: 352
+kind: task
+status: open
+area: implementation
+part_of: electrum silent payments plugin
+statement: Add support for Taproot inputs, batching, payjoin and swaps to the
+  Electrum silent payments sender plugin.
+subject:
+  name: Zenul_Abidin
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-sender-bip352-plugin-for-electrum/2743/1
+  type: forum
+  title: Silent Payments Sender - BIP352 plugin for Electrum
+  date: 2026-07-26
+  retrieved: 2026-11-13
+  quote: Taproot inputs, batching, payjoin, or swaps
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

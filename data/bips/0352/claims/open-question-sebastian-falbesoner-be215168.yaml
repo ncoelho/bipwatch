@@ -1,0 +1,23 @@
+id: open-question-sebastian-falbesoner-be215168
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+statement: Decide the concrete value of the K_max per-group recipient limit,
+  replacing the placeholder of 1000.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/b8edb433-c7b8-4d79-b710-e89a578eb42cn@googlegroups.com/
+  type: mailing-list
+  title: "BIP-352: Limiting the number of per-group recipients (K_max)"
+  date: 2026-02-04
+  retrieved: 2026-11-13
+  quote: the example value used is K_max=1000, but this can be seen as a placeholder
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

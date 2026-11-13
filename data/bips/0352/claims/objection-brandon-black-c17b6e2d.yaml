@@ -1,0 +1,24 @@
+id: objection-brandon-black-c17b6e2d
+bip: 352
+kind: objection
+status: addressed
+area: spec
+statement: Decide whether silent payment addresses should carry an expiration
+  time, and if so how to encode it compactly, given that non-expiring addresses
+  are a risk to users.
+subject:
+  name: Brandon Black
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/ZM17RTXV7M5tVt6N@console/
+  type: mailing-list
+  title: BIP-352 Silent Payments addresses should have an expiration time
+  date: 2023-08-04
+  retrieved: 2026-11-13
+  quote: Non-expiring addresses are a significant risk to bitcoin users.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

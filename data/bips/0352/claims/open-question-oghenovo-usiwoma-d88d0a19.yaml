@@ -1,0 +1,27 @@
+id: open-question-oghenovo-usiwoma-d88d0a19
+bip: 352
+kind: open-question
+status: open
+area: spec
+statement: Decide whether BIP 352 should define a maximum number of labels that
+  wallets must scan for during recovery, instead of only recommending a large
+  number such as 100k.
+subject:
+  name: Oghenovo Usiwoma
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAOCjZ9STHWBvO1J6vYsU1YE_91NhoEAeqGYR3d9yNKqWwvTwww@mail.gmail.com/
+  type: mailing-list
+  title: "[BIP Proposal] Add sp() output descriptor format for BIP352"
+  date: 2025-12-04
+  retrieved: 2026-11-13
+  quote: |-
+    we can set the maximum number of labels in the bip;
+    wallets will only have to scan for this max number of labels during
+    recovery
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

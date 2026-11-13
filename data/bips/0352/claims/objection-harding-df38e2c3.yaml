@@ -1,0 +1,28 @@
+id: objection-harding-df38e2c3
+bip: 352
+kind: objection
+status: open
+area: spec
+part_of: light-client index
+statement: Redesign the light-client protocol's transaction-fetching step so
+  that a server lying about tweaks or filters cannot force a match and unmask
+  the user, for example by fetching full blocks from a random full node over a
+  separate network identity.
+subject:
+  name: harding
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-light-client-protocol/891/12
+  type: forum
+  title: "Silent Payments: Light Client Protocol"
+  date: 2024-06-05
+  retrieved: 2026-11-13
+  quote: If a client fetches all three pieces of data from the same server (or
+    from different servers that are colluding), the server can potentially
+    unmask users in step five by lying in steps 1 and 3.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

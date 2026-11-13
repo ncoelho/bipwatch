@@ -1,0 +1,24 @@
+id: objection-alicexbt-f5a14ba2
+bip: 352
+kind: objection
+status: addressed
+area: ux
+statement: Replace the flag-based signalling of silent payment addresses with a
+  dedicated new address or descriptor format.
+subject:
+  name: alicexbt
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/p5vlwEtPHiiul4GbOK8j3x32FKrnNC9aba_5Q_MJnNVA9I6vvc3BrfQlbvUmBKJELMvORUk6JK68_rQMwsDpat4wHCkZZst79RJPIvyDPzI=@protonmail.com/
+  type: mailing-list
+  title: Silent Payments – Non-interactive private payments with no on-chain overhead
+  date: 2022-05-24
+  retrieved: 2026-11-13
+  quote: I don't mind using flag but a new address/descriptor format should be a
+    better approach.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

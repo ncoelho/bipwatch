@@ -1,0 +1,25 @@
+id: task-andrewtoth-15ef66c4
+bip: 352
+kind: task
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Change the PSBT Signer rule so that, when silent payment outputs are
+  present and no sighash type is given, the signer must sign with SIGHASH_ALL.
+subject:
+  name: Andrew Toth
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/22
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-18
+  retrieved: 2026-11-13
+  quote: If a sighash type is not provided and there are silent payment outputs
+    present, the signer must sign using SIGHASH_ALL.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

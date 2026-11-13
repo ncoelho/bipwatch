@@ -1,0 +1,27 @@
+id: open-question-sosthene-519dbdd4
+bip: 352
+kind: open-question
+status: addressed
+area: research
+part_of: BIP 375
+statement: Determine whether sharing per-input ECDH shares is a safe way to let
+  multiple PSBT signers jointly create silent payment outputs when one party
+  does not own all inputs.
+subject:
+  name: Sosthene
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/2
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-05-19
+  retrieved: 2026-11-13
+  quote: The 2nd problem is harder, as we could do something like the ECDH share
+    you mentioned but I have no idea if that would be safe either. Probably
+    something we should talk about with the secp256k1 guys
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

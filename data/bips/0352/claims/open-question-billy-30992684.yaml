@@ -1,0 +1,25 @@
+id: open-question-billy-30992684
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+statement: Decide whether silent payment outputs should be made identifiable by
+  a standard marker so light clients only download and check those, at the cost
+  of a smaller anonymity set.
+subject:
+  name: Billy
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAGpPWDa1QfN53a_-9Dhee58T6_zk3S0bZJhZbiDpXndzzv0nTA@mail.gmail.com/
+  type: mailing-list
+  title: Silent Payments – Non-interactive private payments with no on-chain overhead
+  date: 2022-03-29
+  retrieved: 2026-11-13
+  quote: Perhaps there could be a standard that can identify tweaked address, such
+    that only those addresses can be downloaded and checked by light clients.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

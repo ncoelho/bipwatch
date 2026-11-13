@@ -1,0 +1,26 @@
+id: task-andrew-toth-98b07abc
+bip: 352
+kind: task
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Specify the DLEQ proof that signers attach so that other PSBT
+  participants can verify ECDH shares.
+subject:
+  name: Andrew Toth
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://gnusha.org/pi/bitcoindev/cde77c84-b576-4d66-aa80-efaf4e50468fn@googlegroups.com/
+  type: mailing-list
+  title: "BIP: Sending Silent Payments in PSBTs"
+  date: 2024-10-17
+  retrieved: 2026-11-13
+  quote: a DLEQ proof by the signer may be added for other entities to verify the
+    corresponding ECDH shares used to derive the output scripts were generated
+    correctly. This will be specified in a following BIP.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

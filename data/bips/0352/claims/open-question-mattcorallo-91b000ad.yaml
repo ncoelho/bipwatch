@@ -1,0 +1,26 @@
+id: open-question-mattcorallo-91b000ad
+bip: 352
+kind: open-question
+status: open
+area: ux
+part_of: bip21 update
+statement: Decide whether silent payment addresses in BIP21 URIs should be
+  carried as a key/value query parameter or as a bare URI parameter without a
+  key.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/revisiting-bip21/630/19
+  type: forum
+  title: Revisiting BIP21
+  date: 2024-03-07
+  retrieved: 2026-11-13
+  quote: The only question is what to do for Silent Payments and BOLT12. We could
+    do K/V or not K/V
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

@@ -1,0 +1,25 @@
+id: open-question-nymius-b3721a65
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+part_of: BIP 376
+statement: Decide whether the PSBT tweak field for spending should be a general
+  raw taproot tweak field or one scoped only to silent payments.
+subject:
+  name: nymius
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/31
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2025-11-13
+  retrieved: 2026-11-13
+  quote: If the intermediate tagged hash step is not a requirement, we may not
+    need to scope the field just for silent payments.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

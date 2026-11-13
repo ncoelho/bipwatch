@@ -1,0 +1,26 @@
+id: task-andrew-toth-af257b2d
+bip: 352
+kind: task
+status: addressed
+area: implementation
+part_of: BIP 375
+statement: Provide a reference implementation for sending silent payments with PSBTs.
+subject:
+  name: Andrew Toth
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://gnusha.org/pi/bitcoindev/cde77c84-b576-4d66-aa80-efaf4e50468fn@googlegroups.com/
+  type: mailing-list
+  title: "BIP: Sending Silent Payments in PSBTs"
+  date: 2024-10-17
+  retrieved: 2026-11-13
+  quote: |-
+    ==Reference implementation==
+
+    Todo
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

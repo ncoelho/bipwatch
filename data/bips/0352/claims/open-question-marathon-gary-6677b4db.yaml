@@ -1,0 +1,26 @@
+id: open-question-marathon-gary-6677b4db
+bip: 352
+kind: open-question
+status: open
+area: spec
+part_of: silent payments coinbase
+statement: "Decide how to rotate the Ark mailbox id per epoch so the server
+  cannot link all payouts: either independent per-epoch registered keys or
+  related keys derived from the ECDH."
+subject:
+  name: marathon-gary
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-coinbase/2833/7
+  type: forum
+  title: Silent Payments coinbase
+  date: 2026-10-13
+  retrieved: 2026-11-13
+  quote: "Variants: independent keys `m/352'/0'/0'/3'/i'` (per-epoch registration)
+    or `M_i = M + H(ecdh_i)·G` (no registration, related keys)."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

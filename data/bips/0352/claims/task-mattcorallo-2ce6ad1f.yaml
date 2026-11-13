@@ -1,0 +1,26 @@
+id: task-mattcorallo-2ce6ad1f
+bip: 352
+kind: task
+status: open
+area: spec
+part_of: bip21 update
+statement: Define how silent payment addresses go in a revised BIP21 URI, for
+  example under a dedicated query key such as "sp" that names the address type.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/revisiting-bip21/630/3
+  type: forum
+  title: Revisiting BIP21
+  date: 2024-03-01
+  retrieved: 2026-11-13
+  quote: we should simply require the type of the address as the key - ie if its a
+    taproot address the key should be ta or tp, silent payment sp, BOLT12 b12,
+    etc.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

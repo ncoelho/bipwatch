@@ -1,0 +1,26 @@
+id: task-setavenger-c7ad7a1a
+bip: 352
+kind: task
+status: open
+area: research
+part_of: light-client index
+statement: Benchmark how much bandwidth a silent payments light client saves by
+  fetching only the needed transaction data instead of downloading full blocks,
+  including for wallets that receive payments often.
+subject:
+  name: setavenger
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-light-client-protocol/891/16
+  type: forum
+  title: "Silent Payments: Light Client Protocol"
+  date: 2024-06-08
+  retrieved: 2026-11-13
+  quote: Would like to run a benchmark to see what the actual difference is w.r.t
+    bandwidth.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

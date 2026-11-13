@@ -1,0 +1,25 @@
+id: task-setavenger-bf1d0719
+bip: 352
+kind: task
+status: open
+area: research
+part_of: light-client index
+statement: Measure the bandwidth a light client uses with a BlindBit
+  Oracle-style index compared with downloading full blocks after a filter match.
+subject:
+  name: setavenger
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-light-client-protocol/891/9
+  type: forum
+  title: "Silent Payments: Light Client Protocol"
+  date: 2024-05-23
+  retrieved: 2026-11-13
+  quote: With BlindBit the goal was to avoid downloading entire blocks to reduce
+    bandwidth, but I never made an actual comparison.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

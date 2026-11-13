@@ -1,0 +1,25 @@
+id: open-question-ruben-somsen-5b976ea6
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+statement: Decide whether the sender tweaks the silent payment address with a
+  single input or with the sum of all inputs.
+subject:
+  name: Ruben Somsen
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAPv7TjbXm953U2h+-12MfJ24YqOM5Kcq77_xFTjVK+R2nf-nYg@mail.gmail.com/
+  type: mailing-list
+  title: Silent Payments – Non-interactive private payments with no on-chain overhead
+  date: 2022-03-28
+  retrieved: 2026-11-13
+  quote: |-
+    What is preferred – single input tweaking (revealing an input to the
+    recipient) or using all inputs (increased coinjoin complexity)?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

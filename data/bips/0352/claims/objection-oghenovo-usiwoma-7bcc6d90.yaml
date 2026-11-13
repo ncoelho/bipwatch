@@ -1,0 +1,25 @@
+id: objection-oghenovo-usiwoma-7bcc6d90
+bip: 352
+kind: objection
+status: addressed
+area: spec
+part_of: BIP 392
+statement: Resolve the objection to introducing new key encodings
+  (spscan/spspend) for the sp() descriptor instead of reusing existing key
+  formats.
+subject:
+  name: Oghenovo Usiwoma
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAOCjZ9QxuFK2-6pEKC9tgL=bThtF2RqxJV_T3MpKz-k084hHAA@mail.gmail.com/
+  type: mailing-list
+  title: "[BIP Proposal] Add sp() output descriptor format for BIP352"
+  date: 2025-12-14
+  retrieved: 2026-11-13
+  quote: I'm still not in support of using new key formats for the descriptor
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

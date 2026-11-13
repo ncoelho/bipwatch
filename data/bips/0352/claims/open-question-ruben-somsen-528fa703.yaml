@@ -1,0 +1,23 @@
+id: open-question-ruben-somsen-528fa703
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+statement: Decide whether silent payment addresses should embed a sunset
+  (expiration) date in the address format.
+subject:
+  name: Ruben Somsen
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAPv7Tjb8oOO3j76HGGuoau+Sz86rFBDFdctsgFO6QUrJNjXj-w@mail.gmail.com/
+  type: mailing-list
+  title: Trustless Address Server ? Outsourcing handing out addresses
+  date: 2022-10-01
+  retrieved: 2026-11-13
+  quote: He suggested embedding a sunset date in the address format.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

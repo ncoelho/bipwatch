@@ -1,0 +1,26 @@
+id: open-question-josibake-3ee0ee64
+bip: 352
+kind: open-question
+status: addressed
+area: research
+part_of: BIP 375
+statement: Decide whether signing devices can safely return per-input ECDH
+  shares instead of private keys for generating silent payment outputs in PSBTs.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/1
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-05-17
+  retrieved: 2026-11-13
+  quote: So a signing device could return the ECDH share for a private key,
+    instead of the full private key. Mentioning this as theoretically possible
+    because this is not something that is provably secure
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

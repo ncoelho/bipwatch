@@ -1,0 +1,25 @@
+id: task-cygnet3-42a734f0
+bip: 352
+kind: task
+status: open
+area: spec
+part_of: light-client index
+statement: Change the light-client protocol's utxos endpoint to return outputs
+  grouped by txid, so clients can scan all outputs of a transaction together to
+  find k>0 outputs.
+subject:
+  name: cygnet3
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-light-client-protocol/891/2
+  type: forum
+  title: "Silent Payments: Light Client Protocol"
+  date: 2024-05-22
+  retrieved: 2026-11-13
+  quote: I think it's better to group the utxos by their `txid`.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

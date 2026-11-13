@@ -1,0 +1,28 @@
+id: task-achow101-7d122eef
+bip: 352
+kind: task
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Define per-input ECDH share and DLEQ proof PSBT fields and a
+  per-output silent payment info field, so PSBTv2 can carry silent payment
+  outputs without a new PSBT version.
+subject:
+  name: achow101
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/13
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-13
+  retrieved: 2026-11-13
+  quote: "With these fields, I believe it is okay to use PSBTv2 instead of
+    defining a PSBTv3, with one modification to PSBTv2's invariats: at least one
+    of `PSBT_OUT_SCRIPT` or `PSBT_OUT_SP_V0_INFO` must be present; both can also
+    be included."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

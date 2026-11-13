@@ -1,0 +1,25 @@
+id: objection-peter-todd-61fbc1ef
+bip: 352
+kind: objection
+status: addressed
+area: spec
+statement: Decide whether silent payment addresses should carry an expiration
+  date field (e.g. 3 bytes of days since an epoch) so that wallets refuse to pay
+  expired addresses.
+subject:
+  name: Peter Todd
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/ZM03twumu88V2NFH@petertodd.org/
+  type: mailing-list
+  title: BIP-352 Silent Payments addresses should have an expiration time
+  date: 2023-08-04
+  retrieved: 2026-11-13
+  quote: "Fixing this is easy: add a 3 byte field to silent payments addresses,
+    encoding the expiration date in terms of days after some epoch."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

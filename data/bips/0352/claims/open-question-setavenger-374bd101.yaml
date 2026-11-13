@@ -1,0 +1,25 @@
+id: open-question-setavenger-374bd101
+bip: 352
+kind: open-question
+status: open
+area: spec
+part_of: nostr notifications
+statement: Decide how notifications should resist spam and DoS from fake or
+  computationally expensive messages, for example with Merkle proofs or NIP-13
+  proof of work.
+subject:
+  name: setavenger
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://delvingbitcoin.org/t/silent-payments-notifications-via-nostr/2203/1
+  type: forum
+  title: Silent Payments notifications via Nostr
+  date: 2026-01-15
+  retrieved: 2026-11-13
+  quote: Spam prevention will be tricky this is undeniably so.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

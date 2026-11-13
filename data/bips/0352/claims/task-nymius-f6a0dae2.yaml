@@ -1,0 +1,27 @@
+id: task-nymius-f6a0dae2
+bip: 352
+kind: task
+status: open
+area: testing
+part_of: BIP 376
+statement: Add test vectors for the PSBT silent payment tweak field used to
+  spend silent payment outputs.
+subject:
+  name: nymius
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/R53cG3TeXgXDUUS4kH_q226GlaFCjI0DZVT6mdTQzSQdj3RnNqWA-bFT7uGgGQFJG6938kDGvDJVoFQj8ItEMsJ6NyOjCTvpVEarYiyW6-8=@proton.me/
+  type: mailing-list
+  title: "[BIP Proposal] Add PSBT_IN_SP_TWEAK field"
+  date: 2025-12-15
+  retrieved: 2026-11-13
+  quote: |-
+    Test Vectors
+
+    To be added
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

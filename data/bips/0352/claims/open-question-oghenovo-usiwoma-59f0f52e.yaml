@@ -1,0 +1,26 @@
+id: open-question-oghenovo-usiwoma-59f0f52e
+bip: 352
+kind: open-question
+status: addressed
+area: spec
+part_of: BIP 392
+statement: Decide how sp() descriptors should encode the labels to scan for, for
+  example as a single bitmask number instead of a variable-length list.
+subject:
+  name: Oghenovo Usiwoma
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAOCjZ9SCrFqXaejbZRg3OTd4sCHG7KB2Y+GaGnKRCMv1kk3pKw@mail.gmail.com/
+  type: mailing-list
+  title: "[BIP Proposal] Add sp() output descriptor format for BIP352"
+  date: 2025-12-12
+  retrieved: 2026-11-13
+  quote: |-
+    What if we encoded
+    multiple labels in one number?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

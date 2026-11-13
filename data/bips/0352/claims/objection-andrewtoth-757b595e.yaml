@@ -1,0 +1,28 @@
+id: objection-andrewtoth-757b595e
+bip: 352
+kind: objection
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Make silent-payment-aware PSBT signers refuse ANYONECANPAY when
+  silent payment outputs are present. Otherwise an outside observer could strip
+  the other inputs from a signed transaction and leave the silent payment
+  outputs underivable.
+subject:
+  name: Andrew Toth
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/18
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-14
+  retrieved: 2026-11-13
+  quote: couldn't any outside observer simply strip the other inputs and
+    rebroadcast, which would still be a valid tx but all silent payment outputs
+    would be invalid?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

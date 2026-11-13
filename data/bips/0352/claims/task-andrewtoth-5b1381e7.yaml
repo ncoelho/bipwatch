@@ -1,0 +1,26 @@
+id: task-andrewtoth-5b1381e7
+bip: 352
+kind: task
+status: addressed
+area: spec
+part_of: BIP 375
+statement: Let a signer that controls all inputs provide a single consolidated
+  ECDH share and proof, so a hardware wallet spending many inputs does not have
+  to compute one share and proof per input.
+subject:
+  name: Andrew Toth
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip352-psbt-support/877/17
+  type: forum
+  title: "BIP352: PSBT support"
+  date: 2024-06-14
+  retrieved: 2026-11-13
+  quote: Without consolidating all shares and proofs, the hardware wallet signer
+    will need to compute 10 times more shares and proofs.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null
