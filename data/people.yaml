@@ -33,3 +33,14 @@ people:
     aliases: [nothingmuch]
   - name: Bastien Teinturier
     aliases: [t-bast]
+  # Authors of BIP 324 and BIP 22 (added 2026-11-13).
+  - name: Pieter Wuille
+    aliases: [sipa]
+  - name: Tim Ruffing
+    aliases: [real-or-random]
+  - name: Dhruv Mehta
+    aliases: [dhruv]
+  - name: Jonas Schnelli
+    aliases: [jonasschnelli]
+  - name: Luke Dashjr
+    aliases: [luke-jr]

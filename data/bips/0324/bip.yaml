@@ -1,0 +1,35 @@
+# Copied from the spec header at spec.revision. Re-sync when the spec changes.
+number: 324
+title: Version 2 P2P Encrypted Transport Protocol
+layer: Peer Services
+type: Specification
+status: Deployed
+version: 1.0.2
+assigned: 2019-03-08
+license: BSD-3-Clause
+authors:
+  - Dhruv Mehta
+  - Tim Ruffing
+  - Jonas Schnelli
+  - Pieter Wuille
+spec:
+  repo: bitcoin/bips
+  path: bip-0324.mediawiki
+  revision: 9571907539af0f46059c9446cbcb20b581fd91c3
+  synced: 2026-11-13
+
+bipwatch:
+  tracked: true
+  category: live-patchy-adoption
+  template: deployed
+  # Peer Services: adoption is the share of nodes that support it (not measured yet). Replaces BIP 151.
+  adoption_measure: node-coverage
+  summary: >-
+    A new transport for Bitcoin's peer-to-peer protocol, with opportunistic
+    encryption, a small bandwidth reduction, and a way to negotiate upgrades
+    before peers exchange application messages.
+  # Matched by the mention index; "BIP <n>" and spec links are found without them.
+  aliases:
+    - v2 transport
+    - v2 p2p
+    - p2p v2

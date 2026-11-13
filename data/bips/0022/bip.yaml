@@ -1,0 +1,30 @@
+# Copied from the spec header at spec.revision. Re-sync when the spec changes.
+number: 22
+title: getblocktemplate - Fundamentals
+layer: API/RPC
+type: Specification
+status: Deployed
+assigned: 2012-02-28
+license: BSD-2-Clause
+authors:
+  - Luke Dashjr
+related: [23, 145]
+spec:
+  repo: bitcoin/bips
+  path: bip-0022.mediawiki
+  revision: 42303cbdf84423e99b4f9cc4d3f90cad14b6c681
+  synced: 2026-11-13
+
+bipwatch:
+  tracked: true
+  category: standard-everywhere
+  template: deployed
+  # API/RPC: adoption is which node software and mining setups use it (not measured yet).
+  adoption_measure: service-coverage
+  summary: >-
+    The getblocktemplate JSON-RPC method for miners and pool software: instead
+    of a bare block header to hash, the node sends the whole block structure,
+    which the miner may customise and assemble itself.
+  # Matched by the mention index; "BIP <n>" and spec links are found without them.
+  aliases:
+    - getblocktemplate

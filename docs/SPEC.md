@@ -39,6 +39,10 @@ Chosen by the owner on 2026-11-13: three consensus proposals and three applicati
 | 352 | Silent Payments | Applications | Complete | tracked |
 | 77 | Async Payjoin | Applications | Draft | tracked |
 | 353 + 321 | DNS Payment Instructions + URI Scheme | Applications | Complete | tracked (as a pair) |
+| 324 | Version 2 P2P Encrypted Transport Protocol | Peer Services | Deployed | tracked (layer example) |
+| 22 | getblocktemplate - Fundamentals | API/RPC | Deployed | tracked (layer example) |
+
+**One BIP per layer** (owner, 2026-11-13), because each layer will get its own page design: what a proposal needs, and what "adopted" means, differ by layer. Consensus (soft fork) has 54, 448 and 360; Applications has 352, 77 and 353 + 321; Peer Services has 324; API/RPC has 22. Consensus (hard fork) has no open BIPs, so none is tracked. The examples also cover the stages: Draft (448, 360, 77), Complete (54, 352, 353, 321) and Deployed (324, 22).
 
 All are tracked since 2026-11-13: `bip.yaml` facts generated from each spec header (the header sync confirms they match), with a BipWatch category, stage template, adoption measure, summary and aliases written by hand (summaries and aliases pending owner review). `people.yaml` maps the authors' GitHub logins to their names. None has claims or a needs assessment yet; the extraction bot backfills stances from the archive (about 2,250 documents across the six, roughly $20 over a week at the default daily cap). 448, 360 and 77 are Drafts, so they need the `draft` stage template; 54 and 448 and 360 are consensus changes, so they are where the consensus signaling module and the chain series (6.3) matter.
 

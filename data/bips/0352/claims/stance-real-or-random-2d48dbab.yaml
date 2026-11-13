@@ -10,7 +10,7 @@ statement: real-or-random approved the text changes of the PR introducing a
   per-group recipient limit K_max in BIP 352, while asking others to
   double-check the chosen number.
 subject:
-  name: real-or-random
+  name: Tim Ruffing
   type: person
 applies_to_version: 1.0.2
 source:
