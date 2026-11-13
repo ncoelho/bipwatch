@@ -21,7 +21,8 @@
     "reindex-mentions": "npm run reindex-mentions --workspace @bipwatch/collect --",
     "freshness:snapshot": "npm run freshness --silent -- --export data/freshness.json --optional",
     "predev": "npm run freshness:snapshot",
-    "prebuild": "npm run freshness:snapshot"
+    "prebuild": "npm run freshness:snapshot",
+    "tracked-bips": "npm run --silent tracked --workspace @bipwatch/data"
   },
   "engines": {
     "node": ">=22.23.4",

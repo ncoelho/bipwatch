@@ -1,0 +1,103 @@
+name: extract
+
+# SPEC 6.2 review queue: every day, run the stance extractor over documents
+# archived since the last run, separately for each tracked BIP, and open one
+# pull request per BIP with the claims it proposed. Nothing reaches data/
+# until a person merges; merging adds the claims as pending review.
+#
+# Off until the repository variable EXTRACT_ENABLED is "true". It also needs
+# the ANTHROPIC_API_KEY secret (plus DATABASE_URL and BOT_TOKEN, already set).
+# Spend is capped per BIP per run by EXTRACT_BUDGET_TOKENS (input + output
+# tokens, default 300000) and EXTRACT_LIMIT_DOCS (default 200).
+
+on:
+  schedule:
+    - cron: '23 5 * * *'
+  workflow_dispatch:
+    inputs:
+      bip:
+        description: Only this BIP number (default every tracked BIP)
+        required: false
+
+concurrency:
+  group: extract
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    if: vars.EXTRACT_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      bips: ${{ steps.list.outputs.bips }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - name: List the BIPs to run
+        id: list
+        env:
+          ONLY: ${{ inputs.bip }}
+        run: |
+          tracked=$(npm run --silent tracked-bips)
+          if [ -n "$ONLY" ]; then
+            if ! echo "$tracked" | grep -qE "(\[|,)$ONLY(,|\])"; then
+              echo "::error::BIP $ONLY is not tracked (tracked: $tracked)"; exit 1
+            fi
+            tracked="[$ONLY]"
+          fi
+          echo "bips=$tracked" >> "$GITHUB_OUTPUT"
+          echo "Extracting for BIPs $tracked"
+
+  stance:
+    needs: plan
+    if: needs.plan.outputs.bips != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      # Two at a time keeps API rate and database load modest.
+      max-parallel: 2
+      matrix:
+        bip: ${{ fromJSON(needs.plan.outputs.bips) }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Fetch bitcoin/bips history
+        # Spec versions at a document's date come from the spec's changelog.
+        run: git clone --filter=blob:none --no-checkout https://github.com/bitcoin/bips.git ../bips
+      - uses: ./.github/actions/setup
+
+      - name: Propose stances for BIP ${{ matrix.bip }}
+        id: run
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BUDGET: ${{ vars.EXTRACT_BUDGET_TOKENS || '300000' }}
+          LIMIT: ${{ vars.EXTRACT_LIMIT_DOCS || '200' }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ] || [ -z "$DATABASE_URL" ]; then
+            echo "::error::EXTRACT_ENABLED is true but ANTHROPIC_API_KEY or DATABASE_URL is not set"; exit 1
+          fi
+          npm run extract -- --task stance --bip ${{ matrix.bip }} \
+            --limit "$LIMIT" --budget "$BUDGET" --summary "$RUNNER_TEMP/summary.md"
+          if [ -f "$RUNNER_TEMP/summary.md" ]; then echo "claims=true" >> "$GITHUB_OUTPUT"; fi
+
+      # The run has already moved this BIP's cursor, so a failure from here on
+      # loses these claims until the cursor is reset (see SPEC 6.2).
+      - name: Validate the new claims
+        if: steps.run.outputs.claims == 'true'
+        run: npm run validate -- --bips ../bips
+
+      - name: Open the pull request
+        if: steps.run.outputs.claims == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          # BOT_TOKEN so the required validate check runs on the PR.
+          token: ${{ secrets.BOT_TOKEN }}
+          branch: bot/stance/bip-${{ matrix.bip }}/run-${{ github.run_id }}
+          add-paths: data/bips/*/claims/*.yaml
+          commit-message: 'BIP ${{ matrix.bip }}: new stances from the archive, pending review'
+          title: 'BIP ${{ matrix.bip }}: new stances from the archive, pending review'
+          body-path: ${{ runner.temp }}/summary.md
+          labels: claims

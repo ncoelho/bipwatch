@@ -3,7 +3,11 @@ import { bipsRepoDir, connect, updateBipsRepo } from '@bipwatch/collect';
 import { findDataDir, loadAll } from '@bipwatch/data';
 import { claudeClient } from './model.ts';
 import { runTask } from './run.ts';
+import { writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import type { Claim } from '@bipwatch/data';
 import { finishRun, lastCursor, logDoc, selectDocs, startRun, writeClaim } from './store.ts';
+import { prSummary, type RunInfo } from './summary.ts';
 import { TASKS } from './tasks/index.ts';
 import type { BipContext } from './types.ts';
 import { makeValidator } from './validate.ts';
@@ -21,6 +25,8 @@ const USAGE = `Usage: npm run extract -- --task <id> [--bip <n>] [--limit <docs>
              may be repeated
   --doc      with --dry-run only: run on these document ids (repeat, or comma-separated),
              e.g. to compare a new prompt version on documents an older one handled
+  --summary  write a pull request description for the claims written to this file
+             (only when at least one claim was written)
 
 Each run starts after the last document a previous (non-dry) run processed.
 Claims are written to data/bips/<NNNN>/claims/ with reviewed_by: null.`;
@@ -34,6 +40,7 @@ const { values } = parseArgs({
     'dry-run': { type: 'boolean', default: false },
     source: { type: 'string', multiple: true },
     doc: { type: 'string', multiple: true },
+    summary: { type: 'string' },
     help: { type: 'boolean', default: false },
   },
 });
@@ -86,6 +93,8 @@ for (const bip of wanted) {
 const today = new Date().toISOString().slice(0, 10);
 const validator = makeValidator(bundles.flatMap((b) => b.claims), dataDir);
 let failed = false;
+const written: Claim[] = [];
+const runInfos: RunInfo[] = [];
 
 // One run per BIP, each from that BIP's own cursor, so a newly tracked BIP
 // starts from the beginning of the archive. --limit and --budget apply to
@@ -117,6 +126,7 @@ for (const ctx of bips.values()) {
         await logDoc(pool, runId, r);
         for (const c of r.claims) {
           const where = dryRun ? '(dry run)' : writeClaim(dataDir, c).replace(`${dataDir}/`, 'data/');
+          if (!dryRun) written.push(c);
           console.log(`+ ${c.kind} ${c.stance ?? ''}${c.scope ? ` (${c.scope})` : ''} BIP ${c.bip} · ${c.subject?.name} · ${where}`);
           if (dryRun) {
             console.log(`    statement: ${c.statement}`);
@@ -138,6 +148,13 @@ for (const ctx of bips.values()) {
       },
     });
     await finishRun(pool, runId, dryRun ? { ...summary, last_document_id: cursor } : summary, cursor);
+    runInfos.push({
+      bip,
+      runId,
+      docs: summary.docs_seen,
+      inputTokens: summary.usage.input_tokens,
+      outputTokens: summary.usage.output_tokens,
+    });
     console.log(
       `Done (${summary.stopped_by}): ${summary.docs_seen} documents · ${summary.claims_written} claims · ${summary.usage.input_tokens} input + ${summary.usage.output_tokens} output tokens · run ${runId}`,
     );
@@ -149,4 +166,9 @@ for (const ctx of bips.values()) {
   }
 }
 await pool.end();
+if (values.summary && written.length) {
+  const file = resolve(process.env.INIT_CWD ?? process.cwd(), values.summary);
+  writeFileSync(file, prSummary({ claims: written, runs: runInfos, task }));
+  console.log(`Wrote ${file}`);
+}
 process.exitCode = failed ? 1 : 0;

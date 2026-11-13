@@ -36,7 +36,7 @@ site/  static pages + JSON API
 
 **In progress**
 - BIP 352 is the one tracked BIP, with 18 hand-written claims, 106 extracted stances and a needs assessment, all pending review.
-- LLM extraction (SPEC 6.2): the `stance` task (v2) ran over the ~1,580 archived documents about BIP 352 and its 106 stances were merged (#3), all pending review. Each is scoped to the proposal, one change to its text, or an implementation, so an ACK of an amendment is not shown as support for the BIP. The BIP 352 page shows them under "Who has taken a position". The pull-request bot that opens such PRs on its own is not built yet.
+- LLM extraction (SPEC 6.2): the `stance` task (v2) ran over the ~1,580 archived documents about BIP 352 and its stances were merged (#3, #5), all pending review. A daily workflow that opens one pull request per tracked BIP with new stances is built and switched off (see Extraction below). Each is scoped to the proposal, one change to its text, or an implementation, so an ACK of an amendment is not shown as support for the BIP. The BIP 352 page shows them under "Who has taken a position". The pull-request bot that opens such PRs on its own is not built yet.
 
 **Not started**
 - Deployment is on hold until the project is ready. The deploy step exists but is switched off (see Deployment below).
@@ -124,7 +124,17 @@ npm run extract -- --task stance --bip 352 --limit 20 --dry-run
 npm run extract -- --task stance --bip 352 --limit 200 --budget 600000
 ```
 
-Each run is per BIP and resumes where that BIP's last run stopped. A dry run writes no files and does not move the cursor; `--source` and `--doc` pick a sample for it.
+Each run is per BIP and resumes where that BIP's last run stopped. A dry run writes no files and does not move the cursor; `--source` and `--doc` pick a sample for it. `--summary <file>` writes a pull request description for the claims written.
+
+## Extraction
+
+`.github/workflows/extract.yml` runs the stance extractor every day for each tracked BIP and opens one pull request per BIP with the claims it proposed (labelled `claims`, never merged automatically). It is **off**. To switch it on (Settings → Secrets and variables → Actions):
+
+1. Secret `ANTHROPIC_API_KEY`: a Claude API key, ideally a dedicated one with a spend limit in the Anthropic Console.
+2. Variable `EXTRACT_ENABLED` = `true`.
+3. Optional variables: `EXTRACT_BUDGET_TOKENS` (per BIP per run, default 300000, about $1.30) and `EXTRACT_LIMIT_DOCS` (default 200).
+
+A newly tracked BIP starts from the beginning of the archive, so its first days spend up to the budget each day until it catches up. "Run workflow" on the Actions tab runs it on demand, optionally for one BIP.
 
 ## What the build produces
 
@@ -161,10 +171,10 @@ A claim is reviewed when a person sets `provenance.reviewed_by` to their handle 
 - [x] Static site and JSON API
 - [x] Collectors for the BIP repo, GitHub, Delving Bitcoin and the mailing list, with mention index and freshness monitor
 - [x] Header sync with self-merging pull requests
-- [ ] LLM extractors behind a pull-request review queue (stance task built; review queue bot not yet)
+- [ ] LLM extractors behind a pull-request review queue (stance task and daily PR bot built; bot switched off; other tasks not yet)
 - [ ] Review of the BIP 352 claims
 - [ ] Deployment (workflow ready, on hold until the project is ready)
-- [ ] Remaining initial BIPs
+- [ ] Seed the focus BIPs: 54, 448, 360, 77, 353 + 321 (352 is done)
 - [ ] Chain and network series for consensus BIPs
 - [ ] Signed contribution intake
 

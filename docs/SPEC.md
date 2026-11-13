@@ -27,15 +27,20 @@ These came out of the design work and should constrain every implementation deci
 5. **Low maintenance.** Static site, scheduled jobs, one database. No servers to babysit beyond what is strictly needed.
 6. **Open by default.** Data is CC0, the API is the same data the site uses, and anyone can fork the record.
 
-### Initial scope: six BIPs
+### Initial scope: the focus BIPs
 
-Three consensus proposals (one big) and three faster wins. Picks so far:
+Chosen by the owner on 2026-11-13: three consensus proposals and three application-layer ones (353 and 321 count as one pair).
 
-- **BIP 352** Silent Payments (applications layer; seeded in this repo)
-- **BIP 353** (pairs with 352 as one of the faster wins)
-- **BIP 54** Consensus Cleanup (consensus)
-- **BIP 448** covenants / vaults (consensus)
-- Two more to be chosen
+| BIP | Title (from the spec header) | Layer | Status | Record |
+|---|---|---|---|---|
+| 54 | Consensus Cleanup | Consensus (soft fork) | Complete | to seed |
+| 448 | Taproot-native (Re)bindable Transactions | Consensus (soft fork) | Draft | to seed |
+| 360 | Pay-to-Merkle-Root (P2MR) | Consensus (soft fork) | Draft | to seed |
+| 352 | Silent Payments | Applications | Complete | tracked (seeded) |
+| 77 | Async Payjoin | Applications | Draft | to seed |
+| 353 + 321 | DNS Payment Instructions + URI Scheme | Applications | Complete | to seed (as a pair) |
+
+Seeding each one follows "Tracking a new BIP" in 6.1. 448, 360 and 77 are Drafts, so they need the `draft` stage template; 54 and 448 and 360 are consensus changes, so they are where the consensus signaling module and the chain series (6.3) matter.
 
 ---
 
@@ -372,7 +377,8 @@ Re-running any collector with the same cursor must not create duplicates (`conte
 - Validator: claim schema, `source.quote` verbatim in `body_text` (whitespace normalized only), BIP is one the document mentions, no claim with the same kind, subject and quote. One retry shows the model its errors; failures are dropped and logged.
 - Bookkeeping in `002_extract.sql`: `extract_runs` (task, version, model, tokens, cursor, how it stopped) and `extract_log` (per document: outcome, attempts, claim ids, rejected proposals with errors), which is the start of the eval set. The token budget is a hard stop between documents. Only transient API errors (connection, rate limit, 5xx) skip a document; anything else stops the run.
 - Stance v1 ran once over BIP 352 (1,578 documents, 45 stances, ~$12) and was set aside: it recorded ACKs of amendment PRs as ACKs of the BIP, split people across names, and dropped a second bare "ACK" as a duplicate. v2 adds `scope`, `people.yaml`, a duplicate key that includes the source URL, and changelog-based versions; a dry run of v2 on the 45 documents v1 drew stances from scoped 32 of 46 as change or implementation.
-- Not done: the PR bot (one PR per BIP per run), Batches for backfills, the other tasks, reviewer-edit tracking, embeddings.
+- **PR bot (built 2026-11-13)**, `.github/workflows/extract.yml`: daily at 05:23 UTC (and on demand, optionally for one BIP), a `plan` job lists the tracked BIPs (`npm run tracked-bips`) and a matrix job per BIP runs `extract --task stance --bip <n>` from that BIP's cursor, validates, and opens a pull request with `--summary` as its description (every claim with its source link, positions on the proposal first), labelled `claims`, from branch `bot/stance/bip-<n>/run-<run id>`. It uses `BOT_TOKEN` so `validate` runs on the PR; there is no auto-merge. Off until the repository variable `EXTRACT_ENABLED` is `true`; needs the `ANTHROPIC_API_KEY` secret; spend per BIP per run is capped by `EXTRACT_BUDGET_TOKENS` (default 300,000 input + output tokens, about $1.30 at Opus 5.5 prices) and `EXTRACT_LIMIT_DOCS` (default 200). Two BIPs run at a time. Known gap: the run moves the BIP's cursor before the PR is opened, so if validation or the PR step fails those claims are only in `extract_log` until the cursor is reset.
+- Not done: Batches for backfills, the other tasks, reviewer-edit tracking, embeddings.
 
 ### 6.3 Chain and network series
 
