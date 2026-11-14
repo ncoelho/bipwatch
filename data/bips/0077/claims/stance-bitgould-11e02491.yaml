@@ -1,0 +1,26 @@
+id: stance-bitgould-11e02491
+bip: 77
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: bitgould, who drafted the serverless (async) payjoin BIP, presents
+  the design as a payjoin protocol more likely to be adopted. It would let
+  receivers use payjoin, including output substitution, without hosting a secure
+  public endpoint.
+subject:
+  name: bitgould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/serverless-payjoin-protocol-design/96/1
+  type: forum
+  title: Serverless Payjoin Protocol Design
+  date: 2023-09-20
+  retrieved: 2026-11-14
+  quote: A draft BIP has been submitted for the design of a payjoin protocol that
+    stands a better chance at adoption
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

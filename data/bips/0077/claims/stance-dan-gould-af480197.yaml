@@ -1,0 +1,26 @@
+id: stance-dan-gould-af480197
+bip: 77
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1890
+  title: "BIP 77: Delimit fragment params with  `-` instead of `+`"
+statement: DanGould approved the change to BIP 77 that delimits URI fragment
+  parameters with `-` instead of `+`.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1890#issuecomment-3058730467
+  type: github
+  title: "BIP 77: Delimit fragment params with  `-` instead of `+`"
+  date: 2025-07-10
+  retrieved: 2026-11-14
+  quote: ACK 1474f0d71552b4bc6cc68ec816847be4e487d7ef
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

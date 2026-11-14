@@ -1,0 +1,28 @@
+id: stance-yuval-kogman-bafa1a46
+bip: 77
+kind: stance
+stance: nack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1885
+  title: "BIP77: Propose to encode `+` as `%2B` in pj param of Bitcoin URIs"
+statement: nothingmuch opposes the proposed change to BIP 77 that would require
+  encoding `+` as `%2B` in the pj parameter of Bitcoin URIs. He argues the spec
+  already accommodates libraries that turn `+` into a space, and that mandating
+  the escaping would burden every implementation.
+subject:
+  name: Yuval Kogman
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1885#issuecomment-3020448774
+  type: github
+  title: "BIP77: Propose to encode `+` as `%2B` in pj param of Bitcoin URIs"
+  date: 2025-06-30
+  retrieved: 2026-11-14
+  quote: NACK, this change is unnecessary.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

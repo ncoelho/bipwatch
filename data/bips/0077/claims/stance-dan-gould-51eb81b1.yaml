@@ -1,0 +1,29 @@
+id: stance-dan-gould-51eb81b1
+bip: 77
+kind: stance
+stance: approach-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1483
+  title: "BIP 77: Async Payjoin"
+statement: DanGould also supports the follow-up suggestion to remove explicit
+  session initialization from BIP 77, replacing repeated sender POST polling
+  with GETs, because it reduces bandwidth, removes complexity and improves
+  efficiency. He later raises an open question about sender authorization under
+  this design.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#issuecomment-2401274780
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2024-10-09
+  retrieved: 2026-11-14
+  quote: your new design deletes complexity and improves efficiency.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
