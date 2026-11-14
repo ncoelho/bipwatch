@@ -1,0 +1,91 @@
+---
+// Bitcoin Core track (Applications layer, Overview): shown when an
+// implementation claim points at a Bitcoin Core pull request. Four tiles
+// from the archived PR (days from opened to merged, reviews before the
+// merge (the collector reads at most 100 reviews per PR), then follow-ups and the first release, which nothing collects yet)
+// and a timeline of the statements made on that PR.
+import type { BipBundle, PrStates } from '@bipwatch/data';
+import { STANCE_LABEL, STATE_LABEL, datePct, isRing } from '../../lib/view.ts';
+
+interface Props { bundle: BipBundle; prs: PrStates | null; }
+const { bundle, prs } = Astro.props;
+const core = bundle.claims.find((c) => c.kind === 'implementation' && c.subject?.name === 'Bitcoin Core' && /github\.com\/bitcoin\/bitcoin\/pull\//.test(c.subject?.url ?? ''));
+const url = core?.subject?.url;
+const pr = url ? prs?.prs[url] : undefined;
+const number = url?.match(/pull\/(\d+)/)?.[1];
+const end = pr?.merged ?? new Date().toISOString().slice(0, 10);
+const days = pr ? Math.round((Date.parse(end) - Date.parse(pr.opened)) / 86_400_000) : null;
+const before = (pr?.reviews ?? []).filter((r) => !pr?.merged || r.date <= pr.merged);
+const reviewers = [...new Set(before.map((r) => r.by).filter(Boolean))];
+const said = bundle.claims
+  .filter((c) => c.kind === 'stance' && c.change?.url === url)
+  .sort((a, b) => (a.source.date ?? '').localeCompare(b.source.date ?? ''));
+const from = pr ? Date.parse(`${pr.opened}T00:00:00Z`) - 5 * 86_400_000 : 0;
+const to = Date.parse(`${end}T00:00:00Z`) + 5 * 86_400_000;
+---
+{core && url && (
+  <section class="panel" id="core-track" aria-labelledby="h-core">
+    <h2 id="h-core">Bitcoin Core track <span class="sub">· bitcoin/bitcoin #{number} · {STATE_LABEL[core.implementation!.state].toLowerCase()}</span></h2>
+    <p class="lede">{core.statement}</p>
+    {pr ? (
+      <div class="tiles">
+        <div class="tile"><span class="k">{pr.merged ? 'Opened to merged' : 'Open for'}</span><span class="v">{days}</span><span class="s">days · opened {pr.opened}{pr.merged ? `, merged ${pr.merged}` : ''}</span></div>
+        <div class="tile"><span class="k">Reviewers{pr.merged ? ' before merge' : ''}</span><span class="v">{reviewers.length}</span><span class="s">{before.length >= 100 ? '100+' : before.length} review submissions · {said.length} recorded statements</span></div>
+        <div class="tile muted"><span class="k">Follow-ups merged</span><span class="v small">not tracked yet</span><span class="s">needs follow-up PRs linked</span></div>
+        <div class="tile muted"><span class="k">First release</span><span class="v small">not tracked yet</span><span class="s">needs a release-notes collector</span></div>
+      </div>
+    ) : (
+      <p class="faint">The pull request isn’t in this build’s archive export.</p>
+    )}
+    {said.length > 0 && pr && (
+      <>
+        <div class="scroll">
+          <div class="lane">
+            <span class="ll"><span class="lt">Statements on #{number}</span><span class="lm">{said.length} · {new Set(said.map((c) => c.subject?.name)).size} people</span></span>
+            <span class="track">
+              {said.map((c, j) => (
+                <a href={`#positions?item=${c.id}`} class:list={['dot', { ring: isRing(c) }]} style={`left:${datePct(c.source.date, from, to).toFixed(2)}%;top:${9 + (((j * 7) % 3) - 1) * 6}px`} aria-label={`${c.source.date}, ${c.subject?.name}, ${STANCE_LABEL[c.stance!]}`}></a>
+              ))}
+            </span>
+          </div>
+        </div>
+        <ol class="rows">
+          {said.map((c) => (
+            <li><span class="mono d">{c.source.date}</span><b>{c.subject?.name}</b><span class:list={['st', { ring: isRing(c) }]}>{STANCE_LABEL[c.stance!]}</span><a href={`#positions?item=${c.id}`}>{c.statement}</a></li>
+          ))}
+        </ol>
+      </>
+    )}
+  </section>
+)}
+
+<style>
+  .panel { background: var(--panel); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+  h2 { font-size: 17px; }
+  .sub { font-weight: 400; color: var(--faint); font-size: 14px; }
+  .lede { font-size: 14px; color: var(--muted); }
+  .faint { color: var(--faint); font-size: 13px; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .tile { background: var(--card); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; }
+  .tile.muted { background: var(--inset); }
+  .k { font-size: 12px; color: var(--faint); }
+  .v { font-family: var(--mono); font-size: 28px; font-weight: 600; }
+  .v.small { font-size: 15px; margin-top: 8px; color: var(--muted); font-family: var(--sans); font-weight: 500; }
+  .s { font-size: 12.5px; color: var(--muted); }
+  .scroll { overflow-x: auto; }
+  .lane { min-width: 520px; display: grid; grid-template-columns: 170px 1fr; gap: 12px; align-items: center; padding: 6px 10px; border-radius: 12px; background: var(--inset); }
+  .ll { display: flex; flex-direction: column; }
+  .lt { font-weight: 600; font-size: 14px; }
+  .lm { font-size: 12px; color: var(--faint); }
+  .track { position: relative; display: block; height: 30px; }
+  .dot { position: absolute; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--fg); }
+  .dot::before { content: ''; position: absolute; inset: -16px; }
+  .dot.ring { background: #000; box-shadow: inset 0 0 0 2px var(--accent-ink); }
+  .rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; font-size: 13.5px; }
+  .rows li { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; padding: 6px 10px; border-radius: 10px; }
+  .d { font-size: 12px; color: var(--faint); }
+  .st { font-size: 11.5px; padding: 2px 9px; border-radius: 999px; background: var(--card); color: var(--fg-2); }
+  .st.ring { background: var(--accent-soft); color: var(--accent-ink); }
+  .rows a { flex: 1 1 100%; color: var(--muted); text-decoration: none; }
+  .rows a:hover { color: var(--fg); }
+</style>

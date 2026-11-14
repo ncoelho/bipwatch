@@ -1,0 +1,213 @@
+---
+// Applications layer hero (page templates spec): "Is it actually getting
+// built?", answered by "Can I use it on my setup?": four counts, a grid of
+// platforms × send/receive listing the wallets in each state, and a detail
+// panel for the selected wallet. Everything comes from implementation claims
+// (subject, state, send, receive, platforms, scanning) and open engineering
+// tasks named after a wallet; "sources disagree" comes from the data checks.
+import type { BipBundle, DataCheck } from '@bipwatch/data';
+import { PLATFORMS, SOURCE_LABEL, STATE_LABEL, isSecondary, setupModel, versionLabel, type SetupWallet } from '../../lib/view.ts';
+
+interface Props { bundle: BipBundle; checks: DataCheck[]; }
+const { bundle, checks } = Astro.props;
+const { bip } = bundle;
+const wallets = setupModel(bundle);
+const disagree = new Set(checks.map((c) => c.file.split('/').pop()!.replace(/\.yaml$/, '')));
+const on = (p: string, cap: 'send' | 'receive') => wallets.filter((w) => w.platforms.includes(p as SetupWallet['platforms'][number]) && w[cap]);
+const names = (ws: SetupWallet[]) => ws.map((w) => w.name).join(', ');
+const recvShipped = (p: string) => on(p, 'receive').filter((w) => w.receive === 'shipped');
+const hardware = wallets.filter((w) => w.platforms.includes('hardware'));
+const light = wallets.filter((w) => /index|light/i.test(w.claim.implementation?.scanning ?? ''));
+const lightOpen = bundle.claims.filter((c) => c.part_of && /light/i.test(c.part_of) && c.status !== 'addressed' && ['task', 'open-question', 'objection'].includes(c.kind)).length;
+const senders = wallets.filter((w) => w.send === 'shipped').length;
+const receivers = wallets.filter((w) => w.receive === 'shipped');
+const answer = bip.bipwatch.short_answer
+  ?? `${senders} ${senders === 1 ? 'wallet sends' : 'wallets send'}; receiving has shipped in ${receivers.length}${receivers.length ? ` (${names(receivers)})` : ''}${hardware.some((w) => w.receive) ? '' : ', none on hardware'}${light.some((w) => w.receive === 'shipped') ? '' : ', and no light client beyond a proof of concept'}.`;
+const STATE_WORD = { shipped: 'Shipped', half: 'Proof of concept or merged, unreleased', review: 'In review', building: 'Being built' } as const;
+const first = wallets.find((w) => w.receive === 'shipped') ?? wallets[0];
+const otherOn = (p: string, cap: 'send' | 'receive') => wallets.filter((w) => w.platforms.includes(p as SetupWallet['platforms'][number]) && !w[cap]);
+---
+<div class="hero">
+  <div class="lead">
+    <div class="eyebrow">Layer main question · Applications</div>
+    <h2>Is it actually getting built?</h2>
+    {bip.bipwatch.summary && <p>{bip.bipwatch.summary}</p>}
+  </div>
+  <div class="answer"><div class="label">The short answer</div><p>{answer}</p></div>
+</div>
+
+<section class="setup" id="setup" aria-labelledby="h-setup" data-setup>
+  <div class="head">
+    <h2 id="h-setup">Can I use it on my setup? <span class="sub">· wallet coverage</span></h2>
+    <div class="mode" role="group" aria-label="Show">
+      <button type="button" data-mode="all" aria-pressed="true">Everything</button>
+      <button type="button" data-mode="shipped" aria-pressed="false">Shipped only</button>
+    </div>
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><span class="k">Receive on mobile</span><span class="v">{recvShipped('mobile').length}</span><span class="s">{names(recvShipped('mobile')) || 'none yet'}</span></div>
+    <div class="tile"><span class="k">Receive on desktop</span><span class="v">{recvShipped('desktop').length}</span><span class="s">{names(recvShipped('desktop')) || 'none yet'}</span></div>
+    <div class="tile"><span class="k">Hardware signers</span><span class="v">{hardware.some((w) => w.receive === 'shipped') ? 'receive' : hardware.some((w) => w.send) ? 'send' : '0'}</span><span class="s">{hardware.length ? `${names(hardware)}${hardware.some((w) => w.receive) ? '' : ', send only'}` : 'none recorded'}</span></div>
+    <div class:list={['tile', { hot: !light.some((w) => w.receive === 'shipped') }]}><span class="k">Light clients</span><span class="v">{light.filter((w) => w.receive === 'shipped').length}</span><span class="s">{light.length ? `${names(light)} (${light.map((w) => STATE_LABEL[w.claim.implementation!.state].toLowerCase()).join(', ')})` : 'none recorded'}{lightOpen ? ` · ${lightOpen} open items on the light-client work` : ''}</span></div>
+  </div>
+
+  <div class="body">
+    <div class="gridcol">
+      <div class="scroll">
+        <table class="grid">
+          <caption class="sr">Wallets by platform that can send or receive, and in what state</caption>
+          <thead><tr><th scope="col">Platform</th><th scope="col">Send</th><th scope="col">Receive</th></tr></thead>
+          <tbody>
+            {PLATFORMS.map((p) => (
+              <tr>
+                <th scope="row"><span class="pl">{p.label}</span><span class="ph">{p.hint}</span></th>
+                {(['send', 'receive'] as const).map((cap) => {
+                  const ws = on(p.key, cap);
+                  const others = otherOn(p.key, cap);
+                  return (
+                    <td>
+                      <div class="cell">
+                        {ws.map((w) => (
+                          <button type="button" class:list={['chip', w[cap]]} data-wallet={w.claim.id} data-level={w[cap] === 'shipped' ? 'shipped' : 'other'} aria-pressed="false" aria-label={`${w.name}, ${cap}: ${STATE_WORD[w[cap]!]}`}>
+                            {w.name}{disagree.has(w.claim.id) && <span class="dis" aria-label="sources disagree"></span>}
+                          </button>
+                        ))}
+                        {ws.length === 0 && <span class="empty">{others.length ? others.map((w) => `${w.name}: ${STATE_LABEL[w.claim.implementation!.state].toLowerCase()}`).join('; ') : 'none recorded'}</span>}
+                      </div>
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <span><i class="sw shipped"></i>Shipped</span>
+        <span><i class="sw half"></i>Proof of concept or merged, unreleased</span>
+        <span><i class="sw review"></i>In review or being built</span>
+        <span><i class="dot"></i>Sources disagree</span>
+      </div>
+    </div>
+
+    <div class="details">
+      {wallets.map((w) => {
+        const c = w.claim;
+        const plats = [...w.platforms, ...(c.implementation!.networks ?? [])];
+        return (
+          <div class="wd" id={c.id} data-detail={c.id} data-first={w === first ? '1' : undefined}>
+            <div class="eyebrow2">{plats.length ? plats.join(' · ') : 'platform not recorded'}</div>
+            <div class="wn">{w.name}</div>
+            <div><span class:list={['pill', { good: c.implementation!.state === 'shipped', accent: c.implementation!.state === 'partial' }]}>{STATE_LABEL[c.implementation!.state]}</span></div>
+            <p>{c.statement}</p>
+            <dl>
+              <dt>Scanning</dt><dd>{c.implementation!.scanning ?? '–'}</dd>
+              <dt>Spec version</dt><dd>{c.applies_to_version ? versionLabel(c.applies_to_version) : 'not recorded'}</dd>
+              <dt>Source</dt><dd>{SOURCE_LABEL[c.source.type]}{c.source.title ? ` · ${c.source.title}` : ''}</dd>
+            </dl>
+            {c.source.quote && <blockquote>“{c.source.quote}”</blockquote>}
+            <a href={c.source.url} rel="noopener">View source</a>
+            {w.task && <a class="task" href={`#needs?piece=${encodeURIComponent(w.name)}&item=${w.task.id}`}>Receiving is an open engineering task ↓</a>}
+            {isSecondary(c) && <div class="sec">Secondary source. Help replace it with {w.name}’s own release notes.</div>}
+            {disagree.has(c.id) && <div class="sec">Sources disagree: see the data check at the top of the page.</div>}
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-setup]');
+  if (root) {
+    root.classList.add('js');
+    const chips = [...root.querySelectorAll<HTMLButtonElement>('[data-wallet]')];
+    const details = [...root.querySelectorAll<HTMLElement>('[data-detail]')];
+    const select = (id: string, write = true) => {
+      for (const d of details) d.hidden = d.dataset.detail !== id;
+      for (const c of chips) c.setAttribute('aria-pressed', String(c.dataset.wallet === id));
+      if (write) history.replaceState(null, '', `#setup?wallet=${encodeURIComponent(id)}`);
+    };
+    for (const c of chips) c.addEventListener('click', () => select(c.dataset.wallet!));
+    for (const b of root.querySelectorAll<HTMLButtonElement>('[data-mode]')) {
+      b.addEventListener('click', () => {
+        const shippedOnly = b.dataset.mode === 'shipped';
+        for (const m of root.querySelectorAll('[data-mode]')) m.setAttribute('aria-pressed', String(m === b));
+        for (const c of chips) c.hidden = shippedOnly && c.dataset.level !== 'shipped';
+      });
+    }
+    const fromHash = () => {
+      const h = decodeURIComponent(location.hash);
+      const m = h.match(/^#setup\?wallet=(.+)$/);
+      // A bare claim id (an evidence link) selects that wallet too.
+      const bare = details.find((d) => `#${d.dataset.detail}` === h)?.dataset.detail;
+      const id = m?.[1] ?? bare ?? details.find((d) => d.dataset.first)?.dataset.detail ?? details[0]?.dataset.detail;
+      if (id) select(id, false);
+    };
+    window.addEventListener('hashchange', fromHash);
+    fromHash();
+  }
+</script>
+
+<style>
+  .hero { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px 24px; flex-wrap: wrap; margin-top: 44px; }
+  .lead { max-width: 660px; }
+  .lead h2 { margin-top: 6px; font-size: 34px; letter-spacing: -0.02em; line-height: 1.12; }
+  .lead p { margin-top: 10px; color: var(--muted); font-size: 16px; }
+  .answer { background: var(--info-ground); border-radius: 14px; padding: 14px 18px; max-width: 420px; }
+  .answer .label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--info-ink); font-weight: 600; }
+  .answer p { margin-top: 4px; font-size: 15px; }
+  .setup { margin-top: 24px; background: var(--panel); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 16px; }
+  .head { display: flex; justify-content: space-between; align-items: center; gap: 10px 16px; flex-wrap: wrap; }
+  .head h2 { font-size: 17px; }
+  .sub { font-weight: 400; color: var(--faint); font-size: 14px; }
+  .mode { display: none; gap: 4px; padding: 3px; border-radius: 999px; background: var(--card); }
+  .setup.js .mode { display: flex; }
+  .mode button { min-height: 36px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font-size: 13px; }
+  .mode button[aria-pressed='true'] { background: var(--fg); color: #000; font-weight: 600; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+  .tile { background: var(--card); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; }
+  .tile.hot { background: var(--accent-ground); }
+  .k { font-size: 12px; color: var(--faint); }
+  .hot .k, .hot .v { color: var(--accent-ink); }
+  .v { font-family: var(--mono); font-size: 28px; font-weight: 600; }
+  .s { font-size: 12.5px; color: var(--muted); }
+  .hot .s { color: #F2D9C4; }
+  .body { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+  .gridcol { flex: 3 1 560px; min-width: 0; }
+  .scroll { overflow-x: auto; }
+  .grid { border-collapse: separate; border-spacing: 4px; min-width: 520px; width: 100%; }
+  .grid thead th { font-size: 12px; color: var(--faint); font-weight: 500; text-align: left; padding: 0 4px; }
+  .grid tbody th { width: 150px; padding: 12px; border-radius: 10px; background: var(--card); text-align: left; vertical-align: middle; }
+  .pl { display: block; font-weight: 600; }
+  .ph { display: block; font-size: 12px; color: var(--faint); font-weight: 400; }
+  .grid td { border-radius: 10px; background: var(--inset); padding: 8px; vertical-align: middle; }
+  .cell { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; min-height: 32px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 12px; border: 0; border-radius: 999px; font-size: 13px; font-weight: 600; }
+  .chip.shipped { background: var(--info); color: #06101F; }
+  .chip.half { background: #B8A6FF; color: #120B2E; }
+  .chip.review, .chip.building { background: repeating-linear-gradient(135deg, rgba(161, 161, 170, 0.35) 0 2px, transparent 2px 5px); color: var(--fg); box-shadow: inset 0 0 0 1px #3A3A40; }
+  .chip[aria-pressed='true'] { outline: 2px solid var(--fg); outline-offset: 2px; }
+  .dis { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .empty { font-size: 13px; color: var(--faint); }
+  .legend { display: flex; gap: 8px 14px; flex-wrap: wrap; margin-top: 12px; font-size: 12.5px; color: var(--fg-2); }
+  .legend span { display: flex; align-items: center; gap: 8px; }
+  .sw { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+  .sw.shipped { background: var(--info); } .sw.half { background: #B8A6FF; }
+  .sw.review { background: repeating-linear-gradient(135deg, rgba(161, 161, 170, 0.35) 0 2px, transparent 2px 5px); box-shadow: inset 0 0 0 1px #3A3A40; }
+  .legend .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .details { flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+  .wd { background: var(--card); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 10px; scroll-margin-top: 16px; }
+  .eyebrow2 { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); font-weight: 600; }
+  .wn { font-size: 22px; font-weight: 650; line-height: 1.2; }
+  .wd p { font-size: 14px; color: var(--fg-2); }
+  dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13px; }
+  dt { color: var(--faint); }
+  dd { margin: 0; }
+  blockquote { margin: 0; padding: 10px 12px; border-radius: 10px; background: var(--panel); font-size: 13px; color: var(--fg-2); }
+  .wd > a { font-size: 13px; }
+  .task { color: var(--accent-ink); }
+  .sec { font-size: 12.5px; padding: 8px 10px; border-radius: 8px; background: var(--warn-soft); color: var(--warn); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>

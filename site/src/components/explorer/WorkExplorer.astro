@@ -72,8 +72,11 @@ const msgLink = (url: string) => url;
                 <span class="k">Based on</span>
                 {x.evidence.map((id, i) => {
                   const c = byId.get(id);
-                  const tab = c?.kind === 'stance' ? 'positions' : 'needs';
-                  return <a class="ev" href={`#${tab}?item=${encodeURIComponent(id)}`} data-item={id} data-tab={tab} title={c?.statement ?? id}>{i + 1}</a>;
+                  // Stances live in Positions, work items here; anything else
+                  // (implementations, problems, evidence) by its own anchor.
+                  const tab = c?.kind === 'stance' ? 'positions' : c && ['task', 'open-question', 'objection'].includes(c.kind) ? 'needs' : '';
+                  const href = tab ? `#${tab}?item=${encodeURIComponent(id)}` : `#${encodeURIComponent(id)}`;
+                  return <a class="ev" href={href} data-item={id} data-tab={tab || undefined} title={c?.statement ?? id}>{i + 1}</a>;
                 })}
               </div>
             ) : (

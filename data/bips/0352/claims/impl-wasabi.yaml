@@ -1,21 +1,24 @@
 id: impl-wasabi
 bip: 352
 kind: implementation
-statement: Wasabi Wallet can send to silent payment addresses but does not receive them.
+statement: >-
+  Wasabi Wallet can send to silent payment addresses since 2.4.0 (January 2025).
 subject:
   name: Wasabi Wallet
   type: wallet
 implementation:
   state: partial
   send: true
-  receive: false
   platforms: [desktop]
 source:
-  url: https://www.spark.money/tools/bitcoin-silent-payment-wallet-comparison
-  type: aggregator
-  title: "Silent Payment Wallet Support: Which Wallets Support BIP 352?"
-  retrieved: 2026-11-05
+  url: https://github.com/WalletWasabi/WalletWasabi/releases/tag/v2.4.0
+  type: release-notes
+  title: Wasabi Wallet v2.4.0
+  date: 2025-01-11
+  quote: Wasabi Wallet v2.4.0 brings send to Silent Payment addresses!
+  retrieved: 2026-11-14
+  verified: false
 provenance:
   extracted_by: model:claude-opus-5-5
-  extracted: 2026-11-05
+  extracted: 2026-11-14
   reviewed_by: null

@@ -9,6 +9,8 @@
 // anything inside a panel), with arrow keys between tabs.
 import { dataChecks, loadPrStates, loadSpecHistory, type BipBundle } from '@bipwatch/data';
 import AtAGlance from '../components/frame/AtAGlance.astro';
+import ApplicationsHero from '../components/layer/ApplicationsHero.astro';
+import CoreTrack from '../components/layer/CoreTrack.astro';
 import DataChecks from '../components/frame/DataChecks.astro';
 import Discussed from '../components/frame/Discussed.astro';
 import FactRail from '../components/frame/FactRail.astro';
@@ -24,9 +26,12 @@ interface Props { bundle: BipBundle; known: Set<number>; }
 const { bundle, known } = Astro.props;
 const { bip, claims } = bundle;
 const tracked = bip.bipwatch.tracked;
+// Layer modules only for tracked BIPs whose page is set (their data exists).
+const page = tracked ? (bip.bipwatch.page ?? 'default') : 'default';
 // Build-time exports (npm run site-exports); the page works without them.
 const history = loadSpecHistory(bip.number);
-const checks = dataChecks(bundle, history, loadPrStates());
+const prs = loadPrStates();
+const checks = dataChecks(bundle, history, prs);
 const openWork = claims.filter((c) => WORK_KINDS.includes(c.kind) && c.status !== 'addressed').length;
 const stances = claims.filter((c) => c.kind === 'stance').length;
 const built = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' });
@@ -58,7 +63,7 @@ const sections = [
 
   <Lifecycle bip={bip} />
   <DataChecks checks={checks} />
-  <AtAGlance bundle={bundle} known={known} history={history} />
+  {page === 'applications' ? <ApplicationsHero bundle={bundle} checks={checks} /> : <AtAGlance bundle={bundle} known={known} history={history} />}
 
   <div class="details-head">
     <div class="eyebrow">Spec, work and positions</div>
@@ -78,8 +83,9 @@ const sections = [
     <div class="panels">
       <section id="overview" role="tabpanel" aria-labelledby="tab-overview" class="tabpanel">
         <h2 class="nojs">Overview</h2>
-        {history && history.changes.length > 0 && <SpecHistory bip={bip} history={history} />}
-        <Implementations bundle={bundle} />
+        {history && history.changes.length > 0 && <SpecHistory bip={bip} history={history} settled={page === 'applications'} claims={claims} />}
+        {page !== 'applications' && <Implementations bundle={bundle} />}
+        {page === 'applications' && <CoreTrack bundle={bundle} prs={prs} />}
         <Discussed bundle={bundle} />
         {sections.map((s) => (
           <section class="panel" id={s.id} aria-labelledby={`h-${s.id}`}>

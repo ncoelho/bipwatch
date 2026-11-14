@@ -235,3 +235,62 @@ export function datePct(date: string | undefined, from: number, to: number): num
   const t = Date.parse(`${date}T00:00:00Z`);
   return to > from ? Math.min(100, Math.max(0, ((t - from) / (to - from)) * 100)) : 50;
 }
+
+// ---- Applications layer (templates PR 4) -----------------------------------
+
+export const PLATFORMS = [
+  { key: 'mobile', label: 'Mobile', hint: 'phone wallets' },
+  { key: 'desktop', label: 'Desktop', hint: 'desktop wallets' },
+  { key: 'hardware', label: 'Hardware', hint: 'signing devices' },
+  { key: 'web', label: 'Web', hint: 'in the browser' },
+  { key: 'node', label: 'Node', hint: 'full node software' },
+] as const;
+export type PlatformKey = (typeof PLATFORMS)[number]['key'];
+
+/** How a wallet's support for one capability looks in the grid. */
+export type CellState = 'shipped' | 'half' | 'review' | 'building';
+
+export interface SetupWallet {
+  claim: Claim;
+  name: string;
+  platforms: PlatformKey[];
+  send?: CellState;
+  receive?: CellState;
+  /** An open engineering task on this wallet (part_of = its name). */
+  task?: Claim;
+}
+
+/** Grid state for a capability the claim says is there. */
+function cellState(c: Claim): CellState {
+  const s = c.implementation!.state;
+  if (s === 'shipped' || s === 'partial') return 'shipped';
+  if (s === 'merged' || s === 'proof-of-concept') return 'half';
+  return 'review';
+}
+
+/**
+ * Wallets for "Can I use it on my setup?": every implementation claim except
+ * libraries (one marked not supported gets no cells, only its detail), placed
+ * on its platforms (or, when
+ * none are recorded, the platform its type implies: node, hardware).
+ */
+export function setupModel(b: BipBundle): SetupWallet[] {
+  const tasks = b.claims.filter((c) => c.kind === 'task' && c.area === 'engineering' && c.status !== 'addressed' && c.part_of);
+  return b.claims
+    .filter((c) => c.kind === 'implementation' && c.subject?.type !== 'library')
+    .map((c) => {
+      const i = c.implementation!;
+      const implied: PlatformKey[] = c.subject?.type === 'node' ? ['node'] : c.subject?.type === 'hardware-wallet' ? ['hardware'] : [];
+      const task = tasks.find((t) => t.part_of === c.subject?.name);
+      const inReview = i.state === 'in-review' || i.state === 'planned';
+      return {
+        claim: c,
+        name: c.subject!.name,
+        platforms: ((i.platforms?.length ? i.platforms : implied) as PlatformKey[]),
+        ...(i.send || inReview ? { send: i.send ? cellState(c) : ('review' as const) } : {}),
+        ...(i.receive ? { receive: cellState(c) } : task ? { receive: 'building' as const } : inReview ? { receive: 'review' as const } : {}),
+        ...(task ? { task } : {}),
+      };
+    })
+    .sort((x, y) => STATE_ORDER.indexOf(x.claim.implementation!.state) - STATE_ORDER.indexOf(y.claim.implementation!.state) || x.name.localeCompare(y.name));
+}
