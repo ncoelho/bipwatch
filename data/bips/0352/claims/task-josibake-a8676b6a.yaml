@@ -1,0 +1,24 @@
+id: task-josibake-a8676b6a
+bip: 352
+kind: task
+status: addressed
+area: testing
+statement: Add a test vector covering the case where input public keys sum to
+  the point at infinity (or private keys sum to zero).
+subject:
+  name: josibake
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1620#pullrequestreview-2123661373
+  type: github
+  title: "BIP-352: handle invalid privkey / pubkey sums for sending / scanning,
+    add changelog"
+  date: 2024-06-17
+  retrieved: 2026-11-14
+  quote: If you are able to add a test case, that would be great!
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

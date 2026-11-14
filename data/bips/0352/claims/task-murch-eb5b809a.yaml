@@ -1,0 +1,27 @@
+id: task-murch-eb5b809a
+bip: 352
+kind: task
+status: open
+area: writing
+part_of: BIP 392
+statement: Add a Rationale section to the silent payment descriptor BIP
+  explaining the design decisions, such as those around wallet birthday and
+  labels.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2047#pullrequestreview-3641161592
+  type: github
+  title: "BIP392: Silent Payment Output Script Descriptors"
+  date: 2026-01-08
+  retrieved: 2026-11-14
+  quote: Perhaps some of the decisions around birthdate and labels could be
+    collected into a Rationale section which currently doesn’t appear to be
+    present.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
