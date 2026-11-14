@@ -35,6 +35,8 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+/* The hidden attribute wins over any display a component sets (tab panels, filtered rows). */
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;

@@ -1,0 +1,143 @@
+---
+// Positions tab (page templates spec): one lane per scope (the proposal,
+// changes to the text, implementations), one dot per statement placed by
+// date, objections and conditions as rings; then every statement, newest
+// first, with a detail panel. No tallies, no percentages, no colour for for
+// or against: a ring is the only mark, and words say the rest.
+import type { BipBundle } from '@bipwatch/data';
+import {
+  LANES, SOURCE_LABEL, STANCE_LABEL, datePct, isPending, isRing, isStale, versionLabel,
+} from '../../lib/view.ts';
+
+interface Props { bundle: BipBundle; }
+const { bundle } = Astro.props;
+const { bip } = bundle;
+const stances = bundle.claims
+  .filter((c) => c.kind === 'stance')
+  .sort((a, b) => (b.source.date ?? '').localeCompare(a.source.date ?? ''));
+const people = new Set(stances.map((c) => c.subject?.name)).size;
+const dates = stances.map((c) => c.source.date).filter((d): d is string => !!d).sort();
+const from = Date.parse(`${dates[0] ?? '2020-01-01'}T00:00:00Z`) - 15 * 86_400_000;
+const to = Date.now();
+const years: number[] = [];
+for (let y = new Date(from).getUTCFullYear() + 1; y <= new Date(to).getUTCFullYear(); y++) years.push(y);
+const lanes = LANES.map((l) => ({ ...l, items: stances.filter((c) => c.scope === l.scope) })).filter((l) => l.items.length);
+const onChanges = stances.filter((c) => c.scope !== 'proposal').length;
+const SCOPE_WORD = { proposal: 'On the proposal', change: 'On a change to the text', implementation: 'On an implementation' } as const;
+---
+{stances.length > 0 && (
+  <section class="panel" id="positions-list" aria-labelledby="h-pos" data-explorer="positions">
+    <div class="head">
+      <h2 id="h-pos">Who has said what <span class="sub">· {stances.length} statements · {people} {people === 1 ? 'person' : 'people'}</span></h2>
+      {stances.every(isPending) && <span class="pill warn">All pending review</span>}
+    </div>
+    <p class="lede">
+      {onChanges > stances.length / 2 ? 'Most statements review changes to the text or code, which isn’t the same as backing the proposal. ' : ''}A ring is an objection or a condition. No tallies, by design.
+    </p>
+
+    <div class="scroll">
+      <div class="lanes">
+        {lanes.map((l) => (
+          <div class="lane">
+            <span class="ll"><span class="lt">{l.label}</span><span class="lm">{l.items.length} statements · {new Set(l.items.map((c) => c.subject?.name)).size} people</span></span>
+            <span class="track">
+              {l.items.map((c, j) => (
+                <button
+                  type="button"
+                  class:list={['dot', { ring: isRing(c) }]}
+                  data-select={c.id}
+                  aria-label={`${c.source.date ?? 'undated'}, ${c.subject?.name}, ${STANCE_LABEL[c.stance!]}`}
+                  style={`left:${datePct(c.source.date, from, to).toFixed(2)}%;top:${11 + (((j * 7) % 3) - 1) * 6}px`}
+                ></button>
+              ))}
+            </span>
+          </div>
+        ))}
+        <div class="lane ticks" aria-hidden="true">
+          <span></span>
+          <span class="track">
+            {years.map((y) => <span class="tick" style={`left:${datePct(`${y}-01-01`, from, to).toFixed(2)}%`}>{y}</span>)}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="split">
+      <ol class="list">
+        {stances.map((c) => (
+          <li id={c.id} data-row>
+            <button type="button" class="rowbtn" data-select={c.id}>
+              <span class="d mono">{c.source.date ?? '–'}</span>
+              <span class="w">{c.subject?.name}</span>
+              <span class:list={['st', { ring: isRing(c) }]}>{STANCE_LABEL[c.stance!]}</span>
+              <span class="t">{c.statement}</span>
+            </button>
+            <div class="detail">
+              <div class="eyebrow2">{SCOPE_WORD[c.scope ?? 'proposal']} · {c.source.date ?? 'undated'}</div>
+              <div class="who">{c.subject?.name}</div>
+              <div class="dchips">
+                <span class:list={['pill', { accent: isRing(c) }]}>{STANCE_LABEL[c.stance!]}</span>
+                <span class="pill">on {versionLabel(c.applies_to_version)}</span>
+                {isStale(c.applies_to_version, bip.version) && <span class="pill warn">spec changed since</span>}
+                {isPending(c) && <span class="pill warn">pending review</span>}
+              </div>
+              <div class="dt">{c.statement}</div>
+              {c.source.quote && <blockquote>“{c.source.quote}”<span class="src">{SOURCE_LABEL[c.source.type]}{c.source.verified ? ' · quote matched' : ''}</span></blockquote>}
+              {c.condition && <div class="cond">Condition: {c.condition}</div>}
+              {c.change && <a href={c.change.url} rel="noopener">The change: {c.change.title ?? c.change.url}</a>}
+              <a href={c.source.url} rel="noopener">Open the message</a>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <aside class="side" aria-live="polite" data-panel hidden></aside>
+    </div>
+  </section>
+)}
+
+<style>
+  .panel { background: var(--panel); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .head { display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; flex-wrap: wrap; }
+  h2 { font-size: 17px; }
+  .sub { font-weight: 400; color: var(--faint); font-size: 14px; }
+  .lede { font-size: 14px; color: var(--muted); }
+  .scroll { overflow-x: auto; }
+  .lanes { min-width: 600px; display: flex; flex-direction: column; gap: 4px; }
+  .lane { display: grid; grid-template-columns: 170px 1fr; gap: 12px; align-items: center; padding: 6px 10px; border-radius: 12px; background: var(--inset); }
+  .lane.ticks { background: transparent; padding-block: 0; }
+  .ll { display: flex; flex-direction: column; }
+  .lt { font-weight: 600; font-size: 14px; }
+  .lm { font-size: 12px; color: var(--faint); }
+  .track { position: relative; display: block; height: 34px; }
+  .ticks .track { height: 16px; }
+  .tick { position: absolute; top: 0; transform: translateX(-50%); font-family: var(--mono); font-size: 11.5px; color: var(--faint); }
+  /* 12 px mark, 44 px hit area. */
+  .dot { position: absolute; width: 12px; height: 12px; margin-left: -6px; padding: 0; border: 0; border-radius: 50%; background: var(--fg); }
+  .dot::before { content: ''; position: absolute; inset: -16px; }
+  .dot.ring { background: #000; box-shadow: inset 0 0 0 2px var(--accent-ink); }
+  .dot.on { outline: 2px solid var(--info); outline-offset: 2px; }
+  .split { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 4px; align-items: flex-start; }
+  .list { flex: 3 1 380px; min-width: 0; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  .list li { scroll-margin-top: 16px; }
+  .rowbtn { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; width: 100%; min-height: 44px; padding: 9px 10px; border: 0; border-radius: 10px; background: transparent; text-align: left; font-size: 13.5px; color: var(--fg-2); }
+  .rowbtn:hover { background: var(--inset); }
+  li.sel > .rowbtn { background: var(--card); color: var(--fg); }
+  .d { font-size: 12px; color: var(--faint); flex: 0 0 84px; }
+  .w { flex: 0 0 120px; min-width: 0; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--fg); }
+  .st { flex: 0 0 auto; font-size: 11.5px; padding: 2px 9px; border-radius: 999px; background: var(--card); color: var(--fg-2); }
+  .st.ring { background: var(--accent-soft); color: var(--accent-ink); }
+  .t { flex: 1 1 100%; min-width: 0; color: var(--muted); }
+  .detail { margin: 2px 0 10px 0; padding: 14px 16px; border-radius: 12px; background: var(--card); display: flex; flex-direction: column; gap: 10px; }
+  :global(html.js-explore) .list .detail { display: none; }
+  .side { flex: 2 1 280px; min-width: 0; position: sticky; top: 16px; }
+  .side :global(.detail) { margin: 0; padding: 18px; border-radius: 14px; }
+  .eyebrow2 { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); font-weight: 600; }
+  .who { font-size: 22px; font-weight: 650; line-height: 1.2; color: var(--fg); }
+  .dchips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .dt { font-size: 14.5px; color: var(--fg); }
+  blockquote { margin: 0; padding: 10px 12px; border-radius: 10px; background: var(--panel); font-size: 13.5px; color: var(--fg-2); }
+  .src { display: block; margin-top: 4px; font-size: 12px; color: var(--good-ink); }
+  .cond { font-size: 13px; padding: 8px 10px; border-radius: 8px; background: var(--accent-soft); color: var(--accent-ink); }
+  .detail > a { font-size: 13px; }
+  @media (max-width: 640px) { .side { position: static; } }
+</style>
