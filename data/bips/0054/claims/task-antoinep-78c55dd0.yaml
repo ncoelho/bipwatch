@@ -1,0 +1,28 @@
+id: task-antoinep-78c55dd0
+bip: 54
+kind: task
+status: addressed
+area: design
+statement: Add a fix making coinbase transactions unique so that BIP30
+  validation is not needed after block 1,983,702, choosing between requiring the
+  coinbase nLockTime to commit to the height and making the witness commitment
+  mandatory.
+subject:
+  name: AntoineP
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/1
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-03-24
+  retrieved: 2026-11-14
+  quote: "A neat fix would be to simply requires the `nLockTime` field of the
+    coinbase transaction to be set to the height of the block being created.
+    However there is a more roundabout fix which is potentially easier for
+    miners to deploy: make the witness commitment mandatory"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,25 @@
+id: open-question-antoinep-328f0649
+bip: 54
+kind: open-question
+status: addressed
+area: design
+statement: "Decide how coinbase transactions are made unique: set nLockTime to
+  the block height (with or without an off-by-one and an nSequence restriction),
+  or instead require a coinbase nVersion other than 1."
+subject:
+  name: AntoineP
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/51
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-11-09
+  retrieved: 2026-11-14
+  quote: we might favor the small confusion over restricting the coinbase's
+    `nSequence`.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

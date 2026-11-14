@@ -1,0 +1,26 @@
+id: objection-evoskuil-da6e50ce
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Justify or drop the rule invalidating 64-byte transactions, which the
+  author argues is an unnecessary consensus change whose only real benefit is a
+  minor SPV bandwidth saving.
+subject:
+  name: evoskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/30
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-08-26
+  retrieved: 2026-11-14
+  quote: fixing a perceived consensus-related security issue, which has been shown
+    to be a suboptimal and unnecessary fix. It is not a trivial thing to add a
+    new consensus rule
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

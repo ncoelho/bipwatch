@@ -1,0 +1,26 @@
+id: objection-evoskuil-55c9b759
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Justify or reconsider invalidating 64-byte transactions, given the
+  objection that valid blocks do not have malleable hashes and that the rule
+  adds unnecessary validation checks.
+subject:
+  name: evoskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/32
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-08-26
+  retrieved: 2026-11-14
+  quote: The proposed invalidation of 64 byte transactions does not in any way
+    represent a fix to a vulnerability. Valid blocks do not have malleable block
+    hashes.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

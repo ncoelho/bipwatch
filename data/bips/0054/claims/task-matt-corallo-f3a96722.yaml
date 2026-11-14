@@ -1,0 +1,24 @@
+id: task-matt-corallo-f3a96722
+bip: 54
+kind: task
+status: addressed
+area: design
+statement: Require the coinbase transaction's nLockTime to commit to the block
+  height so the height can be extracted without parsing Script.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/25
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-08-07
+  retrieved: 2026-11-14
+  quote: I'd still very much love to see the nLockTime set to the block height, it
+    makes pulling the block height out of the coinbase transaction simpler
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

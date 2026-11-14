@@ -1,0 +1,25 @@
+id: objection-zawy-21ce74a2
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Decide whether the Murch–Zawy timestamp restriction should apply to
+  every block instead of only the last block of a difficulty period, to avoid
+  inconsistent rules that external MTP-dependent software might mishandle.
+subject:
+  name: zawy
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/55
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-11-27
+  retrieved: 2026-11-14
+  quote: Applying Murch's timestamp limit to every block appears better than doing
+    it only on the 2016th block
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,24 @@
+id: open-question-ajtowns-3633dc45
+bip: 54
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether the coinbase nLockTime should be set to the parent
+  block's height rather than the block's own height.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/50
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-11-09
+  retrieved: 2026-11-14
+  quote: Why wouldn't you have `nLockTime` be the height of the parent block (mod
+    500M) instead?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

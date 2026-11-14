@@ -1,0 +1,24 @@
+id: objection-1440000bytes-45aa7088
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Decide whether the 2012 SIGHASH_SINGLE bug should also be fixed as
+  part of the Consensus Cleanup soft fork.
+subject:
+  name: 1440000bytes
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/2
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-03-24
+  retrieved: 2026-11-14
+  quote: I think SIGHASH_SINGLE bug reported in 2012 should also be fixed with
+    other bugs
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

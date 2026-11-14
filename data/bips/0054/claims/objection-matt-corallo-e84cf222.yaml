@@ -1,0 +1,27 @@
+id: objection-matt-corallo-e84cf222
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Use the coinbase nLockTime field instead of a required witness
+  commitment to make new coinbases differ from historical ones, because
+  requiring the commitment would undermine its intended use as a flexible future
+  commitment root.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/20
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-07-22
+  retrieved: 2026-11-14
+  quote: This makes the witness commitment useless for its intended purpose - a
+    flexible (future) merkle root committing to additional commitments. The
+    nLockTime field is a *much* neater way of doing this
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

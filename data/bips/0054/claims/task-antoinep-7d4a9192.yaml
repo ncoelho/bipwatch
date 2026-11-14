@@ -1,0 +1,23 @@
+id: task-antoinep-7d4a9192
+bip: 54
+kind: task
+status: addressed
+area: design
+statement: Include a fix for the Murch-Zawy alternating timestamp attack
+  (requiring non-negative difficulty period duration) in the Consensus Cleanup.
+subject:
+  name: AntoineP
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/zawy-s-alternating-timestamp-attack/1062/3
+  type: forum
+  title: Zawy’s Alternating Timestamp Attack
+  date: 2024-08-11
+  retrieved: 2026-11-14
+  quote: The fix could be included as part of the consensus cleanup revival.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

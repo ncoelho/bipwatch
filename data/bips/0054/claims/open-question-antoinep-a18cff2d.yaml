@@ -1,0 +1,25 @@
+id: open-question-antoinep-a18cff2d
+bip: 54
+kind: open-question
+status: addressed
+area: design
+statement: Decide which mechanism (e.g. coinbase nLockTime or another one)
+  should make coinbase txids unique after block 1,983,702, so that duplicate
+  transactions are avoided.
+subject:
+  name: AntoineP
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/18
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-05-17
+  retrieved: 2026-11-14
+  quote: I think we should just make coinbase txids after block 1'983'702 unique
+    (either through `nLockTime` or another mechanism).
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

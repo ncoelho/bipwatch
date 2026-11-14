@@ -1,0 +1,26 @@
+id: objection-antoinep-9a2d63af
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Resolve the conflict where setting the coinbase nLockTime to the
+  block height would fail the IsFinalTx() check unless the coinbase nSequence is
+  forced to SEQUENCE_FINAL.
+subject:
+  name: AntoineP
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/49
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-11-08
+  retrieved: 2026-11-14
+  quote: this would require mandating the coinbase input to have its `nSequence`
+    field be `SEQUENCE_FINAL`, as otherwise the coinbase transaction would fail
+    the `IsFinalTx()` check
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

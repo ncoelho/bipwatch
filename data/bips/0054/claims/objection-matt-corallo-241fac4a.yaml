@@ -1,0 +1,25 @@
+id: objection-matt-corallo-241fac4a
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Avoid fixing the coinbase witness value to the block height for the
+  duplicate-coinbase fix, since that would block future commitments there;
+  commit to the height elsewhere instead.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/23
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-07-23
+  retrieved: 2026-11-14
+  quote: If we fix the coinbase witness value to 00000000height, then you cannot
+    start shoving further commitments in it?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

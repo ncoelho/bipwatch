@@ -1,0 +1,24 @@
+id: task-sjors-6671fd1d
+bip: 54
+kind: task
+status: addressed
+area: design
+statement: Decide to enforce the coinbase nLockTime rule as soon as the soft
+  fork activates rather than waiting until block 1,983,702.
+subject:
+  name: sjors
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/27
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-08-20
+  retrieved: 2026-11-14
+  quote: This does imply that we should enforce this rule as soon as the soft fork
+    activates and not wait for block 1,983,702.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

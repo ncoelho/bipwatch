@@ -1,0 +1,26 @@
+id: objection-ariard-57ac7525
+bip: 54
+kind: objection
+status: addressed
+area: activation
+statement: Decide whether each Consensus Cleanup fix should get its own
+  activation deployment (e.g. a separate BIP9 version bit) rather than
+  activating all fixes together.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/transitory-soft-forks-for-consensus-cleanup-forks/1333/4
+  type: forum
+  title: Transitory Soft Forks for Consensus Cleanup Forks
+  date: 2024-12-29
+  retrieved: 2026-11-14
+  quote: I also think we would be better to package each cleanup consensus change
+    in its own activation sequence (i.e BIP9 nversion bit), rather than trying
+    to deploy a whole set of them at once
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

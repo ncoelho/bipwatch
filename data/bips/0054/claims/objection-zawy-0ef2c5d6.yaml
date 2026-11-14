@@ -1,0 +1,25 @@
+id: objection-zawy-0ef2c5d6
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Enforce the fix for negative difficulty-period timespans (Murch–Zawy)
+  as a rule on block timestamps rather than as an adjustment inside the
+  difficulty calculation's timespan, to avoid exploits.
+subject:
+  name: zawy
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/57
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-11-27
+  retrieved: 2026-11-14
+  quote: But as a minimum, Murch's limit on timespan better be enforced on the
+    timestamp instead of timespan or there's probably an exploit.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
