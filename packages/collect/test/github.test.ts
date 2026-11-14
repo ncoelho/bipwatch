@@ -197,8 +197,14 @@ describe('github normalize', () => {
 
 describe('github setup', () => {
   it('watches the PRs that claims link to outside bitcoin/bips', () => {
-    // Linked from a claim (CORE) or watched by a BIP record (BIP 54's implementation).
-    expect(watchedItems()).toEqual([CORE, 'bitcoin/bitcoin#35793']);
+    // Runs on the live data, which grows: check for known entries, not the
+    // whole list. Linked from a claim (CORE) or watched by a BIP record
+    // (BIP 54's implementation); never bitcoin/bips itself, which is
+    // collected whole.
+    const items = watchedItems();
+    expect(items).toEqual(expect.arrayContaining([CORE, 'bitcoin/bitcoin#35793']));
+    expect(items.every((i) => /^[\w.-]+\/[\w.-]+#\d+$/.test(i) && !i.startsWith('bitcoin/bips#'))).toBe(true);
+    expect(items).toEqual([...items].sort());
   });
 
   it('needs a token', () => {
