@@ -118,6 +118,21 @@ export const NEED_DIMENSIONS = [
 
 export type NeedDimension = (typeof NEED_DIMENSIONS)[number];
 
+/**
+ * Which types of open work bear on each needs dimension. The page links each
+ * dimension to its open items through this, and the needs extractor is told
+ * the same mapping. Problem evidence and ecosystem awareness rest on other
+ * claim kinds (problem, evidence, adoption), not on tasks.
+ */
+export const NEED_AREAS: Record<NeedDimension, readonly WorkArea[]> = {
+  problem_evidence: [],
+  technical_maturity: ['design', 'writing', 'testing', 'review', 'research'],
+  ux_exploration: ['ux'],
+  implementations: ['engineering'],
+  ecosystem_awareness: [],
+  coordination: ['coordination', 'activation'],
+};
+
 export interface NeedsAssessment {
   bip: number;
   assessed: string;
