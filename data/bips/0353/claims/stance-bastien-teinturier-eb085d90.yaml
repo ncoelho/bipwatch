@@ -1,0 +1,26 @@
+id: stance-bastien-teinturier-eb085d90
+bip: 353
+kind: stance
+stance: ack
+scope: proposal
+statement: t-bast approved the pull request adding BIP 353 (DNS Payment
+  Instructions) at a specific commit, indicating he considers the specification
+  text ready.
+subject:
+  name: Bastien Teinturier
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#pullrequestreview-1920089520
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-03-06
+  retrieved: 2026-11-14
+  quote: "APPROVED: ACK
+    https://github.com/bitcoin/bips/pull/1551/commits/d618202ed00b1481d4938bcbc\
+    d0d6b27753df6f5"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: stance-hernanmarino-18b26c4a
+bip: 353
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1551
+  title: "Add BIP 353: DNS Payment Instructions"
+statement: hernanmarino approved the pull request adding the BIP 353 (DNS
+  Payment Instructions) draft text, saying it looks good.
+subject:
+  name: hernanmarino
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#pullrequestreview-1876881387
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-13
+  retrieved: 2026-11-14
+  quote: LGTM :)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

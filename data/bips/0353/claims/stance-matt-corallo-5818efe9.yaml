@@ -1,0 +1,27 @@
+id: stance-matt-corallo-5818efe9
+bip: 353
+kind: stance
+stance: nack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2272
+  title: "BIP 353: Add a Security Considerations section"
+statement: TheBlueMatt opposed a pull request adding a Security Considerations
+  section to BIP 353, calling it low-quality and saying it is not clear it adds
+  anything.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2272#pullrequestreview-5104171166
+  type: github
+  title: "BIP 353: Add a Security Considerations section"
+  date: 2026-09-03
+  retrieved: 2026-11-14
+  quote: This is slop and it's not clear that this is adding anything.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,27 @@
+id: stance-matt-corallo-fee1206d
+bip: 353
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: TheBlueMatt, the BIP's author, defends BIP 353's approach over
+  reusing OpenAlias. He argues it is a more concrete and extensible format that
+  builds on wallets' existing BIP 21 handling, and that it uses a clearly
+  Bitcoin-specific DNS name instead of cluttering existing domain records.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1937498545
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-14
+  quote: this is a more concrete and extensible format for bitcoin payment
+    instructions for wallets which already support and have logic for handling
+    BIP 21 URIs (basically all wallets)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

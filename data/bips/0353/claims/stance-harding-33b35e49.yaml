@@ -1,0 +1,24 @@
+id: stance-harding-33b35e49
+bip: 353
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: harding defends BIP 353's choice of DNS records over a .well-known
+  HTTPS path. He finds its arguments about not revealing sender IP addresses and
+  not relying on TLS certificate authorities really strong.
+subject:
+  name: harding
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1937383689
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-14
+  quote: (b) and (c) seem like really strong points to me.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

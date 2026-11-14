@@ -1,0 +1,26 @@
+id: stance-matt-corallo-fbe98c0a
+bip: 353
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: TheBlueMatt, opening the pull request that adds BIP 353, argues there
+  is strong user demand for resolving human-readable names into payment
+  instructions. He proposes doing it through the DNS, with private queries and
+  DNSSEC proofs.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-10
+  retrieved: 2026-11-14
+  quote: User behavior has clearly indicated a strong demand for the resolution of
+    human-readable names into payment instructions.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

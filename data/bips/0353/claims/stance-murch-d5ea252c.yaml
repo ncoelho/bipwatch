@@ -1,0 +1,27 @@
+id: stance-murch-d5ea252c
+bip: 353
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1551
+  title: "Add BIP 353: DNS Payment Instructions"
+statement: murchandamus approved the pull request that adds BIP 353 (DNS Payment
+  Instructions) to the BIPs repository, apart from a remaining typo. This is an
+  approval of adding the document, not an explicit endorsement of the protocol.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#pullrequestreview-2097342568
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-06-04
+  retrieved: 2026-11-14
+  quote: LGTM, except that you might want to fix the typo. ;)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

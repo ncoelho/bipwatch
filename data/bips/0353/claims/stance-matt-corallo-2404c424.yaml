@@ -1,0 +1,26 @@
+id: stance-matt-corallo-2404c424
+bip: 353
+kind: stance
+stance: ack
+scope: proposal
+statement: TheBlueMatt, the BIP's author, considers the BIP 353 draft
+  essentially final after pushing updates. These included changing the display
+  format to ₿user@domain, a tradeoff between lnurl compatibility and avoiding
+  confusion with email addresses.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1979669962
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-03-05
+  retrieved: 2026-11-14
+  quote: I consider this ~final at this point, absent some substantial issues or
+    minor clerical mistakes.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,23 @@
+id: stance-bastien-teinturier-2e01b54f
+bip: 353
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: t-bast gave a concept ACK to the BIP 353 DNS Payment Instructions
+  proposal and thanked the author for writing it up.
+subject:
+  name: Bastien Teinturier
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#pullrequestreview-1875070726
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-12
+  retrieved: 2026-11-14
+  quote: "Concept ACK :rocket:"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
