@@ -7,7 +7,7 @@ statement: Decide whether to add a rule retroactively preventing the two
   historical candidate blocks (209,921 and 490,897) from ever having a duplicate
   coinbase.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

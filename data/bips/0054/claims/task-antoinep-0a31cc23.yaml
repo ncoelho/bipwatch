@@ -6,7 +6,7 @@ area: design
 statement: Decide whether to add a limit on the size of legacy transactions as
   an extra safety margin on worst-case block validation time.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

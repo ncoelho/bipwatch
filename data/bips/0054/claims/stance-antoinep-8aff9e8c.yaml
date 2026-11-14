@@ -8,7 +8,7 @@ statement: AntoineP opposes modifying BIP54 so that a future fix for the nTime
   away, a chain split is trivially prevented, and it does not justify inferior
   protocol decisions today.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

@@ -8,7 +8,7 @@ statement: AntoineP argues against P2MR (with or without EC disabling) as the
   encourages use of the migration output type without PQ spending paths, breaks
   Taproot's incentive structure, and is 10-15% more expensive.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.12.1
 source:

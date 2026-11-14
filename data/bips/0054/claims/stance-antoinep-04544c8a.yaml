@@ -8,7 +8,7 @@ statement: AntoineP supports the suggested fix for the Murch-Zawy alternating
   Combined with the cleanup's timewarp fix, it would make retarget periods
   monotonic and stop a 51% attacker from driving the difficulty down.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

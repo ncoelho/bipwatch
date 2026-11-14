@@ -123,3 +123,14 @@ describe('mergeDiscussion', () => {
     expect(mergeDiscussion([a], undefined)).toBeUndefined();
   });
 });
+
+describe('syncHeaders without a Version header', () => {
+  it('takes the version from the Changelog section (as BIP 54 keeps it)', async () => {
+    const noHeader = header352.replace(/^\s*Version: .*\n/m, '');
+    // The earlier tests left the spec converted to markdown; go back to one file.
+    g('rm', '-q', 'bip-0352.md');
+    commitSpec(`${noHeader}\n\n== Changelog ==\n\n* '''1.2.1''' (2026-12-02):\n** Fix a typo.\n* '''1.2.0''' (2026-11-20):\n** Deployed.`, 'Move version to changelog');
+    await syncHeaders({ dir: repo, dataDir, ref: 'HEAD', today: '2026-12-02' });
+    expect(parse(readFileSync(yamlFile, 'utf8')).version).toBe('1.2.1');
+  });
+});

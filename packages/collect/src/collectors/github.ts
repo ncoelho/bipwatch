@@ -7,9 +7,10 @@ import type { Collector, DocumentInput, RawItem, RawItemInput } from '../types.t
  * - bitcoin/bips: every pull request (with its changed files, labels and
  *   review summaries), every conversation comment and every inline review
  *   comment. bitcoin/bips has issues turned off, so PRs are the whole story.
- * - Pull requests and issues in other repos that a claim links to
- *   (subject.url or source.url, e.g. bitcoin/bitcoin#35301): that item, its
- *   comments, reviews and inline review comments.
+ * - Pull requests and issues in other repos that a BIP record watches
+ *   (bipwatch.watch, e.g. Bitcoin Core's BIP 54 implementation) or a claim
+ *   links to (subject.url or source.url, e.g. bitcoin/bitcoin#35301): that
+ *   item, its comments, reviews and inline review comments.
  *
  * PRs come from GraphQL (one query per 25 PRs with files and reviews), newest
  * first back to the cursor, then yielded oldest first. Comments come from the
@@ -302,10 +303,17 @@ function toStoredComment(repo: string, c: RestComment, titles: Map<number, strin
 
 const ITEM_URL_RE = /^https:\/\/github\.com\/([\w.-]+)\/([\w.-]+)\/(?:pull|issues)\/(\d+)/;
 
-/** "owner/repo#n" for every GitHub PR or issue a claim links to, outside bitcoin/bips. */
+/**
+ * "owner/repo#n" for every GitHub PR or issue outside bitcoin/bips that a
+ * BIP record lists under bipwatch.watch or a claim links to.
+ */
 export function watchedItems(dataDir?: string): string[] {
   const out = new Set<string>();
-  for (const { claims } of loadAll(dataDir)) {
+  for (const { bip, claims } of loadAll(dataDir)) {
+    for (const u of bip.bipwatch.watch ?? []) {
+      const m = u.match(ITEM_URL_RE);
+      if (m && `${m[1]}/${m[2]}` !== BIPS_REPO) out.add(`${m[1]}/${m[2]}#${m[3]}`);
+    }
     for (const c of claims) {
       const urls = [(c as { subject?: { url?: string } }).subject?.url, c.source?.url];
       for (const u of urls) {

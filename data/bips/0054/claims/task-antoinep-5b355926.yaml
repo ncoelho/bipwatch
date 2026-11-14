@@ -7,7 +7,7 @@ statement: Decide how to count the sigops of spent bare-script prevouts toward
   the validation-cost limit, since they are currently only counted when the
   output is created.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

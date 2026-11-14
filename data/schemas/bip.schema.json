@@ -92,6 +92,12 @@
           "type": "array",
           "items": { "type": "string", "minLength": 3 },
           "uniqueItems": true
+        },
+        "watch": {
+          "description": "GitHub pull requests or issues outside bitcoin/bips whose discussion belongs to this BIP, such as an implementation in Bitcoin Core. The GitHub collector archives each one with its comments and reviews.",
+          "type": "array",
+          "items": { "type": "string", "pattern": "^https://github\\.com/[\\w.-]+/[\\w.-]+/(pull|issues)/\\d+$" },
+          "uniqueItems": true
         }
       }
     }

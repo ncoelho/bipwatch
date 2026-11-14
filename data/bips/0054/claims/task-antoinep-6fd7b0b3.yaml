@@ -7,7 +7,7 @@ statement: Add a fix for the Murch-Zawy attack by requiring the last block of a
   retarget period to have a timestamp no lower than the first block of that
   period.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

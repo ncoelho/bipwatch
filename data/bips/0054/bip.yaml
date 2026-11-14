@@ -4,6 +4,7 @@ title: Consensus Cleanup
 layer: Consensus (soft fork)
 type: Specification
 status: Complete
+version: 1.0.0
 assigned: 2025-04-11
 license: CC0-1.0
 authors:
@@ -13,7 +14,7 @@ spec:
   repo: bitcoin/bips
   path: bip-0054.md
   revision: 927b6de9915c9262615a6399de51b200f81e5aa4
-  synced: 2026-11-13
+  synced: 2026-11-14
 
 bipwatch:
   tracked: true
@@ -30,3 +31,5 @@ bipwatch:
   aliases:
     - consensus cleanup
     - great consensus cleanup
+  watch:
+    - https://github.com/bitcoin/bitcoin/pull/35793

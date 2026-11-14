@@ -8,7 +8,7 @@ statement: AntoineP defends the Consensus Cleanup approach of making 64-byte
   the alternative is roundabout and does not address the root issue, and that it
   would require miners to update their software.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

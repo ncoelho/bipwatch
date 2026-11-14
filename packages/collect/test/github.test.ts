@@ -197,7 +197,8 @@ describe('github normalize', () => {
 
 describe('github setup', () => {
   it('watches the PRs that claims link to outside bitcoin/bips', () => {
-    expect(watchedItems()).toEqual([CORE]);
+    // Linked from a claim (CORE) or watched by a BIP record (BIP 54's implementation).
+    expect(watchedItems()).toEqual([CORE, 'bitcoin/bitcoin#35793']);
   });
 
   it('needs a token', () => {

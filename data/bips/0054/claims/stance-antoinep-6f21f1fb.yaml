@@ -8,7 +8,7 @@ statement: AntoineP, revisiting the Great Consensus Cleanup, argues the bugs it
   and the worst-case block validation time, and supports making 64-byte
   transactions invalid.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

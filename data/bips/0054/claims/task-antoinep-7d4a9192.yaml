@@ -6,7 +6,7 @@ area: design
 statement: Include a fix for the Murch-Zawy alternating timestamp attack
   (requiring non-negative difficulty period duration) in the Consensus Cleanup.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

@@ -8,7 +8,7 @@ statement: AntoineP is leaning toward making 64-byte transactions invalid as
   claimed benefits, the reduced complexity for SPV applications outweighs the
   cost.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

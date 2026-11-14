@@ -5,3 +5,4 @@ export { migrate } from './migrate.ts';
 export { closeAbandonedRuns, contentHash, lastCursor, runCollector, type RunResult } from './run.ts';
 export { bipsRepoDir, git, showFile, updateBipsRepo } from './bips/git.ts';
 export { parseHeader, type SpecHeader } from './bips/header.ts';
+export { changelogTimeline, latestChangelogVersion, type Timeline } from './bips/changelog.ts';

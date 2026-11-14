@@ -36,6 +36,8 @@ export interface BipRecord {
     adoption_measure?: string;
     summary?: string;
     aliases?: string[];
+    /** GitHub PRs or issues outside bitcoin/bips to archive for this BIP. */
+    watch?: string[];
   };
 }
 

@@ -8,7 +8,7 @@ statement: AntoineP favors fixing duplicate coinbases in the Consensus Cleanup
   block's height. He notes that miners were fine with either option and that
   this one lets the block height be read without parsing Script.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

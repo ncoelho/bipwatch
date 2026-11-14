@@ -7,7 +7,7 @@ statement: Restrict the transaction size rule to invalidating exactly 64-byte
   transactions instead of all transactions of 64 bytes or less, since smaller
   ones are not harmful.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

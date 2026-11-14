@@ -8,7 +8,7 @@ statement: AntoineP, the Consensus Cleanup author, agreed to raise the timewarp
   it fairly weak, but judges the cost (worst-case block rate increase from ~0.1%
   to ~0.65%) small enough to err on the safe side.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

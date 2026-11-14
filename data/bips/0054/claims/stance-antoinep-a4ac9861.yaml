@@ -8,7 +8,7 @@ statement: AntoineP declined a suggested relaxation of BIP 54's legacy sigops
   relaxation would have made no historical violation valid, and he expects no
   legitimate demand for spending many large legacy multisigs.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

@@ -8,7 +8,7 @@ statement: AntoineP argues that the Consensus Cleanup should be amended to fix
   a retarget period never has a timestamp lower than the first block of that
   period.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

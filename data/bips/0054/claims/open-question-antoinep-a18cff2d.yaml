@@ -7,7 +7,7 @@ statement: Decide which mechanism (e.g. coinbase nLockTime or another one)
   should make coinbase txids unique after block 1,983,702, so that duplicate
   transactions are avoided.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

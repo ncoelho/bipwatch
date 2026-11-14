@@ -7,7 +7,7 @@ statement: AntoineP supports using the coinbase transaction's nLockTime to
   enforce coinbase uniqueness in the Consensus Cleanup, with the rule taking
   effect at height 1,983,702 (about 21 years away).
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

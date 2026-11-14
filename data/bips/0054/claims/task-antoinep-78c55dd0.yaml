@@ -8,7 +8,7 @@ statement: Add a fix making coinbase transactions unique so that BIP30
   coinbase nLockTime to commit to the height and making the witness commitment
   mandatory.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

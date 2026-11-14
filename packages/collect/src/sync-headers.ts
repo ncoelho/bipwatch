@@ -5,6 +5,7 @@ import { parseArgs } from 'node:util';
 import { findDataDir, listBipFolders } from '@bipwatch/data';
 import { Document, isMap, isScalar, parseDocument, type Pair, type Scalar } from 'yaml';
 import { BIPS_BRANCH, bipsRepoDir, git, showFile, updateBipsRepo } from './bips/git.ts';
+import { latestChangelogVersion } from './bips/changelog.ts';
 import { parseHeader, type SpecHeader } from './bips/header.ts';
 
 /**
@@ -164,7 +165,9 @@ export async function syncHeaders(opts: SyncOptions = {}): Promise<SyncChange[]>
     }
     if (!path || text === null) throw new Error(`BIP ${current.number}: no spec file at ${ref}`);
 
-    const header = parseHeader(text);
+    // Some specs keep their version only in the Changelog section (BIP 54).
+    const parsed = parseHeader(text);
+    const header = { ...parsed, version: parsed.version ?? latestChangelogVersion(text) };
     if (header.number !== current.number) {
       throw new Error(`${path} says BIP ${header.number}, record says ${current.number}`);
     }

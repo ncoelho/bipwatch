@@ -7,7 +7,7 @@ statement: Decide whether Consensus Cleanup should make 64-byte transactions
   invalid, weighing smaller and safer Merkle inclusion proofs against adding a
   non-obvious validity rule.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

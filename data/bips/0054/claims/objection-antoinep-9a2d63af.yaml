@@ -7,7 +7,7 @@ statement: Resolve the conflict where setting the coinbase nLockTime to the
   block height would fail the IsFinalTx() check unless the coinbase nSequence is
   forced to SEQUENCE_FINAL.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:

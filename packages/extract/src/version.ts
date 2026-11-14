@@ -1,4 +1,4 @@
-import { git, parseHeader, showFile } from '@bipwatch/collect';
+import { changelogTimeline, git, parseHeader, showFile, type Timeline } from '@bipwatch/collect';
 import type { BipRecord } from '@bipwatch/data';
 
 /**
@@ -18,21 +18,7 @@ import type { BipRecord } from '@bipwatch/data';
  */
 export const NO_VERSION = '0.0.0';
 
-type Timeline = { at: number; version: string }[];
-
-const CHANGELOG_HEADING = /^(?:==\s*Change\s*log\s*==|##\s*Change\s*log)\s*$/im;
-const NEXT_HEADING = /^(?:==[^=]|##\s)/m;
-const CHANGELOG_ENTRY = /^\*\s*(?:'''|__)(\d+\.\d+\.\d+)(?:'''|__)\s*\((\d{4}-\d{2}-\d{2})\)/gm;
-
-/** Version entries from a spec's changelog, oldest first; [] if it has none. */
-export function changelogTimeline(text: string): Timeline {
-  const parts = text.split(CHANGELOG_HEADING);
-  if (parts.length < 2) return [];
-  const body = parts[1].split(NEXT_HEADING)[0];
-  return [...body.matchAll(CHANGELOG_ENTRY)]
-    .map((m) => ({ at: Date.parse(`${m[2]}T00:00:00Z`), version: m[1] }))
-    .sort((a, b) => a.at - b.at);
-}
+export { changelogTimeline };
 
 export async function specVersionTimeline(bipsDir: string, bip: BipRecord, ref = 'origin/master'): Promise<Timeline> {
   const latest = await showFile(bipsDir, ref, bip.spec.path);

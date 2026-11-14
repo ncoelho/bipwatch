@@ -7,7 +7,7 @@ statement: Address confiscation concerns about the legacy Script restrictions
   that reduce worst-case validation time, for example by applying them only to
   outputs created after a given height.
 subject:
-  name: AntoineP
+  name: Antoine Poinsot
   type: person
 applies_to_version: 0.0.0
 source:
