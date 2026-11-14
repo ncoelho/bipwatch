@@ -1,0 +1,26 @@
+id: stance-dan-gould-9a9ec4cb
+bip: 77
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: DanGould, the author of BIP 77, proposes async payjoin as a Standards
+  Track BIP. He says a single standard lets wallets agree on asynchronous
+  payjoin and implement it correctly and widely.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2023-08-12
+  retrieved: 2026-11-14
+  quote: Proposing this as an Standards Track BIP to ensure wallets across the
+    ecosystem can come to rough consensus on a single asynchronous payjoin
+    standard and correctly implement it widely.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

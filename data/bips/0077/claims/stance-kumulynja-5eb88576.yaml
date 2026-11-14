@@ -1,0 +1,30 @@
+id: stance-kumulynja-5eb88576
+bip: 77
+kind: stance
+stance: concept-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1885
+  title: "BIP77: Propose to encode `+` as `%2B` in pj param of Bitcoin URIs"
+statement: kumulynja proposes amending BIP 77 so that the `+` character in the
+  pj parameter of Bitcoin URIs is percent-encoded as `%2B`. They argue `+` has a
+  reserved meaning in query parameters, and that encoding it keeps parsing
+  reliable across wallets and libraries while preserving QR alphanumeric mode.
+subject:
+  name: kumulynja
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1885
+  type: github
+  title: "BIP77: Propose to encode `+` as `%2B` in pj param of Bitcoin URIs"
+  date: 2025-06-30
+  retrieved: 2026-11-14
+  quote: This PR proposes to percent-encode the `+` character used in the Payjoin
+    mailbox URI (pj parameter) as `%2B` when included in a query parameter of a
+    Bitcoin URI.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,29 @@
+id: stance-dan-gould-c4c2135c
+bip: 77
+kind: stance
+stance: approach-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1483
+  title: "BIP 77: Async Payjoin"
+statement: DanGould supports nothingmuch's suggested amendment to BIP 77 having
+  the sender register its own session subdirectory and include its public key
+  with the original PSBT, saying it simplifies protocol messaging and eliminates
+  a metadata leak.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#issuecomment-2401274780
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2024-10-09
+  retrieved: 2026-11-14
+  quote: The change not only simplifies the protocol messaging, but as you say
+    eliminates a metadata leak. I'm a big fan.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,33 @@
+id: stance-dan-gould-e0c1b4c1
+bip: 77
+kind: stance
+stance: conditional
+condition: Production implementors (e.g. Bull and Cake) accept another breaking
+  change, and parsers are confirmed not to reject `:` or `-` as delimiters.
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1885
+  title: "BIP77: Propose to encode `+` as `%2B` in pj param of Bitcoin URIs"
+statement: DanGould, discussing how the `pj` parameter in Bitcoin URIs is
+  encoded, says he is open to a further breaking change to the encoding. He
+  wants implementors to accept it and parsers to be checked first, and for now
+  recommends the proposed `%2B` encoding so current implementations keep
+  working.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1885#issuecomment-3021230938
+  type: github
+  title: "BIP77: Propose to encode `+` as `%2B` in pj param of Bitcoin URIs"
+  date: 2025-07-01
+  retrieved: 2026-11-14
+  quote: If those production implementors are comfortable with another breaking
+    change, especially since we're able to offer a transition period with PDK,
+    I'm ok with making one.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
