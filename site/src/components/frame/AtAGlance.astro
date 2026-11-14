@@ -47,7 +47,7 @@ const trackedReq = requires.filter((n) => known.has(n));
             const n = openIn(d);
             return (
               <li class:list={[{ low: x.score !== null && x.score <= 2 }]}>
-                <a href={`#needs`} data-dim={d}>
+                <a href={`#needs?dim=${d}`} data-dim-link={d}>
                   <span>{DIMENSION_LABEL[d]}</span>
                   <Dots score={x.score} />
                   <span class="n">{NEED_AREAS[d].length ? (n ? `${n} open` : 'none open') : '—'}</span>

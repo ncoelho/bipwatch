@@ -70,43 +70,6 @@ export const AREA_LABEL: Record<WorkArea, string> = {
   activation: 'Activation',
 };
 
-/** Work on one piece (the BIP itself when part_of is null) within a type of work. */
-export interface WorkPiece { part_of: string | null; open: Claim[]; addressed: Claim[]; }
-export interface WorkGroup { area: WorkArea | null; open: number; addressed: number; pieces: WorkPiece[]; }
-
-/**
- * Tasks, open questions and objections grouped by type of work, in the
- * schema's order (unassigned last, types with nothing open after the rest),
- * then by piece: the BIP itself first, then the piece with most open work.
- * Within a piece, open items newest first; addressed and disputed ones are
- * kept apart so the page leads with what is left to do.
- */
-export function openWork(claims: Claim[]): WorkGroup[] {
-  const items = claims.filter((c) => WORK_KINDS.includes(c.kind));
-  const newest = (a: Claim, b: Claim) => (b.source.date ?? '').localeCompare(a.source.date ?? '');
-  const isOpen = (c: Claim) => c.status !== 'addressed';
-  return [...WORK_AREAS, null]
-    .map((area): WorkGroup => {
-      const inArea = items.filter((c) => (c.area ?? null) === area).sort(newest);
-      const parts = [...new Set(inArea.map((c) => c.part_of ?? null))];
-      const pieces = parts
-        .map((part_of) => {
-          const mine = inArea.filter((c) => (c.part_of ?? null) === part_of);
-          return { part_of, open: mine.filter(isOpen), addressed: mine.filter((c) => !isOpen(c)) };
-        })
-        .sort((a, b) =>
-          Number(a.part_of !== null) - Number(b.part_of !== null) ||
-          b.open.length - a.open.length ||
-          b.addressed.length - a.addressed.length ||
-          (a.part_of ?? '').localeCompare(b.part_of ?? ''),
-        );
-      const open = pieces.reduce((n, p) => n + p.open.length, 0);
-      return { area, open, addressed: inArea.length - open, pieces };
-    })
-    .filter((g) => g.pieces.length > 0)
-    .sort((a, b) => Number(b.open > 0) - Number(a.open > 0));
-}
-
 /** Public JSON shape. Bump when the shape changes in a breaking way. */
 export const API_VERSION = 1;
 export function toApi(b: BipBundle) {
@@ -144,49 +107,7 @@ export const versionLabel = (v: string | undefined) =>
 
 const byDateDesc = (a: Claim, b: Claim) => (b.source.date ?? '').localeCompare(a.source.date ?? '');
 
-/** Proposal-scoped stances: each person's latest, with their earlier ones. */
-export function positionsOnProposal(claims: Claim[]): { latest: Claim; earlier: Claim[] }[] {
-  const byPerson = new Map<string, Claim[]>();
-  for (const c of claims.filter((c) => c.kind === 'stance' && c.scope === 'proposal')) {
-    const k = c.subject!.name;
-    byPerson.set(k, [...(byPerson.get(k) ?? []), c]);
-  }
-  return [...byPerson.values()]
-    .map((cs) => cs.sort(byDateDesc))
-    .map(([latest, ...earlier]) => ({ latest, earlier }))
-    .sort((a, b) => byDateDesc(a.latest, b.latest));
-}
 
-/**
- * Change- or implementation-scoped stances grouped by what they are about:
- * the linked pull request, or (unlinked, e.g. an amendment argued on the
- * list) the discussion thread they came from. Newest activity first.
- */
-export function positionsOnChanges(
-  claims: Claim[],
-  scope: 'change' | 'implementation',
-): { key: string; title: string; url: string; linked: boolean; last: string; stances: Claim[] }[] {
-  const groups = new Map<string, Claim[]>();
-  for (const c of claims.filter((c) => c.kind === 'stance' && c.scope === scope)) {
-    const key = c.change?.url ?? `thread:${c.source.title ?? c.source.url}`;
-    groups.set(key, [...(groups.get(key) ?? []), c]);
-  }
-  return [...groups.entries()]
-    .map(([key, stances]) => {
-      stances.sort((a, b) => (a.source.date ?? '').localeCompare(b.source.date ?? ''));
-      const first = stances[0];
-      const linked = !!first.change;
-      return {
-        key,
-        linked,
-        title: first.change?.title ?? first.source.title ?? 'Discussion',
-        url: first.change?.url ?? first.source.url,
-        last: stances.at(-1)!.source.date ?? '',
-        stances,
-      };
-    })
-    .sort((a, b) => b.last.localeCompare(a.last));
-}
 
 // ---- shared BIP frame (page templates spec) --------------------------------
 
@@ -244,4 +165,73 @@ export function roughAge(from: string, to = new Date()): string {
   }
   const years = Math.round(months / 12);
   return `${months / 12 < years ? 'almost ' : ''}${years} years`;
+}
+
+// ---- What it needs and Positions explorers (templates PR 2) ----------------
+
+export interface WorkPieceRow { name: string; open: number; total: number }
+export interface WorkModel {
+  items: Claim[];
+  open: number;
+  addressed: number;
+  /** Pieces by open count; "BIP n itself" stands for items with no part_of. */
+  pieces: WorkPieceRow[];
+  /** Work areas in use, by open count: open and addressed per area. */
+  areas: { area: WorkArea; open: number; addressed: number }[];
+  /** open[piece][area] for the grid. */
+  cell: (piece: string, area: WorkArea) => number;
+  /** The grid when open work spans two or more pieces, area bars otherwise. */
+  useGrid: boolean;
+  pieceOf: (c: Claim) => string;
+}
+
+export const isOpenWork = (c: Claim) => c.status !== 'addressed';
+
+export function workModel(b: BipBundle): WorkModel {
+  const itself = `BIP ${b.bip.number} itself`;
+  const pieceOf = (c: Claim) => c.part_of ?? itself;
+  const newest = (x: Claim, y: Claim) => (y.source.date ?? '').localeCompare(x.source.date ?? '');
+  const all = b.claims.filter((c) => WORK_KINDS.includes(c.kind));
+  const items = [...all.filter(isOpenWork).sort(newest), ...all.filter((c) => !isOpenWork(c)).sort(newest)];
+  const open = items.filter(isOpenWork);
+  const pieceNames = [...new Set(items.map(pieceOf))];
+  const pieces = pieceNames
+    .map((name) => ({ name, open: open.filter((c) => pieceOf(c) === name).length, total: items.filter((c) => pieceOf(c) === name).length }))
+    .sort((x, y) => y.open - x.open || Number(y.name === itself) - Number(x.name === itself) || y.total - x.total || x.name.localeCompare(y.name));
+  const areas = WORK_AREAS.map((area) => ({
+    area,
+    open: open.filter((c) => c.area === area).length,
+    addressed: items.filter((c) => c.area === area && !isOpenWork(c)).length,
+  }))
+    .filter((a) => a.open + a.addressed > 0)
+    .sort((x, y) => y.open - x.open || y.addressed - x.addressed);
+  const grid = new Map<string, number>();
+  for (const c of open) if (c.area) grid.set(`${pieceOf(c)}\0${c.area}`, (grid.get(`${pieceOf(c)}\0${c.area}`) ?? 0) + 1);
+  return {
+    items,
+    open: open.length,
+    addressed: items.length - open.length,
+    pieces,
+    areas,
+    cell: (p, a) => grid.get(`${p}\0${a}`) ?? 0,
+    useGrid: pieces.filter((p) => p.open > 0).length >= 2,
+    pieceOf,
+  };
+}
+
+/** Lane a stance sits in on the positions timeline. */
+export const LANES = [
+  { scope: 'proposal', label: 'On the proposal' },
+  { scope: 'change', label: 'On changes to the text' },
+  { scope: 'implementation', label: 'On implementations' },
+] as const;
+
+/** Objections and conditions are drawn as rings, everything else filled. */
+export const isRing = (c: Claim) => c.stance === 'nack' || c.stance === 'conditional';
+
+/** Position of an ISO date on [from, to], as a percentage. */
+export function datePct(date: string | undefined, from: number, to: number): number {
+  if (!date) return 0;
+  const t = Date.parse(`${date}T00:00:00Z`);
+  return to > from ? Math.min(100, Math.max(0, ((t - from) / (to - from)) * 100)) : 50;
 }
