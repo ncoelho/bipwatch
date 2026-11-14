@@ -1,0 +1,23 @@
+id: task-murch-61d7e224
+bip: 353
+kind: task
+status: addressed
+area: review
+statement: Review the proposed PSBT per-output field for BIP 353 DNSSEC proofs,
+  with input from the PSBT maintainer.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1657#pullrequestreview-2208315762
+  type: github
+  title: Add a PSBT per-output field for BIP 353 DNSSEC Proofs
+  date: 2024-07-30
+  retrieved: 2026-11-14
+  quote: "@achow101, could you take a look please?"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

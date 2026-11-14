@@ -1,0 +1,24 @@
+id: task-casey-e3041a1e
+bip: 353
+kind: task
+status: addressed
+area: writing
+statement: State explicitly in the spec how a user and domain pair should be
+  displayed, as an email-like USER@DOMAIN form.
+subject:
+  name: casey
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1937372263
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-14
+  quote: maybe say explicitly that the combination of USER + DOMAIN should be
+    rendered as an email address, i.e., `USER@DOMAIN`.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

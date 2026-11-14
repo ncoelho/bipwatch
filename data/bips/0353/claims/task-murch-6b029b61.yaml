@@ -1,0 +1,23 @@
+id: task-murch-6b029b61
+bip: 353
+kind: task
+status: addressed
+area: testing
+statement: Finish and merge the open pull request adding test vectors (DNSSEC
+  proof examples) to BIP 353.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1980
+  type: github
+  title: "BIP327,353: Update to Final and Proposed instead of Active"
+  date: 2025-09-23
+  retrieved: 2026-11-14
+  quote: BIP 353 has an open PR with test vector additions, should be Proposed.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
