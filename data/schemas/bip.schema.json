@@ -18,6 +18,11 @@
       "description": "Official status under BIP 3.",
       "enum": ["Draft", "Complete", "Deployed", "Closed"]
     },
+    "status_since": {
+      "description": "When the BIP took its current status: the date the Status header last moved to a different value on bitcoin/bips, else when the spec was added. Set by the header sync.",
+      "type": "string",
+      "format": "date"
+    },
     "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
     "assigned": { "type": "string", "format": "date" },
     "license": { "type": "string" },

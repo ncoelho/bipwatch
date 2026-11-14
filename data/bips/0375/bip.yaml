@@ -3,6 +3,7 @@ title: Sending Silent Payments with PSBTs
 layer: Applications
 type: Specification
 status: Draft
+status_since: 2025-01-13
 version: 0.1.4
 assigned: 2025-01-08
 license: BSD-2-Clause
@@ -17,7 +18,7 @@ spec:
   repo: bitcoin/bips
   path: bip-0375.mediawiki
   revision: ec7f9b44aa9e151f1add1fcaf1d575392886a05e
-  synced: 2026-11-10
+  synced: 2026-11-14
 bipwatch:
   tracked: false
   category: in-development

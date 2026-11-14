@@ -30,7 +30,15 @@ jobs:
           if [ -n "$DATABASE_URL" ]; then
             npm run freshness -- --export data/freshness.json --no-fail
           fi
-      - run: npm run build
+      # prebuild writes data/generated/ (npm run site-exports): spec history
+      # from this clone, PR labels and states from the archive. Without the
+      # clone or the secret the pages build without them.
+      - name: Fetch bitcoin/bips history
+        run: git clone --filter=blob:none --no-checkout https://github.com/bitcoin/bips.git ../bips
+      - name: Build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npm run build
       - uses: actions/upload-artifact@v7
         with:
           name: site

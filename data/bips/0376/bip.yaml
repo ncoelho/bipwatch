@@ -3,6 +3,7 @@ title: Spending Silent Payment outputs with PSBTs
 layer: Applications
 type: Specification
 status: Draft
+status_since: 2026-04-10
 assigned: 2026-02-05
 license: BSD-2-Clause
 authors:
@@ -22,7 +23,7 @@ spec:
   repo: bitcoin/bips
   path: bip-0376.mediawiki
   revision: c8cbc9804e4a9695ed118c9306b20795eacfdc00
-  synced: 2026-11-05
+  synced: 2026-11-14
 bipwatch:
   tracked: false
   category: in-development

@@ -7,3 +7,4 @@ site/.astro/
 .env.local
 data/freshness.json
 .env.anthropic
+data/generated/

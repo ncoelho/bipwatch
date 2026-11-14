@@ -1,9 +1,10 @@
 ---
 // Lifecycle bar: Idea → Draft → Complete → Deployed, or Closed. The current
 // step is filled blue; the others are outlined. The right side says when the
-// BIP was assigned (how long it has held its status needs status_since, PR 3).
+// BIP has held its status (status_since, from the spec's git history) and
+// when it was assigned.
 import type { BipRecord } from '@bipwatch/data';
-import { LIFECYCLE, lifecycleStep } from '../../lib/view.ts';
+import { LIFECYCLE, lifecycleStep, roughAge } from '../../lib/view.ts';
 
 interface Props { bip: BipRecord; }
 const { bip } = Astro.props;
@@ -23,7 +24,9 @@ const month = (d: string) => new Date(`${d}T00:00:00Z`).toLocaleDateString('en-G
     ))}
   </ol>
   <div class="when">
-    <span>Official status <strong>{bip.status}</strong></span>
+    {bip.status_since
+      ? <span>{bip.status} for <strong>{roughAge(bip.status_since)}</strong></span>
+      : <span>Official status <strong>{bip.status}</strong></span>}
     {bip.assigned && <span class="faint">assigned {month(bip.assigned)}</span>}
   </div>
 </nav>

@@ -3,12 +3,12 @@
 // summary; the short answer names the lowest-scored needs (or a reviewed
 // override); then the needs strip and four tiles. Untracked BIPs get the lead
 // and an invitation instead of the tracked parts.
-import { NEED_AREAS, NEED_DIMENSIONS, type BipBundle } from '@bipwatch/data';
+import { NEED_AREAS, NEED_DIMENSIONS, type BipBundle, type SpecHistory } from '@bipwatch/data';
 import Dots from '../Dots.astro';
 import { DIMENSION_LABEL, WORK_KINDS, bipHref, shortAnswer } from '../../lib/view.ts';
 
-interface Props { bundle: BipBundle; known: Set<number>; }
-const { bundle, known } = Astro.props;
+interface Props { bundle: BipBundle; known: Set<number>; history: SpecHistory | null; }
+const { bundle, known, history } = Astro.props;
 const { bip, needs, claims } = bundle;
 const tracked = bip.bipwatch.tracked;
 const open = claims.filter((c) => WORK_KINDS.includes(c.kind) && c.status !== 'addressed');
@@ -20,6 +20,10 @@ const onProposal = stances.filter((c) => c.scope === 'proposal').length;
 const answer = bip.bipwatch.short_answer ?? shortAnswer(needs);
 const requires = bip.requires ?? [];
 const trackedReq = requires.filter((n) => known.has(n));
+// The latest change to the text (process changes such as status renames left out).
+const lastText = history?.changes.filter((c) => c.type !== 'process').at(-1);
+const sinceAdded = lastText ? history!.changes.filter((c) => c.type !== 'process' && c.date > history!.changes[0].date).length : 0;
+const month = (d: string) => new Date(`${d}T00:00:00Z`).toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
 ---
 <div class="hero">
   <div class="lead">
@@ -68,11 +72,19 @@ const trackedReq = requires.filter((n) => known.has(n));
           <span class="v">{stances.length}</span>
           <span class="s">{people} {people === 1 ? 'person' : 'people'} · {onProposal} on the proposal</span>
         </a>
-        <div class="tile">
-          <span class="k">Spec revision</span>
-          <span class="v small mono">@{bip.spec.revision.slice(0, 7)}</span>
-          <span class="s">synced {bip.spec.synced}</span>
-        </div>
+        {lastText ? (
+          <a class="tile" href={`#ch-${lastText.sha.slice(0, 10)}`}>
+            <span class="k">Spec last changed</span>
+            <span class="v small mono">{month(lastText.date)}</span>
+            <span class="s">{lastText.title} · {sinceAdded} {sinceAdded === 1 ? 'change' : 'changes'} since it was added</span>
+          </a>
+        ) : (
+          <div class="tile">
+            <span class="k">Spec revision</span>
+            <span class="v small mono">@{bip.spec.revision.slice(0, 7)}</span>
+            <span class="s">synced {bip.spec.synced}</span>
+          </div>
+        )}
         <div class="tile">
           <span class="k">Requires</span>
           <span class="v small mono">{requires.length ? requires.join(' · ') : 'none'}</span>

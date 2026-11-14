@@ -1,0 +1,30 @@
+---
+// Data-check banner: shown only when code finds a contradiction in this
+// BIP's data (an implementation's state against its pull request, the spec
+// revision against bitcoin/bips, the needs assessment against newer claims).
+// Each line names the problem and links to the file to fix.
+import type { DataCheck } from '@bipwatch/data';
+
+interface Props { checks: DataCheck[]; }
+const { checks } = Astro.props;
+const REPO = 'https://github.com/ncoelho/bipwatch/blob/main/';
+---
+{checks.length > 0 && (
+  <section class="checks" aria-label="Data checks">
+    <div class="t">{checks.length === 1 ? 'One thing to check in the data' : `${checks.length} things to check in the data`}</div>
+    {checks.map((c) => (
+      <div class="line">
+        <span><strong>{c.subject}</strong> {c.text}</span>
+        <a href={`${REPO}${c.file}`}>{c.fix}</a>
+      </div>
+    ))}
+  </section>
+)}
+
+<style>
+  .checks { margin-top: 12px; padding: 12px 16px; border-radius: 14px; background: var(--accent-ground); display: flex; flex-direction: column; gap: 6px; }
+  .t { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-ink); font-weight: 600; }
+  .line { display: flex; justify-content: space-between; gap: 6px 16px; flex-wrap: wrap; font-size: 14px; color: #F2D9C4; }
+  strong { color: #fff; }
+  a { color: var(--accent-ink); }
+</style>

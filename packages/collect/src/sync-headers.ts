@@ -7,6 +7,7 @@ import { Document, isMap, isScalar, parseDocument, type Pair, type Scalar } from
 import { BIPS_BRANCH, bipsRepoDir, git, showFile, updateBipsRepo } from './bips/git.ts';
 import { latestChangelogVersion } from './bips/changelog.ts';
 import { parseHeader, type SpecHeader } from './bips/header.ts';
+import { specHistory, statusSince } from './bips/history.ts';
 
 /**
  * Re-syncs the facts in every data/bips/<NNNN>/bip.yaml from its spec header
@@ -21,6 +22,7 @@ const FACTS = [
   'layer',
   'type',
   'status',
+  'status_since',
   'version',
   'assigned',
   'license',
@@ -66,12 +68,13 @@ export function mergeDiscussion(current: Discussion | undefined, header: Discuss
   return header.map((d) => byUrl.get(d.url) ?? d);
 }
 
-function desiredFacts(h: SpecHeader, current: Record<string, unknown>): Record<Fact, unknown> {
+function desiredFacts(h: SpecHeader, current: Record<string, unknown>, since: string | undefined): Record<Fact, unknown> {
   return {
     title: h.title,
     layer: h.layer,
     type: h.type,
     status: h.status,
+    status_since: since,
     version: h.version,
     assigned: h.assigned,
     license: h.license,
@@ -172,7 +175,9 @@ export async function syncHeaders(opts: SyncOptions = {}): Promise<SyncChange[]>
       throw new Error(`${path} says BIP ${header.number}, record says ${current.number}`);
     }
 
-    const want = desiredFacts(header, current);
+    // When it took its status, from the spec's history on the branch.
+    const since = statusSince(await specHistory(dir, ref, path, text));
+    const want = desiredFacts(header, current, since);
     const fields = FACTS.filter((k) => !same(current[k], want[k]));
     if (path !== current.spec.path) fields.push('spec.path' as never);
     // A spec edit outside the header still moves the revision the claims and

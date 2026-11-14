@@ -1,0 +1,118 @@
+---
+// Spec history (Overview tab): every change to the spec file on bitcoin/bips
+// master, on a time axis from when it was added to today, in three lanes:
+// what it says, edits, process. Changelog versions are pins above the axis.
+// The list below has one row per change, oldest first; each mark links to
+// its row. A change to what it says with no changelog entry is called out.
+// Reads data/generated/spec-history/<n>.json (npm run site-exports).
+import type { BipRecord, SpecHistory } from '@bipwatch/data';
+import { datePct } from '../../lib/view.ts';
+
+interface Props { bip: BipRecord; history: SpecHistory; }
+const { bip, history } = Astro.props;
+const changes = history.changes;
+const from = Date.parse(`${changes[0].date}T00:00:00Z`) - 10 * 86_400_000;
+const to = Date.now();
+const LANES = [
+  { type: 'says', label: 'What it says' },
+  { type: 'edit', label: 'Edit' },
+  { type: 'process', label: 'Process' },
+] as const;
+const TYPE_WORD = { says: 'What it says', edit: 'Edit', process: 'Process' } as const;
+const years: number[] = [];
+for (let y = new Date(from).getUTCFullYear() + 1; y <= new Date(to).getUTCFullYear(); y++) years.push(y);
+const says = changes.filter((c) => c.type === 'says').length;
+const flagged = changes.filter((c) => c.flag);
+const anchor = (sha: string) => `ch-${sha.slice(0, 10)}`;
+const repoUrl = `https://github.com/${bip.spec.repo}`;
+const month = (d: string) => new Date(`${d}T00:00:00Z`).toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+---
+<section class="panel" id="spec-history" aria-labelledby="h-hist">
+  <h2 id="h-hist">Spec history <span class="sub">· {bip.spec.path} in bitcoin/bips</span></h2>
+  <p class="lede">
+    {changes.length} changes since it was added in {month(changes[0].date)}; {says} changed what it says
+    {history.versions.length > 0 && <>, across {history.versions.length} changelog {history.versions.length === 1 ? 'version' : 'versions'}</>}.
+    {flagged.length > 0 && (
+      <strong> {flagged.length === 1 ? 'One change' : `${flagged.length} changes`} to what it says {flagged.length === 1 ? 'has' : 'have'} no changelog entry: {flagged.map((c, i) => <>{i > 0 && '; '}<a href={`#${anchor(c.sha)}`}>{c.title}</a> ({c.date})</>)}.</strong>
+    )}
+  </p>
+
+  <div class="scroll">
+    <div class="axis">
+      {history.versions.length > 0 && (
+        <div class="lane pins" aria-hidden="true">
+          <span class="ll">Versions</span>
+          <span class="track">{history.versions.map((v) => <span class="pin mono" style={`left:${Math.max(3, datePct(v.date, from, to)).toFixed(2)}%`}>{v.version}</span>)}</span>
+        </div>
+      )}
+      {LANES.map((l) => {
+        const items = changes.filter((c) => c.type === l.type);
+        return (
+          <div class="lane">
+            <span class="ll"><span class="lt">{l.label}</span><span class="lm">{items.length}</span></span>
+            <span class="track">
+              {items.map((c) => (
+                <a href={`#${anchor(c.sha)}`} class:list={['mark', l.type, { flag: c.flag }]} style={`left:${datePct(c.date, from, to).toFixed(2)}%`} aria-label={`${c.date}: ${c.title}`}></a>
+              ))}
+            </span>
+          </div>
+        );
+      })}
+      <div class="lane ticks" aria-hidden="true">
+        <span></span>
+        <span class="track">{years.map((y) => <span class="tick mono" style={`left:${datePct(`${y}-01-01`, from, to).toFixed(2)}%`}>{y}</span>)}</span>
+      </div>
+    </div>
+  </div>
+
+  <ol class="rows">
+    {changes.map((c) => (
+      <li id={anchor(c.sha)}>
+        <span class="d mono">{c.date}</span>
+        <span class:list={['ty', c.type]}>{TYPE_WORD[c.type]}</span>
+        <span class="tt">
+          {c.title}
+          {c.version && c.changelog && <span class="pill mono">v{c.version}</span>}
+          {c.flag && <span class="pill accent">no changelog entry</span>}
+        </span>
+        <span class="ref mono">{c.pr ? <a href={`${repoUrl}/pull/${c.pr}`}>#{c.pr}</a> : <a href={`${repoUrl}/commit/${c.sha}`}>{c.sha.slice(0, 7)}</a>}</span>
+      </li>
+    ))}
+  </ol>
+  <p class="note">Types come from each pull request’s labels in bitcoin/bips, or from the diff when it has none: header only is process, a changelog entry is what it says.</p>
+</section>
+
+<style>
+  .panel { background: var(--panel); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 16px; }
+  h2 { font-size: 17px; }
+  .sub { font-weight: 400; color: var(--faint); font-size: 14px; }
+  .lede { font-size: 14px; color: var(--muted); }
+  .lede strong { color: var(--fg); font-weight: 500; }
+  .scroll { overflow-x: auto; }
+  .axis { min-width: 600px; display: flex; flex-direction: column; gap: 4px; }
+  .lane { display: grid; grid-template-columns: 130px 1fr; gap: 12px; align-items: center; padding: 6px 10px; border-radius: 12px; background: var(--inset); }
+  .lane.pins, .lane.ticks { background: transparent; padding-block: 0; }
+  .ll { display: flex; align-items: baseline; gap: 8px; font-size: 13px; color: var(--faint); }
+  .lt { font-weight: 600; font-size: 14px; color: var(--fg); }
+  .lm { font-family: var(--mono); font-size: 12px; }
+  .track { position: relative; display: block; height: 28px; }
+  .pins .track { height: 24px; }
+  .ticks .track { height: 16px; }
+  .pin { position: absolute; top: 2px; transform: translateX(-50%); font-size: 11.5px; padding: 2px 7px; border-radius: 5px; background: var(--card); color: var(--fg-2); white-space: nowrap; }
+  .tick { position: absolute; top: 0; transform: translateX(-50%); font-size: 11.5px; color: var(--faint); }
+  .mark { position: absolute; top: 8px; width: 12px; height: 12px; margin-left: -6px; border-radius: 3px; background: var(--fg-2); }
+  .mark::before { content: ''; position: absolute; inset: -16px; }
+  .mark.says { background: var(--info); }
+  .mark.process { background: #5A5A63; border-radius: 50%; }
+  .mark.flag { background: var(--panel); box-shadow: inset 0 0 0 2px var(--accent-ink); }
+  .rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; max-height: 420px; overflow-y: auto; }
+  .rows li { display: grid; grid-template-columns: 92px 104px minmax(0, 1fr) auto; gap: 10px; align-items: baseline; padding: 8px 10px; border-radius: 10px; font-size: 13.5px; color: var(--fg-2); scroll-margin-top: 16px; }
+  .rows li:target { background: var(--info-ground); color: var(--fg); }
+  .d { font-size: 12px; color: var(--faint); }
+  .ty { font-size: 11.5px; padding: 2px 9px; border-radius: 999px; background: var(--card); color: var(--fg-2); justify-self: start; }
+  .ty.says { background: var(--info-ground); color: var(--info-ink); }
+  .tt { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; min-width: 0; }
+  .ref { font-size: 12px; }
+  .note { font-size: 12px; color: var(--faint); }
+  @media (max-width: 640px) { .rows li { grid-template-columns: 1fr auto; } .ty, .tt { grid-column: 1 / -1; } }
+</style>

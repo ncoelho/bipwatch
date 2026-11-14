@@ -8,14 +8,14 @@ const CHANGELOG_HEADING = /^(?:==\s*Change\s*log\s*==|##\s*Change\s*log)\s*$/im;
 const NEXT_HEADING = /^(?:==[^=]|##\s)/m;
 // "* '''1.0.1''' (2024-06-22):" (mediawiki), "* __1.0.1__ (2024-06-22):" or
 // "- 0.2.0 2025-07-08" (markdown, as BIP 77 writes it).
-const CHANGELOG_ENTRY = /^[*-]\s*(?:'''|__|\*\*)?v?(\d+\.\d+\.\d+)(?:'''|__|\*\*)?:?\s*\(?(\d{4}-\d{2}-\d{2})\)?/gm;
+export const CHANGELOG_ENTRY_RE = /^[*-]\s*(?:'''|__|\*\*)?v?(\d+\.\d+\.\d+)(?:'''|__|\*\*)?:?\s*\(?(\d{4}-\d{2}-\d{2})\)?/gm;
 
 /** Version entries from a spec's changelog, oldest first; [] if it has none. */
 export function changelogTimeline(text: string): Timeline {
   const parts = text.split(CHANGELOG_HEADING);
   if (parts.length < 2) return [];
   const body = parts[1].split(NEXT_HEADING)[0];
-  return [...body.matchAll(CHANGELOG_ENTRY)]
+  return [...body.matchAll(CHANGELOG_ENTRY_RE)]
     .map((m) => ({ at: Date.parse(`${m[2]}T00:00:00Z`), version: m[1] }))
     .sort((a, b) => a.at - b.at);
 }
