@@ -24,13 +24,14 @@ export const DIMENSION_LABEL: Record<NeedDimension, string> = {
 export const STATE_LABEL: Record<string, string> = {
   shipped: 'Shipped',
   partial: 'Partial',
+  merged: 'Merged, not released',
   'in-review': 'In review',
   planned: 'Planned',
   'not-supported': 'Not supported',
   'proof-of-concept': 'Proof of concept',
 };
 
-export const STATE_ORDER = ['shipped', 'partial', 'proof-of-concept', 'in-review', 'planned', 'not-supported'];
+export const STATE_ORDER = ['shipped', 'merged', 'partial', 'proof-of-concept', 'in-review', 'planned', 'not-supported'];
 
 export const SOURCE_LABEL: Record<Claim['source']['type'], string> = {
   spec: 'Spec',

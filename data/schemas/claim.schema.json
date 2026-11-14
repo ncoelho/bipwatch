@@ -67,11 +67,25 @@
       "additionalProperties": false,
       "required": ["state"],
       "properties": {
-        "state": { "enum": ["shipped", "partial", "in-review", "planned", "not-supported", "proof-of-concept"] },
+        "state": {
+          "description": "shipped: in a release; merged: in the main branch, not in a release yet; partial: shipped with parts missing (e.g. send only); in-review: an open pull request; planned; proof-of-concept; not-supported.",
+          "enum": ["shipped", "merged", "partial", "in-review", "planned", "not-supported", "proof-of-concept"]
+        },
         "send": { "type": "boolean" },
         "receive": { "type": "boolean" },
         "scanning": { "type": "string", "description": "How the implementation detects incoming payments, where relevant." },
-        "platforms": { "type": "array", "items": { "type": "string" } }
+        "platforms": {
+          "description": "Where users run it.",
+          "type": "array",
+          "items": { "enum": ["mobile", "desktop", "hardware", "web", "node"] },
+          "uniqueItems": true
+        },
+        "networks": {
+          "description": "Networks it runs on, when that is the point (e.g. a soft fork live only on signet).",
+          "type": "array",
+          "items": { "enum": ["mainnet", "testnet", "signet", "regtest"] },
+          "uniqueItems": true
+        }
       }
     },
     "applies_to_version": {

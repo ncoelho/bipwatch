@@ -8,7 +8,7 @@ statement: bitgould, who drafted the serverless (async) payjoin BIP, presents
   receivers use payjoin, including output substitution, without hosting a secure
   public endpoint.
 subject:
-  name: bitgould
+  name: Dan Gould
   type: person
 applies_to_version: 0.0.0
 source:

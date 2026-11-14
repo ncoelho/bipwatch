@@ -21,7 +21,6 @@ spec:
 bipwatch:
   tracked: true
   category: live-patchy-adoption
-  template: deployed
   # Peer Services: adoption is the share of nodes that support it (not measured yet). Replaces BIP 151.
   adoption_measure: node-coverage
   summary: >-

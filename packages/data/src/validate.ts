@@ -150,8 +150,8 @@ for (const folder of folders) {
       if (!known.has(folderFor(r)) && (bip.related ?? []).includes(r))
         report('warn', rel(bipFile), `related BIP ${r} has no folder yet`);
     }
-    if (bip.bipwatch.tracked && (!bip.bipwatch.category || !bip.bipwatch.template))
-      report('error', rel(bipFile), 'tracked BIPs need bipwatch.category and bipwatch.template');
+    if (bip.bipwatch.tracked && !bip.bipwatch.category)
+      report('error', rel(bipFile), 'tracked BIPs need bipwatch.category');
     if (!bip.bipwatch.tracked && bip.bipwatch.aliases?.length)
       report('warn', rel(bipFile), 'bipwatch.aliases is only used for tracked BIPs');
   }

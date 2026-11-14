@@ -21,7 +21,6 @@ spec:
 bipwatch:
   tracked: true
   category: in-development
-  template: draft
   # Earlier drafts were called Pay to Quantum Resistant Hash (P2QRH).
   adoption_measure: activation-and-usage
   summary: >-

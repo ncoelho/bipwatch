@@ -6,7 +6,7 @@ area: research
 statement: Analyze the network protocol and design mitigations so an OHTTP relay
   cannot correlate sender and receiver through timing attacks.
 subject:
-  name: bitgould
+  name: Dan Gould
   type: person
 applies_to_version: 0.0.0
 source:

@@ -18,7 +18,6 @@ spec:
 bipwatch:
   tracked: true
   category: ready-to-build
-  template: complete
   # Replaces BIP 21. Mentions of "BIP 21" are not counted here; no alias is safe.
   adoption_measure: wallet-coverage
   summary: >-

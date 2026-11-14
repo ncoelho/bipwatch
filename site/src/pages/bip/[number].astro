@@ -13,9 +13,9 @@ export function getStaticPaths() {
 const { bundle, known } = Astro.props;
 const { bip } = bundle;
 
-// Pick the stage template. Only Complete exists so far; the others fall back to Basic.
-const TEMPLATES = { complete: Complete } as const;
-const Template = (bip.bipwatch.tracked && bip.bipwatch.template && TEMPLATES[bip.bipwatch.template as keyof typeof TEMPLATES]) || Basic;
+// bipwatch.page picks the page. Until the shared frame lands (templates spec,
+// PR 1), the two layer pages use the Complete layout and the rest Basic.
+const Template = bip.bipwatch.tracked && (bip.bipwatch.page === 'applications' || bip.bipwatch.page === 'consensus') ? Complete : Basic;
 ---
 <Base title={`BIP ${bip.number}: ${bip.title} · BipWatch`} description={bip.bipwatch.summary}>
   <Template bundle={bundle} known={known} />

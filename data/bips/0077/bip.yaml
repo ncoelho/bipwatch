@@ -24,7 +24,6 @@ spec:
 bipwatch:
   tracked: true
   category: in-development
-  template: draft
   # Adoption is wallet and service support for sending and receiving.
   adoption_measure: wallet-coverage
   summary: >-

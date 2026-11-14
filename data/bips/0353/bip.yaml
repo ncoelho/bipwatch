@@ -23,7 +23,6 @@ spec:
 bipwatch:
   tracked: true
   category: ready-to-build
-  template: complete
   # Tracked as a pair with BIP 321, whose URIs it publishes in DNS.
   adoption_measure: wallet-coverage
   summary: >-

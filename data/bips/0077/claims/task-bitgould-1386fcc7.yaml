@@ -6,7 +6,7 @@ area: design
 statement: Require that output substitution is disabled when version 1 senders
   send unencrypted payloads through a version 2 directory.
 subject:
-  name: bitgould
+  name: Dan Gould
   type: person
 applies_to_version: 0.0.0
 source:

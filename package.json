@@ -24,7 +24,8 @@
     "prebuild": "npm run freshness:snapshot",
     "tracked-bips": "npm run --silent tracked --workspace @bipwatch/data",
     "relabel-areas": "npm run relabel-areas --workspace @bipwatch/extract --",
-    "needs": "npm run needs --workspace @bipwatch/extract --"
+    "needs": "npm run needs --workspace @bipwatch/extract --",
+    "repin-versions": "npm run repin-versions --workspace @bipwatch/extract --"
   },
   "engines": {
     "node": ">=22.23.4",

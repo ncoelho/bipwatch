@@ -9,7 +9,7 @@ statement: Decide whether to replace the `+` fragment parameter separator with
 subject:
   name: Yuval Kogman
   type: person
-applies_to_version: 0.0.0
+applies_to_version: 0.1.0
 source:
   url: https://github.com/bitcoin/bips/pull/1885#issuecomment-3020448774
   type: github

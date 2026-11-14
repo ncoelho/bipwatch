@@ -20,7 +20,6 @@ spec:
 bipwatch:
   tracked: true
   category: in-development
-  template: draft
   # Bundles three opcodes, each with its own BIP (related below).
   adoption_measure: activation-and-usage
   summary: >-

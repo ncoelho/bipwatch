@@ -12,7 +12,7 @@ statement: Murch approved the pull request changing BIP 77 to delimit URI
 subject:
   name: Murch
   type: person
-applies_to_version: 0.0.0
+applies_to_version: 0.2.0
 source:
   url: https://github.com/bitcoin/bips/pull/1890#pullrequestreview-3006985569
   type: github

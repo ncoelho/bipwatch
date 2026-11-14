@@ -6,7 +6,7 @@ area: design
 statement: Choose a compact text encoding for the OHTTP key and payjoin public
   key shared in the BIP 21 URI, suitable for QR codes.
 subject:
-  name: bitgould
+  name: Dan Gould
   type: person
 applies_to_version: 0.0.0
 source:

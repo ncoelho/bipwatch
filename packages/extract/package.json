@@ -12,7 +12,8 @@
     "relabel-areas": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env --env-file-if-exists=../../.env.anthropic src/relabel-areas.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "needs": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env --env-file-if-exists=../../.env.anthropic src/needs-cli.ts"
+    "needs": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env --env-file-if-exists=../../.env.anthropic src/needs-cli.ts",
+    "repin-versions": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env --env-file-if-exists=../../.env.anthropic src/repin-versions.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "1.1.0",

@@ -13,7 +13,8 @@ export type Category =
   | 'fading'
   | 'closed-replaced';
 
-export type Template = 'idea' | 'draft' | 'complete' | 'deployed' | 'closed';
+/** Which page a BIP gets; the layer modules need their data to exist. */
+export type Page = 'default' | 'applications' | 'consensus';
 
 export interface BipRecord {
   number: number;
@@ -32,7 +33,7 @@ export interface BipRecord {
   bipwatch: {
     tracked: boolean;
     category?: Category;
-    template?: Template;
+    page?: Page;
     adoption_measure?: string;
     summary?: string;
     aliases?: string[];
@@ -86,11 +87,12 @@ export interface Claim {
   change?: { url: string; title?: string };
   subject?: { name: string; type: string; url?: string };
   implementation?: {
-    state: 'shipped' | 'partial' | 'in-review' | 'planned' | 'not-supported' | 'proof-of-concept';
+    state: 'shipped' | 'merged' | 'partial' | 'in-review' | 'planned' | 'not-supported' | 'proof-of-concept';
     send?: boolean;
     receive?: boolean;
     scanning?: string;
-    platforms?: string[];
+    platforms?: ('mobile' | 'desktop' | 'hardware' | 'web' | 'node')[];
+    networks?: ('mainnet' | 'testnet' | 'signet' | 'regtest')[];
   };
   applies_to_version?: string;
   source: {

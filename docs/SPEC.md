@@ -87,7 +87,7 @@ Stored in `bip.yaml` as `bipwatch.category`. They exist because the four officia
 
 ### Stage templates
 
-Stored as `bipwatch.template`. Each template is one page layout answering one question. The **layer** changes what a stage means: "deployed" for a soft fork means activation plus onchain usage; for BIP 352 it means wallet coverage, because silent payment outputs cannot be told apart onchain. That is recorded as `bipwatch.adoption_measure`.
+(Superseded 2026-11-14 by the page templates spec: one shared frame for every BIP, plus layer modules chosen by `bipwatch.page` — `default`, `applications` or `consensus` — set only once the data those modules read exists. `bipwatch.template` was removed.) Each stage template was one page layout answering one question. The **layer** changes what a stage means: "deployed" for a soft fork means activation plus onchain usage; for BIP 352 it means wallet coverage, because silent payment outputs cannot be told apart onchain. That is recorded as `bipwatch.adoption_measure`.
 
 | Template | Question | Modules (planned) |
 |---|---|---|

@@ -49,8 +49,17 @@ beforeAll(() => {
 afterAll(() => rmSync(root, { recursive: true, force: true }));
 
 describe('syncHeaders', () => {
-  it('leaves a record alone when the header matches', async () => {
-    commitSpec(header352, 'Add BIP 352');
+  it('moves only the revision when the spec changed outside its header', async () => {
+    const sha = commitSpec(header352, 'Add BIP 352');
+    const before = parse(readFileSync(yamlFile, 'utf8'));
+    const changes = await syncHeaders({ dir: repo, dataDir, ref: 'HEAD', today: '2026-12-01' });
+    expect(changes).toMatchObject([{ number: 352, fields: ['spec.revision'], revision: sha }]);
+    const after = parse(readFileSync(yamlFile, 'utf8'));
+    expect(after.spec).toMatchObject({ revision: sha, synced: '2026-12-01' });
+    expect({ ...after, spec: before.spec }).toEqual(before);
+  });
+
+  it('leaves a record alone when the header and revision match', async () => {
     const before = readFileSync(yamlFile, 'utf8');
     expect(await syncHeaders({ dir: repo, dataDir, ref: 'HEAD', today: '2026-12-01' })).toEqual([]);
     expect(readFileSync(yamlFile, 'utf8')).toBe(before);

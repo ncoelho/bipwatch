@@ -19,7 +19,7 @@ spec:
 bipwatch:
   tracked: true
   category: needs-consensus
-  template: complete
+  page: consensus
   # Consensus change: what it needs is activation, and adoption means activation plus use.
   adoption_measure: activation-and-usage
   summary: >-
