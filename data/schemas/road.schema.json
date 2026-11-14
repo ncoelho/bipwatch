@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bipwatch.com/schemas/road.schema.json",
+  "title": "Road to activation",
+  "description": "Dated steps from spec to activation for a consensus change, in lanes, plus readiness rows for the one change that needs others to act. bips/<NNNN>/road.yaml.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["bip", "provenance", "lanes", "steps"],
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label"],
+      "properties": {
+        "label": { "type": "string" },
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "claim": { "description": "Id of a claim in this folder the step rests on.", "type": "string" }
+      }
+    }
+  },
+  "properties": {
+    "bip": { "type": "integer", "minimum": 1 },
+    "provenance": { "$ref": "claim.schema.json#/properties/provenance" },
+    "lanes": {
+      "type": "array",
+      "items": { "type": "object", "additionalProperties": false, "required": ["key", "label"], "properties": { "key": { "type": "string" }, "label": { "type": "string" } } }
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["lane", "title", "state", "text", "source"],
+        "properties": {
+          "lane": { "type": "string" },
+          "title": { "type": "string" },
+          "state": { "description": "done (dated), now (in progress), gap (required, nothing exists), todo (not started, undated).", "enum": ["done", "now", "gap", "todo"] },
+          "date": { "type": "string", "format": "date" },
+          "text": { "type": "string" },
+          "source": { "$ref": "#/$defs/source" }
+        }
+      }
+    },
+    "readiness": {
+      "description": "Checklist for the change that needs others to act (BIP 54: pools and the coinbase rule).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fix", "rows"],
+      "properties": {
+        "fix": { "type": "string" },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["state", "title", "text", "source"],
+            "properties": {
+              "state": { "enum": ["done", "open", "unknown", "addressed", "not-measured"] },
+              "title": { "type": "string" },
+              "text": { "type": "string" },
+              "quote": { "type": "string" },
+              "source": { "$ref": "#/$defs/source" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

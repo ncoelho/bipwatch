@@ -15,7 +15,7 @@ import { parse } from 'yaml';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import { canonicalName, findDataDir, folderFor, loadPeople } from './index.ts';
-import type { BipRecord, Claim, NeedsAssessment } from './types.ts';
+import type { BipRecord, Claim, Fixes, NeedsAssessment, Road } from './types.ts';
 
 type Level = 'error' | 'warn';
 const findings: { level: Level; file: string; msg: string }[] = [];
@@ -55,6 +55,8 @@ const validators = {
   claim: ajv.getSchema('claim.schema.json')!,
   needs: ajv.getSchema('needs.schema.json')!,
   people: ajv.getSchema('people.schema.json')!,
+  fixes: ajv.getSchema('fixes.schema.json')!,
+  road: ajv.getSchema('road.schema.json')!,
 };
 
 function check<T>(kind: keyof typeof validators, file: string): T | null {
@@ -159,6 +161,7 @@ for (const folder of folders) {
   // claims
   const claimsDir = join(base, 'claims');
   const ids = new Set<string>();
+  const loadedClaims: Claim[] = [];
   if (existsSync(claimsDir)) {
     for (const f of readdirSync(claimsDir).filter((f) => f.endsWith('.yaml')).sort()) {
       const file = join(claimsDir, f);
@@ -170,6 +173,7 @@ for (const folder of folders) {
       if (claim.bip !== n) report('error', rel(file), `bip ${claim.bip} does not match folder ${folder}`);
       if (ids.has(claim.id)) report('error', rel(file), `duplicate id ${claim.id}`);
       ids.add(claim.id);
+      loadedClaims.push(claim);
 
       if (claim.provenance.reviewed_by === null && claim.provenance.reviewed)
         report('error', rel(file), 'reviewed date set without a reviewer');
@@ -223,6 +227,53 @@ for (const folder of folders) {
     }
   } else if (bip?.bipwatch.tracked) {
     report('warn', rel(base), 'tracked BIP has no needs.yaml yet');
+  }
+
+  // fixes: spec quotes at the record's revision, and the fix:<key> tags
+  const fixesFile = join(base, 'fixes.yaml');
+  const fixKeys = new Set<string>();
+  if (existsSync(fixesFile)) {
+    const fx = check<Fixes>('fixes', fixesFile);
+    if (fx && bip) {
+      if (fx.bip !== n) report('error', rel(fixesFile), `bip ${fx.bip} does not match folder ${folder}`);
+      for (const f of fx.fixes) {
+        if (fixKeys.has(f.key)) report('error', rel(fixesFile), `duplicate fix key ${f.key}`);
+        fixKeys.add(f.key);
+        if (!bipsRepo) continue;
+        const text = specText(bip.spec.revision, bip.spec.path);
+        for (const [what, q] of [['quote', f.quote], ['safe_in.quote', f.safe_in.quote]] as const) {
+          if (text === null) report('error', rel(fixesFile), `revision ${bip.spec.revision.slice(0, 7)} not found`);
+          else if (!text.includes(normalize(q))) report('error', rel(fixesFile), `${f.key} ${what} not found in ${bip.spec.path}@${bip.spec.revision.slice(0, 7)}`);
+          else quotesMatched++;
+        }
+      }
+    }
+  }
+  for (const c of loadedClaims) {
+    for (const t of c.tags ?? []) {
+      if (!t.startsWith('fix:')) continue;
+      if (!fixKeys.has(t.slice(4))) report('error', rel(join(base, 'claims', `${c.id}.yaml`)), `tag ${t} names no fix in fixes.yaml`);
+    }
+  }
+
+  // road: claim references and the readiness fix
+  const roadFile = join(base, 'road.yaml');
+  if (existsSync(roadFile)) {
+    const road = check<Road>('road', roadFile);
+    if (road) {
+      if (road.bip !== n) report('error', rel(roadFile), `bip ${road.bip} does not match folder ${folder}`);
+      const lanes = new Set(road.lanes.map((l) => l.key));
+      for (const s of road.steps) {
+        if (!lanes.has(s.lane)) report('error', rel(roadFile), `step "${s.title}" is in unknown lane ${s.lane}`);
+        if ((s.state === 'done' || s.state === 'now') && !s.date) report('error', rel(roadFile), `step "${s.title}" is ${s.state} but has no date`);
+        if (s.source.claim && !ids.has(s.source.claim)) report('error', rel(roadFile), `step "${s.title}" cites unknown claim "${s.source.claim}"`);
+      }
+      if (road.readiness) {
+        if (!fixKeys.has(road.readiness.fix)) report('error', rel(roadFile), `readiness names no fix "${road.readiness.fix}"`);
+        for (const r of road.readiness.rows)
+          if (r.source.claim && !ids.has(r.source.claim)) report('error', rel(roadFile), `readiness row "${r.title}" cites unknown claim "${r.source.claim}"`);
+      }
+    }
   }
 }
 

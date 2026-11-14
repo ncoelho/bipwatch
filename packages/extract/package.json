@@ -13,7 +13,8 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "needs": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env --env-file-if-exists=../../.env.anthropic src/needs-cli.ts",
-    "repin-versions": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env --env-file-if-exists=../../.env.anthropic src/repin-versions.ts"
+    "repin-versions": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env --env-file-if-exists=../../.env.anthropic src/repin-versions.ts",
+    "tag-fixes": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env --env-file-if-exists=../../.env.anthropic src/tag-fixes.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "1.1.0",

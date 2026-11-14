@@ -13,15 +13,21 @@
         "type": "object",
         "additionalProperties": false,
         "required": ["name", "aliases"],
+        "dependentRequired": { "group": ["group_source"] },
         "properties": {
           "name": { "type": "string", "minLength": 1, "description": "How BipWatch shows this person." },
           "aliases": {
             "description": "Other names and logins the same person uses. Matched case-insensitively.",
             "type": "array",
-            "minItems": 1,
+            "minItems": 0,
             "uniqueItems": true,
             "items": { "type": "string", "minLength": 1 }
-          }
+          },
+          "group": {
+            "description": "Stakeholder group for consensus pages (Who has spoken). Set only when a public source shows the role; most people have none.",
+            "enum": ["developers", "miners", "economic-nodes", "wallets"]
+          },
+          "group_source": { "description": "Public URL showing the role.", "type": "string", "format": "uri", "pattern": "^https://" }
         }
       }
     }

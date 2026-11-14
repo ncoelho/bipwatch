@@ -153,6 +153,8 @@ export interface BipBundle {
   bip: BipRecord;
   claims: Claim[];
   needs: NeedsAssessment | null;
+  fixes?: Fixes | null;
+  road?: Road | null;
 }
 
 /** data/freshness.json: when each collector last succeeded. Written by
@@ -177,7 +179,13 @@ export interface Freshness {
 
 /** data/people.yaml: one identity per person with several names or logins. */
 export interface People {
-  people: { name: string; aliases: string[] }[];
+  people: {
+    name: string;
+    aliases: string[];
+    /** Stakeholder group, only where a public source shows the role. */
+    group?: 'developers' | 'miners' | 'economic-nodes' | 'wallets';
+    group_source?: string;
+  }[];
 }
 
 /** data/generated/spec-history/<n>.json, written by `npm run site-exports`. */
@@ -218,4 +226,34 @@ export interface PrStates {
     /** Reviews on the PR: who, approved / changes_requested / commented, when. */
     reviews?: { by: string | null; state: string; date: string }[];
   }>;
+}
+
+/** bips/<NNNN>/fixes.yaml: the separate changes a BIP bundles. */
+export interface Fix {
+  key: string;
+  name: string;
+  summary: string;
+  rule: string;
+  threat: string;
+  quote: string;
+  section: string;
+  safe_in: { text: string; quote: string };
+  who_acts: string;
+  must_act: boolean;
+  story: string;
+}
+export interface Fixes { bip: number; provenance: Provenance; fixes: Fix[] }
+
+/** bips/<NNNN>/road.yaml: road to activation and readiness. */
+export interface RoadSource { label: string; url?: string; claim?: string }
+export interface RoadStep { lane: string; title: string; state: 'done' | 'now' | 'gap' | 'todo'; date?: string; text: string; source: RoadSource }
+export interface Road {
+  bip: number;
+  provenance: Provenance;
+  lanes: { key: string; label: string }[];
+  steps: RoadStep[];
+  readiness?: {
+    fix: string;
+    rows: { state: 'done' | 'open' | 'unknown' | 'addressed' | 'not-measured'; title: string; text: string; quote?: string; source: RoadSource }[];
+  };
 }

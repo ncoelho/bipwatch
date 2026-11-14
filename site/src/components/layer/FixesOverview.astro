@@ -1,0 +1,142 @@
+---
+// Consensus layer, Overview: "Four fixes, one soft fork" (one card per fix
+// in fixes.yaml, saying who has to act, with its rule, threat, spec quote,
+// where it is already safe and how it changed in discussion) and "Will pools
+// be ready?", the readiness checklist from road.yaml for the fix that needs
+// others to act. Claim counts come from the fix:<key> tags.
+import type { BipBundle } from '@bipwatch/data';
+
+interface Props { bundle: BipBundle; }
+const { bundle } = Astro.props;
+const { bip, fixes, road } = bundle;
+const tagged = (key: string) => bundle.claims.filter((c) => c.tags?.includes(`fix:${key}`));
+const specUrl = `https://github.com/${bip.spec.repo}/blob/${bip.spec.revision}/${bip.spec.path}`;
+const anchor = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+const READY = { done: 'Done', open: 'Open', unknown: 'Unknown', addressed: 'Addressed', 'not-measured': 'Not measured' } as const;
+const words = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
+const actFix = fixes?.fixes.find((f) => f.key === road?.readiness?.fix);
+---
+{fixes && (
+  <section class="panel" id="fixes" aria-labelledby="h-fixes" data-fixes>
+    <h2 id="h-fixes">{words[fixes.fixes.length - 1] ?? fixes.fixes.length} fixes, one soft fork <span class="sub">· who has to act for each</span></h2>
+    <p class="lede">
+      {fixes.fixes.filter((f) => !f.must_act).length} need nothing from anyone today; {fixes.fixes.filter((f) => f.must_act).map((f) => f.name.toLowerCase()).join(' and ') || 'none'} {fixes.fixes.filter((f) => f.must_act).length === 1 ? 'needs' : 'need'} others to change software.
+      {fixes.provenance.reviewed_by === null && <span class="pill warn">Pending review</span>}
+    </p>
+    <div class="cards" role="group" aria-label="Fixes">
+      {fixes.fixes.map((f, i) => {
+        const cs = tagged(f.key);
+        return (
+          <a href={`#fix-${f.key}`} class:list={['card', { act: f.must_act }]} data-fix={f.key}>
+            <span class="n mono">0{i + 1}</span>
+            <span class="name">{f.name}</span>
+            <span class="sum">{f.summary}</span>
+            <span class:list={['who', { act: f.must_act }]}>{f.must_act ? 'Others must update' : 'No action today'}</span>
+            <span class="deb">{cs.length} claims · {new Set(cs.map((c) => c.subject?.name)).size} people</span>
+          </a>
+        );
+      })}
+    </div>
+    <div class="fdetails">
+      {fixes.fixes.map((f, i) => (
+        <article class="fd" id={`fix-${f.key}`} data-fdetail={f.key} data-first={i === 0 ? '1' : undefined}>
+          <h3>{f.name}</h3>
+          <dl>
+            <dt>The rule</dt><dd>{f.rule}</dd>
+            <dt>What it stops</dt><dd>{f.threat}</dd>
+            <dt>The spec</dt><dd><blockquote>“{f.quote}”</blockquote><a href={`${specUrl}#${anchor(f.section)}`}>{f.section} · @{bip.spec.revision.slice(0, 7)}</a></dd>
+            <dt>Already safe in</dt><dd>{f.safe_in.text}<blockquote>“{f.safe_in.quote}”</blockquote></dd>
+            <dt>Who has to act</dt><dd class:list={[{ hot: f.must_act, ok: !f.must_act }]}>{f.who_acts}</dd>
+            <dt>How it changed</dt><dd>{f.story} <a href={`#positions?lane=${f.key}`}>See how it was argued out →</a></dd>
+          </dl>
+          {f.must_act && road?.readiness?.fix === f.key && <a class="pools" href="#pools">Will pools be ready? ↓</a>}
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
+{road?.readiness && (
+  <section class="panel" id="pools" aria-labelledby="h-pools">
+    <h2 id="h-pools">Will pools be ready{actFix ? ` for the ${actFix.name.toLowerCase()} rule` : ''}? <span class="sub">· a checklist for the one fix that needs others to act</span></h2>
+    <ul class="ready">
+      {road.readiness.rows.map((r) => (
+        <li>
+          <span class:list={['icon', r.state]} aria-hidden="true"></span>
+          <div class="rb">
+            <div class="rt"><span class:list={['pill', { info: r.state === 'done', accent: r.state === 'open', warn: r.state === 'unknown' }]}>{READY[r.state]}</span><b>{r.title}</b></div>
+            <p>{r.text}</p>
+            {r.quote && <blockquote>“{r.quote}”</blockquote>}
+            <div class="rs">{r.source.url ? <a href={r.source.url} rel="noopener">{r.source.label}</a> : r.source.label}{r.source.claim && <> · <a href={`#needs?item=${r.source.claim}`}>the claim</a></>}</div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-fixes]');
+  if (root) {
+    root.classList.add('js');
+    const cards = [...root.querySelectorAll<HTMLAnchorElement>('[data-fix]')];
+    const details = [...root.querySelectorAll<HTMLElement>('[data-fdetail]')];
+    const select = (key: string) => {
+      for (const d of details) d.hidden = d.dataset.fdetail !== key;
+      for (const c of cards) c.classList.toggle('on', c.dataset.fix === key);
+    };
+    for (const c of cards)
+      c.addEventListener('click', (e) => {
+        e.preventDefault();
+        history.replaceState(null, '', `#fix-${c.dataset.fix}`);
+        select(c.dataset.fix!);
+      });
+    const fromHash = () => {
+      const m = location.hash.match(/^#fix-(.+)$/);
+      select(m?.[1] ?? details.find((d) => d.dataset.first)?.dataset.fdetail ?? '');
+    };
+    window.addEventListener('hashchange', fromHash);
+    fromHash();
+  }
+</script>
+
+<style>
+  .panel { background: var(--panel); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 14px; scroll-margin-top: 16px; }
+  h2 { font-size: 17px; }
+  .sub { font-weight: 400; color: var(--faint); font-size: 14px; }
+  .lede { font-size: 14px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; }
+  .card { display: flex; flex-direction: column; gap: 4px; padding: 14px; border-radius: 14px; background: var(--card); color: var(--fg); text-decoration: none; min-height: 44px; }
+  .card.act { background: var(--accent-ground); }
+  .card.on { background: var(--fg); color: #000; }
+  .n { font-size: 12px; color: var(--faint); }
+  .on .n, .on .sum, .on .deb { color: #333; }
+  .name { font-weight: 650; font-size: 15px; }
+  .sum { font-size: 12.5px; color: var(--muted); }
+  .who { align-self: flex-start; margin-top: 6px; font-size: 10.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--info-ground); color: var(--info-ink); }
+  .who.act { background: var(--accent); color: #1A0A00; }
+  .deb { font-size: 12px; color: var(--faint); }
+  .fdetails { display: flex; flex-direction: column; gap: 10px; }
+  .fd { background: var(--card); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 10px; scroll-margin-top: 16px; }
+  .fd h3 { font-size: 18px; }
+  dl { margin: 0; display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 10px 16px; font-size: 14px; }
+  dt { color: var(--faint); }
+  dd { margin: 0; color: var(--fg-2); display: flex; flex-direction: column; gap: 6px; }
+  dd.hot { color: var(--accent-ink); font-weight: 500; }
+  dd.ok { color: var(--good-ink); }
+  blockquote { margin: 0; padding: 8px 12px; border-radius: 10px; background: var(--panel); font-size: 13px; color: var(--fg-2); }
+  .pools { font-size: 13.5px; color: var(--accent-ink); }
+  .ready { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .ready li { display: flex; gap: 14px; padding: 12px 14px; border-radius: 12px; background: var(--card); }
+  .icon { flex: none; width: 22px; height: 22px; border-radius: 50%; margin-top: 2px; }
+  .icon.done { background: var(--info); }
+  .icon.open { background: var(--accent); }
+  .icon.unknown { background: #000; box-shadow: inset 0 0 0 2px var(--warn); }
+  .icon.addressed { background: var(--line-strong); }
+  .icon.not-measured { background: #000; box-shadow: inset 0 0 0 1.5px #5A5A63; }
+  .rb { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .rt { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 14.5px; }
+  .rb p { font-size: 13.5px; color: var(--fg-2); }
+  .rs { font-size: 12.5px; color: var(--faint); }
+  @media (max-width: 640px) { dl { grid-template-columns: 1fr; } }
+</style>

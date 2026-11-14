@@ -25,3 +25,5 @@ provenance:
   extracted_by: model:claude-opus-5-5
   extracted: 2026-11-14
   reviewed_by: null
+tags:
+  - fix:tw
