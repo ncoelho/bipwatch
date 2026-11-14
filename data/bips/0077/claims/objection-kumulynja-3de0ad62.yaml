@@ -8,7 +8,7 @@ statement: Fix the fragment parameter separator '+' in the pj URL, which generic
 subject:
   name: kumulynja
   type: person
-applies_to_version: 0.0.0
+applies_to_version: 0.1.0
 source:
   url: https://github.com/bitcoin/bips/pull/1885#issuecomment-3020130604
   type: github

@@ -8,7 +8,7 @@ statement: Check that common URI parsers accept `:` or `-` as a fragment
 subject:
   name: Dan Gould
   type: person
-applies_to_version: 0.0.0
+applies_to_version: 0.1.0
 source:
   url: https://github.com/bitcoin/bips/pull/1885#issuecomment-3021230938
   type: github

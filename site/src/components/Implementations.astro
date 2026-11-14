@@ -13,8 +13,8 @@ const impls = byKind(bundle, 'implementation').sort(
   (a, b) => STATE_ORDER.indexOf(a.implementation!.state) - STATE_ORDER.indexOf(b.implementation!.state)
     || a.subject!.name.localeCompare(b.subject!.name),
 );
-const has = (k: 'send' | 'receive' | 'scanning' | 'platforms') => impls.some((c) => c.implementation![k] !== undefined);
-const cols = { send: has('send'), receive: has('receive'), scanning: has('scanning'), platforms: has('platforms') };
+const has = (k: 'send' | 'receive' | 'scanning' | 'platforms' | 'networks') => impls.some((c) => c.implementation![k] !== undefined);
+const cols = { send: has('send'), receive: has('receive'), scanning: has('scanning'), platforms: has('platforms') || has('networks') };
 const sendCount = impls.filter((c) => c.implementation!.send).length;
 const receiveCount = impls.filter((c) => c.implementation!.receive).length;
 const shipped = impls.filter((c) => c.implementation!.state === 'shipped').length;
@@ -55,7 +55,7 @@ const yn = (v: boolean | undefined) => (v === undefined ? '–' : v ? 'Yes' : 'N
                 {cols.send && <td class="yn">{yn(i.send)}</td>}
                 {cols.receive && <td class="yn">{yn(i.receive)}</td>}
                 {cols.scanning && <td class="muted">{i.scanning ?? '–'}</td>}
-                {cols.platforms && <td class="muted">{i.platforms?.join(', ') ?? '–'}</td>}
+                {cols.platforms && <td class="muted">{[...(i.platforms ?? []), ...(i.networks ?? [])].join(', ') || '–'}</td>}
                 <td class="srccell"><p class="what">{c.statement}</p><Source claim={c} showQuote={false} /></td>
               </tr>
             );

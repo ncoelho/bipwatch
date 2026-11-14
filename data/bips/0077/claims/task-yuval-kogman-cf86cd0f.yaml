@@ -8,7 +8,7 @@ statement: Get an explicit ACK from co-author Dan Gould on the change to delimit
 subject:
   name: Yuval Kogman
   type: person
-applies_to_version: 0.0.0
+applies_to_version: 0.2.0
 source:
   url: https://github.com/bitcoin/bips/pull/1890#issuecomment-3058686035
   type: github

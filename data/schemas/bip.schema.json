@@ -78,9 +78,9 @@
             "closed-replaced"
           ]
         },
-        "template": {
-          "description": "Stage template used to render the page.",
-          "enum": ["idea", "draft", "complete", "deployed", "closed"]
+        "page": {
+          "description": "Which page the BIP gets: default (frame plus core and tracked modules), applications or consensus (adds that layer's modules). Default when absent. Set a layer page only once the data its modules read exists.",
+          "enum": ["default", "applications", "consensus"]
         },
         "adoption_measure": {
           "description": "What 'deployed' means for this BIP.",

@@ -29,13 +29,13 @@ discussion:
 spec:
   repo: bitcoin/bips
   path: bip-0352.mediawiki
-  revision: f827c440636a93e6033a4e10705ca7762594265b
-  synced: 2026-11-05
+  revision: a0190d01a1468390bdc8124229a1e291fb52d6c8
+  synced: 2026-11-14
 
 bipwatch:
   tracked: true
   category: ready-to-build
-  template: complete
+  page: applications
   # Silent payment outputs look like any taproot output, so adoption is
   # measured by which wallets can send and receive, not by onchain counts.
   adoption_measure: wallet-coverage

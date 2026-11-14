@@ -10,9 +10,9 @@ import { parseHeader, type SpecHeader } from './bips/header.ts';
 
 /**
  * Re-syncs the facts in every data/bips/<NNNN>/bip.yaml from its spec header
- * (SPEC 5 rule 8). A file is rewritten only when a header fact differs; then
- * spec.revision moves to the last commit that touched the spec and
- * spec.synced to today. Comments and the bipwatch block are left alone.
+ * (SPEC 5 rule 8). A file is rewritten when a header fact differs or the spec
+ * file has a newer commit than spec.revision; then spec.revision moves to
+ * the last commit that touched the spec and spec.synced to today. Comments and the bipwatch block are left alone.
  */
 
 /** Header facts copied into bip.yaml, in file order. */
@@ -175,12 +175,18 @@ export async function syncHeaders(opts: SyncOptions = {}): Promise<SyncChange[]>
     const want = desiredFacts(header, current);
     const fields = FACTS.filter((k) => !same(current[k], want[k]));
     if (path !== current.spec.path) fields.push('spec.path' as never);
-    if (!fields.length) continue;
-
+    // A spec edit outside the header still moves the revision the claims and
+    // pages read the spec at.
     const revision = (await git(dir, 'log', '-1', '--format=%H', ref, '--', path)).trim();
+    const moved = revision !== (current.spec as { revision?: string }).revision;
+    if (!fields.length && !moved) continue;
     const from: Record<string, unknown> = {};
     const to: Record<string, unknown> = {};
     const edits: Edit[] = [];
+    if (moved && !fields.length) {
+      from['spec.revision'] = (current.spec as { revision?: string }).revision;
+      to['spec.revision'] = revision;
+    }
     for (const k of fields) {
       if (k === ('spec.path' as Fact)) {
         from[k] = current.spec.path;
@@ -196,7 +202,7 @@ export async function syncHeaders(opts: SyncOptions = {}): Promise<SyncChange[]>
     edits.push(scalarEdit(doc, ['spec', 'synced'], today));
 
     if (!opts.dryRun) writeFileSync(file, applyEdits(text0, edits));
-    changes.push({ number: current.number, file, fields, from, to, revision });
+    changes.push({ number: current.number, file, fields: fields.length ? fields : ['spec.revision' as never], from, to, revision });
   }
   return changes;
 }

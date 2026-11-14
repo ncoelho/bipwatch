@@ -13,8 +13,8 @@ discussion:
 spec:
   repo: bitcoin/bips
   path: bip-0392.mediawiki
-  revision: 351ceef2747e46078efaa073246fce54d52e665d
-  synced: 2026-11-05
+  revision: bba6223aa1575de3519275d13409a46eb6a2f1c6
+  synced: 2026-11-14
 bipwatch:
   tracked: false
   category: in-development

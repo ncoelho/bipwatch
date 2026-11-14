@@ -8,7 +8,7 @@ statement: Choose a replacement fragment parameter separator for `+` that URI
 subject:
   name: kumulynja
   type: person
-applies_to_version: 0.0.0
+applies_to_version: 0.1.0
 source:
   url: https://github.com/bitcoin/bips/pull/1885#issuecomment-3023401313
   type: github

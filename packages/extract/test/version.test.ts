@@ -55,6 +55,10 @@ describe('changelog timeline', () => {
     expect(versionAt(t, new Date('2025-12-12'))).toBe('1.0.1');
     const md = '## Changelog\n\n* __1.0.0__ (2026-05-22):\n    * Complete.\n\n[^0]: note';
     expect(changelogTimeline(md)).toEqual([{ at: Date.parse('2026-05-22T00:00:00Z'), version: '1.0.0' }]);
+    // BIP 77's style: a dash, the version, a space and the date, items indented below.
+    const dash = '## Changelog\n\n- 0.2.0 2025-07-08\n    - Change fragment delimiter.\n- 0.1.0 2025-05-28\n    - First merged Draft version of BIP 77\n';
+    expect(changelogTimeline(dash).map((x) => x.version)).toEqual(['0.1.0', '0.2.0']);
+    expect(versionAt(changelogTimeline(dash), new Date('2025-06-15'))).toBe('0.1.0');
     expect(changelogTimeline('no changelog here')).toEqual([]);
   });
 

@@ -6,7 +6,7 @@ area: design
 statement: Specify a secp256k1-based HPKE ciphersuite, since standard HPKE does
   not support secp256k1.
 subject:
-  name: bitgould
+  name: Dan Gould
   type: person
 applies_to_version: 0.0.0
 source:

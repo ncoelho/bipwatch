@@ -7,7 +7,7 @@ statement: Address the risk that an OHTTP relay shared by sender and receiver
   can link their IPs by traffic timing, made worse by long-polling, for example
   by using regular polling with random delays instead.
 subject:
-  name: bitgould
+  name: Dan Gould
   type: person
 applies_to_version: 0.0.0
 source:

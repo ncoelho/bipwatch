@@ -18,7 +18,6 @@ spec:
 bipwatch:
   tracked: true
   category: standard-everywhere
-  template: deployed
   # API/RPC: adoption is which node software and mining setups use it (not measured yet).
   adoption_measure: service-coverage
   summary: >-

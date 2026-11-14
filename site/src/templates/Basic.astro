@@ -28,7 +28,7 @@ const specUrl = `https://github.com/${bip.spec.repo}/blob/${bip.spec.revision}/$
     <p class="muted">Requires {bip.requires.map((n, i) => <>{i > 0 && ', '}<a href={link(n)}>BIP {n}</a></>)}</p>
   ) : null}
   {bip.bipwatch.tracked ? (
-    <p class="note">BipWatch tracks this proposal. Its page for the {bip.bipwatch.template ?? 'current'} stage isn't built yet, so this shows the spec header and summary for now. <a href={specUrl}>Read the spec</a>.</p>
+    <p class="note">BipWatch tracks this proposal. Its full page isn't built yet, so this shows the spec header, summary and the evidence gathered so far. <a href={specUrl}>Read the spec</a>.</p>
   ) : (
     <p class="note">BipWatch doesn't track this proposal in depth yet, so this page only shows its spec header. <a href={specUrl}>Read the spec</a>.</p>
   )}

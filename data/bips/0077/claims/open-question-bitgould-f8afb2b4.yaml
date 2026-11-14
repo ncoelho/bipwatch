@@ -6,7 +6,7 @@ area: design
 statement: Decide whether to use PSBT version 2 with new PSBT fields to carry
   payjoin parameters instead of a separate serialization format.
 subject:
-  name: bitgould
+  name: Dan Gould
   type: person
 applies_to_version: 0.0.0
 source:
