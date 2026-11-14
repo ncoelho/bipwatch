@@ -1,93 +1,288 @@
 ---
-import { loadAll } from '@bipwatch/data';
+// Homepage (page templates spec): "What changed in BIPs this week?". The
+// week's numbers, repo changes, drafts, discussion and activity come from
+// data/generated/week.json (npm run site-exports, from the archive and the
+// bips repo, the 7 days up to the build). The lead story is the reviewed
+// data/weekly/<ISO week>.yaml; its tiles are computed from data. Open work
+// comes from the claims. The page works without JavaScript; the feed tabs
+// filter with it and keep ?feed= in the URL.
+import { isoWeek, loadAll, loadPrStates, loadWeek, loadWeekly } from '@bipwatch/data';
 import Base from '../layouts/Base.astro';
-import Dots from '../components/Dots.astro';
-import Freshness from '../components/Freshness.astro';
-import { CATEGORY_LABEL, bipHref, isPending } from '../lib/view.ts';
+import { AREA_LABEL, WORK_KINDS, bipHref, isPending, storyTile, weekRange } from '../lib/view.ts';
 
+const week = loadWeek();
 const all = loadAll();
+const byNumber = new Map(all.map((b) => [b.bip.number, b]));
+const prs = loadPrStates();
+const now = new Date();
+const story = loadWeekly(isoWeek(now)) ?? loadWeekly(isoWeek(new Date(now.getTime() - 7 * 86_400_000)));
+const sb = story ? byNumber.get(story.bip) : undefined;
+const tiles = story && sb ? story.tiles.map((k) => storyTile(k, sb, prs)).filter((t) => t !== null) : [];
+const short = (d: string) => new Date(`${d}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+const bipChip = (n: number) => (byNumber.has(n) ? { href: bipHref(n), label: `BIP ${n}` } : { href: `https://github.com/bitcoin/bips/blob/master/bip-${String(n).padStart(4, '0')}.md`, label: `BIP ${n}` });
+
+// Open work across tracked BIPs: raised this week, else the newest.
 const tracked = all.filter((b) => b.bip.bipwatch.tracked);
-const others = all.filter((b) => !b.bip.bipwatch.tracked);
+const openWork = tracked
+  .flatMap((b) => b.claims.filter((c) => WORK_KINDS.includes(c.kind) && c.status !== 'addressed').map((c) => ({ c, b })))
+  .sort((x, y) => (y.c.source.date ?? '').localeCompare(x.c.source.date ?? ''));
+const thisWeek = week ? openWork.filter(({ c }) => (c.source.date ?? '') >= week.from) : [];
+const workList = (thisWeek.length ? thisWeek : openWork).slice(0, 6);
+
+const LABEL_CHIP: Record<string, string> = { 'Proposed BIP modification': 'info', 'BIP Update by Owner': 'info', 'New BIP': 'layer', Fixups: '', Process: '', 'Bug fix': 'accent' };
+const mainLabel = (labels: string[]) => labels.find((l) => l in LABEL_CHIP) ?? labels[0] ?? '';
+const FEED = [
+  { key: 'all', label: 'All' },
+  { key: 'merged', label: 'Merged' },
+  { key: 'draft', label: 'New drafts' },
+  { key: 'opened', label: 'PRs opened' },
+  { key: 'discussion', label: 'Discussion' },
+] as const;
+const TYPE_WORD = { merged: 'Merged', draft: 'New draft', opened: 'PR opened', discussion: 'Discussion' } as const;
+const maxHot = Math.max(1, ...(week?.hot.map((h) => h.posts) ?? [1]));
+const year = week ? week.to.slice(0, 4) : String(now.getUTCFullYear());
 ---
-<Base title="BipWatch" current="proposals">
+<Base title="This week in BIPs · BipWatch" current="week" description="What changed in Bitcoin Improvement Proposals this week: status changes, merges, new drafts, discussion and open work, from the archive.">
   <div class="shell home">
-    <header class="intro">
-      <span class="eyebrow">Bitcoin Improvement Proposals</span>
-      <h1>What each proposal needs, with the evidence</h1>
-      <p class="muted">BipWatch keeps an open, sourced record on top of the BIP repository: what problem a proposal solves, who is building it, and what is still missing.</p>
+    <header class="top">
+      <div class="tt">
+        <div class="eyebrow">This week in BIPs</div>
+        <h1>{week ? weekRange(week.from, week.to) : 'This week'} <span class="yr mono">{year}</span></h1>
+      </div>
+      <div class="chips">
+        <span class="pill good">Real data from the archive</span>
+        <span class="pill warn">Claims pending review</span>
+      </div>
     </header>
 
-    <section>
-      <h2>Tracked proposals</h2>
-      <ul class="tracked">
-        {tracked.map((b) => {
-          const shipped = b.claims.filter((c) => c.kind === 'implementation' && c.implementation?.state === 'shipped').length;
-          const openQs = b.claims.filter((c) => c.kind === 'open-question' && c.status === 'open').length;
-          const pending = b.claims.filter(isPending).length;
-          return (
-            <li>
-              <a href={bipHref(b.bip.number)} class="card">
-                <div class="row">
-                  <span class="mono num">BIP {b.bip.number}</span>
-                  {b.bip.bipwatch.category && <span class="pill accent">{CATEGORY_LABEL[b.bip.bipwatch.category]}</span>}
+    {!week ? (
+      <p class="empty">This build has no week export (it needs the archive and a bitcoin/bips clone at build time). <a href="/proposals/">See the proposals</a>.</p>
+    ) : (
+      <>
+        <div class="tiles">
+          <div class="tile"><span class="k">Status changes</span><span class="v mono">{week.status_changes.length}</span><span class="s">{week.status_changes.length ? week.status_changes.map((s) => `BIP ${s.bip} to ${s.status}`).join(', ') : week.last_status_change ? `last on ${short(week.last_status_change.date)}` : 'none recorded'}</span></div>
+          <div class="tile"><span class="k">Pull requests merged</span><span class="v mono">{week.merged.length}</span><span class="s">{week.commits} {week.commits === 1 ? 'commit' : 'commits'} to bitcoin/bips</span></div>
+          <div class="tile"><span class="k">New drafts proposed</span><span class="v mono">{week.drafts.length}</span><span class="s">{week.drafts.filter((d) => d.closed).length} already closed</span></div>
+          <div class="tile"><span class="k">Discussion</span><span class="v mono">{week.discussion.posts}</span><span class="s">posts in {week.discussion.threads} threads</span></div>
+          <div class="tile hot"><span class="k">Waiting on review</span><span class="v mono">{week.waiting.open}</span><span class="s">open PRs · median {week.waiting.median_days} days</span></div>
+        </div>
+
+        <div class="lead-row">
+          {story && sb ? (
+            <article class="story" aria-labelledby="h-story">
+              <div class="eyebrow">Lead story · {story.kind.charAt(0).toUpperCase() + story.kind.slice(1)}</div>
+              <div class="schips">
+                <span class="pill mono">BIP {sb.bip.number}</span>
+                {sb.bip.layer && <span class="pill">{sb.bip.layer}</span>}
+                <span class:list={['pill', { good: sb.bip.status === 'Complete' || sb.bip.status === 'Deployed' }]}>{sb.bip.status}</span>
+                <span class="sname">{sb.bip.title}</span>
+              </div>
+              <h2 id="h-story">{story.headline}</h2>
+              <p class="slead">{story.lead}</p>
+              {tiles.length > 0 && (
+                <div class="stiles">
+                  {tiles.map((t) => <div class:list={['stile', { hot: t!.hot }]}><span class="v mono">{t!.value}</span><span class="s">{t!.label}</span></div>)}
                 </div>
-                <h3>{b.bip.title}</h3>
-                {b.bip.bipwatch.summary && <p class="muted sum">{b.bip.bipwatch.summary}</p>}
-                <div class="stats tnum">
-                  <span><b>{shipped}</b> shipped implementations</span>
-                  <span><b>{openQs}</b> open questions</span>
-                  {pending > 0 && <span class="pend">{pending} claims pending review</span>}
-                </div>
-                {b.needs && (
-                  <div class="mini">
-                    {Object.entries(b.needs.dimensions).map(([k, d]) => (
-                      <span title={k.replace('_', ' ')}><Dots score={d.score} /></span>
-                    ))}
-                  </div>
-                )}
+              )}
+              <div class="actions">
+                <a class="btn primary" href={bipHref(sb.bip.number)}>Open BIP {sb.bip.number}</a>
+                <a class="btn" href={story.link.url} rel="noopener">{story.link.label}</a>
+                <span class="prov">From {story.sources.length} {story.sources.length === 1 ? 'claim' : 'claims'} and this week’s archive{isPending(story) && <> · <span class="warn">pending review</span></>}</span>
+              </div>
+            </article>
+          ) : (
+            <article class="story"><div class="eyebrow">Lead story</div><p class="slead">No lead story has been approved for this week yet.</p></article>
+          )}
+
+          <section class="repo" aria-labelledby="h-repo">
+            <div class="rh"><h2 id="h-repo">Changed in the BIP repo</h2><span class="faint">{week.commits} commits</span></div>
+            <div class="status">
+              {week.status_changes.length
+                ? week.status_changes.map((s) => <div><strong>BIP {s.bip}</strong> moved to {s.status} on {short(s.date)}.</div>)
+                : week.last_status_change
+                  ? <>No status changes this week. The last was <strong>BIP {week.last_status_change.bip}</strong> moving to {week.last_status_change.status} on {short(week.last_status_change.date)}.</>
+                  : 'No status changes this week.'}
+            </div>
+            <ul class="merged">
+              {week.merged.map((m) => (
+                <li>
+                  <a href={m.url} rel="noopener">
+                    <span class="mrow"><span class="mono mb">{m.bips.length ? m.bips.map((n) => `BIP ${n}`).join(', ') : 'process'}</span>{mainLabel(m.labels) && <span class:list={['pill', LABEL_CHIP[mainLabel(m.labels)]]}>{mainLabel(m.labels)}</span>}<span class="md faint">{short(m.date)}</span></span>
+                    <span class="mt">{m.title}</span>
+                  </a>
+                </li>
+              ))}
+              {week.merged.length === 0 && <li class="none">Nothing merged this week.</li>}
+            </ul>
+          </section>
+        </div>
+
+        <div class="section-head">
+          <div class="eyebrow">Across all BIPs</div>
+          <h2>What’s moving</h2>
+        </div>
+        <div class="moving">
+          <section class="col" aria-labelledby="h-drafts">
+            <div class="ch"><h2 id="h-drafts">New BIP drafts</h2><a href="https://github.com/bitcoin/bips/pulls?q=is%3Apr+is%3Aopen+label%3A%22New+BIP%22">{week.open_drafts} open drafts</a></div>
+            {week.drafts.map((d) => (
+              <a class="item" href={d.url} rel="noopener">
+                <span class="ih"><span class="it">{d.title}</span>{d.closed && <span class="pill">closed</span>}</span>
+                <span class="iw">{d.where} · {short(d.date)}</span>
+                <span class="ev"><span class="hollow" aria-hidden="true"><i></i><i></i><i></i></span>No problem evidence recorded yet</span>
               </a>
+            ))}
+            {week.drafts.length === 0 && <p class="none">No new drafts this week.</p>}
+          </section>
+
+          <section class="col" aria-labelledby="h-hot">
+            <div class="ch"><h2 id="h-hot">Most discussed</h2><span class="faint">posts in 7 days</span></div>
+            {week.hot.map((h) => (
+              <a class="hot" href={h.url} rel="noopener">
+                <span class="hl"><span class="it">{h.title}</span><span class:list={['hm', { nobip: !h.bips.length }]}>{h.bips.length ? h.bips.slice(0, 3).map((n) => `BIP ${n}`).join(', ') : 'No BIP linked'} · {h.source}</span></span>
+                <span class="bar" aria-hidden="true"><span class:list={[{ nobip: !h.bips.length }]} style={`width:${((h.posts / maxHot) * 100).toFixed(0)}%`}></span></span>
+                <span class="n mono">{h.posts}</span>
+              </a>
+            ))}
+            <p class="note">Orange: discussion with no BIP linked yet.</p>
+          </section>
+
+          <section class="col" aria-labelledby="h-work">
+            <div class="ch"><h2 id="h-work">Open work</h2><span class="faint">across tracked BIPs</span></div>
+            {!thisWeek.length && <p class="note">Nothing new was raised this week; these are the newest open items.</p>}
+            {workList.map(({ c, b }) => (
+              <a class="item" href={`${bipHref(b.bip.number)}#needs?item=${c.id}`}>
+                <span class="ih"><span class="pill accent">{c.area ? AREA_LABEL[c.area] : 'Work'}</span><span class="mono faint">BIP {b.bip.number}{c.part_of ? ` · ${c.part_of}` : ''}</span></span>
+                <span class="it">{c.statement}</span>
+                <span class="iw">{c.subject?.name} · {c.source.date}{isPending(c) && <> · <span class="warn">pending review</span></>}</span>
+              </a>
+            ))}
+          </section>
+        </div>
+
+        <div class="section-head">
+          <div class="eyebrow">Everything this week</div>
+          <h2>All activity</h2>
+        </div>
+        <div class="feedtabs" role="tablist" aria-label="Activity" data-feed>
+          {FEED.map((f) => {
+            const n = f.key === 'all' ? week.feed.length : week.feed.filter((e) => e.type === f.key).length;
+            return <a role="tab" href={`?feed=${f.key}#feed`} data-key={f.key} aria-selected={f.key === 'all' ? 'true' : 'false'}>{f.label} <span class="mono">{n}</span></a>;
+          })}
+        </div>
+        <ol class="feed" id="feed">
+          {week.feed.map((e) => (
+            <li data-type={e.type}>
+              <span class="fd mono">{short(e.date)}</span>
+              <span class:list={['ft', e.type]}>{TYPE_WORD[e.type]}</span>
+              <span class="fb">{e.bips.slice(0, 2).map((n) => <a href={bipChip(n).href}>{bipChip(n).label}</a>)}</span>
+              <a class="fx" href={e.url} rel="noopener">{e.title}</a>
             </li>
-          );
-        })}
-      </ul>
-    </section>
-
-    {others.length > 0 && (
-      <section>
-        <h2>Also in the dataset</h2>
-        <ul class="others">
-          {others.map((b) => (
-            <li><a href={bipHref(b.bip.number)}><span class="mono">BIP {b.bip.number}</span> {b.bip.title}</a><span class="pill">{b.bip.status}</span></li>
           ))}
-        </ul>
-      </section>
+        </ol>
+      </>
     )}
-
-    <Freshness />
   </div>
 </Base>
 
+<script>
+  const tabs = document.querySelector<HTMLElement>('[data-feed]');
+  if (tabs) {
+    const links = [...tabs.querySelectorAll<HTMLAnchorElement>('[data-key]')];
+    const rows = [...document.querySelectorAll<HTMLElement>('#feed [data-type]')];
+    const show = (key: string, write: boolean) => {
+      for (const l of links) l.setAttribute('aria-selected', String(l.dataset.key === key));
+      for (const r of rows) r.hidden = key !== 'all' && r.dataset.type !== key;
+      if (write) history.replaceState(null, '', key === 'all' ? location.pathname : `?feed=${key}`);
+    };
+    for (const l of links)
+      l.addEventListener('click', (e) => {
+        e.preventDefault();
+        show(l.dataset.key!, true);
+      });
+    const start = new URLSearchParams(location.search).get('feed') ?? 'all';
+    show(links.some((l) => l.dataset.key === start) ? start : 'all', false);
+  }
+</script>
+
 <style>
-  .home { display: flex; flex-direction: column; gap: 44px; }
-  .intro { display: flex; flex-direction: column; gap: 12px; max-width: 680px; }
-  .intro h1 { font-size: clamp(30px, 4.6vw, 44px); line-height: 1.08; letter-spacing: -0.02em; }
-  .intro p { font-size: 17px; }
-  section { display: flex; flex-direction: column; gap: 14px; }
-  section h2 { font-size: 18px; }
-  ul { list-style: none; margin: 0; padding: 0; }
-  .tracked { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
-  .card { display: flex; flex-direction: column; gap: 10px; padding: 18px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; height: 100%; transition: border-color .15s; }
-  .card:hover { border-color: var(--accent); }
-  .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-  .num { font-size: 13px; color: var(--faint); }
-  .card h3 { font-size: 20px; }
-  .sum { font-size: 14px; }
-  .stats { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--muted); }
-  .stats b { color: var(--fg); font-weight: 600; }
-  .pend { color: var(--accent); }
-  .mini { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 8px; border-top: 1px dashed var(--line); }
-  .others { display: flex; flex-direction: column; border-top: 1px solid var(--line); max-width: 760px; }
-  .others li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
-  .others a { text-decoration: none; min-width: 0; }
-  .others .mono { color: var(--faint); margin-right: 6px; font-size: 13px; }
+  .home { display: flex; flex-direction: column; }
+  .top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px 24px; flex-wrap: wrap; }
+  .tt { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  h1 { font-size: clamp(38px, 6vw, 60px); font-weight: 650; letter-spacing: -0.03em; line-height: 1.02; }
+  .yr { font-weight: 500; color: var(--faint); font-size: 0.82em; letter-spacing: -0.04em; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .empty { margin-top: 24px; padding: 16px 18px; border-radius: 14px; background: var(--panel); color: var(--muted); }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-top: 24px; }
+  .tile { background: var(--panel); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; }
+  .tile.hot { background: var(--accent-ground); }
+  .k { font-size: 12px; color: var(--faint); }
+  .tile.hot .k, .tile.hot .v { color: var(--accent-ink); }
+  .v { font-size: 28px; font-weight: 600; }
+  .s { font-size: 12.5px; color: var(--muted); }
+  .tile.hot .s { color: #F2D9C4; }
+  .lead-row { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 44px; align-items: stretch; }
+  .story { flex: 2 1 560px; min-width: 0; background: var(--panel); border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 16px; }
+  .schips { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .sname { font-size: 13.5px; color: var(--muted); }
+  .story h2 { font-size: 36px; line-height: 1.12; letter-spacing: -0.025em; max-width: 720px; }
+  .slead { color: var(--muted); font-size: 16px; max-width: 660px; }
+  .stiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .stile { background: var(--card); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; }
+  .stile .v { font-size: 22px; }
+  .stile.hot { background: var(--accent-ground); }
+  .stile.hot .v { color: var(--accent-ink); }
+  .stile.hot .s { color: #F2D9C4; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 12px; background: var(--card); color: var(--fg); text-decoration: none; font-size: 14px; }
+  .btn.primary { background: var(--fg); color: #000; font-weight: 600; }
+  .prov { font-size: 12.5px; color: var(--faint); }
+  .warn { color: var(--warn); }
+  .repo { flex: 1 1 320px; min-width: 0; background: var(--panel); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 12px; }
+  .rh, .ch { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .repo h2, .col h2 { font-size: 17px; }
+  .faint { color: var(--faint); font-size: 13px; }
+  .status { background: var(--inset); border-radius: 12px; padding: 12px 14px; font-size: 13.5px; color: var(--muted); }
+  .status strong { color: var(--fg); }
+  .merged { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .merged a { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border-radius: 12px; background: var(--card); text-decoration: none; color: var(--fg); }
+  .mrow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .mb { font-size: 12.5px; color: var(--fg-2); }
+  .md { margin-left: auto; font-size: 12px; }
+  .mt { font-size: 14px; font-weight: 600; line-height: 1.35; }
+  .none { font-size: 13.5px; color: var(--faint); }
+  .section-head { margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
+  .section-head h2 { margin-top: 6px; font-size: 34px; letter-spacing: -0.02em; line-height: 1.12; }
+  .moving { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 24px; }
+  .col { background: var(--panel); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .ch a { font-size: 13px; }
+  .item { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border-radius: 12px; background: var(--card); text-decoration: none; color: var(--fg); }
+  .ih { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .it { font-size: 14px; font-weight: 600; line-height: 1.35; }
+  .iw { font-size: 13px; color: var(--muted); }
+  .ev { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--faint); }
+  .hollow { display: flex; gap: 3px; }
+  .hollow i { display: block; width: 8px; height: 8px; border-radius: 50%; box-shadow: inset 0 0 0 1px #5A5A63; }
+  .hot { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; background: var(--card); text-decoration: none; color: var(--fg); min-height: 44px; }
+  .hl { display: flex; flex-direction: column; flex: 1 1 auto; min-width: 0; }
+  .hm { font-size: 12.5px; color: var(--faint); }
+  .hm.nobip { color: var(--accent-ink); }
+  .bar { display: block; flex: none; width: 56px; height: 6px; border-radius: 3px; background: var(--line-strong); }
+  .bar span { display: block; height: 100%; border-radius: 3px; background: var(--fg-2); }
+  .bar span.nobip { background: var(--accent); }
+  .n { font-size: 14px; width: 26px; text-align: right; }
+  .note { font-size: 12px; color: var(--faint); }
+  .feedtabs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 20px; padding: 4px; border-radius: 14px; background: var(--panel); width: fit-content; max-width: 100%; }
+  .feedtabs a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 10px; color: var(--muted); text-decoration: none; font-size: 14.5px; }
+  .feedtabs a[aria-selected='true'] { background: var(--card); color: var(--fg); font-weight: 600; }
+  .feedtabs .mono { font-size: 12px; color: var(--faint); }
+  .feed { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-direction: column; }
+  .feed li { display: grid; grid-template-columns: 64px 104px 120px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 10px 4px; border-top: 1px solid var(--line); font-size: 14px; scroll-margin-top: 16px; }
+  .fd { font-size: 12.5px; color: var(--faint); }
+  .ft { font-size: 11.5px; padding: 2px 9px; border-radius: 999px; background: var(--card); color: var(--fg-2); justify-self: start; }
+  .ft.merged { background: var(--info-ground); color: var(--info-ink); }
+  .ft.draft { background: var(--layer-soft); color: var(--layer); }
+  .fb { display: flex; gap: 6px; font-family: var(--mono); font-size: 12.5px; }
+  .fx { color: var(--fg); text-decoration: none; }
+  .fx:hover { color: var(--link-hover); }
+  @media (max-width: 640px) { .feed li { grid-template-columns: 64px 1fr; } .fb, .fx { grid-column: 2; } .story { padding: 20px; } .story h2 { font-size: 28px; } }
 </style>

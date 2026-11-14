@@ -1,0 +1,93 @@
+---
+import { loadAll } from '@bipwatch/data';
+import Base from '../../layouts/Base.astro';
+import Dots from '../../components/Dots.astro';
+import Freshness from '../../components/Freshness.astro';
+import { CATEGORY_LABEL, bipHref, isPending } from '../../lib/view.ts';
+
+const all = loadAll();
+const tracked = all.filter((b) => b.bip.bipwatch.tracked);
+const others = all.filter((b) => !b.bip.bipwatch.tracked);
+---
+<Base title="Proposals · BipWatch" current="proposals">
+  <div class="shell home">
+    <header class="intro">
+      <span class="eyebrow">Bitcoin Improvement Proposals</span>
+      <h1>What each proposal needs, with the evidence</h1>
+      <p class="muted">BipWatch keeps an open, sourced record on top of the BIP repository: what problem a proposal solves, who is building it, and what is still missing.</p>
+    </header>
+
+    <section>
+      <h2>Tracked proposals</h2>
+      <ul class="tracked">
+        {tracked.map((b) => {
+          const shipped = b.claims.filter((c) => c.kind === 'implementation' && c.implementation?.state === 'shipped').length;
+          const openQs = b.claims.filter((c) => c.kind === 'open-question' && c.status === 'open').length;
+          const pending = b.claims.filter(isPending).length;
+          return (
+            <li>
+              <a href={bipHref(b.bip.number)} class="card">
+                <div class="row">
+                  <span class="mono num">BIP {b.bip.number}</span>
+                  {b.bip.bipwatch.category && <span class="pill accent">{CATEGORY_LABEL[b.bip.bipwatch.category]}</span>}
+                </div>
+                <h3>{b.bip.title}</h3>
+                {b.bip.bipwatch.summary && <p class="muted sum">{b.bip.bipwatch.summary}</p>}
+                <div class="stats tnum">
+                  <span><b>{shipped}</b> shipped implementations</span>
+                  <span><b>{openQs}</b> open questions</span>
+                  {pending > 0 && <span class="pend">{pending} claims pending review</span>}
+                </div>
+                {b.needs && (
+                  <div class="mini">
+                    {Object.entries(b.needs.dimensions).map(([k, d]) => (
+                      <span title={k.replace('_', ' ')}><Dots score={d.score} /></span>
+                    ))}
+                  </div>
+                )}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+
+    {others.length > 0 && (
+      <section>
+        <h2>Also in the dataset</h2>
+        <ul class="others">
+          {others.map((b) => (
+            <li><a href={bipHref(b.bip.number)}><span class="mono">BIP {b.bip.number}</span> {b.bip.title}</a><span class="pill">{b.bip.status}</span></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <Freshness />
+  </div>
+</Base>
+
+<style>
+  .home { display: flex; flex-direction: column; gap: 44px; }
+  .intro { display: flex; flex-direction: column; gap: 12px; max-width: 680px; }
+  .intro h1 { font-size: clamp(30px, 4.6vw, 44px); line-height: 1.08; letter-spacing: -0.02em; }
+  .intro p { font-size: 17px; }
+  section { display: flex; flex-direction: column; gap: 14px; }
+  section h2 { font-size: 18px; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  .tracked { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+  .card { display: flex; flex-direction: column; gap: 10px; padding: 18px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; height: 100%; transition: border-color .15s; }
+  .card:hover { border-color: var(--accent); }
+  .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .num { font-size: 13px; color: var(--faint); }
+  .card h3 { font-size: 20px; }
+  .sum { font-size: 14px; }
+  .stats { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--muted); }
+  .stats b { color: var(--fg); font-weight: 600; }
+  .pend { color: var(--accent); }
+  .mini { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 8px; border-top: 1px dashed var(--line); }
+  .others { display: flex; flex-direction: column; border-top: 1px solid var(--line); max-width: 760px; }
+  .others li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .others a { text-decoration: none; min-width: 0; }
+  .others .mono { color: var(--faint); margin-right: 6px; font-size: 13px; }
+</style>
