@@ -1,0 +1,27 @@
+id: stance-orfeaslitos-2a2ad2c1
+bip: 448
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: OrfeasLitos favors BIP 448's approach over APO. He argues it achieves
+  most of what APO does while adding only three simple opcodes and minimal new
+  script powers, which makes scripts and future updates easier to reason about.
+subject:
+  name: OrfeasLitos
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2255#issuecomment-5511903879
+  type: github
+  title: Mention more BIP 448 benefits, compare it with APO
+  date: 2026-09-02
+  retrieved: 2026-11-14
+  quote: OTOH 448 achieves most of the things that APO does while introducing
+    minimal new powers to the Script - it's much easier for me to reason about
+    what's happening inside a script because I can forget almost all other
+    Bitcoin semantics.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

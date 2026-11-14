@@ -1,0 +1,29 @@
+id: stance-steven-roose-8c04432f
+bip: 448
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Steven Roose defends the proposal as delivering simple
+  next-transaction commitments and basic rebindable signatures, which he
+  considers useful for almost all second-layer protocols. He argues that annex
+  use cases can be handled by their own future soft forks.
+subject:
+  name: Steven Roose
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1974#issuecomment-3324324179
+  type: github
+  title: "BIP446: OP_TEMPLATEHASH and BIP448: Taproot-native (Re)bindable
+    Transactions"
+  date: 2025-09-23
+  retrieved: 2026-11-14
+  quote: This proposal is trying to move the needle for simple next-tx commitment
+    and basic rebindable signatures. Two arguably very simple features that are
+    undeniably useful for almost all second-layer protocols currently being
+    developed and used.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
