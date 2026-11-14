@@ -1,0 +1,24 @@
+id: objection-dan-gould-94a6f6c9
+bip: 77
+kind: objection
+status: addressed
+area: design
+statement: Fix the lack of forward secrecy for the sender's first message, which
+  comes from encrypting the original PSBT with a pre-shared symmetric key.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/3C0A6E4C-444E-4E75-829C-1A21D8EE40E0@ngould.dev/
+  type: mailing-list
+  title: Serverless Payjoin
+  date: 2023-01-22
+  retrieved: 2026-11-14
+  quote: Since psk is a symmetric key, the first message containing the sender's
+    original PSBT does not have forward secrecy.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

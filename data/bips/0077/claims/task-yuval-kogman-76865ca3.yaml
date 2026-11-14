@@ -1,0 +1,22 @@
+id: task-yuval-kogman-76865ca3
+bip: 77
+kind: task
+status: addressed
+area: design
+statement: Remove explicit session initialization with the directory from the protocol.
+subject:
+  name: Yuval Kogman
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#issuecomment-2401109899
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2024-10-09
+  retrieved: 2026-11-14
+  quote: A followup suggestion would be removing explicit session initialization.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

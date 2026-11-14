@@ -1,0 +1,26 @@
+id: objection-yuval-kogman-4d6c75d8
+bip: 77
+kind: objection
+status: addressed
+area: design
+statement: Reconsider the specified fragment parameter ordering, which was taken
+  from the implementation and turned out to be reverse lexicographical, and
+  define a deliberate order.
+subject:
+  name: Yuval Kogman
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1885#issuecomment-3020868172
+  type: github
+  title: "BIP77: Propose to encode `+` as `%2B` in pj param of Bitcoin URIs"
+  date: 2025-06-30
+  retrieved: 2026-11-14
+  quote: ended up just specifying the order that we implemented without much
+    thought (which turned out to be reverse lexicographical, which is also a bit
+    of a gotcha)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

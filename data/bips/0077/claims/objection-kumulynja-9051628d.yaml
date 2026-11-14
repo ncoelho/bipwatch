@@ -1,0 +1,26 @@
+id: objection-kumulynja-9051628d
+bip: 77
+kind: objection
+status: addressed
+area: design
+statement: Avoid using `+` unencoded as the fragment parameter separator in the
+  pj parameter, because common URI parsers treat `+` in query contexts as a
+  space and break parsing.
+subject:
+  name: kumulynja
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1885
+  type: github
+  title: "BIP77: Propose to encode `+` as `%2B` in pj param of Bitcoin URIs"
+  date: 2025-06-30
+  retrieved: 2026-11-14
+  quote: The `+` character also has reserved meaning in query parameter contexts
+    (Bitcoin URI), different  from in path contexts (payjoin URI), and improper
+    encoding can break parsing in standards-compliant URI parsers.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

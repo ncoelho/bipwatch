@@ -1,0 +1,26 @@
+id: task-yuval-kogman-3ad66470
+bip: 77
+kind: task
+status: open
+area: writing
+statement: Document the UTXO probing attack model explicitly in BIP 77,
+  including receiver policies such as automatically broadcasting the fallback
+  transaction and setting a minimum contribution.
+subject:
+  name: Yuval Kogman
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAAQdECAPmrwF+Ratk0uxgK9-suqQq8WDS2BbQqT4SNT9wyN+QQ@mail.gmail.com/
+  type: mailing-list
+  title: UTXO probing attack using payjoin
+  date: 2025-03-28
+  retrieved: 2026-11-14
+  quote: |-
+    I agree, this should be made more explicit and the attack model
+    discussed more clearly, at least in BIP 77.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

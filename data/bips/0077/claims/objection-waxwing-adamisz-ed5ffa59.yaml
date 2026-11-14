@@ -1,0 +1,25 @@
+id: objection-waxwing-adamisz-ed5ffa59
+bip: 77
+kind: objection
+status: open
+area: design
+statement: Decide whether receivers should be required, not just permitted, to
+  broadcast the Original PSBT fallback transaction after the session expires, to
+  mitigate UTXO probing.
+subject:
+  name: waxwing/ AdamISZ
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/d0a0e344-d777-49bc-8b3c-a3462f0d6836n@googlegroups.com/
+  type: mailing-list
+  title: UTXO probing attack using payjoin
+  date: 2025-03-28
+  retrieved: 2026-11-14
+  quote: I think I prefer the BIP78 inclusion of "receiver broadcasts after an
+    expiration" being a requirement, not a "MAY".
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
