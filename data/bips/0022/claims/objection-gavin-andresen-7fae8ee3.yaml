@@ -1,0 +1,25 @@
+id: objection-gavin-andresen-7fae8ee3
+bip: 22
+kind: objection
+status: open
+area: design
+statement: Simplify BIP 22 by working out which optional features most pool
+  customers will use and dropping or separating the rarely used ones.
+subject:
+  name: Gavin Andresen
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CABsx9T3uaEBikhUo7j52mauBx0mnfk2_1mq0QOQBZVptoMB6HA@mail.gmail.com/
+  type: mailing-list
+  title: BIP22/getmemorypool
+  date: 2012-06-11
+  retrieved: 2026-11-14
+  quote: |-
+    Pieter and I feel like
+    BIP 22 is overly complicated, and would like it to be simpler.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

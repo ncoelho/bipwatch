@@ -1,0 +1,26 @@
+id: task-peter-todd-e1f7d3ee
+bip: 22
+kind: task
+status: addressed
+area: engineering
+part_of: pooled-solo mining
+statement: Extend getblocktemplate, along with pool and miner software, so
+  miners build blocks from their own local node while the pool only tracks
+  shares and payouts (pooled-solo mining).
+subject:
+  name: Peter Todd
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/20130531165758.GA29135@petertodd.org/
+  type: mailing-list
+  title: Decentralizing mining
+  date: 2013-05-31
+  retrieved: 2026-11-14
+  quote: the plan is to take getblocktemplate and extend it as required for
+    pooled-solo mining. This will include pool and miner software initially
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

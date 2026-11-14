@@ -1,0 +1,26 @@
+id: task-peter-todd-9ff6309f
+bip: 22
+kind: task
+status: addressed
+area: design
+part_of: BIP 23
+statement: Optimize share submission so miners send transaction hashes instead
+  of the whole block where possible.
+subject:
+  name: Peter Todd
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/20130610210913.GA17242@petertodd.org/
+  type: mailing-list
+  title: Decentralizing mining
+  date: 2013-06-10
+  retrieved: 2026-11-14
+  quote: |-
+    we should optimize this to just hand over tx hashes
+    where possible.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

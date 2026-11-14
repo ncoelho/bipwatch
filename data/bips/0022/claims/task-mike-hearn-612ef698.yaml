@@ -1,0 +1,26 @@
+id: task-mike-hearn-612ef698
+bip: 22
+kind: task
+status: open
+area: engineering
+statement: Make getblocktemplate servers return errors instead of work when a
+  chain fork warning is active, so miners on the wrong chain stop mining
+  automatically.
+subject:
+  name: Mike Hearn
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CANEZrP2Xp7ene+KDw_L_YnNW=hDt9K-UigvZ6PLb3oUviOr_Tw@mail.gmail.com/
+  type: mailing-list
+  title: "[BIP draft] CHECKLOCKTIMEVERIFY - Prevent a txout from being spent until
+    an expiration time"
+  date: 2014-10-07
+  retrieved: 2026-11-14
+  quote: It would be good if getblocktemplate was updated at the same time to
+    serve errors if the fork warning is active.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

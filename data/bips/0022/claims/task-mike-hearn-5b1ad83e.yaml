@@ -1,0 +1,28 @@
+id: task-mike-hearn-5b1ad83e
+bip: 22
+kind: task
+status: open
+area: engineering
+part_of: pooled-solo mining
+statement: Finish getblocktemplate support in mining and pool tools so miners
+  can pool for payouts while still building their own blocks, apart from the
+  coinbase.
+subject:
+  name: Mike Hearn
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CANEZrP2+tufB0jbgqdCc9t_XLbs9pnX9t8jUGfLA_xLDhEts8Q@mail.gmail.com/
+  type: mailing-list
+  title: Decentralizing ming
+  date: 2014-07-18
+  retrieved: 2026-11-14
+  quote: |-
+    I think the best path forward now is to finish off getblocktemplate support
+    in the various tools so it's possible to pool for payout purposes without
+    giving up control of block creation modulo the coinbase.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

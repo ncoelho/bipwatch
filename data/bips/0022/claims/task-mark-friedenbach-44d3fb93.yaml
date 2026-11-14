@@ -1,0 +1,27 @@
+id: task-mark-friedenbach-44d3fb93
+bip: 22
+kind: task
+status: open
+area: engineering
+part_of: pooled-solo mining
+statement: Build mining infrastructure that uses getblocktemplate so miners in
+  pools can select transactions locally.
+subject:
+  name: Mark Friedenbach
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/53A31B3E.7020906@monetize.io/
+  type: mailing-list
+  title: "BlockPow: A Practical Proposal to prevent mining pools AND reduce payoff
+    variance:"
+  date: 2014-06-19
+  retrieved: 2026-11-14
+  quote: |-
+    We just need more or better infrastructure which makes use of this
+    technology to perform local transaction selection.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,29 @@
+id: task-mike-hearn-5f7d961d
+bip: 22
+kind: task
+status: open
+area: engineering
+part_of: pooled-solo mining
+statement: Add support in libblkmaker and other getblocktemplate implementations
+  for miners to connect their own node and choose their own block contents while
+  mining with a pool.
+subject:
+  name: Mike Hearn
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CANEZrP2Lq-28NuvOJR_rS3N2TZsy13xrKubcfPBrMbP7WArcKw@mail.gmail.com/
+  type: mailing-list
+  title: "BlockPow: A Practical Proposal to prevent mining pools AND reduce payoff
+    variance:"
+  date: 2014-06-19
+  retrieved: 2026-11-14
+  quote: |-
+    libblkmaker and other
+    implementations don't actually support connecting your own node to the
+    miners and choosing your own blocks, even though the protocol does.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

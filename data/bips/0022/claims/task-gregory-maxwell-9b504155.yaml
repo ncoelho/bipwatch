@@ -1,0 +1,26 @@
+id: task-gregory-maxwell-9b504155
+bip: 22
+kind: task
+status: open
+area: engineering
+part_of: bundled gbt miner
+statement: Package a modern mining tool supporting CPU/GPU/FPGA/ASIC mining via
+  getblocktemplate alongside bitcoind, to replace getwork-based mining.
+subject:
+  name: Gregory Maxwell
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAAS2fgQtGg+SxRc7Byw0_L3NpEudPTtBpmnKYt-+7VEVSnKZaQ@mail.gmail.com/
+  type: mailing-list
+  title: 'Proposal: remove "getwork" RPC from bitcoind'
+  date: 2013-08-19
+  retrieved: 2026-11-14
+  quote: |-
+    this is why I suggest packaging up a modern mining tool that
+    supports CPU/GPU/FPGA/ASIC mining against a current bitcoind.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
