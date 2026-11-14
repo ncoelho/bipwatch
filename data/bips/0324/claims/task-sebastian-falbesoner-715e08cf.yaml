@@ -1,0 +1,26 @@
+id: task-sebastian-falbesoner-715e08cf
+bip: 324
+kind: task
+status: addressed
+area: engineering
+part_of: bip324 proxy
+statement: "Rewrite the BIP324 proxy in Rust: build a plain v1-to-v1 proxy
+  first, then add the BIP324 v2 transport handling."
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip324-proxy-easy-integration-of-v2-transport-protocol-for-light-clients-poc/678/9
+  type: forum
+  title: "BIP324 Proxy: easy integration of v2 transport protocol for light
+    clients (PoC)"
+  date: 2024-03-17
+  retrieved: 2026-11-14
+  quote: The plan would be to implement a dummy proxy (v1<->v1) first and only
+    then plug in all the BIP324 related stuff.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

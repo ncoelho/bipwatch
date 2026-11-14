@@ -1,0 +1,27 @@
+id: task-dhruv-m-c5330400
+bip: 324
+kind: task
+status: addressed
+area: review
+statement: Review the refreshed BIP324 specification text (BIP PR 1378) and its
+  related Bitcoin Core implementation.
+subject:
+  name: Dhruv M
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/56677685-619a-691f-d5bc-54b69fdb6ed2@bip324.com/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2022-10-08
+  retrieved: 2026-11-14
+  quote: >-
+    We'd like to invite community members to review the BIP[1] and the related
+    Bitcoin Core
+
+    code[2].
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

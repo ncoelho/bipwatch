@@ -1,0 +1,26 @@
+id: task-sebastian-falbesoner-cacb8f44
+bip: 324
+kind: task
+status: addressed
+area: engineering
+part_of: rust bip324 library
+statement: Factor the BIP324 transport logic into a reusable Rust library,
+  possibly as part of rust-bitcoin.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip324-proxy-easy-integration-of-v2-transport-protocol-for-light-clients-poc/678/3
+  type: forum
+  title: "BIP324 Proxy: easy integration of v2 transport protocol for light
+    clients (PoC)"
+  date: 2024-03-14
+  retrieved: 2026-11-14
+  quote: Yeah, I also thought that putting some parts of BIP324 to a library might
+    be a good idea.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

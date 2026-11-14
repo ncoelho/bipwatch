@@ -1,0 +1,26 @@
+id: open-question-pieter-wuille-0e9f4d2d
+bip: 324
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether to replace the separate short-ID and alphabetic
+  message type encodings with a single variable-length encoding that uses each
+  byte's top bit as a continuation flag.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/JXfTBjsA71dHE3h9wkxnWXANrwTbMADO4s2w34gEvMbiduKu4PEt5t-KA3EAIz-Xs4urjBHZ15NDFZST2a7e0x_NqyJymUnEORuTp3SNfMs=@wuille.net/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2022-11-12
+  retrieved: 2026-11-14
+  quote: "I think we can just merge the two and have a single variable-length
+    command structure that can be used for both: command encodings are 1 to 12
+    bytes, each byte's top bit indicating whether another byte follows"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

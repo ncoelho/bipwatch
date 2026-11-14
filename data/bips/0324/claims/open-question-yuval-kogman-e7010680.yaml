@@ -1,0 +1,25 @@
+id: open-question-yuval-kogman-e7010680
+bip: 324
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether message types should use a uniform high-bit-terminated
+  encoding instead of separate 1-byte short IDs and 12-byte ASCII commands.
+subject:
+  name: Yuval Kogman
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAAQdECCibMp+=SfmNW0LfJX=0WZtM5TMw6qWuS9qVUHcvJTBOg@mail.gmail.com/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2022-11-12
+  retrieved: 2026-11-14
+  quote: reversing the meaning of the top bit so that 0 signifies a following byte
+    would allow the alphabetic commands to be reinterpreted as non-alphabetic,
+    so the space no longer needs to be a disjoint union of two sub-spaces
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

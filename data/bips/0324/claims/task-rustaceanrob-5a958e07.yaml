@@ -1,0 +1,26 @@
+id: task-rustaceanrob-5a958e07
+bip: 324
+kind: task
+status: open
+area: engineering
+part_of: rust bip324 library
+statement: Build the top-level API of the Rust BIP 324 library so it can be
+  integrated into the Floresta Rust client's existing TCP logic.
+subject:
+  name: rustaceanrob
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip324-proxy-easy-integration-of-v2-transport-protocol-for-light-clients-poc/678/8
+  type: forum
+  title: "BIP324 Proxy: easy integration of v2 transport protocol for light
+    clients (PoC)"
+  date: 2024-03-17
+  retrieved: 2026-11-14
+  quote: My main concern now is building the top level API around the Floresta
+    Rust client, and I will be working on that this week.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
