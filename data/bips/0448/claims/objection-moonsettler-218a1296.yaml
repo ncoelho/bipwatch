@@ -1,0 +1,26 @@
+id: objection-moonsettler-218a1296
+bip: 448
+kind: objection
+status: addressed
+area: design
+part_of: BIP 446
+statement: Avoid assigning OP_TEMPLATEHASH to opcode 0xcd, which collides with
+  OP_PAIRCOMMIT's existing implementation and activation client.
+subject:
+  name: moonsettler
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1974#issuecomment-3637989508
+  type: github
+  title: "BIP446: OP_TEMPLATEHASH and BIP448: Taproot-native (Re)bindable
+    Transactions"
+  date: 2025-12-10
+  retrieved: 2026-11-14
+  quote: 0xcd is PAIRCOMMIT btw which has an implementation and activation client
+    sort of "out there".
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

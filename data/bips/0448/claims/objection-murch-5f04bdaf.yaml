@@ -1,0 +1,27 @@
+id: objection-murch-5f04bdaf
+bip: 448
+kind: objection
+status: open
+area: writing
+statement: Clarify what the bundle BIP is meant to be and give it substantive
+  specification content, such as activation details, beyond serving as a
+  placeholder.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1974#pullrequestreview-3563925471
+  type: github
+  title: "BIP446: OP_TEMPLATEHASH and BIP448: Taproot-native (Re)bindable
+    Transactions"
+  date: 2025-12-10
+  retrieved: 2026-11-14
+  quote: It seems that it is perhaps a placeholder for the activation parameters,
+    and while it does provide some additional motivation for the bundle, it
+    feels like there is still some crunch missing here.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

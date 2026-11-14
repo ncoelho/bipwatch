@@ -1,0 +1,25 @@
+id: task-murch-783e094e
+bip: 448
+kind: task
+status: addressed
+area: writing
+statement: Expand the content of the bundle ("Twine") BIP document before it can
+  be published.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1974#issuecomment-4006305534
+  type: github
+  title: "BIP446: OP_TEMPLATEHASH and BIP448: Taproot-native (Re)bindable
+    Transactions"
+  date: 2026-03-05
+  retrieved: 2026-11-14
+  quote: this PR is waiting for an update from the authors to expand the content
+    of the Twine document
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

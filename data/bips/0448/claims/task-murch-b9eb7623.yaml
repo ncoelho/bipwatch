@@ -1,0 +1,27 @@
+id: task-murch-b9eb7623
+bip: 448
+kind: task
+status: addressed
+area: writing
+statement: Add a short Specification section to the bundle BIP stating which
+  OP_SUCCESS opcodes the three operations redefine and defining them as a bundle
+  to be activated together.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1974#issuecomment-3961981225
+  type: github
+  title: "BIP446: OP_TEMPLATEHASH and BIP448: Taproot-native (Re)bindable
+    Transactions"
+  date: 2026-02-25
+  retrieved: 2026-11-14
+  quote: extended with a short and sweet Specification section that reiterates
+    which OP_SUCCESS opcodes are used, defines the three proposals as a bundle
+    to be activated together
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

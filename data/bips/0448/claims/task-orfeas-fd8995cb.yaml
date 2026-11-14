@@ -1,0 +1,23 @@
+id: task-orfeas-fd8995cb
+bip: 448
+kind: task
+status: open
+area: writing
+statement: Add a rationale comparison of BIP 448 against BIP 118
+  (SIGHASH_ANYPREVOUT), explaining which applications each enables.
+subject:
+  name: orfeas
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/add-comparison-to-bip-118-in-bip-448/2799/1
+  type: forum
+  title: Add comparison to BIP-118 in BIP-448
+  date: 2026-08-12
+  retrieved: 2026-11-14
+  quote: What's the diff of applications enabled by 448 and 118?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
