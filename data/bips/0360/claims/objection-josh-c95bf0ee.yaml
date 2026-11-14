@@ -1,0 +1,25 @@
+id: objection-josh-c95bf0ee
+bip: 360
+kind: objection
+status: addressed
+area: ux
+statement: Reconsider the name Pay-to-Tapscript-Hash (P2TSH), which could be
+  confusing if a future tapleaf version supports non-tapscript languages such as
+  Simplicity.
+subject:
+  name: josh
+  type: person
+applies_to_version: 0.10.0
+source:
+  url: https://delvingbitcoin.org/t/major-bip-360-update/2170/2
+  type: forum
+  title: Major BIP 360 Update
+  date: 2025-12-20
+  retrieved: 2026-11-14
+  quote: I worry this name could be confusing if a new tapleaf version is added
+    that supports Simplicity.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

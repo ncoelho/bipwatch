@@ -1,0 +1,25 @@
+id: task-conduition-08b400e8
+bip: 360
+kind: task
+status: open
+area: design
+part_of: pq signature bip
+statement: Specify ML-DSA and SLH-DSA signature opcodes in companion BIPs that
+  ship alongside BIP 360.
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.8.0
+source:
+  url: https://delvingbitcoin.org/t/changes-to-bip-360-pay-to-quantum-resistant-hash-p2qrh/1811/19
+  type: forum
+  title: Changes to BIP-360 - Pay to Quantum Resistant Hash (P2QRH)
+  date: 2025-07-18
+  retrieved: 2026-11-14
+  quote: I still think if possible we should try to get ML-DSA and SLH-DSA
+    standardized and packaged with BIP360, even if they are separate BIPs.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

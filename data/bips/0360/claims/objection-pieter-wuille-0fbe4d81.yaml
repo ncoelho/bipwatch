@@ -1,0 +1,25 @@
+id: objection-pieter-wuille-0fbe4d81
+bip: 360
+kind: objection
+status: addressed
+area: ux
+statement: Rename the output type from Pay-to-Tapscript-Hash, because it commits
+  to a script tree Merkle root rather than a script hash and is not restricted
+  to tapscript.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.10.0
+source:
+  url: https://delvingbitcoin.org/t/major-bip-360-update/2170/4
+  type: forum
+  title: Major BIP 360 Update
+  date: 2025-12-22
+  retrieved: 2026-11-14
+  quote: it's (a) not the hash of a script but a Merkle root and (b) not
+    restricted to tapscript.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
