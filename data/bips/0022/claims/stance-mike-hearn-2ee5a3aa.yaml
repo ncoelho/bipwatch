@@ -1,0 +1,26 @@
+id: stance-mike-hearn-2ee5a3aa
+bip: 22
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Mike Hearn recommends working on getblocktemplate support as a better
+  path to mining decentralisation than requiring miner signatures in block
+  headers, arguing that decentralised pooled mining is possible.
+subject:
+  name: Mike Hearn
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CANEZrP2kB3H6SFdo3xCD1CxCyv5aB2BDH7Ad62a4iAJw8X1EHw@mail.gmail.com/
+  type: mailing-list
+  title: "Proposal: Requiring a miner's signature in the block header"
+  date: 2015-02-11
+  retrieved: 2026-11-14
+  quote: |-
+    If you're interested in working on mining decentralisation, chipping away
+    at getblocktemplate support would be a better path forward.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

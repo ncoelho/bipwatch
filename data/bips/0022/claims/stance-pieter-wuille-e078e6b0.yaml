@@ -1,0 +1,30 @@
+id: stance-pieter-wuille-e078e6b0
+bip: 22
+kind: stance
+stance: conditional
+condition: The standard is simplified, with fewer optional variations and one
+  way to express each behaviour, and its purpose and process are clearly
+  described.
+scope: proposal
+statement: Pieter Wuille finds BIP 22 too complex, with too many optional
+  features and redundant ways of specifying the same behaviour. He wants it
+  simplified before he would support merging code that implements it, and
+  sketches a simpler getblocktemplate/submitblocktemplate design.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/20120610090357.GA25567@vps7135.xlshosting.net/
+  type: mailing-list
+  title: BIP22/getmemorypool
+  date: 2012-06-10
+  retrieved: 2026-11-14
+  quote: In summary, I'd like to see the standard simplified. I have no problem
+    merging code that makes getmemorypool compliant to a standard that is agreed
+    upon, but like to understand it first.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
