@@ -11,6 +11,9 @@ import { dataChecks, loadPrStates, loadSpecHistory, type BipBundle } from '@bipw
 import AtAGlance from '../components/frame/AtAGlance.astro';
 import ApplicationsHero from '../components/layer/ApplicationsHero.astro';
 import CoreTrack from '../components/layer/CoreTrack.astro';
+import ConsensusHero from '../components/layer/ConsensusHero.astro';
+import ConsensusPositions from '../components/layer/ConsensusPositions.astro';
+import FixesOverview from '../components/layer/FixesOverview.astro';
 import DataChecks from '../components/frame/DataChecks.astro';
 import Discussed from '../components/frame/Discussed.astro';
 import FactRail from '../components/frame/FactRail.astro';
@@ -63,7 +66,13 @@ const sections = [
 
   <Lifecycle bip={bip} />
   <DataChecks checks={checks} />
-  {page === 'applications' ? <ApplicationsHero bundle={bundle} checks={checks} /> : <AtAGlance bundle={bundle} known={known} history={history} />}
+  {page === 'applications' ? (
+    <ApplicationsHero bundle={bundle} checks={checks} />
+  ) : page === 'consensus' && bundle.road ? (
+    <ConsensusHero bundle={bundle} />
+  ) : (
+    <AtAGlance bundle={bundle} known={known} history={history} />
+  )}
 
   <div class="details-head">
     <div class="eyebrow">Spec, work and positions</div>
@@ -83,7 +92,8 @@ const sections = [
     <div class="panels">
       <section id="overview" role="tabpanel" aria-labelledby="tab-overview" class="tabpanel">
         <h2 class="nojs">Overview</h2>
-        {history && history.changes.length > 0 && <SpecHistory bip={bip} history={history} settled={page === 'applications'} claims={claims} />}
+        {page === 'consensus' && <FixesOverview bundle={bundle} />}
+        {page !== 'consensus' && history && history.changes.length > 0 && <SpecHistory bip={bip} history={history} settled={page === 'applications'} claims={claims} />}
         {page !== 'applications' && <Implementations bundle={bundle} />}
         {page === 'applications' && <CoreTrack bundle={bundle} prs={prs} />}
         <Discussed bundle={bundle} />
@@ -106,7 +116,7 @@ const sections = [
       </section>
       <section id="positions" role="tabpanel" aria-labelledby="tab-positions" class="tabpanel">
         <h2 class="nojs">Positions</h2>
-        {stances ? <PositionsExplorer bundle={bundle} /> : <p class="empty">No positions recorded yet.</p>}
+        {page === 'consensus' ? <ConsensusPositions bundle={bundle} history={history} /> : stances ? <PositionsExplorer bundle={bundle} /> : <p class="empty">No positions recorded yet.</p>}
       </section>
     </div>
   </div>

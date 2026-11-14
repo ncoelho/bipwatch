@@ -1,0 +1,190 @@
+---
+// Consensus layer hero (page templates spec): "What stands between this and
+// activation?", answered by the road to activation from road.yaml: dated
+// steps in lanes on one time axis (done, now, a gap that is required and
+// missing, and undated steps after a "now" line), a step list and a detail
+// panel, then the next blocker with the open activation work.
+import type { BipBundle } from '@bipwatch/data';
+import { WORK_KINDS, datePct, roughAge } from '../../lib/view.ts';
+
+interface Props { bundle: BipBundle; }
+const { bundle } = Astro.props;
+const { bip } = bundle;
+const road = bundle.road!;
+const dated = road.steps.filter((s) => s.date).map((s) => s.date!).sort();
+const today = new Date().toISOString().slice(0, 10);
+const from = Date.parse(`${dated[0]}T00:00:00Z`) - 40 * 86_400_000;
+const nowT = Date.parse(`${today}T00:00:00Z`);
+// Dated steps sit on the left 74% up to today; undated ones are spaced evenly after it.
+const span = (nowT - from) / 0.74;
+const x = (d: string) => datePct(d, from, from + span);
+const undated = road.steps.filter((s) => !s.date);
+const pos = (s: (typeof road.steps)[number]) => (s.date ? x(s.date) : 79 + undated.indexOf(s) * (18 / Math.max(1, undated.length - 1)));
+const lanes = road.lanes.map((l, li) => ({ ...l, li, steps: road.steps.filter((s) => s.lane === l.key) }));
+const label = (s: (typeof road.steps)[number]) => {
+  const li = road.lanes.findIndex((l) => l.key === s.lane);
+  const i = road.steps.filter((t) => t.lane === s.lane).indexOf(s);
+  return li === 0 ? String(i + 1) : String.fromCharCode(97 + i);
+};
+const order = [...road.steps].sort((a, b) => (a.date ?? '9999').localeCompare(b.date ?? '9999') || road.steps.indexOf(a) - road.steps.indexOf(b));
+const STATE = { done: 'Done', now: 'In progress', gap: 'Missing · blocks everything after it', todo: 'Not started' } as const;
+const years: number[] = [];
+for (let y = new Date(from).getUTCFullYear() + 1; y <= new Date(today).getUTCFullYear(); y++) years.push(y);
+const gap = road.steps.find((s) => s.state === 'gap');
+const nowStep = road.steps.find((s) => s.state === 'now');
+const activation = bundle.claims.filter((c) => WORK_KINDS.includes(c.kind) && c.status !== 'addressed' && (c.area === 'activation' || c.tags?.includes('topic:activation')));
+const id = (s: (typeof road.steps)[number]) => `step-${road.steps.indexOf(s)}`;
+const answer = bip.bipwatch.short_answer
+  ?? `${bip.status === 'Complete' ? `The spec is complete${bip.status_since ? ` (for ${roughAge(bip.status_since)})` : ''}` : `The spec is ${bip.status.toLowerCase()}`}${nowStep ? ` and ${nowStep.title.toLowerCase()} is in progress` : ''}. ${gap ? `What blocks activation: ${gap.title.toLowerCase()}, which doesn’t exist yet.` : ''}`;
+---
+<div class="hero">
+  <div class="lead">
+    <div class="eyebrow">Layer main question · {bip.layer}</div>
+    <h2>What stands between this and activation?</h2>
+    {bip.bipwatch.summary && <p>{bip.bipwatch.summary}</p>}
+  </div>
+  <div class="answer"><div class="label">The short answer</div><p>{answer}</p></div>
+</div>
+
+<section class="road" id="road" aria-labelledby="h-road" data-road>
+  <div class="head">
+    <h2 id="h-road">Road to activation <span class="sub">· {road.steps.filter((s) => s.state === 'done').length} of {road.steps.length} steps done</span></h2>
+    {road.provenance.reviewed_by === null && <span class="pill warn">Pending review</span>}
+  </div>
+  <div class="scroll">
+    <div class="axis">
+      <div class="ticks" aria-hidden="true">
+        {years.map((y) => <span class="tick mono" style={`left:${x(`${y}-01-01`).toFixed(2)}%`}>{y}</span>)}
+        <span class="tick after">After an activation method is agreed →</span>
+      </div>
+      <span class="nowline" style={`left:calc(190px + (100% - 190px) * ${(x(today) / 100).toFixed(4)})`} aria-hidden="true"><span>Today</span></span>
+      {lanes.map((l) => (
+        <div class="lane">
+          <span class="ll">{l.label}</span>
+          <span class="track">
+            {l.steps.map((s) => (
+              <a href={`#${id(s)}`} class:list={['pin', s.state, { sq: l.li > 0 }]} style={`left:${pos(s).toFixed(2)}%`} data-step={id(s)} aria-label={`${s.title}${s.date ? `, ${s.date}` : ''}: ${STATE[s.state]}`}>{label(s)}</a>
+            ))}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="body">
+    <ol class="steps">
+      {order.map((s) => (
+        <li>
+          <a href={`#${id(s)}`} class="srow" data-step={id(s)}>
+            <span class:list={['badge', s.state, { sq: s.lane !== road.lanes[0].key }]}>{label(s)}</span>
+            <span class="d mono">{s.date ?? '–'}</span>
+            <span class="t">{s.title}</span>
+            <span class="src">{s.source.label}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+    <div class="details">
+      {road.steps.map((s) => (
+        <div class="sd" id={id(s)} data-detail={id(s)} data-first={s === (nowStep ?? gap) ? '1' : undefined}>
+          <div class="eyebrow2">{road.lanes.find((l) => l.key === s.lane)?.label} · {s.date ?? 'not dated'}</div>
+          <div class="st">{s.title}</div>
+          <div><span class:list={['pill', { info: s.state === 'done', accent: s.state === 'now' || s.state === 'gap' }]}>{STATE[s.state]}</span></div>
+          <p>{s.text}</p>
+          <div class="srcl">{s.source.url ? <a href={s.source.url} rel="noopener">{s.source.label}</a> : s.source.label}{s.source.claim && <> · <a href={`#${s.source.claim}`}>the claim</a></>}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {gap && (
+    <div class="blocker">
+      <div class="label">Next blocker</div>
+      <p><strong>{gap.title}.</strong> {gap.text}</p>
+      <p class="links">
+        {activation.length > 0 && <a href="#needs?area=activation">{activation.length} open {activation.length === 1 ? 'item' : 'items'} about activation ↓</a>}
+        {bundle.road?.readiness && <a href="#pools">See pool readiness ↓</a>}
+      </p>
+    </div>
+  )}
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-road]');
+  if (root) {
+    root.classList.add('js');
+    const details = [...root.querySelectorAll<HTMLElement>('[data-detail]')];
+    const triggers = [...root.querySelectorAll<HTMLAnchorElement>('[data-step]')];
+    const select = (id: string) => {
+      for (const d of details) d.hidden = d.dataset.detail !== id;
+      for (const t of triggers) t.classList.toggle('on', t.dataset.step === id);
+    };
+    for (const t of triggers)
+      t.addEventListener('click', (e) => {
+        e.preventDefault();
+        history.replaceState(null, '', `#${t.dataset.step}`);
+        select(t.dataset.step!);
+      });
+    const fromHash = () => {
+      const h = location.hash.slice(1);
+      const id = details.some((d) => d.dataset.detail === h) ? h : details.find((d) => d.dataset.first)?.dataset.detail ?? details[0]?.dataset.detail;
+      if (id) select(id);
+    };
+    window.addEventListener('hashchange', fromHash);
+    fromHash();
+  }
+</script>
+
+<style>
+  .hero { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px 24px; flex-wrap: wrap; margin-top: 44px; }
+  .lead { max-width: 660px; }
+  .lead h2 { margin-top: 6px; font-size: 34px; letter-spacing: -0.02em; line-height: 1.12; }
+  .lead p { margin-top: 10px; color: var(--muted); font-size: 16px; }
+  .answer { background: var(--info-ground); border-radius: 14px; padding: 14px 18px; max-width: 420px; }
+  .answer .label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--info-ink); font-weight: 600; }
+  .answer p { margin-top: 4px; font-size: 15px; }
+  .road { margin-top: 24px; background: var(--panel); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+  .head { display: flex; justify-content: space-between; align-items: center; gap: 10px 16px; flex-wrap: wrap; }
+  .head h2 { font-size: 17px; }
+  .sub { font-weight: 400; color: var(--faint); font-size: 14px; }
+  .scroll { overflow-x: auto; }
+  .axis { position: relative; min-width: 700px; padding: 26px 0 4px 190px; display: flex; flex-direction: column; gap: 6px; }
+  .ticks { position: absolute; top: 0; left: 190px; right: 0; height: 20px; }
+  .tick { position: absolute; top: 2px; font-size: 11.5px; color: var(--faint); transform: translateX(-50%); }
+  .tick.after { left: 76%; transform: none; color: var(--info-ink); }
+  .nowline { position: absolute; top: 20px; bottom: 0; width: 2px; background: var(--fg); opacity: 0.5; z-index: 1; pointer-events: none; }
+  .nowline span { position: absolute; top: -18px; transform: translateX(-110%); font-size: 11.5px; color: var(--fg); white-space: nowrap; }
+  .lane { position: relative; display: block; height: 52px; border-radius: 12px; background: var(--inset); margin-left: -190px; padding-left: 190px; }
+  .ll { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 170px; font-size: 13.5px; font-weight: 600; }
+  .track { position: relative; display: block; height: 100%; }
+  .pin { position: absolute; top: 13px; width: 26px; height: 26px; margin-left: -13px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-family: var(--mono); font-size: 11.5px; font-weight: 600; text-decoration: none; }
+  .pin::before, .srow::before { content: ''; position: absolute; inset: -9px; }
+  .pin.sq, .badge.sq { border-radius: 7px; }
+  .pin.done, .badge.done { background: var(--info); color: #06101F; }
+  .pin.now, .badge.now { background: var(--accent); color: #1A0A00; }
+  .pin.gap, .badge.gap { background: var(--accent-ground); color: var(--accent-ink); box-shadow: inset 0 0 0 2px var(--accent); }
+  .pin.todo, .badge.todo { background: var(--info-ground); color: var(--info-ink); box-shadow: inset 0 0 0 1.5px #3A5A99; }
+  .pin.sq.done, .badge.sq.done { background: var(--good); color: #03140E; }
+  .pin.on { outline: 2px solid var(--fg); outline-offset: 3px; }
+  .body { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+  .steps { flex: 3 1 420px; min-width: 0; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  .srow { position: relative; display: grid; grid-template-columns: 22px 88px minmax(0, 1fr) auto; gap: 12px; align-items: center; min-height: 40px; padding: 6px 10px; border-radius: 10px; color: var(--fg-2); text-decoration: none; font-size: 13.5px; }
+  .srow:hover, .srow.on { background: var(--card); color: var(--fg); }
+  .badge { width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-family: var(--mono); font-size: 11px; font-weight: 600; }
+  .d { font-size: 12px; color: var(--faint); }
+  .src { font-size: 12px; color: var(--faint); text-align: right; }
+  .details { flex: 2 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+  .sd { background: var(--card); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 10px; scroll-margin-top: 16px; }
+  .road:not(.js) .sd { display: none; }
+  .road:not(.js) .sd:target { display: flex; }
+  .eyebrow2 { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); font-weight: 600; }
+  .st { font-size: 20px; font-weight: 650; line-height: 1.2; }
+  .sd p { font-size: 14px; color: var(--fg-2); }
+  .srcl { font-size: 13px; color: var(--muted); }
+  .blocker { background: var(--accent-ground); border-radius: 14px; padding: 14px 18px; display: flex; flex-direction: column; gap: 6px; font-size: 14.5px; color: #F2D9C4; }
+  .blocker .label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-ink); font-weight: 600; }
+  .blocker strong { color: #fff; }
+  .links { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13.5px; }
+  .links a { color: var(--accent-ink); }
+  @media (max-width: 640px) { .srow { grid-template-columns: 22px 1fr; gap: 2px 12px; } .d, .t, .src { grid-column: 2; } .src { text-align: left; } }
+</style>

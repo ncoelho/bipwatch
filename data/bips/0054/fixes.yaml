@@ -1,0 +1,91 @@
+# The four fixes BIP 54 bundles. Rule, threat, section and quotes come from
+# the spec at the record's spec.revision (the validator checks the quotes);
+# who acts and the stories summarise the claims tagged fix:<key>. Drafted
+# from the page templates boards; pending review.
+bip: 54
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
+fixes:
+  - key: tw
+    name: Timewarp
+    summary: 2-hour limit at each retarget
+    rule: >-
+      The first block of each difficulty period can't be timestamped more than
+      2 hours before the block before it, and a period can't end before it
+      started (the Murch–Zawy rule).
+    threat: >-
+      A majority-hashrate miner pushing difficulty to its minimum within weeks,
+      then mining blocks far faster and taking future subsidy early.
+    quote: In the worst case, an attacker can bring down the difficulty to its minimum within 38 days of starting the attack.
+    section: Motivation
+    safe_in:
+      text: Bitcoin Core 29.0 and later
+      quote: and later will not generate a block template that violates the timestamp restrictions introduced in this BIP.
+    who_acts: Nobody. Miners already take the timestamp from getblocktemplate's curtime or mintime.
+    must_act: false
+    story: >-
+      The grace period grew from 10 minutes to 2 hours after review, and the
+      Murch–Zawy rule was added against negative-duration periods. A late
+      request to leave room for a future fix of the 2106 timestamp overflow
+      was opposed by the author.
+  - key: sig
+    name: Slow blocks
+    summary: 2,500 signature operations per transaction
+    rule: >-
+      A transaction counting more than 2,500 legacy signature operations across
+      its inputs is invalid.
+    threat: >-
+      A crafted block taking minutes to validate on fast hardware and much
+      longer on slow hardware, usable against competing miners.
+    quote: Such a limit reduces the worst case block validation time by a factor of 40
+    section: Rationale
+    safe_in:
+      text: Bitcoin Core 30.0 and later
+      quote: and later will not generate a block template including a transaction that violates the signature operations limit introduced in this BIP.
+    who_acts: Nobody. No non-pathological standard transaction is affected.
+    must_act: false
+    story: >-
+      It started as restrictions on legacy Script that raised confiscation
+      concerns, and settled on a per-transaction signature operations limit.
+      Fixing the old SIGHASH_SINGLE bug in the same soft fork was proposed and
+      left out.
+  - key: b64
+    name: 64-byte transactions
+    summary: Merkle tree ambiguity
+    rule: A transaction whose witness-stripped size is exactly 64 bytes is invalid.
+    threat: >-
+      Fake inclusion proofs that trick SPV verifiers into accepting a
+      transaction that isn't in the block.
+    quote: They have also been non-standard since 2019 and never been used since 2016.
+    section: Rationale
+    safe_in:
+      text: Bitcoin Core 0.16.1 and later
+      quote: and later will neither relay nor create block templates that include transactions whose witness-stripped serialized size is exactly 64 bytes.
+    who_acts: Nobody.
+    must_act: false
+    story: >-
+      The most contested fix. evoskuil objected that SPV verifiers can avoid
+      the problem more cheaply without a consensus change; harding, ajtowns and
+      the author argued for fixing the root cause.
+  - key: cb
+    name: Duplicate transactions
+    summary: The coinbase commits to its height
+    rule: >-
+      The coinbase's nLockTime must be the block height minus 1, and its
+      nSequence can't be final.
+    threat: >-
+      Full BIP 30 duplicate-transaction checks returning in future blocks,
+      adding validation overhead and ruling out some designs, such as Utreexo.
+    quote: The coinbase transaction's `nLockTime` field must be set to the height of the block minus 1
+    section: Specification
+    safe_in:
+      text: Bitcoin Core's own block builder since May 2025 (bitcoin/bitcoin #32155); pool software unknown
+      quote: there does not exist an open source reference broadly in use today for such software.
+    who_acts: Mining pools. Their software builds the coinbase.
+    must_act: true
+    story: >-
+      It moved from a mandatory witness commitment to the coinbase nLockTime
+      in 2024, then to height minus 1 with a non-final nSequence. Getting
+      miners to run it before activation parameters exist is still open.

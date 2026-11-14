@@ -1,0 +1,236 @@
+---
+// Consensus layer, Positions tab (page templates spec).
+// "How it was argued out": a lane per fix (from the fix:<key> tags), plus the
+// whole proposal and activation, with every claim kind plotted by date: a
+// statement is a dot, an objection a square, an open question a diamond, a
+// task a bar; against or conditional is a ring, still open is orange. A line
+// marks the first spec version. "Who has spoken": people sized by how much
+// they said, authors marked, a ring for a latest stance against or with a
+// condition; then stakeholder groups from people.yaml. No tallies, no
+// percentages, no colour for for or against.
+import { loadPeople, type BipBundle, type Claim, type SpecHistory } from '@bipwatch/data';
+import { SOURCE_LABEL, STANCE_LABEL, WORK_KIND_LABEL, datePct, isRing } from '../../lib/view.ts';
+
+interface Props { bundle: BipBundle; history: SpecHistory | null; }
+const { bundle, history } = Astro.props;
+const { bip, fixes } = bundle;
+const laneOf = (c: Claim) => c.tags?.find((t) => t.startsWith('fix:'))?.slice(4) ?? (c.tags?.includes('topic:activation') ? 'act' : 'all');
+const LANES = [
+  { key: 'all', label: 'Whole proposal' },
+  ...(fixes?.fixes ?? []).map((f) => ({ key: f.key, label: f.name })),
+  { key: 'act', label: 'Activation' },
+];
+const claims = bundle.claims.filter((c) => c.kind !== 'implementation' && c.source.date);
+const dates = claims.map((c) => c.source.date!).sort();
+const from = Date.parse(`${dates[0]}T00:00:00Z`) - 20 * 86_400_000;
+const to = Date.now();
+const v1 = history?.versions[0];
+const years: number[] = [];
+for (let y = new Date(from).getUTCFullYear() + 1; y <= new Date(to).getUTCFullYear(); y++) years.push(y);
+const shape = (c: Claim) => (c.kind === 'stance' ? 'dot' : c.kind === 'objection' ? 'sq' : c.kind === 'open-question' ? 'dia' : 'bar');
+const open = (c: Claim) => c.kind !== 'stance' && c.status === 'open';
+const against = (c: Claim) => c.kind === 'stance' && isRing(c);
+const did = (c: Claim) => (c.kind === 'stance' ? c.id : `arg-${c.id}`);
+const kindWord = (c: Claim) => (c.kind === 'stance' ? STANCE_LABEL[c.stance!] : WORK_KIND_LABEL[c.kind] ?? c.kind);
+const laneLabel = (k: string) => LANES.find((l) => l.key === k)?.label ?? k;
+const sorted = [...claims].sort((a, b) => (b.source.date ?? '').localeCompare(a.source.date ?? ''));
+const first = sorted.find(open) ?? sorted[0];
+
+// Who has spoken.
+const people = loadPeople().people;
+const byPerson = new Map<string, Claim[]>();
+for (const c of claims) if (c.subject?.name) byPerson.set(c.subject.name, [...(byPerson.get(c.subject.name) ?? []), c]);
+const authors = new Set(bip.authors.map((a) => a.replace(/\s*<.*>$/, '').trim()));
+const ppl = [...byPerson]
+  .map(([name, cs]) => {
+    const latestProposal = cs.filter((c) => c.kind === 'stance' && c.scope === 'proposal').sort((a, b) => (b.source.date ?? '').localeCompare(a.source.date ?? ''))[0];
+    const latest = [...cs].sort((a, b) => (b.source.date ?? '').localeCompare(a.source.date ?? ''))[0];
+    return { name, cs, latest, ring: !!latestProposal && isRing(latestProposal), author: authors.has(name), lanes: [...new Set(cs.map(laneOf))] };
+  })
+  .sort((a, b) => b.cs.length - a.cs.length || a.name.localeCompare(b.name));
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+const GROUPS = [
+  { key: 'developers', label: 'Developers and reviewers' },
+  { key: 'miners', label: 'Miners and pools' },
+  { key: 'economic-nodes', label: 'Economic nodes' },
+  { key: 'wallets', label: 'Wallets and L2 builders' },
+] as const;
+const groupOf = new Map(people.filter((p) => p.group).map((p) => [p.name, p]));
+---
+<section class="panel" id="argued" aria-labelledby="h-arg" data-argued>
+  <h2 id="h-arg">How it was argued out <span class="sub">· {claims.length} claims by fix, as raised</span></h2>
+  <p class="lede">A dot is a statement, a square an objection, a diamond an open question, a bar a task. A ring is against or conditional; orange is still open. No tallies, by design.</p>
+  <div class="scroll">
+    <div class="lanes">
+      {v1 && <span class="vline" style={`left:calc(192px + (100% - 192px) * ${(datePct(v1.date, from, to) / 100).toFixed(4)})`}><span class="mono">{v1.version}</span></span>}
+      {LANES.map((l) => {
+        const cs = claims.filter((c) => laneOf(c) === l.key);
+        const ppl2 = new Set(cs.map((c) => c.subject?.name)).size;
+        const o = cs.filter(open).length;
+        return (
+          <div class="lane" id={`lane-${l.key}`} data-lane={l.key}>
+            <span class="ll"><span class="lt">{l.label}</span><span class="lm">{cs.length} claims · {ppl2} people{o ? ` · ${o} open` : ''}</span></span>
+            <span class="track">
+              {cs.map((c, j) => (
+                <button type="button" class:list={['mk', shape(c), { open: open(c), ring: against(c) }]} data-item={c.id} style={`left:${datePct(c.source.date, from, to).toFixed(2)}%;top:${15 + (((j * 5) % 3) - 1) * 7}px`} aria-label={`${c.source.date}, ${c.subject?.name}, ${kindWord(c)}`}></button>
+              ))}
+            </span>
+          </div>
+        );
+      })}
+      <div class="lane ticks" aria-hidden="true"><span></span><span class="track">{years.map((y) => <span class="tick mono" style={`left:${datePct(`${y}-01-01`, from, to).toFixed(2)}%`}>{y}</span>)}</span></div>
+    </div>
+  </div>
+  <div class="details">
+    {sorted.map((c) => (
+      <div class="cd" id={did(c)} data-cdetail={c.id} data-first={c === first ? '1' : undefined}>
+        <div class="eyebrow2">{laneLabel(laneOf(c))} · {c.source.date}{v1 && c.source.date! < v1.date ? ` · before ${v1.version}` : ''}</div>
+        <div class="who">{c.subject?.name}</div>
+        <div class="chips">
+          <span class:list={['pill', { accent: open(c) || against(c) }]}>{kindWord(c)}</span>
+          {c.kind !== 'stance' && c.status && <span class:list={['pill', { good: c.status === 'addressed' }]}>{c.status}</span>}
+          {c.provenance.reviewed_by === null && <span class="pill warn">pending review</span>}
+        </div>
+        <p>{c.statement}</p>
+        {c.source.quote && <blockquote>“{c.source.quote}”<span class="src">{SOURCE_LABEL[c.source.type]}{c.source.verified ? ' · quote matched' : ''}</span></blockquote>}
+        {c.condition && <div class="cond">Condition: {c.condition}</div>}
+        <a href={c.source.url} rel="noopener">Open the message</a>
+      </div>
+    ))}
+  </div>
+</section>
+
+<section class="panel" id="spoken" aria-labelledby="h-spoken" data-spoken>
+  <h2 id="h-spoken">Who has spoken <span class="sub">· {ppl.length} people, sized by how much they said</span></h2>
+  <p class="lede">Consensus isn’t a vote: this shows who has spoken and about what, not a count. A ring means their latest statement on the proposal is against it or conditional. Authors are marked.</p>
+  <div class="map" role="group" aria-label="People">
+    {ppl.map((p) => (
+      <button type="button" class:list={['person', { ring: p.ring, author: p.author }]} data-person={slug(p.name)} style={`flex-grow:${p.cs.length};flex-basis:${Math.min(240, 60 + p.cs.length * 14)}px`}>
+        <span class="pn">{p.name}</span><span class="pc mono">{p.cs.length}</span>{p.author && <span class="au">author</span>}
+      </button>
+    ))}
+  </div>
+  <div class="pdetails">
+    {ppl.map((p, i) => (
+      <div class="pd" id={`who-${slug(p.name)}`} data-pdetail={slug(p.name)} data-first={i === 0 ? '1' : undefined}>
+        <div class="eyebrow2">{p.author ? 'Author of the BIP' : groupOf.get(p.name)?.group ? GROUPS.find((g) => g.key === groupOf.get(p.name)!.group)!.label : 'Role not recorded'}</div>
+        <div class="who">{p.name}</div>
+        <div class="chips">{p.lanes.map((k) => <a class="pill" href={`#positions?lane=${k}`}>{laneLabel(k)}</a>)}</div>
+        <p>{p.latest.statement}</p>
+        {p.latest.source.quote && <blockquote>“{p.latest.source.quote}”<span class="src">{p.latest.source.date} · {SOURCE_LABEL[p.latest.source.type]}</span></blockquote>}
+      </div>
+    ))}
+  </div>
+  <h3>By stakeholder group</h3>
+  <ul class="groups">
+    {GROUPS.map((g) => {
+      const members = ppl.filter((p) => groupOf.get(p.name)?.group === g.key);
+      return (
+        <li>
+          <b>{g.label}</b>
+          <span>{members.length ? members.map((m) => m.name).join(', ') : 'none found'}</span>
+        </li>
+      );
+    })}
+  </ul>
+  <p class="note">Groups are set only where a public source shows someone’s role, so an empty group may only mean nobody has been classified yet, or that what has been read so far doesn’t include them.</p>
+</section>
+
+<script>
+  const arg = document.querySelector<HTMLElement>('[data-argued]');
+  const spoken = document.querySelector<HTMLElement>('[data-spoken]');
+  const show = <T extends HTMLElement>(els: T[], key: string, attr: string) => {
+    for (const d of els) d.hidden = d.dataset[attr] !== key;
+  };
+  if (arg) {
+    arg.classList.add('js');
+    const marks = [...arg.querySelectorAll<HTMLButtonElement>('[data-item]')];
+    const details = [...arg.querySelectorAll<HTMLElement>('[data-cdetail]')];
+    const lanes = [...arg.querySelectorAll<HTMLElement>('[data-lane]')];
+    const select = (item: string, lane = '') => {
+      show(details, item, 'cdetail');
+      for (const m of marks) m.classList.toggle('on', m.dataset.item === item);
+      for (const l of lanes) l.classList.toggle('dim', !!lane && l.dataset.lane !== lane);
+    };
+    for (const m of marks)
+      m.addEventListener('click', () => {
+        history.replaceState(null, '', `#positions?item=${encodeURIComponent(m.dataset.item!)}`);
+        select(m.dataset.item!);
+      });
+    const fromHash = () => {
+      const h = decodeURIComponent(location.hash.slice(1));
+      const q = new URLSearchParams(h.split('?')[1] ?? '');
+      const lane = q.get('lane') ?? '';
+      let item = q.get('item') ?? (details.some((d) => d.dataset.cdetail === h) ? h : '');
+      if (!item && lane) item = marks.filter((m) => m.closest<HTMLElement>('[data-lane]')?.dataset.lane === lane).at(-1)?.dataset.item ?? '';
+      select(item || details.find((d) => d.dataset.first)?.dataset.cdetail || '', lane);
+      if (lane) arg.scrollIntoView({ block: 'start' });
+    };
+    window.addEventListener('hashchange', fromHash);
+    fromHash();
+  }
+  if (spoken) {
+    spoken.classList.add('js');
+    const btns = [...spoken.querySelectorAll<HTMLButtonElement>('[data-person]')];
+    const details = [...spoken.querySelectorAll<HTMLElement>('[data-pdetail]')];
+    const select = (p: string) => {
+      show(details, p, 'pdetail');
+      for (const b of btns) b.setAttribute('aria-pressed', String(b.dataset.person === p));
+    };
+    for (const b of btns) b.addEventListener('click', () => select(b.dataset.person!));
+    select(details.find((d) => d.dataset.first)?.dataset.pdetail ?? '');
+  }
+</script>
+
+<style>
+  .panel { background: var(--panel); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 16px; }
+  h2 { font-size: 17px; }
+  h3 { font-size: 15px; margin-top: 6px; }
+  .sub { font-weight: 400; color: var(--faint); font-size: 14px; }
+  .lede { font-size: 14px; color: var(--muted); }
+  .scroll { overflow-x: auto; }
+  .lanes { position: relative; min-width: 700px; display: flex; flex-direction: column; gap: 4px; padding-top: 18px; }
+  .vline { position: absolute; top: 0; bottom: 20px; width: 1px; background: var(--good); opacity: 0.8; pointer-events: none; z-index: 1; }
+  .vline span { position: absolute; top: 0; transform: translateX(-50%); font-size: 11px; padding: 1px 6px; border-radius: 5px; background: var(--good-soft); color: var(--good-ink); white-space: nowrap; }
+  .lane { display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center; padding: 6px 0 6px 12px; border-radius: 12px; background: var(--inset); scroll-margin-top: 16px; }
+  .lane.dim { opacity: 0.35; }
+  .lane.ticks { background: transparent; padding-block: 0; }
+  .ll { display: flex; flex-direction: column; }
+  .lt { font-weight: 600; font-size: 14px; }
+  .lm { font-size: 12px; color: var(--faint); }
+  .track { position: relative; display: block; height: 40px; margin-right: 12px; }
+  .ticks .track { height: 16px; }
+  .tick { position: absolute; top: 0; transform: translateX(-50%); font-size: 11.5px; color: var(--faint); }
+  .mk { position: absolute; padding: 0; border: 0; background: var(--fg); opacity: 0.75; }
+  .mk::before { content: ''; position: absolute; inset: -16px; }
+  .mk.open { background: var(--accent); opacity: 1; }
+  .mk.dot { width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; }
+  .mk.dot.ring { background: #000; box-shadow: inset 0 0 0 2px var(--accent-ink); opacity: 1; }
+  .mk.sq { width: 10px; height: 10px; margin-left: -5px; border-radius: 2px; }
+  .mk.dia { width: 9px; height: 9px; margin-left: -4px; transform: rotate(45deg); }
+  .mk.bar { width: 14px; height: 5px; margin-left: -7px; margin-top: 2px; border-radius: 2px; }
+  .mk.on { opacity: 1; outline: 2px solid var(--info); outline-offset: 2px; }
+  .details, .pdetails { display: flex; flex-direction: column; gap: 8px; }
+  .cd, .pd { background: var(--card); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 10px; scroll-margin-top: 16px; }
+  .panel:not(.js) .details { max-height: 520px; overflow-y: auto; }
+  .eyebrow2 { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); font-weight: 600; }
+  .who { font-size: 20px; font-weight: 650; line-height: 1.2; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chips a.pill { text-decoration: none; }
+  .cd p, .pd p { font-size: 14px; color: var(--fg); }
+  blockquote { margin: 0; padding: 10px 12px; border-radius: 10px; background: var(--panel); font-size: 13.5px; color: var(--fg-2); }
+  .src { display: block; margin-top: 4px; font-size: 12px; color: var(--good-ink); }
+  .cond { font-size: 13px; padding: 8px 10px; border-radius: 8px; background: var(--accent-soft); color: var(--accent-ink); }
+  .cd > a { font-size: 13px; }
+  .map { display: flex; flex-wrap: wrap; gap: 4px; }
+  .person { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; min-height: 44px; padding: 10px 12px; border: 0; border-radius: 10px; background: var(--card); color: var(--fg); text-align: left; font-size: 13px; }
+  .person.ring { box-shadow: inset 0 0 0 2px var(--accent-ink); }
+  .person[aria-pressed='true'] { background: var(--info-ground); outline: 2px solid var(--info); }
+  .pn { font-weight: 600; }
+  .pc { font-size: 12px; color: var(--faint); }
+  .au { font-size: 10.5px; padding: 1px 6px; border-radius: 999px; background: var(--layer-soft); color: var(--layer); }
+  .groups { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+  .groups li { background: var(--inset); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; font-size: 13.5px; }
+  .groups span { color: var(--muted); }
+  .note { font-size: 12.5px; color: var(--faint); }
+</style>

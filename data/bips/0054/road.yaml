@@ -1,0 +1,123 @@
+# Road to activation for BIP 54: dated steps in two lanes, and readiness for
+# the coinbase rule, the one fix that needs others to act. Every step names
+# its source; "gap" is required and missing, "todo" not started. Drafted from
+# the page templates boards; pending review.
+bip: 54
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
+lanes:
+  - key: spec
+    label: Spec and code
+  - key: miner
+    label: Miner safety in Bitcoin Core
+steps:
+  - lane: spec
+    title: Number assigned
+    state: done
+    date: 2025-04-11
+    text: BIP 54 assigned to Antoine Poinsot and Matt Corallo.
+    source: { label: Spec header, url: "https://github.com/bitcoin/bips/blob/master/bip-0054.md" }
+  - lane: spec
+    title: Test vectors merged
+    state: done
+    date: 2025-11-25
+    text: Test vectors for all four fixes merged into bitcoin/bips.
+    source: { label: "bitcoin/bips #2015", url: "https://github.com/bitcoin/bips/pull/2015" }
+  - lane: spec
+    title: Running on signet
+    state: done
+    date: 2026-02-06
+    text: Bitcoin Inquisition merged an implementation and enforces the rules on signet since release 29.2.
+    source: { label: "bitcoin-inquisition/bitcoin #99", url: "https://github.com/bitcoin-inquisition/bitcoin/pull/99", claim: impl-bitcoin-inquisition }
+  - lane: spec
+    title: Spec complete · 1.0.0
+    state: done
+    date: 2026-05-22
+    text: The authors finished the planned work and moved the BIP to Complete.
+    source: { label: "bitcoin/bips #2172", url: "https://github.com/bitcoin/bips/pull/2172" }
+  - lane: spec
+    title: Consensus code in Bitcoin Core
+    state: now
+    date: 2026-07-24
+    text: Implements the rules enabled only on regtest, without mainnet activation, so it can merge before any activation decision.
+    source: { label: "bitcoin/bitcoin #35793", url: "https://github.com/bitcoin/bitcoin/pull/35793", claim: impl-bitcoin-core }
+  - lane: spec
+    title: Activation method
+    state: gap
+    text: >-
+      The spec has no deployment section: no signaling mechanism and no
+      parameters. Whether to delay activation so pools have time is still
+      open.
+    source: { label: "Spec: no Deployment section", url: "https://github.com/bitcoin/bips/blob/master/bip-0054.md", claim: open-question-sjors-23a967e4 }
+  - lane: spec
+    title: Activation client released
+    state: todo
+    text: A release that enforces the rules on mainnet once activated.
+    source: { label: Not started }
+  - lane: spec
+    title: Signaling and lock-in
+    state: todo
+    text: Depends on the method. Tracked from block headers once it exists.
+    source: { label: Not started }
+  - lane: spec
+    title: Active on mainnet
+    state: todo
+    text: For a soft fork, Deployed means activated and enforced.
+    source: { label: Not started }
+  - lane: miner
+    title: No timewarp templates
+    state: done
+    date: 2025-01-23
+    text: Bitcoin Core's block builder never creates a template that exploits the timewarp bug.
+    source: { label: "bitcoin/bitcoin #31376", url: "https://github.com/bitcoin/bitcoin/pull/31376" }
+  - lane: miner
+    title: Coinbase locked to height
+    state: done
+    date: 2025-05-09
+    text: Bitcoin Core's own block builder sets the coinbase nLockTime the way BIP 54 requires. Pool software is separate.
+    source: { label: "bitcoin/bitcoin #32155", url: "https://github.com/bitcoin/bitcoin/pull/32155" }
+  - lane: miner
+    title: Sigops-heavy transactions non-standard
+    state: done
+    date: 2025-07-18
+    text: Transactions over the legacy signature operations limit are no longer relayed or mined by Bitcoin Core.
+    source: { label: "bitcoin/bitcoin #32521", url: "https://github.com/bitcoin/bitcoin/pull/32521" }
+  - lane: miner
+    title: Murch–Zawy rule in the miner
+    state: done
+    date: 2026-09-07
+    text: Bitcoin Core's block builder enforces the rule against negative-duration difficulty periods.
+    source: { label: "bitcoin/bitcoin #35949", url: "https://github.com/bitcoin/bitcoin/pull/35949" }
+readiness:
+  fix: cb
+  rows:
+    - state: done
+      title: Bitcoin Core's own block builder complies
+      text: Since May 2025 Bitcoin Core sets the coinbase nLockTime the way BIP 54 requires.
+      source: { label: "bitcoin/bitcoin #32155", url: "https://github.com/bitcoin/bitcoin/pull/32155" }
+    - state: unknown
+      title: Pool coinbase software
+      text: The spec knows of no open-source pool software broadly in use, so nobody can check it for them.
+      quote: there does not exist an open source reference broadly in use today for such software.
+      source: { label: "BIP 54 · Miner forward compatibility", url: "https://github.com/bitcoin/bips/blob/master/bip-0054.md#miner-forward-compatibility" }
+    - state: open
+      title: Get miners running it before activation parameters exist
+      text: Encourage miners to run the coinbase rule early to find problems nobody knows of yet.
+      quote: we could encourage miners to run this well before any activation parameters are set, to figure out if there is a problem we're not aware of.
+      source: { label: "Task · sjors · Delving", url: "https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/27", claim: task-sjors-a3d62a7d }
+    - state: open
+      title: Delay activation if pools need more than a node upgrade?
+      text: Whether to activate a year or more later if miners have to change more than their node.
+      quote: Perhaps it should activate a (few) year(s) later, if it turns out miners have to do more than just upgrade their node.
+      source: { label: "Open question · sjors · Delving", url: "https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/27", claim: open-question-sjors-23a967e4 }
+    - state: addressed
+      title: Delay only the coinbase rule?
+      text: Turning on the nLockTime requirement some time after the rest of the fork; marked addressed.
+      quote: the nLockTime requirement only turns on two years later or whatever.
+      source: { label: "Task · Matt Corallo · Delving", url: "https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/20", claim: task-matt-corallo-f2ac5ece }
+    - state: not-measured
+      title: Share of recent blocks that already comply
+      text: Can be checked in code from every block's coinbase, per pool. Needs the chain series.
+      source: { label: Not collected yet }
