@@ -1,0 +1,25 @@
+id: task-andrew-toth-48b9947e
+bip: 352
+kind: task
+status: addressed
+area: design
+part_of: BIP 376
+statement: Specify PSBT support for spending silent payment outputs by adding a
+  new input field carrying the tweak data.
+subject:
+  name: Andrew Toth
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1687
+  type: github
+  title: "BIP375: Sending Silent Payments in PSBTs"
+  date: 2024-10-17
+  retrieved: 2026-11-13
+  quote: Spending support is trivial and can be done with a modification to BIP370
+    to add a new input field for the tweak data.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

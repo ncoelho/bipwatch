@@ -1,0 +1,26 @@
+id: objection-yuval-kogman-46c6aabb
+bip: 352
+kind: objection
+status: addressed
+area: design
+part_of: BIP 375
+statement: Prevent unsafe summing of ECDH shares over overlapping input sets,
+  e.g. by using one ECDH share per input or by specifying how to compute the sum
+  safely.
+subject:
+  name: Yuval Kogman
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1687#pullrequestreview-2439395304
+  type: github
+  title: "BIP375: Sending Silent Payments in PSBTs"
+  date: 2024-11-15
+  retrieved: 2026-11-13
+  quote: a signer is technically allowed to add ECDH shares for two non-disjoint
+    input sets with a non-empty symmetric difference
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

@@ -1,0 +1,27 @@
+id: task-sebastian-falbesoner-56b3fe91
+bip: 352
+kind: task
+status: open
+area: engineering
+part_of: bip-352 scanning tool
+statement: Extend the signet worst-case demo into a general BIP-352 scanning
+  tool built on libbitcoinkernel and libsecp256k1, supporting multiple inputs
+  and all eligible input types.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.1.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/cf64109b-4d78-4515-a68e-d427243a105cn@googlegroups.com/
+  type: mailing-list
+  title: "BIP-352: Limiting the number of per-group recipients (K_max)"
+  date: 2026-04-01
+  retrieved: 2026-11-13
+  quote: It might be a workable starting point for a general BIP-352 scanning tool
+    using libbitcoinkernel and libsecp256k1, if anyone is interested in working
+    on that.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null

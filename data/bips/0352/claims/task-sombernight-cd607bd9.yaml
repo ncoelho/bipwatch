@@ -1,0 +1,27 @@
+id: task-sombernight-cd607bd9
+bip: 352
+kind: task
+status: open
+area: engineering
+part_of: wallet support
+statement: Have wallets avoid signalling replaceability (nSequence MAX-2) on
+  transactions that pay to silent payment addresses, because a different wallet
+  restored from the same seed could replace the transaction without re-deriving
+  the silent payment output and lose the coins.
+subject:
+  name: SomberNight
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://gnusha.org/pi/bitcoindev/NDkJg0T-NF7_W2e1dDsNmmfET-rDUbmRXhiiEQngqTNNnf2EyM4s4eM01O9--90LN985wXDHJgbiGyVthNdji9Zd3sB6OJgn5v03PFuEM-I=@protonmail.com/
+  type: mailing-list
+  title: "[BIP Proposal] Removal of BIP 125 RBF signalling in wallet transactions"
+  date: 2026-06-16
+  retrieved: 2026-11-13
+  quote: ideally a tx paying to a silent payment address should not set MAX-2 in
+    any wallet. Otherwise in scenario (2), the user could lose the coins.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-13
+  reviewed_by: null
