@@ -36,6 +36,8 @@ export interface BipRecord {
     page?: Page;
     adoption_measure?: string;
     summary?: string;
+    /** Reviewed override for the hero's short answer. */
+    short_answer?: string;
     aliases?: string[];
     /** GitHub PRs or issues outside bitcoin/bips to archive for this BIP. */
     watch?: string[];

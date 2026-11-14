@@ -1,45 +1,37 @@
-/* BipWatch site tokens. Same palette and type as the concept mocks. */
+/* Dark palette from the page templates spec (B dark boards). Dark only for
+   now (decision 2); the old names are kept so existing components work.
+   Separate things by fill steps (--bg, --panel, --card), not borders. */
 :root {
-  --bg: #f6f5f2;
-  --panel: #ffffff;
-  --band: #efede8;
-  --line: #dddad3;
-  --line-strong: #b9b4a9;
-  --fg: #1a1916;
-  --muted: #6b675e;
-  --faint: #8f8a80;
-  --accent: #c2620a;
-  --accent-soft: #fbeedd;
-  --layer: #4a45a8;
-  --layer-soft: #eeedfb;
-  --good: #0f6e56;
-  --good-soft: #e3f4ee;
-  --warn: #9a6500;
-  --warn-soft: #fdf3d8;
+  --bg: #000000;
+  --panel: #0F0F11;
+  --card: #18181B;
+  --inset: #141417;
+  --band: #141417;
+  --line: #1C1C20;
+  --line-strong: #26262B;
+  --fg: #F2F2F3;
+  --fg-2: #D4D4D8;
+  --muted: #A1A1AA;
+  --faint: #8A8A93;
+  --accent: #FF8F45;
+  --accent-ink: #FFB88A;
+  --accent-soft: rgba(255, 143, 69, 0.16);
+  --accent-ground: #1F140B;
+  --info: #5E9BFF;
+  --info-ink: #A9C9FF;
+  --info-ground: #0E1A33;
+  --good: #3FBF9A;
+  --good-ink: #7FDDBF;
+  --good-soft: rgba(63, 191, 154, 0.16);
+  --warn: #F5D76E;
+  --warn-soft: rgba(245, 215, 110, 0.14);
+  --layer: #D4CAFF;
+  --layer-soft: rgba(184, 166, 255, 0.16);
+  --link: #9CC2FF;
+  --link-hover: #C8DCFF;
   --sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #111110;
-    --panel: #1a1a18;
-    --band: #171715;
-    --line: #2c2b28;
-    --line-strong: #4a4843;
-    --fg: #ecebe6;
-    --muted: #a19d93;
-    --faint: #7c786f;
-    --accent: #f0953a;
-    --accent-soft: #2e2112;
-    --layer: #aaa5f0;
-    --layer-soft: #1f1d38;
-    --good: #5dcaa5;
-    --good-soft: #12291f;
-    --warn: #f0c35a;
-    --warn-soft: #2d2410;
-    color-scheme: dark;
-  }
+  color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -50,29 +42,33 @@ body {
   color: var(--fg);
   font-family: var(--sans);
   font-size: 15px;
-  line-height: 1.55;
+  line-height: 1.5;
 }
-a { color: inherit; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
-a:hover { text-decoration-color: var(--accent); }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
-h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.01em; text-wrap: balance; }
+a { color: var(--link); text-underline-offset: 3px; }
+a:hover { color: var(--link-hover); }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 3px; }
+h1, h2, h3, h4 { margin: 0; font-weight: 650; letter-spacing: -0.01em; text-wrap: balance; }
 p { margin: 0; }
 
-.shell { max-width: 1040px; margin: 0 auto; padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px)); }
+.shell { max-width: 1240px; margin: 0 auto; padding-inline: max(20px, env(safe-area-inset-left, 0px)) max(20px, env(safe-area-inset-right, 0px)); }
 .mono { font-family: var(--mono); }
-.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); }
+.eyebrow { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: var(--accent); }
 .muted { color: var(--muted); }
 .tnum { font-variant-numeric: tabular-nums; }
 
+/* Chips: no borders, a fill per meaning. Orange open or wanted, green done or
+   verified, yellow pending review, violet the BipWatch category. */
 .pill {
   display: inline-flex; align-items: center; gap: 6px;
-  font-family: var(--mono); font-size: 12px; line-height: 1;
-  padding: 5px 9px; border-radius: 999px; border: 1px solid var(--line);
-  background: var(--panel); color: var(--muted); white-space: nowrap;
+  font-size: 12px; line-height: 1.4;
+  padding: 3px 10px; border-radius: 999px; border: 0;
+  background: var(--card); color: var(--fg-2); white-space: nowrap;
 }
-.pill.accent { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
-.pill.layer { color: var(--layer); border-color: var(--layer); background: var(--layer-soft); }
-.pill.good { color: var(--good); border-color: var(--good); background: var(--good-soft); }
-.pill.warn { color: var(--warn); border-color: var(--warn); background: var(--warn-soft); }
+.pill.accent { color: var(--accent-ink); background: var(--accent-soft); }
+.pill.layer { color: var(--layer); background: var(--layer-soft); }
+.pill.good { color: var(--good-ink); background: var(--good-soft); }
+.pill.warn { color: var(--warn); background: var(--warn-soft); }
+.pill.info { color: var(--info-ink); background: var(--info-ground); }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

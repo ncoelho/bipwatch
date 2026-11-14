@@ -420,10 +420,12 @@ A small Cloudflare Worker that accepts a statement signed with nostr, PGP or BIP
 
 ## 7. Design system for the site
 
-Defined in `site/src/styles/global.css`. Keep new UI on these tokens.
+Defined in `site/src/styles/global.css` (page templates spec, 2026-11-14). Keep new UI on these tokens. Dark only for now; a light variant would be designed separately.
 
-- Type: Geist for text, Geist Mono for labels, numbers and data. Uppercase mono eyebrows with letter-spacing.
-- Light: background `#f6f5f2`, panel `#ffffff`, text `#1a1916`, muted `#6b675e`, lines `#dddad3`.
-- Accent orange `#c2620a` (needs, pending, calls to action). Indigo `#4a45a8` (layer and adoption context). Green `#0f6e56` (shipped, verified). Amber `#9a6500` (partial, secondary sources).
-- Dark mode follows `prefers-color-scheme` with matching tokens.
+- Grounds: `--bg #000000` page, `--panel #0F0F11` section panels, tab bar and rail cards, `--card #18181B` cards and selected rows, `--inset #141417` empty states and tracks. Separate things by these fill steps, not borders. The only lines are 1 px `--line #1C1C20` rules above major section headers.
+- Text: `--fg #F2F2F3`, `--fg-2 #D4D4D8` secondary and chips, `--muted #A1A1AA` leads and inactive tabs, `--faint #8A8A93` labels and dates. Links `#9CC2FF` (hover `#C8DCFF`), also the focus ring.
+- Meaning: orange `--accent #FF8F45` (ink `#FFB88A`, ground `#1F140B`) for open work, needs, blockers and eyebrows; blue `--info #5E9BFF` (ink `#A9C9FF`, ground `#0E1A33`) for the current lifecycle step, the short answer and selection; green `--good #3FBF9A` (ink `#7FDDBF`) for shipped, addressed and live data; yellow `--warn #F5D76E` for pending review and stale; violet `--layer #D4CAFF` for the BipWatch category. Never score or tally positions with colour, and never carry state by colour alone.
+- Type: Geist for text, Geist Mono for numbers, versions and dates. h1 clamp(38px, 6vw, 60px) weight 650, section h2 34 px, panel titles 17 px, eyebrows 12 px uppercase, tracking 0.1em, weight 600, orange.
+- Radii: 18 px panels, 14 px cards and tab bar, 10 to 12 px rows and buttons, 999 px chips. Container 1240 px with 20 px gutters.
+- Pages: every BIP uses one frame (title, lifecycle bar, hero, "BIP Details" with a fact rail and the Overview, What it needs and Positions tabs). Modules come in three sets: CORE (any BIP), TRACKED (needs `tracked` and a needs assessment) and LAYER (`bipwatch.page`: applications or consensus).
 - Mark every unverified or unreviewed item visibly. Label placeholder data as placeholder.

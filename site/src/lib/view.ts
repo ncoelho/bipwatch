@@ -1,5 +1,5 @@
 // Labels and small helpers shared by pages. All data comes from @bipwatch/data.
-import { WORK_AREAS, type BipBundle, type Category, type Claim, type NeedDimension, type WorkArea } from '@bipwatch/data';
+import { NEED_DIMENSIONS, WORK_AREAS, type BipBundle, type Category, type Claim, type NeedDimension, type WorkArea } from '@bipwatch/data';
 
 export const CATEGORY_LABEL: Record<Category, string> = {
   idea: 'Idea',
@@ -186,4 +186,62 @@ export function positionsOnChanges(
       };
     })
     .sort((a, b) => b.last.localeCompare(a.last));
+}
+
+// ---- shared BIP frame (page templates spec) --------------------------------
+
+export const LIFECYCLE = ['Idea', 'Draft', 'Complete', 'Deployed'] as const;
+export type Step = (typeof LIFECYCLE)[number] | 'Closed';
+
+/**
+ * The lifecycle step for an official status. BIP 3 statuses map directly;
+ * BIP 2 ones map as BIP 3 says: Proposed to Complete, Final and Active to
+ * Deployed, Rejected, Withdrawn, Replaced and Obsolete to Closed.
+ */
+export function lifecycleStep(status: string): Step {
+  const s = status.toLowerCase();
+  if (s === 'draft') return 'Draft';
+  if (s === 'complete' || s === 'proposed') return 'Complete';
+  if (s === 'deployed' || s === 'final' || s === 'active') return 'Deployed';
+  if (['closed', 'rejected', 'withdrawn', 'replaced', 'obsolete', 'deferred'].includes(s)) return 'Closed';
+  return 'Idea';
+}
+
+/**
+ * The "short answer": the lowest-scored needs dimension or dimensions, in
+ * words, written by code from needs.yaml. A reviewed bipwatch.short_answer
+ * replaces it when present.
+ */
+export function shortAnswer(needs: BipBundle['needs']): string | null {
+  if (!needs) return null;
+  const scored = NEED_DIMENSIONS.map((d) => [d, needs.dimensions[d].score] as const).filter(
+    (x): x is readonly [NeedDimension, number] => x[1] !== null,
+  );
+  if (!scored.length) return null;
+  const low = Math.min(...scored.map(([, s]) => s));
+  const lowest = scored.filter(([, s]) => s === low).map(([d]) => DIMENSION_LABEL[d].toLowerCase());
+  const list = lowest.length > 1 ? `${lowest.slice(0, -1).join(', ')} and ${lowest.at(-1)}` : lowest[0];
+  if (low >= 4) return `Little help is needed anywhere: every assessed dimension scores 4 or more.`;
+  return `What it needs most is ${list}, ${lowest.length > 1 ? 'each scoring' : 'scoring'} ${low} of 5.`;
+}
+
+/** Claims by source type, most first, for the rail's evidence bar. */
+export function sourceMix(claims: Claim[]): { type: Claim['source']['type']; label: string; n: number }[] {
+  const counts = new Map<Claim['source']['type'], number>();
+  for (const c of claims) counts.set(c.source.type, (counts.get(c.source.type) ?? 0) + 1);
+  return [...counts].map(([type, n]) => ({ type, label: SOURCE_LABEL[type], n })).sort((a, b) => b.n - a.n);
+}
+
+/** "18 months", "almost 6 months", "3 weeks": a rough age for people, not for sorting. */
+export function roughAge(from: string, to = new Date()): string {
+  const days = Math.max(0, Math.round((to.getTime() - new Date(from).getTime()) / 86_400_000));
+  if (days < 14) return `${days} ${days === 1 ? 'day' : 'days'}`;
+  if (days < 60) return `${Math.round(days / 7)} weeks`;
+  const months = days / 30.44;
+  if (months < 23.5) {
+    const m = Math.round(months);
+    return `${months < m ? 'almost ' : ''}${m} months`;
+  }
+  const years = Math.round(months / 12);
+  return `${months / 12 < years ? 'almost ' : ''}${years} years`;
 }

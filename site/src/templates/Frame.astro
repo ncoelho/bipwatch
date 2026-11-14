@@ -1,0 +1,188 @@
+---
+// The shared BIP frame (page templates spec): title block, lifecycle bar,
+// hero, then "BIP Details" with a fact rail and three tabs. Every BIP uses it;
+// bipwatch.page adds layer modules (Applications, Consensus) in later PRs.
+//
+// Without JavaScript every panel renders, one after another, and the tab bar
+// is a row of in-page links. The script turns it into ARIA tabs: one panel at
+// a time, chosen by the URL hash (#overview, #needs, #positions, or the id of
+// anything inside a panel), with arrow keys between tabs.
+import type { BipBundle } from '@bipwatch/data';
+import AtAGlance from '../components/frame/AtAGlance.astro';
+import Discussed from '../components/frame/Discussed.astro';
+import FactRail from '../components/frame/FactRail.astro';
+import Lifecycle from '../components/frame/Lifecycle.astro';
+import Implementations from '../components/Implementations.astro';
+import Needs from '../components/Needs.astro';
+import OpenWork from '../components/OpenWork.astro';
+import Positions from '../components/Positions.astro';
+import Source from '../components/Source.astro';
+import { CATEGORY_LABEL, WORK_KINDS, byKind, isPending } from '../lib/view.ts';
+
+interface Props { bundle: BipBundle; known: Set<number>; }
+const { bundle, known } = Astro.props;
+const { bip, claims } = bundle;
+const tracked = bip.bipwatch.tracked;
+const openWork = claims.filter((c) => WORK_KINDS.includes(c.kind) && c.status !== 'addressed').length;
+const stances = claims.filter((c) => c.kind === 'stance').length;
+const built = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+const pending = claims.filter(isPending).length;
+const TABS = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'needs', label: 'What it needs', count: tracked ? openWork : undefined, hot: true },
+  { id: 'positions', label: 'Positions', count: stances },
+];
+const first = tracked ? 'needs' : 'overview';
+const sections = [
+  { id: 'problem', title: 'Why it exists', items: byKind(bundle, 'problem') },
+  { id: 'tradeoffs', title: 'Trade-offs', items: byKind(bundle, 'tradeoff') },
+  { id: 'evidence', title: 'Evidence', items: byKind(bundle, 'evidence') },
+].filter((s) => s.items.length);
+---
+<article class="shell">
+  <header class="title">
+    <h1><span class="num">BIP {bip.number}</span> {bip.title}</h1>
+    <div class="chips">
+      {bip.layer && <span class="pill">{bip.layer}</span>}
+      <span class="pill">Official status: {bip.status}</span>
+      {bip.bipwatch.category && <span class="pill layer">{CATEGORY_LABEL[bip.bipwatch.category]}</span>}
+      {bip.version && <span class="pill mono">v{bip.version}</span>}
+      <span class="pill good">Live data · {built}</span>
+      {pending > 0 && <span class="pill warn">{pending} of {claims.length} claims pending review</span>}
+    </div>
+  </header>
+
+  <Lifecycle bip={bip} />
+  <AtAGlance bundle={bundle} known={known} />
+
+  <div class="details-head">
+    <div class="eyebrow">Spec, work and positions</div>
+    <h2>BIP Details</h2>
+    <div class="tabs" role="tablist" aria-label="BIP details" data-first={first}>
+      {TABS.map((t) => (
+        <a href={`#${t.id}`} role="tab" id={`tab-${t.id}`} aria-controls={t.id} aria-selected={t.id === first ? 'true' : 'false'} data-tab={t.id}>
+          <span>{t.label}</span>
+          {t.count !== undefined && <span class:list={['count', { hot: t.hot && t.count > 0 }]}>{t.count}</span>}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="body">
+    <FactRail bundle={bundle} known={known} />
+    <div class="panels">
+      <section id="overview" role="tabpanel" aria-labelledby="tab-overview" class="tabpanel">
+        <h2 class="nojs">Overview</h2>
+        <Implementations bundle={bundle} />
+        <Discussed bundle={bundle} />
+        {sections.map((s) => (
+          <section class="panel" id={s.id} aria-labelledby={`h-${s.id}`}>
+            <h2 id={`h-${s.id}`}>{s.title}</h2>
+            <ul class="claims">
+              {s.items.map((c) => <li id={c.id}><p>{c.statement}</p><Source claim={c} /></li>)}
+            </ul>
+          </section>
+        ))}
+      </section>
+      <section id="needs" role="tabpanel" aria-labelledby="tab-needs" class="tabpanel">
+        {!tracked && <h2 class="nojs">What it needs</h2>}
+        {tracked ? (
+          <>
+            <Needs bundle={bundle} />
+            <OpenWork bundle={bundle} />
+          </>
+        ) : (
+          <p class="empty">BipWatch doesn’t track this proposal in depth yet, so nobody has assessed what it needs.</p>
+        )}
+      </section>
+      <section id="positions" role="tabpanel" aria-labelledby="tab-positions" class="tabpanel">
+        <h2 class="nojs">Positions</h2>
+        {stances ? <Positions bundle={bundle} /> : <p class="empty">No positions recorded yet.</p>}
+      </section>
+    </div>
+  </div>
+</article>
+
+<script>
+  const bar = document.querySelector<HTMLElement>('.tabs[role="tablist"]');
+  if (bar) {
+    const tabs = [...bar.querySelectorAll<HTMLAnchorElement>('[role="tab"]')];
+    const panels = tabs.map((t) => document.getElementById(t.dataset.tab!)!);
+    document.documentElement.classList.add('js-tabs');
+    for (const t of tabs) t.removeAttribute('href');
+
+    const show = (id: string, focus = false) => {
+      tabs.forEach((t, i) => {
+        const on = t.dataset.tab === id;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        panels[i].hidden = !on;
+        if (on && focus) t.focus();
+      });
+    };
+    // A hash names a tab, or something inside a panel (a claim, a section).
+    const fromHash = () => {
+      const id = decodeURIComponent(location.hash.slice(1).split('?')[0]);
+      if (!id) return show(bar.dataset.first!);
+      const panel = panels.find((p) => p.id === id) ?? document.getElementById(id)?.closest<HTMLElement>('[role="tabpanel"]');
+      show(panel?.id ?? bar.dataset.first!);
+      const target = document.getElementById(id);
+      if (target && !panels.includes(target)) {
+        for (let p = target.parentElement; p; p = p.parentElement) if (p instanceof HTMLDetailsElement) p.open = true;
+        target.scrollIntoView({ block: 'start' });
+      }
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => {
+        history.replaceState(null, '', `#${t.dataset.tab}`);
+        show(t.dataset.tab!);
+      });
+      t.addEventListener('keydown', (e) => {
+        const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (e.key === 'Home' || e.key === 'End') {
+          e.preventDefault();
+          const j = e.key === 'Home' ? 0 : tabs.length - 1;
+          history.replaceState(null, '', `#${tabs[j].dataset.tab}`);
+          return show(tabs[j].dataset.tab!, true);
+        }
+        if (step) {
+          e.preventDefault();
+          const j = (i + step + tabs.length) % tabs.length;
+          history.replaceState(null, '', `#${tabs[j].dataset.tab}`);
+          show(tabs[j].dataset.tab!, true);
+        }
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          t.click();
+        }
+      });
+    });
+    window.addEventListener('hashchange', fromHash);
+    fromHash();
+  }
+</script>
+
+<style>
+  .title h1 { font-size: clamp(38px, 6vw, 60px); font-weight: 650; letter-spacing: -0.03em; line-height: 1.02; }
+  .num { font-family: var(--mono); font-weight: 500; color: var(--faint); font-size: 0.82em; letter-spacing: -0.04em; }
+  .chips { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .details-head { margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
+  .details-head h2 { margin-top: 6px; font-size: 34px; letter-spacing: -0.02em; line-height: 1.12; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 20px; padding: 4px; border-radius: 14px; background: var(--panel); width: fit-content; max-width: 100%; }
+  .tabs [role='tab'] { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 10px; color: var(--muted); text-decoration: none; font-size: 14.5px; cursor: pointer; }
+  .tabs [role='tab']:hover { color: var(--fg); }
+  .tabs [role='tab'][aria-selected='true'] { background: var(--card); color: var(--fg); font-weight: 600; }
+  .count { font-family: var(--mono); font-size: 12px; padding: 1px 7px; border-radius: 999px; background: var(--inset); color: var(--faint); }
+  .count.hot { background: var(--accent-soft); color: var(--accent-ink); }
+  .body { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 24px; align-items: flex-start; }
+  .panels { flex: 999 1 660px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+  .tabpanel { display: flex; flex-direction: column; gap: 20px; min-width: 0; scroll-margin-top: 16px; }
+  .nojs { font-size: 22px; }
+  :global(html.js-tabs) .nojs { display: none; }
+  .panel { background: var(--panel); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .panel h2 { font-size: 17px; }
+  .claims { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .claims li { background: var(--card); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; scroll-margin-top: 16px; }
+  .claims li:target { box-shadow: inset 0 0 0 2px var(--info); }
+  .empty { background: var(--inset); border-radius: 14px; padding: 16px 18px; color: var(--muted); font-size: 14px; }
+</style>

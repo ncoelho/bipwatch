@@ -1,0 +1,89 @@
+---
+// Fact rail, left of the tabs on every BIP: header facts, family, evidence
+// (claims by source type and quotes matched), a mini needs strip and the spec
+// revision with the API link.
+import { NEED_DIMENSIONS, type BipBundle } from '@bipwatch/data';
+import Dots from '../Dots.astro';
+import { DIMENSION_LABEL, bipHref, sourceMix } from '../../lib/view.ts';
+
+interface Props { bundle: BipBundle; known: Set<number>; }
+const { bundle, known } = Astro.props;
+const { bip, claims, needs } = bundle;
+const mix = sourceMix(claims);
+const matched = claims.filter((c) => c.source.quote && c.source.verified).length;
+const quoted = claims.filter((c) => c.source.quote).length;
+const family = [...(bip.requires ?? []).map((n) => ({ n, rel: 'requires' })), ...(bip.related ?? []).map((n) => ({ n, rel: 'related' }))];
+const SWATCH = ['var(--info)', 'var(--accent)', 'var(--good)', 'var(--layer)', 'var(--warn)', 'var(--faint)', 'var(--fg-2)', 'var(--muted)'];
+const ext = (n: number) => `https://github.com/bitcoin/bips/blob/master/bip-${String(n).padStart(4, '0')}.mediawiki`;
+---
+<aside class="rail" aria-label="Facts">
+  <dl>
+    {bip.layer && <><dt>Layer</dt><dd>{bip.layer}</dd></>}
+    <dt>Type</dt><dd>{bip.type}</dd>
+    {bip.version && <><dt>Version</dt><dd class="mono">{bip.version}</dd></>}
+    {bip.assigned && <><dt>Assigned</dt><dd class="mono">{bip.assigned}</dd></>}
+    <dt>Authors</dt><dd>{bip.authors.join(', ')}</dd>
+    {bip.license && <><dt>License</dt><dd>{bip.license}</dd></>}
+  </dl>
+
+  {family.length > 0 && (
+    <div class="block">
+      <div class="head">Family</div>
+      <ul class="fam">
+        {family.map(({ n, rel }) => (
+          <li><a href={known.has(n) ? bipHref(n) : ext(n)}>BIP {n}</a> <span class="faint">{rel}{known.has(n) ? '' : ' · outside BipWatch'}</span></li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  <div class="block">
+    <div class="head">Evidence</div>
+    <div><span class="big mono">{claims.length}</span> {claims.length === 1 ? 'claim' : 'claims'}</div>
+    {claims.length > 0 && (
+      <>
+        <div class="bar" role="img" aria-label={mix.map((m) => `${m.label} ${m.n}`).join(', ')}>
+          {mix.map((m, i) => <span style={`flex:${m.n};background:${SWATCH[i % SWATCH.length]}`}></span>)}
+        </div>
+        <ul class="legend">
+          {mix.map((m, i) => <li><span class="sw" style={`background:${SWATCH[i % SWATCH.length]}`} aria-hidden="true"></span>{m.label} {m.n}</li>)}
+        </ul>
+        <div class="faint small">{matched} of {quoted} quotes matched by code</div>
+      </>
+    )}
+  </div>
+
+  {needs && (
+    <div class="block">
+      <div class="head">Needs · <a href="#needs">details ↓</a></div>
+      <ul class="mini">
+        {NEED_DIMENSIONS.map((d) => <li><span>{DIMENSION_LABEL[d]}</span><Dots score={needs.dimensions[d].score} /></li>)}
+      </ul>
+    </div>
+  )}
+
+  <div class="block faint small">
+    Spec <a href={`https://github.com/${bip.spec.repo}/blob/${bip.spec.revision}/${bip.spec.path}`}>@{bip.spec.revision.slice(0, 7)}</a> · synced {bip.spec.synced}<br />
+    <a href={`/api/bips/${bip.number}.json`}>/api/bips/{bip.number}.json</a>
+  </div>
+</aside>
+
+<style>
+  .rail { flex: 1 1 240px; max-width: 290px; min-width: 0; display: flex; flex-direction: column; gap: 18px; font-size: 14px; color: var(--fg-2); }
+  dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; }
+  dt { color: var(--faint); }
+  dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+  .block { padding-top: 16px; border-top: 1px solid var(--line); }
+  .head { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); font-weight: 600; margin-bottom: 8px; }
+  .fam { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; font-size: 13.5px; }
+  .big { font-size: 20px; font-weight: 600; color: var(--fg); }
+  .bar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; gap: 2px; margin-top: 8px; }
+  .legend { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; color: var(--muted); }
+  .legend li { display: flex; align-items: center; gap: 5px; }
+  .sw { width: 8px; height: 8px; border-radius: 2px; }
+  .mini { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .mini li { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+  .faint { color: var(--faint); }
+  .small { font-size: 12.5px; margin-top: 8px; }
+  @media (max-width: 960px) { .rail { max-width: none; } }
+</style>

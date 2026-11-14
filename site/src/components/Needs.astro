@@ -15,7 +15,7 @@ const open = bundle.claims.filter((c) => WORK_KINDS.includes(c.kind) && c.status
 const openIn = (area: string) => open.filter((c) => c.area === area).length;
 ---
 {needs && (
-  <section id="needs">
+  <section id="needs-cards">
     <div class="sec-head">
       <h2>What it needs</h2>
       <p class="muted">
@@ -56,16 +56,6 @@ const openIn = (area: string) => open.filter((c) => c.area === area).length;
   </section>
 )}
 
-<script>
-  // Evidence can sit in a folded "already addressed" list; open it on arrival.
-  const reveal = () => {
-    const el = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
-    for (let p = el && el.parentElement; p; p = p.parentElement) if (p instanceof HTMLDetailsElement) p.open = true;
-    if (el) el.scrollIntoView();
-  };
-  window.addEventListener('hashchange', reveal);
-  reveal();
-</script>
 
 <style>
   section { display: flex; flex-direction: column; gap: 16px; }

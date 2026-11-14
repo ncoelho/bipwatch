@@ -1,0 +1,41 @@
+---
+// Where it's discussed: how many claims come from each venue, then the
+// discussion links from the spec header.
+import type { BipBundle } from '@bipwatch/data';
+import { sourceMix } from '../../lib/view.ts';
+
+interface Props { bundle: BipBundle; }
+const { bundle } = Astro.props;
+const mix = sourceMix(bundle.claims);
+const links = bundle.bip.discussion ?? [];
+---
+{(mix.length > 0 || links.length > 0) && (
+  <section class="panel" aria-labelledby="h-disc">
+    <h2 id="h-disc">Where it’s discussed <span class="sub">· claims by venue, and the spec’s discussion links</span></h2>
+    {mix.length > 0 && (
+      <ul class="venues">
+        {mix.map((m) => <li><span class="n mono">{m.n}</span><span>{m.label}</span></li>)}
+      </ul>
+    )}
+    {links.length > 0 && (
+      <ol class="links">
+        {links.map((d) => (
+          <li><span class="mono date">{d.date ?? '–'}</span><a href={d.url} rel="noopener">{d.title ?? new URL(d.url).hostname}</a></li>
+        ))}
+      </ol>
+    )}
+  </section>
+)}
+
+<style>
+  .panel { background: var(--panel); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+  h2 { font-size: 17px; }
+  .sub { font-weight: 400; color: var(--faint); font-size: 14px; }
+  .venues { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .venues li { background: var(--card); border-radius: 12px; padding: 10px 14px; display: flex; align-items: baseline; gap: 8px; font-size: 13.5px; color: var(--fg-2); }
+  .n { font-size: 18px; font-weight: 600; color: var(--fg); }
+  .links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+  .links li { display: flex; gap: 12px; align-items: baseline; min-width: 0; }
+  .links a { overflow-wrap: anywhere; }
+  .date { font-size: 12.5px; color: var(--faint); flex: 0 0 auto; }
+</style>
