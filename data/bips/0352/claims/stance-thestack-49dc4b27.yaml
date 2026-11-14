@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2087
   title: "BIP-352: vendor secp256k1lab and use it for reference implementation"
-statement: theStack, after a further self-review, considers ready for merge
+statement: Sebastian Falbesoner, after a further self-review, considers ready for merge
   their bitcoin/bips pull request that vendors secp256k1lab and uses it for the
   BIP-352 reference implementation.
 subject:

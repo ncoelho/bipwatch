@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1458
   title: "BIP 352: Silent Payments"
-statement: real-or-random supports dropping the sorting of outpoints from the
+statement: Tim Ruffing supports dropping the sorting of outpoints from the
   BIP 352 input hashing. Absent a concrete hardware-wallet concern, they think
   the sorting adds too much complexity for an unclear benefit.
 subject:

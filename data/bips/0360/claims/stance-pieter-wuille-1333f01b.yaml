@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: "sipa supports a P2MR-based output type as one part of a two-track
+statement: "Pieter Wuille supports a P2MR-based output type as one part of a two-track
   plan, intended to prepare for a longer-term full migration away from ECC. He
   does not see it as the emergency option: for that he prefers a P2TRv2 output
   type, citing P2MR's extra cost and complexity. He envisions the P2MR type with

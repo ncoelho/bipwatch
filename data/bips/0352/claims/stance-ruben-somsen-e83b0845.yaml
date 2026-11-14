@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1902
   title: "BIP352: be explicit for the input_hash corner case"
-statement: RubenSomsen approved a pull request amending BIP 352 to state
+statement: Ruben Somsen approved a pull request amending BIP 352 to state
   explicitly how the input_hash corner case is handled.
 subject:
   name: Ruben Somsen

@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1458
   title: "BIP 352: Silent Payments"
-statement: josibake opposes TheBlueMatt's suggestion to define an `sp=` BIP21
+statement: josibake opposes Matt Corallo's suggestion to define an `sp=` BIP21
   URI parameter for silent payments. He argues the bech32m `sp` HRP already
   identifies the address, so `bitcoin:sp1q...` should be used instead, and that
   mixing a silent payment address with a reused on-chain address in a static URI

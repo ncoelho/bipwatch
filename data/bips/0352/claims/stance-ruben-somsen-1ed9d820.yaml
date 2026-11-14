@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1458
   title: "BIP 352: Silent Payments"
-statement: RubenSomsen supports having Silent Payments handle P2PK inputs. He
+statement: Ruben Somsen supports having Silent Payments handle P2PK inputs. He
   argues the implementation burden is minimal because it is a simple script that
   only affects recipients, who already run full nodes, and that a significant
   amount of coins (mostly from early miners) is locked in P2PK.

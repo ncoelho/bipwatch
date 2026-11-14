@@ -78,6 +78,16 @@ describe('work task', () => {
   });
 });
 
+describe('names', () => {
+  it('names the author and any mapped login in the document as people.yaml does', () => {
+    const msg = workTask.userMessage(doc(5, 'As sipa noted, this is fine.', { author: 'AntoineP' }), [...bips.values()]);
+    expect(msg).toContain('Author: Antoine Poinsot');
+    expect(msg).toContain('Names: AntoineP = Antoine Poinsot; sipa = Pieter Wuille');
+    expect(workTask.system).toContain('never by a login or handle');
+    expect(workTask.userMessage(doc(6, 'Nobody known here.'), [...bips.values()])).not.toContain('Names:');
+  });
+});
+
 describe('normalisePartOf', () => {
   it('reuses known spellings and drops the BIP itself', () => {
     expect(normalisePartOf('Light-Client Index', 352, ['light-client index'])).toBe('light-client index');
@@ -96,8 +106,8 @@ describe('work task context', () => {
     expect(text).toContain('(name one in part_of when work belongs to it): BIP 375, BIP 376, BIP 340.');
     expect(text).toContain('<spec bip="352">\n== Abstract ==\nSilent payments.\n</spec>');
     expect(text).toContain('Current text of companion BIP 375, for judging the status of work that belongs to it:\n<spec bip="375">\nPSBT fields.\n</spec>');
-    expect(workTask.version).toBe(4);
-    expect(workTask.continuesFrom).toEqual([3]);
+    expect(workTask.version).toBe(5);
+    expect(workTask.continuesFrom).toEqual([3, 4]);
     expect(workTask.skipSources).toEqual(['bips-repo']);
     expect(workTask.system).toContain('A design question the current spec settles');
   });

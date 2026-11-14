@@ -3,7 +3,7 @@ bip: 54
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: AntoineP argues that the Consensus Cleanup's invalidation of 64-byte
+statement: Antoine Poinsot argues that the Consensus Cleanup's invalidation of 64-byte
   transactions is better justified than he first thought. He points to several
   side-systems in development that he says were vulnerable to faked SPV proofs,
   in some cases to the point of losing all funds.

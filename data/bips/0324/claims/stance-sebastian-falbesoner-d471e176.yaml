@@ -3,7 +3,7 @@ bip: 324
 kind: stance
 stance: concept-ack
 scope: implementation
-statement: theStack agrees that creating a reusable BIP324 library (for example
+statement: Sebastian Falbesoner agrees that creating a reusable BIP324 library (for example
   in rust-bitcoin) makes sense. He invites contributions, starting with a module
   for the BIP324 cipher suite.
 subject:

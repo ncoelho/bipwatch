@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: EthanHeilman, defending the proposal against objections, says the
+statement: Ethan Heilman, defending the proposal against objections, says the
   quantum-computing threat is pressing and is the reason he is working on the
   BIP 360 output type.
 subject:

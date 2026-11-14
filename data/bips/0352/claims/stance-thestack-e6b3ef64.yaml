@@ -7,7 +7,7 @@ scope: implementation
 change:
   url: https://github.com/bitcoin/bitcoin/pull/35301
   title: "Silent Payments: Implement bip352 (take 2)"
-statement: theStack considers the BIP 352 implementation pull request good,
+statement: Sebastian Falbesoner considers the BIP 352 implementation pull request good,
   provided a corner-case fix in the silent payments scanning wrapper is made.
 subject:
   name: Sebastian Falbesoner

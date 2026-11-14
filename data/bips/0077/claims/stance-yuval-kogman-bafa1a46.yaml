@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1885
   title: "BIP77: Propose to encode `+` as `%2B` in pj param of Bitcoin URIs"
-statement: nothingmuch opposes the proposed change to BIP 77 that would require
+statement: Yuval Kogman opposes the proposed change to BIP 77 that would require
   encoding `+` as `%2B` in the pj parameter of Bitcoin URIs. He argues the spec
   already accommodates libraries that turn `+` into a space, and that mandating
   the escaping would burden every implementation.

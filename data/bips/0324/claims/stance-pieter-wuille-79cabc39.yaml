@@ -3,7 +3,7 @@ bip: 324
 kind: stance
 stance: ack
 scope: proposal
-statement: sipa, the BIP's author, proposed marking BIP 324 as Final, giving as
+statement: Pieter Wuille, the BIP's author, proposed marking BIP 324 as Final, giving as
   the reason that the protocol is in active use on the P2P network.
 subject:
   name: Pieter Wuille

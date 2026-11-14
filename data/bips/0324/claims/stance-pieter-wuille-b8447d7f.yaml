@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1378
   title: "Add BIP324: v2 P2P Transport Protocol"
-statement: sipa rejected a suggestion that BIP 324 always require a known remote
+statement: Pieter Wuille rejected a suggestion that BIP 324 always require a known remote
   public key, with peers' identities distributed alongside their network
   addresses as in Lightning. He calls it a bad idea because Bitcoin nodes do
   not, and should not, have identities.

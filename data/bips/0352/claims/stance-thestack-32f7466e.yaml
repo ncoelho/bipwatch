@@ -7,7 +7,7 @@ change:
   url: https://github.com/bitcoin/bips/pull/2153
   title: "bip352: clarify/fix specification to disallow sender to create outputs
     the receiver can't find"
-statement: theStack agrees that the BIP 352 spec is ambiguous about how
+statement: Sebastian Falbesoner agrees that the BIP 352 spec is ambiguous about how
   recipient groups are defined, but objects to this PR's approach of redefining
   groups by unique address and moving the K_max check. He prefers clarifying the
   originally intended per-output grouping, arguing that the PR's approach would

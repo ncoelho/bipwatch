@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: nack
 scope: proposal
-statement: sipa argues that BIP 360 as currently written achieves nothing for
+statement: Pieter Wuille argues that BIP 360 as currently written achieves nothing for
   quantum protection. It does not disable discrete-log-based spending, so it
   offers no long-range protection, and its only remaining benefit (avoiding the
   key-path reveal) is in his view not a positive evolution.

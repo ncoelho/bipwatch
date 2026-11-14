@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1498
   title: "bip324: Remove garbage authentication packet (breaking change)"
-statement: sipa ACKs the change removing the separate garbage authentication
+statement: Pieter Wuille ACKs the change removing the separate garbage authentication
   packet in BIP 324 (merging it into the version packet), saying it is simpler
   in retrospect, though he wants more opinions since the BIP is fine as is and
   the improvement is minor relative to the breaking change.

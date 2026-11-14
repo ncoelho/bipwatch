@@ -7,7 +7,7 @@ change:
   url: https://github.com/bitcoin/bips/pull/1620
   title: "BIP-352: handle invalid privkey / pubkey sums for sending / scanning,
     add changelog"
-statement: real-or-random approved the bips pull request that makes BIP-352
+statement: Tim Ruffing approved the bips pull request that makes BIP-352
   handle invalid private/public key sums during sending and scanning and adds a
   changelog, saying the diff looks good though he had not checked the test
   vector.

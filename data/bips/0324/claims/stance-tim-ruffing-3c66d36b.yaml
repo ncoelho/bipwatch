@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1498
   title: "bip324: Remove garbage authentication packet (breaking change)"
-statement: real-or-random, author of the change, favors removing BIP 324's
+statement: Tim Ruffing, author of the change, favors removing BIP 324's
   separate garbage authentication packet and instead authenticating the garbage
   as associated data on the first packet. They prefer this approach, or a
   variant that rejects a decoy as the first packet, over an alternative

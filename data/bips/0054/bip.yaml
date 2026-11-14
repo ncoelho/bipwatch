@@ -33,3 +33,4 @@ bipwatch:
     - great consensus cleanup
   watch:
     - https://github.com/bitcoin/bitcoin/pull/35793
+    - https://github.com/bitcoin-inquisition/bitcoin/pull/99

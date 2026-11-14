@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1707
   title: "BIP352: Add support for Pay-to-Anchor (P2A) in get_pubkey_from_input"
-statement: theStack argued against the proposed change adding Pay-to-Anchor
+statement: Sebastian Falbesoner argued against the proposed change adding Pay-to-Anchor
   (P2A) handling to get_pubkey_from_input in BIP 352's reference code. P2A
   outputs intentionally contain no keys, so the function already returns an
   empty key and the explicit handling would be a no-op.

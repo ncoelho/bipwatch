@@ -3,7 +3,7 @@ bip: 54
 kind: stance
 stance: nack
 scope: change
-statement: AntoineP opposes the original proposal's rule that also invalidates
+statement: Antoine Poinsot opposes the original proposal's rule that also invalidates
   transactions smaller than 64 bytes, and would invalidate only exactly 64-byte
   transactions. He says being useless is not enough reason to ban a transaction
   type by soft fork.

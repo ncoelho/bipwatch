@@ -3,7 +3,7 @@ bip: 54
 kind: stance
 stance: approach-ack
 scope: proposal
-statement: sipa analyzed BIP-54's two timewarp rules and concluded, with a
+statement: Pieter Wuille analyzed BIP-54's two timewarp rules and concluded, with a
   Lean-checked proof, that they are each necessary and together sufficient to
   tightly bound chain growth. This supports the timewarp-fix part of the
   proposal's approach.

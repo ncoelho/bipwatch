@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1483
   title: "BIP 77: Async Payjoin"
-statement: DanGould also supports the follow-up suggestion to remove explicit
+statement: Dan Gould also supports the follow-up suggestion to remove explicit
   session initialization from BIP 77, replacing repeated sender POST polling
   with GETs, because it reduces bandwidth, removes complexity and improves
   efficiency. He later raises an open question about sender authorization under

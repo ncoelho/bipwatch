@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1911
   title: Mark BIP21 as replaced by 321, update 321 from Draft to Proposed
-statement: TheBlueMatt opened a change marking BIP 21 as replaced by BIP 321 and
+statement: Matt Corallo opened a change marking BIP 21 as replaced by BIP 321 and
   moving BIP 321 from Draft to Proposed. He says this should happen at some
   point but is unsure of the right timeline.
 subject:

@@ -3,7 +3,7 @@ bip: 324
 kind: stance
 stance: ack
 scope: proposal
-statement: sipa opened a pull request to mark BIP 324 as Final, on the grounds
+statement: Pieter Wuille opened a pull request to mark BIP 324 as Final, on the grounds
   that the protocol is actively used on the P2P network.
 subject:
   name: Pieter Wuille

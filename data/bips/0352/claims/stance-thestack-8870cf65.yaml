@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2142
   title: "BIP-352: add test vector for edge case - input key intermediate sum zero"
-statement: theStack approved the pull request adding a BIP-352 test vector for
+statement: Sebastian Falbesoner approved the pull request adding a BIP-352 test vector for
   the edge case where the intermediate sum of input keys is zero, after
   verifying that the first two input keys cancel each other out.
 subject:

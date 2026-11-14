@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2055
   title: "BIP-352: limit number of recipients to 2^32-1"
-statement: theStack closed their own pull request that would have limited the
+statement: Sebastian Falbesoner closed their own pull request that would have limited the
   total number of BIP-352 recipients to 2^32-1. After further discussion on
   another pull request, they are no longer convinced the change makes sense as
   written.

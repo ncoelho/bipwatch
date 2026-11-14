@@ -3,7 +3,7 @@ bip: 352
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: "craigraw argues in favour of Silent Payments: an address can be
+statement: "Craig Raw argues in favour of Silent Payments: an address can be
   shared once per persona rather than once per payment, which addresses
   widespread address reuse. He says the status quo is strictly worse than the
   Silent Payments alternative."

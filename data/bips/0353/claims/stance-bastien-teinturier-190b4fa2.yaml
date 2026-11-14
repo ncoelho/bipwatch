@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1645
   title: "bip353: improve ₿-prefix instructions"
-statement: t-bast approved a pull request that revises BIP 353's instructions on
+statement: Bastien Teinturier approved a pull request that revises BIP 353's instructions on
   handling the ₿ prefix for DNS payment instruction names.
 subject:
   name: Bastien Teinturier

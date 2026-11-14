@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: approach-ack
 scope: proposal
-statement: stevenroose supports BIP 360's design of an output type without a
+statement: Steven Roose supports BIP 360's design of an output type without a
   key-spend path. He argues that covenant-based second-layer protocols would
   otherwise waste 32 bytes of witness space, and that CAT-based contracts
   compose more easily without EC tweaking.

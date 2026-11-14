@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: approach-ack
 scope: proposal
-statement: EthanHeilman, a BIP-360 author, defends P2QRH's approach of allowing
+statement: Ethan Heilman, a BIP-360 author, defends P2QRH's approach of allowing
   both Schnorr and PQ signature leaves, arguing that it eases adoption and that
   it is preferable to keeping P2TR and later disabling key-path spends, since
   that alternative would be larger and more complex.

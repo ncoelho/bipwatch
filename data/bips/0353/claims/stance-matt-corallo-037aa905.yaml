@@ -3,7 +3,7 @@ bip: 353
 kind: stance
 stance: approach-ack
 scope: proposal
-statement: TheBlueMatt, the BIP's author, defends its use of DNS rather than
+statement: Matt Corallo, the BIP's author, defends its use of DNS rather than
   HTTP. He says the BIP text explains why HTTP is badly suited to the goal and
   that this design choice will not change.
 subject:

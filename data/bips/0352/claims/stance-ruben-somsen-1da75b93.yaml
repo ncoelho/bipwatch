@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2106
   title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
-statement: RubenSomsen supports the proposed change to BIP 352 that adds a
+statement: Ruben Somsen supports the proposed change to BIP 352 that adds a
   per-group recipient limit K_max (2323). He considers the concern that about 23
   users could be targeted per block to be minor, and prefers limiting K because
   it keeps constraints on silent payment transactions to a minimum and so avoids

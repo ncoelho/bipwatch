@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2106
   title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
-statement: theStack agrees that setting the per-group recipient limit K_max to
+statement: Sebastian Falbesoner agrees that setting the per-group recipient limit K_max to
   2324, the theoretical maximum for standard-sized transactions, would be the
   safest choice. He considers the resulting worst-case scanning time still
   acceptable and is open to raising the limit to that value.

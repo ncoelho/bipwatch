@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2186
   title: "BIP 77: Specify v1-fallback response mechanism"
-statement: nothingmuch approved the pull request that specifies the v1-fallback
+statement: Yuval Kogman approved the pull request that specifies the v1-fallback
   response mechanism in BIP 77.
 subject:
   name: Yuval Kogman

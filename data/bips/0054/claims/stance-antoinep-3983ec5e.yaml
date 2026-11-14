@@ -3,7 +3,7 @@ bip: 54
 kind: stance
 stance: concept-ack
 scope: change
-statement: AntoineP argues that the Consensus Cleanup should be amended to fix
+statement: Antoine Poinsot argues that the Consensus Cleanup should be amended to fix
   the Murch-Zawy timestamp attack. The fix would require that the last block of
   a retarget period never has a timestamp lower than the first block of that
   period.

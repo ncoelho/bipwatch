@@ -3,7 +3,7 @@ bip: 77
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: DanGould, the author of BIP 77, proposes async payjoin as a Standards
+statement: Dan Gould, the author of BIP 77, proposes async payjoin as a Standards
   Track BIP. He says a single standard lets wallets agree on asynchronous
   payjoin and implement it correctly and widely.
 subject:

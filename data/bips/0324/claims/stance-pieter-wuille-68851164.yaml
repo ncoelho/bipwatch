@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1498
   title: "bip324: Remove garbage authentication packet (breaking change)"
-statement: sipa prefers the PR's approach of removing garbage authentication
+statement: Pieter Wuille prefers the PR's approach of removing garbage authentication
   packets and keeping all remaining packets headerful, over making version
   packets headerless. He argues it keeps the specification and implementation
   simpler because there is only one packet type with the same semantics.

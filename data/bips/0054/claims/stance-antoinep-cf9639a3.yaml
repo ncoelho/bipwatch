@@ -3,7 +3,7 @@ bip: 54
 kind: stance
 stance: approach-ack
 scope: proposal
-statement: AntoineP defends the Consensus Cleanup approach of making 64-byte
+statement: Antoine Poinsot defends the Consensus Cleanup approach of making 64-byte
   transactions invalid over an alternative coinbase-proof mitigation. He argues
   the alternative is roundabout and does not address the root issue, and that it
   would require miners to update their software.

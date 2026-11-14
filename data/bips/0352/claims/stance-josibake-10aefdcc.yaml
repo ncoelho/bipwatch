@@ -4,7 +4,7 @@ kind: stance
 stance: ack
 scope: proposal
 statement: josibake, a BIP 352 author, says that after a final round of review
-  with RubenSomsen they consider the Silent Payments protocol final, and asks
+  with Ruben Somsen they consider the Silent Payments protocol final, and asks
   that the BIP be merged.
 subject:
   name: josibake

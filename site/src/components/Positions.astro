@@ -49,7 +49,7 @@ const label = (c: Claim) => STANCE_LABEL[c.stance!];
             {c.condition && <p class="cond"><span>Condition</span> {c.condition}</p>}
             <Source claim={c} />
             {earlier.length > 0 && (
-              <p class="earlier">Earlier: {earlier.map((e, i) => <>{i > 0 && ', '}<a href={e.source.url} rel="noopener">{label(e)}</a> <span class="mono tnum">{e.source.date}</span></>)}</p>
+              <p class="earlier">Earlier: {earlier.map((e, i) => <>{i > 0 && ', '}<a id={e.id} href={e.source.url} rel="noopener">{label(e)}</a> <span class="mono tnum">{e.source.date}</span></>)}</p>
             )}
           </li>
         ))}

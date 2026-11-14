@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2055
   title: "BIP-352: limit number of recipients to 2^32-1"
-statement: murchandamus considers the change limiting the number of silent
+statement: Murch considers the change limiting the number of silent
   payment recipients to 2^32-1 ready to merge, though he would like sign-off
   from one of the BIP authors first.
 subject:

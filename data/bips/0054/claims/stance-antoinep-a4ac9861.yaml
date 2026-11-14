@@ -3,7 +3,7 @@ bip: 54
 kind: stance
 stance: nack
 scope: change
-statement: AntoineP declined a suggested relaxation of BIP 54's legacy sigops
+statement: Antoine Poinsot declined a suggested relaxation of BIP 54's legacy sigops
   counting and will keep the simpler limit. His analysis found that the
   relaxation would have made no historical violation valid, and he expects no
   legitimate demand for spending many large legacy multisigs.

@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: nack
 scope: change
-statement: sipa objects to justifying the proposed BIP-360 change to a
+statement: Pieter Wuille objects to justifying the proposed BIP-360 change to a
   non-tweaked Merkle root of scripts (no key path) on the grounds that it avoids
   the cost of the key path. He argues this undermines Taproot's privacy
   incentive for cooperative key-path spends, though he acknowledges there may be

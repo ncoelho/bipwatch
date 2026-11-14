@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: cryptoquick, presenting the first draft of the proposal (then called
+statement: Hunter Beast, presenting the first draft of the proposal (then called
   P2QRH), argues that Bitcoin needs a concrete quantum-resistant output type
   ready before any quantum emergency, because development and activation are
   slow.

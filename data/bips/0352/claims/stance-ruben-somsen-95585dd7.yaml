@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1908
   title: "BIP352: add warning against omitting outputs"
-statement: RubenSomsen approved a pull request adding a warning to BIP 352
+statement: Ruben Somsen approved a pull request adding a warning to BIP 352
   against omitting outputs.
 subject:
   name: Ruben Somsen

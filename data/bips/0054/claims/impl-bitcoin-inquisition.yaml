@@ -1,0 +1,26 @@
+id: impl-bitcoin-inquisition
+bip: 54
+kind: implementation
+statement: >-
+  Bitcoin Inquisition, the signet node for testing proposed soft forks,
+  enforces the BIP 54 rules on signet since release 29.2 (February 2026),
+  from its implementation in PR #99.
+subject:
+  name: Bitcoin Inquisition
+  type: node
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99
+implementation:
+  state: shipped
+  platforms: [signet]
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/releases/tag/v29.2-inq
+  type: release-notes
+  title: Bitcoin Inquisition 29.2
+  date: 2026-02-07
+  retrieved: 2026-11-14
+  quote: includes heretical activation of BIP 54 (Consensus Cleanup)
+  verified: false
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

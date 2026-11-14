@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1498
   title: "bip324: Remove garbage authentication packet (breaking change)"
-statement: sipa approved the breaking change to BIP 324 that removes the garbage
+statement: Pieter Wuille approved the breaking change to BIP 324 that removes the garbage
   authentication packet from the protocol.
 subject:
   name: Pieter Wuille

@@ -3,7 +3,7 @@ bip: 353
 kind: stance
 stance: ack
 scope: proposal
-statement: t-bast approved the pull request adding BIP 353 (DNS Payment
+statement: Bastien Teinturier approved the pull request adding BIP 353 (DNS Payment
   Instructions) at a specific commit, indicating he considers the specification
   text ready.
 subject:

@@ -3,7 +3,7 @@ bip: 353
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: pinheadmz considers BIP 353 a reasonable proposal and sees clear
+statement: Matthew Zipkin considers BIP 353 a reasonable proposal and sees clear
   demand for it, though he has concerns about DNSSEC centralization, developer
   unfamiliarity with DNS, and address reuse. He thinks it is probably the
   quickest way to get something useful deployed.

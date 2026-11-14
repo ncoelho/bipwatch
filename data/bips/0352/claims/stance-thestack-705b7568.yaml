@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2339
   title: "Bip352: Add consensus-validity requirement to Scanning requirements"
-statement: theStack approved the BIP 352 pull request adding a requirement that
+statement: Sebastian Falbesoner approved the BIP 352 pull request adding a requirement that
   scanned transactions be consensus-valid to the Scanning requirements. They
   noted that test vectors which are unintentionally consensus-invalid could be
   fixed in a follow-up.

@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2092
   title: "BIP 324, 434: Specify p2p v2 one-byte identifier for FEATURE message"
-statement: murchandamus approved the pull request amending BIP 324 to specify a
+statement: Murch approved the pull request amending BIP 324 to specify a
   v2 P2P one-byte message identifier for the FEATURE message (and transcribing
   another mentioned message into the table).
 subject:

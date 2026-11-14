@@ -8,7 +8,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1885
   title: "BIP77: Propose to encode `+` as `%2B` in pj param of Bitcoin URIs"
-statement: DanGould, discussing how the `pj` parameter in Bitcoin URIs is
+statement: Dan Gould, discussing how the `pj` parameter in Bitcoin URIs is
   encoded, says he is open to a further breaking change to the encoding. He
   wants implementors to accept it and parsers to be checked first, and for now
   recommends the proposed `%2B` encoding so current implementations keep

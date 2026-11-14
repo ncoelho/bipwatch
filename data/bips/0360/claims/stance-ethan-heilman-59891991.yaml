@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: approach-ack
 scope: proposal
-statement: EthanHeilman defends the P2QRH approach of BIP 360. He argues that an
+statement: Ethan Heilman defends the P2QRH approach of BIP 360. He argues that an
   opt-in output type with no key-spend reduces harm if elliptic-curve
   cryptography is broken, and that combined with post-quantum signature opcodes
   it protects users who migrate. He prefers this to relying on a future freeze

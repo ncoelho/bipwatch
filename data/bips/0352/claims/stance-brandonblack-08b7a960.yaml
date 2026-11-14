@@ -3,7 +3,7 @@ bip: 352
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: brandonblack welcomed the Silent Payments proposal advancing and sees
+statement: Brandon Black welcomed the Silent Payments proposal advancing and sees
   it as a powerful way of transacting privately, suggesting minor changes could
   make it compatible with MuSig2 Taproot keypaths.
 subject:

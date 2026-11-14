@@ -3,7 +3,7 @@ bip: 54
 kind: stance
 stance: nack
 scope: change
-statement: AntoineP opposes modifying BIP54 so that a future fix for the nTime
+statement: Antoine Poinsot opposes modifying BIP54 so that a future fix for the nTime
   overflow can be deployed as a soft fork. He argues the issue is about 80 years
   away, a chain split is trivially prevented, and it does not justify inferior
   protocol decisions today.

@@ -1,4 +1,4 @@
-import type { Claim, ClaimKind } from '@bipwatch/data';
+import { canonicalName, loadPeople, type Claim, type ClaimKind } from '@bipwatch/data';
 import type { z } from 'zod';
 import type { BipContext, InputDoc } from './types.ts';
 
@@ -50,6 +50,24 @@ export interface Task<Out> {
 }
 
 /** Lowercase, dash-separated, safe for ids and file names. */
+const people = loadPeople();
+/** A person's name as people.yaml maps it (the login itself if unmapped). */
+export const canonical = canonicalName(people);
+
+/**
+ * "Names: sipa = Pieter Wuille; ..." for every people.yaml alias that appears
+ * in the given texts, so the model writes the name rather than the login.
+ * Empty when none appears.
+ */
+export function namesNote(...texts: (string | null | undefined)[]): string {
+  const text = texts.filter(Boolean).join('\n');
+  const found = new Map<string, string>();
+  for (const p of people.people)
+    for (const a of p.aliases ?? [])
+      if (new RegExp(`(?<![\\w/.-])${a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w/-])`, 'i').test(text)) found.set(a, p.name);
+  return found.size ? `Names: ${[...found].map(([a, n]) => `${a} = ${n}`).join('; ')}` : '';
+}
+
 export function slug(s: string, max = 40): string {
   return (
     s

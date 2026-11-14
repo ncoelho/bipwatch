@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { canonicalName, loadPeople, WORK_AREAS, type Claim } from '@bipwatch/data';
 import { z } from 'zod';
-import { slug, SOURCE_LABEL, SOURCE_TYPE, type Task } from '../../task.ts';
+import { slug, SOURCE_LABEL, SOURCE_TYPE, type Task, namesNote } from '../../task.ts';
 
 /**
  * Open work (SPEC 1, "the main job"): tasks, open questions and objections a
@@ -37,7 +37,8 @@ export type WorkOutput = z.infer<typeof WorkOutput>;
 // companions would otherwise hide the work that moves the BIP forward.
 // v4 (2026-11-13): areas are types of work by contributor; "spec" splits
 // into design (deciding how it works) and writing (editing the document).
-const VERSION = 4;
+// v5 (2026-11-14): names people as people.yaml maps them, not by login.
+const VERSION = 5;
 const MAX_SPEC_CHARS = 120_000;
 const MAX_COMPANION_CHARS = 60_000;
 
@@ -72,8 +73,8 @@ const canonical = canonicalName(loadPeople());
 export const workTask: Task<WorkOutput> = {
   id: 'work',
   version: VERSION,
-  // v4 only renamed areas, so it carries on where v3 stopped.
-  continuesFrom: [3],
+  // v4 renamed areas and v5 names people; neither calls for re-reading.
+  continuesFrom: [3, 4],
   kind: 'task',
   model: 'claude-opus-5-5',
   effort: 'medium',
@@ -113,7 +114,8 @@ export const workTask: Task<WorkOutput> = {
       ...bips.map(({ bip }) => `- BIP ${bip.number}: ${bip.title} (status: ${bip.status})`),
       '',
       `Source: ${SOURCE_LABEL[doc.source]}`,
-      `Author: ${doc.author}`,
+      `Author: ${canonical(doc.author ?? 'unknown')}`,
+      ...[namesNote(doc.author, doc.body_text, doc.later)].filter(Boolean),
       `Date: ${doc.posted_at ? doc.posted_at.toISOString().slice(0, 10) : 'unknown'}`,
       ...(doc.thread_title ? [`Thread: ${doc.thread_title}`] : []),
       ...(doc.title && doc.title !== doc.thread_title ? [`Title: ${doc.title}`] : []),

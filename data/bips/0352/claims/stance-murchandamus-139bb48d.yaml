@@ -6,9 +6,9 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2134
   title: "BIP-352: warn against stopping scan due to wallet policy filtering"
-statement: murchandamus approved the BIP 352 change that adds a warning against
+statement: Murch approved the BIP 352 change that adds a warning against
   stopping the scan because of wallet policy filtering, while deferring the
-  merge until theStack has reviewed it.
+  merge until Sebastian Falbesoner has reviewed it.
 subject:
   name: Murch
   type: person

@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1378
   title: "Add BIP324: v2 P2P Transport Protocol"
-statement: sipa rejected a suggestion to make BIP324 authenticate peers with
+statement: Pieter Wuille rejected a suggestion to make BIP324 authenticate peers with
   static public keys advertised over P2P. He argued that for automatic
   connections every node is equally good, so there is nothing to ensure.
 subject:
