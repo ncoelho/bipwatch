@@ -1,55 +1,72 @@
 ---
+// Site shell from the page templates spec: logo, segmented nav with the
+// current page filled, and the sources footer. Nav items appear once their
+// page exists (This week, New drafts and What needs doing come later; search
+// arrives with the homepage, PR 6).
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description?: string;
+  /** Which nav item is the current page. */
+  current?: 'proposals' | 'data';
 }
-const { title, description = 'An open layer of data, metadata and evidence on top of the Bitcoin BIP repository.' } = Astro.props;
-const built = new Date().toISOString().slice(0, 10);
+const { title, description = 'An open layer of data, metadata and evidence on top of the Bitcoin BIP repository.', current } = Astro.props;
+const NAV = [
+  { key: 'proposals', label: 'Proposals', href: '/' },
+  { key: 'data', label: 'Open data', href: '/api/bips.json' },
+] as const;
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400;500;600&display=swap" />
     <link rel="alternate" type="application/json" href="/api/bips.json" title="BipWatch open data" />
   </head>
   <body>
     <header class="top">
       <div class="shell bar">
-        <a class="mark" href="/">bip<span>watch</span></a>
-        <nav>
-          <a href="/">Proposals</a>
-          <a href="/api/bips.json">Open data</a>
+        <a class="mark" href="/">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--info)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          BipWatch
+        </a>
+        <nav aria-label="Main">
+          <ul>
+            {NAV.map((n) => (
+              <li><a href={n.href} aria-current={current === n.key ? 'page' : undefined}>{n.label}</a></li>
+            ))}
+          </ul>
         </nav>
       </div>
     </header>
     <main><slot /></main>
     <footer class="shell foot">
-      <span>Data is CC0. Every claim links to its source.</span>
-      <span class="mono">built {built}</span>
+      <span>Built from bitcoin/bips, its pull requests, Delving Bitcoin and the bitcoin-dev list. Every item links to its source. Data is CC0.</span>
+      <span class="links"><a href="/api/bips.json">Open data</a><a href="https://github.com/ncoelho/bipwatch">How we curate</a></span>
     </footer>
   </body>
 </html>
 
 <style>
-  .top { border-bottom: 1px solid var(--line); background: var(--panel); padding-top: env(safe-area-inset-top, 0px); }
-  .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; }
-  .mark { font-family: var(--mono); font-weight: 500; font-size: 16px; text-decoration: none; letter-spacing: -0.02em; }
-  .mark span { color: var(--accent); }
-  nav { display: flex; gap: 18px; font-size: 14px; }
-  nav a { text-decoration: none; color: var(--muted); }
+  .top { padding-top: env(safe-area-inset-top, 0px); }
+  .bar { display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap; padding-block: 16px; }
+  .mark { display: flex; align-items: center; gap: 9px; color: var(--fg); text-decoration: none; font-weight: 650; font-size: 17px; letter-spacing: -0.01em; }
+  nav ul { list-style: none; margin: 0; padding: 4px; display: flex; gap: 2px; flex-wrap: wrap; font-size: 14px; background: var(--panel); border-radius: 12px; }
+  nav a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 9px; color: var(--muted); text-decoration: none; }
   nav a:hover { color: var(--fg); }
-  main { padding-block: 36px 64px; }
+  nav a[aria-current='page'] { background: var(--fg); color: #000; font-weight: 600; }
+  main { padding-block: 28px 64px; }
   .foot {
-    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
-    border-top: 1px solid var(--line); padding-block: 18px calc(28px + env(safe-area-inset-bottom, 0px));
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 20px;
+    border-top: 1px solid var(--line); padding-block: 20px calc(28px + env(safe-area-inset-bottom, 0px));
     color: var(--faint); font-size: 13px;
   }
+  .links { display: flex; gap: 16px; }
 </style>

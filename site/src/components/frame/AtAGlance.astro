@@ -1,0 +1,119 @@
+---
+// Hero for the default page: "Where BIP n stands". The lead is the BipWatch
+// summary; the short answer names the lowest-scored needs (or a reviewed
+// override); then the needs strip and four tiles. Untracked BIPs get the lead
+// and an invitation instead of the tracked parts.
+import { NEED_AREAS, NEED_DIMENSIONS, type BipBundle } from '@bipwatch/data';
+import Dots from '../Dots.astro';
+import { DIMENSION_LABEL, WORK_KINDS, bipHref, shortAnswer } from '../../lib/view.ts';
+
+interface Props { bundle: BipBundle; known: Set<number>; }
+const { bundle, known } = Astro.props;
+const { bip, needs, claims } = bundle;
+const tracked = bip.bipwatch.tracked;
+const open = claims.filter((c) => WORK_KINDS.includes(c.kind) && c.status !== 'addressed');
+const addressed = claims.filter((c) => WORK_KINDS.includes(c.kind) && c.status === 'addressed').length;
+const openIn = (d: (typeof NEED_DIMENSIONS)[number]) => open.filter((c) => c.area && NEED_AREAS[d].includes(c.area)).length;
+const stances = claims.filter((c) => c.kind === 'stance');
+const people = new Set(stances.map((c) => c.subject?.name)).size;
+const onProposal = stances.filter((c) => c.scope === 'proposal').length;
+const answer = bip.bipwatch.short_answer ?? shortAnswer(needs);
+const requires = bip.requires ?? [];
+const trackedReq = requires.filter((n) => known.has(n));
+---
+<div class="hero">
+  <div class="lead">
+    <div class="eyebrow">At a glance · {bip.status}</div>
+    <h2>Where BIP {bip.number} stands</h2>
+    {bip.bipwatch.summary && <p>{bip.bipwatch.summary}</p>}
+  </div>
+  {answer && (
+    <div class="answer">
+      <div class="label">The short answer</div>
+      <p>{answer}</p>
+    </div>
+  )}
+</div>
+
+{tracked && needs ? (
+  <section class="glance" aria-labelledby="h-glance">
+    <h2 id="h-glance">At a glance</h2>
+    <div class="cols">
+      <div class="strip">
+        <div class="strip-head"><span>What it needs · 5 means no help needed</span><a href="#needs">Open “What it needs” ↓</a></div>
+        <ul>
+          {NEED_DIMENSIONS.map((d) => {
+            const x = needs.dimensions[d];
+            const n = openIn(d);
+            return (
+              <li class:list={[{ low: x.score !== null && x.score <= 2 }]}>
+                <a href={`#needs`} data-dim={d}>
+                  <span>{DIMENSION_LABEL[d]}</span>
+                  <Dots score={x.score} />
+                  <span class="n">{NEED_AREAS[d].length ? (n ? `${n} open` : 'none open') : '—'}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      <div class="tiles">
+        <a class="tile hot" href="#needs">
+          <span class="k">Open work</span>
+          <span class="v">{open.length}</span>
+          <span class="s">{addressed} already addressed</span>
+        </a>
+        <a class="tile" href="#positions">
+          <span class="k">Positions</span>
+          <span class="v">{stances.length}</span>
+          <span class="s">{people} {people === 1 ? 'person' : 'people'} · {onProposal} on the proposal</span>
+        </a>
+        <div class="tile">
+          <span class="k">Spec revision</span>
+          <span class="v small mono">@{bip.spec.revision.slice(0, 7)}</span>
+          <span class="s">synced {bip.spec.synced}</span>
+        </div>
+        <div class="tile">
+          <span class="k">Requires</span>
+          <span class="v small mono">{requires.length ? requires.join(' · ') : 'none'}</span>
+          <span class="s">
+            {requires.length === 0 ? 'stands on its own' : trackedReq.length ? <>tracked: {trackedReq.map((n, i) => <>{i > 0 && ', '}<a href={bipHref(n)}>BIP {n}</a></>)}</> : 'none tracked by BipWatch'}
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+) : (
+  <p class="invite">BipWatch doesn’t track this proposal in depth yet, so there is no assessment of what it needs, and no open work or positions gathered. <a href="https://github.com/ncoelho/bipwatch">Help add it</a>.</p>
+)}
+
+<style>
+  .hero { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px 24px; flex-wrap: wrap; margin-top: 44px; }
+  .lead { max-width: 660px; }
+  .lead h2 { margin-top: 6px; font-size: 34px; letter-spacing: -0.02em; line-height: 1.12; }
+  .lead p { margin-top: 10px; color: var(--muted); font-size: 16px; }
+  .answer { background: var(--info-ground); border-radius: 14px; padding: 14px 18px; max-width: 420px; }
+  .answer .label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--info-ink); font-weight: 600; }
+  .answer p { margin-top: 4px; font-size: 15px; }
+  .glance { margin-top: 24px; background: var(--panel); border-radius: 18px; padding: 20px; }
+  .glance h2 { font-size: 17px; }
+  .cols { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 16px; align-items: stretch; }
+  .strip { flex: 3 1 440px; min-width: 0; background: var(--card); border-radius: 14px; padding: 16px; }
+  .strip-head { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; align-items: baseline; font-size: 13px; color: var(--muted); }
+  .strip ul { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .strip li a { display: grid; grid-template-columns: minmax(0, 1fr) auto 84px; gap: 14px; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; color: var(--fg); text-decoration: none; font-size: 14px; }
+  .strip li a:hover { background: var(--inset); }
+  .strip li.low a { background: var(--accent-ground); }
+  .n { font-size: 12.5px; color: var(--faint); text-align: right; }
+  .low .n { color: var(--accent-ink); }
+  .tiles { flex: 2 1 300px; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .tile { text-decoration: none; color: inherit; background: var(--card); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .tile.hot { background: var(--accent-ground); }
+  .k { font-size: 12px; color: var(--faint); }
+  .hot .k, .hot .v { color: var(--accent-ink); }
+  .v { font-family: var(--mono); font-size: 28px; font-weight: 600; }
+  .v.small { font-size: 20px; margin-top: 6px; overflow-wrap: anywhere; }
+  .s { font-size: 12.5px; color: var(--muted); }
+  .hot .s { color: #F2D9C4; }
+  .invite { margin-top: 24px; padding: 16px 18px; border-radius: 14px; background: var(--panel); color: var(--muted); font-size: 14px; }
+</style>

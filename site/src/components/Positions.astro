@@ -20,7 +20,7 @@ const people = new Set(stances.map((c) => c.subject!.name)).size;
 const label = (c: Claim) => STANCE_LABEL[c.stance!];
 ---
 {stances.length > 0 && (
-  <section id="positions">
+  <section id="positions-list">
     <div class="sec-head">
       <h2>Who has taken a position</h2>
       <p class="muted">

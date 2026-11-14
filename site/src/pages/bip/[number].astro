@@ -1,8 +1,7 @@
 ---
 import { loadAll } from '@bipwatch/data';
 import Base from '../../layouts/Base.astro';
-import Complete from '../../templates/Complete.astro';
-import Basic from '../../templates/Basic.astro';
+import Frame from '../../templates/Frame.astro';
 
 export function getStaticPaths() {
   const all = loadAll();
@@ -13,10 +12,7 @@ export function getStaticPaths() {
 const { bundle, known } = Astro.props;
 const { bip } = bundle;
 
-// bipwatch.page picks the page. Until the shared frame lands (templates spec,
-// PR 1), the two layer pages use the Complete layout and the rest Basic.
-const Template = bip.bipwatch.tracked && (bip.bipwatch.page === 'applications' || bip.bipwatch.page === 'consensus') ? Complete : Basic;
 ---
-<Base title={`BIP ${bip.number}: ${bip.title} · BipWatch`} description={bip.bipwatch.summary}>
-  <Template bundle={bundle} known={known} />
+<Base title={`BIP ${bip.number}: ${bip.title} · BipWatch`} description={bip.bipwatch.summary} current="proposals">
+  <Frame bundle={bundle} known={known} />
 </Base>

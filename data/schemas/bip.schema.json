@@ -87,6 +87,11 @@
           "enum": ["activation-and-usage", "wallet-coverage", "node-coverage", "service-coverage", "not-applicable"]
         },
         "summary": { "type": "string", "maxLength": 400 },
+        "short_answer": {
+          "description": "Reviewed override for the hero's short answer. Without it, code writes one from needs.yaml.",
+          "type": "string",
+          "maxLength": 300
+        },
         "aliases": {
           "description": "Names the BIP goes by in discussion, used by the collectors' mention index. Only matched for tracked BIPs. Matched case-insensitively on word boundaries, so avoid common words.",
           "type": "array",
