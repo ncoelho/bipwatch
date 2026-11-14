@@ -1,0 +1,27 @@
+id: stance-matt-corallo-2e569646
+bip: 321
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Matt Corallo, who wrote these BIP 321 updates, argues that new
+  payment instructions should be added as query parameters rather than replacing
+  the address field. He says this keeps compatibility with senders and
+  recipients that may not support every new format.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/commit/f5cb29f9b7267963c2c079a9fabd98b32f80a462
+  type: github
+  title: Update BIP 321 with information about more modern usage of it
+  date: 2025-03-25
+  retrieved: 2026-11-14
+  quote: Looking forward, as new payment instructions get adopted, it makes much
+    more sense to include them in query parameters rather than replace the
+    existing address field
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
