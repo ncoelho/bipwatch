@@ -1,0 +1,25 @@
+id: stance-evoskuil-0e7f8aa2
+bip: 54
+kind: stance
+stance: nack
+scope: proposal
+statement: evoskuil objects to a new consensus rule being argued for in the
+  Consensus Cleanup discussion, calling it unnecessary and rejecting the
+  justification that knowledge of the issue has spread only in a limited way.
+subject:
+  name: evoskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/34
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-08-26
+  retrieved: 2026-11-14
+  quote: You are quite literally arguing in favor of a new and unnecessary
+    CONSENSUS RULE because of "limited propagation of knowledge."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

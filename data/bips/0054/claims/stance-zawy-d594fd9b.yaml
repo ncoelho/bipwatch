@@ -1,0 +1,26 @@
+id: stance-zawy-d594fd9b
+bip: 54
+kind: stance
+stance: approach-ack
+scope: change
+statement: zawy considers Murch's proposed timespan limit for the timewarp fix
+  in the Consensus Cleanup the easiest and safest option. He argues it prevents
+  an attack without breaking anything, while also urging that a monotonicity fix
+  be kept ready for emergencies.
+subject:
+  name: zawy
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/57
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-11-27
+  retrieved: 2026-11-14
+  quote: Murch's fix seems the easiest and safest in terms of preventing an attack
+    and not breaking anything.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,27 @@
+id: stance-ajtowns-dd7d1001
+bip: 54
+kind: stance
+stance: nack
+scope: change
+statement: ajtowns opposes including a fix for the SIGHASH_SINGLE bug in the
+  consensus cleanup. He argues the behaviour has legitimate uses, such as
+  cheaply sweeping insecure dust and reusable 'release' signatures, and that
+  people can avoid it by using p2wpkh, p2wsh or p2tr.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/8
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-04-05
+  retrieved: 2026-11-14
+  quote: So personally I think it's fine to leave this as-is, and just recommend
+    people use p2wpkh, p2wsh or p2tr instead to avoid this weird behaviour
+    unless they actually want it.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

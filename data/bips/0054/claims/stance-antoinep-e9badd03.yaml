@@ -1,0 +1,25 @@
+id: stance-antoinep-e9badd03
+bip: 54
+kind: stance
+stance: approach-ack
+scope: change
+statement: AntoineP supports using the coinbase transaction's nLockTime to
+  enforce coinbase uniqueness in the Consensus Cleanup, with the rule taking
+  effect at height 1,983,702 (about 21 years away).
+subject:
+  name: AntoineP
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/21
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-07-22
+  retrieved: 2026-11-14
+  quote: I agree, i think we should just use `nLockTime` and make the rule kick in
+    at height 1,983,702 (in about 21 years).
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

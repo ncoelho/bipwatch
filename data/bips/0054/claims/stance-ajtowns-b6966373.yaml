@@ -1,0 +1,28 @@
+id: stance-ajtowns-b6966373
+bip: 54
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: ajtowns favors making coinbase transactions unique by requiring their
+  nLockTime to match the BIP34 height, rather than requiring a witness
+  commitment. He reasons that people who generate empty blocks with simple
+  manual scripts would find bumping nLockTime much easier than adding a coinbase
+  witness and its commitment.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/22
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-07-23
+  retrieved: 2026-11-14
+  quote: "bumping the `nLockTime` to match the BIP34 height commitment is likely a
+    lot easier than adding support for even an all-zero coinbase witness, plus
+    its commitment. So, :+1:"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,27 @@
+id: stance-evoskuil-8cf2a7e1
+bip: 54
+kind: stance
+stance: nack
+scope: proposal
+statement: evoskuil opposes one proposed new consensus rule in the Consensus
+  Cleanup, not the cleanup as a whole. He argues the rule is a suboptimal and
+  unnecessary fix for the security issue it targets, and that its modest
+  bandwidth saving for SPV proofs does not justify a new consensus rule.
+subject:
+  name: evoskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/30
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-08-26
+  retrieved: 2026-11-14
+  quote: The bandwidth savings was a modest side effect benefit of fixing a
+    perceived consensus-related security issue, which has been shown to be a
+    suboptimal and unnecessary fix.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

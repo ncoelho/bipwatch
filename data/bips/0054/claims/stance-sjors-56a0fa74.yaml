@@ -1,0 +1,27 @@
+id: stance-sjors-56a0fa74
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Sjors supports pursuing the consensus cleanup soft fork while keeping
+  it simple and uncontroversial. He argues that without a soft fork, an attack
+  using slow-validating blocks could push pool operators into unhealthy
+  off-chain coordination.
+subject:
+  name: sjors
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/3
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-03-25
+  retrieved: 2026-11-14
+  quote: But without a soft fork I'm worried that if an attack takes places,
+    especially if people see it coming, there's an incentive for pool operators
+    to hop on a phone call and coordinate what to do about it.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

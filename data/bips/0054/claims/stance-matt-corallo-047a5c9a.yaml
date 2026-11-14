@@ -1,0 +1,27 @@
+id: stance-matt-corallo-047a5c9a
+bip: 54
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: MattCorallo favors the Consensus Cleanup making coinbase transactions
+  unique through the nLockTime field, not the witness commitment. He argues that
+  using the witness commitment would ruin its use as a flexible future
+  commitment root, and that miners can adapt given a year or two of lead time.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/20
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-07-22
+  retrieved: 2026-11-14
+  quote: The nLockTime field is a *much* neater way of doing this, and I don't
+    really see why "miners have to slightly tweak their software" is a huge deal
+    as long as they get a year or two of lead time to do it.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

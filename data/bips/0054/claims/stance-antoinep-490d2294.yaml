@@ -1,0 +1,26 @@
+id: stance-antoinep-490d2294
+bip: 54
+kind: stance
+stance: concept-ack
+scope: change
+statement: AntoineP floats an amendment to the Consensus Cleanup, suggested by
+  ajtowns, that would also require coinbase nSequence to be non-final so the
+  height timelock is enforced. He likes it because BIP30 validation would then
+  never be needed after activation, while noting it has little practical impact
+  and asking for feedback.
+subject:
+  name: AntoineP
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/79
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2025-03-19
+  retrieved: 2026-11-14
+  quote: Of course it does not matter for any practical purpose. But it's pretty neat.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

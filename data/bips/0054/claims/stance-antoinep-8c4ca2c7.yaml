@@ -1,0 +1,28 @@
+id: stance-antoinep-8c4ca2c7
+bip: 54
+kind: stance
+stance: approach-ack
+scope: change
+statement: AntoineP proposes that the Consensus Cleanup mitigate worst-case
+  block validation time with a 2,500 per-transaction limit on legacy (bare and
+  P2SH) input sigops. He argues this gives a 40x reduction with a simple,
+  flexible rule that minimizes the confiscatory surface, and he judges a further
+  combined rule not worth its extra confiscatory surface.
+subject:
+  name: AntoineP
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/64
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2025-01-07
+  retrieved: 2026-11-14
+  quote: After studying the various options i believe the best way forward is to
+    introduce a 2'500 per-transaction limit on the number of legacy (both bare
+    and P2SH) input sigops.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

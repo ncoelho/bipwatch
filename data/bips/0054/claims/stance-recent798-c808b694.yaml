@@ -1,0 +1,26 @@
+id: stance-recent798-c808b694
+bip: 54
+kind: stance
+stance: nack
+scope: proposal
+statement: recent798 objects to the duplicate-coinbase part of the Consensus
+  Cleanup, the requirement for a witness commitment. They argue that a soft fork
+  cannot be enforced on past blocks, so fallback code is needed anyway, and the
+  fix seems better done without a consensus deployment.
+subject:
+  name: recent798
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/11
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-04-05
+  retrieved: 2026-11-14
+  quote: So requiring a witness commitment does not seem appropriate, because it
+    can not be enforced on past blocks.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,27 @@
+id: stance-antoinep-6f21f1fb
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: AntoineP, revisiting the Great Consensus Cleanup, argues the bugs it
+  targets are serious and worth fixing. He points to the timewarp vulnerability
+  and the worst-case block validation time, and supports making 64-byte
+  transactions invalid.
+subject:
+  name: AntoineP
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/1
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-03-24
+  retrieved: 2026-11-14
+  quote: i think it's bad. The worst case block validation time is concerning. I
+    also believe it's more important to fix the timewarp vulnerability than
+    people usually think.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

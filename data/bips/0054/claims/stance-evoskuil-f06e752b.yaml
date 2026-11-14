@@ -1,0 +1,26 @@
+id: stance-evoskuil-f06e752b
+bip: 54
+kind: stance
+stance: nack
+scope: proposal
+statement: evoskuil opposes the Consensus Cleanup's proposed invalidation of
+  64-byte transactions, arguing that a simpler, more efficient and equally
+  effective fix for block hash malleability exists that needs no new consensus
+  rule.
+subject:
+  name: evoskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/28
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-08-25
+  retrieved: 2026-11-14
+  quote: As that discussion presently stands I see no justification for the
+    proposed invalidation of 64 byte transactions.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
