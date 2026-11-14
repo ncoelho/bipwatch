@@ -1,0 +1,27 @@
+id: task-rustaceanrob-3a9953ce
+bip: 324
+kind: task
+status: open
+area: engineering
+part_of: rust bip324 library
+statement: Reduce the Rust BIP324 library's dependency on RustCrypto crates,
+  which contain unsafe code and are hard to audit, so its cryptography is
+  concise and readable enough to be merged into the rust-bitcoin ecosystem.
+subject:
+  name: rustaceanrob
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip324-proxy-easy-integration-of-v2-transport-protocol-for-light-clients-poc/678/10
+  type: forum
+  title: "BIP324 Proxy: easy integration of v2 transport protocol for light
+    clients (PoC)"
+  date: 2024-03-17
+  retrieved: 2026-11-14
+  quote: they recommended the dependency reduction as a step towards being merged
+    to their community, presumably so the crypto is concise and readable
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: task-anthony-towns-4bbeba50
+bip: 324
+kind: task
+status: addressed
+area: design
+statement: Decide whether a node must introduce or negotiate a new 1-byte
+  message type ID with its peer before using it, rather than relying on a fixed
+  global assignment.
+subject:
+  name: Anthony Towns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/Y2nK99fHUKxbPHmw@erisian.com.au/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2022-11-08
+  retrieved: 2026-11-14
+  quote: |-
+    I guess I think it would make sense to not start using a novel 1-byte
+    message unless you've done something to introduce that message first
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

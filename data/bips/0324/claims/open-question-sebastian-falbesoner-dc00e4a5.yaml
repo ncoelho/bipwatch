@@ -1,0 +1,27 @@
+id: open-question-sebastian-falbesoner-dc00e4a5
+bip: 324
+kind: open-question
+status: open
+area: research
+part_of: bip324 proxy
+statement: Check whether light clients accept multiple peers on the same (local)
+  IP address with different ports, which a statically configured per-port bip324
+  proxy depends on.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip324-proxy-easy-integration-of-v2-transport-protocol-for-light-clients-poc/678/15
+  type: forum
+  title: "BIP324 Proxy: easy integration of v2 transport protocol for light
+    clients (PoC)"
+  date: 2024-06-03
+  retrieved: 2026-11-14
+  quote: do light clients allow to add multiple peers with the same IP address
+    (even if the port is different)?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: objection-pieter-wuille-da3f44ca
+bip: 324
+kind: objection
+status: addressed
+area: design
+statement: Remove rarely-sent or at-most-once-sent messages (version, verack,
+  sendaddrv2, sendheaders, sendcmpct, wtxidrelay, mempool) from the 1-byte
+  message type ID allocation to conserve the short ID space.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/wDqcIVw-YGTsjdf5M2GO9NNRl_UQuBeka2CUQUyQ329u6u-o7RabW_7S4FD3EDfk02kUczb3bXf8LtHhKLtx773UhQ7djKOl-JPOIrXqBSc=@wuille.net/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2022-11-10
+  retrieved: 2026-11-14
+  quote: |-
+    Rarely-sent or at-most-once-sent commands don't really provide much
+    benefit. I'd suggest scrapping from the list:
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

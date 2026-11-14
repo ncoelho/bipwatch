@@ -1,0 +1,26 @@
+id: objection-jonas-schnelli-cdaed90d
+bip: 324
+kind: objection
+status: addressed
+area: design
+statement: Limit short (1-byte) message type IDs to frequently sent messages,
+  stating this in the BIP and not assigning short IDs to message types expected
+  to be sent only once per connection.
+subject:
+  name: Jonas Schnelli
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/87FFCF31-946A-44AE-8AAE-6FA3E6465C89@jonasschnelli.ch/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2022-11-03
+  retrieved: 2026-11-14
+  quote: Maybe the BIP should state that only frequent sent messages should
+    reserve a short ID, though, the BIP itself assigns short IDs to all(?)
+    message types (including low frequent messages like SENDHEADERS).
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

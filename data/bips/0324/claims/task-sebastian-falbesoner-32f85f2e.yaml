@@ -1,0 +1,28 @@
+id: task-sebastian-falbesoner-32f85f2e
+bip: 324
+kind: task
+status: open
+area: writing
+part_of: bip324 proxy
+statement: Add a prerequisites section to the BIP324 proxy README explaining
+  that it relies on the VERSION message's addr_recv field holding the real
+  remote address, and list clients known to be incompatible.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip324-proxy-easy-integration-of-v2-transport-protocol-for-light-clients-poc/678/3
+  type: forum
+  title: "BIP324 Proxy: easy integration of v2 transport protocol for light
+    clients (PoC)"
+  date: 2024-03-14
+  retrieved: 2026-11-14
+  quote: I might add a prerequisites section to README.md mentioning the reliance
+    on `addr_recv` being set correctly, together with a list of clients that are
+    already known to be incompatible with BIP324 proxy.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

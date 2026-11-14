@@ -1,0 +1,26 @@
+id: task-sebastian-falbesoner-8f2c5fc2
+bip: 324
+kind: task
+status: open
+area: engineering
+part_of: bip324 proxy
+statement: Rewrite the proof-of-concept BIP324 proxy in Rust as an efficient
+  implementation that is not vulnerable to side-channel attacks, so light
+  clients can use v2 transport.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip324-proxy-easy-integration-of-v2-transport-protocol-for-light-clients-poc/678/1
+  type: forum
+  title: "BIP324 Proxy: easy integration of v2 transport protocol for light
+    clients (PoC)"
+  date: 2024-03-13
+  retrieved: 2026-11-14
+  quote: The plan is to do an efficient rewrite in Rust.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

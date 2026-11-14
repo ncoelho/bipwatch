@@ -1,0 +1,29 @@
+id: open-question-sebastian-falbesoner-96c1781f
+bip: 324
+kind: open-question
+status: open
+area: design
+part_of: bip324 proxy
+statement: Work out how users of a statically configured bip324 proxy would
+  discover remote peers that offer the services their particular light client
+  needs.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip324-proxy-easy-integration-of-v2-transport-protocol-for-light-clients-poc/678/15
+  type: forum
+  title: "BIP324 Proxy: easy integration of v2 transport protocol for light
+    clients (PoC)"
+  date: 2024-06-03
+  retrieved: 2026-11-14
+  quote: how would a user know which remote peers to configure? Every light client
+    might have slightly different requirements for peers in terms of required
+    services, so discovering peers that fit the used client could be
+    non-trivial.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
