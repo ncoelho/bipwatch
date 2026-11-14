@@ -1,7 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { parse } from 'yaml';
-import type { BipBundle, BipRecord, Claim, Fixes, Freshness, NeedsAssessment, People, PrStates, Road, SpecHistory } from './types.ts';
+import type { BipBundle, BipRecord, Claim, Fixes, Freshness, NeedsAssessment, People, PrStates, Road, SpecHistory, WeekData, WeeklyStory } from './types.ts';
 
 export * from './types.ts';
 export { dataChecks, type DataCheck } from './checks.ts';
@@ -75,6 +75,28 @@ export function loadSpecHistory(n: number, dataDir = findDataDir()): SpecHistory
 export function loadPrStates(dataDir = findDataDir()): PrStates | null {
   const file = join(dataDir, 'generated', 'github-prs.json');
   return existsSync(file) ? (JSON.parse(readFileSync(file, 'utf8')) as PrStates) : null;
+}
+
+/** The homepage's week from data/generated, or null when not exported. */
+export function loadWeek(dataDir = findDataDir()): WeekData | null {
+  const file = join(dataDir, 'generated', 'week.json');
+  return existsSync(file) ? (JSON.parse(readFileSync(file, 'utf8')) as WeekData) : null;
+}
+
+/** ISO week of a date, as YYYY-Www. */
+export function isoWeek(d = new Date()): string {
+  const t = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+  const dow = t.getUTCDay() || 7;
+  t.setUTCDate(t.getUTCDate() + 4 - dow);
+  const y = t.getUTCFullYear();
+  const w = Math.ceil(((t.getTime() - Date.UTC(y, 0, 1)) / 86_400_000 + 1) / 7);
+  return `${y}-W${String(w).padStart(2, '0')}`;
+}
+
+/** The lead story for a week from data/weekly, or null when none is approved. */
+export function loadWeekly(week = isoWeek(), dataDir = findDataDir()): WeeklyStory | null {
+  const file = join(dataDir, 'weekly', `${week}.yaml`);
+  return existsSync(file) ? readYaml<WeeklyStory>(file) : null;
 }
 
 /** data/people.yaml, or an empty list. */

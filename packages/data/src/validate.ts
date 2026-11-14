@@ -15,7 +15,7 @@ import { parse } from 'yaml';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import { canonicalName, findDataDir, folderFor, loadPeople } from './index.ts';
-import type { BipRecord, Claim, Fixes, NeedsAssessment, Road } from './types.ts';
+import type { BipRecord, Claim, Fixes, NeedsAssessment, Road, WeeklyStory } from './types.ts';
 
 type Level = 'error' | 'warn';
 const findings: { level: Level; file: string; msg: string }[] = [];
@@ -57,6 +57,7 @@ const validators = {
   people: ajv.getSchema('people.schema.json')!,
   fixes: ajv.getSchema('fixes.schema.json')!,
   road: ajv.getSchema('road.schema.json')!,
+  weekly: ajv.getSchema('weekly.schema.json')!,
 };
 
 function check<T>(kind: keyof typeof validators, file: string): T | null {
@@ -274,6 +275,23 @@ for (const folder of folders) {
           if (r.source.claim && !ids.has(r.source.claim)) report('error', rel(roadFile), `readiness row "${r.title}" cites unknown claim "${r.source.claim}"`);
       }
     }
+  }
+}
+
+// ---- weekly lead stories ------------------------------------------------------------
+const weeklyDir = join(dataDir, 'weekly');
+if (existsSync(weeklyDir)) {
+  for (const f of readdirSync(weeklyDir).filter((f) => f.endsWith('.yaml'))) {
+    const file = join(weeklyDir, f);
+    const story = check<WeeklyStory>('weekly', file);
+    if (!story) continue;
+    if (`${story.week}.yaml` !== f) report('error', rel(file), `week ${story.week} does not match the file name`);
+    const folder = String(story.bip).padStart(4, '0');
+    const claimsDir = join(dataDir, 'bips', folder, 'claims');
+    if (!existsSync(join(dataDir, 'bips', folder))) report('error', rel(file), `BIP ${story.bip} has no folder`);
+    const known = existsSync(claimsDir) ? new Set(readdirSync(claimsDir).map((n) => n.replace(/\.yaml$/, ''))) : new Set<string>();
+    for (const id of [...story.sources, ...story.tiles.filter((t) => t.startsWith('implementation:')).map((t) => t.slice(15))])
+      if (!known.has(id)) report('error', rel(file), `cites unknown claim "${id}" in BIP ${story.bip}`);
   }
 }
 

@@ -257,3 +257,37 @@ export interface Road {
     rows: { state: 'done' | 'open' | 'unknown' | 'addressed' | 'not-measured'; title: string; text: string; quote?: string; source: RoadSource }[];
   };
 }
+
+/** data/generated/week.json: the homepage's week, written by `npm run site-exports`. */
+export interface WeekData {
+  generated_at: string;
+  /** Inclusive YYYY-MM-DD bounds: the 7 days up to the build. */
+  from: string;
+  to: string;
+  status_changes: { bip: number; status: string; date: string; sha: string }[];
+  /** The latest status change before the window, when none fell in it. */
+  last_status_change: { bip: number; status: string; date: string } | null;
+  commits: number;
+  merged: { number: number; title: string; url: string; date: string; labels: string[]; bips: number[] }[];
+  drafts: { title: string; url: string; date: string; where: string; closed: boolean }[];
+  open_drafts: number;
+  discussion: { posts: number; threads: number };
+  waiting: { open: number; median_days: number };
+  /** Threads by posts in the window. */
+  hot: { title: string; url: string; source: string; posts: number; bips: number[] }[];
+  /** Activity, newest first. */
+  feed: { date: string; type: 'merged' | 'draft' | 'opened' | 'discussion'; title: string; url: string; bips: number[] }[];
+}
+
+/** data/weekly/<YYYY>-W<ww>.yaml: the homepage's lead story for a week. */
+export interface WeeklyStory {
+  week: string;
+  bip: number;
+  kind: 'implementation' | 'status' | 'discussion' | 'draft' | 'spec' | 'activation';
+  headline: string;
+  lead: string;
+  link: { label: string; url: string };
+  tiles: string[];
+  sources: string[];
+  provenance: Provenance;
+}

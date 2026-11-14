@@ -294,3 +294,50 @@ export function setupModel(b: BipBundle): SetupWallet[] {
     })
     .sort((x, y) => STATE_ORDER.indexOf(x.claim.implementation!.state) - STATE_ORDER.indexOf(y.claim.implementation!.state) || x.name.localeCompare(y.name));
 }
+
+// ---- homepage (templates PR 6) ----------------------------------------------
+
+export interface StoryTile { value: string; label: string; hot?: boolean }
+
+/**
+ * A lead story tile, from its key in the weekly file and the BIP's data, so
+ * the reviewed text never carries a number: status_age, open_work, road_gap,
+ * pr_age:<url>, implementation:<claim id>. Null when the data isn't there.
+ */
+export function storyTile(key: string, b: BipBundle, prs: { prs: Record<string, { state: string; opened: string; merged: string | null }> } | null, today = new Date()): StoryTile | null {
+  const days = (from: string, to?: string | null) => Math.round(((to ? Date.parse(to) : today.getTime()) - Date.parse(from)) / 86_400_000);
+  const short = (d: string) => new Date(`${d}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+  if (key === 'status_age' && b.bip.status_since) return { value: `${days(b.bip.status_since)}d`, label: `${b.bip.status} since ${short(b.bip.status_since)}` };
+  if (key === 'open_work') return { value: String(b.claims.filter((c) => WORK_KINDS.includes(c.kind) && c.status !== 'addressed').length), label: 'open work items' };
+  if (key === 'road_gap') {
+    const gap = b.road?.steps.find((s) => s.state === 'gap');
+    return gap ? { value: 'missing', label: gap.title.toLowerCase(), hot: true } : null;
+  }
+  if (key.startsWith('pr_age:')) {
+    const url = key.slice(7);
+    const pr = prs?.prs[url];
+    const n = url.match(/\/([\w.-]+)\/pull\/(\d+)/);
+    if (!pr || !n) return null;
+    const repo = n[1] === 'bitcoin' ? 'Core' : n[1];
+    return pr.merged
+      ? { value: `${days(pr.opened, pr.merged)}d`, label: `${repo} PR #${n[2]} open before merging` }
+      : { value: `${days(pr.opened)}d`, label: `${repo} PR #${n[2]} open` };
+  }
+  if (key.startsWith('implementation:')) {
+    const c = b.claims.find((x) => x.id === key.slice(15));
+    if (!c?.implementation) return null;
+    const i = c.implementation;
+    return i.networks?.length
+      ? { value: i.networks[0], label: `${STATE_LABEL[i.state].toLowerCase()} in ${c.subject?.name}` }
+      : { value: STATE_LABEL[i.state].toLowerCase(), label: c.subject?.name ?? '' };
+  }
+  return null;
+}
+
+/** "7–14 November" or "28 October – 4 November". */
+export function weekRange(from: string, to: string): string {
+  const f = new Date(`${from}T00:00:00Z`);
+  const t = new Date(`${to}T00:00:00Z`);
+  const month = (d: Date) => d.toLocaleDateString('en-GB', { month: 'long', timeZone: 'UTC' });
+  return f.getUTCMonth() === t.getUTCMonth() ? `${f.getUTCDate()}–${t.getUTCDate()} ${month(t)}` : `${f.getUTCDate()} ${month(f)} – ${t.getUTCDate()} ${month(t)}`;
+}

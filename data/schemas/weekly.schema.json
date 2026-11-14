@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bipwatch.com/schemas/weekly.schema.json",
+  "title": "Weekly lead story",
+  "description": "The homepage's lead story for one ISO week: which BIP, what kind of story, a headline and a two-sentence lead (reviewed text), the sources it rests on, and tile keys whose numbers the site computes from data. The weekly digest job drafts it as a pull request; merging approves it. weekly/<YYYY>-W<ww>.yaml.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["week", "bip", "kind", "headline", "lead", "link", "tiles", "sources", "provenance"],
+  "properties": {
+    "week": { "type": "string", "pattern": "^\\d{4}-W\\d{2}$" },
+    "bip": { "type": "integer", "minimum": 1 },
+    "kind": { "enum": ["implementation", "status", "discussion", "draft", "spec", "activation"] },
+    "headline": { "type": "string", "maxLength": 160 },
+    "lead": { "description": "Two sentences. Avoid typed numbers; the tiles carry them.", "type": "string", "maxLength": 400 },
+    "link": {
+      "description": "The secondary button: the thread or pull request the story is about.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "url"],
+      "properties": { "label": { "type": "string" }, "url": { "type": "string", "format": "uri", "pattern": "^https://" } }
+    },
+    "tiles": {
+      "description": "Up to four of: status_age, open_work, road_gap, pr_age:<GitHub PR url>, implementation:<claim id>.",
+      "type": "array",
+      "maxItems": 4,
+      "items": { "type": "string", "pattern": "^(status_age|open_work|road_gap|pr_age:https://github\\.com/\\S+|implementation:\\S+)$" }
+    },
+    "sources": { "description": "Claim ids the story rests on.", "type": "array", "items": { "type": "string" } },
+    "provenance": { "$ref": "claim.schema.json#/properties/provenance" }
+  }
+}

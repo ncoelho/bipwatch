@@ -27,6 +27,7 @@ import { changelogEntries } from './bips/changelog.ts';
 import { bipsRepoDir, showFile } from './bips/git.ts';
 import { specHistory, type SpecChange } from './bips/history.ts';
 import { connect } from './db.ts';
+import { weekData } from './week.ts';
 
 export type ChangeType = 'says' | 'edit' | 'process';
 
@@ -129,6 +130,13 @@ async function main() {
     );
     writeFileSync(join(out, 'github-prs.json'), `${JSON.stringify({ generated_at: new Date().toISOString(), prs }, null, 1)}\n`);
     console.log(`site-exports: ${recs.size} of ${urls.size} linked pull requests are in the archive.`);
+
+    // The homepage's week (needs the archive and the bips clone).
+    if (existsSync(join(bipsDir, '.git')) || existsSync(join(bipsDir, 'HEAD'))) {
+      const week = await weekData(db, bipsDir);
+      writeFileSync(join(out, 'week.json'), `${JSON.stringify(week, null, 1)}\n`);
+      console.log(`site-exports: week ${week.from} to ${week.to}: ${week.merged.length} merged, ${week.drafts.length} drafts, ${week.discussion.posts} posts.`);
+    }
     await db.end();
   }
 }

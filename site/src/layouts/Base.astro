@@ -1,19 +1,20 @@
 ---
 // Site shell from the page templates spec: logo, segmented nav with the
-// current page filled, and the sources footer. Nav items appear once their
-// page exists (This week, New drafts and What needs doing come later; search
-// arrives with the homepage, PR 6).
+// current page filled, search (Pagefind, built after the site), and the
+// sources footer. Nav items appear once their page exists (New drafts and
+// What needs doing across BIPs are not built yet).
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description?: string;
   /** Which nav item is the current page. */
-  current?: 'proposals' | 'data';
+  current?: 'week' | 'proposals' | 'data';
 }
 const { title, description = 'An open layer of data, metadata and evidence on top of the Bitcoin BIP repository.', current } = Astro.props;
 const NAV = [
-  { key: 'proposals', label: 'Proposals', href: '/' },
+  { key: 'week', label: 'This week', href: '/' },
+  { key: 'proposals', label: 'Proposals', href: '/proposals/' },
   { key: 'data', label: 'Open data', href: '/api/bips.json' },
 ] as const;
 ---
@@ -31,7 +32,7 @@ const NAV = [
     <link rel="alternate" type="application/json" href="/api/bips.json" title="BipWatch open data" />
   </head>
   <body>
-    <header class="top">
+    <header class="top" data-pagefind-ignore="all">
       <div class="shell bar">
         <a class="mark" href="/">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--info)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>
@@ -44,13 +45,32 @@ const NAV = [
             ))}
           </ul>
         </nav>
+        <div class="search" id="search" role="search" aria-label="Search BIPs and discussions"></div>
       </div>
     </header>
     <main><slot /></main>
-    <footer class="shell foot">
+    <footer class="shell foot" data-pagefind-ignore="all">
       <span>Built from bitcoin/bips, its pull requests, Delving Bitcoin and the bitcoin-dev list. Every item links to its source. Data is CC0.</span>
       <span class="links"><a href="/api/bips.json">Open data</a><a href="https://github.com/ncoelho/bipwatch">How we curate</a></span>
     </footer>
+    <script is:inline>
+      // Pagefind indexes the built site (npm run build); in dev there is no
+      // index and the box stays empty.
+      (function () {
+        var box = document.getElementById('search');
+        if (!box) return;
+        var css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = '/pagefind/pagefind-ui.css';
+        var s = document.createElement('script');
+        s.src = '/pagefind/pagefind-ui.js';
+        s.onload = function () {
+          document.head.appendChild(css);
+          new window.PagefindUI({ element: '#search', showSubResults: true, showImages: false, translations: { placeholder: 'Search BIPs and discussions' } });
+        };
+        document.head.appendChild(s);
+      })();
+    </script>
   </body>
 </html>
 
@@ -63,6 +83,11 @@ const NAV = [
   nav a:hover { color: var(--fg); }
   nav a[aria-current='page'] { background: var(--fg); color: #000; font-weight: 600; }
   main { padding-block: 28px 64px; }
+  .search { margin-left: auto; flex: 0 1 320px; min-width: 180px; position: relative; z-index: 5;
+    --pagefind-ui-scale: 0.8; --pagefind-ui-primary: var(--link); --pagefind-ui-text: var(--fg);
+    --pagefind-ui-background: var(--panel); --pagefind-ui-border: var(--line-strong); --pagefind-ui-tag: var(--card);
+    --pagefind-ui-border-width: 1px; --pagefind-ui-border-radius: 12px; --pagefind-ui-font: var(--sans); }
+  .search :global(.pagefind-ui__drawer) { position: absolute; right: 0; width: min(560px, calc(100vw - 40px)); max-height: 70vh; overflow-y: auto; background: var(--panel); border-radius: 14px; padding: 0 16px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); }
   .foot {
     display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 20px;
     border-top: 1px solid var(--line); padding-block: 20px calc(28px + env(safe-area-inset-bottom, 0px));

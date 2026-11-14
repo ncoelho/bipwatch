@@ -1,0 +1,53 @@
+name: weekly
+
+# The homepage's lead story: every Monday, export the past week from the
+# archive and the bips repo, draft data/weekly/<ISO week>.yaml from the
+# busiest thread about a tracked BIP (npm run weekly-digest), and open a pull
+# request. Merging it approves the story. Off while EXTRACT_ENABLED is not
+# "true", like the other model jobs. About 2k billed tokens a week.
+
+on:
+  schedule:
+    - cron: '57 6 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: weekly
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    if: vars.EXTRACT_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+      - name: Fetch bitcoin/bips history
+        run: git clone --filter=blob:none --no-checkout https://github.com/bitcoin/bips.git ../bips
+      - uses: ./.github/actions/setup
+      - name: Export the week
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npm run site-exports
+      - name: Draft the lead story
+        id: draft
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: npm run weekly-digest
+      - name: Validate
+        run: npm run validate -- --bips ../bips
+      - name: Open the pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+          branch: bot/weekly/run-${{ github.run_id }}
+          add-paths: data/weekly/*.yaml
+          commit-message: 'Weekly lead story, pending review'
+          title: 'Weekly lead story, pending review'
+          body: |
+            The homepage's lead story for this week, drafted from the busiest thread about a tracked BIP (`npm run weekly-digest`). Check the headline and lead say only what the sources show; the tiles' numbers come from data. Merging approves it.
+
+            🤖 Opened by the weekly workflow
+          labels: claims

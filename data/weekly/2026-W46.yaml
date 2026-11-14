@@ -1,0 +1,27 @@
+# Lead story for 2026-W46 (2026-11-07 to 2026-11-14), drafted by npm run weekly-digest
+# from the busiest thread about a tracked BIP. Merging the pull request approves it.
+week: 2026-W46
+bip: 54
+kind: implementation
+headline: Bitcoin Core review continues on a BIP 54 Consensus Cleanup
+  implementation that leaves out mainnet activation
+lead: BIP 54 bundles fixes for the timewarp attack, worst-case block validation
+  time, Merkle tree weaknesses and duplicate transactions; its specification has
+  been complete since 2026-05-22 and Bitcoin Inquisition already ships it. The
+  spec still has no deployment section, so no signaling mechanism or parameters
+  exist yet, and whether to delay activation to give pools time remains open.
+link:
+  label: Read the pull request
+  url: https://github.com/bitcoin/bitcoin/pull/35793
+tiles:
+  - pr_age:https://github.com/bitcoin/bitcoin/pull/35793
+  - implementation:impl-bitcoin-core
+  - road_gap
+  - implementation:impl-bitcoin-inquisition
+sources:
+  - impl-bitcoin-core
+  - impl-bitcoin-inquisition
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

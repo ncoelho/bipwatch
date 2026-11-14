@@ -28,7 +28,8 @@
     "repin-versions": "npm run repin-versions --workspace @bipwatch/extract --",
     "site-exports": "npm run site-exports --workspace @bipwatch/collect --",
     "site:snapshot": "npm run freshness:snapshot && npm run site-exports --silent -- --optional",
-    "tag-fixes": "npm run tag-fixes --workspace @bipwatch/extract --"
+    "tag-fixes": "npm run tag-fixes --workspace @bipwatch/extract --",
+    "weekly-digest": "npm run weekly-digest --workspace @bipwatch/extract --"
   },
   "engines": {
     "node": ">=22.23.4",
