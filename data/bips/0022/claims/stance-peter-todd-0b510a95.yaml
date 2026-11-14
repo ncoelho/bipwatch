@@ -1,0 +1,26 @@
+id: stance-peter-todd-0b510a95
+bip: 22
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Peter Todd supports building on getblocktemplate, extending it for
+  pooled-solo mining so that miners construct their own blocks. He sees this as
+  a way to decentralize mining away from large pools, and proposes funding
+  development of the work.
+subject:
+  name: Peter Todd
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/20130531165758.GA29135@petertodd.org/
+  type: mailing-list
+  title: Decentralizing mining
+  date: 2013-05-31
+  retrieved: 2026-11-14
+  quote: essentially the plan is to take getblocktemplate and extend it as
+    required for pooled-solo mining
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

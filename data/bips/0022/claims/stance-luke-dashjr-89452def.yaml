@@ -1,0 +1,24 @@
+id: stance-luke-dashjr-89452def
+bip: 22
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Luke-Jr endorses getblocktemplate as the full replacement for
+  getwork, saying it does everything getwork did and more, so solo miners are
+  not locked out by getwork's removal.
+subject:
+  name: Luke Dashjr
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/201308192013.02806.luke@dashjr.org/
+  type: mailing-list
+  title: 'Proposal: remove "getwork" RPC from bitcoind'
+  date: 2013-08-19
+  retrieved: 2026-11-14
+  quote: You missed getblocktemplate. It does everything getwork did and more.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

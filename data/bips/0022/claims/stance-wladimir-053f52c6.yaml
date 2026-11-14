@@ -1,0 +1,26 @@
+id: stance-wladimir-053f52c6
+bip: 22
+kind: stance
+stance: ack
+scope: proposal
+statement: Wladimir proposed moving BIP 22 (getblocktemplate) to Final status.
+  His reason is that it is widely implemented and therefore fixed in place, so
+  any changes would need a new BIP.
+subject:
+  name: Wladimir
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CA+s+GJApfj5OAxGyHG9CsmRHTpAQBgC44iU2U99LwNGNZDATBw@mail.gmail.com/
+  type: mailing-list
+  title: Proposed BIP status changes
+  date: 2014-10-15
+  retrieved: 2026-11-14
+  quote: |-
+    These BIPs should go to Final state - they are implemented all over
+    the place, and are thus entirely fixed in place now.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

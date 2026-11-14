@@ -1,0 +1,27 @@
+id: stance-gavin-andresen-626449e7
+bip: 22
+kind: stance
+stance: conditional
+condition: BIP 22 is simplified, dropping features few pool customers would use
+scope: proposal
+statement: Gavin Andresen says he (and Pieter) find BIP 22 overly complicated
+  and want it simpler, asking which features are actually needed by most pool
+  users.
+subject:
+  name: Gavin Andresen
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CABsx9T3uaEBikhUo7j52mauBx0mnfk2_1mq0QOQBZVptoMB6HA@mail.gmail.com/
+  type: mailing-list
+  title: BIP22/getmemorypool
+  date: 2012-06-11
+  retrieved: 2026-11-14
+  quote: |-
+    Pieter and I feel like
+    BIP 22 is overly complicated, and would like it to be simpler.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

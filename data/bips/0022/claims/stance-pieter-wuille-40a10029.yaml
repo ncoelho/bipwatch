@@ -1,0 +1,29 @@
+id: stance-pieter-wuille-40a10029
+bip: 22
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Pieter Wuille endorses getblocktemplate as the successor to getwork.
+  He says it fixes getwork's problems and is more decentralization-friendly
+  because callers can see, and even modify, the transactions the daemon wants to
+  put in a block.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAPg+sBjMdZfHpZrvHwMx6oQsS0yJaXVjTnyRwf6VCdnWTHQZaw@mail.gmail.com/
+  type: mailing-list
+  title: 'Proposal: remove "getwork" RPC from bitcoind'
+  date: 2013-08-19
+  retrieved: 2026-11-14
+  quote: |-
+    They were addressed and fixed in a successor API, getblocktemplate.
+    It's even more decentralization-friendly, as it allows the caller to
+    see what transactions the daemon is trying to put into a block, and
+    even modify it.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

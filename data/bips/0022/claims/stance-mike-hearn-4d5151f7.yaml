@@ -1,0 +1,29 @@
+id: stance-mike-hearn-4d5151f7
+bip: 22
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Mike Hearn views getblocktemplate as a way to decentralise mining
+  pools. He says that finishing and polishing a getblocktemplate-based
+  decentralised mining pool would improve mining decentralisation more than
+  lowering the block size.
+subject:
+  name: Mike Hearn
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CA+w+GKTLBWj6b4ppwrmnXb_gybYFcrX7haLBSdCnMaijy2An4w@mail.gmail.com/
+  type: mailing-list
+  title: Block size following technological growth
+  date: 2015-07-31
+  retrieved: 2026-11-14
+  quote: |-
+    2) Finishing, documenting, and making the UX really slick for a
+    getblocktemplate based decentralised mining pool
+
+    then I'd pick (2) in a heartbeat. I think it'd be a lot more effective.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

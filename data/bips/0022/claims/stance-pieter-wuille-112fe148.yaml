@@ -1,0 +1,30 @@
+id: stance-pieter-wuille-112fe148
+bip: 22
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Pieter Wuille thinks a stable, standardized API for negotiating block
+  generation is important and that moving block generation to specialized
+  programs is a step in the right direction. He also argues the current BIP 22
+  draft is too complex, with too many optional features, and wants it
+  simplified.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/20120609231054.GA16966@vps7135.xlshosting.net/
+  type: mailing-list
+  title: getmemorypool
+  date: 2012-06-09
+  retrieved: 2026-11-14
+  quote: |-
+    I think that having a stable and flexible API for negotiating
+    block generation is important to be standardized. The fact that
+    it allows moving block generation to specialized programs is a
+    step in the right direction.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
