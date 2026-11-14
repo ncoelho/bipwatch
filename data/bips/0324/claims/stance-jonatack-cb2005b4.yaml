@@ -1,0 +1,27 @@
+id: stance-jonatack-cb2005b4
+bip: 324
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1655
+  title: "BIP 324: fix python aad in complete_handshake"
+statement: jonatack gave an initial ACK to a change fixing the AAD used in
+  complete_handshake in BIP 324's Python reference code, noting that it matches
+  Bitcoin Core's net.cpp and the v2_p2p.py functional test framework.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1655#pullrequestreview-2202216596
+  type: github
+  title: "BIP 324: fix python aad in complete_handshake"
+  date: 2024-07-26
+  retrieved: 2026-11-14
+  quote: Initial ACK, appears to correspond to
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

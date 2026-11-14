@@ -1,0 +1,27 @@
+id: stance-murch-24525c6e
+bip: 324
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2092
+  title: "BIP 324, 434: Specify p2p v2 one-byte identifier for FEATURE message"
+statement: murchandamus approved the pull request amending BIP 324 to specify a
+  v2 P2P one-byte message identifier for the FEATURE message (and transcribing
+  another mentioned message into the table).
+subject:
+  name: Murch
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2092#pullrequestreview-3742192206
+  type: github
+  title: "BIP 324, 434: Specify p2p v2 one-byte identifier for FEATURE message"
+  date: 2026-02-03
+  retrieved: 2026-11-14
+  quote: This looks great to me.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

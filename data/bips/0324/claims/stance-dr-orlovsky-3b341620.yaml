@@ -1,0 +1,27 @@
+id: stance-dr-orlovsky-3b341620
+bip: 324
+kind: stance
+stance: nack
+scope: proposal
+statement: dr-orlovsky objects to BIP 324's unauthenticated exchange-exchange
+  key scheme, arguing that it leaves room for MitM attacks and gains no
+  anonymity because the connecting peer already knows its target. He argues that
+  an exchange-known scheme like Noise_XK would be more adequate.
+subject:
+  name: dr-orlovsky
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1378#pullrequestreview-1232042460
+  type: github
+  title: "Add BIP324: v2 P2P Transport Protocol"
+  date: 2022-12-28
+  retrieved: 2026-11-14
+  quote: I think that "exchange-known" key scheme (like in Noise_XK) is more
+    adequate for bitcoin P2P than "exchange-exchange", as in the current
+    proposal (and like in Noise_XX).
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

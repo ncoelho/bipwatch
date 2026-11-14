@@ -1,0 +1,27 @@
+id: stance-david-a-harding-fe63bec3
+bip: 324
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: David A. Harding says he would like to see BIP324 supported, so that
+  encrypted (and, with something like countersign, authenticated) connections
+  from a lite client to a trusted node are easy to set up.
+subject:
+  name: David A. Harding
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/4aeb6a134be5d941fcc65cf512ce89e4@dtrt.org/
+  type: mailing-list
+  title: Proposal to Remove BIP35 P2P 'mempool' Message
+  date: 2023-04-18
+  retrieved: 2026-11-14
+  quote: |-
+    I'd also like to see support for BIP324 and for
+    something like countersign so that authenticated and encrypted
+    connections from a lite client to a trusted node are easy to setup.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

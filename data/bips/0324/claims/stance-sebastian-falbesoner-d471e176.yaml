@@ -1,0 +1,25 @@
+id: stance-sebastian-falbesoner-d471e176
+bip: 324
+kind: stance
+stance: concept-ack
+scope: implementation
+statement: theStack agrees that creating a reusable BIP324 library (for example
+  in rust-bitcoin) makes sense. He invites contributions, starting with a module
+  for the BIP324 cipher suite.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/bip324-proxy-easy-integration-of-v2-transport-protocol-for-light-clients-poc/678/7
+  type: forum
+  title: "BIP324 Proxy: easy integration of v2 transport protocol for light
+    clients (PoC)"
+  date: 2024-03-16
+  retrieved: 2026-11-14
+  quote: Yup, I agree that creating a BIP324 library makes a lot of sense
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

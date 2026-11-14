@@ -1,0 +1,27 @@
+id: stance-pieter-wuille-a743f1de
+bip: 324
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1428
+  title: "BIP324: Fixed length message type IDs"
+statement: 'sipa approved the change titled "BIP324: Fixed length message type
+  IDs", which concerns how message type IDs are encoded in the v2 encrypted
+  transport protocol.'
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1428#issuecomment-1460342243
+  type: github
+  title: "BIP324: Fixed length message type IDs"
+  date: 2023-03-08
+  retrieved: 2026-11-14
+  quote: ACK
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

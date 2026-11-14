@@ -1,0 +1,28 @@
+id: stance-pieter-wuille-b1e5231b
+bip: 324
+kind: stance
+stance: concept-ack
+scope: change
+statement: "Pieter Wuille supports a proposed BIP324 design change: give short
+  message IDs only to some messages, so a short-ID mapping could be negotiated
+  without a re-negotiation mechanism. He says this avoids the variable-length
+  encoding question and its complexity for messages where bandwidth doesn't
+  matter."
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/S1zoL4CCIDVTrjmXx2JtYhO2qjgGyNIAP6X9FXRCRKPDjoQj20VcqKFCYkmmPQkNuMyNf9zp6GFVWWC7l8dBzCogUqvzmDx9D811NPheNJ8=@wuille.net/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2023-02-17
+  retrieved: 2026-11-14
+  quote: I like this idea. It avoids the variable-length encoding question and
+    related complexity entirely for things where we admittedly don't care about
+    the bandwidth impact anyway.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

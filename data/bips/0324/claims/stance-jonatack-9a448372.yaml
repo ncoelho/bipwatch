@@ -1,0 +1,24 @@
+id: stance-jonatack-9a448372
+bip: 324
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: jonatack gave a Concept ACK on the pull request adding the BIP324
+  draft, supporting the idea of a version 2 encrypted P2P transport protocol.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1024#issuecomment-713421069
+  type: github
+  title: WIP [don't merge] Add BIP324 - Version 2 Peer-to-Peer Message Transport
+    Protocol
+  date: 2020-10-21
+  retrieved: 2026-11-14
+  quote: Concept ACK
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

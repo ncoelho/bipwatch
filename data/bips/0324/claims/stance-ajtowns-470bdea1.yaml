@@ -1,0 +1,26 @@
+id: stance-ajtowns-470bdea1
+bip: 324
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1428
+  title: "BIP324: Fixed length message type IDs"
+statement: ajtowns approved a change to BIP 324 that defines fixed-length
+  message type IDs, saying it looks good to him.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1428#issuecomment-1453044508
+  type: github
+  title: "BIP324: Fixed length message type IDs"
+  date: 2023-03-03
+  retrieved: 2026-11-14
+  quote: ACK - looks good to me
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,27 @@
+id: stance-jonatack-9e8123e5
+bip: 324
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2016
+  title: "BIP324: Fix features bitmask for decoding-case selection"
+statement: jonatack ACKed a pull request fixing the features bitmask used for
+  decoding-case selection in BIP324's test vector generation, verifying it by
+  regenerating the test vectors and running the test suite.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2016#pullrequestreview-3372580846
+  type: github
+  title: "BIP324: Fix features bitmask for decoding-case selection"
+  date: 2025-10-23
+  retrieved: 2026-11-14
+  quote: ACK 713f000a20421a54b29cd8ab89e711eef1fbccb9
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

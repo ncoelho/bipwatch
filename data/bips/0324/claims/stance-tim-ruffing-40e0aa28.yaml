@@ -1,0 +1,26 @@
+id: stance-tim-ruffing-40e0aa28
+bip: 324
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1428
+  title: "BIP324: Fixed length message type IDs"
+statement: real-or-random approved a change to BIP324 that introduces
+  fixed-length message type IDs.
+subject:
+  name: Tim Ruffing
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1428#pullrequestreview-1330947469
+  type: github
+  title: "BIP324: Fixed length message type IDs"
+  date: 2023-03-08
+  retrieved: 2026-11-14
+  quote: ACK ee8a4a3bc5ac4b7cc8c5a6610bf30b42ece2ad20
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
