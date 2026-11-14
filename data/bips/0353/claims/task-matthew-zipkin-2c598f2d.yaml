@@ -1,0 +1,24 @@
+id: task-matthew-zipkin-2c598f2d
+bip: 353
+kind: task
+status: addressed
+area: writing
+statement: Specify explicitly that clients must concatenate the multiple
+  character-strings of a TXT record when a URI exceeds 255 characters.
+subject:
+  name: Matthew Zipkin
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1646
+  type: github
+  title: "bip353: concatenate strings in TXT record"
+  date: 2024-07-16
+  retrieved: 2026-11-14
+  quote: URIs longer than 255 characters will be encoded in a TXT record as more
+    than one string.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

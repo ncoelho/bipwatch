@@ -1,0 +1,24 @@
+id: objection-alexgleason-21194e89
+bip: 353
+kind: objection
+status: addressed
+area: design
+statement: Decide whether a `.well-known` HTTP path should be used instead of
+  DNS TXT records, given that DNS resolution is harder in many environments,
+  especially client-side JavaScript.
+subject:
+  name: alexgleason
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1937376657
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-14
+  quote: IMO a `.well-known` path would be better.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
