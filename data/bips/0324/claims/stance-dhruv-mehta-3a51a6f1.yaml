@@ -1,0 +1,24 @@
+id: stance-dhruv-mehta-3a51a6f1
+bip: 324
+kind: stance
+stance: ack
+scope: proposal
+statement: dhruv, a BIP324 co-author, considers the BIP draft ready for merge
+  into the bips repository after pushing the latest changes, including a new
+  ChaCha20-based rekeying mechanism.
+subject:
+  name: Dhruv Mehta
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1378#issuecomment-1370453069
+  type: github
+  title: "Add BIP324: v2 P2P Transport Protocol"
+  date: 2023-01-04
+  retrieved: 2026-11-14
+  quote: the working group (@sipa, @real-or-random and I) agrees it's rfm.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

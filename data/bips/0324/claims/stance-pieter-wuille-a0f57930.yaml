@@ -1,0 +1,28 @@
+id: stance-pieter-wuille-a0f57930
+bip: 324
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: sipa defends BIP324's choice to deploy unauthenticated opportunistic
+  encryption and leave authentication to a separate, optional later step. He
+  argues that building authentication into the key exchange (as with Noise_XK)
+  would force listening nodes to have known identities, which he considers
+  undesirable.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1378#issuecomment-1366957149
+  type: github
+  title: "Add BIP324: v2 P2P Transport Protocol"
+  date: 2022-12-28
+  retrieved: 2026-11-14
+  quote: There are already tangible benefits to deploying opportunistic encryption
+    without authentication at all, so we don't feel like waiting for that is
+    desirable either.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

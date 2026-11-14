@@ -1,0 +1,30 @@
+id: stance-dr-orlovsky-c1b0ae2a
+bip: 324
+kind: stance
+stance: conditional
+condition: The new P2P transport is designed with attention to peer
+  authentication (e.g. peers advertising remote identities/pubkeys alongside
+  addresses, as in Lightning), even for automatic connections.
+scope: proposal
+statement: dr-orlovsky agrees that separating authentication from encryption is
+  good, but objects to building a new Bitcoin P2P stack without addressing
+  authentication. He argues that knowing peer identity can be desirable even for
+  automatic connections.
+subject:
+  name: dr-orlovsky
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1378#issuecomment-1367001255
+  type: github
+  title: "Add BIP324: v2 P2P Transport Protocol"
+  date: 2022-12-29
+  retrieved: 2026-11-14
+  quote: At the same time I agree that the abstraction of authentication from
+    encryption is a good thing to have. What is not good is to build a new P2P
+    stack for bitcoin without paying attention to authentication.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

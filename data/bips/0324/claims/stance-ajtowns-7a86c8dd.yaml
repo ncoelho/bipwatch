@@ -1,0 +1,30 @@
+id: stance-ajtowns-7a86c8dd
+bip: 324
+kind: stance
+stance: concept-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2092
+  title: "BIP 324, 434: Specify p2p v2 one-byte identifier for FEATURE message"
+statement: ajtowns proposes assigning a hardcoded one-byte BIP 324 v2 message
+  type ID to the FEATURE message. He argues that the message is sent repeatedly
+  before verack, so a short ID saves bandwidth, and that the ID must be
+  hardcoded because it is used before negotiation completes.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2092
+  type: github
+  title: "BIP 324, 434: Specify p2p v2 one-byte identifier for FEATURE message"
+  date: 2026-01-30
+  retrieved: 2026-11-14
+  quote: The feature message is intended to be used repeatedly prior to verack, so
+    it should have a short id to save a little bandwidth, and the identifier has
+    to be hardcoded, because it's used before negotiation is completed.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

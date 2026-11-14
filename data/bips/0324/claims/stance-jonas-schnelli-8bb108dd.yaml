@@ -1,0 +1,25 @@
+id: stance-jonas-schnelli-8bb108dd
+bip: 324
+kind: stance
+stance: nack
+scope: change
+statement: Jonas Schnelli opposes the suggestion to use TLS 1.3 for a
+  post-quantum BIP 324. He cites the dependency cost, TLS's distinctive
+  fingerprint undermining censorship resistance, and its bundling of
+  authentication with encryption.
+subject:
+  name: Jonas Schnelli
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/547ADFCA-2BB1-4E16-A26A-C92262EBBD84@gmail.com/
+  type: mailing-list
+  title: A Post-Quantum Path for BIP 324
+  date: 2026-05-07
+  retrieved: 2026-11-14
+  quote: On Ethan's TLS 1.3 suggestionm,... I don't think it really fits.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: stance-pieter-wuille-f1d56da2
+bip: 324
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1498
+  title: "bip324: Remove garbage authentication packet (breaking change)"
+statement: sipa approved the breaking change to BIP 324 that removes the garbage
+  authentication packet from the protocol.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1498#issuecomment-1737247845
+  type: github
+  title: "bip324: Remove garbage authentication packet (breaking change)"
+  date: 2023-09-27
+  retrieved: 2026-11-14
+  quote: LGTM
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
