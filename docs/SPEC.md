@@ -30,6 +30,8 @@ Prompt v4 (same day, owner's request): the `area` values are types of work by co
 
 The daily extraction bot (`.github/workflows/extract.yml`) runs both tasks, open work and stances, for every tracked BIP, one pull request per BIP and task. Work v4 declares `continuesFrom: [3]`, so it carries on from v3's cursor instead of re-reading documents (a task version only does this when its change does not call for re-reading).
 
+"What it needs" (2026-11-14) is the overview above the open work, and is now generated rather than written once. `npm run needs` gives the model a one-line-per-claim digest of the BIP (problems and evidence, implementations, open and addressed work with type and piece, dissenting positions) and gets back a 0-5 score, a short rationale and the claim ids for each dimension; code checks the ids exist. `NEED_AREAS` (in `@bipwatch/data`) says which types of work bear on each dimension, so each card links to its open items below. The weekly `needs` workflow reassesses BIPs whose claims changed and opens a PR. About 6k billed tokens per BIP.
+
 ### Principles
 
 These came out of the design work and should constrain every implementation decision.

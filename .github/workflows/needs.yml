@@ -1,0 +1,57 @@
+name: needs
+
+# Weekly: reassess "What it needs" for every tracked BIP whose claims changed
+# since its last assessment, and open one pull request with the new
+# needs.yaml files. One model call per BIP (about 6k billed tokens each).
+# Off while EXTRACT_ENABLED is not "true", like the extraction bot.
+
+on:
+  schedule:
+    - cron: '41 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      all:
+        description: Reassess every tracked BIP, changed or not
+        type: boolean
+        default: false
+
+concurrency:
+  group: needs
+  cancel-in-progress: false
+
+jobs:
+  needs:
+    if: vars.EXTRACT_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+      - name: Fetch bitcoin/bips history
+        run: git clone --filter=blob:none --no-checkout https://github.com/bitcoin/bips.git ../bips
+      - uses: ./.github/actions/setup
+
+      - name: Reassess
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ALL: ${{ inputs.all }}
+        run: |
+          if [ "$ALL" = "true" ]; then npm run needs; else npm run needs -- --if-changed; fi
+
+      - name: Validate
+        run: npm run validate -- --bips ../bips
+
+      - name: Open the pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+          branch: bot/needs/run-${{ github.run_id }}
+          add-paths: data/bips/*/needs.yaml
+          commit-message: 'Reassess what tracked BIPs need, pending review'
+          title: 'Reassess what tracked BIPs need, pending review'
+          body: |
+            Regenerated `needs.yaml` for tracked BIPs with claims newer than their last assessment (`npm run needs -- --if-changed`). Each score cites the claims it rests on; all are pending review. Check the rationales read well on the BIP pages.
+
+            🤖 Opened by the needs workflow
+          labels: claims

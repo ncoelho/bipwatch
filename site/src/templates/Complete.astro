@@ -3,13 +3,12 @@
 // main job); then "is it getting built?" with implementations near the top,
 // and the problem statement and trade-offs after.
 import type { BipBundle } from '@bipwatch/data';
-import { NEED_DIMENSIONS } from '@bipwatch/data';
-import Dots from '../components/Dots.astro';
+import Needs from '../components/Needs.astro';
 import OpenWork from '../components/OpenWork.astro';
 import Positions from '../components/Positions.astro';
 import Source from '../components/Source.astro';
 import {
-  CATEGORY_LABEL, DIMENSION_LABEL, STATE_LABEL, STATE_ORDER,
+  CATEGORY_LABEL, STATE_LABEL, STATE_ORDER,
   bipHref, byKind, isPending, pad,
 } from '../lib/view.ts';
 
@@ -52,34 +51,10 @@ const bipLink = (n: number) => (known.has(n) ? bipHref(n) : `https://github.com/
     )}
   </header>
 
+  <Needs bundle={bundle} />
+
   <OpenWork bundle={bundle} />
 
-  {needs && (
-    <section id="needs">
-      <div class="sec-head">
-        <h2>What it needs</h2>
-        <p class="muted">Each dimension is scored 0 to 5, where 5 means no help is needed. {isPending(needs) && <span class="pill warn">Draft, pending review</span>}</p>
-      </div>
-      <ul class="needs">
-        {NEED_DIMENSIONS.map((dim) => {
-          const d = needs.dimensions[dim];
-          return (
-            <li>
-              <div class="need-top">
-                <h3>{DIMENSION_LABEL[dim]}</h3>
-                <Dots score={d.score} />
-              </div>
-              <p class="muted">{d.rationale}</p>
-              {d.help_wanted?.length ? (
-                <ul class="asks">{d.help_wanted.map((h) => <li>{h}</li>)}</ul>
-              ) : null}
-              {d.evidence.length > 0 && <p class="ev">Based on {d.evidence.map((id, i) => <>{i > 0 && ', '}<a href={`#${id}`}>{id}</a></>)}</p>}
-            </li>
-          );
-        })}
-      </ul>
-    </section>
-  )}
 
   {impls.length > 0 && (
   <section id="implementations">
@@ -173,15 +148,6 @@ const bipLink = (n: number) => (known.has(n) ? bipHref(n) : `https://github.com/
   .sec-head h2 { font-size: 22px; }
   .sec-head p { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; }
 
-  .needs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
-  .needs > li { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-  .need-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-  .need-top h3 { font-size: 15px; }
-  .needs p { font-size: 14px; }
-  .asks { margin: 0; padding-left: 18px; font-size: 13px; }
-  .asks li::marker { color: var(--accent); }
-  .ev { font-size: 12px; color: var(--faint); overflow-wrap: anywhere; }
-  .ev a { color: var(--faint); font-family: var(--mono); font-size: 11px; }
 
   .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
   table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 14px; }
