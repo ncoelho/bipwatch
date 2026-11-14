@@ -1,0 +1,26 @@
+id: task-dan-gould-297efdfe
+bip: 77
+kind: task
+status: addressed
+area: design
+statement: Replace the authentication-token directory access mechanism with a
+  privacy-preserving way to prevent DoS and misuse, such as limiting access to
+  eligible OHTTP relays.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#issuecomment-2143981635
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2024-06-02
+  retrieved: 2026-11-14
+  quote: 'Replacethe `Authenticate: <token>` messaging with a mask on eligible
+    OHTTP relay addresses that start with "pay" domains. Avoid using identifying
+    protocols like authentication tokens to preserve privacy.'
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

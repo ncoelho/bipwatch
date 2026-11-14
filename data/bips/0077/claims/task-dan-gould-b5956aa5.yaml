@@ -1,0 +1,26 @@
+id: task-dan-gould-b5956aa5
+bip: 77
+kind: task
+status: addressed
+area: research
+statement: Research how a relay can safely hold payjoin requests for an offline
+  counterparty, so that an asynchronous payjoin protocol can be recommended
+  without falling back to broadcasting the original PSBT.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/3C0A6E4C-444E-4E75-829C-1A21D8EE40E0@ngould.dev/
+  type: mailing-list
+  title: Serverless Payjoin
+  date: 2023-01-22
+  retrieved: 2026-11-14
+  quote: It may be possible for a relay to hold a requeust for an offline payjoin
+    peer until that peer comes online. However, the BIP 78 spec recommends
+    broadcasting request PSBTs in the case of an offline counterparty.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

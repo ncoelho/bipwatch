@@ -1,0 +1,23 @@
+id: task-dan-gould-d87280c9
+bip: 77
+kind: task
+status: addressed
+area: engineering
+statement: Implement the simplified protocol (reply key with the Original PSBT,
+  implicit sessions) in rust-payjoin.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#issuecomment-2401274780
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2024-10-09
+  retrieved: 2026-11-14
+  quote: link it to a `rust-payjoin` issue to implement
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

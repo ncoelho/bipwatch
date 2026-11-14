@@ -1,0 +1,24 @@
+id: task-dan-gould-2490a116
+bip: 77
+kind: task
+status: addressed
+area: engineering
+statement: Build a complete reference implementation of the Payjoin version 2
+  specification, beyond the existing proofs of concept.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/7B11AE34-27A7-46ED-95BF-66CA13BA26F3@ngould.dev/
+  type: mailing-list
+  title: BIP for Serverless Payjoin
+  date: 2023-08-09
+  retrieved: 2026-11-14
+  quote: am working on an implementation including this exact specification, but
+    wanted to get early feedback on this design in the spirit of BIP 2.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

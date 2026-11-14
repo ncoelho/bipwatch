@@ -1,0 +1,24 @@
+id: task-murch-24f04972
+bip: 77
+kind: task
+status: open
+area: testing
+statement: Add test vectors for BIP 77 before advancing it to Proposed status.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#pullrequestreview-2434059012
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2024-11-13
+  retrieved: 2026-11-14
+  quote: Would it be viable to provide test vectors for this proposal? If so, I
+    would suggest that some be added before this proposal is advanced to
+    "Proposed".
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

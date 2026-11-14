@@ -1,0 +1,25 @@
+id: open-question-kumulynja-65272d7a
+bip: 77
+kind: open-question
+status: addressed
+area: design
+statement: Decide how to handle the `+` fragment parameter separator being
+  decoded as a space by URI parsers, either by tolerating spaces or by
+  specifying a single unambiguous encoding.
+subject:
+  name: kumulynja
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1885#issuecomment-3023458221
+  type: github
+  title: "BIP77: Propose to encode `+` as `%2B` in pj param of Bitcoin URIs"
+  date: 2025-07-01
+  retrieved: 2026-11-14
+  quote: Instead of every user having to take care of replacing ` ` with `+` after
+    parsing, PDK could maybe do this itself?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
