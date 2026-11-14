@@ -1,0 +1,28 @@
+id: task-peter-todd-4d09bda5
+bip: 22
+kind: task
+status: open
+area: engineering
+part_of: pooled-solo mining
+statement: Add code to libblkmaker (then BFGMiner and python-blkmaker) to merge
+  the pool's and local bitcoind's block templates by finding their common
+  transactions.
+subject:
+  name: Peter Todd
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/20130610210913.GA17242@petertodd.org/
+  type: mailing-list
+  title: Decentralizing mining
+  date: 2013-06-10
+  retrieved: 2026-11-14
+  quote: |-
+    Basically we need code to merge the two block templates together to find
+    commonality. I guess you probably want to implement this in bfgminer
+    first, so add the code to libblkmaker first, then maybe python-blkmaker.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

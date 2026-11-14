@@ -1,0 +1,26 @@
+id: objection-pieter-wuille-6665bad0
+bip: 22
+kind: objection
+status: addressed
+area: design
+statement: Decide whether templates and submissions should carry full
+  hex-serialized transactions or only txids, since the server already has the
+  transaction database.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAPg+sBiqi_NDGOfhzrFy1V3o24kPnxvGtYzsSsk6iy9dyyhF8w@mail.gmail.com/
+  type: mailing-list
+  title: BIP22/getmemorypool
+  date: 2012-06-10
+  retrieved: 2026-11-14
+  quote: |-
+    is there a particular reason for sending the
+    full transactions (serialized in hex) both in templates and submissions?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

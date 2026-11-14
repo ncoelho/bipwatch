@@ -1,0 +1,26 @@
+id: task-luke-dashjr-02dba170
+bip: 22
+kind: task
+status: open
+area: review
+part_of: BIP 145
+statement: Review the segwit getblocktemplate draft, especially its changes to
+  sigoplimit handling.
+subject:
+  name: Luke Dashjr
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/201601301850.03469.luke@dashjr.org/
+  type: mailing-list
+  title: SegWit GBT updates
+  date: 2016-01-30
+  retrieved: 2026-11-14
+  quote: |-
+    Please review and comment (especially with regard to the changes in the 
+    sigoplimits handling).
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

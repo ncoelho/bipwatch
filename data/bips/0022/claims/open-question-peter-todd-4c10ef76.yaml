@@ -1,0 +1,29 @@
+id: open-question-peter-todd-4c10ef76
+bip: 22
+kind: open-question
+status: open
+area: engineering
+part_of: pooled-solo mining
+statement: Determine whether Eloipool accepts arbitrary miner-built shares with
+  correct accounting (adjusting share value for fees), and how it handles a
+  found block it sees without receiving the share directly.
+subject:
+  name: Peter Todd
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/20130610210913.GA17242@petertodd.org/
+  type: mailing-list
+  title: Decentralizing mining
+  date: 2013-06-10
+  retrieved: 2026-11-14
+  quote: |-
+    So does eliopool already accept arbitrary shares like this and do the
+    correct accounting already? (IE adjust share amount based on fees?) What
+    happens when the pool doesn't get the share directly, but does see the
+    new block?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

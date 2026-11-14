@@ -1,0 +1,26 @@
+id: task-gregory-maxwell-84f71fcc
+bip: 22
+kind: task
+status: open
+area: engineering
+part_of: bundled gbt miner
+statement: Bundle a getblocktemplate-capable miner with the Bitcoin Core package
+  so users can still mine against bitcoind once getwork is removed.
+subject:
+  name: Gregory Maxwell
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAAS2fgQRcfbe+3A6_t4s8BJRaWwmLdKkGG1ePmG+Epm5W6CxdQ@mail.gmail.com/
+  type: mailing-list
+  title: 'Proposal: remove "getwork" RPC from bitcoind'
+  date: 2013-08-19
+  retrieved: 2026-11-14
+  quote: |-
+    I think we should also package along a proper getblocktemplate miner
+    to remove any doubt that we're providing a full network node here.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

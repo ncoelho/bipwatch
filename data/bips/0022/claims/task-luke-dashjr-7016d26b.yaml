@@ -1,0 +1,26 @@
+id: task-luke-dashjr-7016d26b
+bip: 22
+kind: task
+status: addressed
+area: engineering
+part_of: BIP 145
+statement: Update libblkmaker's reference implementation so it complies with the
+  rule that the witness commitment must be the last coinbase output.
+subject:
+  name: Luke Dashjr
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/201601301850.03469.luke@dashjr.org/
+  type: mailing-list
+  title: SegWit GBT updates
+  date: 2016-01-30
+  retrieved: 2026-11-14
+  quote: |-
+    libblkmaker's reference implementation is at this time incompatible 
+    with the "last output" rule in this BIP.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

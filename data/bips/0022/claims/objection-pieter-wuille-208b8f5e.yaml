@@ -1,0 +1,23 @@
+id: objection-pieter-wuille-208b8f5e
+bip: 22
+kind: objection
+status: addressed
+area: design
+statement: Pick a single mechanism for marking mandatory transactions instead of
+  txrequires, a per-transaction 'required' field and the transactions variation.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/20120610090357.GA25567@vps7135.xlshosting.net/
+  type: mailing-list
+  title: BIP22/getmemorypool
+  date: 2012-06-10
+  retrieved: 2026-11-14
+  quote: Pick one way that is flexible enough, and discard the others.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

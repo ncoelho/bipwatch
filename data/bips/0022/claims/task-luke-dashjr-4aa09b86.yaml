@@ -1,0 +1,24 @@
+id: task-luke-dashjr-4aa09b86
+bip: 22
+kind: task
+status: addressed
+area: coordination
+part_of: BIP 23
+statement: Assign a BIP number to the split-out getblocktemplate Pooled Mining
+  specification.
+subject:
+  name: Luke Dashjr
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/201207302031.01396.luke@dashjr.org/
+  type: mailing-list
+  title: BIP 22 - getmemorypool
+  date: 2012-07-30
+  retrieved: 2026-11-14
+  quote: It just needs a number assigned (as the last part).
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

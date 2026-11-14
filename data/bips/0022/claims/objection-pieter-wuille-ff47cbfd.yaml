@@ -1,0 +1,27 @@
+id: objection-pieter-wuille-ff47cbfd
+bip: 22
+kind: objection
+status: addressed
+area: design
+part_of: BIP 23
+statement: Decide whether to cut the many individually selectable mutations
+  (coinbase, noncerange, time, transactions, prevblock) down to a simpler fixed
+  model.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/20120609231054.GA16966@vps7135.xlshosting.net/
+  type: mailing-list
+  title: getmemorypool
+  date: 2012-06-09
+  retrieved: 2026-11-14
+  quote: |-
+    I'm unconvinced we need 10 individually selectable
+    variations.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: task-peter-todd-4f7a656d
+bip: 22
+kind: task
+status: open
+area: engineering
+part_of: pooled-solo mining
+statement: Implement automatic fallback to local solo mining when the pool
+  cannot be contacted.
+subject:
+  name: Peter Todd
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/20130610210913.GA17242@petertodd.org/
+  type: mailing-list
+  title: Decentralizing mining
+  date: 2013-06-10
+  retrieved: 2026-11-14
+  quote: |-
+    We also want an automatic fallback to local solo mining if the pool
+    can't be contacted.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
