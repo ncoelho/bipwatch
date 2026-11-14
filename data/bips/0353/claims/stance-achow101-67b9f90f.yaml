@@ -1,0 +1,26 @@
+id: stance-achow101-67b9f90f
+bip: 353
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1657
+  title: Add a PSBT per-output field for BIP 353 DNSSEC Proofs
+statement: achow101 approved the pull request adding a PSBT per-output field for
+  carrying BIP 353 DNSSEC proofs.
+subject:
+  name: achow101
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1657#issuecomment-2318738927
+  type: github
+  title: Add a PSBT per-output field for BIP 353 DNSSEC Proofs
+  date: 2024-08-29
+  retrieved: 2026-11-14
+  quote: ACK b0d5a0794333bfcf103c3642b168c4338320c48e
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

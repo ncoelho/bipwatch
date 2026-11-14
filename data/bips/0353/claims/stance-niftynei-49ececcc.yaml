@@ -1,0 +1,23 @@
+id: stance-niftynei-49ececcc
+bip: 353
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: niftynei expressed general support for the DNS Payment Instructions
+  proposal, calling it a great idea.
+subject:
+  name: niftynei
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1938757027
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-12
+  retrieved: 2026-11-14
+  quote: Great idea.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

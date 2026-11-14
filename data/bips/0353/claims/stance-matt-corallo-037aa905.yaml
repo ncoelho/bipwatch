@@ -1,0 +1,25 @@
+id: stance-matt-corallo-037aa905
+bip: 353
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: TheBlueMatt, the BIP's author, defends its use of DNS rather than
+  HTTP. He says the BIP text explains why HTTP is badly suited to the goal and
+  that this design choice will not change.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1937504487
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-14
+  quote: the text of the BIP which clearly explains why HTTP is horribly unsuited
+    to this goal
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

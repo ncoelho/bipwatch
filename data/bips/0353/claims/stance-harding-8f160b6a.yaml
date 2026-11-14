@@ -1,0 +1,25 @@
+id: stance-harding-8f160b6a
+bip: 353
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: harding defends BIP 353's choice of DNS over a .well-known HTTPS
+  path. He accepts that DNS is less developer-friendly but values the better
+  privacy and not tying Bitcoin standards to TLS.
+subject:
+  name: harding
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1937414630
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-14
+  quote: I think it'd be nice to have better privacy (at least in some cases) and
+    not to tie Bitcoin standards to TLS.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

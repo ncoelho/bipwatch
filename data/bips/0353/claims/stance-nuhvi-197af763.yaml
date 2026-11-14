@@ -1,0 +1,24 @@
+id: stance-nuhvi-197af763
+bip: 353
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Nuhvi defends BIP 353's choice of DNS over a .well-known HTTPS
+  approach. They argue that DNS-over-HTTPS addresses the privacy and webapp
+  concerns, and that DNS is more durable and more distributed.
+subject:
+  name: Nuhvi
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1937485698
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-14
+  quote: DNS will outlast every adhoc protocol/format you build on top of .well-known.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

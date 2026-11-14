@@ -1,0 +1,26 @@
+id: stance-albassort-04a4334e
+bip: 353
+kind: stance
+stance: nack
+scope: proposal
+statement: albassort opposes BIP 353 as reinventing the wheel, arguing that the
+  existing OpenAlias standard already covers this. They add that OpenAlias
+  supports multiple currencies at one name, whereas BIP 353 would need separate
+  subdomains per currency.
+subject:
+  name: albassort
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-2808686493
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2025-04-16
+  retrieved: 2026-11-14
+  quote: The difference is not reinventing the wheel. There is no need for such a
+    thing.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

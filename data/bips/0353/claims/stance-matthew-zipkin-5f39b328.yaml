@@ -1,0 +1,26 @@
+id: stance-matthew-zipkin-5f39b328
+bip: 353
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: pinheadmz considers BIP 353 a reasonable proposal and sees clear
+  demand for it, though he has concerns about DNSSEC centralization, developer
+  unfamiliarity with DNS, and address reuse. He thinks it is probably the
+  quickest way to get something useful deployed.
+subject:
+  name: Matthew Zipkin
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1950483634
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-17
+  retrieved: 2026-11-14
+  quote: I agree there is a clear demand and despite my concerns, this proposal is
+    probably the quickest way to get something useful deployed.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

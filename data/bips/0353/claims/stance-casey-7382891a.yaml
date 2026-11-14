@@ -1,0 +1,24 @@
+id: stance-casey-7382891a
+bip: 353
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: casey expressed liking the BIP 353 DNS Payment Instructions proposal,
+  while suggesting it explicitly state that user and domain be rendered like an
+  email address.
+subject:
+  name: casey
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1937372263
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-14
+  quote: I like this!
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

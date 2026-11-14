@@ -1,0 +1,26 @@
+id: stance-jonatack-978b34f3
+bip: 353
+kind: stance
+stance: approach-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1645
+  title: "bip353: improve ₿-prefix instructions"
+statement: jonatack agreed with the approach of a pull request that revises BIP
+  353's instructions on using the ₿ prefix.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1645#pullrequestreview-2172916924
+  type: github
+  title: "bip353: improve ₿-prefix instructions"
+  date: 2024-07-11
+  retrieved: 2026-11-14
+  quote: Approach ACK
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

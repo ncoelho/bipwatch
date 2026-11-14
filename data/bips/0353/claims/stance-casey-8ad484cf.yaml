@@ -1,0 +1,25 @@
+id: stance-casey-8ad484cf
+bip: 353
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Casey favours the BIP using the USER@DOMAIN display format for
+  payment addresses over alternatives such as USER.DOMAIN or @USER@DOMAIN. He
+  argues that confusion with email addresses is a minor issue.
+subject:
+  name: casey
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1947357643
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-15
+  retrieved: 2026-11-14
+  quote: I personally like `USER@DOMAIN` much better than `USER.DOMAIN` or other
+    weird formats, like `@USER@DOMAIN`.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
