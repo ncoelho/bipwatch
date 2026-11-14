@@ -1,0 +1,26 @@
+id: stance-bigspider-e3fb0794
+bip: 448
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: bigspider likes the general direction of the OP_TEMPLATEHASH /
+  Taproot-native (Re)bindable Transactions specifications. He considers
+  TEMPLATEHASH cleaner than CTV because it avoids CTV's side-effect of
+  accidentally enabling commitments via legacy Script.
+subject:
+  name: bigspider
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1974#issuecomment-3637313471
+  type: github
+  title: "BIP446: OP_TEMPLATEHASH and BIP448: Taproot-native (Re)bindable
+    Transactions"
+  date: 2025-12-10
+  retrieved: 2026-11-14
+  quote: Thanks for writing these specifications. I like the general direction
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

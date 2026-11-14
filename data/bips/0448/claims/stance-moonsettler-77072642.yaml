@@ -1,0 +1,29 @@
+id: stance-moonsettler-77072642
+bip: 448
+kind: stance
+stance: conditional
+condition: OP_SHA256TAGGED is added to the bundle of opcodes
+scope: proposal
+statement: moonsettler says that if OP_SHA256TAGGED were added to the
+  Taproot-native (Re)bindable Transactions bundle, it would be a viable
+  alternative to LNhance that he could support without misgivings, even with
+  OP_TEMPLATEHASH in place of CTV.
+subject:
+  name: moonsettler
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1974#issuecomment-3353568840
+  type: github
+  title: "BIP446: OP_TEMPLATEHASH and BIP448: Taproot-native (Re)bindable
+    Transactions"
+  date: 2025-09-30
+  retrieved: 2026-11-14
+  quote: how do you feel about adding OP_SHA256TAGGED to this mix? Even with the
+    "French CTV" it would be a pretty viable LNhance alternative I could support
+    without any misgivings.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

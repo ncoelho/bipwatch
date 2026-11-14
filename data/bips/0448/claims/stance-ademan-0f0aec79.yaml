@@ -1,0 +1,27 @@
+id: stance-ademan-0f0aec79
+bip: 448
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Ademan likes the OP_TEMPLATEHASH-based proposal and slightly prefers
+  it over CTV, citing pushing the hash onto the stack and using only cached
+  intermediate hashes. He has reservations about committing to the annex but is
+  ok with it as-is, since an annex-less opcode could be added later.
+subject:
+  name: Ademan
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1974#issuecomment-3321878856
+  type: github
+  title: "BIP446: OP_TEMPLATEHASH and BIP448: Taproot-native (Re)bindable
+    Transactions"
+  date: 2025-09-22
+  retrieved: 2026-11-14
+  quote: TL;DR I like this proposal. As-is I prefer it slightly over CTV, but I
+    think committing to the annex may be undesirable
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
