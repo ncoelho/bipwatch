@@ -1,0 +1,26 @@
+id: stance-ethan-heilman-c5a84f90
+bip: 360
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: EthanHeilman, a BIP-360 author, defends P2QRH's approach of allowing
+  both Schnorr and PQ signature leaves, arguing that it eases adoption and that
+  it is preferable to keeping P2TR and later disabling key-path spends, since
+  that alternative would be larger and more complex.
+subject:
+  name: Ethan Heilman
+  type: person
+applies_to_version: 0.8.0
+source:
+  url: https://delvingbitcoin.org/t/changes-to-bip-360-pay-to-quantum-resistant-hash-p2qrh/1811/21
+  type: forum
+  title: Changes to BIP-360 - Pay to Quantum Resistant Hash (P2QRH)
+  date: 2025-07-19
+  retrieved: 2026-11-14
+  quote: It is workable but P2QRH just seems slightly better (smaller, easier to
+    adopt, less complex)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

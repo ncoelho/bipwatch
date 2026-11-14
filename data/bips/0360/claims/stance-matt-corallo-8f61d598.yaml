@@ -1,0 +1,32 @@
+id: stance-matt-corallo-8f61d598
+bip: 360
+kind: stance
+stance: conditional
+condition: Strip out all signature schemes except straightforward hash-based
+  ones (perhaps only SPHINCS+), embed them only in a taproot leaf, and provide
+  them via an opcode to allow multisig.
+scope: proposal
+statement: Matt Corallo suggests that if a post-quantum proposal like BIP-360 is
+  pursued in the short-to-medium term, it should be reduced to hash-based
+  signatures (maybe only SPHINCS+) embedded in a taproot leaf as an emergency
+  break-glass option. He considers BIP 32 compatibility not a big concern for
+  that use.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.6.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/737fe7bb-4195-439f-87a9-b6fabd14eeea@mattcorallo.com/
+  type: mailing-list
+  title: P2QRH / BIP-360 Update
+  date: 2025-02-20
+  retrieved: 2026-11-14
+  quote: IMO we should strip out all the signature schemes that are anything more
+    than quite straightforward in their security assumptions (i.e. only keep
+    hash-based signatures, maybe just SPHINCS+), only embed them in a taproot
+    leaf, and call it a day.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

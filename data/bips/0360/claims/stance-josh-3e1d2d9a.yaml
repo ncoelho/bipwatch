@@ -1,0 +1,25 @@
+id: stance-josh-3e1d2d9a
+bip: 360
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: josh says he is a big fan of the BIP 360 work and hopes naming
+  disagreements won't get in the way of adoption. He prefers the name
+  Pay-to-Script-Tree (P2ST) over P2STH.
+subject:
+  name: josh
+  type: person
+applies_to_version: 0.10.2
+source:
+  url: https://delvingbitcoin.org/t/major-bip-360-update/2170/10
+  type: forum
+  title: Major BIP 360 Update
+  date: 2026-01-31
+  retrieved: 2026-11-14
+  quote: Big fan of this work by the way @cryptoquick! I see no reason why
+    semantics should get in the way of adoption.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

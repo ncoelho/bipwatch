@@ -1,0 +1,26 @@
+id: stance-dustin-ray-ee8384bb
+bip: 360
+kind: stance
+stance: approach-ack
+scope: change
+statement: Dustin Ray agrees with moving away from the earlier, higher
+  post-quantum security level in BIP 360, calling the previous proposal
+  overkill. He thinks matching ECDSA's current security level is sufficient
+  given years of scrutiny.
+subject:
+  name: Dustin Ray
+  type: person
+applies_to_version: 0.6.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAC3UE4KkpxCO++huw=kw6YRayEvnhWtngzPkngiAvk16v3Kfew@mail.gmail.com/
+  type: mailing-list
+  title: P2QRH / BIP-360 Update
+  date: 2025-02-19
+  retrieved: 2026-11-14
+  quote: Per your comment on security levels, I agree that your previous proposal
+    was absolutely overkill.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
