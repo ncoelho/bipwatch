@@ -1,0 +1,28 @@
+id: objection-murch-315efb95
+bip: 448
+kind: objection
+status: addressed
+area: writing
+part_of: BIP 446
+statement: Explain in the BIP 446 rationale how the claimed flexibility to
+  recover from an underfunded commitment by adding another coin squares with a
+  template that commits to a single-input spending transaction.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1974#discussion_r2411139718
+  type: github
+  title: "BIP446: OP_TEMPLATEHASH and BIP448: Taproot-native (Re)bindable
+    Transactions"
+  date: 2025-10-07
+  retrieved: 2026-11-14
+  quote: when your OP_TEMPLATEHASH commits to the spending  transaction having a
+    single input, you would not have the flexibility to add a second output to
+    provide more funds, i.e., doesn’t that contradict your flexibility point?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

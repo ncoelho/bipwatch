@@ -1,0 +1,31 @@
+id: objection-murch-6ade6b2e
+bip: 448
+kind: objection
+status: addressed
+area: writing
+statement: Expand the bundle document so it meets the criteria for a
+  Specification BIP, for example by adding a Deployment section even if its
+  content is TBD.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1974#discussion_r2790404439
+  type: github
+  title: "BIP446: OP_TEMPLATEHASH and BIP448: Taproot-native (Re)bindable
+    Transactions"
+  date: 2026-02-10
+  retrieved: 2026-11-14
+  quote: >-
+    I currently don’t see this document meeting the criteria for a BIP, let
+    alone a Specification BIP.
+
+
+    This could for example be remedied by adding a Deployment section, even if
+    the content were TBD.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: task-murch-f21c62f3
+bip: 448
+kind: task
+status: addressed
+area: writing
+part_of: BIP 446
+statement: Add a section to BIP 446 linking to the reference implementation of
+  OP_TEMPLATEHASH.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1974#discussion_r2407574445
+  type: github
+  title: "BIP446: OP_TEMPLATEHASH and BIP448: Taproot-native (Re)bindable
+    Transactions"
+  date: 2025-10-06
+  retrieved: 2026-11-14
+  quote: Is there already a reference implementation for this proposal? If so,
+    please include a section linking to it.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

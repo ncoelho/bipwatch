@@ -1,0 +1,24 @@
+id: open-question-moonsettler-d90c88a8
+bip: 448
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether to add OP_SHA256TAGGED to the bundle of opcodes
+  proposed alongside OP_TEMPLATEHASH, OP_CHECKSIGFROMSTACK and OP_INTERNALKEY.
+subject:
+  name: moonsettler
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1974#issuecomment-3353568840
+  type: github
+  title: "BIP446: OP_TEMPLATEHASH and BIP448: Taproot-native (Re)bindable
+    Transactions"
+  date: 2025-09-30
+  retrieved: 2026-11-14
+  quote: how do you feel about adding OP_SHA256TAGGED to this mix?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,23 @@
+id: task-orfeas-f8ff292d
+bip: 448
+kind: task
+status: open
+area: writing
+statement: Add a comparison with BIP 118 (ANYPREVOUT) to the Rationale section of BIP 448.
+subject:
+  name: orfeas
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/add-comparison-to-bip-118-in-bip-448/2799/5
+  type: forum
+  title: Add comparison to BIP-118 in BIP-448
+  date: 2026-08-13
+  retrieved: 2026-11-14
+  quote: There's some nice intuition here that isn't present in the BIP-448 text.
+    I'd like to open a PR to add it under Rationale, wdyt?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

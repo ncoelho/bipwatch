@@ -1,0 +1,27 @@
+id: task-murch-1d0a2a17
+bip: 448
+kind: task
+status: addressed
+area: writing
+part_of: BIP 446
+statement: Clarify in the BIP 446 rationale why the BIP341 hash_type field is
+  omitted from the template hash, since the earlier wording about a single
+  supported hash type was confusing.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1974#discussion_r2411147155
+  type: github
+  title: "BIP446: OP_TEMPLATEHASH and BIP448: Taproot-native (Re)bindable
+    Transactions"
+  date: 2025-10-07
+  retrieved: 2026-11-14
+  quote: What is the sighash type that you need to use with OP_TEMPLATEHASH, and
+    shouldn’t that be mentioned in the spec?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

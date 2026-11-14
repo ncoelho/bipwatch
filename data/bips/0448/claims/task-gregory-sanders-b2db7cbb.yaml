@@ -1,0 +1,26 @@
+id: task-gregory-sanders-b2db7cbb
+bip: 448
+kind: task
+status: addressed
+area: writing
+part_of: BIP 446
+statement: Add an Implementation section to the OP_TEMPLATEHASH spec that links
+  to the reference implementation branch.
+subject:
+  name: Gregory Sanders
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1974
+  type: github
+  title: "BIP446: OP_TEMPLATEHASH and BIP448: Taproot-native (Re)bindable
+    Transactions"
+  date: 2025-09-19
+  retrieved: 2026-11-14
+  quote: "Probably need to add implementation section:
+    https://github.com/instagibbs/bitcoin/tree/2025-07-op_templatehash"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
