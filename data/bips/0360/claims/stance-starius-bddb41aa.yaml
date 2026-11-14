@@ -1,0 +1,27 @@
+id: stance-starius-bddb41aa
+bip: 360
+kind: stance
+stance: concept-ack
+scope: change
+statement: starius proposes amending BIP-360 to add a 'recoverable EC leaf'
+  type, which recovers the EC public key from the signature so the leaf script
+  is dropped from the witness. They argue it should be folded in before
+  activation, because adding it later would need a new witness version.
+subject:
+  name: starius
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://delvingbitcoin.org/t/public-key-recovery-for-ec-leaves-in-p2mr-bip-360/2603/1
+  type: forum
+  title: Public key recovery for EC leaves in P2MR (BIP-360)
+  date: 2026-06-06
+  retrieved: 2026-11-14
+  quote: The proposal is to fold this into BIP-360 before activation, because
+    adding it later requires another witness version rather than just another
+    leaf version
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

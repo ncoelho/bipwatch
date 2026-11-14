@@ -1,0 +1,28 @@
+id: stance-pieter-wuille-1333f01b
+bip: 360
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: "sipa supports a P2MR-based output type as one part of a two-track
+  plan, intended to prepare for a longer-term full migration away from ECC. He
+  does not see it as the emergency option: for that he prefers a P2TRv2 output
+  type, citing P2MR's extra cost and complexity. He envisions the P2MR type with
+  Tripwire, Miner Lockdown and a new witness style, deployed on a longer
+  timescale."
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.12.1
+source:
+  url: https://delvingbitcoin.org/t/pqc-output-type-discussion/2749/2
+  type: forum
+  title: PQC output type discussion
+  date: 2026-07-27
+  retrieved: 2026-11-14
+  quote: I believe the best solution is a combination of P2TRv2 and P2MR, covering
+    distinct use cases.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

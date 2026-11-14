@@ -1,0 +1,26 @@
+id: stance-matt-corallo-69e32a77
+bip: 360
+kind: stance
+stance: nack
+scope: proposal
+statement: Matt Corallo disagrees with the approach taken in the BIP-360 (then
+  P2QRH) discussion. He argues that lattice-based post-quantum schemes will not
+  be ready for Bitcoin for a long time, and that the only practical short-term
+  step is to add a hash-based scheme that wallets include in their taproot
+  outputs.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.6.1
+source:
+  url: https://gnusha.org/pi/bitcoindev/2e0fc337-3603-4a22-8056-59cf7e21aa43@mattcorallo.com/
+  type: mailing-list
+  title: P2QRH / BIP-360 Update
+  date: 2025-02-26
+  retrieved: 2026-11-14
+  quote: I think you're approaching this from the wrong stance.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: stance-ethan-heilman-4cc69e10
+bip: 360
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: EthanHeilman says the BIP-360 output type is useful to have
+  regardless of its quantum-resistance value. He also defends keeping the P2QRH
+  name and the SegWit v3 "bc1r" addresses, so users can tell quantum-resistant
+  outputs apart from vulnerable P2TR ones.
+subject:
+  name: Ethan Heilman
+  type: person
+applies_to_version: 0.8.0
+source:
+  url: https://delvingbitcoin.org/t/changes-to-bip-360-pay-to-quantum-resistant-hash-p2qrh/1811/4
+  type: forum
+  title: Changes to BIP-360 - Pay to Quantum Resistant Hash (P2QRH)
+  date: 2025-07-14
+  retrieved: 2026-11-14
+  quote: I agree with that BIP-360 (P2QRH) independent of its value to quantum
+    resistance is a useful output type to have regardless.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

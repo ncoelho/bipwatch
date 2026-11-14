@@ -1,0 +1,25 @@
+id: stance-simul-d9f96247
+bip: 360
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: simul responded favorably to the BIP 360 (P2MR) update, saying it
+  makes a lot of sense. He added that combined with TXHASH it could let people
+  commit to quantum-safe spending paths that need no signatures.
+subject:
+  name: simul
+  type: person
+applies_to_version: 0.10.0
+source:
+  url: https://delvingbitcoin.org/t/major-bip-360-update/2170/3
+  type: forum
+  title: Major BIP 360 Update
+  date: 2025-12-21
+  retrieved: 2026-11-14
+  quote: This makes a lot of sense! if we also enabled TXHASH that would allow
+    people to commit to a spending path that requires multi-step secret reveal.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
