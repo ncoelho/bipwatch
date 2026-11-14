@@ -4,6 +4,7 @@ title: Pay-to-Merkle-Root (P2MR)
 layer: Consensus (soft fork)
 type: Specification
 status: Draft
+status_since: 2026-02-11
 version: 0.12.1
 assigned: 2024-12-18
 license: BSD-3-Clause
@@ -16,7 +17,7 @@ spec:
   repo: bitcoin/bips
   path: bip-0360.mediawiki
   revision: e7263a4cfe500c89e4269889244606953691ca33
-  synced: 2026-11-13
+  synced: 2026-11-14
 
 bipwatch:
   tracked: true

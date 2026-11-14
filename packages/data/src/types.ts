@@ -22,6 +22,8 @@ export interface BipRecord {
   layer: string | null;
   type: 'Specification' | 'Informational' | 'Process';
   status: OfficialStatus;
+  /** When it took its current status (header sync, from git history). */
+  status_since?: string;
   version?: string;
   assigned?: string;
   license?: string;
@@ -176,4 +178,38 @@ export interface Freshness {
 /** data/people.yaml: one identity per person with several names or logins. */
 export interface People {
   people: { name: string; aliases: string[] }[];
+}
+
+/** data/generated/spec-history/<n>.json, written by `npm run site-exports`. */
+export interface SpecHistory {
+  bip: number;
+  path: string;
+  /** Changelog versions with their dates, oldest first. */
+  versions: { version: string; date: string }[];
+  /** Changes to the spec file on bitcoin/bips master, oldest first. */
+  changes: {
+    sha: string;
+    date: string;
+    pr?: number;
+    title: string;
+    header: boolean;
+    body: boolean;
+    changelog: boolean;
+    bodyLines: number;
+    status?: string;
+    version?: string;
+    /** says: what the BIP says; edit: wording, links, fixups; process: metadata. */
+    type: 'says' | 'edit' | 'process';
+    /** How the type was decided: the PR's labels, or the diff. */
+    by: 'labels' | 'diff';
+    /** A "says" change with no changelog entry, once the spec keeps one. */
+    flag: boolean;
+    labels?: string[];
+  }[];
+}
+
+/** data/generated/github-prs.json: state of each GitHub PR a claim links to. */
+export interface PrStates {
+  generated_at: string;
+  prs: Record<string, { state: 'open' | 'closed' | 'merged'; opened: string; merged: string | null }>;
 }

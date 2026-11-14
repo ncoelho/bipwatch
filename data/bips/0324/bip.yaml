@@ -4,6 +4,7 @@ title: Version 2 P2P Encrypted Transport Protocol
 layer: Peer Services
 type: Specification
 status: Deployed
+status_since: 2024-07-10
 version: 1.0.2
 assigned: 2019-03-08
 license: BSD-3-Clause
@@ -16,7 +17,7 @@ spec:
   repo: bitcoin/bips
   path: bip-0324.mediawiki
   revision: 9571907539af0f46059c9446cbcb20b581fd91c3
-  synced: 2026-11-13
+  synced: 2026-11-14
 
 bipwatch:
   tracked: true

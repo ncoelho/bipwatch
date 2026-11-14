@@ -4,6 +4,7 @@ title: Taproot-native (Re)bindable Transactions
 layer: Consensus (soft fork)
 type: Specification
 status: Draft
+status_since: 2026-03-17
 assigned: 2026-03-11
 license: CC0-1.0
 authors:
@@ -15,7 +16,7 @@ spec:
   repo: bitcoin/bips
   path: bip-0448.md
   revision: 2778442c21cef2290ae3e0c843d9f3179aa1cdd0
-  synced: 2026-11-13
+  synced: 2026-11-14
 
 bipwatch:
   tracked: true

@@ -3,6 +3,7 @@ title: Silent Payment Output Script Descriptors
 layer: Applications
 type: Specification
 status: Draft
+status_since: 2026-03-05
 assigned: 2026-02-06
 license: BSD-2-Clause
 authors:

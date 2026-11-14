@@ -4,6 +4,7 @@ title: DNS Payment Instructions
 layer: Applications
 type: Specification
 status: Complete
+status_since: 2025-09-24
 assigned: 2024-02-10
 license: CC0-1.0
 authors:
@@ -18,7 +19,7 @@ spec:
   repo: bitcoin/bips
   path: bip-0353.mediawiki
   revision: 58f1e33d961e8ae3bf65fe496fa35d850302e476
-  synced: 2026-11-13
+  synced: 2026-11-14
 
 bipwatch:
   tracked: true

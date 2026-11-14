@@ -7,11 +7,13 @@
 // is a row of in-page links. The script turns it into ARIA tabs: one panel at
 // a time, chosen by the URL hash (#overview, #needs, #positions, or the id of
 // anything inside a panel), with arrow keys between tabs.
-import type { BipBundle } from '@bipwatch/data';
+import { dataChecks, loadPrStates, loadSpecHistory, type BipBundle } from '@bipwatch/data';
 import AtAGlance from '../components/frame/AtAGlance.astro';
+import DataChecks from '../components/frame/DataChecks.astro';
 import Discussed from '../components/frame/Discussed.astro';
 import FactRail from '../components/frame/FactRail.astro';
 import Lifecycle from '../components/frame/Lifecycle.astro';
+import SpecHistory from '../components/frame/SpecHistory.astro';
 import Implementations from '../components/Implementations.astro';
 import PositionsExplorer from '../components/explorer/PositionsExplorer.astro';
 import WorkExplorer from '../components/explorer/WorkExplorer.astro';
@@ -22,6 +24,9 @@ interface Props { bundle: BipBundle; known: Set<number>; }
 const { bundle, known } = Astro.props;
 const { bip, claims } = bundle;
 const tracked = bip.bipwatch.tracked;
+// Build-time exports (npm run site-exports); the page works without them.
+const history = loadSpecHistory(bip.number);
+const checks = dataChecks(bundle, history, loadPrStates());
 const openWork = claims.filter((c) => WORK_KINDS.includes(c.kind) && c.status !== 'addressed').length;
 const stances = claims.filter((c) => c.kind === 'stance').length;
 const built = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' });
@@ -52,7 +57,8 @@ const sections = [
   </header>
 
   <Lifecycle bip={bip} />
-  <AtAGlance bundle={bundle} known={known} />
+  <DataChecks checks={checks} />
+  <AtAGlance bundle={bundle} known={known} history={history} />
 
   <div class="details-head">
     <div class="eyebrow">Spec, work and positions</div>
@@ -72,6 +78,7 @@ const sections = [
     <div class="panels">
       <section id="overview" role="tabpanel" aria-labelledby="tab-overview" class="tabpanel">
         <h2 class="nojs">Overview</h2>
+        {history && history.changes.length > 0 && <SpecHistory bip={bip} history={history} />}
         <Implementations bundle={bundle} />
         <Discussed bundle={bundle} />
         {sections.map((s) => (

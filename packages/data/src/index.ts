@@ -1,9 +1,10 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { parse } from 'yaml';
-import type { BipBundle, BipRecord, Claim, Freshness, NeedsAssessment, People } from './types.ts';
+import type { BipBundle, BipRecord, Claim, Freshness, NeedsAssessment, People, PrStates, SpecHistory } from './types.ts';
 
 export * from './types.ts';
+export { dataChecks, type DataCheck } from './checks.ts';
 
 /**
  * Finds the data directory by walking up from `start` until it sees
@@ -61,6 +62,18 @@ export function loadAll(dataDir = findDataDir()): BipBundle[] {
 export function loadFreshness(dataDir = findDataDir()): Freshness | null {
   const file = join(dataDir, 'freshness.json');
   return existsSync(file) ? (JSON.parse(readFileSync(file, 'utf8')) as Freshness) : null;
+}
+
+/** A BIP's spec history from data/generated, or null when not exported. */
+export function loadSpecHistory(n: number, dataDir = findDataDir()): SpecHistory | null {
+  const file = join(dataDir, 'generated', 'spec-history', `${n}.json`);
+  return existsSync(file) ? (JSON.parse(readFileSync(file, 'utf8')) as SpecHistory) : null;
+}
+
+/** States of the GitHub PRs claims link to, or null when not exported. */
+export function loadPrStates(dataDir = findDataDir()): PrStates | null {
+  const file = join(dataDir, 'generated', 'github-prs.json');
+  return existsSync(file) ? (JSON.parse(readFileSync(file, 'utf8')) as PrStates) : null;
 }
 
 /** data/people.yaml, or an empty list. */

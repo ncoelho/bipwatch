@@ -53,10 +53,13 @@ describe('syncHeaders', () => {
     const sha = commitSpec(header352, 'Add BIP 352');
     const before = parse(readFileSync(yamlFile, 'utf8'));
     const changes = await syncHeaders({ dir: repo, dataDir, ref: 'HEAD', today: '2026-12-01' });
-    expect(changes).toMatchObject([{ number: 352, fields: ['spec.revision'], revision: sha }]);
+    // The throwaway repo's single commit also dates the status (status_since).
+    expect(changes).toMatchObject([{ number: 352, fields: ['status_since'], revision: sha }]);
     const after = parse(readFileSync(yamlFile, 'utf8'));
     expect(after.spec).toMatchObject({ revision: sha, synced: '2026-12-01' });
-    expect({ ...after, spec: before.spec }).toEqual(before);
+    expect(after.status_since).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    const strip = ({ status_since: _, spec: __, ...r }: Record<string, unknown>) => r;
+    expect(strip(after)).toEqual(strip(before));
   });
 
   it('leaves a record alone when the header and revision match', async () => {

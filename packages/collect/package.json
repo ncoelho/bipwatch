@@ -15,7 +15,8 @@
     "test:db": "node --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env ../../node_modules/vitest/vitest.mjs run test/db.integration.test.ts",
     "sync-headers": "tsx src/sync-headers.ts",
     "freshness": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env src/freshness.ts",
-    "reindex-mentions": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env src/reindex.ts"
+    "reindex-mentions": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env src/reindex.ts",
+    "site-exports": "tsx --env-file-if-exists=../../.env.local --env-file-if-exists=../../.env src/site-exports.ts"
   },
   "dependencies": {
     "@bipwatch/data": "*",

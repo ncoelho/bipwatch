@@ -4,6 +4,7 @@ title: URI Scheme
 layer: Applications
 type: Specification
 status: Complete
+status_since: 2025-09-23
 assigned: 2024-11-15
 license: BSD-2-Clause
 authors:
@@ -13,7 +14,7 @@ spec:
   repo: bitcoin/bips
   path: bip-0321.mediawiki
   revision: 644e484d4a8376cb8ba564a449999148aaaaf8f5
-  synced: 2026-11-13
+  synced: 2026-11-14
 
 bipwatch:
   tracked: true
