@@ -1,0 +1,23 @@
+id: task-jonatack-94ea2046
+bip: 321
+kind: task
+status: addressed
+area: coordination
+statement: Advance BIP 321's status from Draft to Proposed (or Final), since it
+  replaces BIP 21.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1911#issuecomment-3160201099
+  type: github
+  title: Mark BIP21 as replaced by 321, update 321 from Draft to Proposed
+  date: 2025-08-06
+  retrieved: 2026-11-14
+  quote: For the timeline, BIP 321 should probably be Proposed or Final.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,24 @@
+id: task-jonatack-15a4c088
+bip: 321
+kind: task
+status: addressed
+area: writing
+statement: Identify a working BIP 321-specific implementation and add a
+  Reference Implementation section to BIP 321.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1911#issuecomment-3165210105
+  type: github
+  title: Mark BIP21 as replaced by 321, update 321 from Draft to Proposed
+  date: 2025-08-07
+  retrieved: 2026-11-14
+  quote: is there a working 321-specific implementation, can add a Reference
+    Implementation section to BIP 321?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
