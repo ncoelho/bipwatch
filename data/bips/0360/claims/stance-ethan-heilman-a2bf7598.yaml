@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: EthanHeilman argues for using SegWit version 3 as an output-type flag
+statement: Ethan Heilman argues for using SegWit version 3 as an output-type flag
   in BIP-360, on usability grounds. He says that if the community opposes that
   choice, he would still prefer to get P2QRH adopted rather than insist on the
   flagging.

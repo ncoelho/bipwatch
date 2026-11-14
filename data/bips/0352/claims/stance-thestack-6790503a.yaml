@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2142
   title: "BIP-352: add test vector for edge case - input key intermediate sum zero"
-statement: theStack gave a concept ACK to a pull request adding a BIP-352 test
+statement: Sebastian Falbesoner gave a concept ACK to a pull request adding a BIP-352 test
   vector for the edge case where the intermediate sum of input keys is zero.
 subject:
   name: Sebastian Falbesoner

@@ -3,7 +3,7 @@ bip: 54
 kind: stance
 stance: concept-ack
 scope: change
-statement: AntoineP is leaning toward making 64-byte transactions invalid as
+statement: Antoine Poinsot is leaning toward making 64-byte transactions invalid as
   part of the Consensus Cleanup proposal. He says that, despite pushback on some
   claimed benefits, the reduced complexity for SPV applications outweighs the
   cost.

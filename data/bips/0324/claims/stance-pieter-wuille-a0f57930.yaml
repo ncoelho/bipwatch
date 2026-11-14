@@ -3,7 +3,7 @@ bip: 324
 kind: stance
 stance: approach-ack
 scope: proposal
-statement: sipa defends BIP324's choice to deploy unauthenticated opportunistic
+statement: Pieter Wuille defends BIP324's choice to deploy unauthenticated opportunistic
   encryption and leave authentication to a separate, optional later step. He
   argues that building authentication into the key exchange (as with Noise_XK)
   would force listening nodes to have known identities, which he considers

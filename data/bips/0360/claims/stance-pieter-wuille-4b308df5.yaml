@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: nack
 scope: proposal
-statement: sipa argues against relying on P2MR alone as the post-quantum output
+statement: Pieter Wuille argues against relying on P2MR alone as the post-quantum output
   type. He says it would make spending more expensive and discourage upgrades,
   and that in practice most users cannot get quantum resistance from it because
   public keys are widely shared. He prefers P2TRv2, with a separate P2MR-style

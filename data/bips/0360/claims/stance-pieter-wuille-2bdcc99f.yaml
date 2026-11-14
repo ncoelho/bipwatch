@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: nack
 scope: proposal
-statement: sipa argues that BIP 360 as currently designed (without PQC locks and
+statement: Pieter Wuille argues that BIP 360 as currently designed (without PQC locks and
   without disabling EC) offers a false sense of security, since P2TR is strictly
   better for mixed EC-or-PQC spending and pure-PQC use cannot be judged without
   an actual PQC scheme. He says he fails to see the point of the proposal.

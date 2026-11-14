@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1483
   title: "BIP 77: Async Payjoin"
-statement: DanGould supports nothingmuch's suggested amendment to BIP 77 having
+statement: Dan Gould supports Yuval Kogman's suggested amendment to BIP 77 having
   the sender register its own session subdirectory and include its public key
   with the original PSBT, saying it simplifies protocol messaging and eliminates
   a metadata leak.

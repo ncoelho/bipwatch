@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: sipa indicates support for adding a P2MR output type at a later
+statement: Pieter Wuille indicates support for adding a P2MR output type at a later
   stage, alongside a long-tail P2TRv2 output, citing the appeal of an output
   type without security conditions attached.
 subject:

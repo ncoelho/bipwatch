@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1405
   title: BIP324 reference code / test vector improvements
-statement: real-or-random approved a pull request that improves the BIP 324
+statement: Tim Ruffing approved a pull request that improves the BIP 324
   reference code and test vectors.
 subject:
   name: Tim Ruffing

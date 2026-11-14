@@ -9,59 +9,61 @@ provenance:
 dimensions:
   problem_evidence:
     score: null
-    rationale: Nothing recorded yet shows outside evidence of how much the timewarp,
-      slow-validation, Merkle and duplicate-transaction weaknesses are felt
-      today. The design debate takes the problems as given, but no sourced
-      problem claims exist.
+    rationale: Nothing recorded yet shows outside evidence that the timewarp,
+      slow-block, Merkle or duplicate-transaction problems are felt today. The
+      design discussion assumes these weaknesses matter, but no sourced evidence
+      of real-world impact is on file.
     evidence: []
   technical_maturity:
     score: 4
-    rationale: "The specification is complete, and its many design questions are
-      resolved: the timewarp grace period, the Murch–Zawy fix, coinbase
-      uniqueness via nLockTime and the 64-byte transaction rule. A standing
-      objection to the 64-byte rule and a conditional request about the 2106
-      timestamp overflow remain on record."
+    rationale: "The design is settled: every recorded design question, from the
+      timewarp grace period to coinbase uniqueness via nLockTime and the
+      Murch–Zawy fix, has been addressed. Some reviewers still object to
+      invalidating 64-byte transactions, and one asks that the timewarp fix
+      leave room for solving the 2106 timestamp overflow."
     evidence:
+      - open-question-antoinep-328f0649
+      - objection-sjors-8127dff3
+      - task-antoinep-6fd7b0b3
       - open-question-antoinep-8625c5c2
-      - objection-evoskuil-da6e50ce
       - stance-evoskuil-f06e752b
       - stance-josh-e437aa6f
-      - objection-sjors-8127dff3
-      - open-question-antoinep-328f0649
-      - task-antoinep-7d4a9192
-      - task-antoinep-5b355926
+      - objection-antoinep-2840a311
   ux_exploration:
     score: null
     rationale: Nothing recorded yet shows how users or wallets would meet this
-      change, and no UX work is listed. As a consensus fix it may have little
-      direct user-facing surface.
+      change. As a consensus fix it may have little user-facing surface, but no
+      claims say so either way.
     evidence: []
   implementations:
-    score: null
-    rationale: Nothing recorded yet shows which node or mining software implements
-      these rules or how complete that work is. Miner software that sets the
-      coinbase nLockTime is mentioned only as something still to encourage.
-    evidence: []
+    score: 3
+    rationale: Bitcoin Inquisition has shipped the rules, and the Bitcoin Core
+      implementation is still in review. Activation depends on the Core version
+      being merged and released, and on mining software that sets the coinbase
+      nLockTime.
+    evidence:
+      - impl-bitcoin-core
+      - impl-bitcoin-inquisition
+      - task-sjors-a3d62a7d
   ecosystem_awareness:
     score: 2
-    rationale: "Some developers have taken positions on the proposal: concept and
-      approach support plus a few rejections, mostly of the 64-byte and coinbase
-      rules. Nothing recorded shows awareness among miners, pools, exchanges or
-      other services."
+    rationale: "Developers have engaged widely: 5 approach-acks, 8 concept-acks and
+      4 nacks are recorded. Nothing shows that miners, pools or services know
+      about the change or want it, which matters because of the coinbase
+      nLockTime requirement."
     evidence:
-      - stance-evoskuil-8cf2a7e1
+      - stance-evoskuil-f06e752b
       - stance-recent798-c808b694
-      - stance-josh-e437aa6f
+      - task-sjors-a3d62a7d
   coordination:
     score: 1
-    rationale: Activation is what remains. It has been settled that all fixes
-      activate together and that the coinbase rule is enforced at activation,
-      but the activation timing is still open. Miners also need to be encouraged
+    rationale: Activation is still open. No activation parameters are set, and it is
+      undecided whether to delay activation by a year or more so miners can
+      update custom coinbase software. Miners also still need to be encouraged
       to run software that sets the coinbase nLockTime early, to surface
-      compatibility problems before parameters are set.
+      compatibility problems.
     evidence:
       - open-question-sjors-23a967e4
       - task-sjors-a3d62a7d
       - objection-ariard-57ac7525
       - task-matt-corallo-f2ac5ece
-      - task-sjors-6671fd1d

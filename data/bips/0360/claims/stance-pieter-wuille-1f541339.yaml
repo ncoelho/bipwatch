@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: nack
 scope: proposal
-statement: sipa opposes making P2MR the only post-quantum upgrade path and
+statement: Pieter Wuille opposes making P2MR the only post-quantum upgrade path and
   prefers a P2TRv2-style design. He argues that P2MR's security advantage
   depends on workflow changes the ecosystem won't make, and that it forces P2TR
   users to choose between Taproot's advantages and PQC.

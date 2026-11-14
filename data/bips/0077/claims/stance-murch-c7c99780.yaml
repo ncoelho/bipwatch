@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1890
   title: "BIP 77: Delimit fragment params with  `-` instead of `+`"
-statement: murchandamus approved the pull request changing BIP 77 to delimit URI
+statement: Murch approved the pull request changing BIP 77 to delimit URI
   fragment parameters with '-' instead of '+', asking only whether to wait for
   the BIP author's review before merging.
 subject:

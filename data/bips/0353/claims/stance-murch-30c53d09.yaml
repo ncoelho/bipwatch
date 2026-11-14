@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1657
   title: Add a PSBT per-output field for BIP 353 DNSSEC Proofs
-statement: murchandamus approved and merged a change adding a PSBT per-output
+statement: Murch approved and merged a change adding a PSBT per-output
   field for BIP 353 DNSSEC proofs, noting it only adds PSBT handling
   specification and terminology adjustments, with sign-off from the BIP 174
   author.

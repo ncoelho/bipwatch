@@ -5,7 +5,7 @@ stance: conditional
 condition: The new output type also disables the existing checksig (DL-based)
   opcodes inside its scripts.
 scope: proposal
-statement: sipa says he could see an advantage to a separate output type if it
+statement: Pieter Wuille says he could see an advantage to a separate output type if it
   also disabled the existing checksig opcodes, which would allow future rules
   encouraging migration. He remains hesitant about distinguishing outputs this
   way for privacy reasons.

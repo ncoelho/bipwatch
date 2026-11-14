@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2259
   title: "bip324: fix handshake pseudocode errors"
-statement: murchandamus approved a pull request fixing errors in BIP 324's
+statement: Murch approved a pull request fixing errors in BIP 324's
   handshake pseudocode, saying the changes look correct, while asking the BIP
   authors to confirm.
 subject:

@@ -1,0 +1,25 @@
+id: impl-bitcoin-core
+bip: 54
+kind: implementation
+statement: >-
+  Bitcoin Core has the BIP 54 rules in review as PR #35793, enabled only on
+  regtest. Whether and how to activate them on mainnet is left for later.
+subject:
+  name: Bitcoin Core
+  type: node
+  url: https://github.com/bitcoin/bitcoin/pull/35793
+implementation:
+  state: in-review
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-07-24
+  retrieved: 2026-11-14
+  quote: These rules are only enabled on regtest. Mainnet activation, if any, is to be considered separately.
+  verified: false
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

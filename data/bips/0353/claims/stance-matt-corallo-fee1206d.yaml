@@ -3,7 +3,7 @@ bip: 353
 kind: stance
 stance: approach-ack
 scope: proposal
-statement: TheBlueMatt, the BIP's author, defends BIP 353's approach over
+statement: Matt Corallo, the BIP's author, defends BIP 353's approach over
   reusing OpenAlias. He argues it is a more concrete and extensible format that
   builds on wallets' existing BIP 21 handling, and that it uses a clearly
   Bitcoin-specific DNS name instead of cluttering existing domain records.

@@ -3,7 +3,7 @@ bip: 353
 kind: stance
 stance: approach-ack
 scope: proposal
-statement: TheBlueMatt defends BIP 353's choice of DNS/DNSSEC over HTTP
+statement: Matt Corallo defends BIP 353's choice of DNS/DNSSEC over HTTP
   .well-known. He argues that DNSSEC allows succinct proofs that offline
   hardware wallets can verify, that adding a TXT record is simpler than hosting
   a file, and that DNS gives privacy proxying without integrating Tor.

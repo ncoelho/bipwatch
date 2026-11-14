@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: stevenroose supports a script-path-only output type like this one,
+statement: Steven Roose supports a script-path-only output type like this one,
   saying other parts of the ecosystem want something like pay-to-tapscript. If
   post-quantum crypto is added only as opcodes, he suggests renaming the soft
   fork to pay-to-tapscript or pay-to-mast, since it is not quantum-specific.

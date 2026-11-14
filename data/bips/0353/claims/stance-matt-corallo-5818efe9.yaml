@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2272
   title: "BIP 353: Add a Security Considerations section"
-statement: TheBlueMatt opposed a pull request adding a Security Considerations
+statement: Matt Corallo opposed a pull request adding a Security Considerations
   section to BIP 353, calling it low-quality and saying it is not clear it adds
   anything.
 subject:

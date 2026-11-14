@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2339
   title: "Bip352: Add consensus-validity requirement to Scanning requirements"
-statement: theStack re-approved the pull request that adds a consensus-validity
+statement: Sebastian Falbesoner re-approved the pull request that adds a consensus-validity
   requirement to BIP 352's scanning requirements.
 subject:
   name: Sebastian Falbesoner

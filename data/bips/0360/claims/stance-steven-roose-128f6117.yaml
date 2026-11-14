@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: stevenroose thinks the proposed tapscript-only (P2TR-like) output
+statement: Steven Roose thinks the proposed tapscript-only (P2TR-like) output
   type is useful even apart from quantum resistance. He objects to framing and
   naming it around quantum resistance, because that could delay interest until a
   quantum threat seems relevant.

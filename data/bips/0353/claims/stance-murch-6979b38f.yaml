@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1979
   title: "BIP353: Advance to Active"
-statement: murchandamus proposes moving BIP 353 to Active status. He says
+statement: Murch proposes moving BIP 353 to Active status. He says
   several projects have implemented it, naming Phoenix, Cake Wallet, Sparrow and
   CLN.
 subject:

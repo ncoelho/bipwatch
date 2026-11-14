@@ -3,7 +3,7 @@ bip: 353
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: TheBlueMatt, opening the pull request that adds BIP 353, argues there
+statement: Matt Corallo, opening the pull request that adds BIP 353, argues there
   is strong user demand for resolving human-readable names into payment
   instructions. He proposes doing it through the DNS, with private queries and
   DNSSEC proofs.

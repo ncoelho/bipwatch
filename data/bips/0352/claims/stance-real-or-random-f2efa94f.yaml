@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2106
   title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
-statement: real-or-random favors setting the per-group recipient limit near 2324
+statement: Tim Ruffing favors setting the per-group recipient limit near 2324
   rather than 1000. A limit of 1000 could make silent payment transactions with
   about 1000 outputs identifiable, and roughly doubling the scanning cost is
   acceptable.

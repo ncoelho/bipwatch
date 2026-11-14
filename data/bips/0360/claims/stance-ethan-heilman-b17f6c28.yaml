@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: EthanHeilman supports merging BIP 360 (P2MR), together with an
+statement: Ethan Heilman supports merging BIP 360 (P2MR), together with an
   SLH-DSA CHECKSIG opcode, as a way to give Bitcoin algorithm agility. He argues
   it lets holders hedge against classical or quantum breaks of Schnorr without
   the confiscation that disabling Taproot key spends would cause.

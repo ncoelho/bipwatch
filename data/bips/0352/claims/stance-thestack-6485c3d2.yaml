@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2288
   title: "BIP352: align reference address decoding with silent payment rules"
-statement: theStack gave a concept ACK to a pull request that aligns BIP 352's
+statement: Sebastian Falbesoner gave a concept ACK to a pull request that aligns BIP 352's
   reference address decoding with the silent payment rules.
 subject:
   name: Sebastian Falbesoner

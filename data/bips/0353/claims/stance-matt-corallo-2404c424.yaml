@@ -3,7 +3,7 @@ bip: 353
 kind: stance
 stance: ack
 scope: proposal
-statement: TheBlueMatt, the BIP's author, considers the BIP 353 draft
+statement: Matt Corallo, the BIP's author, considers the BIP 353 draft
   essentially final after pushing updates. These included changing the display
   format to ₿user@domain, a tradeoff between lnurl compatibility and avoiding
   confusion with email addresses.

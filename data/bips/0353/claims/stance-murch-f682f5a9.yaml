@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1551
   title: "Add BIP 353: DNS Payment Instructions"
-statement: murchandamus approved the pull request adding the BIP 353 (DNS
+statement: Murch approved the pull request adding the BIP 353 (DNS
   Payment Instructions) draft to the BIPs repository at a specific commit. This
   is review of the submission, not an endorsement of the protocol itself.
 subject:

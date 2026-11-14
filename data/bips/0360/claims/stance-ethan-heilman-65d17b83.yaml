@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: approach-ack
 scope: proposal
-statement: "EthanHeilman, a co-author, supports BIP-360's revised design:
+statement: "Ethan Heilman, a co-author, supports BIP-360's revised design:
   script-spend-only taproot with the quantum-vulnerable key-spend path removed.
   He argues it reuses taproot code, protects tapscript outputs against
   long-exposure quantum attacks, and lets the ecosystem upgrade well before

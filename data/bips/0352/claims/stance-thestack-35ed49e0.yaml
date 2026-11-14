@@ -6,7 +6,7 @@ scope: implementation
 change:
   url: https://github.com/bitcoin/bitcoin/pull/35301
   title: "Silent Payments: Implement bip352 (take 2)"
-statement: theStack said the Bitcoin Core BIP352 silent payments implementation
+statement: Sebastian Falbesoner said the Bitcoin Core BIP352 silent payments implementation
   (take 2) looks good overall. They left further findings on labels and the
   label cache, and suggested a dedicated serialized-label type, possibly in a
   follow-up.

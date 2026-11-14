@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1498
   title: "bip324: Remove garbage authentication packet (breaking change)"
-statement: real-or-random, who authored this change, supports removing the
+statement: Tim Ruffing, who authored this change, supports removing the
   garbage authentication packet from BIP 324, a breaking change to the
   handshake. He took the pull request out of draft because there seemed to be
   broad agreement to make it.

@@ -7,7 +7,7 @@ change:
   url: https://github.com/bitcoin/bips/pull/2153
   title: "bip352: clarify/fix specification to disallow sender to create outputs
     the receiver can't find"
-statement: theStack is not convinced that the misinterpretation scenario
+statement: Sebastian Falbesoner is not convinced that the misinterpretation scenario
   justifies changing BIP 352's reference implementation or test vectors to stop
   senders from creating outputs the receiver can't find. He would prefer, at
   most, a simple text clarification of the grouping mechanism, arguing the

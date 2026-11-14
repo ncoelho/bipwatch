@@ -3,7 +3,7 @@ bip: 353
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: t-bast gave a concept ACK to the BIP 353 DNS Payment Instructions
+statement: Bastien Teinturier gave a concept ACK to the BIP 353 DNS Payment Instructions
   proposal and thanked the author for writing it up.
 subject:
   name: Bastien Teinturier

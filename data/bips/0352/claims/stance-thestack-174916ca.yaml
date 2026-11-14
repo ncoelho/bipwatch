@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2134
   title: "BIP-352: warn against stopping scan due to wallet policy filtering"
-statement: theStack approved a change to BIP 352 that adds a warning against
+statement: Sebastian Falbesoner approved a change to BIP 352 that adds a warning against
   stopping the scan for silent payment outputs because of wallet policy
   filtering.
 subject:

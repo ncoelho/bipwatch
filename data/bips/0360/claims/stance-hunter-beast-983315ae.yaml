@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: cryptoquick defends BIP-360 against the claim that it achieves
+statement: Hunter Beast defends BIP-360 against the claim that it achieves
   nothing. He argues that removing the key path spend protects against
   long-exposure attacks and lets wallets choose between ECC and post-quantum
   script paths, which makes Taproot useful in a post-quantum context.

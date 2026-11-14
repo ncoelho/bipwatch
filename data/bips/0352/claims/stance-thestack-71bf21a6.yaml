@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2337
   title: "BIP352: add taproot key-path spend with annex vector"
-statement: theStack gave a concept ACK to a pull request adding a BIP 352 test
+statement: Sebastian Falbesoner gave a concept ACK to a pull request adding a BIP 352 test
   vector for a taproot key-path spend with an annex.
 subject:
   name: Sebastian Falbesoner

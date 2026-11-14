@@ -3,7 +3,7 @@ bip: 54
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: AntoineP, revisiting the Great Consensus Cleanup, argues the bugs it
+statement: Antoine Poinsot, revisiting the Great Consensus Cleanup, argues the bugs it
   targets are serious and worth fixing. He points to the timewarp vulnerability
   and the worst-case block validation time, and supports making 64-byte
   transactions invalid.

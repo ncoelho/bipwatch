@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2106
   title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
-statement: murchandamus approved the pull request amending BIP 352 to introduce
+statement: Murch approved the pull request amending BIP 352 to introduce
   a per-group recipient limit K_max of 2323.
 subject:
   name: Murch

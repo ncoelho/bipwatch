@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { canonicalName, loadPeople, type Claim } from '@bipwatch/data';
 import { z } from 'zod';
-import { slug, SOURCE_LABEL, SOURCE_TYPE, type Task } from '../../task.ts';
+import { slug, SOURCE_LABEL, SOURCE_TYPE, type Task, namesNote } from '../../task.ts';
 
 /**
  * Stance extraction, the first SPEC 6.2 task: does the document's author
@@ -30,7 +30,8 @@ export type StanceOutput = z.infer<typeof StanceOutput>;
 
 // v2 (2026-11-06): adds scope, so an ACK of one amendment is not recorded as
 // support for the proposal; editorial approvals are excluded at every scope.
-const VERSION = 2;
+// v3 (2026-11-14): names people as people.yaml maps them, not by login.
+const VERSION = 3;
 const system = readFileSync(new URL(`./prompt.v${VERSION}.md`, import.meta.url), 'utf8');
 
 /** The pull request a GitHub document belongs to, from its thread key ("owner/repo#123"). */
@@ -44,6 +45,7 @@ const canonical = canonicalName(loadPeople());
 export const stanceTask: Task<StanceOutput> = {
   id: 'stance',
   version: VERSION,
+  continuesFrom: [2],
   kind: 'stance',
   model: 'claude-opus-5-5',
   effort: 'medium',
@@ -60,7 +62,8 @@ export const stanceTask: Task<StanceOutput> = {
       }),
       '',
       `Source: ${SOURCE_LABEL[doc.source]}`,
-      `Author: ${doc.author}`,
+      `Author: ${canonical(doc.author ?? 'unknown')}`,
+      ...[namesNote(doc.author, doc.body_text, doc.later)].filter(Boolean),
       `Date: ${doc.posted_at ? doc.posted_at.toISOString().slice(0, 10) : 'unknown'}`,
       ...(doc.thread_title ? [`Thread: ${doc.thread_title}`] : []),
       ...(doc.title && doc.title !== doc.thread_title ? [`Title: ${doc.title}`] : []),

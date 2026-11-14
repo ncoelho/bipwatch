@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: EthanHeilman says the BIP-360 output type is useful to have
+statement: Ethan Heilman says the BIP-360 output type is useful to have
   regardless of its quantum-resistance value. He also defends keeping the P2QRH
   name and the SegWit v3 "bc1r" addresses, so users can tell quantum-resistant
   outputs apart from vulnerable P2TR ones.

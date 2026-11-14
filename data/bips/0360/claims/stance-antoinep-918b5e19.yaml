@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: nack
 scope: proposal
-statement: AntoineP argues against P2MR (with or without EC disabling) as the
+statement: Antoine Poinsot argues against P2MR (with or without EC disabling) as the
   first migration step and prefers a P2TRv2 approach. His reasons are that P2MR
   encourages use of the migration output type without PQ spending paths, breaks
   Taproot's incentive structure, and is 10-15% more expensive.

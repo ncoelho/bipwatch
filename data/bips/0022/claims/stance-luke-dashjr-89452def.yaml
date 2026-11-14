@@ -3,7 +3,7 @@ bip: 22
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: Luke-Jr endorses getblocktemplate as the full replacement for
+statement: Luke Dashjr endorses getblocktemplate as the full replacement for
   getwork, saying it does everything getwork did and more, so solo miners are
   not locked out by getwork's removal.
 subject:

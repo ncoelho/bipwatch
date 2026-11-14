@@ -3,7 +3,7 @@ bip: 54
 kind: stance
 stance: ack
 scope: change
-statement: AntoineP, the Consensus Cleanup author, agreed to raise the timewarp
+statement: Antoine Poinsot, the Consensus Cleanup author, agreed to raise the timewarp
   fix's grace period from 10 minutes to 2 hours. He considers the arguments for
   it fairly weak, but judges the cost (worst-case block rate increase from ~0.1%
   to ~0.65%) small enough to err on the safe side.

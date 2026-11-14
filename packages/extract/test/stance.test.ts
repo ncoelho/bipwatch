@@ -82,7 +82,8 @@ describe('stance v2 scope', () => {
   });
 
   it('asks the model for a scope', () => {
-    expect(stanceTask.version).toBe(2);
+    expect(stanceTask.version).toBe(3);
+    expect(stanceTask.continuesFrom).toEqual([2]);
     expect(stanceTask.system).toContain('is review of that change, not a position on the proposal');
     expect(StanceOutput.safeParse({ stances: [{ ...stance(), scope: 'everything' }] }).success).toBe(false);
   });

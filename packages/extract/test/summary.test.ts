@@ -32,7 +32,7 @@ describe('prSummary', () => {
   });
 
   it('says what it is, how many, and that nothing is reviewed', () => {
-    expect(body).toContain('2 claims proposed by the `stance` extractor (v2, `model:claude-opus-5-5`) from 19 newly archived documents');
+    expect(body).toContain('2 claims proposed by the `stance` extractor (v3, `model:claude-opus-5-5`) from 19 newly archived documents');
     expect(body).toContain('All have `reviewed_by: null`');
     expect(body).toContain('1 is a position on the proposal itself');
   });

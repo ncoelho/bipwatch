@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1498
   title: "bip324: Remove garbage authentication packet (breaking change)"
-statement: real-or-random proposes removing BIP 324's separate garbage
+statement: Tim Ruffing proposes removing BIP 324's separate garbage
   authentication packet by merging it into the first packet after garbage
   termination. They argue this simplifies implementations, and that the phases
   stay properly separated because the AEAD checks the garbage before the version

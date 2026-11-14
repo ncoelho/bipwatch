@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2337
   title: "BIP352: add taproot key-path spend with annex vector"
-statement: theStack approved the pull request adding a BIP 352 test vector for a
+statement: Sebastian Falbesoner approved the pull request adding a BIP 352 test vector for a
   taproot key-path spend with an annex. He asked only for a rebase on master and
   a changelog entry with a bumped patch version.
 subject:

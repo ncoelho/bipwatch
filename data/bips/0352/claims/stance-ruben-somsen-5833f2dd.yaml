@@ -3,7 +3,7 @@ bip: 352
 kind: stance
 stance: ack
 scope: proposal
-statement: RubenSomsen, co-author of BIP 352, considers the Silent Payments BIP
+statement: Ruben Somsen, co-author of BIP 352, considers the Silent Payments BIP
   mature with no further breaking changes planned, and proposes moving its
   status to final.
 subject:

@@ -3,7 +3,7 @@ bip: 54
 kind: stance
 stance: approach-ack
 scope: change
-statement: AntoineP proposes that the Consensus Cleanup mitigate worst-case
+statement: Antoine Poinsot proposes that the Consensus Cleanup mitigate worst-case
   block validation time with a 2,500 per-transaction limit on legacy (bare and
   P2SH) input sigops. He argues this gives a 40x reduction with a simple,
   flexible rule that minimizes the confiscatory surface, and he judges a further

@@ -3,7 +3,7 @@ bip: 321
 kind: stance
 stance: approach-ack
 scope: proposal
-statement: TheBlueMatt, opening the pull request that creates BIP 321, argues
+statement: Matt Corallo, opening the pull request that creates BIP 321, argues
   that new payment instructions should go in URI query parameters rather than
   replace the address field. He says this keeps senders and recipients
   compatible whether or not they support the newest formats.

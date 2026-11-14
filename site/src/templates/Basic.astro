@@ -2,8 +2,10 @@
 // Fallback for BIPs without a stage template: untracked companions, and tracked
 // BIPs whose stage template is not built yet (only `complete` exists).
 import type { BipBundle } from '@bipwatch/data';
+import Implementations from '../components/Implementations.astro';
 import Needs from '../components/Needs.astro';
 import OpenWork from '../components/OpenWork.astro';
+import Positions from '../components/Positions.astro';
 import { CATEGORY_LABEL, bipHref, pad } from '../lib/view.ts';
 
 interface Props { bundle: BipBundle; known: Set<number>; }
@@ -32,6 +34,8 @@ const specUrl = `https://github.com/${bip.spec.repo}/blob/${bip.spec.revision}/$
   )}
   <Needs bundle={bundle} />
   <OpenWork bundle={bundle} />
+  <Implementations bundle={bundle} />
+  <Positions bundle={bundle} />
 </article>
 
 <style>

@@ -1,0 +1,86 @@
+---
+// Who implements it: one row per implementation claim, best state first.
+// Send, receive, scanning and platform columns only appear when some claim
+// has them, so a wallet-facing BIP (352) and a consensus change (54) both
+// get a table that fits.
+import type { BipBundle } from '@bipwatch/data';
+import Source from './Source.astro';
+import { STATE_LABEL, STATE_ORDER, byKind } from '../lib/view.ts';
+
+interface Props { bundle: BipBundle; }
+const { bundle } = Astro.props;
+const impls = byKind(bundle, 'implementation').sort(
+  (a, b) => STATE_ORDER.indexOf(a.implementation!.state) - STATE_ORDER.indexOf(b.implementation!.state)
+    || a.subject!.name.localeCompare(b.subject!.name),
+);
+const has = (k: 'send' | 'receive' | 'scanning' | 'platforms') => impls.some((c) => c.implementation![k] !== undefined);
+const cols = { send: has('send'), receive: has('receive'), scanning: has('scanning'), platforms: has('platforms') };
+const sendCount = impls.filter((c) => c.implementation!.send).length;
+const receiveCount = impls.filter((c) => c.implementation!.receive).length;
+const shipped = impls.filter((c) => c.implementation!.state === 'shipped').length;
+const yn = (v: boolean | undefined) => (v === undefined ? '–' : v ? 'Yes' : 'No');
+---
+{impls.length > 0 && (
+  <section id="implementations">
+    <div class="sec-head">
+      <h2>Who implements it</h2>
+      <p class="muted tnum">
+        {cols.send || cols.receive
+          ? `${sendCount} of ${impls.length} tracked implementations can send · ${receiveCount} can receive`
+          : `${impls.length} tracked ${impls.length === 1 ? 'implementation' : 'implementations'} · ${shipped} shipped`}
+      </p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Implementation</th><th>State</th>
+            {cols.send && <th>Send</th>}
+            {cols.receive && <th>Receive</th>}
+            {cols.scanning && <th>Scanning</th>}
+            {cols.platforms && <th>Where</th>}
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          {impls.map((c) => {
+            const i = c.implementation!;
+            return (
+              <tr id={c.id}>
+                <td>
+                  <b>{c.subject!.url ? <a href={c.subject!.url} rel="noopener">{c.subject!.name}</a> : c.subject!.name}</b>
+                  <span class="sub">{c.subject!.type.replace('-', ' ')}</span>
+                </td>
+                <td><span class:list={['pill', { good: i.state === 'shipped', warn: i.state === 'partial' || i.state === 'proof-of-concept' }]}>{STATE_LABEL[i.state]}</span></td>
+                {cols.send && <td class="yn">{yn(i.send)}</td>}
+                {cols.receive && <td class="yn">{yn(i.receive)}</td>}
+                {cols.scanning && <td class="muted">{i.scanning ?? '–'}</td>}
+                {cols.platforms && <td class="muted">{i.platforms?.join(', ') ?? '–'}</td>}
+                <td class="srccell"><p class="what">{c.statement}</p><Source claim={c} showQuote={false} /></td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  </section>
+)}
+
+<style>
+  section { display: flex; flex-direction: column; gap: 16px; }
+  .sec-head { display: flex; flex-direction: column; gap: 4px; }
+  .sec-head h2 { font-size: 22px; }
+  .sec-head p { font-size: 14px; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+  table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); background: var(--band); }
+  tr:last-child td { border-bottom: none; }
+  td b { display: block; font-weight: 600; }
+  td b a { color: inherit; }
+  .sub { font-size: 12px; color: var(--faint); }
+  .yn { font-family: var(--mono); font-size: 13px; }
+  .srccell { min-width: 260px; display: flex; flex-direction: column; gap: 6px; }
+  .what { font-size: 13px; color: var(--muted); }
+  tr:target { background: var(--accent-soft); }
+</style>

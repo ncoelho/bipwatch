@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1405
   title: BIP324 reference code / test vector improvements
-statement: dhruv approved a pull request improving the BIP324 reference code and
+statement: Dhruv Mehta approved a pull request improving the BIP324 reference code and
   test vectors, at commit cc177ab.
 subject:
   name: Dhruv Mehta

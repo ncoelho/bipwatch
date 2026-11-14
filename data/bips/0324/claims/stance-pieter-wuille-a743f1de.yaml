@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1428
   title: "BIP324: Fixed length message type IDs"
-statement: 'sipa approved the change titled "BIP324: Fixed length message type
+statement: 'Pieter Wuille approved the change titled "BIP324: Fixed length message type
   IDs", which concerns how message type IDs are encoded in the v2 encrypted
   transport protocol.'
 subject:

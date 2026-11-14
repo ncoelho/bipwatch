@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2106
   title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
-statement: real-or-random approved the text changes of the PR introducing a
+statement: Tim Ruffing approved the text changes of the PR introducing a
   per-group recipient limit K_max in BIP 352, while asking others to
   double-check the chosen number.
 subject:

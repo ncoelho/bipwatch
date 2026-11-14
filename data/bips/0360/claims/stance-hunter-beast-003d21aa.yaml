@@ -3,7 +3,7 @@ bip: 360
 kind: stance
 stance: concept-ack
 scope: proposal
-statement: cryptoquick (Hunter Beast), a BIP 360 co-author, supports adopting
+statement: Hunter Beast (Hunter Beast), a BIP 360 co-author, supports adopting
   the proposed output type with the key path spend removed. He calls it an
   important first step in protecting Bitcoin from potential breaks of elliptic
   curve cryptography, whether by quantum computers or other cryptanalytic

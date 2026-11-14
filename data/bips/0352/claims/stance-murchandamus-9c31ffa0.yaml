@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1737
   title: Update BIP-352 status to Final
-statement: murchandamus opposes the change moving BIP 352 to Final status,
+statement: Murch opposes the change moving BIP 352 to Final status,
   arguing it is premature because adoption is limited, there is only one
   implementation, and the authors' own implementation is still in progress.
 subject:

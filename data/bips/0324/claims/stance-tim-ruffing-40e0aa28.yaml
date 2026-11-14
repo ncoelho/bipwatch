@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/1428
   title: "BIP324: Fixed length message type IDs"
-statement: real-or-random approved a change to BIP324 that introduces
+statement: Tim Ruffing approved a change to BIP324 that introduces
   fixed-length message type IDs.
 subject:
   name: Tim Ruffing

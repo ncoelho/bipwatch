@@ -6,7 +6,7 @@ scope: change
 change:
   url: https://github.com/bitcoin/bips/pull/2106
   title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
-statement: theStack, author of the PR adding a per-group recipient limit K_max
+statement: Sebastian Falbesoner, author of the PR adding a per-group recipient limit K_max
   to BIP 352, raised the limit to 2324. He considers it a reasonable choice
   because it is the least limiting value while keeping worst-case scanning time
   acceptable.

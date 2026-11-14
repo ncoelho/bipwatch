@@ -3,7 +3,7 @@ bip: 54
 kind: stance
 stance: approach-ack
 scope: proposal
-statement: MattCorallo favors the Consensus Cleanup making coinbase transactions
+statement: Matt Corallo favors the Consensus Cleanup making coinbase transactions
   unique through the nLockTime field, not the witness commitment. He argues that
   using the witness commitment would ruin its use as a flexible future
   commitment root, and that miners can adapt given a year or two of lead time.
