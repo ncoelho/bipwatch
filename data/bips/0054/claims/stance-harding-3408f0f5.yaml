@@ -1,0 +1,26 @@
+id: stance-harding-3408f0f5
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: harding argues that the consensus cleanup's change to restore the
+  security of simple merkle-tree transaction inclusion proofs (the 64-byte
+  transaction issue) is a genuine fix worth carefully weighing. He says
+  documentation alone does not adequately protect downstream developers.
+subject:
+  name: harding
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/33
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-08-26
+  retrieved: 2026-11-14
+  quote: Restoring a simple protocol to its originally intended security is a fix,
+    in my opinion.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

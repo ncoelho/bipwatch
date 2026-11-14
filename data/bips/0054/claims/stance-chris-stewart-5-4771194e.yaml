@@ -1,0 +1,28 @@
+id: stance-chris-stewart-5-4771194e
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Chris_Stewart_5 sees the Great Consensus Cleanup's fixes (timewarp,
+  64-byte transactions, worst-case validation time) as security soft forks with
+  little chainsplit risk. He argues they should be deployed independently of
+  feature soft forks, as soon as they are properly reviewed.
+subject:
+  name: Chris_Stewart_5
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/security-soft-fork-deployments-arent-risky/1328/1
+  type: forum
+  title: Security soft fork deployments arent risky
+  date: 2024-12-18
+  retrieved: 2026-11-14
+  quote: Lets look at the Timewarp attack. This means the miner is attempting to
+    increase block velocity and claim more rewards for themselves. If someone is
+    actively attempting to exploit this, we want to fork them off the network
+    via soft fork.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

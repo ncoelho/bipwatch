@@ -1,0 +1,29 @@
+id: stance-josh-e437aa6f
+bip: 54
+kind: stance
+stance: conditional
+condition: BIP54's timewarp fix is modified, for example by committing a u64
+  timestamp in the coinbase, so that a future soft fork can still resolve the
+  2106 nTime overflow.
+scope: proposal
+statement: josh supports preventing the timewarp attack. He argues BIP54's
+  current rule inadvertently rules out a future soft fork for the nTime
+  overflow, and he prefers a fix that does not bind future generations,
+  proposing a coinbase u64 timestamp modification.
+subject:
+  name: josh
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/modifying-bip54-to-support-future-ntime-soft-fork/2163/1
+  type: forum
+  title: Modifying BIP54 to Support Future nTime Soft Fork
+  date: 2025-12-15
+  retrieved: 2026-11-14
+  quote: But I would tend to prefer a fix to the timewarp problem that does not
+    bind the hands of future generations.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

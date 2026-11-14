@@ -1,0 +1,27 @@
+id: stance-sjors-f3b52dc6
+bip: 54
+kind: stance
+stance: concept-ack
+scope: change
+statement: Sjors argues that the 600-second backwards grace period in the
+  timewarp fix is too tight and should be raised to 2 hours in any future
+  consensus cleanup proposal. His reason is that nodes should not be assumed to
+  have accurate clocks, and nTime rolling can combine with blocks timestamped in
+  the future.
+subject:
+  name: sjors
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/timewarp-attack-600-second-grace-period/1326/1
+  type: forum
+  title: Timewarp attack 600 second grace period
+  date: 2024-12-17
+  retrieved: 2026-11-14
+  quote: The 600 second grace period is cutting it too close imo, and we should
+    consider increasing it to 2 hours for any future proposal
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

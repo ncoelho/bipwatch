@@ -1,0 +1,27 @@
+id: stance-harding-a7a419af
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: harding supports the Consensus Cleanup's new rule against the SPV
+  merkle-tree vulnerability. He argues that fixing it helps widely used
+  software, simplifies future software and reduces bandwidth, whereas the
+  coinbase-depth workaround adds code and inflates proof sizes.
+subject:
+  name: harding
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/31
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-08-26
+  retrieved: 2026-11-14
+  quote: Fixing a vulnerability that affects widely used software, that simplifies
+    the design of future software, and that reduces network (and potentially
+    consensus) bandwidth seems useful to me.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

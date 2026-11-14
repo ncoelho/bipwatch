@@ -1,0 +1,26 @@
+id: stance-antoinep-04544c8a
+bip: 54
+kind: stance
+stance: concept-ack
+scope: change
+statement: AntoineP supports the suggested fix for the Murch-Zawy alternating
+  timestamp attack and suggests it could be added to the consensus cleanup.
+  Combined with the cleanup's timewarp fix, it would make retarget periods
+  monotonic and stop a 51% attacker from driving the difficulty down.
+subject:
+  name: AntoineP
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/zawy-s-alternating-timestamp-attack/1062/3
+  type: forum
+  title: Zawy’s Alternating Timestamp Attack
+  date: 2024-08-11
+  retrieved: 2026-11-14
+  quote: Your suggested fix makes sense. Coupled with the consensus cleanup's
+    timewarp fix this would effectively make retarget periods monotonic.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

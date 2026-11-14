@@ -1,0 +1,25 @@
+id: stance-salvatoshi-8095b09a
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: salvatoshi, in passing, says he looks forward to the Great Consensus
+  Cleanup properly mitigating quadratic hashing, which today parallel input
+  validation only poorly mitigates.
+subject:
+  name: salvatoshi
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/op-checkcontractverify-and-its-amount-semantic/1527/11
+  type: forum
+  title: OP_CHECKCONTRACTVERIFY and its amount semantic
+  date: 2025-04-19
+  retrieved: 2026-11-14
+  quote: which I look forward to see mitigated more properly with your work on the
+    Great Consensus Cleanup
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
