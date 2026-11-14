@@ -185,7 +185,7 @@ export interface SpecHistory {
   bip: number;
   path: string;
   /** Changelog versions with their dates, oldest first. */
-  versions: { version: string; date: string }[];
+  versions: { version: string; date: string; notes: string[] }[];
   /** Changes to the spec file on bitcoin/bips master, oldest first. */
   changes: {
     sha: string;
@@ -211,5 +211,11 @@ export interface SpecHistory {
 /** data/generated/github-prs.json: state of each GitHub PR a claim links to. */
 export interface PrStates {
   generated_at: string;
-  prs: Record<string, { state: 'open' | 'closed' | 'merged'; opened: string; merged: string | null }>;
+  prs: Record<string, {
+    state: 'open' | 'closed' | 'merged';
+    opened: string;
+    merged: string | null;
+    /** Reviews on the PR: who, approved / changes_requested / commented, when. */
+    reviews?: { by: string | null; state: string; date: string }[];
+  }>;
 }

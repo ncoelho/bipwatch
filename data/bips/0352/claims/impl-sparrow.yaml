@@ -2,8 +2,7 @@ id: impl-sparrow
 bip: 352
 kind: implementation
 statement: >-
-  Sparrow sends and receives silent payments on desktop. Instead of scanning
-  locally it relies on an Electrum server that supports silent payments.
+  Sparrow can send to silent payment addresses since 2.3.0 (October 2025) and has receiving wallets since 2.5.0 (May 2026), including with airgapped hardware signers.
 subject:
   name: Sparrow Wallet
   type: wallet
@@ -11,17 +10,16 @@ implementation:
   state: shipped
   send: true
   receive: true
-  scanning: silent-payments-capable Electrum server
   platforms: [desktop]
 source:
-  # Secondary source. Replace with Sparrow release notes when collected.
-  url: https://www.spark.money/tools/bitcoin-silent-payment-wallet-comparison
-  type: aggregator
-  title: "Silent Payment Wallet Support: Which Wallets Support BIP 352?"
-  retrieved: 2026-11-05
-  quote: Rather than scanning blocks locally, Sparrow connects to an SP-capable Electrum server.
+  url: https://github.com/sparrowwallet/sparrow/releases/tag/2.5.0
+  type: release-notes
+  title: Sparrow 2.5.0
+  date: 2026-05-21
+  quote: Add Silent Payments (SP) receiving wallets, including support for airgapped hardware wallet signers
+  retrieved: 2026-11-14
   verified: false
 provenance:
   extracted_by: model:claude-opus-5-5
-  extracted: 2026-11-05
+  extracted: 2026-11-14
   reviewed_by: null

@@ -1,24 +1,25 @@
 id: impl-electrum
 bip: 352
 kind: implementation
-statement: Electrum supports neither sending nor receiving yet. A pull request for sending is open.
+statement: >-
+  Electrum does not support silent payments. Pull requests for sending (#9900) and for a sending and receiving plugin (#10526) were both closed without merging on 15 March 2026.
 subject:
   name: Electrum
   type: wallet
 implementation:
-  state: in-review
+  state: not-supported
   send: false
   receive: false
-  platforms: [desktop, mobile]
+  platforms: [desktop]
 source:
-  # Secondary source. Link the actual Electrum PR when collected.
-  url: https://www.spark.money/tools/bitcoin-silent-payment-wallet-comparison
-  type: aggregator
-  title: "Silent Payment Wallet Support: Which Wallets Support BIP 352?"
-  retrieved: 2026-11-05
-  quote: No (PR open)
+  url: https://github.com/spesmilo/electrum/pull/10526
+  type: github
+  title: Sending and Receiving silent payments as a plugin
+  date: 2026-03-15
+  quote: I am trying to implement silent payments as a plugin
+  retrieved: 2026-11-14
   verified: false
 provenance:
   extracted_by: model:claude-opus-5-5
-  extracted: 2026-11-05
+  extracted: 2026-11-14
   reviewed_by: null

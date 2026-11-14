@@ -24,3 +24,32 @@ export function changelogTimeline(text: string): Timeline {
 export function latestChangelogVersion(text: string): string | undefined {
   return changelogTimeline(text).at(-1)?.version;
 }
+
+/**
+ * Changelog entries with their notes: the lines under each version, as plain
+ * text (list markers and wiki or markdown emphasis removed), oldest first.
+ */
+export function changelogEntries(text: string): { version: string; date: string; notes: string[] }[] {
+  const parts = text.split(CHANGELOG_HEADING);
+  if (parts.length < 2) return [];
+  const body = parts[1].split(NEXT_HEADING)[0];
+  const marks = [...body.matchAll(CHANGELOG_ENTRY_RE)];
+  return marks
+    .map((m, i) => {
+      const end = i + 1 < marks.length ? marks[i + 1].index! : body.length;
+      const notes = body
+        .slice(m.index! + m[0].length, end)
+        .split('\n')
+        .map((l) =>
+          l
+            .replace(/<ref[^>]*>(?:.*?<\/ref>)?|<ref[^>]*\/>/g, '')
+            .replace(/<[^>]+>/g, '')
+            .replace(/^[\s*#:-]+/, '')
+            .replace(/'''|''|__|\*\*|`/g, '')
+            .trim(),
+        )
+        .filter((l) => l.length > 2);
+      return { version: m[1], date: m[2], notes };
+    })
+    .sort((a, b) => a.date.localeCompare(b.date));
+}

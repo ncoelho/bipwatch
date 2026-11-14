@@ -2,8 +2,7 @@ id: impl-silentium
 bip: 352
 kind: implementation
 statement: >-
-  Silentium is a proof-of-concept web wallet that sends and receives using
-  tweak data served by its own indexer, silentiumd.
+  Silentium is an experimental web wallet that sends and receives silent payments as a light client, scanning through its own index server (silentiumd).
 subject:
   name: Silentium
   type: wallet
@@ -14,11 +13,14 @@ implementation:
   scanning: silentiumd indexer
   platforms: [web]
 source:
-  url: https://www.spark.money/tools/bitcoin-silent-payment-wallet-comparison
-  type: aggregator
-  title: "Silent Payment Wallet Support: Which Wallets Support BIP 352?"
-  retrieved: 2026-11-05
+  url: https://github.com/louisinger/silentium
+  type: github
+  title: louisinger/silentium
+  date: 2025-01-05
+  quote: This is an experimental project acting as a proof of concept for Silent Payments light wallets.
+  retrieved: 2026-11-14
+  verified: false
 provenance:
   extracted_by: model:claude-opus-5-5
-  extracted: 2026-11-05
+  extracted: 2026-11-14
   reviewed_by: null

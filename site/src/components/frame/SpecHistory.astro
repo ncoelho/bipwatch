@@ -5,11 +5,17 @@
 // The list below has one row per change, oldest first; each mark links to
 // its row. A change to what it says with no changelog entry is called out.
 // Reads data/generated/spec-history/<n>.json (npm run site-exports).
-import type { BipRecord, SpecHistory } from '@bipwatch/data';
+import type { BipRecord, Claim, SpecHistory } from '@bipwatch/data';
 import { datePct } from '../../lib/view.ts';
 
-interface Props { bip: BipRecord; history: SpecHistory; }
-const { bip, history } = Astro.props;
+interface Props {
+  bip: BipRecord;
+  history: SpecHistory;
+  /** Applications pages ask "Is the spec settled enough to build on?". */
+  settled?: boolean;
+  claims?: Claim[];
+}
+const { bip, history, settled = false, claims = [] } = Astro.props;
 const changes = history.changes;
 const from = Date.parse(`${changes[0].date}T00:00:00Z`) - 10 * 86_400_000;
 const to = Date.now();
@@ -26,9 +32,39 @@ const flagged = changes.filter((c) => c.flag);
 const anchor = (sha: string) => `ch-${sha.slice(0, 10)}`;
 const repoUrl = `https://github.com/${bip.spec.repo}`;
 const month = (d: string) => new Date(`${d}T00:00:00Z`).toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+// The Applications reading: the latest minor version is what a wallet built
+// earlier needs to check; major versions after 1.0.0 are breaking changes.
+const parse = (v: string) => v.split('.').map(Number);
+const minors = history.versions.filter((v, i) => {
+  if (i === 0) return false;
+  const [a, b] = parse(v.version);
+  const [pa, pb] = parse(history.versions[i - 1].version);
+  return a === pa && b > pb;
+});
+const readFirst = minors.at(-1);
+const majors = history.versions.filter((v) => parse(v.version)[0] > 1 && parse(v.version)[1] === 0 && parse(v.version)[2] === 0).length;
+const year = new Date().getUTCFullYear();
+const amendments = claims.filter((c) => c.kind === 'stance' && c.scope === 'change');
+const amendThisYear = amendments.filter((c) => c.source.date?.startsWith(String(year))).length;
+const months = new Map<string, number>();
+for (const c of amendments) if (c.source.date) months.set(c.source.date.slice(0, 7), (months.get(c.source.date.slice(0, 7)) ?? 0) + 1);
+const maxMonth = Math.max(1, ...months.values());
 ---
 <section class="panel" id="spec-history" aria-labelledby="h-hist">
-  <h2 id="h-hist">Spec history <span class="sub">· {bip.spec.path} in bitcoin/bips</span></h2>
+  <h2 id="h-hist">{settled ? 'Is the spec settled enough to build on?' : 'Spec history'} <span class="sub">· {bip.spec.path} in bitcoin/bips</span></h2>
+  {settled && (
+    <div class="settled">
+      {readFirst && (
+        <div class="first">
+          <div class="label">Read this first</div>
+          <p><strong>{readFirst.version}</strong> ({month(readFirst.date)}){readFirst.notes[0] ? `: ${readFirst.notes[0]}` : ''}</p>
+          <p class="faint">Wallets built before {readFirst.date} should check it still holds for them.</p>
+        </div>
+      )}
+      <div class="count"><span class="v mono">{majors}</span><span class="k">breaking changes since 1.0.0</span></div>
+      <div class="count"><span class="v mono">{amendThisYear}</span><span class="k">statements on amendments in {year}</span></div>
+    </div>
+  )}
   <p class="lede">
     {changes.length} changes since it was added in {month(changes[0].date)}; {says} changed what it says
     {history.versions.length > 0 && <>, across {history.versions.length} changelog {history.versions.length === 1 ? 'version' : 'versions'}</>}.
@@ -58,6 +94,12 @@ const month = (d: string) => new Date(`${d}T00:00:00Z`).toLocaleDateString('en-G
           </div>
         );
       })}
+      {settled && months.size > 0 && (
+        <div class="lane bars" role="img" aria-label={`Statements on amendments per month, up to ${maxMonth} in one month`}>
+          <span class="ll"><span class="lt">Amendment reviews</span></span>
+          <span class="track">{[...months].map(([m, n]) => <span class="mbar" style={`left:${datePct(`${m}-01`, from, to).toFixed(2)}%;height:${Math.max(3, (n / maxMonth) * 26).toFixed(0)}px`}></span>)}</span>
+        </div>
+      )}
       <div class="lane ticks" aria-hidden="true">
         <span></span>
         <span class="track">{years.map((y) => <span class="tick mono" style={`left:${datePct(`${y}-01-01`, from, to).toFixed(2)}%`}>{y}</span>)}</span>
@@ -105,6 +147,15 @@ const month = (d: string) => new Date(`${d}T00:00:00Z`).toLocaleDateString('en-G
   .mark.says { background: var(--info); }
   .mark.process { background: #5A5A63; border-radius: 50%; }
   .mark.flag { background: var(--panel); box-shadow: inset 0 0 0 2px var(--accent-ink); }
+  .settled { display: flex; flex-wrap: wrap; gap: 10px; }
+  .first { flex: 3 1 320px; background: var(--info-ground); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+  .first .label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--info-ink); font-weight: 600; }
+  .faint { color: var(--faint); font-size: 13px; }
+  .count { flex: 1 1 150px; background: var(--card); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; }
+  .count .v { font-size: 28px; font-weight: 600; }
+  .count .k { font-size: 12.5px; color: var(--muted); }
+  .bars .track { height: 30px; }
+  .mbar { position: absolute; bottom: 0; width: 6px; margin-left: -3px; border-radius: 2px 2px 0 0; background: var(--fg-2); }
   .rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; max-height: 420px; overflow-y: auto; }
   .rows li { display: grid; grid-template-columns: 92px 104px minmax(0, 1fr) auto; gap: 10px; align-items: baseline; padding: 8px 10px; border-radius: 10px; font-size: 13.5px; color: var(--fg-2); scroll-margin-top: 16px; }
   .rows li:target { background: var(--info-ground); color: var(--fg); }

@@ -23,7 +23,7 @@ import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parseArgs } from 'node:util';
 import { findDataDir, loadAll } from '@bipwatch/data';
-import { changelogTimeline } from './bips/changelog.ts';
+import { changelogEntries } from './bips/changelog.ts';
 import { bipsRepoDir, showFile } from './bips/git.ts';
 import { specHistory, type SpecChange } from './bips/history.ts';
 import { connect } from './db.ts';
@@ -75,7 +75,8 @@ async function main() {
 
   // PR records from the archive, newest stored version per PR.
   const prRecords = async (ids: string[]) => {
-    if (!db || !ids.length) return new Map<string, { state: string; created_at: string; merged_at: string | null; labels: string[] }>();
+    if (!db || !ids.length)
+      return new Map<string, { state: string; created_at: string; merged_at: string | null; labels: string[]; reviews?: { author: string | null; state: string; submitted_at: string }[] }>();
     const { rows } = await db.query<{ external_id: string; body: string }>(
       `SELECT DISTINCT ON (external_id) external_id, body FROM raw_items
         WHERE source = 'github' AND external_id = ANY($1) ORDER BY external_id, id DESC`,
@@ -96,7 +97,7 @@ async function main() {
       if (!text) continue;
       const history = await specHistory(bipsDir, 'origin/master', bip.spec.path, text);
       const prs = await prRecords([...new Set(history.flatMap((c) => (c.pr ? [`bitcoin/bips#${c.pr}`] : [])))]);
-      const versions = changelogTimeline(text).map((v) => ({ version: v.version, date: new Date(v.at).toISOString().slice(0, 10) }));
+      const versions = changelogEntries(text);
       const changes = history.map((c, i) => {
         const labels = c.pr ? prs.get(`bitcoin/bips#${c.pr}`)?.labels : undefined;
         return { ...c, ...changeType(c, labels, i === 0, versions[0]?.date), ...(labels ? { labels } : {}) };
@@ -122,7 +123,8 @@ async function main() {
     const prs = Object.fromEntries(
       [...recs].map(([id, r]) => {
         const [repo, n] = id.split('#');
-        return [`https://github.com/${repo}/pull/${n}`, { state: r.state.toLowerCase(), opened: r.created_at.slice(0, 10), merged: r.merged_at?.slice(0, 10) ?? null }];
+        const reviews = (r.reviews ?? []).map((v: { author: string | null; state: string; submitted_at: string }) => ({ by: v.author, state: v.state.toLowerCase(), date: v.submitted_at.slice(0, 10) }));
+        return [`https://github.com/${repo}/pull/${n}`, { state: r.state.toLowerCase(), opened: r.created_at.slice(0, 10), merged: r.merged_at?.slice(0, 10) ?? null, reviews }];
       }),
     );
     writeFileSync(join(out, 'github-prs.json'), `${JSON.stringify({ generated_at: new Date().toISOString(), prs }, null, 1)}\n`);
