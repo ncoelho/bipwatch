@@ -1,0 +1,26 @@
+id: impl-bluewallet
+bip: 352
+kind: implementation
+statement: >-
+  BlueWallet can send to silent payment addresses, since version 6.6.7 (June
+  2024). It cannot receive them yet.
+subject:
+  name: BlueWallet
+  type: wallet
+implementation:
+  state: partial
+  send: true
+  receive: false
+  platforms: [mobile]
+source:
+  url: https://github.com/BlueWallet/BlueWallet/releases/tag/v6.6.7
+  type: release-notes
+  title: BlueWallet v6.6.7
+  date: 2024-06-25
+  retrieved: 2026-11-14
+  quote: "ADD: send to SilentPayment address"
+  verified: false
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
