@@ -1,0 +1,26 @@
+id: objection-ajtowns-5382d52d
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Enforce the coinbase uniqueness rule within a few years of activation
+  instead of deferring its effect until block 1,983,702, so that implementers
+  actually adopt it.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/22
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-07-23
+  retrieved: 2026-11-14
+  quote: Having a new rule not have any effect until decades in the future seems
+    like a good way to have people not implement it (at all, let alone
+    correctly)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

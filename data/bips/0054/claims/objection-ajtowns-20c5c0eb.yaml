@@ -1,0 +1,25 @@
+id: objection-ajtowns-20c5c0eb
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Decide whether the timewarp fix should use a rolling
+  earliest-time-past rule applied to every block instead of a constraint only on
+  the first and last blocks of each difficulty period.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/54
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-11-27
+  retrieved: 2026-11-14
+  quote: Having a rule that is applied consistently to every block seems somewhat
+    better to me than a rule that only applies to every 2016th block to me.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

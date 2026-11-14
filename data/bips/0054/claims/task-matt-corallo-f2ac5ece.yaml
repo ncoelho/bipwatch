@@ -1,0 +1,26 @@
+id: task-matt-corallo-f2ac5ece
+bip: 54
+kind: task
+status: addressed
+area: activation
+statement: Decide whether the coinbase nLockTime requirement should take effect
+  after a delay (for example two years after activation) to give miners time to
+  update their software.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/20
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-07-22
+  retrieved: 2026-11-14
+  quote: We could even set this part of the fork to activate on some substantial
+    delay - after the GCCR fork activates, the nLockTime requirement only turns
+    on two years later or whatever.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

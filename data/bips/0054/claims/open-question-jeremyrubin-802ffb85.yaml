@@ -1,0 +1,25 @@
+id: open-question-jeremyrubin-802ffb85
+bip: 54
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether the consensus cleanup soft fork should be transitory,
+  expiring after a fixed period (e.g. two years) unless explicitly renewed,
+  rather than permanent.
+subject:
+  name: JeremyRubin
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/transitory-soft-forks-for-consensus-cleanup-forks/1333/1
+  type: forum
+  title: Transitory Soft Forks for Consensus Cleanup Forks
+  date: 2024-12-23
+  retrieved: 2026-11-14
+  quote: Instead of making it permanent, we could adopt an expiration, say two
+    years, unless explicitly renewed.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

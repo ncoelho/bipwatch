@@ -1,0 +1,26 @@
+id: open-question-antoinep-8625c5c2
+bip: 54
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether Consensus Cleanup should make 64-byte transactions
+  invalid, weighing smaller and safer Merkle inclusion proofs against adding a
+  non-obvious validity rule.
+subject:
+  name: AntoineP
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/41
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-09-03
+  retrieved: 2026-11-14
+  quote: To evaluate whether to include it in a future Consensus Cleanup proposal,
+    i'd like to weigh the remaining pros and cons of making 64 bytes
+    transactions invalid through a soft fork.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: objection-evoskuil-4441dcf0
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Weigh whether invalidating 64-byte transactions is worth a soft fork
+  and mandatory size checks, given that SPV clients can instead verify the
+  coinbase Merkle path to learn tree depth at modest bandwidth cost.
+subject:
+  name: evoskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/45
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-09-04
+  retrieved: 2026-11-14
+  quote: The tradeoff in the full node is mandatory checking of the stripped size
+    of all transactions (and soft fork) vs. doing nothing (possibly
+    "compressing" null points for SPV clients).
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

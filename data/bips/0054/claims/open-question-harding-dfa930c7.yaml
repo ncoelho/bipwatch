@@ -1,0 +1,26 @@
+id: open-question-harding-dfa930c7
+bip: 54
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether to fix the Merkle tree weakness by committing to tree
+  depth in the block header version field rather than by other means such as
+  invalidating 64-byte transactions.
+subject:
+  name: harding
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/42
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-09-03
+  retrieved: 2026-11-14
+  quote: "@evoskuil mentioned an alternative potential soft fork: a commitment to
+    tree depth, which could be done for any depth possible with the current
+    consensus rules[1] using only 4 bits."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

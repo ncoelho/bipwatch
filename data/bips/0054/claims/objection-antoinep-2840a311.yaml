@@ -1,0 +1,27 @@
+id: objection-antoinep-2840a311
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Address confiscation concerns about the legacy Script restrictions
+  that reduce worst-case validation time, for example by applying them only to
+  outputs created after a given height.
+subject:
+  name: AntoineP
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/1
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-03-24
+  retrieved: 2026-11-14
+  quote: Some confiscation concerns were raised about the proposed mitigations. I
+    believe those concerns are reasonable and could be addressed by only
+    applying the new rules when checking the script for an output created after
+    a certain block height.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

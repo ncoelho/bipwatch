@@ -1,0 +1,23 @@
+id: objection-benthecarman-b3837c17
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Resolve whether requiring a witness commitment in every coinbase
+  transaction breaks empty blocks that contain only the coinbase.
+subject:
+  name: benthecarman
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/5
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-03-28
+  retrieved: 2026-11-14
+  quote: Wouldn't this not work for the occasional empty block?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

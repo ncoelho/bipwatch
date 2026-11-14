@@ -1,0 +1,24 @@
+id: task-antoinep-0a31cc23
+bip: 54
+kind: task
+status: addressed
+area: design
+statement: Decide whether to add a limit on the size of legacy transactions as
+  an extra safety margin on worst-case block validation time.
+subject:
+  name: AntoineP
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/1
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-03-24
+  retrieved: 2026-11-14
+  quote: I believe we could further introduce a limitation on the size of legacy
+    transactions to be on the safe side.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null

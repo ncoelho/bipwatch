@@ -1,0 +1,25 @@
+id: open-question-sjors-23a967e4
+bip: 54
+kind: open-question
+status: open
+area: activation
+statement: Decide whether to delay activation by one or more years in case
+  miners need to change custom coinbase-processing software beyond upgrading
+  their node.
+subject:
+  name: sjors
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/27
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2024-08-20
+  retrieved: 2026-11-14
+  quote: Perhaps it should activate a (few) year(s) later, if it turns out miners
+    have to do more than just upgrade their node.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-14
+  reviewed_by: null
