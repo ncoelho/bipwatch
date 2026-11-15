@@ -1,0 +1,27 @@
+id: stance-erik-aronesty-d39ca7d0
+bip: 360
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Erik Aronesty defends P2MR's design against the claim that it offers
+  no advantage over a key-path alternative. He argues that before a key is
+  revealed, P2MR is strictly better because it has no exposed key path, and that
+  the advantage is lost only by users who reuse addresses.
+subject:
+  name: Erik Aronesty
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAJowKg+PJRdNc6RQb+SAf7TkG4EPZMPhJVgYQw5ygxN7JdgjTg@mail.gmail.com/
+  type: mailing-list
+  title: PQC - What is our Goal, Even?
+  date: 2026-04-19
+  retrieved: 2026-11-15
+  quote: |-
+    before reveal, p2mr is strictly
+    better because there’s no key path sitting there exposed the whole time.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

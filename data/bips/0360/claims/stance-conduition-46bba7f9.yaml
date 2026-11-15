@@ -1,0 +1,31 @@
+id: stance-conduition-46bba7f9
+bip: 360
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: conduition argues that P2MR should be deployed instead of a P2TRv2
+  alternative. His reasons are that it is quantum-secure by default, more
+  efficient in the long term, avoids carrying legacy cryptography, and remains
+  useful even if Q-day never comes.
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/FK4r4I9x1v2s7NWZWm26e7rhmove8ckpdjJ4l6hwhpEomvIHxqVFgFws5ElDhIBnhaALGfTqaAj2NchrX0T8i4vYvUuxyh19sPmcrqG_Sy8=@proton.me/
+  type: mailing-list
+  title: In defense of a PQ output type
+  date: 2026-04-14
+  retrieved: 2026-11-15
+  quote: >-
+    Therefore, P2MR is the better long-term choice.
+
+
+    If we assume Bitcoin will survive long into the future after CRQCs appear,
+    then we should favor the best long-term design choices over short-term
+    compromises. Thus, we should deploy P2MR and NOT deploy P2TRv2.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

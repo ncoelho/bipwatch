@@ -1,0 +1,29 @@
+id: stance-conduition-e41b9dde
+bip: 360
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: conduition considers BIP 360's P2MR a better choice than a
+  re-deployed P2TR with keypath-disabling, because it relies on weaker security
+  assumptions, drops elliptic-curve code from wallets, and uses less witness
+  space for script-path spends. They accept a small increase in witness size as
+  a fair price for quantum security.
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/GhzGKZ5zphDf7mFpC_PMD0Bn7-KIK14HXdCPLeB7HKvPBfDRVG8eUAlCKKLWcki6XDW0h0R1IQC5SS9B7jnMRS85GzOzcmCt9v5R3xoW4Js=@proton.me/
+  type: mailing-list
+  title: Algorithm Agility for Bitcoin to maintain security in the face of quantum
+    and classic breaks in the signature algorithms
+  date: 2026-02-17
+  retrieved: 2026-11-15
+  quote: Thus i see P2MR as the superior choice to P2TRv2 even if P2TRv2 may be
+    slightly more space efficient in the near-term. Thinking longer term, P2MR
+    is the better choice.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

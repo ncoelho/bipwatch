@@ -1,0 +1,24 @@
+id: stance-hayashi-3275e82d
+bip: 360
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Hayashi says he personally prefers P2MR (BIP 360) over keeping P2TR.
+  He makes the remark while arguing that a formal freezing plan would clarify
+  how P2TR is treated.
+subject:
+  name: Hayashi
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/a1aab08b-bea4-4dd9-a289-59994375849fn@googlegroups.com/
+  type: mailing-list
+  title: In defense of a PQ output type
+  date: 2026-04-13
+  retrieved: 2026-11-15
+  quote: I personally prefer P2MR
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

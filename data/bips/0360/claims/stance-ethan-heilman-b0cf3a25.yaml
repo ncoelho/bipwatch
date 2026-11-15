@@ -1,0 +1,27 @@
+id: stance-ethan-heilman-b0cf3a25
+bip: 360
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Ethan Heilman defends P2MR against claims it won't see adoption. He
+  argues that wallets serving high-value holders will want quantum resistance,
+  and that its roughly 11% (about 50 sat) overhead over P2TR is a price such
+  holders would gladly pay.
+subject:
+  name: Ethan Heilman
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAEM=y+UYBQoocr95ucutw_9QoTuyRcpGPTf_1wgazzK3nbFyyQ@mail.gmail.com/
+  type: mailing-list
+  title: In defense of a PQ output type
+  date: 2026-04-11
+  retrieved: 2026-11-15
+  quote: It is hard to imagine someone holding significant quantities of Bitcoin
+    not wanting to pay 50 sats to ensure their Bitcoin isn't stolen by a quantum
+    computer.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

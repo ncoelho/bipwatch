@@ -1,0 +1,27 @@
+id: stance-matt-corallo-0365c83b
+bip: 360
+kind: stance
+stance: nack
+scope: proposal
+statement: Matt Corallo argues that relying on P2MR because some users can use
+  it correctly is not just insufficient but somewhat dangerous. He says
+  widespread address reuse would leave many users exposed and blamed for "using
+  it wrong", and could discourage a future fork disabling EC spends.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/39f3c26e-2cb5-4dcb-a269-78c793174b2a@mattcorallo.com/
+  type: mailing-list
+  title: PQC - What is our Goal, Even?
+  date: 2026-04-19
+  retrieved: 2026-11-15
+  quote: I think the reasoning of "well, some people will be able to use P2MR
+    correctly" isn't just not fixing an interesting problem, I think its
+    somewhat dangerous.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
