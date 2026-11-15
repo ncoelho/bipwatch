@@ -1,0 +1,27 @@
+id: stance-matt-corallo-d6b702b2
+bip: 353
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Matt Corallo, who authored the BIP, holds that resolving
+  human-readable names into payment instructions is worth doing. He points to
+  strong user demand and proposes a DNS-only protocol that uses DNSSEC for
+  compact, simple-to-verify proofs.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/commit/4f75edb2b85f55f5723e379584e52181f5f44269
+  type: github
+  title: Add a BIP which resolves human readable names into payment info
+  date: 2024-02-10
+  retrieved: 2026-11-15
+  quote: |-
+    User behavior has clearly indicated a strong demand for the
+    resolution of human-readable names into payment instructions.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
