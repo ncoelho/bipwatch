@@ -1,0 +1,26 @@
+id: open-question-jeanpablojp-8c89bc5d
+bip: 360
+kind: open-question
+status: open
+area: design
+statement: Decide whether validation must fail when the control byte's low bit
+  is not 1, and either add an explicit fail clause to the validation steps or
+  reword the footnote and drop the enforcing test case.
+subject:
+  name: jeanpablojp
+  type: person
+applies_to_version: 0.12.1
+source:
+  url: https://delvingbitcoin.org/t/changes-to-bip-360-pay-to-quantum-resistant-hash-p2qrh/1811/33
+  type: forum
+  title: Changes to BIP-360 - Pay to Quantum Resistant Hash (P2QRH)
+  date: 2026-08-01
+  retrieved: 2026-11-15
+  quote: the control byte's low bit is described as "unused and must be 1", but
+    the validation steps have no explicit fail clause for it, unlike every other
+    rule in that section.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

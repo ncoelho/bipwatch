@@ -1,0 +1,25 @@
+id: task-coldtest-berlin-71d41d80
+bip: 360
+kind: task
+status: open
+area: review
+part_of: pq single-address backup
+statement: Review the proposed encrypted single-address backup format for P2MR
+  SLH-DSA seeds and its offline reference code.
+subject:
+  name: coldtest-berlin
+  type: person
+applies_to_version: 0.12.1
+source:
+  url: https://delvingbitcoin.org/t/pq-single-address-backup-bip-38-for-p2mr-bc1z-104-char-encrypted-backup-format/2767/1
+  type: forum
+  title: PQ-single-address-backup - BIP-38 for P2MR (bc1z) - 104-char encrypted
+    backup format
+  date: 2026-08-04
+  retrieved: 2026-11-15
+  quote: Looking for feedback and a reference implementation.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
