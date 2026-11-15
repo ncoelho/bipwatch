@@ -1,0 +1,26 @@
+id: task-lucia-w-261e1ae7
+bip: 352
+kind: task
+status: open
+area: review
+part_of: BIP 376
+statement: Review and finalize the proposed Python reference implementation and
+  test vectors for BIP 376 Silent Payment input signing, which the BIP still
+  lists as TODO.
+subject:
+  name: lucia-w
+  type: person
+applies_to_version: 1.1.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2139
+  type: github
+  title: "BIP-376: add python ref implementation and initial test vectors"
+  date: 2026-04-12
+  retrieved: 2026-11-15
+  quote: This PR adds a reference implementation and test vectors for Silent
+    Payment input signing behavior.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

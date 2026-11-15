@@ -1,0 +1,25 @@
+id: open-question-junderw-fc012eb8
+bip: 352
+kind: open-question
+status: addressed
+area: design
+part_of: BIP 392
+statement: Decide whether the proposed silent payment scan and spend key
+  encodings should be output descriptors instead of standalone encodings.
+subject:
+  name: junderw
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2026
+  type: github
+  title: "BIP352: Add extra encoding formats for scanning and spending"
+  date: 2025-11-01
+  retrieved: 2026-11-15
+  quote: I was debating whether to make the non-address encodings into descriptors
+    instead.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

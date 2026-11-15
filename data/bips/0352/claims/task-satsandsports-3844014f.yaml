@@ -1,0 +1,29 @@
+id: task-satsandsports-3844014f
+bip: 352
+kind: task
+status: open
+area: engineering
+part_of: wallet support
+statement: Fix silent payments implementations (such as the
+  go-libsecp256k1-based index and the Rust silent-payments crates) that error on
+  an intermediate point-at-infinity input sum, so they match the reference
+  implementation.
+subject:
+  name: SatsAndSports
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2264
+  type: github
+  title: "BIP352: clarify input-sum accumulation — tolerate intermediate point at
+    infinity"
+  date: 2026-08-19
+  retrieved: 2026-11-15
+  quote: rust-secp256k1 reports `InvalidPublicKeySum` / `InvalidTweak` on the same
+    case in the Rust silent-payments crates (rust-silentpayments / spdk) — send
+    aborts, receive errors, both diverging from the reference verdict.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

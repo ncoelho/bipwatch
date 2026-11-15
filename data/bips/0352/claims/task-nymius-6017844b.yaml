@@ -1,0 +1,27 @@
+id: task-nymius-6017844b
+bip: 352
+kind: task
+status: open
+area: engineering
+part_of: BIP 376
+statement: Vendor secp256k1lab v1.0.0 and the needed Bitcoin Core test framework
+  code into a dependencies directory for the BIP 376 reference implementation,
+  as BIP 375 does.
+subject:
+  name: nymius
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2139#pullrequestreview-4196865684
+  type: github
+  title: "BIP-376: add python ref implementation and initial test vectors"
+  date: 2026-04-29
+  retrieved: 2026-11-15
+  quote: I would create a `dependencies` or `deps` dir with the
+    `secp256k1lab@1.0.0` source code and the code from bitcoin core test
+    framework like `BIP 375` does
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

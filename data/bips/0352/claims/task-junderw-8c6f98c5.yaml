@@ -1,0 +1,26 @@
+id: task-junderw-8c6f98c5
+bip: 352
+kind: task
+status: open
+area: design
+statement: Define a standard encoding for silent payment secret key material
+  that also carries the wallet birthday and the labels used, so wallets can be
+  exported and imported without losing information.
+subject:
+  name: junderw
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2026
+  type: github
+  title: "BIP352: Add extra encoding formats for scanning and spending"
+  date: 2025-11-01
+  retrieved: 2026-11-15
+  quote: Encode secret information including birthday and labels used, so that
+    silent payment wallets can be exported and imported across wallets without
+    information loss.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

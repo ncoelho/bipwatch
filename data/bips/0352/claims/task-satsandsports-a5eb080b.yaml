@@ -1,0 +1,26 @@
+id: task-satsandsports-a5eb080b
+bip: 352
+kind: task
+status: open
+area: writing
+statement: State normatively that input-key sum accumulation must tolerate an
+  intermediate point at infinity, be order-invariant, and that EC backends
+  erroring on such additions must catch the condition and continue.
+subject:
+  name: SatsAndSports
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2264
+  type: github
+  title: "BIP352: clarify input-sum accumulation — tolerate intermediate point at
+    infinity"
+  date: 2026-08-19
+  retrieved: 2026-11-15
+  quote: It does not say what happens when an **intermediate partial sum** equals
+    the point at infinity during accumulation.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
