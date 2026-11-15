@@ -1,0 +1,27 @@
+id: stance-dan-gould-a95b12ad
+bip: 77
+kind: stance
+stance: nack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1887
+  title: Remove `pjos` parameter from BIP77 example URI
+statement: Dan Gould opposed the proposed change removing the `pjos` parameter
+  from BIP 77's example URI, while noting the observation was useful for the
+  implementation.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.1.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1887#discussion_r2178741163
+  type: github
+  title: Remove `pjos` parameter from BIP77 example URI
+  date: 2025-07-01
+  retrieved: 2026-11-15
+  quote: NACK on this change but good catch for the implementation
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
