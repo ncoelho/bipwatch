@@ -1,0 +1,29 @@
+id: stance-tim-ruffing-56fe6d7d
+bip: 324
+kind: stance
+stance: approach-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2092
+  title: "BIP 324, 434: Specify p2p v2 one-byte identifier for FEATURE message"
+statement: Tim Ruffing finds it reasonable to keep the list of v2 P2P one-byte
+  message identifiers in a separate document among BIP 324's auxiliary files,
+  owned by the BIP 324 authors. He says this avoids a debate over who controls a
+  new document, though he is not convinced it is the perfect solution.
+subject:
+  name: Tim Ruffing
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2092#issuecomment-3822479068
+  type: github
+  title: "BIP 324, 434: Specify p2p v2 one-byte identifier for FEATURE message"
+  date: 2026-01-30
+  retrieved: 2026-11-15
+  quote: I am not convinced that's the perfect solution, but it's the status quo
+    anyway, so I'm okay with it.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
