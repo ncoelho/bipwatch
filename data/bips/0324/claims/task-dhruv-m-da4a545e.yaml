@@ -1,0 +1,24 @@
+id: task-dhruv-m-da4a545e
+bip: 324
+kind: task
+status: addressed
+area: design
+statement: Remove 1-byte message type ID allocations for messages that are sent
+  at most once per connection per direction.
+subject:
+  name: Dhruv M
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/6b83c32e-59ca-65ef-2553-d66f8d117e56@bip324.com/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2023-02-16
+  retrieved: 2026-11-15
+  quote: We remove 1 byte allocations for messages that are sent at most once per
+    connection per direction
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

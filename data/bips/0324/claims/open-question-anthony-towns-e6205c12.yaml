@@ -1,0 +1,27 @@
+id: open-question-anthony-towns-e6205c12
+bip: 324
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether BIP 324 nodes should be able to negotiate their own
+  1-byte short message type ID mapping from the start, rather than using a fixed
+  table.
+subject:
+  name: Anthony Towns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/Y%2FTrWS1Y3JkxHsQn@erisian.com.au/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2023-02-21
+  retrieved: 2026-11-15
+  quote: |-
+    I suppose being able to choose your own short id mapping from day 0 would
+    mean that every bip324 node could use a single short id mapping for all
+    outgoing messages
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

@@ -1,0 +1,23 @@
+id: open-question-pieter-wuille-7d7e7e4c
+bip: 324
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether the REJECT message should be assigned a 1-byte short
+  message type ID.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/S1zoL4CCIDVTrjmXx2JtYhO2qjgGyNIAP6X9FXRCRKPDjoQj20VcqKFCYkmmPQkNuMyNf9zp6GFVWWC7l8dBzCogUqvzmDx9D811NPheNJ8=@wuille.net/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2023-02-17
+  retrieved: 2026-11-15
+  quote: Do you feel REJECT should be included?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

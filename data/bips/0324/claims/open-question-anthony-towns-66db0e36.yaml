@@ -1,0 +1,26 @@
+id: open-question-anthony-towns-66db0e36
+bip: 324
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether 1-byte short message type IDs should be negotiable per
+  peer and direction instead of a fixed table, and how new short IDs get
+  assigned for future messages.
+subject:
+  name: Anthony Towns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/Y7vMGVQz8TjS4Cad@erisian.com.au/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2023-01-09
+  retrieved: 2026-11-15
+  quote: |-
+    So I think you can make this setup work with a negotiated assignment of
+    shortids
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

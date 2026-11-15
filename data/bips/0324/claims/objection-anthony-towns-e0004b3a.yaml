@@ -1,0 +1,26 @@
+id: objection-anthony-towns-e0004b3a
+bip: 324
+kind: objection
+status: addressed
+area: design
+statement: Resolve how short message type IDs are allocated so that BIPs
+  choosing from a small, meaningless ID space don't conflict, e.g. by
+  negotiating short-ID tables per connection instead of using a fixed
+  assignment.
+subject:
+  name: Anthony Towns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/Y3dBUXPhTskCx+Fu@erisian.com.au/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2022-11-18
+  retrieved: 2026-11-15
+  quote: picking an otherwise meaningless value from a set of 102 elements seems
+    likely to produce conflicts...
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

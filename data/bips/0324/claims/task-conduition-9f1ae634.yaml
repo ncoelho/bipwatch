@@ -1,0 +1,28 @@
+id: task-conduition-9f1ae634
+bip: 324
+kind: task
+status: open
+area: design
+part_of: pq bip 324
+statement: If a hybrid post-quantum key exchange is adopted for BIP 324, define
+  clear migration paths both to pure post-quantum cryptography and back to
+  classical ECDH.
+subject:
+  name: conduition
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/RS1NnL6YB4YFxxuEa9eOQuB5OOkPp6zwxWkLl9QCFQfE9-1y9vB0njN2QycURGNdSkT3sM4erCyaSkYvkmYTHicE32JMNMRepa1QwV3obVc=@proton.me/
+  type: mailing-list
+  title: A Post-Quantum Path for BIP 324
+  date: 2026-05-09
+  retrieved: 2026-11-15
+  quote: if we go with a hybrid scheme, we should have clear migration paths to
+    transition to either pure PQC (if a CRQC appears and breaks ECDH, we might
+    as well discard it), or back to classical ECDH (if CRQCs turn out to be
+    impossible).
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
