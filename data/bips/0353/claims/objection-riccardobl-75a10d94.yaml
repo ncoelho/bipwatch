@@ -1,0 +1,25 @@
+id: objection-riccardobl-75a10d94
+bip: 353
+kind: objection
+status: addressed
+area: design
+statement: Justify using DNS TXT records instead of an HTTPS .well-known lookup,
+  given that DNS cannot be queried directly from webapps or extensions, TTL
+  caching cannot be strictly controlled, and unencrypted DNS can reveal payment
+  intent to the ISP.
+subject:
+  name: riccardobl
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1937482285
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-15
+  quote: i believe .well-known in reality is a much superior choice
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

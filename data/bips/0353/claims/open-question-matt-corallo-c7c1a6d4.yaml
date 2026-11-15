@@ -1,0 +1,25 @@
+id: open-question-matt-corallo-c7c1a6d4
+bip: 353
+kind: open-question
+status: addressed
+area: ux
+statement: "Decide how human-readable payment names should be displayed: plain
+  user@domain, which LNURL fallback stays compatible with but users may confuse
+  with email addresses, or a distinguishing prefix form."
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1937438951
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-15
+  quote: we could also do other things which are subtly compatible but provide UX
+    distinction, eg $user@domain
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

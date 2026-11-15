@@ -1,0 +1,24 @@
+id: task-matt-corallo-477da3ec
+bip: 353
+kind: task
+status: addressed
+area: writing
+statement: Add a recommendation that on-chain addresses in payment instruction
+  records be rotated whenever a payment is received, to reduce address reuse.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1950832550
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-18
+  retrieved: 2026-11-15
+  quote: we should suggest rotation whenever a payment is received, which I think
+    is sensible and may be somewhat doable for larger providers
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

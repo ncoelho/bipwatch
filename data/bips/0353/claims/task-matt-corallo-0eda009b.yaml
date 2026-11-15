@@ -1,0 +1,23 @@
+id: task-matt-corallo-0eda009b
+bip: 353
+kind: task
+status: addressed
+area: writing
+statement: Add a section to the spec explaining how wallets should parse and
+  display the user@domain human-readable name.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1937830967
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-15
+  quote: I'd like to add a section on displaying this info
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
