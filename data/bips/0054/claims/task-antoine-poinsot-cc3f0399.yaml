@@ -1,0 +1,24 @@
+id: task-antoine-poinsot-cc3f0399
+bip: 54
+kind: task
+status: addressed
+area: research
+statement: Compile the historical transactions that would be valid under a
+  6-sigop CHECKMULTISIG cap but invalid under the current BIP54 sigop rule.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/90
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2026-01-07
+  retrieved: 2026-11-15
+  quote: I'll put together a list of historical transactions that would have been
+    valid according to this adapted rule but not according to today's BIP54.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

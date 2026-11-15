@@ -1,0 +1,25 @@
+id: open-question-chris-stewart-5-df9b35b5
+bip: 54
+kind: open-question
+status: addressed
+area: research
+statement: Determine whether forbidding 1-input, 1-output SegWit transactions
+  that pay to 2-byte witness programs (such as P2A) harms any use case, and
+  document the consequence.
+subject:
+  name: Chris_Stewart_5
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/73
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2025-02-26
+  retrieved: 2026-11-15
+  quote: I am not aware of any reason why this would be a problem, but I have not
+    seen it documented anywhere.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
