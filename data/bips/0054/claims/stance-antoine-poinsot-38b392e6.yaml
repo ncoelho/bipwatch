@@ -1,0 +1,28 @@
+id: stance-antoine-poinsot-38b392e6
+bip: 54
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Antoine Poinsot defends BIP54's "potentially executed" sigops limit
+  as the right mitigation. He argues it targets exactly the harmful
+  quadratic-hashing behaviour with minimal impact on legitimate usage, and that
+  alternatives would yield diminishing returns with a larger confiscatory
+  surface.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/PIqe0rw-nHRiIJxiJ1aK-WdO1Co9HxYIPNcey3s1VCmgziSaLWAVLhXGJqD4j8VWelXFDGTmU2xl4u2P2u2EJBSnweRbatp2f_mkIEhF6Zo=@protonmail.com/
+  type: mailing-list
+  title: BIP54 implementation and test vectors
+  date: 2025-10-28
+  retrieved: 2026-11-15
+  quote: The BIP54 mitigation was chosen because it pinpoints exactly the harmful
+    behaviour we want to prevent, with only a minimal impact on potentially
+    legitimate usage
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

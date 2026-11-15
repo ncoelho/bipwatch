@@ -1,0 +1,24 @@
+id: stance-antoine-poinsot-6bd550df
+bip: 54
+kind: stance
+stance: ack
+scope: proposal
+statement: Antoine Poinsot, the author of the Consensus Cleanup draft, considers
+  the proposal ready to be officially published as a BIP after research and
+  community discussion settled the list of mitigations.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-03-26
+  retrieved: 2026-11-15
+  quote: I think it's now ready to be officially published as a BIP.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

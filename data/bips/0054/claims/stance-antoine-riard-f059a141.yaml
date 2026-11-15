@@ -1,0 +1,28 @@
+id: stance-antoine-riard-f059a141
+bip: 54
+kind: stance
+stance: needs-research
+scope: proposal
+statement: Antoine Riard thinks BIP 54 is not yet ready to finalize. In his
+  view, the open technical disagreements must be resolved first, especially over
+  outlawing 64-byte transactions, and the reference implementation needs more
+  review and testing. He suggests activation could realistically be considered
+  in the second half of 2027 if community consensus exists by then.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CALZpt+GwkE1gH2-yrJXt=oqkrYR_ubdrMur0PG6aZvziJCHMLg@mail.gmail.com/
+  type: mailing-list
+  title: Getting BIP54 past the finish line
+  date: 2026-10-02
+  retrieved: 2026-11-15
+  quote: Moving BIP54 past the finish line, in my view, would necessitate
+    resolving the open technical conservations, especially on the disagreement
+    about the 64 bye transactions.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

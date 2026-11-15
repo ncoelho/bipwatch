@@ -1,0 +1,29 @@
+id: stance-russell-o-connor-9bdf9dd0
+bip: 54
+kind: stance
+stance: nack
+scope: proposal
+statement: Russell O'Connor opposes the Great Consensus Cleanup's proposed
+  restriction on sighash type byte values. He argues it addresses no security
+  threat and could destroy funds held in non-standard but valid transactions. He
+  also says the rarity of such transactions on-chain cannot justify the soft
+  fork, because policy already makes them non-standard.
+subject:
+  name: Russell O'Connor
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAMZUoKnrUENVwSLJd6HEprqrjmU_Em5LFL4o+UW1-nOBKADVUw@mail.gmail.com/
+  type: mailing-list
+  title: "Sighash Type Byte; Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-08
+  retrieved: 2026-11-15
+  quote: |-
+    Since the above soft-fork isn't addressing addressing any such threat (that
+    I'm aware of), and could hypothetically destroy other people money, it
+    crosses a line I thought we were never supposed to cross.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

@@ -1,0 +1,29 @@
+id: stance-anthony-towns-7bd470e2
+bip: 54
+kind: stance
+stance: needs-research
+scope: proposal
+statement: Anthony Towns says it is unclear to him whether the great consensus
+  cleanup should be deployed on mainnet as is, after specific changes, or not at
+  all. He adds that it is also unclear what work would settle the question, and
+  suggests evaluation on signet as a way to get an answer.
+subject:
+  name: Anthony Towns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/YztoDOBOxJIZP14k@erisian.com.au/
+  type: mailing-list
+  title: "bitcoin-inquistion: evaluating soft forks on signet"
+  date: 2022-10-03
+  retrieved: 2026-11-15
+  quote: |-
+    it's the same thing with drivechains and the
+    great consensus cleanup: are these ideas sensible to deploy on mainnet? If
+    the answer to that were a clear yes for either of them, then it would
+    make sense to work on merging them in core
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

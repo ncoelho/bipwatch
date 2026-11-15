@@ -1,0 +1,28 @@
+id: stance-russell-o-connor-f74709c9
+bip: 54
+kind: stance
+stance: nack
+scope: change
+statement: Russell O'Connor objects to the Great Consensus Cleanup's proposed
+  disabling of OP_CODESEPARATOR. He argues that users may already have funds
+  committed to legitimate scripts using it, hidden behind P2SH, and that
+  disabling it risks destroying their money. He proposes pricing
+  OP_CODESEPARATOR by weight instead.
+subject:
+  name: Russell O'Connor
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAMZUoKk3CgatSexAHRuxn3ibCYwgHpTkc0gF0yDi6hLAVcCiNA@mail.gmail.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-08
+  retrieved: 2026-11-15
+  quote: Please don't strawman my position.  I am not suggesting we don't fix a
+    vulnerability in Bitcoin.  I am suggesting we find another way.  One that
+    limits the of risk destroying other people's money.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

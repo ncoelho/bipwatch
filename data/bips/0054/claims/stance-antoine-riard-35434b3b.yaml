@@ -1,0 +1,27 @@
+id: stance-antoine-riard-35434b3b
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Antoine Riard considers BIP 54's fix for long block validation times
+  a must-have and its difficulty adjustment fixes very good to have. He is more
+  skeptical of the merkle tree malleability fix, thinks the duplicate coinbase
+  fix's design could be improved, and would prefer splitting the fixes into
+  separate proposals.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/05f5b0ee-b487-4733-9860-ac0705b6b901n@googlegroups.com/
+  type: mailing-list
+  title: Addressing remaining points on BIP 54
+  date: 2026-01-08
+  retrieved: 2026-11-15
+  quote: my thinking is that a fix long block validation time is a really must
+    have, fixes for difficulty adjustment exploits is also very good to have
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

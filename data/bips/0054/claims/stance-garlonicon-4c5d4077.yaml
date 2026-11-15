@@ -1,0 +1,26 @@
+id: stance-garlonicon-4c5d4077
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: garlonicon calls the Consensus Cleanup small and non-controversial,
+  and argues it should ship on its own rather than be bundled with other
+  changes, which would risk not getting BIP 54 at all.
+subject:
+  name: garlonicon
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/softfork-before-gta-vi/2913/2
+  type: forum
+  title: Softfork before GTA VI?
+  date: 2026-09-27
+  retrieved: 2026-11-15
+  quote: It is easier to reach consensus for a change, where mining pools are
+    already supporting it, and it is quite small and non-controversial, than add
+    more things into it, and risking not having BIP-54 at all.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

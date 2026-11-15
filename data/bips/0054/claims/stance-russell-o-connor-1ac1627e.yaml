@@ -1,0 +1,25 @@
+id: stance-russell-o-connor-1ac1627e
+bip: 54
+kind: stance
+stance: nack
+scope: proposal
+statement: Russell O'Connor objects to the Consensus Cleanup proposal's
+  invalidation of OP_CODESEPARATOR uses. He argues that it could confiscate
+  funds in benign, possibly unseen scripts, and that the validation-cost problem
+  should instead be fixed by increasing the opcode's weight.
+subject:
+  name: Russell O'Connor
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAMZUoKnK2YhucaJ-1HxH3MXeBtQZebV+h_rcS5Oq=yCMDC5u7A@mail.gmail.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-09
+  retrieved: 2026-11-15
+  quote: Instead, it is this soft-fork proposal that is unprecedented.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

@@ -1,0 +1,31 @@
+id: stance-antoine-poinsot-baab5b2a
+bip: 54
+kind: stance
+stance: conditional
+condition: Transactions with more than 2500 legacy signature operations are
+  first made non-standard, and there is good reason to believe the vast majority
+  of hashrate won't mine such a transaction.
+scope: proposal
+statement: Antoine Poinsot argues that BIP 54 should not be activated until
+  pathological transactions that exceed its 2500 legacy sigop limit are
+  non-standard and nearly all hashrate would refuse to mine them. Otherwise, he
+  says, activation opens a major DoS vector against unupgraded miners.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/49dyqqkf5NqGlGdinp6SELIoxzE_ONh3UIj6-EB8S804Id5yROq-b1uGK8DUru66eIlWuhb5R3nhRRutwuYjemiuOOBS2FQ4KWDnEh0wLuA=@protonmail.com/
+  type: mailing-list
+  title: Make pathological transactions with more than 2500 legacy signature
+    operations non-standard
+  date: 2025-07-02
+  retrieved: 2026-11-15
+  quote: Therefore i propose to make such transactions non-standard and hold off
+    activation of BIP54 until we have good reasons to believe that the vast
+    majority of the hashrate won't create a block containing such a transaction.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

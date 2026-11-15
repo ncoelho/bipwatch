@@ -1,0 +1,27 @@
+id: stance-mark-f-412e487d
+bip: 54
+kind: stance
+stance: nack
+scope: proposal
+statement: Mark F objects to the consensus cleanup's timewarp fix. He argues it
+  would permanently remove the ability to make changes like flexible block size
+  and subsidy smoothing as backwards-compatible soft forks (as in his forward
+  blocks proposal).
+subject:
+  name: Mark F
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/67ec72f6-b89f-4f8d-8629-0ebc8bdb7acfn@googlegroups.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-04-30
+  retrieved: 2026-11-15
+  quote: Therefore fixing the timewarp bug will _permanently_ cutoff the bitcoin
+    community from ever having the ability to scale on-chain in a
+    backwards-compatible way, now or decades or centuries into the future.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

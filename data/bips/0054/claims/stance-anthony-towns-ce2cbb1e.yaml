@@ -1,0 +1,26 @@
+id: stance-anthony-towns-ce2cbb1e
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Anthony Towns says transactions that cause quadratic-hashing
+  validation delays should be made invalid by consensus rather than only blocked
+  at relay. He expresses hope that BIP 54's consensus cleanup does this.
+subject:
+  name: Anthony Towns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/aBSVn7nJnrheLy5Z@erisian.com.au/
+  type: mailing-list
+  title: Relax OP_RETURN standardness restrictions
+  date: 2025-05-02
+  retrieved: 2026-11-15
+  quote: Transactions like that should really be removed from consensus validity
+    not just prevented at the relay level, and BIP 54's consensus cleanup
+    hopefully does that.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

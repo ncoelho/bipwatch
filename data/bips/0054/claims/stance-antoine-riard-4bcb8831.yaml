@@ -1,0 +1,28 @@
+id: stance-antoine-riard-4bcb8831
+bip: 54
+kind: stance
+stance: needs-research
+scope: proposal
+statement: Antoine Riard doubts that invalidating 64-byte transactions, as the
+  Consensus Cleanup proposes, actually fixes the merkle root weaknesses. He
+  argues that the minimal sufficient check for rejecting a block needs more
+  careful analysis first.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/78e8248d-bc77-452f-ac7e-19c28cbc3280n@googlegroups.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-11-28
+  retrieved: 2026-11-15
+  quote: So I think more that the minimal sufficient check to reject a block
+    should be more carefully analyzed, rather than advocating that forbidding
+    some magic value obviously fix an issue, in the present the bitcoin's merkle
+    root weaknesses.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

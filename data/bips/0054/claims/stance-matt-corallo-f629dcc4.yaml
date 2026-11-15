@@ -1,0 +1,28 @@
+id: stance-matt-corallo-f629dcc4
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Matt Corallo, the proposal's author, defends the Great Consensus
+  Cleanup's disabling of OP_CODESEPARATOR in non-segwit scripts, arguing it is a
+  significant vulnerability with no practical use case and that the remote
+  chance of rendering some funds unspendable does not justify leaving it
+  unfixed.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/6bb308f5-f478-d5ec-064f-e4972709f29c@mattcorallo.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-07
+  retrieved: 2026-11-15
+  quote: I strongly, strongly disagree that the highly-unlikely remote possibility
+    that someone created something before which could be rendered unspendable is
+    sufficient reason to not fix a vulnerability in Bitcoin today.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

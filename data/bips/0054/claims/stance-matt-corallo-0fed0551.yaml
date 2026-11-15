@@ -1,0 +1,27 @@
+id: stance-matt-corallo-0fed0551
+bip: 54
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Matt Corallo defends the Consensus Cleanup proposal's removal of
+  OP_CODESEPARATOR by soft fork. He says nobody is known to use it, that
+  removing it simplifies checksig analysis, and that a proposed alternative of
+  charging extra weight does not solve the problem.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/FD3AE549-3DD4-48E0-9804-73BFBB30A9B0@mattcorallo.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-12
+  retrieved: 2026-11-15
+  quote: It would end up being a huge shame to have all the OP_CORESEPARATOR mess
+    left around after all the effort that has gone into removing it for the past
+    few years
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

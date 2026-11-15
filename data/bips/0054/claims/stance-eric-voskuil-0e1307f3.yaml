@@ -1,0 +1,29 @@
+id: stance-eric-voskuil-0e1307f3
+bip: 54
+kind: stance
+stance: nack
+scope: proposal
+statement: Eric Voskuil opposes the Consensus Cleanup's rule invalidating
+  64-byte transactions. He argues it would not make block hashes unique
+  identifiers and would not detect malleated blocks any earlier. In his view it
+  adds validation cost and complexity, since checking the coinbase for a null
+  point already suffices.
+subject:
+  name: Eric Voskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/926fdd12-4e50-433d-bd62-9cc41c7b22a0n@googlegroups.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-07-20
+  retrieved: 2026-11-15
+  quote: It is also not the case that detection of type64 malleated blocks can be
+    made more performant if 64 byte txs are globally invalid. In fact the
+    opposite is true, it becomes more costly (and complex) and is therefore just
+    dead code.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

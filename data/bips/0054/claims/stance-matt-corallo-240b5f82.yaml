@@ -1,0 +1,27 @@
+id: stance-matt-corallo-240b5f82
+bip: 54
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Matt Corallo defends the Great Consensus Cleanup's plan to disable
+  OP_CODESEPARATOR rather than merely limit how often it is called. He argues
+  that limiting it adds a lot of complexity and makes sighash caching harder,
+  while removing it allows a lot of code to be deleted.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/db3405ef-7e06-9538-0700-df37abaa602d@mattcorallo.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-08
+  retrieved: 2026-11-15
+  quote: Note that "just limit number of OP_CODESEPARATOR calls" results in a ton
+    of complexity and reduces the simple analysis that fees (almost) have today
+    vs just removing it allows us to also remove a ton of code.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

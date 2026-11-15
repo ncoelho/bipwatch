@@ -1,0 +1,29 @@
+id: stance-antoine-poinsot-e897de8c
+bip: 54
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Antoine Poinsot defends BIP 54's approach of invalidating 64-byte
+  transactions. He argues that preventing Merkle malleability in only one
+  direction is sufficient and requires no changes from SPV verifiers, because
+  grinding an inner node to match a meaningful transaction is computationally
+  infeasible.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/zsUBtB2e_nQ-rup8cdIacq139Y1FznGRLQfq8XQ2lM-6SZNk3Kfucj2pxvX0YQ0QW1G2liAhenj8xYBFGqvzGLvtwZYFE5r1Xo2Y91O_Mz8=@protonmail.com/
+  type: mailing-list
+  title: Prohibit Merkle Internal Node Preimages That Encode Minimal 64-Byte
+    Transactions
+  date: 2026-06-05
+  retrieved: 2026-11-15
+  quote: So i think the point stands that preventing malleability only in one
+    direction (by invalidating 64-byte transactions) is sufficient, and does not
+    require SPV verifiers to do anything.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

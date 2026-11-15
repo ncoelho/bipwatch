@@ -1,0 +1,29 @@
+id: stance-matt-corallo-8cf6af69
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Matt Corallo, the proposal's author, puts forward the Great Consensus
+  Cleanup soft fork to remove oddities in the consensus rules and fix several
+  vulnerabilities. He argues that the timewarp vulnerability should obviously be
+  fixed because exploiting it could only serve malicious inflation or extension
+  blocks.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/bf96c2fb-2e2e-a47f-e59f-87e56d83eca3@mattcorallo.com/
+  type: mailing-list
+  title: "BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-06
+  retrieved: 2026-11-15
+  quote: As for why the timewarp vulnerability should (IMO rather obviously) be
+    fixed, it seems rather clear that the only potential use for exploiting it
+    would be either to inflate the currency supply maliciously by miners or to
+    fork in what amounts to extension blocks.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

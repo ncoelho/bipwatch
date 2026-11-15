@@ -1,0 +1,28 @@
+id: stance-antoine-riard-6b9ba292
+bip: 54
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Antoine Riard supports BIP 54's approach of committing the block
+  height in the coinbase nLocktime rather than in an additional OP_RETURN
+  output. He argues nLocktime is already a mandatory field and so more
+  space-efficient, and that it adds no new cryptoeconomic attack risk.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/e758af9b-72fc-4fdd-8e07-e1126635780an@googlegroups.com/
+  type: mailing-list
+  title: Addressing remaining points on BIP 54
+  date: 2026-01-30
+  retrieved: 2026-11-15
+  quote: |-
+    I'm still favoring the coinbase over
+    the additional op_return field, nLocktime is already a mandatory transaction
+    field so it's more information-theoretic space efficient.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

@@ -1,0 +1,28 @@
+id: stance-antoine-poinsot-531671e7
+bip: 54
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Antoine Poinsot defends BIP 54's requirement to commit the block
+  height in the coinbase nLockTime, rejecting the objection that the field is
+  better used as an extranonce. He says it guarantees coinbase uniqueness
+  without relying on BIP 30 validation.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/UsKuvCXXhSAnNVx5a0K2UfP3srAr3slW9mcOjtYk9LnolaOXfWrW9jpqbxsQQPkyQuZogkhz2Hbfwii2VsTm79vRDpgKduxk35hpBu_t7Do=@protonmail.com/
+  type: mailing-list
+  title: Addressing remaining points on BIP 54
+  date: 2025-12-30
+  retrieved: 2026-11-15
+  quote: |-
+    committing to block height in nLockTime is the most
+    elegant way to guarantee coinbase transaction uniqueness without relying on
+    non-portable BIP 30 validation.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

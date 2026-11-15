@@ -1,0 +1,26 @@
+id: stance-antoine-poinsot-6072f95f
+bip: 54
+kind: stance
+stance: ack
+scope: proposal
+statement: Antoine Poinsot, the BIP's author, says he is confident moving
+  forward with every mitigation in the Consensus Cleanup. He says each one was
+  researched and discussed at length by multiple people over the past year.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/TD8gP8PKw3th-0DrZznBXrXFILRkwr66wVRoiPC2di_e-NivCRKVjooVZIh7JJSV_C9rJEkKTvudWSG8CJsq16jPhQBjM0eVmPe8rir50Y4=@protonmail.com/
+  type: mailing-list
+  title: Consensus Cleanup BIP draft
+  date: 2025-03-27
+  retrieved: 2026-11-15
+  quote: The fact that each of these mitigations was researched and discussed at
+    length by multiple people over the past year gives me confidence to move
+    forward with every single one of those.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

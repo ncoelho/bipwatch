@@ -1,0 +1,29 @@
+id: stance-antoine-riard-3937b7bb
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Antoine Riard favors prioritizing design, review, testing and
+  activation of the BIP 54 consensus cleanup fixes ahead of CTV+CSFS, citing
+  limited reviewer capacity and the risk of unfavorable interactions between
+  concurrent soft forks.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/fc065dd1-b151-4710-8d5a-5ed1ad54e0ccn@googlegroups.com/
+  type: mailing-list
+  title: What's a good stopping point? Making the case for the capabilities
+    enabled by CTV+CSFS
+  date: 2025-06-29
+  retrieved: 2026-11-15
+  quote: |-
+    So very personally, I favor the optic we go to activate first as much fixes
+    we can among the set of BIP54 ones, then we go to consider for activation
+    CTV alone or CTV+CSFS together.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

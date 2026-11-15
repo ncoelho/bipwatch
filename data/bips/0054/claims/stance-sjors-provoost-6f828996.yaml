@@ -1,0 +1,26 @@
+id: stance-sjors-provoost-6f828996
+bip: 54
+kind: stance
+stance: concept-ack
+scope: change
+statement: Sjors Provoost proposes amending BIP 54 to add coinbase locktime,
+  sequence and version fields to getblocktemplate. He argues that node software
+  should supply these values so pools need not compute them, and prefers
+  extending BIP 54 over writing a separate BIP.
+subject:
+  name: Sjors Provoost
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/1A3B8BFA-41A6-4D0F-BBE6-E791F9785A5E@sprovoost.nl/
+  type: mailing-list
+  title: "Bip54: add sequence, timestamp (and version) to GBT"
+  date: 2026-02-09
+  retrieved: 2026-11-15
+  quote: it seems appropriate and convenient to have node software provide these
+    values via the getblocktemplate RPC.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
