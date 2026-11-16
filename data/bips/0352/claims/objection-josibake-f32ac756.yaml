@@ -1,0 +1,26 @@
+id: objection-josibake-f32ac756
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Specify how to handle the negligible-probability case where a
+  hash-derived scalar (such as t_k or input_hash) is zero or exceeds the
+  secp256k1 curve order.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#issuecomment-1598832940
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-20
+  retrieved: 2026-11-16
+  quote: One reason EC operations can fail is when a pseudorandom scalar value
+    exceeds the curve order, which should only happen with negligible
+    probability but other BIPs still have special cases for when it happens
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

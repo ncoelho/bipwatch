@@ -1,0 +1,26 @@
+id: task-fametrano-171674c1
+bip: 352
+kind: task
+status: open
+area: engineering
+part_of: BIP 375
+statement: Make the BIP 375 reference validator reject PSBTs whose inputs lack
+  the spent output, or whose P2SH inputs lack the redeem script.
+subject:
+  name: fametrano
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2317
+  type: github
+  title: "bip-0375: check test vector signatures in the test runner"
+  date: 2026-09-29
+  retrieved: 2026-11-16
+  quote: "An input without its spent output, or a P2SH input without its redeem
+    script, is skipped: rejecting such a PSBT is the validator's job, which
+    #2324 makes it do."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

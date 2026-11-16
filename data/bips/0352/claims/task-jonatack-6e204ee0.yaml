@@ -1,0 +1,24 @@
+id: task-jonatack-6e204ee0
+bip: 352
+kind: task
+status: addressed
+area: testing
+statement: Strengthen the taproot key-path annex test vector by using an annex
+  of 0x50 followed by the BIP341 NUMS point H, so that implementations that fail
+  to strip the annex are caught.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2337#pullrequestreview-5634221608
+  type: github
+  title: "BIP352: add taproot key-path spend with annex vector"
+  date: 2026-10-23
+  retrieved: 2026-11-16
+  quote: Agree with @fametrano's stronger annex (0x50 + BIP-341 NUMS point H)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

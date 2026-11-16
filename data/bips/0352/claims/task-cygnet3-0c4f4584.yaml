@@ -1,0 +1,26 @@
+id: task-cygnet3-0c4f4584
+bip: 352
+kind: task
+status: addressed
+area: testing
+statement: Change the expected sending outputs in the test vectors so that
+  generated taproot outputs can be matched to specific recipients without
+  relying on unique amounts.
+subject:
+  name: cygnet3
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#issuecomment-1669991489
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-08-08
+  retrieved: 2026-11-16
+  quote: For the sending outputs, expect a dictionary object instead, where the
+    key is a recipient (bech32m string representing a silent payment address),
+    and the value is a list of taproot outputs
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: task-ginavalent-1537e863
+bip: 352
+kind: task
+status: open
+area: engineering
+statement: "Make the BIP 352 reference implementation's address decoder follow
+  the spec: accept only Bech32m, accept versions 0 to 30 and reject 31, require
+  exactly 66 bytes for v0, and use only the first 66 bytes for v1 to v30."
+subject:
+  name: ginavalent
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2288
+  type: github
+  title: "BIP352: align reference address decoding with silent payment rules"
+  date: 2026-09-13
+  retrieved: 2026-11-16
+  quote: The BIP352 reference implementation currently uses the generic SegWit
+    decoder without checking the encoding type, which allows a Bech32 checksum
+    for a silent payment address.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
