@@ -1,0 +1,24 @@
+id: task-murch-fee529c1
+bip: 324
+kind: task
+status: open
+area: review
+statement: BIP 324 authors should review the proposed fixes to the handshake
+  pseudocode and confirm or correct them.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2259#pullrequestreview-5251408671
+  type: github
+  title: "bip324: fix handshake pseudocode errors"
+  date: 2026-09-18
+  retrieved: 2026-11-16
+  quote: I would appreciate if the authors confirm or correct, in case something
+    here was not right.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

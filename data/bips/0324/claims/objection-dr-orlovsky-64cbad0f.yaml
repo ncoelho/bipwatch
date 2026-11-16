@@ -1,0 +1,26 @@
+id: objection-dr-orlovsky-64cbad0f
+bip: 324
+kind: objection
+status: addressed
+area: design
+statement: Decide whether the handshake should authenticate the responder with a
+  known static key (a Noise_XK-style pattern) instead of an unauthenticated
+  exchange of ephemeral keys, to prevent man-in-the-middle attacks.
+subject:
+  name: dr-orlovsky
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1378#pullrequestreview-1232042460
+  type: github
+  title: "Add BIP324: v2 P2P Transport Protocol"
+  date: 2022-12-28
+  retrieved: 2026-11-16
+  quote: I think that "exchange-known" key scheme (like in Noise_XK) is more
+    adequate for bitcoin P2P than "exchange-exchange", as in the current
+    proposal (and like in Noise_XX).
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

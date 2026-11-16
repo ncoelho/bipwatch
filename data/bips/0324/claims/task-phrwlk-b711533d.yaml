@@ -1,0 +1,24 @@
+id: task-phrwlk-b711533d
+bip: 324
+kind: task
+status: open
+area: testing
+statement: Fix the BIP 324 test vector generator so the decoding-case checks use
+  the lower two feature bits (features & 3) instead of (features & 4), so that
+  all four decoding modes are actually exercised.
+subject:
+  name: phrwlk
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1969
+  type: github
+  title: "BIP324: Fix features bitmask for decoding-case selection"
+  date: 2025-09-16
+  retrieved: 2026-11-16
+  quote: Replace (features & 4) with (features & 3) in the four decoding-case checks.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

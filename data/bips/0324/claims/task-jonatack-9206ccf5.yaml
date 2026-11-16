@@ -1,0 +1,29 @@
+id: task-jonatack-9206ccf5
+bip: 324
+kind: task
+status: addressed
+area: writing
+part_of: bip324 one-byte message type id alias assignment
+statement: Add a Rationale section to the message type ID alias proposal
+  explaining choices such as not extending BIP 324's global table, using BIP 434
+  instead of a service or version bit, the 12-byte cap, collapsing unknown
+  types, and encouraging hardcoded bundles.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2301#pullrequestreview-5309228784
+  type: github
+  title: "BIP333: BIP324 One-Byte Message Type ID Alias Assignment"
+  date: 2026-09-24
+  retrieved: 2026-11-16
+  quote: "Missing Rationale section (BIP 3); some ideas it could discuss: why not
+    extend BIP 324’s global table; why BIP 434 instead of a service bit /
+    version bit; why 12-byte cap; why collapse unknown types; why hardcoded
+    bundles are encouraged."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
