@@ -1,0 +1,25 @@
+id: task-hunter-b500f472
+bip: 360
+kind: task
+status: addressed
+area: writing
+statement: Add a section to the Motivation or Security part explaining how a
+  practical quantum attack could take place and how urgent it might be.
+subject:
+  name: hunter
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/2cbd432f-ca19-4481-93c5-3b0f7cdea1cb@DS3018xs/
+  type: mailing-list
+  title: Proposing a P2QRH BIP towards a quantum resistant soft fork
+  date: 2024-06-17
+  retrieved: 2026-11-16
+  quote: I can write a section in the BIP Motivation or Security section about how
+    an attack might take place practically, and the potential urgency of such an
+    attack.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

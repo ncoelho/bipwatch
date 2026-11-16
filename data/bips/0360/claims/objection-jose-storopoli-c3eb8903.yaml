@@ -1,0 +1,28 @@
+id: objection-jose-storopoli-c3eb8903
+bip: 360
+kind: objection
+status: addressed
+area: design
+statement: The objection that adding post-quantum signature schemes would
+  inflate public key and signature sizes and verification cost on a
+  storage-constrained chain, and so should wait, was resolved by dropping
+  post-quantum signatures from the proposal and leaving them to a separate
+  future proposal.
+subject:
+  name: Jose Storopoli
+  type: person
+applies_to_version: 0.6.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/77dbf51a-93aa-4d4a-87c0-b1303d83d5ccn@googlegroups.com/
+  type: mailing-list
+  title: P2QRH / BIP-360 Update
+  date: 2025-03-12
+  retrieved: 2026-11-16
+  quote: |-
+    It adds orders of magnitude to public keys sizes and/or signature sizes; 
+    and verification computation cost.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

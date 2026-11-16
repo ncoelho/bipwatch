@@ -1,0 +1,25 @@
+id: objection-hunter-beast-902bfc39
+bip: 360
+kind: objection
+status: addressed
+area: design
+statement: Add a way to express m-of-n multisig thresholds, since the
+  attestation design only supported n-of-n.
+subject:
+  name: Hunter Beast
+  type: person
+applies_to_version: 0.6.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/8797807d-e017-44e2-b419-803291779007n@googlegroups.com/
+  type: mailing-list
+  title: P2QRH / BIP-360 Update
+  date: 2025-02-19
+  retrieved: 2026-11-16
+  quote: |-
+    I consider m/n multisigs to be the single largest obvious 
+    omission in the spec right now.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
