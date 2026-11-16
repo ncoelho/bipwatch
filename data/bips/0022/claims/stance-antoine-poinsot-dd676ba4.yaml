@@ -1,0 +1,30 @@
+id: stance-antoine-poinsot-dd676ba4
+bip: 22
+kind: stance
+stance: nack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2097
+  title: "bip54: add coinbase locktime and sequence to GBT"
+statement: Antoine Poinsot opposes extending getblocktemplate with coinbase
+  locktime, sequence and version fields for BIP 54, and disagrees with linking
+  to it from BIP 22. He argues that other consensus-relevant coinbase fields
+  aren't provided by GBT either, and that the only GBT detail worth specifying
+  is the "!" prefix for the bip54 rule.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2097#issuecomment-3977385069
+  type: github
+  title: "bip54: add coinbase locktime and sequence to GBT"
+  date: 2026-02-28
+  retrieved: 2026-11-15
+  quote: I don't see why, there are fields with consensus meaning that are not
+    provided by GBT.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
