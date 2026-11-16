@@ -1,0 +1,26 @@
+id: stance-jacob-eliosoff-f8f397f7
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Jacob Eliosoff supports the Consensus Cleanup's disabling of
+  OP_CODESEPARATOR. He argues that research found no users relying on it, so
+  refusing to disable it over backward-compatibility concerns takes caution too
+  far.
+subject:
+  name: Jacob Eliosoff
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAAUaCyixU14z-ym6s62b_BDn2c4TL9jEk-Fa7VwPeNWPm9SPbg@mail.gmail.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-12
+  retrieved: 2026-11-15
+  quote: a case like this where extensive research unearthed zero users, is taking
+    caution too far.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

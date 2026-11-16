@@ -1,0 +1,26 @@
+id: stance-jacob-eliosoff-0644df34
+bip: 54
+kind: stance
+stance: concept-ack
+scope: change
+statement: Jacob Eliosoff supports the Great Consensus Cleanup's removal of
+  OP_CODESEPARATOR, arguing that Matt showed the tradeoffs justify it and that
+  hypothetical affected users should not veto a net-beneficial change.
+subject:
+  name: Jacob Eliosoff
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAAUaCyh09NkgVi2fCNGaNikmaNJ1Yi7AYtBnK9f+Qg8sFoA+_Q@mail.gmail.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-10
+  retrieved: 2026-11-15
+  quote: |-
+    Matt did the legwork to show that the tradeoffs around OP_CODESEPARATOR
+    justify removing it.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

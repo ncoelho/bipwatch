@@ -1,0 +1,27 @@
+id: stance-chris-stewart-59560247
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Chris Stewart welcomed progress on the Consensus Cleanup and drafted
+  a separate BIP for its 64-byte transaction part, arguing that such
+  transactions enable block malleability and attacks on SPV clients.
+subject:
+  name: Chris Stewart
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAGL6+mFYCKjhD8O1G9diC4pbM=_XubW0YxTfeqyyRpDe9t2fng@mail.gmail.com/
+  type: mailing-list
+  title: Update on the Great Consensus Cleanup Revival
+  date: 2025-02-10
+  retrieved: 2026-11-15
+  quote: |-
+    Excited to see this work moving forward. I've taken the
+    liberty of carving off the 64 byte transaction portion of this proposal and
+    drafted a BIP.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

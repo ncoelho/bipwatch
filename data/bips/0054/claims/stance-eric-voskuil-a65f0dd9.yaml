@@ -1,0 +1,28 @@
+id: stance-eric-voskuil-a65f0dd9
+bip: 54
+kind: stance
+stance: nack
+scope: proposal
+statement: Eric Voskuil opposes the Consensus Cleanup's proposed rule making
+  64-byte transactions invalid. He argues it brings no performance gain over
+  checking for a null coinbase point and adds a permanent consensus seam, and
+  that it does not deliver unmalleable block hashes because duplicate-txid
+  malleation remains. In his view the only benefit is small bandwidth savings
+  for SPV proofs, which does not justify a new consensus rule.
+subject:
+  name: Eric Voskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/be78e733-6e9f-4f4e-8dc2-67b79ddbf677n@googlegroups.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-06-24
+  retrieved: 2026-11-15
+  quote: I would have a very hard time justifying adding any consensus rule to
+    achieve only that result.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

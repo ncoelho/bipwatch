@@ -1,0 +1,28 @@
+id: stance-eric-voskuil-bd8369ef
+bip: 54
+kind: stance
+stance: nack
+scope: proposal
+statement: Eric Voskuil opposes the Consensus Cleanup's rule making 64-byte
+  transactions invalid. He argues it is a redundant rule that would slow
+  validation, since that malleation can already be detected cheaply by checking
+  for the coinbase null point, and he considers caching invalid blocks
+  counterproductive.
+subject:
+  name: Eric Voskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/d9834ad5-f803-4a39-a854-95b2439738f5n@googlegroups.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-07-03
+  retrieved: 2026-11-15
+  quote: An invalid 64 byte tx consensus rule would definitely not make it harder
+    to exploit block message invalidity. In fact it would just slow down
+    validation by adding a redundant rule.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

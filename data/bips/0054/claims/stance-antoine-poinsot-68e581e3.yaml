@@ -1,0 +1,28 @@
+id: stance-antoine-poinsot-68e581e3
+bip: 54
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Antoine Poinsot defends BIP 54's invalidation of 64-byte
+  transactions. He argues that such transactions can only burn or give away the
+  spent coins, so no plausible future scripting upgrade would need them.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/A-Yiqh9r08Wd0V1KwMr7MlVObsiW3esWqySZZzm7aZBV3xBpL0qVJSpF07GfQBoq9YFpBLdlo0k2_tGU5CZ-i0_91MEketsaN8V4FpUnno0=@protonmail.com/
+  type: mailing-list
+  title: "[BIP-0054] 64-Byte Transactions and Potential Legitimate Uses"
+  date: 2026-05-06
+  retrieved: 2026-11-15
+  quote: >-
+    As AJ points out, your examples are all anyone-can-spend, so BIP 54 is
+    correct
+
+    here.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

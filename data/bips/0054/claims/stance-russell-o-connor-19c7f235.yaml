@@ -1,0 +1,26 @@
+id: stance-russell-o-connor-19c7f235
+bip: 54
+kind: stance
+stance: nack
+scope: proposal
+statement: Russell O'Connor objects to the Consensus Cleanup proposal's
+  disabling of OP_CODESEPARATOR. He argues that users whose funds would be
+  affected are unlikely to notice or speak up, pointing to people still stuck
+  after an earlier standardness change.
+subject:
+  name: Russell O'Connor
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAMZUoKmU3-b5nTBFuO2dCuZZ+xVT6uZmoXgyjbpVkZQLVTrFrA@mail.gmail.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-11
+  retrieved: 2026-11-15
+  quote: It is so easy to say stuff like this when one's own money isn't what is
+    at risk.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

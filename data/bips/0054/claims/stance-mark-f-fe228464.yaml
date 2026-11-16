@@ -1,0 +1,29 @@
+id: stance-mark-f-fe228464
+bip: 54
+kind: stance
+stance: nack
+scope: proposal
+statement: Mark F opposes the timewarp fix in the Consensus Cleanup, arguing it
+  only closes an unlikely, easily countered subsidy-draining attack while
+  removing the only known way to raise effective block size compatibly with
+  un-upgraded nodes (Forward Blocks).
+subject:
+  name: Mark F
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/62640263-077c-4ac7-98a6-d9c17913fca0n@googlegroups.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-04-18
+  retrieved: 2026-11-15
+  quote: |-
+    disabling time-warp will close off an unlikely 
+    and difficult to pull off subsidy draining attack that to activate would 
+    necessarily require weeks of forewarning and could be easily countered in 
+    other ways
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

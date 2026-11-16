@@ -1,0 +1,28 @@
+id: stance-antoine-poinsot-b95c8fe2
+bip: 54
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Antoine Poinsot defends BIP 54's approach of invalidating 64-byte
+  transactions over Jeremy's alternative. He argues that any system securing
+  real value would not need patching, and that the Merkle proof quirk should be
+  fixed at the consensus level.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/MuaBBWyHNVBd2i0ppWeXGlhAx8C_UqdUZctkuQ7stQeo8CudqJSWfeJHsmJLYLgXz_XZgRw5i1nTJ4wAZCsdCyQccR1Xh4IzA4QjBMVUJpU=@protonmail.com/
+  type: mailing-list
+  title: Prohibit Merkle Internal Node Preimages That Encode Minimal 64-Byte
+    Transactions
+  date: 2026-06-01
+  retrieved: 2026-11-15
+  quote: But i don't think this is a meaningful distinction, as any system that
+    actually matters and tries to secure value would not have to be patched.
+    This is why we chose this approach for BIP 54
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

@@ -1,0 +1,27 @@
+id: stance-antoine-riard-45432871
+bip: 54
+kind: stance
+stance: needs-research
+scope: proposal
+statement: Antoine Riard questions whether BIP 54's proposed 2500
+  per-transaction sigops limit was chosen with full-node costs other than CPU in
+  mind. He notes that an attacker could shift the load to fetching many UTXOs,
+  and wonders whether a better value could be picked, asking whether worst-case
+  transactions maximizing UTXO fetches were analyzed.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/e8d7baa0-5d96-4e41-8cb5-083742c61454n@googlegroups.com/
+  type: mailing-list
+  title: BIP54 implementation and test vectors
+  date: 2025-10-27
+  retrieved: 2026-11-15
+  quote: it's a legitimate wonder about the efficiency limit, and more
+    interestingly if there wouldn't be a better value to be selected.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

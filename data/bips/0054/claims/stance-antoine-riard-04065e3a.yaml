@@ -1,0 +1,26 @@
+id: stance-antoine-riard-04065e3a
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Antoine Riard supports the consensus cleanup's fix for the timewarp
+  attack, citing its safety implications for long-term timelock use. He
+  considers alternatives to forward blocks sufficient, so fixing timewarp is
+  fine with him.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/dc2cc46f-e697-4b14-91b3-34cf11de29a3n@googlegroups.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-03-26
+  retrieved: 2026-11-15
+  quote: I think fixing the timewarp attack is a good idea, especially w.r.t
+    safety implications of long-term timelocks usage.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

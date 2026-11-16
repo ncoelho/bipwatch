@@ -1,0 +1,27 @@
+id: stance-antoine-poinsot-c7e18f92
+bip: 54
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: "Antoine Poinsot argues that all the consensus cleanup fixes should
+  be bundled into one soft fork, since deployment has a large fixed cost and
+  patching only some security bugs would leave the protocol partly vulnerable.
+  He also defends the new validation-time mitigation as conservative: it only
+  adds a transaction-level limit and disables no opcodes."
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/mm_NvE4votqtjm455I3AmdrLOTzwgfFpqbtbFFNy0Zf2PywGt220MXfn76it60q_kbnS9Rw97cv6XzqogNgQMfIXi6-HdOnamw7tUrMtmXc=@protonmail.com/
+  type: mailing-list
+  title: Update on the Great Consensus Cleanup Revival
+  date: 2025-02-10
+  retrieved: 2026-11-15
+  quote: I believe it is important to bundle all fixes together to make up for the
+    substantial fixed cost of deploying a soft fork.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

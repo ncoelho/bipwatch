@@ -1,0 +1,28 @@
+id: stance-anthony-towns-66405867
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Anthony Towns says he is convinced that at least some of the ideas in
+  the 2019 Great Consensus Cleanup proposal (the precursor to BIP 54) are good,
+  though not necessarily all of them. He regrets that it has not made more
+  progress.
+subject:
+  name: Anthony Towns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/YyVlra0AMIFO9Xid@erisian.com.au/
+  type: mailing-list
+  title: "bitcoin-inquistion: evaluating soft forks on signet"
+  date: 2022-09-17
+  retrieved: 2026-11-15
+  quote: |-
+    Maybe not all of the ideas in it were unambiguously good
+    [1], but personally, I'm convinced at least some of them are, and I
+    don't think I'm alone in thinking that.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

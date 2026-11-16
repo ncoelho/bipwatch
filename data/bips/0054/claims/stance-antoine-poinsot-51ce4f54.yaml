@@ -1,0 +1,25 @@
+id: stance-antoine-poinsot-51ce4f54
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Antoine Poinsot supports including the invalidation of 64-byte
+  transactions in the consensus cleanup soft fork. He argues it enables earlier
+  caching of block failures, saves SPV bandwidth, removes footguns and makes
+  block hashes unique, with trivial confiscatory effect.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/yt1O1F7NiVj-WkmnYeta1fSqCYNFx8h6OiJaTBmwhmJ2MWAZkmmjPlUST6FM7t6_-2NwWKdglWh77vcnEKA8swiAnQCZJY2SSCAh4DOKt2I=@protonmail.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-06-21
+  retrieved: 2026-11-15
+  quote: Therefore i believe the benefits of making them illegal outweigh the costs.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

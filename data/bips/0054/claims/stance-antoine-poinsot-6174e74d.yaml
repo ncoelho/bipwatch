@@ -1,0 +1,29 @@
+id: stance-antoine-poinsot-6174e74d
+bip: 54
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Antoine Poinsot defends BIP 54's invalidation of 64-byte
+  transactions. He admits it is inelegant but calls it the least bad option
+  compared with leaving a footgun for upper-layer developers or adding a new
+  sparse Merkle tree, which would effectively mandate an extension block.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/UsKuvCXXhSAnNVx5a0K2UfP3srAr3slW9mcOjtYk9LnolaOXfWrW9jpqbxsQQPkyQuZogkhz2Hbfwii2VsTm79vRDpgKduxk35hpBu_t7Do=@protonmail.com/
+  type: mailing-list
+  title: Addressing remaining points on BIP 54
+  date: 2025-12-30
+  retrieved: 2026-11-15
+  quote: |-
+    But when the alternatives are leaving a notorious footgun to
+    upper-layer developers [4], or making a far more invasive change that
+    effectively mandates an extension block, this is pragmatically the least bad
+    solution.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

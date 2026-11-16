@@ -1,0 +1,27 @@
+id: stance-melvin-carvalho-41eb5dcf
+bip: 54
+kind: stance
+stance: nack
+scope: change
+statement: Melvin Carvalho opposes adding getblocktemplate fields (sequence,
+  timestamp, version) to BIP 54, arguing that bundling them would make the
+  otherwise uncontroversial consensus fixes controversial and widen the policy
+  surface. He says these additions should be specified in a separate proposal.
+subject:
+  name: Melvin Carvalho
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAKaEYh+cjFBx42vhag3dd1zF0QFbgXHPL0fBUDFcA4aZY63EvQ@mail.gmail.com/
+  type: mailing-list
+  title: "Bip54: add sequence, timestamp (and version) to GBT"
+  date: 2026-02-10
+  retrieved: 2026-11-15
+  quote: Bundling new getblocktemplate additions into it changes that and expands
+    the policy surface. Those additions should be specified separately, where
+    they belong.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

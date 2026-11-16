@@ -1,0 +1,25 @@
+id: stance-sjors-provoost-945f3296
+bip: 54
+kind: stance
+stance: concept-ack
+scope: change
+statement: Sjors Provoost defends adding sequence, timestamp (and version)
+  fields to getblocktemplate for BIP 54. He argues they add no new rules to the
+  proposal and only make implementation easier and safer.
+subject:
+  name: Sjors Provoost
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/081ed43e-04e7-40d5-b61a-dc3957dc5d08@app.fastmail.com/
+  type: mailing-list
+  title: "Bip54: add sequence, timestamp (and version) to GBT"
+  date: 2026-02-10
+  retrieved: 2026-11-15
+  quote: The fields do not add new rules to the proposal, they merely make
+    implementation easier and safer.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

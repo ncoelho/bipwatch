@@ -1,0 +1,26 @@
+id: stance-antoine-poinsot-98d05a27
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Antoine Poinsot argues the timewarp bug should be fixed as part of
+  the consensus cleanup, saying it changes the 51% attacker threat model and
+  lets miners force extra block data on nodes, and that this cost outweighs
+  losing the "forward blocks" idea.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/8fFFuAU-SN2NrQ2SKhS2eOeLkHIdCQtnivE4LzWe32vk5gejNEwNvr9IIa3JJ-sII2UUIpOx8oRMslzmA1ZL6y1kBuQEB1fpTaXku2QGAC0=@protonmail.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-04-18
+  retrieved: 2026-11-15
+  quote: the cost of not fixing timewarp objectively far exceeds the cost of
+    making "forward blocks" impossible.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

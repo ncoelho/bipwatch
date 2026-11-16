@@ -1,0 +1,27 @@
+id: stance-antoine-poinsot-53b7f5aa
+bip: 54
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Antoine Poinsot defends making 64-byte transactions invalid as part
+  of the consensus cleanup. He argues that the check is simple, so the risk of
+  implementation bugs is small, and that it would make it impossible for two
+  valid blocks to share the same hash.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/jJLDrYTXvTgoslhl1n7Fk9-pL1mMC-0k6gtoniQINmioJpzgtqrJ_WqyFZkLltsCUusnQ4jZ6HbvRC-mGuaUlDi3kcqcFHALd10-JQl-FMY=@protonmail.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-06-27
+  retrieved: 2026-11-15
+  quote: The potential for implementation bugs is a fair point to raise, but in
+    this case i don't think it's a big concern. Verifying no transaction in a
+    block is 64 bytes is as simple a check as you can get.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

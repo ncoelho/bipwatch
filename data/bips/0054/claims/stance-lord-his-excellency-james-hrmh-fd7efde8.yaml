@@ -1,0 +1,27 @@
+id: stance-lord-his-excellency-james-hrmh-fd7efde8
+bip: 54
+kind: stance
+stance: conditional
+condition: The removal of OP_CODESEPARATOR should be locked in at a block height
+  about 10 years in the future, with wide publicity so affected users can move
+  their funds first.
+scope: proposal
+statement: James HRMH supports the cleanup's removal of OP_CODESEPARATOR, but
+  wants it scheduled about ten years ahead and widely publicised so anyone
+  affected has time to act.
+subject:
+  name: LORD HIS EXCELLENCY JAMES HRMH
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/PS2P216MB0179EEBB4E8EBF86EB25EACD9D4F0@PS2P216MB0179.KORP216.PROD.OUTLOOK.COM/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-10
+  retrieved: 2026-11-15
+  quote: Lock in a blockheight to get rid of it 10 years in the future.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

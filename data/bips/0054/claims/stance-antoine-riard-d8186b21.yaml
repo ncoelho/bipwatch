@@ -1,0 +1,26 @@
+id: stance-antoine-riard-d8186b21
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Antoine Riard notes some minor downsides of the timewarp fix in the
+  Consensus Cleanup proposal, such as needing to upgrade mining and pool
+  software, but says they do not stand in the way of pursuing this fix to the
+  difficulty adjustment algorithm further.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/e045e415-9f0b-4f90-9c65-3aeeecca785bn@googlegroups.com/
+  type: mailing-list
+  title: Timewarp fix, Mining software and Clocks
+  date: 2024-08-25
+  retrieved: 2026-11-15
+  quote: Personally, I don't think those downsides raise a bottleneck to further
+    inquiry on this cleaning up of the difficulty adjustement algorithm.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
