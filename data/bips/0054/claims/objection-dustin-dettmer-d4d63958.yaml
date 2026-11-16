@@ -1,0 +1,26 @@
+id: objection-dustin-dettmer-d4d63958
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Consider deprecating OP_CODESEPARATOR gradually, for example by
+  raising its weight cost and announcing future removal, instead of disabling it
+  outright.
+subject:
+  name: Dustin Dettmer
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CABLeJxS1sK8x-dgkOJ5f4=vjB4xja6EVeca-aHbeqOyS7SwWWQ@mail.gmail.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-10
+  retrieved: 2026-11-16
+  quote: What about putting it in a deprecated state for some time. Adjust the
+    transaction weight so using the op code is more expensive (10x, 20x?) and
+    get the word out that it will be removed in the future.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

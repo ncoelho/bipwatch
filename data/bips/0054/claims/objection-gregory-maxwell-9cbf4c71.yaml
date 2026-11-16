@@ -1,0 +1,24 @@
+id: objection-gregory-maxwell-9cbf4c71
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Avoid fixing the OP_CODESEPARATOR validation cost by disabling it
+  outright, since that risks confiscating user funds; the problem is not severe
+  enough to justify the risk.
+subject:
+  name: Gregory Maxwell
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAAS2fgQPtMG0Fad6=wR-KcQ18bDQzXWDgwHtN9edQ51VZMsmrw@mail.gmail.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-13
+  retrieved: 2026-11-16
+  quote: Codeseperator and its related costs are not an especially severe problem.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

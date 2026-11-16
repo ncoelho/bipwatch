@@ -1,0 +1,27 @@
+id: objection-russell-o-connor-c6f6f656
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Address worst-case validation cost from OP_CODESEPARATOR without
+  disabling it, for example by counting its occurrences alongside signature
+  operations and raising transaction weight accordingly, rather than
+  invalidating its use.
+subject:
+  name: Russell O'Connor
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAMZUoKmKvQXLvmUuts4+XieSisL6bHQe0mg=65C7t+t3ApBRQA@mail.gmail.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-09
+  retrieved: 2026-11-16
+  quote: I think counting the number of occurrences of OP_CODESEPARATOR (perhaps
+    at the same time we count OP_CHECKSIG operations?) is a reasonable
+    compromise
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

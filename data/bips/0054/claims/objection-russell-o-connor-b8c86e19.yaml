@@ -1,0 +1,26 @@
+id: objection-russell-o-connor-b8c86e19
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Avoid invalidating undefined sighash type bytes, since doing so could
+  confiscate funds whose transactions are only non-standard and fixes no
+  existential threat.
+subject:
+  name: Russell O'Connor
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAMZUoKnrUENVwSLJd6HEprqrjmU_Em5LFL4o+UW1-nOBKADVUw@mail.gmail.com/
+  type: mailing-list
+  title: "Sighash Type Byte; Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-08
+  retrieved: 2026-11-16
+  quote: |-
+    could hypothetically destroy other people money, it
+    crosses a line I thought we were never supposed to cross.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

@@ -1,0 +1,25 @@
+id: objection-russell-o-connor-f1e31c12
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Avoid disabling OP_CODESEPARATOR in legacy scripts, since unseen P2SH
+  users could lose funds, and use an alternative such as pricing or limiting its
+  execution to mitigate validation cost.
+subject:
+  name: Russell O'Connor
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAMZUoK=1kgZLR1YZ+cJgzwmEOwrABYFs=2Ri=xGX=BCr+w=VQw@mail.gmail.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-07
+  retrieved: 2026-11-16
+  quote: Activating a soft-fork as describe above means these sorts of funds would
+    be permanently lost.  It is not acceptable to risk people's money like this.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

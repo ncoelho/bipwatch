@@ -1,0 +1,24 @@
+id: open-question-cmp-ancp-6f51f8a2
+bip: 54
+kind: open-question
+status: open
+area: activation
+statement: Decide whether BIP 54 should be deployed as a standalone soft fork or
+  bundled with other changes such as covenant or rebindable-signature opcodes.
+subject:
+  name: cmp_ancp
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/softfork-before-gta-vi/2913/1
+  type: forum
+  title: Softfork before GTA VI?
+  date: 2026-09-24
+  retrieved: 2026-11-16
+  quote: It will be released alone? Or will it come in a package with rebindable
+    opcodes and so?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: objection-russell-o-connor-eef0e2dd
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Avoid disabling OP_CODESEPARATOR, which could destroy funds locked in
+  hidden P2SH scripts; mitigate its validation cost another way, for example by
+  pricing it in weight.
+subject:
+  name: Russell O'Connor
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAMZUoKk3CgatSexAHRuxn3ibCYwgHpTkc0gF0yDi6hLAVcCiNA@mail.gmail.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-08
+  retrieved: 2026-11-16
+  quote: I am not suggesting we don't fix a vulnerability in Bitcoin.  I am
+    suggesting we find another way.  One that limits the of risk destroying
+    other people's money.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
