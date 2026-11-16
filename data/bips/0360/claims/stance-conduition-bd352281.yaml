@@ -1,0 +1,26 @@
+id: stance-conduition-bd352281
+bip: 360
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: conduition supports P2MR as a post-quantum output type, saying it
+  keeps P2TR's script tree commitment structure without the quantum-vulnerable
+  cryptography and is more efficient than P2TR for script-path spends. They
+  consider the alternative P2TRv2 approach short-sighted.
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/h5gQ0PjtFheoHTlevAG3fXbYLqDDTzgHXbvdkF0_RRh-G4a8U24hIl4nth0Lv_wL9faydmQj9lO_A08UmH9PjxKxyampfcCR6bfgJ1pBLME=@proton.me/
+  type: mailing-list
+  title: In defense of a PQ output type
+  date: 2026-04-14
+  retrieved: 2026-11-15
+  quote: Absolutely. P2MR has all the advantages of P2TR's script tree commitment
+    structure, with none of the vulnerable cryptography.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

@@ -1,0 +1,27 @@
+id: stance-ariard-069e3b8d
+bip: 360
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Antoine Riard supports the proposal's approach of separating the
+  output type (P2QRH) from the specific post-quantum signature algorithms, so
+  the output type can be committed via a new witness program, taproot leaf
+  version, or future graftroot-style construction.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.6.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#pullrequestreview-2635736658
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2025-02-23
+  retrieved: 2026-11-15
+  quote: I think it’s a good idea to indeed dissociate the output type itself
+    (P2QRH) from the supported post-quantum signature algorithm (FALCON,
+    SPHINCS+, etc)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

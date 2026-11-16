@@ -1,0 +1,29 @@
+id: stance-conduition-6085a5f4
+bip: 360
+kind: stance
+stance: concept-ack
+scope: change
+statement: conduition proposes amending BIP 360 to require at least one merkle
+  authentication path in the control block, which bans depth-zero script trees.
+  He argues this removes the incentive to use P2MR over P2TR for single scripts
+  and encourages cooperative spending paths and PQ fallback leaves, which
+  improves privacy.
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/Q8YTY1ArMzia7tRvcZ5v769WPxCMxAl_0rUy-byOBjBcTd4HXj7IB7Yt4gxLbKqk7EXFWy-PuGB6QtI28qRjE5Vob-l44UmBH6L8aXInoSk=@proton.me/
+  type: mailing-list
+  title: Aligning privacy incentives in P2MR
+  date: 2026-06-03
+  retrieved: 2026-11-15
+  quote: By eliminating depth-zero script trees, we'd force all P2MR users to pay
+    for the cost of having at least two spending conditions. We'd eliminate the
+    incentive for script devs to use P2MR over P2TR because both are equally
+    efficient
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

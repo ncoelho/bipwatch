@@ -1,0 +1,27 @@
+id: stance-conduition-76eee3c2
+bip: 360
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: conduition prefers P2MR over a P2TRv2 alternative because P2MR is
+  quantum-resistant by default and carries only local risk (address reuse) that
+  users can control, whereas P2TRv2 depends on solving the systemic fork-timing
+  problem.
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/jVpYczjMUwILN76cjc9LSoXttkuOrkClgAX6gwtlQ4-lVEcGFKD8tEp72zhTCzCqmOdyrkyuoyGF2DA-p5WebDgmgXyAGpBnH6mYRGvl1-I=@proton.me/
+  type: mailing-list
+  title: Aligning privacy incentives in P2MR
+  date: 2026-06-06
+  retrieved: 2026-11-15
+  quote: Users and devs can control local risk with very simple software tweaks
+    (to avoid address reuse) but they can't do anything about systemic risks.
+    This is why I prefer P2MR.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

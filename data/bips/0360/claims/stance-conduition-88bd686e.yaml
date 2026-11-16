@@ -1,0 +1,26 @@
+id: stance-conduition-88bd686e
+bip: 360
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: conduition argues that P2MR is preferable to a P2TRv2 alternative
+  because adoption in the near term would be similar either way, while P2MR is
+  better optimized for the long-term future.
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/doSPUSJvChwux9prI1puFj9OMI_ZeCeIEb1KKhnlp6G_wnpkvZmo3FZvvMRvaLAhzQFF2NS1Ad1tHDWfnmf6ytLI7oMotciw64hUZkHoI68=@proton.me/
+  type: mailing-list
+  title: Aligning privacy incentives in P2MR
+  date: 2026-06-05
+  retrieved: 2026-11-15
+  quote: Whether we pick P2MR or P2TRv2 today, neither choice will affect the
+    early stages of this plot-line very much, so we might as well optimize for
+    the long-term future, and P2MR wins out there.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

@@ -1,0 +1,28 @@
+id: stance-alex-bf68ba32
+bip: 360
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Alex defends migrating to BIP 360 wallets with a backup SLH-DSA
+  script leaf. He argues that users keep spending cheaply with Schnorr and pay
+  extra only if they use the backup, and that having a migration settled before
+  Q-day is a major benefit.
+subject:
+  name: Alex
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/9d991f8a-6eaf-4701-9226-9a35abc89b35n@googlegroups.com/
+  type: mailing-list
+  title: Algorithm Agility for Bitcoin to maintain security in the face of quantum
+    and classic breaks in the signature algorithms
+  date: 2026-02-12
+  retrieved: 2026-11-15
+  quote: having a migration ready & settled _before_ Q-day so you know for sure
+    you can move your funds (at 10x the cost) even after Q-day is an enormous
+    relief to everyone holding more than peanuts.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

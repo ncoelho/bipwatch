@@ -1,0 +1,27 @@
+id: stance-ethan-heilman-215b8653
+bip: 360
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Ethan Heilman argues that P2MR is preferable to a P2TRv2 design whose
+  key spend path would later need to be disabled by soft fork. He reasons that
+  disabling it early enough is equivalent to activating P2MR, while P2MR keeps
+  funds safe even if quantum attacks arrive unexpectedly.
+subject:
+  name: Ethan Heilman
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAEM=y+U673Q1U09Z_xrumiBjU9q9xKGnMOE3OC41Qt651g2ROw@mail.gmail.com/
+  type: mailing-list
+  title: Algorithm Agility for Bitcoin to maintain security in the face of quantum
+    and classic breaks in the signature algorithms
+  date: 2026-02-12
+  retrieved: 2026-11-15
+  quote: Activating P2TRv2-disable-soft-fork as early as possible is equivalent to
+    activating P2MR. Thus, might as well activate P2MR instead.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

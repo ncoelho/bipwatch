@@ -1,0 +1,28 @@
+id: stance-armchaircryptologist-032c2ccf
+bip: 360
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: ArmchairCryptologist would prefer to deploy P2MR alongside a P2TRv2
+  variant, with P2MR serving self-reliant long-term holders who want full
+  control over their funds and protection from quantum attacks. They consider
+  this worth the costs of easier wallet fingerprinting and added implementation
+  complexity.
+subject:
+  name: ArmchairCryptologist
+  type: person
+applies_to_version: 0.12.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/2UBm2dVIs3jNHvlZtgXA_7Pfa09T6bK0BBkpvEZUMV8CNgeOwpG87vmUZ9vEnn0TQIfag2uIbiViizuDaND9UljX9LdDqHYXgJhTlW7OGqs=@protonmail.com/
+  type: mailing-list
+  title: Aligning privacy incentives in P2MR
+  date: 2026-06-26
+  retrieved: 2026-11-15
+  quote: P2MR (plain), with EC spending only disabled with a soft fork, for the
+    self-reliant holders who know (how) to not expose their EC public key and
+    want full control over their funds.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

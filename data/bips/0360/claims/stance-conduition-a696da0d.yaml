@@ -1,0 +1,28 @@
+id: stance-conduition-a696da0d
+bip: 360
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: conduition backs pursuing a post-quantum output type such as BIP
+  360's P2MR now, alongside separate work on rescuing exposed coins. He calls
+  this proactive work the more pressing issue because settling on an address
+  format sooner lets vulnerable coins start migrating earlier.
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/6wBygQ_pK40ZpU_CMXfzIy-6LkthOmEh-xd2g9bwUl-f8w2K6G4rUWJEssE2zeJgxyipGe2GrFH9y_TUUI48asqfh7dhi9A2rl7NpWyFW1o=@proton.me/
+  type: mailing-list
+  title: In defense of a PQ output type
+  date: 2026-04-10
+  retrieved: 2026-11-15
+  quote: In my humble opinion, the proactive field (1) is the much more pressing
+    issue. The sooner we settle on at least one address format and wallet
+    structure for long-term hodling, the sooner PQ-vulnerable UTXOs can start
+    migrating
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
