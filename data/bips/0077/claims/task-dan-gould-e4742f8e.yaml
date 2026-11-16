@@ -1,0 +1,24 @@
+id: task-dan-gould-e4742f8e
+bip: 77
+kind: task
+status: addressed
+area: writing
+statement: Require that directory authorization tokens be unlinkable rather than
+  saying they should be anonymous credentials.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#discussion_r1792831942
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2024-10-09
+  retrieved: 2026-11-16
+  quote: instead of "should be anonymous credentials", if a token is used maybe
+    it's better to specify that it "must be unlinkable"?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
