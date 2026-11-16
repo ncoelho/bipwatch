@@ -1,0 +1,30 @@
+id: stance-murch-d47f12ce
+bip: 54
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2172
+  title: "BIP 54: progress to Complete"
+statement: Murch approved the pull request moving BIP 54 (Consensus Cleanup) to
+  Complete status, after re-reviewing its test vectors and reference
+  implementation and noting that concerns had been discussed on the mailing list
+  and documented in the proposal.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2172#pullrequestreview-4347952897
+  type: github
+  title: "BIP 54: progress to Complete"
+  date: 2026-05-22
+  retrieved: 2026-11-16
+  quote: I had another look at test vectors and reference implementation. Concerns
+    and issues have been discussed on the mailing list and are documented in the
+    proposal. LGTM.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

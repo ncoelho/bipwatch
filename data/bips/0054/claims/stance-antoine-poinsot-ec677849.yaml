@@ -1,0 +1,29 @@
+id: stance-antoine-poinsot-ec677849
+bip: 54
+kind: stance
+stance: nack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2097
+  title: "bip54: add coinbase locktime and sequence to GBT"
+statement: Antoine Poinsot opposes the pull request adding coinbase locktime and
+  sequence fields to getblocktemplate in BIP 54, arguing the fields are
+  unnecessary or redundant, the pool-upgrade rationale is invalid, and such GBT
+  changes do not belong in BIP 54 (at most specifying the "!" prefix for the
+  bip54 rule).
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2097#issuecomment-3977385069
+  type: github
+  title: "bip54: add coinbase locktime and sequence to GBT"
+  date: 2026-02-28
+  retrieved: 2026-11-16
+  quote: In any case, i do not think those changes belong in BIP 54.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

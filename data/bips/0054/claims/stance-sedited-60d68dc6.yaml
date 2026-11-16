@@ -1,0 +1,28 @@
+id: stance-sedited-60d68dc6
+bip: 54
+kind: stance
+stance: concept-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2097
+  title: "bip54: add coinbase locktime and sequence to GBT"
+statement: sedited agrees with the change adding coinbase locktime and sequence
+  fields to getblocktemplate in BIP 54, since those fields would gain consensus
+  meaning. He also suggests linking to the text from BIP 22's "See Also"
+  section.
+subject:
+  name: sedited
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2097#issuecomment-3976551249
+  type: github
+  title: "bip54: add coinbase locktime and sequence to GBT"
+  date: 2026-02-28
+  retrieved: 2026-11-16
+  quote: I think I agree with this.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

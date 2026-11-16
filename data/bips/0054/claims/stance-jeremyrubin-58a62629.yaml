@@ -1,0 +1,34 @@
+id: stance-jeremyrubin-58a62629
+bip: 54
+kind: stance
+stance: conditional
+condition: Deployment parameters should not be changeable after the BIP is
+  marked Complete, for example by moving them to a separate
+  deployment-parameters BIP that stays incomplete until the deployment is
+  buried.
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2172
+  title: "BIP 54: progress to Complete"
+statement: Jeremy Rubin objects to moving BIP 54 to Complete while still
+  allowing its consensus or deployment parameters to change afterwards, calling
+  that a recipe for disaster. He suggests putting deployment parameters in a
+  separate BIP that stays incomplete until buried.
+subject:
+  name: JeremyRubin
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2172#issuecomment-4549357344
+  type: github
+  title: "BIP 54: progress to Complete"
+  date: 2026-05-26
+  retrieved: 2026-11-16
+  quote: Allowing major consensus changes/deployment params after the fact
+    (including we set it to X date and then changed it to Y date) seems like a
+    slight disaster recipe?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

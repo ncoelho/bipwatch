@@ -1,0 +1,24 @@
+id: stance-ariard6-3b773a5b
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Ariard6 thinks it is good to make progress on the timewarp fix in BIP
+  54 and says they will continue reviewing it. They also note a possible pending
+  security issue with one of the BIP's other mitigations.
+subject:
+  name: Ariard6
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#issuecomment-2822598336
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-04-22
+  retrieved: 2026-11-16
+  quote: IMHO it's good to make progress on the timewarp fix.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
