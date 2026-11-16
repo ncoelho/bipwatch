@@ -1,0 +1,26 @@
+id: task-murch-121d3eb6
+bip: 22
+kind: task
+status: open
+area: writing
+part_of: bip54 gbt extension
+statement: Write a short standalone extension to BIP 22 (and BIP 23/BIP 145 as
+  applicable) that specifies the getblocktemplate changes for the BIP54 coinbase
+  locktime and sequence requirements, rather than putting them in BIP54.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2097#pullrequestreview-4277052708
+  type: github
+  title: "bip54: add coinbase locktime and sequence to GBT"
+  date: 2026-05-12
+  retrieved: 2026-11-16
+  quote: A short and sweet extension to BIP22, BIP23, and BIP145 (as applicable)
+    would probably be a better fit to specify these proposed changes.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

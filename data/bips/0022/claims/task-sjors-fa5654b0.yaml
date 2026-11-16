@@ -1,0 +1,26 @@
+id: task-sjors-fa5654b0
+bip: 22
+kind: task
+status: open
+area: design
+part_of: bip54 gbt extension
+statement: Specify a getblocktemplate extension where the server adds "!bip54"
+  to its rules at activation and clients signal "bip54" in their request, so
+  miners must set the coinbase nLockTime and nSequence correctly.
+subject:
+  name: Sjors
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#issuecomment-2841572486
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-04-30
+  retrieved: 2026-11-16
+  quote: we could have `getblocktemplate` add `!bip54` to its rules result field
+    (at the moment of activation).
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
