@@ -1,0 +1,27 @@
+id: objection-fametrano-cd6a870b
+bip: 352
+kind: objection
+status: addressed
+area: design
+part_of: BIP 375
+statement: Resolve the contradiction in BIP 375 between the text, which assigns
+  k by lexicographic order of silent payment codes, and the reference validator
+  and test vectors, which assign k by output index order.
+subject:
+  name: fametrano
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2256
+  type: github
+  title: "bip-0375: assign k in output index order, fix labeled test vectors"
+  date: 2026-08-14
+  retrieved: 2026-11-16
+  quote: BIP-375 says to assign k in lexicographic order of the silent payment
+    codes, but its reference validator and test vectors assign it in output
+    index order.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

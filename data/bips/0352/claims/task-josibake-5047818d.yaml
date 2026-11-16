@@ -1,0 +1,26 @@
+id: task-josibake-5047818d
+bip: 352
+kind: task
+status: open
+area: coordination
+part_of: bip21 update
+statement: Once sending to silent payment addresses is widely supported, add sp1
+  addresses to BIP21 payment URIs, e.g. alongside a BOLT12 offer as a fallback.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#issuecomment-1630498315
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-07-11
+  retrieved: 2026-11-16
+  quote: Keep the `sp1qxxx` bech32m encoding and add it to BIP21 once there is
+    widespread support for sending to silent payment addresses and something
+    like BOLT12.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: task-zjubiology-01b5bf03
+bip: 352
+kind: task
+status: addressed
+area: engineering
+part_of: BIP 375
+statement: Fix the BIP 375 reference validator so the SegWit v2+ input check
+  also covers prevouts supplied only through PSBT_IN_NON_WITNESS_UTXO.
+subject:
+  name: zjubiology
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2310
+  type: github
+  title: "BIP375: check SegWit versions in non-witness UTXOs"
+  date: 2026-09-26
+  retrieved: 2026-11-16
+  quote: BIP174 also permits SegWit inputs to provide the full previous
+    transaction through `PSBT_IN_NON_WITNESS_UTXO`, so an input containing only
+    that field can currently bypass the SegWit-version check.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

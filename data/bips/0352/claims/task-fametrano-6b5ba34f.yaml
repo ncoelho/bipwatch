@@ -1,0 +1,27 @@
+id: task-fametrano-6b5ba34f
+bip: 352
+kind: task
+status: addressed
+area: writing
+part_of: BIP 375
+statement: Reword the Unique Identification sentence in BIP 375 so it clearly
+  describes the 67-byte placeholder output script used for the unique identifier
+  (version byte plus scan and spend keys), not the 66-byte PSBT_OUT_SP_V0_INFO
+  field.
+subject:
+  name: fametrano
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2257
+  type: github
+  title: "bip-0375: say the version byte belongs to the identifier, not to the field"
+  date: 2026-08-14
+  retrieved: 2026-11-16
+  quote: Both readings are available to someone reading the sentence alone, and
+    one of them contradicts three other artefacts.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

@@ -1,0 +1,23 @@
+id: task-eunovo-b7d554a3
+bip: 352
+kind: task
+status: addressed
+area: writing
+statement: Add a requirement to the scanning rules that only consensus-valid
+  transactions are scanned.
+subject:
+  name: Eunovo
+  type: person
+applies_to_version: 1.1.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2339
+  type: github
+  title: "Bip352: Add consensus-validity requirement to Scanning requirements"
+  date: 2026-10-25
+  retrieved: 2026-11-16
+  quote: Add a consensus-validity requirement to Scanning requirements
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
