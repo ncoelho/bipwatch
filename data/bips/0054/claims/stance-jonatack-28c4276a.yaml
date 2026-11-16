@@ -1,0 +1,27 @@
+id: stance-jonatack-28c4276a
+bip: 54
+kind: stance
+stance: nack
+scope: proposal
+statement: jonatack objects to the way the proposal is packaged, not to its
+  consensus content. He prefers splitting the four fixes into separate, focused
+  BIPs, as BIP 2 and BIP 3 recommend, and is mildly negative (-0.5 to -0.9) even
+  on a single document with clearer separation.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#pullrequestreview-2788772574
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-04-23
+  retrieved: 2026-11-16
+  quote: I'd prefer to see separate, focused BIPs, as recommended in both BIP 2
+    and BIP 3, as that would be much clearer. Failing which, then clearer
+    separation in this draft but -0.5 to -0.9 on that.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

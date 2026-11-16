@@ -1,0 +1,34 @@
+id: stance-jonatack-2b079824
+bip: 54
+kind: stance
+stance: concept-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2175
+  title: Split BIP54 into bundle constituents
+statement: jonatack supports the proposed change to split BIP 54 into separate
+  BIPs for each of its bundled constituents, citing BIP 2 and BIP 3
+  recommendations for focused, single-idea BIPs.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2175#issuecomment-4535711498
+  type: github
+  title: Split BIP54 into bundle constituents
+  date: 2026-05-25
+  retrieved: 2026-11-16
+  quote: >-
+    Concept ACK
+
+
+    As I wrote in
+    https://github.com/bitcoin/bips/pull/1800#pullrequestreview-2788772574, I'd
+    prefer to see separate, focused BIPs, as recommended in both BIP 2 and BIP
+    3.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

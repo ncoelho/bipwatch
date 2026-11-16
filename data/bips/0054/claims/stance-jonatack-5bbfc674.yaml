@@ -1,0 +1,30 @@
+id: stance-jonatack-5bbfc674
+bip: 54
+kind: stance
+stance: conditional
+condition: The open questions raised by the PR author are resolved with feedback
+  from the BIP author (Antoine Poinsot).
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2293
+  title: "bip-0054: distinguish miner enforcement of the two timestamp restrictions"
+statement: Jon Atack approved the change to BIP 54 that distinguishes how miners
+  enforce the two timestamp restrictions, pending answers to the PR author's
+  open questions. He noted the change assumes a recently merged Bitcoin Core PR
+  is not backported.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2293#pullrequestreview-5243444737
+  type: github
+  title: "bip-0054: distinguish miner enforcement of the two timestamp restrictions"
+  date: 2026-09-18
+  retrieved: 2026-11-16
+  quote: ACK modulo open questions by the PR author for BIP author feedback
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

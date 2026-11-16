@@ -1,0 +1,24 @@
+id: stance-murch-8a6b5780
+bip: 54
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Murch prefers bundling the 64-byte transaction fix together with the
+  other fixes into a single soft fork, as Antoine's Consensus Cleanup work does,
+  rather than proposing it as a separate standalone BIP.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1760#pullrequestreview-2609834968
+  type: github
+  title: "BIP 53: Disallow 64-byte transactions"
+  date: 2025-02-11
+  retrieved: 2026-11-16
+  quote: It seems better to me to package all four fixes in one soft fork.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

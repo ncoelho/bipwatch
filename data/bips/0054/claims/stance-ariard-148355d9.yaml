@@ -1,0 +1,28 @@
+id: stance-ariard-148355d9
+bip: 54
+kind: stance
+stance: concept-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2177
+  title: Consensus Cleanup Protocol Changes as Independent BIPs
+statement: Antoine Riard supports splitting the Consensus Cleanup protocol
+  changes into independent BIPs, because separate BIPs allow separate activation
+  flags and let people support some fixes without supporting all of them.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2177#issuecomment-4608164552
+  type: github
+  title: Consensus Cleanup Protocol Changes as Independent BIPs
+  date: 2026-06-03
+  retrieved: 2026-11-16
+  quote: i'm +1 to unbundle, unbundling allows to have multiple activation flags
+    or whatever.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: stance-jeremyrubin-e7efb880
+bip: 54
+kind: stance
+stance: nack
+scope: proposal
+statement: Jeremy Rubin opposes the part of Consensus Cleanup that invalidates
+  64-byte witness-stripped transactions, calling it a mistake with better
+  alternatives for helping SPV users. He wants that rule unbundled so the other
+  cleanup components can proceed without churn.
+subject:
+  name: JeremyRubin
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2177#issuecomment-4568079777
+  type: github
+  title: Consensus Cleanup Protocol Changes as Independent BIPs
+  date: 2026-05-28
+  retrieved: 2026-11-16
+  quote: I think removing 64 byte witness stripped transactions from Bitcoin to
+    benefit SPV users is a mistake, and a mistake with better alternatives.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

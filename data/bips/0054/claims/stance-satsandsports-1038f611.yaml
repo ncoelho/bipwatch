@@ -1,0 +1,34 @@
+id: stance-satsandsports-1038f611
+bip: 54
+kind: stance
+stance: nack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2175
+  title: Split BIP54 into bundle constituents
+statement: SatsAndSports opposes the pull request that would split BIP 54 into
+  its bundle constituents, arguing it is inappropriate to significantly edit a
+  BIP proposed by other authors; those wanting a different proposal should write
+  their own BIPs.
+subject:
+  name: SatsAndSports
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2175#issuecomment-4548002049
+  type: github
+  title: Split BIP54 into bundle constituents
+  date: 2026-05-26
+  retrieved: 2026-11-16
+  quote: >-
+    NACK
+
+
+    You are free to make your own BIP, or BIPs, with another proposal (or set of
+    proposals). But it's not appropriate to significantly edit the BIP that was
+    proposed by other authors
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

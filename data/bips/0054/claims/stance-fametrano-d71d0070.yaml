@@ -1,0 +1,29 @@
+id: stance-fametrano-d71d0070
+bip: 54
+kind: stance
+stance: concept-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2326
+  title: "bip54: exempt genesis from coinbase checks"
+statement: fametrano supports the change exempting the genesis block from BIP
+  54's coinbase checks, noting that the genesis coinbase would otherwise make
+  all coinbase test vectors invalid; he suggests extending the exemption to the
+  timewarp rule too.
+subject:
+  name: fametrano
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2326#issuecomment-6075441961
+  type: github
+  title: "bip54: exempt genesis from coinbase checks"
+  date: 2026-10-09
+  retrieved: 2026-11-16
+  quote: Concept ACK. All 7 cases in `bip-0054/test_vectors/coinbases.json` start
+    from the mainnet genesis block.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

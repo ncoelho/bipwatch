@@ -1,0 +1,25 @@
+id: stance-sjors-dc5dab84
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Sjors gives concept ACK to BIP 54's timewarp and Murch-Zawy fixes and
+  the 64-byte transaction ban, while saying he still needs to study the
+  worst-case validation fix and the nLockTime change.
+subject:
+  name: Sjors
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#pullrequestreview-2720496281
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-03-27
+  retrieved: 2026-11-16
+  quote: Concept ACK on the timewarp and Murch-Zawy fix, as well as the 64 byte
+    transaction ban.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

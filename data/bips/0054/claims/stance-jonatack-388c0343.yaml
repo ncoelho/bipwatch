@@ -1,0 +1,27 @@
+id: stance-jonatack-388c0343
+bip: 54
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1800
+  title: "BIP 54: Consensus Cleanup"
+statement: jonatack approved merging the pull request that adds the BIP 54
+  Consensus Cleanup document as a Draft, at commit 1ee43519, leaving further
+  edits to follow-up pull requests.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#issuecomment-2840371323
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-04-29
+  retrieved: 2026-11-16
+  quote: SGTM, ACK 1ee43519dd2520fbd8ad5c264bd4198acdba4863
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
