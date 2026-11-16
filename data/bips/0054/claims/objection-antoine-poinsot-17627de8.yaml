@@ -1,0 +1,25 @@
+id: objection-antoine-poinsot-17627de8
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Resolve Luke Dashjr's objection that requiring the coinbase nLockTime
+  to be the block height removes a field that would make a good extranonce,
+  since it is serialized at the very end of the transaction.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/great-consensus-cleanup-revival/710/85
+  type: forum
+  title: Great Consensus Cleanup Revival
+  date: 2025-04-21
+  retrieved: 2026-11-15
+  quote: since the nLockTime field is serialized at the very end of a transaction,
+    it makes for a good extranonce
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

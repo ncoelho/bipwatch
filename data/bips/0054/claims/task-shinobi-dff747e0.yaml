@@ -1,0 +1,26 @@
+id: task-shinobi-dff747e0
+bip: 54
+kind: task
+status: addressed
+area: engineering
+part_of: slow blocks signet demo
+statement: Build a simple display that reads node logs and shows block
+  validation times as blocks arrive, so that users joining the Consensus Cleanup
+  slow-block signet demo can see the effect on their own node.
+subject:
+  name: shinobi
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://delvingbitcoin.org/t/consensus-cleanup-demo-of-slow-blocks-on-signet/2367/2
+  type: forum
+  title: "Consensus Cleanup: demo of slow blocks on Signet"
+  date: 2026-04-02
+  retrieved: 2026-11-15
+  quote: Just wanted to suggest vibe coding a basic GUI/display to pull from the
+    logs and display to a user validation times as the blocks come in.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
