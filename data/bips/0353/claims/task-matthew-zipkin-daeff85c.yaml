@@ -1,0 +1,25 @@
+id: task-matthew-zipkin-daeff85c
+bip: 353
+kind: task
+status: open
+area: engineering
+part_of: address-rotating nameserver
+statement: Build a BIP 353 nameserver that serves rotating on-chain addresses
+  from an xpub or address table with short TTLs.
+subject:
+  name: Matthew Zipkin
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1950483634
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-17
+  retrieved: 2026-11-15
+  quote: only if you are running a nameserver with an xpub or table of static
+    addresses
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

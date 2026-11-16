@@ -1,0 +1,23 @@
+id: open-question-matt-corallo-def8e010
+bip: 353
+kind: open-question
+status: addressed
+area: ux
+statement: Decide whether human-readable payment names should use exactly the
+  USER@DOMAIN display format or a different one.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1937830967
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-15
+  quote: I'd like to discuss whether we want specifically USER@DOMAIN for a bit first.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

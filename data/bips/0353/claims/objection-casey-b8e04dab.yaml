@@ -1,0 +1,26 @@
+id: objection-casey-b8e04dab
+bip: 353
+kind: objection
+status: open
+area: writing
+statement: Warn in the DNS Enumeration section that making every DNS name return
+  valid payment instructions is dangerous, because a misspelled username would
+  send funds to an unintended recipient.
+subject:
+  name: casey
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1947357643
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-15
+  retrieved: 2026-11-15
+  quote: It should probably be noted that this is super dangerous, since this
+    could lead to bitcoin not going to the intended recipient if you misspell
+    the username.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

@@ -1,0 +1,28 @@
+id: task-matt-corallo-69ca1aae
+bip: 353
+kind: task
+status: open
+area: engineering
+part_of: address-rotating nameserver
+statement: Build a nameserver that serves BIP 353 records with rotating
+  addresses derived from an xpub or a table of static addresses, using short
+  TTLs.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-1950832550
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-18
+  retrieved: 2026-11-15
+  quote: only if you are running a nameserver with an xpub or table of static
+    addresses (which I have sortof
+    [implemented](https://github.com/pinheadmz/hip2-server) before, and would
+    happy to write a BIP-xxxx nameserver)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
