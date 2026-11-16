@@ -1,0 +1,24 @@
+id: task-spacebear21-0712e8f1
+bip: 77
+kind: task
+status: addressed
+area: design
+statement: Decide whether the Original PSBT should use PSBTv2 and set the input
+  and output Transaction Modifiable Flags; the current spec settles this by
+  using PSBTv0.
+subject:
+  name: spacebear21
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#discussion_r1588449650
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2024-05-02
+  retrieved: 2026-11-15
+  quote: Set input and output Transaction Modifiable Flags to 1
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
