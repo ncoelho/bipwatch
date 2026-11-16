@@ -1,0 +1,28 @@
+id: task-ajtowns-b684a87a
+bip: 360
+kind: task
+status: open
+area: design
+part_of: public key recovery for ec leaves
+statement: Define a descriptor form for hashed-pubkey EC leaves that carries the
+  key origin and the public key hash instead of the xpub (for example
+  hpkh([fingerprint/path]hash)), so descriptors do not expose public keys.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://delvingbitcoin.org/t/public-key-recovery-for-ec-leaves-in-p2mr-bip-360/2603/14
+  type: forum
+  title: Public key recovery for EC leaves in P2MR (BIP-360)
+  date: 2026-06-09
+  retrieved: 2026-11-15
+  quote: "I think from a descriptor point-of-view you don't want to include the
+    xpub there either (in case you're not keeping descriptors as secure as your
+    private key seed), and would be better off having it appear as something
+    like:"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

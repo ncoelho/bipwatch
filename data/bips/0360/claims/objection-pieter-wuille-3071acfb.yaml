@@ -1,0 +1,27 @@
+id: objection-pieter-wuille-3071acfb
+bip: 360
+kind: objection
+status: open
+area: design
+part_of: public key recovery for ec leaves
+statement: "Address the drawbacks of using public key recovery for EC leaves in
+  P2MR: it prevents batch validation and requires breaking the abstraction
+  around the signature scheme."
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://delvingbitcoin.org/t/public-key-recovery-for-ec-leaves-in-p2mr-bip-360/2603/9
+  type: forum
+  title: Public key recovery for EC leaves in P2MR (BIP-360)
+  date: 2026-06-08
+  retrieved: 2026-11-15
+  quote: "it suffers from the same downsides as other uses of recovery
+    shenanigans: no batch validation, and needing to break the abstraction
+    around the signature scheme."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

@@ -1,0 +1,25 @@
+id: task-anzus-gemwallet-12137022
+bip: 360
+kind: task
+status: open
+area: writing
+part_of: pq single-address backup
+statement: Specify an explicit wrong-password (authentication failed) result as
+  part of the PQ single-address backup recovery behavior.
+subject:
+  name: Anzus_GemWallet
+  type: person
+applies_to_version: 0.12.1
+source:
+  url: https://delvingbitcoin.org/t/pq-single-address-backup-bip-38-for-p2mr-bc1z-104-char-encrypted-backup-format/2767/3
+  type: forum
+  title: PQ-single-address-backup - BIP-38 for P2MR (bc1z) - 104-char encrypted
+    backup format
+  date: 2026-08-14
+  retrieved: 2026-11-15
+  quote: an explicit wrong-password result
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

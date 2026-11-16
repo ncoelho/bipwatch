@@ -1,0 +1,26 @@
+id: objection-conduition-420129d8
+bip: 360
+kind: objection
+status: open
+area: design
+part_of: wallet support
+statement: Design a replacement for BIP32 xpub derivation for EC keys in P2MR,
+  or batches of addresses handed to senders instead, because today's BIP32 is
+  risky against quantum adversaries.
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://delvingbitcoin.org/t/public-key-recovery-for-ec-leaves-in-p2mr-bip-360/2603/8
+  type: forum
+  title: Public key recovery for EC leaves in P2MR (BIP-360)
+  date: 2026-06-08
+  retrieved: 2026-11-15
+  quote: today's BIP32 standard should probably not be applied to EC keys in the
+    context P2MR because of how risky/complex it is.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
