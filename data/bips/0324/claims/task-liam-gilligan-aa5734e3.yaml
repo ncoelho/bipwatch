@@ -1,0 +1,27 @@
+id: task-liam-gilligan-aa5734e3
+bip: 324
+kind: task
+status: open
+area: design
+part_of: pq bip 324
+statement: Specify how BIP 324 transport upgrades are negotiated, so that
+  different post-quantum KEMs and authentication protocols can be selected over
+  the established v2 channel.
+subject:
+  name: Liam Gilligan
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/d4b87b2c-63c2-488b-9e76-4e3dbeedb0c2n@googlegroups.com/
+  type: mailing-list
+  title: A Post-Quantum Path for BIP 324
+  date: 2026-08-27
+  retrieved: 2026-11-15
+  quote: I think specifying how transport upgrades are negotiated at all is the
+    logical first step, and it should be defined such that different PQ-KEMs can
+    be negotiated, as well as authentication protocols
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

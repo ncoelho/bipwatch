@@ -1,0 +1,27 @@
+id: open-question-anthony-towns-48fbb0ef
+bip: 324
+kind: open-question
+status: addressed
+area: design
+statement: Decide how a long (non-short-id) message type is separated from the
+  payload, e.g. by a length prefix, by setting the high bit of the final byte,
+  or by reserving short id 0 for a fixed 12-byte v1-style command.
+subject:
+  name: Anthony Towns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/Y++id6mXsscfxduH@erisian.com.au/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2023-02-17
+  retrieved: 2026-11-15
+  quote: |-
+    how do you distinguish the command from the payload for
+        non short-ids -- by a length prefix, or by setting the high-bit
+        of the final command byte?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

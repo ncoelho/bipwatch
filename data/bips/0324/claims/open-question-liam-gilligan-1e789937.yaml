@@ -1,0 +1,25 @@
+id: open-question-liam-gilligan-1e789937
+bip: 324
+kind: open-question
+status: addressed
+area: design
+part_of: transport feature negotiation
+statement: Decide whether the responder must always be the advertiser, or
+  whether it may hand the advertising role to the initiator so the initiator
+  does not always choose between incompatible features.
+subject:
+  name: Liam Gilligan
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/29174459-1523-4cf8-a20f-5ce1abc302c3n@googlegroups.com/
+  type: mailing-list
+  title: "[BIP Proposal] Transport Feature Negotiation"
+  date: 2026-09-17
+  retrieved: 2026-11-15
+  quote: Must the responder be the advertiser?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

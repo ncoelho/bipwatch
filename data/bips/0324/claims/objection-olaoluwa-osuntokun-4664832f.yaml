@@ -1,0 +1,27 @@
+id: objection-olaoluwa-osuntokun-4664832f
+bip: 324
+kind: objection
+status: open
+area: design
+statement: Address the lack of peer authentication in BIP 324, which Olaoluwa
+  Osuntokun calls a defect because no authentication code has been deployed in
+  all the years since it was first sketched.
+subject:
+  name: Olaoluwa Osuntokun
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAO3Pvs_+orjc1mbEVSpOpCApy1SjuGH+yhRfJX2aGB6ZZ0hAyg@mail.gmail.com/
+  type: mailing-list
+  title: A Post-Quantum Path for BIP 324
+  date: 2026-09-24
+  retrieved: 2026-11-15
+  quote: |-
+    Arguably the lack of authentication is a defect in BIP-324 itself as many
+    years have passed since the initial sketches to atck on this feature with no
+    actual code deployed.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

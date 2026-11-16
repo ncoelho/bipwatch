@@ -1,0 +1,25 @@
+id: objection-erik-aronesty-70c68cb3
+bip: 324
+kind: objection
+status: addressed
+area: design
+statement: Decide whether short message type IDs should use an extensible
+  variable-length encoding, protobuf-varint style, so the 1-byte ID space can
+  grow when it runs out.
+subject:
+  name: Erik Aronesty
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAJowKg+gOTCE=S2KYTF9j-uPYysUZJsJty5CHkkVp6+Ugy6Vtw@mail.gmail.com/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2023-02-28
+  retrieved: 2026-11-15
+  quote: 1 byte is fine for now, but reserve the top bit for "this is a two byte
+    id" (128 choices).
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

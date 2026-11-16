@@ -1,0 +1,28 @@
+id: task-anthony-towns-fd380998
+bip: 324
+kind: task
+status: addressed
+area: design
+statement: Revise the initial short id table to drop handshake-only messages
+  such as VERSION, VERACK, GETADDR, SENDADDRV2, SENDHEADERS, SENDTXRCNCL and
+  WTXIDRELAY, and keep only frequently sent messages.
+subject:
+  name: Anthony Towns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/Y++id6mXsscfxduH@erisian.com.au/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2023-02-17
+  retrieved: 2026-11-15
+  quote: |-
+    which drops:
+
+        VERSION, VERACK, GETADDR, SENDADDRV2, SENDHEADERS, SENDTXRCNCL,
+        WTXIDRELAY
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

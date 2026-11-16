@@ -1,0 +1,27 @@
+id: task-anthony-towns-73bd4397
+bip: 324
+kind: task
+status: open
+area: engineering
+part_of: set324alias
+statement: Finish the reference implementation for the set324alias one-byte
+  message type alias proposal, building on Anthony Towns' Bitcoin Core patchset,
+  and reference it in the draft BIP.
+subject:
+  name: Anthony Towns
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/aq9ADn7GscMHWc19@erisian.com.au/
+  type: mailing-list
+  title: "[BIP Proposal] BIP324 One-Byte Message Type ID Alias Assignment"
+  date: 2026-09-20
+  retrieved: 2026-11-15
+  quote: "**TODO** See
+    https://github.com/ajtowns/bitcoin/commits/202605-bip324-id/ in the
+    meantime."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

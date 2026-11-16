@@ -1,0 +1,26 @@
+id: task-anthony-towns-e1ea8cbc
+bip: 324
+kind: task
+status: open
+area: coordination
+part_of: set324alias
+statement: Assign a BIP 434 feature id for advertising set324alias support,
+  which the draft still leaves as TBD.
+subject:
+  name: Anthony Towns
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/aq9ADn7GscMHWc19@erisian.com.au/
+  type: mailing-list
+  title: "[BIP Proposal] BIP324 One-Byte Message Type ID Alias Assignment"
+  date: 2026-09-20
+  retrieved: 2026-11-15
+  quote: |-
+    Support for this feature is indicated via the [BIP-434][BIP434] `feature`
+    message, with `featureid` **TBD** and an empty `featuredata`.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

@@ -1,0 +1,27 @@
+id: objection-anthony-towns-47cd197e
+bip: 324
+kind: objection
+status: addressed
+area: design
+statement: Avoid assigning short IDs to one-shot negotiation messages like
+  VERSION or WTXIDRELAY, and reserve 1-byte IDs for messages sent more than once
+  per connection.
+subject:
+  name: Anthony Towns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/Y7vMGVQz8TjS4Cad@erisian.com.au/
+  type: mailing-list
+  title: Refreshed BIP324
+  date: 2023-01-09
+  retrieved: 2026-11-15
+  quote: |-
+    I guess I still kind-of think it'd make more sense to just reserve
+    shortids for post-VERACK messages that are going to be sent more
+    than once per connection...
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
