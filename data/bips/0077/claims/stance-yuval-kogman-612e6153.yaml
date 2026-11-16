@@ -1,0 +1,28 @@
+id: stance-yuval-kogman-612e6153
+bip: 77
+kind: stance
+stance: ack
+scope: change
+statement: Yuval Kogman supports changing BIP 77's fragment parameter separator
+  from `+` to `-`. He argues that `+` causes friction, and that only two
+  production wallets (Bull Bitcoin Mobile and Cake Wallet, both using PDK) would
+  be affected.
+subject:
+  name: Yuval Kogman
+  type: person
+applies_to_version: 0.1.0
+source:
+  url: https://github.com/bitcoin/bips/commit/43f9688600c7bcd79eabc5cca15c54e51626b1dc
+  type: github
+  title: Separate fragment params with `-` instead of `+`
+  date: 2025-07-03
+  retrieved: 2026-11-16
+  quote: |-
+    the `+` character is causing some
+    friction, this change seems justified to avoid similar issues with
+    future implementations.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
