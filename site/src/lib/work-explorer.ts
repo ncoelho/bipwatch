@@ -1,0 +1,248 @@
+/**
+ * The /work/ island (work page spec). The page is complete without it: every
+ * row and its detail are rendered, newest first, and the tiles, grid cells
+ * and piece rows are links to the filtered URL. This script only filters,
+ * re-sorts by moving the rendered rows, selects an item into the side panel,
+ * keeps the counts that depend on other filters current, and mirrors the
+ * state in the query string:
+ *
+ *   /work/?area=design&bip=352&kind=task&piece=352|light-client%20index&sort=old&item=<id>
+ *
+ * area=none means no type of work recorded. Past about 1,000 items, render
+ * the first 200 in the current order with a "Show 200 more" button here.
+ */
+
+type Sort = 'new' | 'old' | 'bip';
+interface State { area: string; bip: string; kind: string; piece: string; sort: Sort; item: string }
+
+const KIND_LABEL: Record<string, string> = { task: 'Tasks', 'open-question': 'Open questions', objection: 'Objections' };
+
+export function initWorkExplorer() {
+  const root = document.querySelector<HTMLElement>('[data-work]');
+  if (!root) return;
+  document.documentElement.classList.add('js-work');
+  const $$ = <T extends HTMLElement>(sel: string) => [...root.querySelectorAll<T>(sel)];
+
+  const list = root.querySelector<HTMLElement>('[data-list]')!;
+  const rows = $$<HTMLElement>('[data-row]');
+  const order = new Map(rows.map((r, i) => [r, i]));
+  const panel = root.querySelector<HTMLElement>('[data-panel]')!;
+  const select = root.querySelector<HTMLSelectElement>('[data-bip-select]')!;
+  const options = [...select.options];
+  const optionLabel = new Map(options.map((o) => [o.value, o.textContent!.replace(/ · \d+ open$/, '')]));
+  const tiles = $$<HTMLAnchorElement>('[data-area-tile]');
+  const tileLabel = new Map(tiles.map((t) => [t.dataset.areaTile!, t.querySelector('.rl')!.textContent!]));
+  const kindPills = $$<HTMLButtonElement>('[data-kind-pill]');
+  const sorts = $$<HTMLButtonElement>('[data-sort]');
+  const gridHeads = $$<HTMLAnchorElement>('[data-grid-bip]');
+  const cells = $$<HTMLElement>('[data-cell-bip]');
+  const cols = $$<HTMLElement>('[data-col]');
+  const pieceRows = $$<HTMLAnchorElement>('[data-piece-row]');
+  const clear = root.querySelector<HTMLButtonElement>('[data-clear]')!;
+  const nothing = root.querySelector<HTMLElement>('[data-nothing]')!;
+  const title = root.querySelector<HTMLElement>('[data-list-title]')!;
+  const count = root.querySelector<HTMLElement>('[data-list-count]')!;
+
+  // Links become toggle buttons once the script runs.
+  for (const el of [...tiles, ...gridHeads, ...pieceRows, ...cells.filter((c) => c.tagName === 'A')]) {
+    el.setAttribute('role', 'button');
+    if (!el.dataset.cellBip) el.setAttribute('aria-pressed', 'false');
+  }
+
+  const q = new URLSearchParams(location.search);
+  const st: State = {
+    area: q.get('area') ?? '',
+    bip: q.get('bip') ?? '',
+    kind: q.get('kind') ?? '',
+    piece: q.get('piece') ?? '',
+    sort: (['new', 'old', 'bip'].includes(q.get('sort') ?? '') ? q.get('sort') : 'new') as Sort,
+    item: q.get('item') ?? '',
+  };
+
+  type Dim = 'area' | 'bip' | 'kind' | 'piece';
+  const matches = (r: HTMLElement, skip?: Dim) =>
+    (skip === 'area' || !st.area || r.dataset.area === st.area) &&
+    (skip === 'bip' || !st.bip || r.dataset.bip === st.bip) &&
+    (skip === 'kind' || !st.kind || r.dataset.kind === st.kind) &&
+    (skip === 'piece' || !st.piece || r.dataset.piece === st.piece);
+
+  const sorted = () => {
+    const byDate = (dir: number) => (a: HTMLElement, b: HTMLElement) => {
+      const x = a.dataset.date!, y = b.dataset.date!;
+      return !x && !y ? 0 : !x ? 1 : !y ? -1 : dir * x.localeCompare(y);
+    };
+    const tie = (a: HTMLElement, b: HTMLElement) => order.get(a)! - order.get(b)!;
+    return [...rows].sort((a, b) =>
+      st.sort === 'new'
+        ? byDate(-1)(a, b) || tie(a, b)
+        : st.sort === 'old'
+          ? byDate(1)(a, b) || tie(a, b)
+          : Number(a.dataset.bip) - Number(b.dataset.bip) || a.dataset.pieceName!.localeCompare(b.dataset.pieceName!) || byDate(-1)(a, b) || tie(a, b),
+    );
+  };
+
+  const write = () => {
+    const p = new URLSearchParams();
+    for (const k of ['area', 'bip', 'kind', 'piece'] as const) if (st[k]) p.set(k, st[k]);
+    if (st.sort !== 'new') p.set('sort', st.sort);
+    if (st.item) p.set('item', st.item);
+    const qs = p.toString();
+    history.replaceState(null, '', `${location.pathname}${qs ? `?${qs}` : ''}`);
+  };
+
+  const render = () => {
+    // Order, then visibility.
+    for (const r of sorted()) list.appendChild(r);
+    const ordered = sorted();
+    const visible = ordered.filter((r) => matches(r));
+    for (const r of rows) r.hidden = !visible.includes(r);
+    let sel = visible.find((r) => r.dataset.id === st.item);
+    if (!sel) {
+      sel = visible[0];
+      if (st.item) st.item = '';
+    }
+    for (const r of rows) {
+      const on = r === sel;
+      r.classList.toggle('sel', on);
+      r.querySelector('[data-select]')?.setAttribute('aria-pressed', String(on));
+    }
+    const detail = sel?.querySelector<HTMLElement>('.detail');
+    panel.hidden = !detail;
+    panel.innerHTML = detail ? detail.outerHTML : '';
+    nothing.hidden = visible.length > 0;
+    count.textContent = String(visible.length);
+    title.textContent = st.area ? tileLabel.get(st.area) ?? 'Open work' : 'Open work';
+
+    // Counts that respect every filter but their own.
+    for (const t of tiles) {
+      const key = t.dataset.areaTile!;
+      const n = rows.filter((r) => matches(r, 'area') && (!key || r.dataset.area === key)).length;
+      const c = t.querySelector('[data-count]')!;
+      c.textContent = String(n);
+      c.classList.toggle('hot', n > 0);
+      t.classList.toggle('zero', n === 0);
+      // An empty type of work is inactive: dimmed, and a click does nothing.
+      if (n === 0 && st.area !== key) t.setAttribute('aria-disabled', 'true');
+      else t.removeAttribute('aria-disabled');
+      t.setAttribute('aria-pressed', String(st.area === key));
+    }
+    for (const o of options) {
+      const n = rows.filter((r) => (!st.area || r.dataset.area === st.area) && (!st.kind || r.dataset.kind === st.kind) && (!o.value || r.dataset.bip === o.value)).length;
+      o.textContent = `${optionLabel.get(o.value)} · ${n} open`;
+    }
+    select.value = st.bip;
+    select.classList.toggle('on', !!st.bip);
+    for (const p of kindPills) {
+      const key = p.dataset.kindPill!;
+      p.querySelector('[data-count]')!.textContent = String(rows.filter((r) => matches(r, 'kind') && (!key || r.dataset.kind === key)).length);
+      p.setAttribute('aria-pressed', String(st.kind === key));
+    }
+    for (const s of sorts) s.setAttribute('aria-pressed', String(s.dataset.sort === st.sort));
+
+    // Grid and pieces.
+    for (const h of gridHeads) h.setAttribute('aria-pressed', String(h.dataset.gridBip === st.bip));
+    for (const c of cells) {
+      c.classList.toggle('on', c.dataset.cellBip === st.bip && c.dataset.cellArea === st.area);
+      c.classList.toggle('dimmed', (!!st.bip && c.dataset.cellBip !== st.bip) || (!!st.area && c.dataset.cellArea !== st.area));
+    }
+    for (const c of cols) c.classList.toggle('on', c.dataset.col === st.area);
+    for (const p of pieceRows) p.setAttribute('aria-pressed', String(p.dataset.pieceRow === st.piece));
+
+    // What is filtered, for the clear button.
+    const parts = [
+      st.area && tileLabel.get(st.area),
+      st.bip && `BIP ${st.bip}`,
+      st.kind && KIND_LABEL[st.kind],
+      st.piece && (st.piece.split('|')[1] || `BIP ${st.piece.split('|')[0]} itself`),
+    ].filter(Boolean);
+    clear.hidden = !parts.length;
+    clear.textContent = `${parts.join(' · ')} · Show all ✕`;
+    write();
+  };
+
+  const setPiece = (key: string) => {
+    st.piece = key;
+    st.bip = key ? key.split('|')[0] : st.bip;
+    st.area = '';
+    st.kind = '';
+    st.item = '';
+  };
+
+  for (const t of tiles)
+    t.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (t.getAttribute('aria-disabled') === 'true') return;
+      st.area = t.dataset.areaTile!;
+      st.item = '';
+      render();
+    });
+  select.addEventListener('change', () => {
+    st.bip = select.value;
+    st.piece = '';
+    st.item = '';
+    render();
+  });
+  for (const p of kindPills)
+    p.addEventListener('click', () => {
+      st.kind = p.dataset.kindPill!;
+      st.item = '';
+      render();
+    });
+  for (const s of sorts)
+    s.addEventListener('click', () => {
+      st.sort = s.dataset.sort as Sort;
+      render();
+    });
+  for (const r of rows)
+    r.querySelector('[data-select]')!.addEventListener('click', () => {
+      st.item = r.dataset.id!;
+      render();
+    });
+  const clearAll = () => {
+    st.area = st.bip = st.kind = st.piece = st.item = '';
+    render();
+  };
+  clear.addEventListener('click', clearAll);
+  root.querySelector('[data-clear-inline]')?.addEventListener('click', clearAll);
+  // "N more open on <piece>" lives in the panel's copy of the detail.
+  panel.addEventListener('click', (e) => {
+    const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('[data-piece-link]');
+    if (!a) return;
+    e.preventDefault();
+    setPiece(a.dataset.pieceLink!);
+    render();
+  });
+  for (const h of gridHeads)
+    h.addEventListener('click', (e) => {
+      e.preventDefault();
+      st.bip = st.bip === h.dataset.gridBip ? '' : h.dataset.gridBip!;
+      st.piece = '';
+      st.item = '';
+      render();
+      root.querySelector('#list')!.scrollIntoView({ block: 'start' });
+    });
+  for (const c of cells.filter((x) => x.tagName === 'A'))
+    c.addEventListener('click', (e) => {
+      e.preventDefault();
+      const hit = st.bip === c.dataset.cellBip && st.area === c.dataset.cellArea;
+      st.bip = hit ? '' : c.dataset.cellBip!;
+      st.area = hit ? '' : c.dataset.cellArea!;
+      st.piece = '';
+      st.kind = '';
+      st.item = '';
+      render();
+      root.querySelector('#list')!.scrollIntoView({ block: 'start' });
+    });
+  for (const p of pieceRows)
+    p.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (st.piece === p.dataset.pieceRow) {
+        st.piece = '';
+        st.item = '';
+      } else setPiece(p.dataset.pieceRow!);
+      render();
+      root.querySelector('#list')!.scrollIntoView({ block: 'start' });
+    });
+
+  render();
+}

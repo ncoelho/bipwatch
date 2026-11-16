@@ -1,20 +1,21 @@
 ---
 // Site shell from the page templates spec: logo, segmented nav with the
 // current page filled, search (Pagefind, built after the site), and the
-// sources footer. Nav items appear once their page exists (New drafts and
-// What needs doing across BIPs are not built yet).
+// sources footer. Nav items appear once their page exists (New drafts is not
+// built yet).
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description?: string;
   /** Which nav item is the current page. */
-  current?: 'week' | 'proposals' | 'data';
+  current?: 'week' | 'proposals' | 'work' | 'data';
 }
 const { title, description = 'An open layer of data, metadata and evidence on top of the Bitcoin BIP repository.', current } = Astro.props;
 const NAV = [
   { key: 'week', label: 'This week', href: '/' },
   { key: 'proposals', label: 'Proposals', href: '/proposals/' },
+  { key: 'work', label: 'What needs doing', href: '/work/' },
   { key: 'data', label: 'Open data', href: '/api/bips.json' },
 ] as const;
 ---
