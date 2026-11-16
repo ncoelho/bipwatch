@@ -1,0 +1,28 @@
+id: open-question-antoine-riard-ee65bbd0
+bip: 22
+kind: open-question
+status: open
+area: writing
+part_of: BIP 23
+statement: Decide whether the getblocktemplate specs should document that
+  template nTime for the first block of a difficulty period must be at least the
+  prior block's nTime minus 600 seconds (the timewarp fix), for example as an
+  addendum to BIP 23.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/e045e415-9f0b-4f90-9c65-3aeeecca785bn@googlegroups.com/
+  type: mailing-list
+  title: Timewarp fix, Mining software and Clocks
+  date: 2024-08-25
+  retrieved: 2026-11-15
+  quote: |-
+    I don't know if it should be further documented or implemented (e.g 
+    addendum to bip23 ?)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

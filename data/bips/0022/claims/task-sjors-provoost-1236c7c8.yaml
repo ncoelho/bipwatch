@@ -1,0 +1,27 @@
+id: task-sjors-provoost-1236c7c8
+bip: 22
+kind: task
+status: open
+area: engineering
+part_of: bip 54 getblocktemplate fields
+statement: Add support in node software for the proposed getblocktemplate
+  coinbase_locktime and coinbase_sequence fields, so that mining pools can build
+  BIP 54-compliant coinbase transactions from the template.
+subject:
+  name: Sjors Provoost
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/1A3B8BFA-41A6-4D0F-BBE6-E791F9785A5E@sprovoost.nl/
+  type: mailing-list
+  title: "Bip54: add sequence, timestamp (and version) to GBT"
+  date: 2026-02-09
+  retrieved: 2026-11-15
+  quote: |-
+    This can be done by using the new
+    `getblocktemplate` fields described below, once node software supports it.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
