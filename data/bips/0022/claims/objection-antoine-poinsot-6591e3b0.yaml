@@ -1,0 +1,26 @@
+id: objection-antoine-poinsot-6591e3b0
+bip: 22
+kind: objection
+status: open
+area: design
+part_of: bip54 gbt extension
+statement: Justify or drop the proposed coinbase sequence and locktime fields in
+  getblocktemplate, since other consensus-relevant coinbase data such as the
+  witness commitment is not specified in GBT either.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2097#issuecomment-3977385069
+  type: github
+  title: "bip54: add coinbase locktime and sequence to GBT"
+  date: 2026-02-28
+  retrieved: 2026-11-16
+  quote: Why for instance should we provide a coinbase sequence but not a coinbase
+    witness?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

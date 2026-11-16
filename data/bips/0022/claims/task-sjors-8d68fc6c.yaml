@@ -1,0 +1,26 @@
+id: task-sjors-8d68fc6c
+bip: 22
+kind: task
+status: open
+area: engineering
+part_of: bip54 gbt extension
+statement: Extend getblocktemplate to expose the BIP 54 coinbase requirements,
+  and update the Stratum v1 software that relies on that RPC to use the new
+  fields.
+subject:
+  name: Sjors
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#discussion_r2026895491
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-04-03
+  retrieved: 2026-11-16
+  quote: The changes to the coinbase need to be added to `getblocktemplate` and
+    Stratum v1 software which relies on that RPC needs to use these fields.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

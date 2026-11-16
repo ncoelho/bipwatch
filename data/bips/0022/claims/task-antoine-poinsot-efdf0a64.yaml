@@ -1,0 +1,26 @@
+id: task-antoine-poinsot-efdf0a64
+bip: 22
+kind: task
+status: open
+area: writing
+part_of: bip54 gbt extension
+statement: Write a separate getblocktemplate extension BIP, in the style of BIP
+  145, that describes expected GBT behaviour for BIP 54 and requires the "!"
+  rule prefix for the bip54 rule.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2097#issuecomment-3977385069
+  type: github
+  title: "bip54: add coinbase locktime and sequence to GBT"
+  date: 2026-02-28
+  retrieved: 2026-11-16
+  quote: The only thing i would say is worth specifying for GBT is that the "!'
+    prefix should be set for the `bip54` rule.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
