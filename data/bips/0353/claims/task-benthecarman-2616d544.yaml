@@ -1,0 +1,24 @@
+id: task-benthecarman-2616d544
+bip: 353
+kind: task
+status: open
+area: writing
+statement: Add a note to the address reuse section that payjoin parameters can
+  be included in the URI, so payjoin-capable senders avoid reusing the on-chain
+  address.
+subject:
+  name: benthecarman
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#discussion_r1485632761
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-16
+  quote: Could also add a note that you could add payjoin parameters to the URI
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

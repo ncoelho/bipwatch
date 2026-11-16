@@ -1,0 +1,25 @@
+id: open-question-achow101-ab85ea47
+bip: 353
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether the PSBT DNSSEC proof field needs to carry the
+  human-readable name explicitly, given that the RFC 9102 authentication chain
+  already contains the record.
+subject:
+  name: achow101
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1657#issuecomment-2297402366
+  type: github
+  title: Add a PSBT per-output field for BIP 353 DNSSEC Proofs
+  date: 2024-08-19
+  retrieved: 2026-11-16
+  quote: Wouldn't the Authentication Chain already contain the name since it has
+    the record itself?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

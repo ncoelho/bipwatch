@@ -1,0 +1,27 @@
+id: task-sethforprivacy-c275b2f2
+bip: 353
+kind: task
+status: addressed
+area: writing
+part_of: BIP 321
+statement: Add an example to the URI scheme showing how to combine two different
+  payment instructions, such as a BOLT 12 offer and a silent payment address, in
+  one URI.
+subject:
+  name: sethforprivacy
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1555#issuecomment-2227046546
+  type: github
+  title: "BIP 321: URI Scheme (Replace BIP 21 with a new BIP containing
+    information about more modern usage of it)"
+  date: 2024-07-13
+  retrieved: 2026-11-16
+  quote: Could you clarify in the examples how to use two diverse payment codes
+    together in one URI?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

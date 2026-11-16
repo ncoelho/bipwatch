@@ -1,0 +1,26 @@
+id: objection-albassort-32785d0a
+bip: 353
+kind: objection
+status: addressed
+area: design
+statement: Decide whether to reuse the existing OpenAlias DNS record format
+  instead of a new Bitcoin-specific format, so that one domain can publish
+  addresses for several currencies without separate subdomains.
+subject:
+  name: albassort
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#issuecomment-2808686493
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2025-04-16
+  retrieved: 2026-11-16
+  quote: The difference is not reinventing the wheel. There is no need for such a
+    thing. The other reason, is, OpenAlias being supported and used by other
+    ones means it can standardized.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

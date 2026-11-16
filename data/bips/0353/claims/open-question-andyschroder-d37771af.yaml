@@ -1,0 +1,27 @@
+id: open-question-andyschroder-d37771af
+bip: 353
+kind: open-question
+status: addressed
+area: design
+statement: "Decide whether BIP 353 names should get their own URI form (such as
+  bip353:, ₿: or BTC:) so they can be used in QR codes, clickable links and NFC
+  intents. The decision was no: wallets must prefer direct URIs and copy the
+  underlying URI rather than the name."
+subject:
+  name: AndySchroder
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1555#issuecomment-2380877028
+  type: github
+  title: "BIP 321: URI Scheme (Replace BIP 21 with a new BIP containing
+    information about more modern usage of it)"
+  date: 2024-09-28
+  retrieved: 2026-11-16
+  quote: Wondering if we can have another URI form that will resolve a BIP-0353
+    address?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
