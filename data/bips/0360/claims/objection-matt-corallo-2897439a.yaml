@@ -1,0 +1,25 @@
+id: objection-matt-corallo-2897439a
+bip: 360
+kind: objection
+status: addressed
+area: design
+statement: Avoid relying on lattice-based post-quantum signatures in the
+  proposal; only hash-based schemes have enough confidence to add in the short
+  term.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.6.1
+source:
+  url: https://gnusha.org/pi/bitcoindev/2e0fc337-3603-4a22-8056-59cf7e21aa43@mattcorallo.com/
+  type: mailing-list
+  title: P2QRH / BIP-360 Update
+  date: 2025-02-26
+  retrieved: 2026-11-16
+  quote: I don't buy that there's a world where we get serious about adding
+    something lattice-based to Bitcoin for a longggg time
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

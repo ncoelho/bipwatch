@@ -1,0 +1,26 @@
+id: objection-jonas-nick-2fb10dc9
+bip: 360
+kind: objection
+status: addressed
+area: design
+statement: Prevent the attestation structure from letting arbitrary data be
+  embedded at no extra computational cost; the current design removed the
+  attestation structure.
+subject:
+  name: Jonas Nick
+  type: person
+applies_to_version: 0.6.1
+source:
+  url: https://gnusha.org/pi/bitcoindev/69ab395f-acba-4d11-87ee-9da6327509c6@gmail.com/
+  type: mailing-list
+  title: P2QRH / BIP-360 Update
+  date: 2025-02-26
+  retrieved: 2026-11-16
+  quote: arbitrary data can be included in the attestation structure with zero
+    additional computational cost, no elliptic curve grinding or hash collisions
+    required.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

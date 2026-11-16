@@ -1,0 +1,25 @@
+id: objection-ian-quantum-6b7b93ea
+bip: 360
+kind: objection
+status: addressed
+area: design
+statement: Avoid adopting FALCON or FALCON+ signatures until they are
+  standardized, given weaknesses in randomness and parameters; the current spec
+  no longer includes any post-quantum signature scheme.
+subject:
+  name: Ian Quantum
+  type: person
+applies_to_version: 0.6.1
+source:
+  url: https://gnusha.org/pi/bitcoindev/CA+7C+cYY_97y_QsSON5U3y7v4a0usGaGmcD+r=8Y05p5Cwmp5w@mail.gmail.com/
+  type: mailing-list
+  title: P2QRH / BIP-360 Update
+  date: 2025-02-24
+  retrieved: 2026-11-16
+  quote: I would suggest delaying FALCON or FALCON+ until standardized. There are
+    significant weaknesses but no full break.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

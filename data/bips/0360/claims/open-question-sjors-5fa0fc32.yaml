@@ -1,0 +1,26 @@
+id: open-question-sjors-5fa0fc32
+bip: 360
+kind: open-question
+status: open
+area: design
+statement: Decide whether P2MR's new SegWit version should also carry opt-in
+  replay protection, in which an annex starting with a block height commits the
+  signature to that block's hash (at least 100 blocks deep).
+subject:
+  name: sjors
+  type: person
+applies_to_version: 0.12.1
+source:
+  url: https://delvingbitcoin.org/t/universal-opt-in-replay-protection/2792/11
+  type: forum
+  title: Universal opt-in replay protection?
+  date: 2026-09-09
+  retrieved: 2026-11-16
+  quote: A new SegWit version means it should ride along with another proposal
+    that needs one, like BIP 460 CISA. Alternatively, BIP360 or a variant with
+    key-path which disables it later, like P2TRv2.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

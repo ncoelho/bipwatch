@@ -1,0 +1,29 @@
+id: objection-hunter-beast-462ff9dd
+bip: 360
+kind: objection
+status: addressed
+area: design
+statement: Matt Corallo argued that the proposal should drop its bundled
+  post-quantum signature schemes in favour of simple hash-based signatures,
+  placed in a taproot leaf and exposed through an opcode so multisig works; the
+  current spec removes the signature schemes and leaves PQ signatures to future
+  opcodes or leaf versions in script trees.
+subject:
+  name: Hunter Beast
+  type: person
+applies_to_version: 0.6.1
+source:
+  url: https://gnusha.org/pi/bitcoindev/866ee206-4a4e-4cd6-9de3-fa2fa35e2230n@googlegroups.com/
+  type: mailing-list
+  title: P2QRH / BIP-360 Update
+  date: 2025-02-23
+  retrieved: 2026-11-16
+  quote: |-
+    we should strip out all the 
+    signature schemes that are anything more than quite straightforward in 
+    their security assumptions
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
