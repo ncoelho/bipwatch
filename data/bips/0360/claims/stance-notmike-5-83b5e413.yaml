@@ -1,0 +1,29 @@
+id: stance-notmike-5-83b5e413
+bip: 360
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2103
+  title: "bip360: use correct leafVersion in control block byte for non-default
+    version leaves"
+statement: notmike-5 endorses the pull request that fixes BIP 360 to use the
+  correct leafVersion in the control block byte for non-default leaf versions,
+  calling it obviously correct.
+subject:
+  name: notmike-5
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2103#issuecomment-4069827655
+  type: github
+  title: "bip360: use correct leafVersion in control block byte for non-default
+    version leaves"
+  date: 2026-03-16
+  retrieved: 2026-11-16
+  quote: This PR is obviously correct.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

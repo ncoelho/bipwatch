@@ -1,0 +1,28 @@
+id: stance-hunter-beast-9dfa2a2e
+bip: 360
+kind: stance
+stance: approach-ack
+scope: proposal
+statement: Hunter Beast, the BIP's author, defends the current BIP 360 design
+  against suggestions to step back and revisit design goals. He prefers to prove
+  the design out in practice, and argues that it keeps witness-script support
+  and that libbitcoinpqc contains the complexity of the post-quantum signature
+  schemes.
+subject:
+  name: Hunter Beast
+  type: person
+applies_to_version: 0.7.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#issuecomment-2743879415
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2025-03-21
+  retrieved: 2026-11-16
+  quote: another alternative is to put the work needed into proving out this
+    design. There's too many variables to consider without something concrete to
+    work from and think about.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
