@@ -1,0 +1,24 @@
+id: open-question-murch-b1828ffb
+bip: 77
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether Async Payjoin supports only PSBT version 0 or also
+  PSBT version 2.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#discussion_r1840957533
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2024-11-13
+  retrieved: 2026-11-16
+  quote: Just wondering, is this proposal only compatible with PSBT v0, or also
+    PSBT v2?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

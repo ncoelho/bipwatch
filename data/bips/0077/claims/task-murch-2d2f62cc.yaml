@@ -1,0 +1,26 @@
+id: task-murch-2d2f62cc
+bip: 77
+kind: task
+status: open
+area: design
+statement: Check that Async Payjoin is compatible with the draft for sending
+  silent payments in PSBTs, so that silent-payment-based payjoins remain
+  possible.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#discussion_r1840957533
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2024-11-13
+  retrieved: 2026-11-16
+  quote: 'Perhaps it would make sense for this proposal to consider whether this
+    proposal will be compatible with the efforts in "Bip Draft: Sending Silent
+    Payments in PSBTs #1687"'
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
