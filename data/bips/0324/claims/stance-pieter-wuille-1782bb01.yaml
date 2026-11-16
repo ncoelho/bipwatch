@@ -1,0 +1,27 @@
+id: stance-pieter-wuille-1782bb01
+bip: 324
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2092
+  title: "BIP 324, 434: Specify p2p v2 one-byte identifier for FEATURE message"
+statement: Pieter Wuille approved the change to BIP 324 that specifies a v2 p2p
+  one-byte short identifier for the FEATURE message, limiting his approval to
+  the BIP 324 portion.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2092#issuecomment-3828600673
+  type: github
+  title: "BIP 324, 434: Specify p2p v2 one-byte identifier for FEATURE message"
+  date: 2026-01-31
+  retrieved: 2026-11-15
+  quote: ACK as far as 324 is concerned.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

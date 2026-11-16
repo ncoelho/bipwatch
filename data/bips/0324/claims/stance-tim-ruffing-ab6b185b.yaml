@@ -1,0 +1,26 @@
+id: stance-tim-ruffing-ab6b185b
+bip: 324
+kind: stance
+stance: ack
+scope: change
+statement: Tim Ruffing authored and argued for a breaking change to BIP 324 that
+  removes the separate garbage authentication packet by merging it into the
+  first packet sent after garbage termination. He says this simplifies
+  implementations and that the key exchange and version phases remain properly
+  separated because the AEAD checks the garbage before the contents are read.
+subject:
+  name: Tim Ruffing
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/commit/75dc363d201072579289cc6d20d40ef7a67db291
+  type: github
+  title: "bip324: Remove garbage authentication packet (breaking change)"
+  date: 2023-09-24
+  retrieved: 2026-11-15
+  quote: "The new protocol simplifies implementations:"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
