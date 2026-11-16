@@ -1,0 +1,24 @@
+id: objection-matt-corallo-46bc0aed
+bip: 353
+kind: objection
+status: addressed
+area: design
+statement: Stop requiring an on-chain address in the BIP 21 URI stored in the
+  DNS record, since URIs in practice work without one.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#discussion_r1485637091
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-16
+  quote: In practice BIP 21 URIs in the wild sometimes don't have an on-chain
+    address. The spec shouldn't mandate it given it's not required to function.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

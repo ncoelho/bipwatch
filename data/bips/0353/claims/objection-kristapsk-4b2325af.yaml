@@ -1,0 +1,27 @@
+id: objection-kristapsk-4b2325af
+bip: 353
+kind: objection
+status: addressed
+area: design
+statement: Address the concern that restricting records to BIP 21 URIs causes
+  on-chain address reuse and rules out micropayments, for example by allowing
+  plain BOLT12 offers; the spec now allows URIs with an empty on-chain path
+  carrying an lno offer and requires rotating re-used addresses.
+subject:
+  name: kristapsk
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#discussion_r1485600335
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-16
+  quote: Or this spec could be altered, that it could be not just BIP21, but also
+    plain BOLT12, for example. Wtih BIP21 there is currently two problems -
+    address reuse
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

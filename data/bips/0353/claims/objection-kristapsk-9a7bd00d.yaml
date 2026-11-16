@@ -1,0 +1,28 @@
+id: objection-kristapsk-9a7bd00d
+bip: 353
+kind: objection
+status: addressed
+area: design
+part_of: BIP 321
+statement: Reconcile BIP 353's empty-address example URIs with BIP 21, which
+  required an on-chain address, by updating the URI spec so the on-chain address
+  can be omitted.
+subject:
+  name: kristapsk
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#discussion_r1485390796
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-11
+  retrieved: 2026-11-16
+  quote: This example contradicts statement above that "This BIP proposes a
+    standard format for encoding BIP 21 URI schemes in DNS TXT records", as
+    according to BIP21 onchain address in URI is required not optional
+    component.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
