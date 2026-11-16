@@ -1,0 +1,24 @@
+id: task-murch-e6adb614
+bip: 352
+kind: task
+status: addressed
+area: review
+part_of: BIP 376
+statement: Get the BIP 376 draft reviewed by Sebastian Falbesoner and achow101
+  before publication.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 1.1.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2089#pullrequestreview-3955585310
+  type: github
+  title: "BIP376: Spending Silent Payment outputs with PSBTs"
+  date: 2026-03-16
+  retrieved: 2026-11-15
+  quote: Perhaps a review from @theStack and @achow101 would be useful?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null

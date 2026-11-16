@@ -1,0 +1,27 @@
+id: task-nymius-14f4852d
+bip: 352
+kind: task
+status: open
+area: writing
+part_of: BIP 375
+statement: Specify in BIP 375's Updater role the exact value format an Updater
+  should use to hide the fingerprint and derivation path in
+  PSBT_IN_BIP32_DERIVATION, matching BIP 376 (a 4-byte zero fingerprint with no
+  path elements).
+subject:
+  name: nymius
+  type: person
+applies_to_version: 1.1.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2120
+  type: github
+  title: "BIP375: fixes to Updater role"
+  date: 2026-03-12
+  retrieved: 2026-11-15
+  quote: It's not clear from the specification which format should the Updater use
+    to not reveal the derivation path and fingerprint on these fields.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-15
+  reviewed_by: null
