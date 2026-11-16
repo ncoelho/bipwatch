@@ -1,0 +1,26 @@
+id: open-question-proofofkeags-8b96be23
+bip: 324
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether the v2 transport needs a way to recover TLS-style
+  "virtual host" functionality, so that multiple nodes behind the same NAT can
+  be addressed.
+subject:
+  name: ProofOfKeags
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1378#issuecomment-1292747813
+  type: github
+  title: "Add BIP324: v2 P2P Transport Protocol"
+  date: 2022-10-26
+  retrieved: 2026-11-16
+  quote: Since TLS isn't being used is there any way to recover "virtual host"
+    functionality? This is necessary for addressing multiple nodes behind the
+    same NAT which is increasingly common these days.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

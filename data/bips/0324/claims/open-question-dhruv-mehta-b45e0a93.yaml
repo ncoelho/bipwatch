@@ -1,0 +1,25 @@
+id: open-question-dhruv-mehta-b45e0a93
+bip: 324
+kind: open-question
+status: addressed
+area: design
+statement: Decide how new 1-byte message type IDs should be allocated over time
+  without requiring atomic updates to the table in the BIP text.
+subject:
+  name: Dhruv Mehta
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1378
+  type: github
+  title: "Add BIP324: v2 P2P Transport Protocol"
+  date: 2022-10-07
+  retrieved: 2026-11-16
+  quote: The process for updating this table atomically to assign new IDs when new
+    message types are being proposed is likely going to be an annoyance. What
+    are better ways to handle ongoing allocation?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

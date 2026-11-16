@@ -1,0 +1,26 @@
+id: task-ajtowns-1a0c30dd
+bip: 324
+kind: task
+status: addressed
+area: writing
+statement: Clarify in BIP 324 that 1-byte short message type IDs are aliases for
+  their 13-byte equivalents, so nodes behave the same whichever encoding is
+  received.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2086
+  type: github
+  title: "BIP 324: Clarify equivalence between 1 and 13 byte message types"
+  date: 2026-01-16
+  retrieved: 2026-11-16
+  quote: it left it ambiguous as to what should happen if a 13-byte message_type
+    was received. Clarify that the single byte message types are simply aliases
+    for the longer equivalents
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

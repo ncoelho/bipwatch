@@ -1,0 +1,26 @@
+id: task-murch-ecf93ea6
+bip: 324
+kind: task
+status: open
+area: engineering
+part_of: BIP 333
+statement: Update the reference implementation for the BIP 333 one-byte message
+  type ID alias assignment and remove its TODO, as required before the BIP can
+  advance to Complete.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2301#pullrequestreview-5745242715
+  type: github
+  title: "BIP333: BIP324 One-Byte Message Type ID Alias Assignment"
+  date: 2026-11-03
+  retrieved: 2026-11-16
+  quote: Reference implementation still needs an update and the TODO to be removed
+    before merge probably.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

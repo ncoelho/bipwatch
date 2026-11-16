@@ -1,0 +1,25 @@
+id: open-question-yojoe-c2aa0de4
+bip: 324
+kind: open-question
+status: open
+area: writing
+statement: Clarify in the transport layer specification that BIP 324 requires a
+  reliable, ordered stream transport underneath (such as TCP, Tor or I2P), so
+  readers do not wonder whether UDP-based connections are supported.
+subject:
+  name: yojoe
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1378#issuecomment-1304818628
+  type: github
+  title: "Add BIP324: v2 P2P Transport Protocol"
+  date: 2022-11-06
+  retrieved: 2026-11-16
+  quote: What does "typically TCP/IP" mean? Will UDP based connections be
+    supported by BIP-324 as well?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

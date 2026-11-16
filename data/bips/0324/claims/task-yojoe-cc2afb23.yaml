@@ -1,0 +1,23 @@
+id: task-yojoe-cc2afb23
+bip: 324
+kind: task
+status: open
+area: writing
+statement: Add a short rationale section to BIP 324 explaining why it is not
+  designed to run on QUIC (UDP-based reliable streams) instead of TCP.
+subject:
+  name: yojoe
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1378#issuecomment-1304841789
+  type: github
+  title: "Add BIP324: v2 P2P Transport Protocol"
+  date: 2022-11-06
+  retrieved: 2026-11-16
+  quote: I think two or three sentences on "Why not QUIC?" would help the BIP324 spec.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

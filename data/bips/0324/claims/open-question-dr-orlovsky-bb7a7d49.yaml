@@ -1,0 +1,25 @@
+id: open-question-dr-orlovsky-bb7a7d49
+bip: 324
+kind: open-question
+status: addressed
+area: design
+statement: Justify why BIP 324 defines its own transport encryption scheme
+  instead of reusing the Lightning Network's BOLT8 messaging structure.
+subject:
+  name: dr-orlovsky
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1024#issuecomment-714389257
+  type: github
+  title: WIP [don't merge] Add BIP324 - Version 2 Peer-to-Peer Message Transport
+    Protocol
+  date: 2020-10-22
+  retrieved: 2026-11-16
+  quote: why not to stick to the same messaging structure used by the current LN
+    and increase the number of encoding standards/protocol/library code?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
