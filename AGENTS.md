@@ -12,3 +12,4 @@ Read `docs/SPEC.md` before making changes. It explains what BipWatch is, the dec
 - Code does what code can do. LLMs are only for reading prose, and their output goes through the validator and a pull request.
 - Keep CI on `main` green. Prefer small commits.
 - Ask the owner before choosing paid services or hosting (Postgres host, deploy target).
+- Never ping people or other projects from GitHub. In PR descriptions, comments and commit messages, write people by name without `@` (or put an `@login` in a code span), and link issues, PRs and commits in other repositories through `https://redirect.github.com/...`, not `https://github.com/...`, so GitHub posts nothing on them. Generated PR text goes through `noMentions` and `noBacklink` from `@bipwatch/data`.

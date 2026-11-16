@@ -42,7 +42,7 @@ describe('prSummary', () => {
     expect(rows).toHaveLength(2);
     expect(rows[0]).toContain('`nack` (proposal) | Alice Example');
     expect(rows[1]).toContain('`ack` (change) | Eunovo');
-    expect(rows[1]).toContain('(https://github.com/bitcoin/bips/pull/2348#review-1) · [PR](https://github.com/bitcoin/bips/pull/2348)');
+    expect(rows[1]).toContain('(https://redirect.github.com/bitcoin/bips/pull/2348#review-1) · [PR](https://redirect.github.com/bitcoin/bips/pull/2348)');
     expect(rows[1]).toContain(`\`data/bips/0352/claims/${change.id}.yaml\``);
   });
 
@@ -81,5 +81,20 @@ describe('prSummary', () => {
     expect(big).toContain(`…and ${left} more not listed here`);
     expect(big).toContain(`: ${200 - rows.length} open, 400 addressed. They are in the changed files.`);
     expect(big).toContain('🤖 Opened by the extraction workflow');
+  });
+
+  it('never pings people or links back into other repositories', () => {
+    const [quoted] = stanceTask.toClaims(
+      { stances: [{ bip: 352, stance: 'ack', scope: 'change', condition: null, statement: 'Approved, with @sipa.', quote: 'the working group (@sipa, @real-or-random and I) agrees' }] },
+      doc(5, 'the working group (@sipa, @real-or-random and I) agrees', { source: 'github', url: 'https://github.com/bitcoin/bips/pull/1405#issuecomment-9', thread_key: 'bitcoin/bips#1405' }),
+      ctx,
+    );
+    const out = prSummary({ claims: [quoted], runs: [{ bip: 352, runId: 1, docs: 1, inputTokens: 1, outputTokens: 1 }], task: { id: 'stance', version: 3, model: 'm' } });
+    // No live mention: every @login sits in a code span.
+    expect(out.match(/(^|[^`\w])@[A-Za-z0-9-]+(?!`)/gm)).toBeNull();
+    expect(out).toContain('`@real-or-random`');
+    // No github.com link to another repository's pull request.
+    expect(out).not.toMatch(/\]\(https:\/\/github\.com\/bitcoin\//);
+    expect(out).toContain('https://redirect.github.com/bitcoin/bips/pull/1405');
   });
 });

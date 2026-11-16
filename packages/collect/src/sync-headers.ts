@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
-import { findDataDir, listBipFolders } from '@bipwatch/data';
+import { findDataDir, listBipFolders, noBacklink } from '@bipwatch/data';
 import { Document, isMap, isScalar, parseDocument, type Pair, type Scalar } from 'yaml';
 import { BIPS_BRANCH, bipsRepoDir, git, showFile, updateBipsRepo } from './bips/git.ts';
 import { latestChangelogVersion } from './bips/changelog.ts';
@@ -222,7 +222,7 @@ export function summarize(changes: SyncChange[], dataDir: string): string {
     lines.push(
       `### BIP ${c.number}`,
       '',
-      `\`${c.file.replace(dataDir, 'data')}\` at [\`${c.revision.slice(0, 7)}\`](https://github.com/bitcoin/bips/commit/${c.revision})`,
+      `\`${c.file.replace(dataDir, 'data')}\` at [\`${c.revision.slice(0, 7)}\`](${noBacklink(`https://github.com/bitcoin/bips/commit/${c.revision}`)})`,
       '',
       '| Field | Was | Now |',
       '|---|---|---|',

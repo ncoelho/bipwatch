@@ -5,6 +5,7 @@ import type { BipBundle, BipRecord, Claim, Fixes, Freshness, NeedsAssessment, Pe
 
 export * from './types.ts';
 export { dataChecks, type DataCheck } from './checks.ts';
+export { noBacklink, noMentions } from './github-safe.ts';
 
 /**
  * Finds the data directory by walking up from `start` until it sees

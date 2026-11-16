@@ -1,4 +1,4 @@
-import type { Claim } from '@bipwatch/data';
+import { noBacklink, noMentions, type Claim } from '@bipwatch/data';
 
 /**
  * Pull request description for claims an extraction run wrote (SPEC 6.2:
@@ -21,7 +21,10 @@ const SCOPE_ORDER = ['proposal', 'change', 'implementation'];
 /** GitHub rejects PR bodies over 65,536 characters; keep a margin. */
 export const MAX_BODY_CHARS = 60_000;
 
-const cell = (s: string) => s.replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
+// Every piece of quoted or model-written text goes through noMentions, and
+// every link through noBacklink: a bot PR must never ping people or show up
+// on other projects' pull requests (see github-safe.ts).
+const cell = (s: string) => noMentions(s.replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim());
 const cut = (s: string, n: number) => (s.length > n ? `${s.slice(0, n - 1)}…` : s);
 
 export function prSummary(opts: {
@@ -64,7 +67,7 @@ export function prSummary(opts: {
     '🤖 Opened by the extraction workflow',
   ];
   const row = (c: Claim) => {
-    const src = `[${c.source.type} ${c.source.date ?? ''}](${c.source.url})${c.change ? ` · [PR](${c.change.url})` : ''}`;
+    const src = `[${c.source.type} ${c.source.date ?? ''}](${noBacklink(c.source.url)})${c.change ? ` · [PR](${noBacklink(c.change.url)})` : ''}`;
     const what = c.kind === 'stance' ? `\`${c.stance}\` (${c.scope})` : `\`${c.kind}\` · ${c.area}${c.part_of ? ` (${c.part_of})` : ''} · ${c.status}`;
     return `| ${what} | ${cell(c.subject?.name ?? '')} | ${cell(cut(c.statement, 200))}<br>“${cell(cut(c.source.quote ?? '', 140))}” | ${src} | \`data/bips/${String(c.bip).padStart(4, '0')}/claims/${c.id}.yaml\` |`;
   };
