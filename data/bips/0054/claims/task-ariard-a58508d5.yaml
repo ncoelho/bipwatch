@@ -1,0 +1,23 @@
+id: task-ariard-a58508d5
+bip: 54
+kind: task
+status: open
+area: review
+statement: Review the Bitcoin Core implementation of BIP 54 (bitcoin/bitcoin PR 35793).
+subject:
+  name: ariard
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://delvingbitcoin.org/t/softfork-before-gta-vi/2913/4
+  type: forum
+  title: Softfork before GTA VI?
+  date: 2026-10-22
+  retrieved: 2026-11-16
+  quote: reviewing the BIP, one of the implementation in a full-node (
+    https://github.com/bitcoin/bitcoin/pull/35793 )
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

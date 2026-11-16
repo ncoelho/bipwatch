@@ -1,0 +1,26 @@
+id: objection-russell-o-connor-3f898295
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Avoid disabling OP_CODESEPARATOR by consensus, because users with
+  existing funds locked in such scripts could have them confiscated even though
+  the opcode is already non-standard.
+subject:
+  name: Russell O'Connor
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAMZUoKmU3-b5nTBFuO2dCuZZ+xVT6uZmoXgyjbpVkZQLVTrFrA@mail.gmail.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-11
+  retrieved: 2026-11-16
+  quote: While non-standardness is a helpful in dissuading users from committing
+    new funds to OP_CODESEPARATOR scripts, it doesn't do anything to help users
+    that may have been caught unaware by the non-standardness change.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

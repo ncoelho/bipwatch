@@ -1,0 +1,26 @@
+id: open-question-moral-agent-97059819
+bip: 54
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether outputs using OP_CODESEPARATOR (and similar features)
+  created before activation should stay spendable, for example by keeping them
+  standard with weight penalties, rather than being disabled.
+subject:
+  name: Moral Agent
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CACiOHGyJ9WZhp2HG1GJdfmkD-nUTFaeVevDJFVRB_j7yBSt6Ew@mail.gmail.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-10
+  retrieved: 2026-11-16
+  quote: |-
+    make UTXOs containing OP_CODESEAPRATOR (etc.) and mined prior to
+    the soft fork activation standard, with weight penalties as appropriate
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

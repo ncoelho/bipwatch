@@ -1,0 +1,25 @@
+id: objection-russell-o-connor-71287cd0
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Avoid invalidating signatures with non-standard sighash type bytes,
+  since unbroadcast presigned transactions may depend on them; caching the
+  sighash midstate was suggested instead.
+subject:
+  name: Russell O'Connor
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAMZUoKneArC+YZ36YFwxNTKsDtJhEz5P2cosXKxJS8Rf_3Nyuw@mail.gmail.com/
+  type: mailing-list
+  title: "Sighash Type Byte; Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-07
+  retrieved: 2026-11-16
+  quote: I don't think that one's hunch that there isn't much risk in disabling
+    these sighashes is good enough to put people funds at risk
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

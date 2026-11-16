@@ -1,0 +1,22 @@
+id: task-luke-dashjr-a9728214
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: Add a Backward Compatibility section to the proposal.
+subject:
+  name: Luke Dashjr
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/201903071044.34985.luke@dashjr.org/
+  type: mailing-list
+  title: "BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-07
+  retrieved: 2026-11-16
+  quote: Needs a Backward Compatibility section
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

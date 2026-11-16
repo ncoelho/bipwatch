@@ -1,0 +1,26 @@
+id: objection-russell-o-connor-0ec34d6e
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Avoid disabling OP_CODESEPARATOR in P2SH and mitigate its
+  validation-cost vulnerability another way, such as raising its weight, so
+  usable opcodes are not removed.
+subject:
+  name: Russell O'Connor
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAMZUoKkJY6UpN=OmOsR0tDAwLw++dYrZtuo_Vir-+DHrK3ckNg@mail.gmail.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-11
+  retrieved: 2026-11-16
+  quote: |-
+    it would be
+    much better than eliminating OP_CODESEPARATOR within P2SH entirely.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null

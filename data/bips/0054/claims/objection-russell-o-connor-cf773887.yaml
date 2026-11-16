@@ -1,0 +1,27 @@
+id: objection-russell-o-connor-cf773887
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Avoid disabling OP_CODESEPARATOR, since it is a usable opcode and
+  simplifying Bitcoin's theoretical operation does not justify removing it;
+  mitigate the validation-cost vulnerability another way.
+subject:
+  name: Russell O'Connor
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CAMZUoK=NKfxMpDs18R1VUGg5YcwiTXUaTcE+H7RSArn0fBMjDw@mail.gmail.com/
+  type: mailing-list
+  title: "OP_CODESEPARATOR Re: BIP Proposal: The Great Consensus Cleanup"
+  date: 2019-03-13
+  retrieved: 2026-11-16
+  quote: |-
+    Simplifying the theoretical operation of Bitcoin is
+    not a sufficient reason to make changes to the consensus rules, and it is
+    most certainly not a sufficient reason to remove usable op codes.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-16
+  reviewed_by: null
