@@ -12,6 +12,9 @@ describe('noMentions', () => {
     expect(noMentions('mail me at someone@gmail.com')).toBe('mail me at someone@gmail.com');
     expect(noMentions('already `@sipa` in code')).toBe('already `@sipa` in code');
     expect(noMentions('no mentions here')).toBe('no mentions here');
+    // An @ inside a URL is not a mention; the link must stay whole.
+    const url = 'https://gnusha.org/pi/bitcoindev/abc=@protonmail.com/';
+    expect(noMentions(`see [list](${url}) and @sipa`)).toBe(`see [list](${url}) and \`@sipa\``);
   });
 });
 

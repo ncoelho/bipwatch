@@ -12,9 +12,18 @@
 
 const MENTION = /(^|[^\w`/@.-])@([A-Za-z0-9](?:[A-Za-z0-9-]{0,38}))(?![\w-]*`)/g;
 
-/** Quoted text with every @login made inert. */
+const URL = /(https?:\/\/[^\s)\]>|]+)/;
+
+/**
+ * Quoted text with every @login made inert. URLs are left whole: an @ inside
+ * one (a mailing-list archive link, say) is not a mention, and a code span
+ * there would break the link.
+ */
 export function noMentions(text: string): string {
-  return text.replace(MENTION, (_, pre: string, login: string) => `${pre}\`@${login}\``);
+  return text
+    .split(URL)
+    .map((part, i) => (i % 2 ? part : part.replace(MENTION, (_, pre: string, login: string) => `${pre}\`@${login}\``)))
+    .join('');
 }
 
 const ITEM = /^https:\/\/github\.com\/([\w.-]+)\/([\w.-]+)\/(pull|issues|commit)\/(\w+)(.*)$/;
