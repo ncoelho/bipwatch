@@ -1,0 +1,26 @@
+id: task-dan-gould-08695b43
+bip: 77
+kind: task
+status: addressed
+area: writing
+statement: Revise the HKDF-SHA256 rationale to say it was chosen because SHA-256
+  is necessarily available in all contexts, not because Bitcoin Core already
+  implements it.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#discussion_r2083667288
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2025-05-12
+  retrieved: 2026-11-17
+  quote: The rationale for choosing HKDF-SHA256 is not that it is already
+    implemented in bitcoin core, but that its primitive, sha-256, is necessarily
+    available in all contexts.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

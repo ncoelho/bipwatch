@@ -1,0 +1,25 @@
+id: open-question-w0xlt-23280d45
+bip: 77
+kind: open-question
+status: addressed
+area: writing
+statement: Clarify whether an HKDF-SHA256 implementation limited to 32-byte
+  output (like Bitcoin Core's BIP 324 one) is sufficient for BIP 77, or whether
+  a fully RFC-compliant HKDF-SHA256 is required.
+subject:
+  name: w0xlt
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#discussion_r2083294415
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2025-05-10
+  retrieved: 2026-11-17
+  quote: Is this implementation, for example, sufficient for Payjoin, or do we
+    need a fully RFC 5896-compliant HKDF-SHA256 implementation?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

@@ -1,0 +1,24 @@
+id: objection-murch-60f0821c
+bip: 77
+kind: objection
+status: addressed
+area: writing
+statement: Remove the list of specific production relays from the BIP, since it
+  will go out of date.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#discussion_r1841034908
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2024-11-13
+  retrieved: 2026-11-17
+  quote: I’m not sure whether specifying "production relays" in the BIP makes
+    sense as that information will almost inevitably outdate.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
