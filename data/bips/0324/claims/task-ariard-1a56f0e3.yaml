@@ -1,0 +1,27 @@
+id: task-ariard-1a56f0e3
+bip: 324
+kind: task
+status: open
+area: writing
+statement: Clarify the FSChaCha20Poly1305 and FSChaCha20 sections of BIP 324
+  beyond pseudocode, adding precise typing and stricter cryptographic vocabulary
+  to help re-implementers.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1965#issuecomment-3294317374
+  type: github
+  title: Add bip-txrelayv2
+  date: 2025-09-15
+  retrieved: 2026-11-17
+  quote: there are some sections that could be more well-defined or clarified not
+    only in pseudo-code (e.g around `FSChaCha20Poly1305` and `FSChaCha20`), i.e
+    adding precise typing, use more strict cryptographic vocabulary sometimes,
+    etc.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

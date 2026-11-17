@@ -1,0 +1,27 @@
+id: open-question-ajtowns-a519954f
+bip: 324
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether the first packet after the garbage terminator should
+  always be a headerless version packet whose whole contents drive version
+  negotiation.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1498#issuecomment-1735122192
+  type: github
+  title: "bip324: Remove garbage authentication packet (breaking change)"
+  date: 2023-09-26
+  retrieved: 2026-11-17
+  quote: Perhaps it would it be simpler but still workable to just have the first
+    packet after the garbage terminator always be the version packet, and have
+    its entire contents (with no header) be interpreted as the version
+    negotiation?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
