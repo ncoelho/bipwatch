@@ -1,0 +1,26 @@
+id: open-question-antoine-poinsot-5d705a94
+bip: 54
+kind: open-question
+status: addressed
+area: design
+statement: "Decide how future coinbase transactions must differ from early
+  BIP34-violating coinbases: nLockTime set to height minus one, nLockTime set to
+  height with max nSequence, a non-1 nVersion, or a mandatory witness
+  commitment."
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/cLJjA4Em1sfbLHBctwsPUvquk8uMGGnXt2zGx7mn_JNu5F-HULjtdsBQjX9VET6MVRhbzJExPRrwNKBeLV1S30uEgCtFiBmMPVuzTFVNxkY=@protonmail.com/
+  type: mailing-list
+  title: Prevent future duplicate coinbase transactions as part of Consensus Cleanup
+  date: 2024-11-22
+  retrieved: 2026-11-17
+  quote: Is any of these preferable? Why? Would any of these make miners' life
+    really hard? For what reason? Do you have an alternative suggestion?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

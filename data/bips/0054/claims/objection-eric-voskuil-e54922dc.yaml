@@ -1,0 +1,25 @@
+id: objection-eric-voskuil-e54922dc
+bip: 54
+kind: objection
+status: addressed
+area: writing
+statement: Eric Voskuil disputes the claim that invalidating 64-byte
+  transactions helps nodes cache block invalidity earlier. The motivation should
+  not rely on that benefit.
+subject:
+  name: Eric Voskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/c8f285b3-bcc4-43f3-b9d8-06fe23ee8303n@googlegroups.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-07-02
+  retrieved: 2026-11-17
+  quote: 64-bytes transactions invalid could help caching block failures at an
+    earlier stage is incorrect.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

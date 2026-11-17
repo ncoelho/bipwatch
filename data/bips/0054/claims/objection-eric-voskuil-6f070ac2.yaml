@@ -1,0 +1,25 @@
+id: objection-eric-voskuil-6f070ac2
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Justify invalidating 64-byte transactions when an existing
+  context-free check, such as requiring the coinbase's first input to be null,
+  might already be enough to detect malleated Merkle trees.
+subject:
+  name: Eric Voskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/5b0331a5-4e94-465d-a51d-02166e2c1937n@googlegroups.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-06-18
+  retrieved: 2026-11-17
+  quote: My question is why is that not sufficient - especially given that a
+    similar (context free) check is required for duplicated tx malleability?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

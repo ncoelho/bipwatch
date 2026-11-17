@@ -1,0 +1,28 @@
+id: objection-jeremy-fbcdde1a
+bip: 54
+kind: objection
+status: addressed
+area: coordination
+statement: Consult miners and ASIC makers on whether the new coinbase
+  nSequence/nLockTime requirements could break hardware or firmware that
+  hardcodes those fields.
+subject:
+  name: jeremy
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/afedbc69-8042-4fe8-99c2-279173a440f3n@googlegroups.com/
+  type: mailing-list
+  title: Consensus Cleanup BIP draft
+  date: 2025-03-27
+  retrieved: 2026-11-17
+  quote: |-
+    have you bothered to 
+    talk to anyone in the mining business how they feel about that? Are you 
+    sure no ASIC in the wild don't hardcode a field that never needed to be set 
+    before?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

@@ -1,0 +1,25 @@
+id: open-question-antoine-riard-b06c70d0
+bip: 54
+kind: open-question
+status: addressed
+area: design
+statement: Clarify whether the worst-case validation time limit applies to
+  spends of legacy outputs created before activation, given the retroactive
+  confiscation concerns raised in 2019.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/87360fbe-30dd-4e18-acbf-7416c47ebc61n@googlegroups.com/
+  type: mailing-list
+  title: Update on the Great Consensus Cleanup Revival
+  date: 2025-02-11
+  retrieved: 2026-11-17
+  quote: it's unclear to me if the limit aims to apply on UTXO spends spending
+    lecacy scripts ex post to the activation
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

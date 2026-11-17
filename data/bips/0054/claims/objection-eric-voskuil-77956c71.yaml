@@ -1,0 +1,26 @@
+id: objection-eric-voskuil-77956c71
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Justify invalidating 64-byte transactions against the objection that
+  it adds a permanent consensus seam in valid transaction sizes, may cause more
+  implementation bugs than it prevents, and mainly saves a little SPV proof
+  bandwidth.
+subject:
+  name: Eric Voskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/be78e733-6e9f-4f4e-8dc2-67b79ddbf677n@googlegroups.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-06-24
+  retrieved: 2026-11-17
+  quote: It seems to me that introducing an arbitrary tx size validity may create
+    more potential implementation bugs than it resolves.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
