@@ -1,0 +1,27 @@
+id: task-conduition-50e7fe46
+bip: 360
+kind: task
+status: open
+area: research
+part_of: pq signature bip
+statement: "Research Falcon (FN-DSA): its weaknesses, secure constant-time
+  signing, and how well it adapts to CISA, BIP32 derivation and multisignatures,
+  before deciding whether to include it in the post-quantum signature opcode
+  BIP."
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.10.1
+source:
+  url: https://gnusha.org/pi/bitcoindev/qmJtMusWT649HfvfUWJJn8dIP7vcJ-xI4bLEXnb-1saPcgmC4as1sSSOpshVGrx2Aj-9X0McB97slaYO286jS7-4N_ROqXtbNDdCrbcEnX0=@proton.me/
+  type: mailing-list
+  title: Falcon Post-Quantum Signature Scheme Proposal
+  date: 2026-01-22
+  retrieved: 2026-11-17
+  quote: more research is needed to explore Falcon, its weaknesses, and how
+    flexibly it can be adapted to schemes like CISA, BIP32, and multisignatures
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

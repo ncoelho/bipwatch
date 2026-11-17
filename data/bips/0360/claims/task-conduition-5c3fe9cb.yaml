@@ -1,0 +1,26 @@
+id: task-conduition-5c3fe9cb
+bip: 360
+kind: task
+status: open
+area: engineering
+part_of: wallet support
+statement: Standardize P2MR address derivation and provide libraries that
+  generate addresses with ML-DSA and SLH-DSA leaf scripts.
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.8.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/gSvbx255CIbMSivfsn-1cGECh7UpJufvfVP4lwnp5r7gIamZo9t5LdBZBEYyiw4Eb9zNSvLXoi2SW8Sq3i7shSwBkWwxLRjoPkncexfCPRM=@proton.me/
+  type: mailing-list
+  title: A Post Quantum Migration Proposal
+  date: 2025-07-16
+  retrieved: 2026-11-17
+  quote: We can ameliorate the situation by properly standardizing P2QRH address
+    derivation, providing libraries to generate addresses with ML-DSA and
+    SLH-DSA leafs.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

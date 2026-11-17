@@ -1,0 +1,28 @@
+id: objection-bas-westerbaan-31a1a196
+bip: 360
+kind: objection
+status: open
+area: engineering
+part_of: pq signature bip
+statement: Make sure Falcon signing implementations are secure and avoid fast
+  floating-point versions, because Falcon signing is complex and tricky to
+  implement safely.
+subject:
+  name: Bas Westerbaan
+  type: person
+applies_to_version: 0.7.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/e812604c-94a5-4f5f-87e8-71d178963d62n@googlegroups.com/
+  type: mailing-list
+  title: jpeg resistance of various post-quantum signature schemes
+  date: 2025-05-22
+  retrieved: 2026-11-17
+  quote: |-
+    I do have to warn about 
+    it's signing routine: it's quite complicated and tricky to implement 
+    securily, especially if you want it to be fast.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
