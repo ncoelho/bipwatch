@@ -1,0 +1,26 @@
+id: task-matt-corallo-ba639b81
+bip: 352
+kind: task
+status: open
+area: ux
+part_of: bip21 update
+statement: "Specify that silent payment addresses in bitcoin: URIs go in a
+  dedicated query parameter (e.g. sp=), with an optional fallback on-chain
+  address in the body, so wallets without silent payment support can still pay."
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#issuecomment-1971842656
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2024-02-29
+  retrieved: 2026-11-17
+  quote: if I had to rewrite BIP21 today I'd write explicitly that "new address
+    formats MUST define a key and be placed in the parameters section."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

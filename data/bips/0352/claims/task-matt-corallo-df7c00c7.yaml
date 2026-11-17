@@ -1,0 +1,27 @@
+id: task-matt-corallo-df7c00c7
+bip: 352
+kind: task
+status: open
+area: design
+part_of: bip21 update
+statement: "Specify how silent payment addresses go in bitcoin: URIs, preferably
+  as an sp query parameter (bitcoin:?sp=...), which works both with and without
+  an on-chain fallback address, so implementers know what to support."
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#issuecomment-1971422234
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2024-02-29
+  retrieved: 2026-11-17
+  quote: if you prefer to just have one, just do the second one and don't worry
+    about the first. The second supports both the onchain falback and the
+    no-fallback use-cases and is more generic.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
