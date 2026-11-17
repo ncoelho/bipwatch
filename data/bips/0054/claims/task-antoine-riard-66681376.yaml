@@ -1,0 +1,24 @@
+id: task-antoine-riard-66681376
+bip: 54
+kind: task
+status: addressed
+area: research
+statement: Check whether requiring the coinbase nLockTime to be set to the block
+  height breaks anything for Stratum V2 or mining job distribution.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CALZpt+GeEonE08V6tBoY0gsc1hj6r3y1yTUri_nCJ-=Lyq6jLA@mail.gmail.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-03-27
+  retrieved: 2026-11-17
+  quote: To be checked if it doesn't break anything w.rt Stratum V2 / mining job
+    distribution.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

@@ -1,0 +1,25 @@
+id: objection-eric-voskuil-6f90fc95
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Address the objection that invalidating 64-byte transactions does not
+  make block hashes unmalleable, because duplicate-transaction-hash malleation
+  remains, so this cannot be claimed as a benefit.
+subject:
+  name: Eric Voskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/be78e733-6e9f-4f4e-8dc2-67b79ddbf677n@googlegroups.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-06-24
+  retrieved: 2026-11-17
+  quote: This does not produce unmalleable block hashes. Duplicate tx hash
+    malleation remains in either case, to the same effect.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: objection-eric-voskuil-fb9dbcd8
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Answer Eric Voskuil's objection that invalidating all 64-byte
+  transactions does not allow earlier caching of block failures, only adds
+  redundant checks, and introduces a discontinuity in valid transaction sizes.
+subject:
+  name: Eric Voskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/9a4c4151-36ed-425a-a535-aa2837919a04n@googlegroups.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-06-28
+  retrieved: 2026-11-17
+  quote: A rule to prohibit *all* 64 byte txs is counterproductive as it only adds
+    additional checks on typically thousands of txs per block, serving no
+    purpose.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
