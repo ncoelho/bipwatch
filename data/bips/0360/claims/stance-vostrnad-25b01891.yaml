@@ -1,0 +1,27 @@
+id: stance-vostrnad-25b01891
+bip: 360
+kind: stance
+stance: nack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/1670
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+statement: vostrnad recommends removing the canary coins concept from BIP 360
+  entirely, noting that only about 0.02 BTC sits in obvious NUMS-point addresses
+  and agreeing with Murch's other criticisms.
+subject:
+  name: vostrnad
+  type: person
+applies_to_version: 0.5.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r1896090998
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2024-12-23
+  retrieved: 2026-11-17
+  quote: I'd recommend completely removing the concept of canary coins from the BIP.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
