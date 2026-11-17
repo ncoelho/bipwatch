@@ -1,0 +1,22 @@
+id: open-question-conduition-4d9a3dad
+bip: 360
+kind: open-question
+status: addressed
+area: ux
+statement: Settle on a name for the new output type (for example P2QRH, P2TSH or P2TTH).
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.9.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/-k1KNMwmXrdmMxpxMeJHAOYuKpMfeUpx7rqfIkta_NC6f7MtzlOYEdXbAhi-SztejTidNysh40ask8j9JNrzxoh1sUCH4F9tKV6tarkrWrc=@proton.me/
+  type: mailing-list
+  title: Human meaningful witness versioning
+  date: 2025-07-20
+  retrieved: 2026-11-17
+  quote: naming the output type (P2QRH? or P2TSH? or P2TTH? etc)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
