@@ -1,0 +1,25 @@
+id: stance-luke-dashjr-a6341e8f
+bip: 54
+kind: stance
+stance: nack
+scope: proposal
+statement: Luke Dashjr objects to the Consensus Cleanup draft's rule that fixes
+  the coinbase transaction's nLockTime. He argues nLockTime is the best place
+  for an extranonce and should not be used up without good reason.
+subject:
+  name: Luke Dashjr
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#discussion_r2029450291
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-04-04
+  retrieved: 2026-11-17
+  quote: nLockTime is the most ideal location to put an extranonce, so it seems
+    like a bad idea to burn it for no good reason.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
