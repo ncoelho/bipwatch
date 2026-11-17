@@ -1,0 +1,28 @@
+id: task-ajtowns-8582e452
+bip: 324
+kind: task
+status: open
+area: engineering
+part_of: rust-bitcoin p2p
+statement: Update rust-bitcoin, floresta and the bip324 crate so they accept the
+  13-byte ASCII encoding for message types that also have a one-byte short ID,
+  instead of rejecting it.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2086#issuecomment-3757559911
+  type: github
+  title: "BIP 324: Clarify equivalence between 1 and 13 byte message types"
+  date: 2026-01-16
+  retrieved: 2026-11-17
+  quote: "[rust-bitcoin](https://github.com/rust-bitcoin/rust-bitcoin/blob/4cfcd8\
+    cb9791a6dbf961e00303501f4235c0654a/p2p/src/message.rs#L1414-L1429) does not,
+    and will instead reject messages that don't use the assigned short id.
+    (Likewise for floresta and the bip324 crate, AIUI)"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
