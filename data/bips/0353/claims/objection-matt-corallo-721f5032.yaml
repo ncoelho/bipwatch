@@ -1,0 +1,24 @@
+id: objection-matt-corallo-721f5032
+bip: 353
+kind: objection
+status: addressed
+area: design
+statement: Decide whether to drop non-ASCII (punycode) name support, given how
+  hard it is to defend against homograph attacks.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#discussion_r1486590452
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-12
+  retrieved: 2026-11-17
+  quote: dealing with homograph attacks is...quite nontrivial. So, indeed, I'm
+    down to just remove all the non-ASCII support.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

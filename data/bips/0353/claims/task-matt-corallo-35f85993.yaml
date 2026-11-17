@@ -1,0 +1,24 @@
+id: task-matt-corallo-35f85993
+bip: 353
+kind: task
+status: addressed
+area: writing
+statement: State in the spec that all CNAME/DNAME records followed during
+  resolution, and the records they point to, must be DNSSEC-signed.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#discussion_r1486586764
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-12
+  retrieved: 2026-11-17
+  quote: I can add a few words just saying that all the CNAME/DNAME records as
+    well as the records they point to must be signed.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
