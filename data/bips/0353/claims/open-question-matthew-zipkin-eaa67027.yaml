@@ -1,0 +1,25 @@
+id: open-question-matthew-zipkin-eaa67027
+bip: 353
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether the DNS record name should keep the "user" label and
+  its current ordering, or put the underscored label first like TLSA-style names
+  (e.g. _bitcoin-payment.matt.mattcorallo.com).
+subject:
+  name: Matthew Zipkin
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#discussion_r1493759316
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-18
+  retrieved: 2026-11-17
+  quote: "Also why not order the labels with the underscores more like existing
+    schemes for example, TLSA:"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

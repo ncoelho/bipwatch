@@ -1,0 +1,27 @@
+id: objection-nickfarrow-30ece3a0
+bip: 353
+kind: objection
+status: open
+area: design
+statement: Address the privacy leak where anyone who knows a human-readable name
+  can repeatedly poll it to collect the rotated on-chain addresses and monitor
+  the recipient's incoming transactions, for example by discouraging on-chain
+  addresses in favour of silent payments or BOLT12.
+subject:
+  name: nickfarrow
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#discussion_r1560397314
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-04-11
+  retrieved: 2026-11-17
+  quote: By only rotating the onchain address after receiving a payment, anyone
+    with the human readable name can continually poll your address(es) and
+    monitor the onchain transactions you receive.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
