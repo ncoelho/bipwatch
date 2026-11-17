@@ -1,0 +1,25 @@
+id: task-dan-gould-48993826
+bip: 77
+kind: task
+status: addressed
+area: writing
+statement: Update BIP 77's Payjoin URI definition to accommodate BIP 321 URIs,
+  including support for future bitcoinaddress types.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#discussion_r2096247940
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2025-05-19
+  retrieved: 2026-11-17
+  quote: I'd like to make the appropriate accommodations for it after we get this
+    version merged if that seems possible, in particular to support future
+    `bitcoinaddress` types.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

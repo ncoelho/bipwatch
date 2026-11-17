@@ -1,0 +1,28 @@
+id: task-murch-2370a65f
+bip: 77
+kind: task
+status: addressed
+area: writing
+statement: Clarify the fragment parameter encoding so it is unambiguous that the
+  parameter key sits in the HRP position, followed by the '1' separator and the
+  bech32-encoded value without a checksum, with whole parameters joined by a
+  separator character.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#discussion_r2093612800
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2025-05-16
+  retrieved: 2026-11-17
+  quote: Given that bech32 also has a separator, this is ambiguous. I assume you
+    mean that the whole parameters (key:value) are separated by plusses. But
+    does that mean you still want to use the "1" separator between the 'HRP' and
+    the parameter value?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
