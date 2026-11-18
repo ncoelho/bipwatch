@@ -1,0 +1,26 @@
+id: open-question-stratospher-8e596c5e
+bip: 324
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether the transport layer should limit decoy packets sent
+  before the version packet and disconnect peers that never complete the
+  handshake.
+subject:
+  name: stratospher
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1498#discussion_r1348781729
+  type: github
+  title: "bip324: Remove garbage authentication packet (breaking change)"
+  date: 2023-10-06
+  retrieved: 2026-11-18
+  quote: since there's no limit on the number of decoy packets that a peer can
+    send (after sending the garbage terminator, before sending the version
+    packet), wouldn't we want to disconnect from the handshake at some point
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

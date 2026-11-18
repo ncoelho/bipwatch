@@ -1,0 +1,28 @@
+id: objection-ajtowns-426583a5
+bip: 324
+kind: objection
+status: addressed
+area: design
+statement: "Resolve how one-byte message type IDs are coordinated: proposals
+  made at the same time could pick the same byte, and adding a short ID to an
+  existing ASCII message type while staying compatible with older nodes would
+  serialize feature additions."
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1378#discussion_r990569523
+  type: github
+  title: "Add BIP324: v2 P2P Transport Protocol"
+  date: 2022-10-08
+  retrieved: 2026-11-18
+  quote: Updating this table seems like it might be annoying (both if proposals
+    made at the same time both choose the same byte, and if a proposal using
+    just an ascii string wants to add support for a one byte id, while remaining
+    compatible with nodes that aren't aware of the new id)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
