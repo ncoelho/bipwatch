@@ -1,0 +1,24 @@
+id: open-question-ysangkok-dfcf8059
+bip: 324
+kind: open-question
+status: addressed
+area: writing
+statement: Specify a single key size (128 or 256 bits) for the cipher, or
+  explain where the choice is made.
+subject:
+  name: ysangkok
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1024#discussion_r515547214
+  type: github
+  title: WIP [don't merge] Add BIP324 - Version 2 Peer-to-Peer Message Transport
+    Protocol
+  date: 2020-10-31
+  retrieved: 2026-11-18
+  quote: '"128 or 256 bits". Surely this must be fixed for the purposes of this spec?'
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

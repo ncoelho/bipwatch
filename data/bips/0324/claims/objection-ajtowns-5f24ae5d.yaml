@@ -1,0 +1,27 @@
+id: objection-ajtowns-5f24ae5d
+bip: 324
+kind: objection
+status: addressed
+area: design
+statement: Reserve one-byte message type IDs only for messages that benefit from
+  compression, rather than for messages such as VERSION, VERACK, SENDHEADERS,
+  WTXIDRELAY, SENDADDRV2 and GETADDR that are sent at most once per connection.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1378#discussion_r990567999
+  type: github
+  title: "Add BIP324: v2 P2P Transport Protocol"
+  date: 2022-10-08
+  retrieved: 2026-11-18
+  quote: "`VERSION`, `VERACK`,`SENDHEADERS`, `WTXIDRELAY`, and `SENDADDRV2` are
+    only sent at most once per connection; wouldn't it make sense to reserve
+    single byte message types for things that will give a meaningful benefit
+    from compression?"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

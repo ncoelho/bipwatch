@@ -1,0 +1,26 @@
+id: open-question-ajtowns-68d34f05
+bip: 324
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether the BIP-61 REJECT message, still supported by btcd,
+  should be given a one-byte message type ID in the v2 table.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1378#discussion_r990568481
+  type: github
+  title: "Add BIP324: v2 P2P Transport Protocol"
+  date: 2022-10-08
+  retrieved: 2026-11-18
+  quote: The
+    [BIP-61](https://github.com/bitcoin/bips/blob/master/bip-0061.mediawiki)
+    `REJECT` message isn't supported by bitcoin core since 0.19.0, but does seem
+    to still be supported by [btcd]
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
