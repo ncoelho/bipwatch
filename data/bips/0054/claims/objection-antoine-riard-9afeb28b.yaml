@@ -1,0 +1,25 @@
+id: objection-antoine-riard-9afeb28b
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Weigh the concern that the coinbase nLockTime should stay free as a
+  fixed-size extranonce field for ASIC controllers, rather than being committed
+  to the block height.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CALZpt+FyPWsbvNOo3jpSoBR08a-LXoZi40yaP5VFEaKm=NYRPw@mail.gmail.com/
+  type: mailing-list
+  title: Addressing remaining points on BIP 54
+  date: 2026-01-13
+  retrieved: 2026-11-18
+  quote: Luke's concern of letting the coinbase as a reserved field for now is not
+    without ground
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

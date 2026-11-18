@@ -1,0 +1,25 @@
+id: task-antoine-riard-3d6c8f34
+bip: 54
+kind: task
+status: open
+area: research
+statement: Build worst-case transactions that hit the 2500 sigops limit while
+  maximizing UTXO fetches, and measure whether the limit makes prevout lookup
+  DoS cheaper for an attacker, especially on low-memory nodes.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/e8d7baa0-5d96-4e41-8cb5-083742c61454n@googlegroups.com/
+  type: mailing-list
+  title: BIP54 implementation and test vectors
+  date: 2025-10-27
+  retrieved: 2026-11-18
+  quote: if worst-case transactions samples binding to the 2500 limit have been
+    crafted to maximize the number of UTXOs fetches
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

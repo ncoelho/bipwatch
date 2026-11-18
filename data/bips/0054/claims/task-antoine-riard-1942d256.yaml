@@ -1,0 +1,28 @@
+id: task-antoine-riard-1942d256
+bip: 54
+kind: task
+status: addressed
+area: engineering
+statement: Provide a reference implementation for BIP 54 and link it from the
+  BIP document so the signature operation limit can be reviewed in code.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/eb191c75-e245-4c40-8288-1d102477ccfdn@googlegroups.com/
+  type: mailing-list
+  title: Make pathological transactions with more than 2500 legacy signature
+    operations non-standard
+  date: 2025-07-03
+  retrieved: 2026-11-18
+  quote: |-
+    May I 
+    kindly note
+    there is no reference implementation attached in the current BIP54 document 
+    [1].
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

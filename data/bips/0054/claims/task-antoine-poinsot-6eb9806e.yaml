@@ -1,0 +1,24 @@
+id: task-antoine-poinsot-6eb9806e
+bip: 54
+kind: task
+status: open
+area: review
+statement: Have developers of alternative Bitcoin clients review the BIP 54 test
+  vectors and check them against their own implementations.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/V0qeILOW1CuH3NS2O8IUdQBK8i3o8LwzLNGf7xh1UO0S_Gzui1CpdP5NhdT3EtrW6NgqxJ538egeag6bVZoBX8C8E46ZYTCyPg1qBxkwCXs=@protonmail.com/
+  type: mailing-list
+  title: BIP54 implementation and test vectors
+  date: 2025-10-21
+  retrieved: 2026-11-18
+  quote: I'm seeking feedback on these test vectors from everybody but in
+    particular developers of alternative Bitcoin clients
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: task-antoine-poinsot-e4398b9b
+bip: 54
+kind: task
+status: addressed
+area: research
+part_of: slow blocks signet demo
+statement: Publish publicly verifiable evidence that slow blocks can be crafted,
+  such as a demonstration of an expensive but far-from-worst block, to support
+  the soft fork activation proposal.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/273ith9pPyipCI5hjV6ETFBzFhM4xFN8ptEFK8zc5N-jxGwOBvEn5r9Bt2c9p0A-6-3Bs53gONglzo1QfI4LCIOwkJgR9PWT4iQT_Wbpllo=@protonmail.com/
+  type: mailing-list
+  title: BIP 54 active on Bitcoin Inquisition
+  date: 2026-03-11
+  retrieved: 2026-11-18
+  quote: i do think it's necessary to provide some amount of publicly verifiable
+    information to support a soft fork activation proposal.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

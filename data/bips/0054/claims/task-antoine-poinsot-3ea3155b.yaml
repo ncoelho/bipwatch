@@ -1,0 +1,25 @@
+id: task-antoine-poinsot-3ea3155b
+bip: 54
+kind: task
+status: open
+area: engineering
+part_of: bitcoin core policy
+statement: Backport the non-standardness of transactions exceeding 2500 legacy
+  signature operations to earlier Bitcoin Core versions.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/49dyqqkf5NqGlGdinp6SELIoxzE_ONh3UIj6-EB8S804Id5yROq-b1uGK8DUru66eIlWuhb5R3nhRRutwuYjemiuOOBS2FQ4KWDnEh0wLuA=@protonmail.com/
+  type: mailing-list
+  title: Make pathological transactions with more than 2500 legacy signature
+    operations non-standard
+  date: 2025-07-02
+  retrieved: 2026-11-18
+  quote: as well as backported to previous versions
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

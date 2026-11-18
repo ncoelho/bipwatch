@@ -1,0 +1,25 @@
+id: objection-antoine-riard-64fc0246
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Weigh the objection that requiring the coinbase nLockTime to equal
+  the block height minus 1 removes about 19 bits that pooling protocols other
+  than Stratum v1/v2 could use as an extranonce.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CALZpt+Ff_L84d8LssCZWSBM0HPvfc5Z88jCGe0PBvExX7FxZaw@mail.gmail.com/
+  type: mailing-list
+  title: Addressing remaining points on BIP 54
+  date: 2026-01-13
+  retrieved: 2026-11-18
+  quote: Saying we should only consider stratum v1/v2 in matters of
+    consensus-design it can be a bit blindsighted imho.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

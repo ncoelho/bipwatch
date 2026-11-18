@@ -1,0 +1,26 @@
+id: objection-jeremy-3c38b39d
+bip: 54
+kind: objection
+status: open
+area: design
+statement: Address in the rationale whether invalidating 64-byte transactions
+  complicates future introspection or covenant constructions that would need a
+  valid way to add a padding byte without upsetting a state machine.
+subject:
+  name: jeremy
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/123e5545-2eda-4eca-9532-4f4cea2b83ecn@googlegroups.com/
+  type: mailing-list
+  title: "[BIP-0054] 64-Byte Transactions and Potential Legitimate Uses"
+  date: 2026-05-01
+  retrieved: 2026-11-18
+  quote: with introspection opcodes, it might create substantive additional
+    complexity to ensure that there is always a valid way to add a padding byte
+    without upsetting a state machine.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
