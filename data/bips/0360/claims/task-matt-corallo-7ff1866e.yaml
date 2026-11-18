@@ -1,0 +1,25 @@
+id: task-matt-corallo-7ff1866e
+bip: 360
+kind: task
+status: open
+area: engineering
+part_of: wallet support
+statement: Make quantum-safe wallets resist dusting attacks by spending all
+  outputs to the same address at once, so public keys are not revealed early.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/39f3c26e-2cb5-4dcb-a269-78c793174b2a@mattcorallo.com/
+  type: mailing-list
+  title: PQC - What is our Goal, Even?
+  date: 2026-04-19
+  retrieved: 2026-11-18
+  quote: any "quantum safe" wallet should handle this in the way Bitcoin Core does
+    - ensuring it spends all outputs with the same address at once
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
