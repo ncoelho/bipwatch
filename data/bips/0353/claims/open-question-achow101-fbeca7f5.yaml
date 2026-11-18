@@ -1,0 +1,26 @@
+id: open-question-achow101-fbeca7f5
+bip: 353
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether the PSBT DNSSEC proof field needs special handling for
+  RRSIGs that cover multiple RRs, which must all be included to verify the
+  signature.
+subject:
+  name: achow101
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1657#discussion_r1722332982
+  type: github
+  title: Add a PSBT per-output field for BIP 353 DNSSEC Proofs
+  date: 2024-08-19
+  retrieved: 2026-11-18
+  quote: Since a single RRSIG can cover multiple RRs in the response, those RRs
+    would need to be included in order to verify the signature. Does there need
+    to be any specific handling and/or disallowing of such RRSets?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

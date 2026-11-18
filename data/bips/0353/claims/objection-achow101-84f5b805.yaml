@@ -1,0 +1,23 @@
+id: objection-achow101-84f5b805
+bip: 353
+kind: objection
+status: addressed
+area: design
+statement: Decide whether the BIP 353 DNSSEC proof PSBT output field should take
+  the next sequential key type (0x09) instead of 0x35.
+subject:
+  name: achow101
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1657#discussion_r1722333423
+  type: github
+  title: Add a PSBT per-output field for BIP 353 DNSSEC Proofs
+  date: 2024-08-19
+  retrieved: 2026-11-18
+  quote: It'd be nice to just go in order... the next field available is 0x09.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
