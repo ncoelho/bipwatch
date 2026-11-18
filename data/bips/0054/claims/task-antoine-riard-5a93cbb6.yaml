@@ -1,0 +1,24 @@
+id: task-antoine-riard-5a93cbb6
+bip: 54
+kind: task
+status: open
+area: coordination
+statement: Resolve the remaining disagreement among developers over the rule
+  that invalidates 64-byte transactions.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CALZpt+GwkE1gH2-yrJXt=oqkrYR_ubdrMur0PG6aZvziJCHMLg@mail.gmail.com/
+  type: mailing-list
+  title: Getting BIP54 past the finish line
+  date: 2026-10-02
+  retrieved: 2026-11-18
+  quote: resolving the open technical conservations, especially on the
+    disagreement about the 64 bye transactions
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

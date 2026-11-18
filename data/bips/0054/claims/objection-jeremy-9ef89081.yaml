@@ -1,0 +1,25 @@
+id: objection-jeremy-9ef89081
+bip: 54
+kind: objection
+status: addressed
+area: writing
+statement: Revise or justify the rationale's claim that 64-byte transactions can
+  only pay anyone-can-spend or burn outputs, given proposed uses such as
+  timelocked miner donations, connector outputs and keyed-anchor shims.
+subject:
+  name: jeremy
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/123e5545-2eda-4eca-9532-4f4cea2b83ecn@googlegroups.com/
+  type: mailing-list
+  title: "[BIP-0054] 64-Byte Transactions and Potential Legitimate Uses"
+  date: 2026-05-01
+  retrieved: 2026-11-18
+  quote: "This is not strictly correct. Here are a few examples of current and
+    future uses for 64-byte transactions:"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: objection-josh-doman-9c25176b
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Josh Doman objected that BIP 54's timewarp fix rules out a future
+  soft fork for the nTime overflow, and proposed enforcing the timestamp rules
+  on a u64 coinbase timestamp instead; this needed a decision on whether to keep
+  the timewarp fix as specified.
+subject:
+  name: Josh Doman
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/e7a70843-a304-4d04-9365-08b8b4259caen@googlegroups.com/
+  type: mailing-list
+  title: Does GCC preclude a soft fork to handle timestamp overflow?
+  date: 2025-12-15
+  retrieved: 2026-11-18
+  quote: As written, BIP54 makes that soft fork impossible, leaving a hard fork as
+    the only option to resolve nTime overflow.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

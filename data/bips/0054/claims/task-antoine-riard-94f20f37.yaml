@@ -1,0 +1,24 @@
+id: task-antoine-riard-94f20f37
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: Explain in the rationale how historical BIP34-violating coinbases
+  with a final nSequence (which bypasses nLockTime) interact with the nLockTime
+  uniqueness rule, and why constraining nSequence is needed.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/e758af9b-72fc-4fdd-8e07-e1126635780an@googlegroups.com/
+  type: mailing-list
+  title: Addressing remaining points on BIP 54
+  date: 2026-01-30
+  retrieved: 2026-11-18
+  quote: that's where the BIP54 document and its implementation is silent
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

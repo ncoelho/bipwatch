@@ -1,0 +1,28 @@
+id: objection-portlandhodl-14e02f6d
+bip: 54
+kind: objection
+status: open
+area: design
+statement: "Address the confiscation risk of BIP 54's per-transaction signature
+  operation limit: transactions breaking that rule have already been mined (e.g.
+  txid bb41a757…), and outputs that could be spent the same way already exist
+  on-chain."
+subject:
+  name: PortlandHODL
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/78475572-3e52-44e4-8116-8f1a917995a4n@googlegroups.com/
+  type: mailing-list
+  title: "[BIP Proposal] Limit ScriptPubkey Size >= 520 Bytes Consensus."
+  date: 2025-10-18
+  retrieved: 2026-11-18
+  quote: I would actually go as far as to say the confiscation risk is higher with
+    the TX limit proposed in BIP54 as we actually have proof of redemption of
+    TXs that break that rule and the input set to do this already exists
+    on-chain
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

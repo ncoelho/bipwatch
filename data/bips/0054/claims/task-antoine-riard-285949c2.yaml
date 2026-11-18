@@ -1,0 +1,23 @@
+id: task-antoine-riard-285949c2
+bip: 54
+kind: task
+status: open
+area: review
+statement: Review and test the Bitcoin Core reference implementation of BIP 54
+  more thoroughly.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CALZpt+GwkE1gH2-yrJXt=oqkrYR_ubdrMur0PG6aZvziJCHMLg@mail.gmail.com/
+  type: mailing-list
+  title: Getting BIP54 past the finish line
+  date: 2026-10-02
+  retrieved: 2026-11-18
+  quote: more review and testing of the reference implementation is obviously needed.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

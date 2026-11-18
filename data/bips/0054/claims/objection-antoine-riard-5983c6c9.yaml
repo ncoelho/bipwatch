@@ -1,0 +1,26 @@
+id: objection-antoine-riard-5983c6c9
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Address the concern that committing the block height in the coinbase
+  nLockTime removes it as a possible extranonce, and weigh alternatives such as
+  a BIP141 commitment slot or splitting nLockTime into a 24-bit height and an
+  8-bit nonce.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/05f5b0ee-b487-4733-9860-ac0705b6b901n@googlegroups.com/
+  type: mailing-list
+  title: Addressing remaining points on BIP 54
+  date: 2026-01-08
+  retrieved: 2026-11-18
+  quote: An alternative can be to split the u32 nLocktime field in a u24 | u8,
+    with the u8 field being reserved as an extranonce.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
