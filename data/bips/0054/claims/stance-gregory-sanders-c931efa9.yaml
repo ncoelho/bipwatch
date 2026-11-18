@@ -1,0 +1,28 @@
+id: stance-gregory-sanders-c931efa9
+bip: 54
+kind: stance
+stance: ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bitcoin/pull/35793
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+statement: Gregory Sanders ACKed a revision of the Bitcoin Core pull request
+  implementing BIP 54 (Consensus Cleanup) without mainnet activation, noting
+  only minor changes since his previous review.
+subject:
+  name: Gregory Sanders
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#issuecomment-6350441043
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-10-22
+  retrieved: 2026-11-18
+  quote: ACK
+    https://github.com/bitcoin/bitcoin/pull/35793/commits/3f0f142b1d0d08a18152d6b100e12d1abf09d58e
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

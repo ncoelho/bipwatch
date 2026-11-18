@@ -1,0 +1,26 @@
+id: stance-nervana21-a1c8dcf0
+bip: 54
+kind: stance
+stance: concept-ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bitcoin/pull/35793
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+statement: nervana21 gave a concept ACK to the pull request implementing BIP 54
+  (Consensus Cleanup) without mainnet activation.
+subject:
+  name: nervana21
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#issuecomment-5766989488
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-09-21
+  retrieved: 2026-11-18
+  quote: Concept ACK
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

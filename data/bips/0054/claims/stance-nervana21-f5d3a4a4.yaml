@@ -1,0 +1,27 @@
+id: stance-nervana21-f5d3a4a4
+bip: 54
+kind: stance
+stance: ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bitcoin/pull/35793
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+statement: nervana21 reviewed the code implementing BIP 54 (Consensus Cleanup)
+  without mainnet activation and said it looks good, noting it needs a rebase
+  and offering only non-blocking suggestions.
+subject:
+  name: nervana21
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#pullrequestreview-5698121191
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-11-10
+  retrieved: 2026-11-18
+  quote: I've reviewed the code and it lgtm.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
