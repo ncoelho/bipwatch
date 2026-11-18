@@ -1,0 +1,29 @@
+id: stance-0xb10c-8c7a04af
+bip: 54
+kind: stance
+stance: concept-ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bitcoin/pull/35793
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+statement: 0xB10C supports implementing the BIP 54 Consensus Cleanup code and
+  functionality in this pull request without mainnet activation, so that it is
+  available, but says he lacks the expertise and bandwidth to review it in
+  detail soon.
+subject:
+  name: "0xB10C"
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#issuecomment-6186757010
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-10-15
+  retrieved: 2026-11-18
+  quote: Concept ACK on implementing BIP 54 code and functionality here without
+    mainnet activation to have it available.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

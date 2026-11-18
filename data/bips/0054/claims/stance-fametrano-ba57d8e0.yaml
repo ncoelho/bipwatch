@@ -1,0 +1,28 @@
+id: stance-fametrano-ba57d8e0
+bip: 54
+kind: stance
+stance: ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bitcoin/pull/35793
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+statement: Giovanni Fametrano tested the Bitcoin Core pull request implementing
+  BIP 54 without mainnet activation, cross-checking its sigop counting against
+  his btclib library and other vectors against his own checker, and found them
+  in agreement with passing tests.
+subject:
+  name: fametrano
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#issuecomment-6394623793
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-10-25
+  retrieved: 2026-11-18
+  quote: tACK 3f0f142b1d0d08a18152d6b100e12d1abf09d58e
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

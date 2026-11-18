@@ -1,0 +1,29 @@
+id: stance-murch-3f0f225d
+bip: 54
+kind: stance
+stance: nack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2326
+  title: "bip54: exempt genesis from coinbase checks"
+statement: "Murch opposes the proposed BIP 54 edit that exempts the Genesis
+  block from the coinbase checks. He calls it incorrect and redundant: the
+  specification already applies only to blocks after activation, and singling
+  out Genesis would imply every later block, including those before activation,
+  must follow the rule."
+subject:
+  name: Murch
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2326#discussion_r4289898723
+  type: github
+  title: "bip54: exempt genesis from coinbase checks"
+  date: 2026-10-16
+  retrieved: 2026-11-18
+  quote: This change seems incorrect and redundant to me.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: stance-evoskuil-b546f8b5
+bip: 54
+kind: stance
+stance: needs-research
+scope: proposal
+statement: evoskuil questions whether BIP 54's consensus rule against 64-byte
+  transactions is needed. He argues that malleation only affects node caching
+  optimizations and SPV inclusion proofs, that both can be mitigated without a
+  new rule, and that it is unclear whether removing that SPV complication is
+  worth the cost of a consensus change.
+subject:
+  name: evoskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2159#discussion_r3245207353
+  type: github
+  title: "BIP 54: clarify 64-byte transactions item description and rationale"
+  date: 2026-05-15
+  retrieved: 2026-11-18
+  quote: Eliminating (5) may or may not be worth the costs of adding a consensus rule.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
