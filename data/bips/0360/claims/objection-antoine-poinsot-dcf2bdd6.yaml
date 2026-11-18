@@ -1,0 +1,30 @@
+id: objection-antoine-poinsot-dcf2bdd6
+bip: 360
+kind: objection
+status: open
+area: design
+statement: Address the objection that BIP 360 neither enables a hash-based
+  post-quantum signature scheme nor disables elliptic-curve opcodes, which
+  Antoine Poinsot argues a useful PQ output type should do.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/b1Rnhsv35QTZwTeWM9R6Z9MGYw950zAXhs1QCuavxI64Y5CmSkYSXEP5bZgI3l1OY6V7PfBtBBAjXF1ACMznCg4VNrHJ1rMTD7qQM2hgtz8=@protonmail.com/
+  type: mailing-list
+  title: In defense of a PQ output type
+  date: 2026-04-15
+  retrieved: 2026-11-18
+  quote: >-
+    my argument applies to an output
+
+    type that enables a hash-based PQ signature scheme, and preferably disables
+    EC
+
+    opcodes. BIP 360 as it stands does neither.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: objection-matt-corallo-4706c1a7
+bip: 360
+kind: objection
+status: open
+area: design
+statement: Address whether P2MR's protection against long-exposure attacks is
+  meaningful given widespread address reuse in existing flows, which still
+  leaves wallets depending on a later soft fork disabling EC before a CRQC
+  arrives.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/D13BDAB9-111D-4F85-942E-58F56AEBA946@mattcorallo.com/
+  type: mailing-list
+  title: PQC - What is our Goal, Even?
+  date: 2026-04-18
+  retrieved: 2026-11-18
+  quote: Yes but we’re still back to square one - there’s still wallets relying on
+    a disable-EC soft fork before a CRQC.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

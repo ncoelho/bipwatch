@@ -1,0 +1,26 @@
+id: open-question-conduition-4f430cb1
+bip: 360
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether P2MR should require script trees of depth at least 1,
+  so users bear the cost of two spending paths and are pushed toward a
+  cooperative BIP340 leaf, avoiding the privacy-harming single-leaf pattern.
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/F0sSI3to9XSYx59YKqcc8WkM99HJwP18Cca56peuOmfMnPFEmptu61Mtjkv4wf8xLgzWbGjDKfyfn9Ipi7OvDuajiWU7NnhmjHhdjFpxOcM=@proton.me/
+  type: mailing-list
+  title: PQC - What is our Goal, Even?
+  date: 2026-05-21
+  retrieved: 2026-11-18
+  quote: What if we modified P2MR to require trees of at least depth 1? This way,
+    the user must bear the cost of at least two spending paths anyway, so they
+    might as well use one for an everyone-agrees BIP340 path.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
