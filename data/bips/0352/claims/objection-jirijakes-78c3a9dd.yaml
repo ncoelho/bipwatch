@@ -1,0 +1,26 @@
+id: objection-jirijakes-78c3a9dd
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Resolve the conflict between silent payment versions up to 31 and the
+  0–16 version limit in BIP 173/350 (which existing bech32 decoders enforce),
+  either by matching that range or by stating clearly that the range differs.
+subject:
+  name: jirijakes
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#issuecomment-2043940711
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2024-04-09
+  retrieved: 2026-11-18
+  quote: Not sure what would be the best way to deal with it – either allow the
+    same version range as BIP 350 or make it clear that the version range
+    differs from BIP 350.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
