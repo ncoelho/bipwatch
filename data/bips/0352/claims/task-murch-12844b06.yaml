@@ -1,0 +1,27 @@
+id: task-murch-12844b06
+bip: 352
+kind: task
+status: open
+area: coordination
+part_of: wallet support
+statement: Get BIP 352 adopted by more than one complete wallet implementation,
+  and finish the implementation the BIP's authors are working on, before the BIP
+  moves to Final.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1737#issuecomment-2588035258
+  type: github
+  title: Update BIP-352 status to Final
+  date: 2025-01-13
+  retrieved: 2026-11-18
+  quote: BIP 352 doesn’t seem widely adopted yet, afaia there is only a single
+    implementation, and especially the implementation the BIP’s authors are
+    contributing to is still in progress, so moving it to final seems premature.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

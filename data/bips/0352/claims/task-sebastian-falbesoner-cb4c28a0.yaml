@@ -1,0 +1,26 @@
+id: task-sebastian-falbesoner-cb4c28a0
+bip: 352
+kind: task
+status: addressed
+area: engineering
+statement: Replace the old secp256k1 Python module in the BIP 352 reference
+  implementation with one that follows best practices and has a cleaner API,
+  such as a proper point-at-infinity check.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1620#issuecomment-2177236187
+  type: github
+  title: "BIP-352: handle invalid privkey / pubkey sums for sending / scanning,
+    add changelog"
+  date: 2024-06-18
+  retrieved: 2026-11-18
+  quote: I thought that it's maybe worth it to update the secp256k1 implementation
+    to one that follows best practices and has a nicer API
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

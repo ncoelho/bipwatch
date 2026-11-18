@@ -1,0 +1,25 @@
+id: open-question-josibake-4587adbf
+bip: 352
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether silent payment address versions should match BIP 350's
+  version range (0..16) or explicitly document that they differ, since existing
+  Bech32 decoders may reject versions above 16.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#issuecomment-2056335996
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2024-04-15
+  retrieved: 2026-11-18
+  quote: Great point, I'm leaning towards having it match the versioning
+    restrictions of BIP350 to avoid unnecessary headache for implementers.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

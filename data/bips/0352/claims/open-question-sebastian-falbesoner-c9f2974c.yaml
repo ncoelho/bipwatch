@@ -1,0 +1,25 @@
+id: open-question-sebastian-falbesoner-c9f2974c
+bip: 352
+kind: open-question
+status: addressed
+area: writing
+statement: Decide the format of a changelog for BIP 352, including how verbose
+  it is and which versioning scheme it uses.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1620#issuecomment-2177236187
+  type: github
+  title: "BIP-352: handle invalid privkey / pubkey sums for sending / scanning,
+    add changelog"
+  date: 2024-06-18
+  retrieved: 2026-11-18
+  quote: curious to get opinions from the BIP authors about the details
+    (verbosity, concrete versioning used etc.)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
