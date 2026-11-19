@@ -1,0 +1,23 @@
+id: task-ariard-cef1ed5b
+bip: 54
+kind: task
+status: open
+area: testing
+statement: Add test vectors for 64-byte transactions that carry a full or an
+  empty Taproot annex.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2015#issuecomment-3594569866
+  type: github
+  title: "BIP54: Consensus Cleanup test vectors"
+  date: 2025-12-01
+  retrieved: 2026-11-19
+  quote: 64-byte transaction with Taproot annex full / empty
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null

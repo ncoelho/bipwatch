@@ -1,0 +1,23 @@
+id: task-ariard-64e20eeb
+bip: 54
+kind: task
+status: open
+area: testing
+statement: Add sigops-limit test vectors for segwit scripts using CHECKMULTISIG
+  preceded by OP_2 through OP_16.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2015#issuecomment-3594569866
+  type: github
+  title: "BIP54: Consensus Cleanup test vectors"
+  date: 2025-12-01
+  retrieved: 2026-11-19
+  quote: "max-sigops: segwit from OP_2 to OP_16"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null
