@@ -1,0 +1,24 @@
+id: open-question-let-the-dreamers-rise-02b1a384
+bip: 360
+kind: open-question
+status: open
+area: engineering
+statement: Decide whether the Python reference implementation's tapleaf_hash
+  should reject empty leaf scripts, or accept them as consensus would.
+subject:
+  name: let-the-dreamers-rise
+  type: person
+applies_to_version: 0.12.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2273
+  type: github
+  title: "bip360: bound merkle depth at 128 and replace validation asserts in
+    ref-impl"
+  date: 2026-09-02
+  retrieved: 2026-11-19
+  quote: "`tapleaf_hash` refuses empty scripts (deliberate, or defensive?)"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null
