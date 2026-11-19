@@ -1,0 +1,26 @@
+id: objection-achow101-dec5d536
+bip: 352
+kind: objection
+status: addressed
+area: design
+part_of: BIP 392
+statement: Keep the wallet birthday out of the sp() descriptor, since it is
+  metadata that is not needed to compute or spend output scripts.
+subject:
+  name: achow101
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2047#issuecomment-3741330405
+  type: github
+  title: "BIP392: Silent Payment Output Script Descriptors"
+  date: 2026-01-13
+  retrieved: 2026-11-19
+  quote: A birthday is purely metadata in that regard - it does not provide any
+    necessary information to generate the output scripts or the private keys
+    required to spend them.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null
