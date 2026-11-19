@@ -1,0 +1,26 @@
+id: objection-ariard-318e7028
+bip: 54
+kind: objection
+status: addressed
+area: writing
+statement: Decide whether to split the Consensus Cleanup into one BIP per fix,
+  so that each mitigation can carry its own policy rules, rationale and notes on
+  downstream impact.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#issuecomment-2817376082
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-04-20
+  retrieved: 2026-11-19
+  quote: For the single aspect of adding more policy rules in the coming fututre,
+    with their rationales and how it can impact downstream softwares, it’s
+    worthy to split them, in my opinion.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null

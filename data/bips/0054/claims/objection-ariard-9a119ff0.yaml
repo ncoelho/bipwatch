@@ -1,0 +1,26 @@
+id: objection-ariard-9a119ff0
+bip: 54
+kind: objection
+status: addressed
+area: writing
+statement: Decide whether the four consensus fixes (timewarp, worst-case block
+  validation, 64-byte transactions, duplicate transactions) should be split into
+  separate BIPs instead of one bundled document.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#issuecomment-2814266787
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-04-18
+  retrieved: 2026-11-19
+  quote: This doesn’t say what is the BIP editorial policy followed here in matter
+    of distributing multiple consensus changes in different BIPs as we have here
+    4 proposed fixes gathered in a single document
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null

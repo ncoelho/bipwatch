@@ -1,0 +1,27 @@
+id: objection-antoine-poinsot-4b499429
+bip: 54
+kind: objection
+status: open
+area: design
+part_of: getblocktemplate support
+statement: Decide whether getblocktemplate should expose the BIP 54 coinbase
+  locktime and sequence fields; Antoine Poinsot argues they are redundant with
+  the block height pools already have, and that requiring a newer Bitcoin Core
+  may raise the bar for compatibility rather than lower it.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2097#issuecomment-3878382662
+  type: github
+  title: "bip54: add coinbase locktime and sequence to GBT"
+  date: 2026-02-10
+  retrieved: 2026-11-19
+  quote: i don't think providing the fields in the GBT response is materially
+    lowering the bar to make their software compatible
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: task-sjors-1c61a9fd
+bip: 54
+kind: task
+status: open
+area: design
+part_of: mining pool support
+statement: Decide whether BIP 54 should specify new getblocktemplate (BIP 22)
+  fields `lock_time` and `sequence` that give miners the required coinbase
+  values, and review the Bitcoin Core implementation of them.
+subject:
+  name: Sjors
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2097
+  type: github
+  title: "bip54: add coinbase locktime and sequence to GBT"
+  date: 2026-02-09
+  retrieved: 2026-11-19
+  quote: "This PR extends BIP54 with the following BIP22 fields
+    (`getblocktemplate` RPC):"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null
