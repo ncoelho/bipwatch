@@ -1,0 +1,27 @@
+id: stance-ajtowns-142b69f6
+bip: 54
+kind: stance
+stance: ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99
+  title: BIP54 "Consensus Cleanup" implementation
+statement: ajtowns considers the BIP 54 Consensus Cleanup implementation pull
+  request for Bitcoin Inquisition mergeable. He says none of his review comments
+  are show-stoppers.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#pullrequestreview-3676830481
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-01-19
+  retrieved: 2026-11-19
+  quote: I don't think any of these are show-stoppers for merging in inquisition.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null

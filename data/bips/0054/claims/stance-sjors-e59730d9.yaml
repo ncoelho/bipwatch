@@ -1,0 +1,29 @@
+id: stance-sjors-e59730d9
+bip: 54
+kind: stance
+stance: approach-ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99
+  title: BIP54 "Consensus Cleanup" implementation
+statement: Sjors reviewed the consensus-change commits in the Bitcoin Core BIP54
+  implementation PR and found them consistent with the BIP54 specification,
+  praising the PR's organization; he has not yet reviewed the tests in detail.
+subject:
+  name: Sjors
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#issuecomment-3645534859
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2025-12-12
+  retrieved: 2026-11-19
+  quote: The consensus changes, with respect to their specification in
+    [BIP54](https://github.com/bitcoin/bips/blob/master/bip-0054.md), look good
+    to me
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null
