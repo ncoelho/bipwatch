@@ -1,0 +1,26 @@
+id: task-danielabrozzoni-b743dcd6
+bip: 324
+kind: task
+status: addressed
+area: writing
+part_of: BIP 333
+statement: Add a short rationale note to the alias assignment BIP explaining why
+  aliases must not use id=0 (BIP 324 reserves a zero first byte to signal a
+  12-byte ASCII message type).
+subject:
+  name: danielabrozzoni
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2301#discussion_r4379557887
+  type: github
+  title: "BIP333: BIP324 One-Byte Message Type ID Alias Assignment"
+  date: 2026-10-26
+  retrieved: 2026-11-19
+  quote: "nit: I would add a footnote or short sentence explaining why, I was
+    confused at first and had to read BIP324 to find out why :)"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null

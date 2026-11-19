@@ -1,0 +1,27 @@
+id: task-jonatack-7421835b
+bip: 324
+kind: task
+status: open
+area: writing
+part_of: BIP 333
+statement: Clarify in the set324alias spec whether sending multiple set324alias
+  messages on a connection is allowed or whether nodes MUST send at most one,
+  since the update-ordering example can be read as implying updates are valid.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2301#discussion_r4097833948
+  type: github
+  title: "BIP333: BIP324 One-Byte Message Type ID Alias Assignment"
+  date: 2026-09-24
+  retrieved: 2026-11-19
+  quote: this update in order example could maybe be interpreted to imply update
+    messages are valid instead of order within the same payload vector. Maybe
+    clarify to either allow multiple messages or MUST send at most one.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null

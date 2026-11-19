@@ -1,0 +1,24 @@
+id: open-question-jonatack-7223d0f9
+bip: 324
+kind: open-question
+status: open
+area: writing
+part_of: BIP 333
+statement: Specify in the alias-assignment draft whether a sender may still use
+  long-form message types alongside the aliases it has advertised.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2301#discussion_r4097905916
+  type: github
+  title: "BIP333: BIP324 One-Byte Message Type ID Alias Assignment"
+  date: 2026-09-24
+  retrieved: 2026-11-19
+  quote: Can the sender mix alias and long-form after advertising aliases?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null
