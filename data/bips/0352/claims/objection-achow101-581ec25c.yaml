@@ -1,0 +1,26 @@
+id: objection-achow101-581ec25c
+bip: 352
+kind: objection
+status: addressed
+area: design
+part_of: BIP 392
+statement: Allow the scan and spend keys to be given as two separate key
+  expressions in sp(), so that BIP 352 derivation paths can be used, rather than
+  only as a concatenated spscan/spspend encoding.
+subject:
+  name: achow101
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2047#issuecomment-3741330405
+  type: github
+  title: "BIP392: Silent Payment Output Script Descriptors"
+  date: 2026-01-13
+  retrieved: 2026-11-19
+  quote: I also don't see why `spspend` and `spscan` need to be the spend and scan
+    keys concatenated for the encoding.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null

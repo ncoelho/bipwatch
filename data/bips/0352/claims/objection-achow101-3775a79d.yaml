@@ -1,0 +1,28 @@
+id: objection-achow101-3775a79d
+bip: 352
+kind: objection
+status: open
+area: design
+part_of: BIP 392
+statement: Reconsider Bech32m encoding of private keys in spscan/spspend, since
+  its error detection and correction may give false negatives or correct to the
+  wrong key when there are enough errors.
+subject:
+  name: achow101
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2047#issuecomment-3741330405
+  type: github
+  title: "BIP392: Silent Payment Output Script Descriptors"
+  date: 2026-01-13
+  retrieved: 2026-11-19
+  quote: IIRC this is actually one of the reasons that bech32 was never proposed
+    for private keys since the error detection and correction has the
+    possibility of false negatives and/or correcting to the wrong key if there
+    are enough errors.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null
