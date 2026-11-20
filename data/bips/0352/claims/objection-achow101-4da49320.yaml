@@ -1,0 +1,27 @@
+id: objection-achow101-4da49320
+bip: 352
+kind: objection
+status: open
+area: design
+part_of: BIP 392
+statement: Resolve the objection that the single-key sp(spscan/spspend) form is
+  a bespoke, redundant encoding that does not fit the descriptor paradigm,
+  either by dropping it or by justifying it.
+subject:
+  name: achow101
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2047#issuecomment-3781874476
+  type: github
+  title: "BIP392: Silent Payment Output Script Descriptors"
+  date: 2026-01-22
+  retrieved: 2026-11-20
+  quote: I guess the hangup that I have with the single key expression, even in a
+    world with both types, is that it fundamentally doesn't fit into the
+    descriptor paradigm at all.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null

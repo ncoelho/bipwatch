@@ -1,0 +1,26 @@
+id: objection-jvgelder-d0c36e08
+bip: 352
+kind: objection
+status: addressed
+area: design
+part_of: BIP 392
+statement: Reconsider including birthday heights and labels in the sp()
+  descriptor, since they are scanning hints that are not needed for recovery and
+  labels may change over time.
+subject:
+  name: jvgelder
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2047#issuecomment-3871686012
+  type: github
+  title: "BIP392: Silent Payment Output Script Descriptors"
+  date: 2026-02-09
+  retrieved: 2026-11-20
+  quote: To me heights and labels are somewhat of a hint to the the wallet (a
+    shortcut to scan less basically) and not necessary for recovery.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null

@@ -1,0 +1,27 @@
+id: objection-macgyver13-f08709eb
+bip: 352
+kind: objection
+status: addressed
+area: design
+part_of: BIP 392
+statement: Move label information out of the sp() descriptor, since labels
+  change over time and need extra mapping data better suited to a wallet backup
+  format.
+subject:
+  name: macgyver13
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2047#issuecomment-3872264043
+  type: github
+  title: "BIP392: Silent Payment Output Script Descriptors"
+  date: 2026-02-09
+  retrieved: 2026-11-20
+  quote: labels will change over time and should have additional mapping
+    information like "name" or "category" for each integer. For that reason I
+    would think wallet backup is the better location.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null
