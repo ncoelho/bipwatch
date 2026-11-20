@@ -1,0 +1,26 @@
+id: open-question-jeremyrubin-e4d6f2bc
+bip: 54
+kind: open-question
+status: open
+area: writing
+part_of: mining pool support
+statement: Decide whether the getblocktemplate fields for the coinbase locktime
+  and sequence should be specified in a separate BIP rather than in BIP 54
+  itself.
+subject:
+  name: JeremyRubin
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2097#issuecomment-4567944865
+  type: github
+  title: "bip54: add coinbase locktime and sequence to GBT"
+  date: 2026-05-28
+  retrieved: 2026-11-20
+  quote: it seems like the advice above is that it would be best as a separate BIP
+    from the actually protocl changes?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null

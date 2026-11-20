@@ -1,0 +1,26 @@
+id: task-vostrnad-c8ed0a04
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: Reword the signature operation limit section so it does not imply
+  that 2500 is the maximum number of CHECKSIG and CHECKMULTISIG opcodes, and
+  explain how each opcode contributes to the total.
+subject:
+  name: vostrnad
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#discussion_r2021777231
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-03-31
+  retrieved: 2026-11-20
+  quote: avoid implying that 2500 is the maximum count of CHECKSIG and
+    CHECKMULTISIG opcodes before explaining how they actually contribute to the
+    total
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null

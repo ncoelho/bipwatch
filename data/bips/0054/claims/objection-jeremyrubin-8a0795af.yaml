@@ -1,0 +1,26 @@
+id: objection-jeremyrubin-8a0795af
+bip: 54
+kind: objection
+status: open
+area: activation
+statement: Resolve the objection that BIP 54 was marked Complete without
+  deployment parameters, which could be added or changed later; consider moving
+  them to a separate deployment-parameters BIP that stays incomplete until the
+  deployment is buried.
+subject:
+  name: JeremyRubin
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2172#issuecomment-4549357344
+  type: github
+  title: "BIP 54: progress to Complete"
+  date: 2026-05-26
+  retrieved: 2026-11-20
+  quote: Having a Separate Deployment Params BIP which stays incomplete till
+    buried seems better?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null

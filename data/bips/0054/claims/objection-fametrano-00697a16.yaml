@@ -1,0 +1,26 @@
+id: objection-fametrano-00697a16
+bip: 54
+kind: objection
+status: addressed
+area: writing
+statement: Clarify whether the genesis block is exempt from the coinbase
+  nLockTime/nSequence rule and the timewarp timestamp rule, since the test
+  vectors start from genesis and genesis has no previous block.
+subject:
+  name: fametrano
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2326#issuecomment-6075441961
+  type: github
+  title: "bip54: exempt genesis from coinbase checks"
+  date: 2026-10-09
+  retrieved: 2026-11-20
+  quote: "The timewarp rule has the same gap: at N=0 there is no T<sub>N−1</sub>,
+    and `timestamps.json` also starts from genesis. One sentence could exempt
+    genesis from both rules."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null

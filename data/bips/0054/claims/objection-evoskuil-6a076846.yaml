@@ -1,0 +1,26 @@
+id: objection-evoskuil-6a076846
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Address the concern that making one specific transaction size invalid
+  is itself a footgun, since transaction creation and validation must avoid that
+  size.
+subject:
+  name: evoskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2159#issuecomment-4461983422
+  type: github
+  title: "BIP 54: clarify 64-byte transactions item description and rationale"
+  date: 2026-05-15
+  retrieved: 2026-11-20
+  quote: One could also raise the real possibility that a specific size
+    transaction being invalid is also a footgun, as transaction creation (and
+    validation) must avoid it.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null

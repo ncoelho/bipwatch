@@ -1,0 +1,25 @@
+id: open-question-ajtowns-df955344
+bip: 54
+kind: open-question
+status: open
+area: activation
+statement: Decide whether BIP 54's activation parameters will be added to the
+  BIP itself after it reached Complete, or specified in a separate deployment
+  BIP.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2172#issuecomment-4526847793
+  type: github
+  title: "BIP 54: progress to Complete"
+  date: 2026-05-23
+  retrieved: 2026-11-20
+  quote: will activation params for bip54 go in a separate bip (similar to 448 vs
+    446/348/349?), or something else?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null

@@ -1,0 +1,24 @@
+id: task-evoskuil-1fc5e31c
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: Present all known SPV verifier workarounds for the 64-byte
+  transaction Merkle weakness in the rationale, neutrally, instead of only the
+  proposal's preferred framing.
+subject:
+  name: evoskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2159#issuecomment-4462067010
+  type: github
+  title: "BIP 54: clarify 64-byte transactions item description and rationale"
+  date: 2026-05-15
+  retrieved: 2026-11-20
+  quote: There is no harm in presenting all three, and any others.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null
