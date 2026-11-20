@@ -1,0 +1,26 @@
+id: task-sebastian-falbesoner-a7199ddf
+bip: 352
+kind: task
+status: addressed
+area: testing
+statement: 'Use a more compact encoding for the K_max test vectors: a "count"
+  field for sender recipients and an optional "n_outputs" field in place of full
+  output data on the receiver side.'
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2106#issuecomment-3961384931
+  type: github
+  title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
+  date: 2026-02-25
+  retrieved: 2026-11-20
+  quote: We could make the "addresses" and "outputs" fields optional if
+    "n_outputs" is provided instead, and take use of that for the new K_max test
+    cases.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null
