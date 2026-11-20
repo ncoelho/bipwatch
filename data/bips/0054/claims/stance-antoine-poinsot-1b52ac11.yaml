@@ -1,0 +1,28 @@
+id: stance-antoine-poinsot-1b52ac11
+bip: 54
+kind: stance
+stance: concept-ack
+scope: proposal
+statement: Antoine Poinsot argues that preventing the forward blocks exploit is
+  an intended goal of the Consensus Cleanup timewarp fix, not a side effect. He
+  sees it as a benefit that any lifting of block space limits would then need
+  users to opt into a consensus change rather than being forced on them through
+  an exploit.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2344#issuecomment-7014007812
+  type: github
+  title: "BIP54: Add a footnote mentioning the rule-out of forward block"
+  date: 2026-11-19
+  retrieved: 2026-11-20
+  quote: i do see as a benefit that it makes it necessary to convince Bitcoin
+    users to opt into a consensus change that lifts block space constraints,
+    instead of being able to force it onto them through an exploit.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null

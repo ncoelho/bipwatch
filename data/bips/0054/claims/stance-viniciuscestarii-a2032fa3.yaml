@@ -1,0 +1,30 @@
+id: stance-viniciuscestarii-a2032fa3
+bip: 54
+kind: stance
+stance: ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bitcoin/pull/35793
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+statement: ViniciusCestarii ACKed the Bitcoin Core pull request implementing BIP
+  54 (Consensus Cleanup) without mainnet activation, at commit 58b418f, after
+  confirming the added tests kill the two mutants he had tested against.
+subject:
+  name: ViniciusCestarii
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#pullrequestreview-5920611512
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-11-16
+  retrieved: 2026-11-20
+  quote: |-
+    ACK 58b418f85582b559ad9ac718e42251e5bc5aab3a
+
+    Can confirm the 2 mutants were killed.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null
