@@ -1,0 +1,24 @@
+id: task-sjors-7001bd43
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: Explain in a footnote why the coinbase transaction is exempt from the
+  signature operations limit (its scriptSig size is constrained so the limit
+  cannot be reached).
+subject:
+  name: Sjors
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#discussion_r2016069142
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-03-27
+  retrieved: 2026-11-20
+  quote: "And then explain the coinbase exception:"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null

@@ -1,0 +1,23 @@
+id: task-antoine-poinsot-9e9db59b
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: Explicitly mention the VERIFY counterparts (CHECKSIGVERIFY,
+  CHECKMULTISIGVERIFY) in the signature operations limit specification.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#discussion_r2023223400
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-04-01
+  retrieved: 2026-11-20
+  quote: Good point for the `VERIFY` version of opcodes.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null

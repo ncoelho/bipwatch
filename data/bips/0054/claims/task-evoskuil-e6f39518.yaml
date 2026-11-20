@@ -1,0 +1,24 @@
+id: task-evoskuil-e6f39518
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: Describe the existing SPV workarounds that invalidating 64-byte
+  transactions replaces in enough detail for readers to weigh the tradeoff.
+subject:
+  name: evoskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2159#issuecomment-4461983422
+  type: github
+  title: "BIP 54: clarify 64-byte transactions item description and rationale"
+  date: 2026-05-15
+  retrieved: 2026-11-20
+  quote: The actual mitigation that is being replaced should be described with
+    sufficient detail for people to make an informed decision.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null
