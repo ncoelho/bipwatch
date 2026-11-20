@@ -1,0 +1,26 @@
+id: objection-hunter-beast-4f9aea39
+bip: 360
+kind: objection
+status: addressed
+area: design
+statement: Resolve the objection to supporting several post-quantum signature
+  algorithms in one output and telling them apart by public key length, or
+  justify the added complexity.
+subject:
+  name: Hunter Beast
+  type: person
+applies_to_version: 0.5.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#issuecomment-2541736709
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2024-12-13
+  retrieved: 2026-11-20
+  quote: This avoids using length as a signaling mechanism. Currently length
+    works, but what if two algorithms have the same length public key? Do we
+    lengthen one?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null
