@@ -1,0 +1,23 @@
+id: objection-jonatack-da49d5c1
+bip: 54
+kind: objection
+status: addressed
+area: writing
+statement: Decide whether to split the Consensus Cleanup into separate focused
+  BIPs, one per issue and mitigation, rather than bundling them in one document.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#discussion_r2056935197
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-04-23
+  retrieved: 2026-11-21
+  quote: Better yet, a focused BIP per issue and its mitigation.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-21
+  reviewed_by: null

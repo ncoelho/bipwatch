@@ -1,0 +1,24 @@
+id: task-murch-d68911be
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: Add text explaining that miners must upgrade to produce blocks valid
+  under the new rules.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#discussion_r2047853539
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-04-16
+  retrieved: 2026-11-21
+  quote: I think it wouldn’t be unreasonable to mention that miners will have to
+    upgrade to produce valid blocks, even if it may seem obvious.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-21
+  reviewed_by: null
