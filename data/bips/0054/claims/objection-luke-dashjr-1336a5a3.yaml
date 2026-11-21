@@ -1,0 +1,24 @@
+id: objection-luke-dashjr-1336a5a3
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Resolve the objection that requiring the coinbase nLockTime to equal
+  the block height minus 1 takes away the best place for an extranonce.
+subject:
+  name: Luke Dashjr
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#discussion_r2029450291
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-04-04
+  retrieved: 2026-11-21
+  quote: nLockTime is the most ideal location to put an extranonce, so it seems
+    like a bad idea to burn it for no good reason.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-21
+  reviewed_by: null
