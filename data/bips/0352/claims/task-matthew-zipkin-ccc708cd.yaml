@@ -1,0 +1,26 @@
+id: task-matthew-zipkin-ccc708cd
+bip: 352
+kind: task
+status: addressed
+area: writing
+statement: Link the footnote on light clients to the light client appendix or
+  note that per-transaction tweak data must come from a trusted source in
+  addition to BIP158 filters.
+subject:
+  name: Matthew Zipkin
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1218471896
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-05
+  retrieved: 2026-11-22
+  quote: I think you should either link to the light clients section below, or
+    mention in this footnote that the 32-byte tweak for each TX in every block
+    must be provided by a trusted source in addition to BIP158 data
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

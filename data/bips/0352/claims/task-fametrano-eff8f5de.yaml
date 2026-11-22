@@ -1,0 +1,29 @@
+id: task-fametrano-eff8f5de
+bip: 352
+kind: task
+status: open
+area: writing
+part_of: BIP 375
+statement: State explicitly in BIP 375 that the lexicographic sort key for k
+  ordering is the serialized 66-byte PSBT_OUT_SP_V0_INFO value, ascending, with
+  ties broken by output index.
+subject:
+  name: fametrano
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2207#issuecomment-5296095285
+  type: github
+  title: "BIP-375: correct labeled test vectors to include labeled-spend key in
+    PSBT_OUT_SP_V0_INFO"
+  date: 2026-08-14
+  retrieved: 2026-11-22
+  quote: |-
+    have the prose name the sort key — the serialized
+    `PSBT_OUT_SP_V0_INFO`, ascending, ties by output index, which is what
+    this PR implements.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

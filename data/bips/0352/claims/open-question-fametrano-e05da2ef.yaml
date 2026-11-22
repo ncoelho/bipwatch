@@ -1,0 +1,27 @@
+id: open-question-fametrano-e05da2ef
+bip: 352
+kind: open-question
+status: addressed
+area: design
+part_of: BIP 375
+statement: Resolve the contradiction in BIP 375 between the text (sort silent
+  payment codes lexicographically to assign k) and the validator/test vectors
+  (assign k by output index) by choosing one ordering rule.
+subject:
+  name: fametrano
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2256#issuecomment-5572382055
+  type: github
+  title: "bip-0375: assign k in output index order, fix labeled test vectors"
+  date: 2026-09-07
+  retrieved: 2026-11-22
+  quote: BIP375's text says to sort the silent payment codes lexicographically to
+    assign *k*; instead, its validator and its vectors assign *k* by output
+    index.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

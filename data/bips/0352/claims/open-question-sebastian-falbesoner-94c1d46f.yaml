@@ -1,0 +1,26 @@
+id: open-question-sebastian-falbesoner-94c1d46f
+bip: 352
+kind: open-question
+status: addressed
+area: testing
+statement: Decide whether BIP 352 test vectors should cover consensus-invalid
+  transactions, or instead state in the BIP that scanning assumes
+  consensus-valid transactions.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.1.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2339#issuecomment-6413281281
+  type: github
+  title: "Bip352: Add consensus-validity requirement to Scanning requirements"
+  date: 2026-10-26
+  retrieved: 2026-11-22
+  quote: it's not clear to me whether we should have test vectors for those in the
+    first place. An alternative could be to state more clearly in the BIP that
+    scanning assumes consensus-valid transactions
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

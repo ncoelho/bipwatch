@@ -1,0 +1,30 @@
+id: objection-fametrano-9bb55268
+bip: 352
+kind: objection
+status: addressed
+area: design
+part_of: BIP 375
+statement: Decide whether silent payment k values within a scan-key group are
+  assigned by lexicographic order of codes or by output index, given that output
+  index order is cheaper and reordering invariance is unavailable once scripts
+  are set.
+subject:
+  name: fametrano
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2207#issuecomment-5296095285
+  type: github
+  title: "BIP-375: correct labeled test vectors to include labeled-spend key in
+    PSBT_OUT_SP_V0_INFO"
+  date: 2026-08-14
+  retrieved: 2026-11-22
+  quote: |-
+    So index order looks like the cheaper rule, and it is what all three
+    shipped artefacts did before this PR. That is an argument for amending
+    the two sentences at L240-241 instead
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

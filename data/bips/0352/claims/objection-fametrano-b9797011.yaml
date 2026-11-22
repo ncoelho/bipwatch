@@ -1,0 +1,27 @@
+id: objection-fametrano-b9797011
+bip: 352
+kind: objection
+status: addressed
+area: design
+part_of: BIP 375
+statement: Decide whether BIP 375 assigns k values among silent payment outputs
+  sharing a scan key by lexicographic order of the silent payment codes or by
+  output index; output index is argued to be cheaper and to need no canonical
+  encoding.
+subject:
+  name: fametrano
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2207#issuecomment-5597937617
+  type: github
+  title: "BIP-375: correct labeled test vectors to include labeled-spend key in
+    PSBT_OUT_SP_V0_INFO"
+  date: 2026-09-09
+  retrieved: 2026-11-22
+  quote: nACK the switch to lexicographic ordering.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

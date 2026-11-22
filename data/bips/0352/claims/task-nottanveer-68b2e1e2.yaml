@@ -1,0 +1,25 @@
+id: task-nottanveer-68b2e1e2
+bip: 352
+kind: task
+status: open
+area: review
+part_of: wallet support
+statement: Review the embit library pull request that implements BIP 352 silent payments.
+subject:
+  name: notTanveer
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2312#issuecomment-5879073773
+  type: github
+  title: "BIP-352: add sprt as the regtest hrp"
+  date: 2026-09-28
+  retrieved: 2026-11-22
+  quote: i did follow the BIP in my
+    [embit](https://github.com/diybitcoinhardware/embit/pull/145/changes#diff-c889c77b7766b354650c5b2f93f344bfd82eb2fe596c717d64d260dadb8c737f)
+    implementation
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null
