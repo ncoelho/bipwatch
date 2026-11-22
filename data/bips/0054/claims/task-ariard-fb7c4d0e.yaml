@@ -1,0 +1,24 @@
+id: task-ariard-fb7c4d0e
+bip: 54
+kind: task
+status: open
+area: review
+statement: Review the Bitcoin Core implementation of the BIP 54 signature
+  operations limit that fixes long block validation times.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#pullrequestreview-4803507464
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-07-29
+  retrieved: 2026-11-22
+  quote: Let's start at least the review for the fix of the long validation block
+    time.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

@@ -1,0 +1,28 @@
+id: task-ariard-78edea83
+bip: 54
+kind: task
+status: open
+area: testing
+statement: Add a test vector for a Taproot transaction with an annex near the
+  64-byte size boundary, for example a 65-byte transaction whose 1-byte annex is
+  stripped, to check the size rule has no unintended interaction with annex
+  handling.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2015#discussion_r2575597947
+  type: github
+  title: "BIP54: Consensus Cleanup test vectors"
+  date: 2025-12-01
+  retrieved: 2026-11-22
+  quote: What if a 65-byte Taproot transaction is stripped of its 1-byte annex at
+    the p2p-level, normally the annex is committed in the taproot signature so
+    it should fail at signature verification, but the tx should be now rejected
+    early due to its 64-byte size.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

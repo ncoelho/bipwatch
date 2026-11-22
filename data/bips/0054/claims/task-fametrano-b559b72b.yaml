@@ -1,0 +1,26 @@
+id: task-fametrano-b559b72b
+bip: 54
+kind: task
+status: open
+area: testing
+statement: Add a regtest check to feature_bip54.py that a 2501-sigop transaction
+  is rejected by testmempoolaccept when the deployment is only started, so the
+  reported mutant is caught.
+subject:
+  name: fametrano
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#issuecomment-6394623793
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-10-25
+  retrieved: 2026-11-22
+  quote: Under the mutant it is accepted, while `feature_bip54.py`,
+    `mempool_sigoplimit.py` and `mempool_accept.py` still pass. That check could
+    go in `feature_bip54.py`.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

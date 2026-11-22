@@ -1,0 +1,24 @@
+id: task-antoine-poinsot-7c2d798b
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: Update the 64-byte transaction rationale to mention that relying on
+  existing mitigations, rather than a consensus change, is another alternative.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2159#discussion_r3248669309
+  type: github
+  title: "BIP 54: clarify 64-byte transactions item description and rationale"
+  date: 2026-05-15
+  retrieved: 2026-11-22
+  quote: I'll update to mention that another alternative is to keep relying on
+    existing mitigations instead.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

@@ -1,0 +1,25 @@
+id: task-evoskuil-e072cd0e
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: Clarify in the 64-byte transaction motivation that a block with a
+  malleated Merkle root cannot pass validation, so the weakness only affects SPV
+  verifiers.
+subject:
+  name: evoskuil
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2159#discussion_r3245150505
+  type: github
+  title: "BIP 54: clarify 64-byte transactions item description and rationale"
+  date: 2026-05-15
+  retrieved: 2026-11-22
+  quote: I think it's worth being explicit here that it's not possible for a block
+    to pass validation with a malleated merkle root.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

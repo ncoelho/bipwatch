@@ -1,0 +1,23 @@
+id: task-antoine-poinsot-e17257be
+bip: 54
+kind: task
+status: addressed
+area: engineering
+statement: Open the BIP 54 reference implementation branch as a pull request to
+  Bitcoin Core.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2172#discussion_r3290511683
+  type: github
+  title: "BIP 54: progress to Complete"
+  date: 2026-05-22
+  retrieved: 2026-11-22
+  quote: Yes, i plan to eventually open this branch as a Bitcoin Core PR.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null
