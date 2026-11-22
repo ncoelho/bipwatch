@@ -1,0 +1,27 @@
+id: objection-murch-5c607c94
+bip: 360
+kind: objection
+status: open
+area: writing
+statement: "Address that the short exposure window is not fixed: as attacks on
+  the DLP get faster they will fit between broadcast and confirmation, and an
+  attacker can delay the victim's confirmation by outbidding it to gain more
+  time."
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.3.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r1838807880
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2024-11-12
+  retrieved: 2026-11-22
+  quote: If the security of the DLP is broken, eventually it could be broken in
+    the time between submission of a transaction and its confirmation. Anyway,
+    an attacker could simply outspend the victim’s transaction to buy more time.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

@@ -1,0 +1,23 @@
+id: task-hunter-beast-a593daf5
+bip: 360
+kind: task
+status: addressed
+area: writing
+statement: Add unhardened BIP-32 HD wallet keys (xpubs) as a further case in the
+  description of when public keys are exposed to quantum attacks.
+subject:
+  name: Hunter Beast
+  type: person
+applies_to_version: 0.2.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r1779606859
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2024-09-28
+  retrieved: 2026-11-22
+  quote: "I'll also need to add a 5th case: Unhardened BIP-32 HD wallet keys"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null
