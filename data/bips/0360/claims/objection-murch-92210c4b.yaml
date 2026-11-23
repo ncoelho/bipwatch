@@ -1,0 +1,25 @@
+id: objection-murch-92210c4b
+bip: 360
+kind: objection
+status: addressed
+area: design
+statement: Support only a single post-quantum signature algorithm, with hooks to
+  add others later, instead of specifying several at once.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.5.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r1894379956
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2024-12-20
+  retrieved: 2026-11-23
+  quote: wouldn’t it make the proposal much more viable if it picked only one and
+    added hooks to introduce another later in case we change our mind as we
+    learn more?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null
