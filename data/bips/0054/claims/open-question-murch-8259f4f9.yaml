@@ -1,0 +1,25 @@
+id: open-question-murch-8259f4f9
+bip: 54
+kind: open-question
+status: open
+area: engineering
+part_of: bitcoin core implementation
+statement: Decide whether the Bitcoin Core implementation should enforce BIP 54
+  from the hardcoded genesis block or start at height 1.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#discussion_r4290868880
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-10-16
+  retrieved: 2026-11-23
+  quote: Given that Genesis blocks of chains are hardcoded, should it be active
+    for the Genesis block? Wouldn’t height 1 make more sense?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null

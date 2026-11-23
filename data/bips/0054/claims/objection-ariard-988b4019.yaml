@@ -1,0 +1,27 @@
+id: objection-ariard-988b4019
+bip: 54
+kind: objection
+status: open
+area: design
+statement: Justify or reconsider counting a bare CHECKMULTISIG as 20 signature
+  operations versus 1 for OP_1 CHECKMULTISIG, since a party to a collaborative
+  transaction could cheaply push it over the 2500 sigops limit.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#discussion_r3670609391
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-07-29
+  retrieved: 2026-11-23
+  quote: in any collaborative txn among multi parties, one can force the tx to
+    reach the new 2500 limit at a vbyte cost inferior rather than putting a
+    `OP_1 CHECKMULTISIG` coming with a higher absolute vbyte cost, whatever the
+    feerate.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null

@@ -1,0 +1,27 @@
+id: task-viniciuscestarii-d397b457
+bip: 54
+kind: task
+status: open
+area: testing
+part_of: bitcoin core implementation
+statement: Fix the timewarp test's timestamp for period 2 to use start_time + 2
+  * 4 * interval_expected_sec, so difficulty falls D -> D/4 -> D/16 as intended
+  instead of returning to D.
+subject:
+  name: ViniciusCestarii
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#discussion_r4401934437
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-10-28
+  retrieved: 2026-11-23
+  quote: "nit: this should be `start_time + 2 * 4 * interval_expected_sec`. As is,
+    period 2's elapsed time is 0, so difficulty goes D -> D/4 -> D -> 4D instead
+    of D -> D/4 -> D/16 -> D/4."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null

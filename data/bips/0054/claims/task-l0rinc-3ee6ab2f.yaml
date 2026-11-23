@@ -1,0 +1,24 @@
+id: task-l0rinc-3ee6ab2f
+bip: 54
+kind: task
+status: open
+area: writing
+statement: Express the timewarp rule's 2016 and 2015 height constants in terms
+  of the difficulty adjustment interval, so that networks with a different
+  interval such as regtest are covered by the specification.
+subject:
+  name: l0rinc
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#discussion_r3770651900
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-08-12
+  retrieved: 2026-11-23
+  quote: was just wondering if we could update the BIP to make 2016 and 2015 variables
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null

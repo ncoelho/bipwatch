@@ -1,0 +1,26 @@
+id: task-viniciuscestarii-88e8c08c
+bip: 54
+kind: task
+status: open
+area: testing
+part_of: bitcoin core implementation
+statement: Add a test that catches changes to pre-activation mainnet mempool
+  behaviour of the BIP 54 sigops check, exercising the enforce_bip54 value
+  PreChecks actually passes instead of a hardcoded true.
+subject:
+  name: ViniciusCestarii
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#discussion_r4353762986
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-10-22
+  retrieved: 2026-11-23
+  quote: the mutant changes behaviour on mainnet before activation and no test
+    catches that.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null

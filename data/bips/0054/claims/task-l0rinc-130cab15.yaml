@@ -1,0 +1,26 @@
+id: task-l0rinc-130cab15
+bip: 54
+kind: task
+status: open
+area: writing
+statement: Clarify in the BIP text that the 2016 and 2015 values in the timewarp
+  rules come from the network's difficulty adjustment period rather than being
+  fixed constants.
+subject:
+  name: l0rinc
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#discussion_r3732075425
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-08-06
+  retrieved: 2026-11-23
+  quote: could we adjust the BIP text, or add a note here to clarify that these
+    values are derived from the network's adjustment period rather than fixed
+    constants?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null
