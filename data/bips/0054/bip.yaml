@@ -14,8 +14,8 @@ authors:
 spec:
   repo: bitcoin/bips
   path: bip-0054.md
-  revision: 927b6de9915c9262615a6399de51b200f81e5aa4
-  synced: 2026-11-14
+  revision: 335eaac0e80751d382952ba78b4b1149f10876a1
+  synced: 2026-11-23
 
 bipwatch:
   tracked: true
