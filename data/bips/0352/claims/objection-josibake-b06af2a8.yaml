@@ -1,0 +1,26 @@
+id: objection-josibake-b06af2a8
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Define the outpoint ordering used for the input hash in the protocol
+  itself, rather than relying on the transaction's input order, which is not
+  fixed until signing.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1222440579
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-08
+  retrieved: 2026-11-23
+  quote: Seems much safer to have an ordering defined by the protocol rather than
+    requiring wallet software to ensure the prevout outpoints are always kept in
+    the same order during the entire transaction creation process
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null
