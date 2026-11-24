@@ -1,0 +1,26 @@
+id: objection-yuval-kogman-b9d0de94
+bip: 77
+kind: objection
+status: addressed
+area: writing
+statement: Avoid declaring that BIP 77 supersedes BIP 78, since a BIP 77-only
+  sender cannot pay a BIP 78-only receiver and senders must implement both for
+  full interoperability.
+subject:
+  name: Yuval Kogman
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#discussion_r2093778733
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2025-05-16
+  retrieved: 2026-11-17
+  quote: i don't think this really supersedes, a BIP 77 only sender can't send to
+    a BIP 78 only receiver so supporting senders need to implement both
+    specifications for full interoperability
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

@@ -1,0 +1,23 @@
+id: open-question-murch-b4849a7d
+bip: 77
+kind: open-question
+status: open
+area: writing
+statement: Decide whether BIP 77 supersedes BIP 78 and state that relationship
+  in the preamble.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#discussion_r2093415621
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2025-05-16
+  retrieved: 2026-11-17
+  quote: Also, doesn’t this supersede BIP 78?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

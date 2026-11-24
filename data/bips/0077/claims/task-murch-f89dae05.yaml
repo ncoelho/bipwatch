@@ -1,0 +1,24 @@
+id: task-murch-f89dae05
+bip: 77
+kind: task
+status: addressed
+area: writing
+statement: State in the overview that the Original PSBT fallback transaction and
+  the Proposal PSBT transaction conflict, so only one can be confirmed.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#discussion_r2093507694
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2025-05-16
+  retrieved: 2026-11-17
+  quote: Should it be mentioned that the two transactions are in conflict and only
+    one can be confirmed?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
