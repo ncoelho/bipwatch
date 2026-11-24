@@ -1,0 +1,28 @@
+# Lead story for 2026-W48 (2026-11-17 to 2026-11-24), drafted by npm run weekly-digest
+# from the busiest thread about a tracked BIP. Merging the pull request approves it.
+week: 2026-W48
+bip: 54
+kind: spec
+headline: A BIP 54 pull request adding a footnote on ruling out forward blocks
+  was the week's busiest thread
+lead: Consensus Cleanup is a soft fork that bundles fixes for the timewarp
+  attack, worst-case block validation time, Merkle tree weaknesses and duplicate
+  transactions, and its spec has been Complete since 2026-05-22. Bitcoin
+  Inquisition has shipped it and Bitcoin Core support is in review, but the spec
+  still has no deployment section setting out a signaling mechanism or
+  parameters.
+link:
+  label: Read the pull request
+  url: https://github.com/bitcoin/bips/pull/2344
+tiles:
+  - pr_age:https://github.com/bitcoin/bips/pull/2344
+  - road_gap
+  - implementation:impl-bitcoin-core
+  - implementation:impl-bitcoin-inquisition
+sources:
+  - impl-bitcoin-core
+  - impl-bitcoin-inquisition
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null
