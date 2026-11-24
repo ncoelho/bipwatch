@@ -2,7 +2,8 @@
  * npm run recheck -- [--bip <n>]... [--spec] [--budget <tokens>] [--max-threads <n>] [--dry-run] [--summary <file>]
  *
  * Triage step 4: closes open work that later messages or the current spec
- * show settled (see recheck.ts). For each tracked BIP, the threads of its
+ * show settled (see recheck.ts). Thread batches carry no spec text, which
+ * keeps the weekly run cheap; the spec goes only with --spec batches. For each tracked BIP, the threads of its
  * open items that have messages archived since the last recheck run, one
  * model call per thread; with --spec, also items raised on an older spec
  * version, against the current text. An item is written as addressed only
@@ -75,7 +76,8 @@ for (const b of bundles) {
   let stopped: 'done' | 'budget' = 'done';
   try {
     const specText = (await showFile(bipsDir, b.bip.spec.revision, b.bip.spec.path)) ?? undefined;
-    const system = recheckSystem(b.bip, specText);
+    // Thread batches leave the spec out; only spec batches need it.
+    const systems = { thread: recheckSystem(b.bip, specText, false), spec: recheckSystem(b.bip, specText, true) };
 
     // Threads of open items with messages archived since the last run.
     const { rows: docs } = await db.query<{ url: string; source: string; thread_key: string }>(
@@ -123,7 +125,7 @@ for (const b of bundles) {
       const messages: Anthropic.Beta.BetaMessageParam[] = [{ role: 'user', content: recheckMessage(batch) }];
       let out: RecheckOutput | null = null;
       for (let attempt = 1; attempt <= 2; attempt++) {
-        const res = await model.run({ model: RECHECK_MODEL, effort: 'medium', system, messages, schema: RecheckOutput });
+        const res = await model.run({ model: RECHECK_MODEL, effort: 'medium', system: batch.thread === 'spec' ? systems.spec : systems.thread, messages, schema: RecheckOutput });
         add(res.usage);
         if (!res.output) throw new Error(`BIP ${b.bip.number}: model returned ${res.stop}`);
         out = res.output;

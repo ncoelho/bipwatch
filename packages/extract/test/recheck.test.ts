@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Claim } from '@bipwatch/data';
-import { checkRecheck, closeClaim, olderSpec, recheckable, recheckMessage, resolved, specBatches, type Batch } from '../src/recheck.ts';
+import { checkRecheck, closeClaim, olderSpec, recheckable, recheckMessage, recheckSystem, resolved, specBatches, type Batch } from '../src/recheck.ts';
 import { BIP352 } from './helpers.ts';
 
 const claim = (id: string, over: Partial<Claim> = {}): Claim => ({
@@ -26,6 +26,7 @@ const batch: Batch = {
   ],
 };
 const spec = 'Senders must count K_max per scan key, not per address.';
+const specBatch: Batch = { bip: 352, thread: 'spec', items: [batch.items[1]], messages: [] };
 
 describe('recheck', () => {
   it('only rechecks open work without a resolution', () => {
@@ -45,10 +46,11 @@ describe('recheck', () => {
     const out = {
       items: [
         { id: 'a', status: 'addressed' as const, evidence: 2, quote: 'I have pushed the fix:  the TEST vectors now use valid signatures.' },
-        { id: 'b', status: 'addressed' as const, evidence: 'spec' as const, quote: 'Senders must count K_max per scan key' },
+        { id: 'b', status: 'open' as const, evidence: null, quote: null },
       ],
     };
     expect(checkRecheck(out, batch, spec)).toEqual([]);
+    expect(checkRecheck({ items: [{ id: 'b', status: 'addressed', evidence: 'spec', quote: 'Senders must count K_max per scan key' }] }, specBatch, spec)).toEqual([]);
   });
 
   it('rejects made-up quotes, missing evidence, earlier messages, unknown and missing ids', () => {
@@ -70,11 +72,18 @@ describe('recheck', () => {
     expect(checkRecheck({ items: [{ id: 'a', status: 'open', evidence: null, quote: null }] }, batch, spec).join('\n')).toMatch(/no answer for "b"/);
   });
 
+  it('keeps each kind of batch to its own evidence, and the spec out of thread prompts', () => {
+    expect(checkRecheck({ items: [{ id: 'a', status: 'addressed', evidence: 'spec', quote: 'Senders must count K_max per scan key' }, { id: 'b', status: 'open', evidence: null, quote: null }] }, batch, spec).join('\n')).toMatch(/a: quote one of the numbered messages/);
+    expect(checkRecheck({ items: [{ id: 'b', status: 'addressed', evidence: 1, quote: 'Senders must count K_max per scan key' }] }, specBatch, spec).join('\n')).toMatch(/b: quote the spec/);
+    expect(recheckSystem(BIP352, spec, false)).not.toContain(spec);
+    expect(recheckSystem(BIP352, spec, true)).toContain(spec);
+  });
+
   it('closes only the items whose own evidence passes, with the message or spec as the source', () => {
     const out = {
       items: [
         { id: 'a', status: 'addressed' as const, evidence: 2, quote: 'the test vectors now use valid signatures.' },
-        { id: 'b', status: 'addressed' as const, evidence: 'spec' as const, quote: 'not in the spec at all, invented' },
+        { id: 'b', status: 'addressed' as const, evidence: 1, quote: 'not in the message at all, invented' },
       ],
     };
     const r = resolved(out, batch, BIP352, spec, 'claude-opus-5-5', '2026-11-24');
@@ -83,7 +92,7 @@ describe('recheck', () => {
     const closed = closeClaim(r[0]);
     expect(closed.status).toBe('addressed');
     expect(closed.provenance.reviewed_by).toBeNull();
-    const s = resolved({ items: [{ id: 'b', status: 'addressed', evidence: 'spec', quote: 'Senders must count K_max per scan key' }] }, batch, BIP352, spec, 'm', '2026-11-24');
+    const s = resolved({ items: [{ id: 'b', status: 'addressed', evidence: 'spec', quote: 'Senders must count K_max per scan key' }] }, specBatch, BIP352, spec, 'm', '2026-11-24');
     expect(s[0].resolution.url).toBe(`https://github.com/bitcoin/bips/blob/${BIP352.spec.revision}/${BIP352.spec.path}`);
   });
 
