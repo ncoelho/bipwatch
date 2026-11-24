@@ -1,0 +1,114 @@
+# Open work items that ask for the same thing, grouped by `npm run topics`;
+# pending review. Items not listed here stand alone.
+bip: 352
+grouped: 2026-11-24
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null
+topics:
+  - id: clarify-the-sender-grouping-step-so-k-max-counts-outputs-per
+    title: Clarify the sender grouping step so K_max counts outputs per scan key, not distinct addresses
+    items:
+      - objection-edilmedeiros-7eac44e5
+      - objection-edilmedeiros-b1faf880
+      - objection-edilmedeiros-d86b55f3
+      - task-isaquefranklin-7ee0b588
+      - task-josibake-bb429024
+      - task-sebastian-falbesoner-7cad2926
+      - task-sebastian-falbesoner-7e82262a
+      - task-sebastian-falbesoner-bfce1d32
+  - id: fix-the-bip-352-test-vectors-that-are-consensus-invalid
+    title: Fix the BIP 352 test vectors that are consensus-invalid
+    items:
+      - task-fametrano-9c506273
+      - task-fametrano-aabba11d
+      - task-sebastian-falbesoner-2beca277
+  - id: make-the-light-client-index-return-outputs-grouped-by-txid
+    title: Make the light-client index return outputs grouped by txid
+    items:
+      - task-cygnet3-42a734f0
+      - task-cygnet3-43878209
+      - task-josibake-e7015cc6
+      - open-question-setavenger-2ee3a59e
+  - id: decide-whether-light-clients-fetch-full-blocks-or-simplified
+    title: Decide whether light clients fetch full blocks or simplified UTXO data after a filter match
+    items:
+      - open-question-josibake-20a18800
+      - open-question-josibake-4cab7e4a
+  - id: benchmark-light-client-bandwidth-of-fetching-only-needed-dat
+    title: Benchmark light-client bandwidth of fetching only needed data versus full blocks
+    items:
+      - task-setavenger-bf1d0719
+      - task-setavenger-c7ad7a1a
+  - id: decide-whether-to-serve-tweak-data-and-filters-together-in-a
+    title: Decide whether to serve tweak data and filters together in a single light-client step
+    items:
+      - open-question-josibake-ca610da5
+      - task-setavenger-1c4f1ff8
+  - id: standardize-a-server-index-that-serves-silent-payment-tweak
+    title: Standardize a server index that serves silent payment tweak data
+    items:
+      - task-josibake-3e8765c0
+      - task-securitybrahh-0cbe2023
+  - id: specify-how-silent-payment-addresses-are-carried-in-bitcoin
+    title: "Specify how silent payment addresses are carried in bitcoin: URIs, e.g. an sp= query
+      parameter"
+    items:
+      - objection-matt-corallo-3999ccce
+      - open-question-josibake-29cb6ac8
+      - open-question-josibake-82081e02
+      - open-question-kristapsk-946f0ab3
+      - open-question-mattcorallo-91b000ad
+      - task-josibake-92eac588
+      - task-matt-corallo-5179ef45
+      - task-matt-corallo-7b3cd853
+      - task-matt-corallo-8a25eca5
+      - task-matt-corallo-ada919ee
+      - task-matt-corallo-ba639b81
+      - task-matt-corallo-dda608b7
+      - task-matt-corallo-df7c00c7
+      - task-mattcorallo-2ce6ad1f
+      - task-ruben-somsen-0c043c70
+  - id: update-bip21-so-a-uri-can-carry-multiple-or-future-address-f
+    title: Update BIP21 so a URI can carry multiple or future address formats without per-type keys
+    items:
+      - task-ruben-somsen-16687c48
+      - task-ruben-somsen-dc79335e
+  - id: relax-bip21-so-payment-uris-need-no-on-chain-fallback-addres
+    title: Relax BIP21 so payment URIs need no on-chain fallback address
+    items:
+      - task-josibake-0ec4078a
+      - task-matt-corallo-5a669188
+      - task-matt-corallo-a4e56ce1
+  - id: address-weak-bech32m-error-detection-for-long-spscan-spspend
+    title: Address weak Bech32m error detection for long spscan/spspend private key strings
+    items:
+      - objection-achow101-3775a79d
+      - objection-achow101-a78883b7
+      - objection-achow101-b97f38a9
+  - id: decide-whether-exported-silent-payment-key-formats-carry-wal
+    title: Decide whether exported silent payment key formats carry wallet birthday and labels
+    items:
+      - open-question-craig-raw-b4df34f3
+      - open-question-junderw-c19b81cb
+  - id: decide-whether-the-silent-payment-key-format-should-encode-a
+    title: Decide whether the silent payment key format should encode a label range or limit
+    items:
+      - open-question-sebastian-falbesoner-8a8ef579
+      - task-nymius-f8b61876
+  - id: require-receivers-to-validate-nostr-notification-contents-ag
+    title: Require receivers to validate Nostr notification contents against the chain
+    items:
+      - objection-setavenger-28248034
+      - objection-setavenger-ff531554
+  - id: get-the-bip-376-draft-reviewed-by-other-silent-payments-cont
+    title: Get the BIP 376 draft reviewed by other silent payments contributors
+    items:
+      - task-murch-0a305615
+      - task-nymius-630a42a8
+  - id: add-bip-376-test-vectors-for-the-silent-payment-tweak-field
+    title: Add BIP 376 test vectors for the silent payment tweak field and signing
+    items:
+      - task-nymius-da3a0cea
+      - task-nymius-f6a0dae2

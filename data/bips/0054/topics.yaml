@@ -1,0 +1,85 @@
+# Open work items that ask for the same thing, grouped by `npm run topics`;
+# pending review. Items not listed here stand alone.
+bip: 54
+grouped: 2026-11-24
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null
+topics:
+  - id: decide-whether-bip-54-s-deployment-parameters-go-in-the-bip
+    title: Decide whether BIP 54's deployment parameters go in the BIP itself or in a separate
+      deployment document
+    items:
+      - objection-jeremyrubin-8a0795af
+      - open-question-ajtowns-be168c31
+      - open-question-ajtowns-df955344
+  - id: add-test-vectors-for-64-byte-taproot-transactions-with-an-em
+    title: Add test vectors for 64-byte Taproot transactions with an empty or full annex
+    items:
+      - task-antoine-poinsot-71889648
+      - task-antoine-riard-2db8f024
+      - task-ariard-3d2536a3
+      - task-ariard-cef1ed5b
+  - id: add-sigops-test-vectors-covering-future-segwit-versions-up-t
+    title: Add sigops test vectors covering future Segwit versions up to 16
+    items:
+      - task-antoine-poinsot-c636a49f
+      - task-ariard-463351f9
+  - id: add-a-footnote-noting-the-timewarp-fix-rules-out-the-forward
+    title: Add a footnote noting the timewarp fix rules out the forward blocks proposal, with links and
+      context
+    items:
+      - task-antoine-riard-3082840c
+      - task-ariard-5238750f
+      - task-ariard-95fbd673
+  - id: explain-what-happens-to-the-coinbase-nlocktime-rule-once-hei
+    title: Explain what happens to the coinbase nLockTime rule once height reaches LOCKTIME_THRESHOLD
+    items:
+      - task-antoine-poinsot-d87f18d7
+      - task-sjors-fb610b32
+  - id: express-the-timewarp-rule-s-2016-and-2015-constants-in-terms
+    title: Express the timewarp rule's 2016 and 2015 constants in terms of the difficulty adjustment
+      interval
+    items:
+      - task-l0rinc-130cab15
+      - task-l0rinc-3ee6ab2f
+  - id: add-tests-catching-rules-enforced-one-block-off-from-the-act
+    title: Add tests catching rules enforced one block off from the activation height
+    items:
+      - task-gregory-sanders-172bbc3b
+      - task-viniciuscestarii-d9cf076a
+  - id: add-test-vectors-reproducing-murch-zawy-attack-scenarios-for
+    title: Add test vectors reproducing Murch–Zawy attack scenarios for the timestamp rules
+    items:
+      - task-ariard-72f50b04
+      - task-ariard-ab9544e2
+  - id: review-and-test-the-bitcoin-core-reference-implementation-of
+    title: Review and test the Bitcoin Core reference implementation of BIP 54
+    items:
+      - task-antoine-riard-285949c2
+      - task-ariard-a58508d5
+  - id: add-a-pre-activation-mempool-test-for-the-bip-54-sigops-chec
+    title: Add a pre-activation mempool test for the BIP 54 sigops check using the real enforce_bip54
+      value
+    items:
+      - task-viniciuscestarii-88e8c08c
+      - task-viniciuscestarii-93f3d97a
+  - id: decide-where-to-specify-the-getblocktemplate-coinbase-lockti
+    title: Decide where to specify the getblocktemplate coinbase locktime and sequence requirements,
+      likely a separate document
+    items:
+      - open-question-jeremyrubin-e4d6f2bc
+      - task-jonatack-f7f333de
+      - task-sjors-6f7818d7
+  - id: specify-getblocktemplate-fields-giving-pools-the-required-co
+    title: Specify getblocktemplate fields giving pools the required coinbase nLockTime and nSequence
+    items:
+      - task-sjors-1c61a9fd
+      - task-sjors-provoost-7969e9f6
+  - id: get-mining-pool-software-to-set-bip-54-compatible-coinbase-n
+    title: Get mining pool software to set BIP 54-compatible coinbase nLockTime and nSequence before
+      activation
+    items:
+      - task-antoine-poinsot-48a1d5c7
+      - task-sjors-0a36e8de

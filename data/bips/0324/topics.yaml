@@ -1,0 +1,38 @@
+# Open work items that ask for the same thing, grouped by `npm run topics`;
+# pending review. Items not listed here stand alone.
+bip: 324
+grouped: 2026-11-24
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null
+topics:
+  - id: decide-between-a-classical-then-pq-upgrade-inside-the-v2-cha
+    title: Decide between a classical-then-PQ upgrade inside the v2 channel and a one-shot hybrid
+      post-quantum handshake
+    items:
+      - open-question-liam-gilligan-a31fb438
+      - open-question-olaoluwa-osuntokun-baa5d37e
+  - id: clarify-in-the-spec-that-bip-324-requires-an-underlying-reli
+    title: Clarify in the spec that BIP 324 requires an underlying reliable, ordered stream transport
+      such as TCP, Tor or I2P
+    items:
+      - open-question-yojoe-c2aa0de4
+      - task-pieter-wuille-d715044a
+  - id: update-the-bip-333-reference-implementation-for-one-byte-mes
+    title: Update the BIP 333 reference implementation for one-byte message type alias assignment
+    items:
+      - task-ajtowns-bb483edb
+      - task-murch-ecf93ea6
+  - id: specify-whether-set324alias-may-be-sent-more-than-once-per-c
+    title: Specify whether set324alias may be sent more than once per connection and how receivers
+      handle repeated messages
+    items:
+      - open-question-jonatack-737bef9e
+      - open-question-jonatack-b46ec3db
+      - task-jonatack-7421835b
+  - id: build-a-reusable-rust-library-implementing-bip-324-v2-transp
+    title: Build a reusable Rust library implementing BIP 324 v2 transport
+    items:
+      - task-0xb10c-7084b046
+      - task-josibake-f2d886dc
