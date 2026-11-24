@@ -1,0 +1,26 @@
+id: objection-ariard-2c5b0505
+bip: 360
+kind: objection
+status: open
+area: writing
+statement: Reconsider the long-exposure versus short-exposure definitions, which
+  treat the mempool as a black box, possibly grounding them in block time and
+  mining difficulty instead.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.6.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r1966885340
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2025-02-23
+  retrieved: 2026-11-24
+  quote: So I think a better long-exposure vs short-exposure kind of heuristic
+    definition in the bitcoin world would be better grounded on the
+    computational difficulty to mine a block according to the consensus rules.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

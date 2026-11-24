@@ -1,0 +1,26 @@
+id: open-question-murch-9886551e
+bip: 360
+kind: open-question
+status: open
+area: design
+part_of: pq signature bip
+statement: Decide whether post-quantum signature algorithms should be introduced
+  through OP_SUCCESSx opcodes, a new leaf version, or both, given how many
+  OP_SUCCESSx opcodes remain unused.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.8.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r2205925548
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2025-07-14
+  retrieved: 2026-11-24
+  quote: If it is, perhaps both a new leaf version and using OP_SUCCESSx opcodes
+    in that leaf version may dissuade the concerns?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

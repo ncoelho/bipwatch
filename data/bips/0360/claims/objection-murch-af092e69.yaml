@@ -1,0 +1,26 @@
+id: objection-murch-af092e69
+bip: 360
+kind: objection
+status: addressed
+area: writing
+statement: Correct the claim that all coins in P2PK outputs date from the first
+  halving epoch, since P2PK outputs were created as recently as 2021.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.8.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r2205838643
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2025-07-14
+  retrieved: 2026-11-24
+  quote: P2PK outputs were created as recently as 2021, and the total amount of
+    bitcoins held in P2PK outputs was 1,719,270.33902196 three days ago, so it
+    does not seem accurate that all of these coins are held in outputs from the
+    first epoch.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null
