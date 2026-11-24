@@ -16,6 +16,7 @@ import { stringify } from 'yaml';
 import { z } from 'zod';
 import { claudeClient } from './model.ts';
 import { billedTokens } from './types.ts';
+import { HEADLINE_MAX, LEAD_MAX, clip, fits } from './weekly-limits.ts';
 
 const { values } = parseArgs({ options: { week: { type: 'string' }, 'dry-run': { type: 'boolean', default: false } } });
 const dataDir = findDataDir();
@@ -59,7 +60,7 @@ const digest = [
 const SYSTEM = `You write the lead story for BipWatch's weekly front page about Bitcoin Improvement Proposals. You get a short digest of facts. Write:
 - kind: what the story is about (implementation, status, discussion, draft, spec or activation).
 - headline: one plain sentence, under 120 characters, saying what happened this week. No hype, no question.
-- lead: two plain sentences giving the context a reader needs. Use only the facts in the digest. Do not write numbers or counts: the tiles show them. Dates are fine.
+- lead: two plain sentences giving the context a reader needs, ${LEAD_MAX} characters at most in all. Use only the facts in the digest. Do not write numbers or counts: the tiles show them. Dates are fine.
 - tiles: up to four keys from "Tiles available", the most telling first.
 - sources: the claim ids in brackets that the story rests on (may be empty).
 - link_label: a short label for a button to the thread, such as "Read the pull request" or "Read the thread".`;
@@ -71,17 +72,28 @@ const Out = z.object({
   sources: z.array(z.string()),
   link_label: z.string(),
 });
-const res = await claudeClient().run({ model: 'claude-opus-5-5', effort: 'medium', system: SYSTEM, messages: [{ role: 'user', content: digest }], schema: Out });
+// One more try when the draft is too long for the schema; then clip it.
+const ask = (note = '') =>
+  claudeClient().run({ model: 'claude-opus-5-5', effort: 'medium', system: SYSTEM, messages: [{ role: 'user', content: digest + note }], schema: Out });
+let res = await ask();
+let billed = billedTokens(res.usage);
 if (!res.output) throw new Error(`model returned ${res.stop}`);
-const o = res.output;
+if (!fits(res.output)) {
+  const long = `\n\nYour last draft was too long (headline ${res.output.headline.trim().length} characters, lead ${res.output.lead.trim().length}). Keep the headline under ${HEADLINE_MAX} characters and the lead at most ${LEAD_MAX}.`;
+  console.log(`weekly-digest: draft too long, asking again.`);
+  res = await ask(long);
+  if (!res.output) throw new Error(`model returned ${res.stop}`);
+  billed += billedTokens(res.usage);
+}
+const o = res.output!;
 const ids = new Set(b.claims.map((c) => c.id));
 const today = new Date().toISOString().slice(0, 10);
 const story: WeeklyStory = {
   week,
   bip: b.bip.number,
   kind: o.kind,
-  headline: o.headline.trim(),
-  lead: o.lead.trim(),
+  headline: clip(o.headline, HEADLINE_MAX),
+  lead: clip(o.lead, LEAD_MAX),
   link: { label: o.link_label.trim(), url: pick.url },
   tiles: o.tiles.filter((t) => tileKeys.includes(t)).slice(0, 4),
   // The claims the tiles show are sources too, whatever the model listed.
@@ -94,7 +106,7 @@ const yaml = [
   stringify(story, { lineWidth: 80 }),
 ].join('\n');
 console.log(yaml);
-console.log(`weekly-digest: ${billedTokens(res.usage)} billed-equivalent tokens${values['dry-run'] ? ' · dry run' : ''}`);
+console.log(`weekly-digest: ${billed} billed-equivalent tokens${values['dry-run'] ? ' · dry run' : ''}`);
 if (!values['dry-run']) {
   mkdirSync(join(dataDir, 'weekly'), { recursive: true });
   writeFileSync(file, yaml);
