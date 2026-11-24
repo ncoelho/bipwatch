@@ -1,0 +1,25 @@
+id: task-macgyver13-3386cf94
+bip: 352
+kind: task
+status: addressed
+area: writing
+part_of: BIP 392
+statement: Update BIP 390 to explicitly permit musig() key expressions inside
+  sp() descriptors, consistent with BIP 392 stating it is valid.
+subject:
+  name: macgyver13
+  type: person
+applies_to_version: 1.1.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2047#issuecomment-3985618668
+  type: github
+  title: "BIP392: Silent Payment Output Script Descriptors"
+  date: 2026-03-02
+  retrieved: 2026-11-21
+  quote: A similar update may be warranted to explicitly permit `musig()` inside
+    `sp()`, since BIP-392 already states it is valid.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-21
+  reviewed_by: null

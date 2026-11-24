@@ -1,0 +1,24 @@
+id: task-tim-ruffing-1ba38098
+bip: 352
+kind: task
+status: addressed
+area: research
+statement: Verify that the K_max group-size limit matches the maximum number of
+  P2TR outputs that fit in a standard 100kvB transaction, accounting for inputs
+  and encoding overhead.
+subject:
+  name: Tim Ruffing
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2106#issuecomment-3974757859
+  type: github
+  title: "BIP-352: introduce per-group recipient limit K_max (=2323)"
+  date: 2026-02-27
+  retrieved: 2026-11-21
+  quote: Did anyone double-check that 2324 is really the right number?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-21
+  reviewed_by: null

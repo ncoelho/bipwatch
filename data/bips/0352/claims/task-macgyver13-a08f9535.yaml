@@ -1,0 +1,24 @@
+id: task-macgyver13-a08f9535
+bip: 352
+kind: task
+status: addressed
+area: writing
+part_of: BIP 392
+statement: Add a valid sp() descriptor example to BIP 392 that uses a musig()
+  aggregate spend key.
+subject:
+  name: macgyver13
+  type: person
+applies_to_version: 1.1.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2047#issuecomment-3985618668
+  type: github
+  title: "BIP392: Silent Payment Output Script Descriptors"
+  date: 2026-03-02
+  retrieved: 2026-11-21
+  quote: Consider adding a valid descriptor example using `musig()` as the spend key
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-21
+  reviewed_by: null
