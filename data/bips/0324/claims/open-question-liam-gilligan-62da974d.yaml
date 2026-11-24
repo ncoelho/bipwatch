@@ -1,0 +1,25 @@
+id: open-question-liam-gilligan-62da974d
+bip: 324
+kind: open-question
+status: open
+area: design
+part_of: pq bip 324
+statement: Decide whether a node advertising ML-KEM support should include its
+  1184-byte encapsulation key by default, or omit it so the selecting peer sends
+  one.
+subject:
+  name: Liam Gilligan
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://gnusha.org/pi/bitcoindev/12a1a76d-0e27-4035-9fe8-a47524729c47n@googlegroups.com/
+  type: mailing-list
+  title: "BIP Proposal: ML-KEM Key Establishment"
+  date: 2026-11-13
+  retrieved: 2026-11-19
+  quote: on whether the advertiser should send its encapsulation key by default.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null
