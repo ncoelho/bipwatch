@@ -1,0 +1,27 @@
+id: open-question-tim-ruffing-5a1beaa6
+bip: 324
+kind: open-question
+status: addressed
+area: design
+statement: "Decide how the first packet after the garbage terminator is handled
+  once the separate garbage authentication packet is removed: treat it as a
+  normal packet carrying the garbage as AAD, ignore its ignore bit, reject
+  decoys there, or use a headerless format."
+subject:
+  name: Tim Ruffing
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1498#issuecomment-1735363745
+  type: github
+  title: "bip324: Remove garbage authentication packet (breaking change)"
+  date: 2023-09-26
+  retrieved: 2026-11-17
+  quote: So I think if we agree that it makes sense to drop the explicit garbage
+    authentication packet and get rid of one state in the state machine, then I
+    see the following possibilities after the garbage terminator.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

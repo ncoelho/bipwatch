@@ -1,0 +1,27 @@
+id: open-question-ajtowns-a9aea44c
+bip: 324
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether decoy packets should be allowed before the version
+  packet, given that the version packet determines how the header is
+  interpreted.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1498#issuecomment-1735122192
+  type: github
+  title: "bip324: Remove garbage authentication packet (breaking change)"
+  date: 2023-09-26
+  retrieved: 2026-11-17
+  quote: Does it make sense to have a decoy packet before the version packet
+    rather than after it? The version packet tells you how to interpret the
+    header, so it seems slightly odd to be parsing headers before you've
+    actually figured out what the header format is.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

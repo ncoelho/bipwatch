@@ -1,0 +1,24 @@
+id: task-tim-ruffing-89a65b57
+bip: 324
+kind: task
+status: addressed
+area: testing
+statement: Regenerate the pregenerated packet_encoding_test_vectors.csv to
+  reflect the fix to the decoding-case features bitmask.
+subject:
+  name: Tim Ruffing
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1969#issuecomment-3318334945
+  type: github
+  title: "BIP324: Fix features bitmask for decoding-case selection"
+  date: 2025-09-22
+  retrieved: 2026-11-17
+  quote: this PR will also need to update the pregenerated
+    `packet_encoding_test_vectors.csv`.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

@@ -1,0 +1,25 @@
+id: open-question-tim-ruffing-e6158fb8
+bip: 324
+kind: open-question
+status: addressed
+area: writing
+statement: Decide where the table of one-byte message type IDs should live
+  (inside BIP 324 or a separate non-authoritative reference file), so that it is
+  clear which document is authoritative for each assignment.
+subject:
+  name: Tim Ruffing
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2092#issuecomment-3822286367
+  type: github
+  title: "BIP 324, 434: Specify p2p v2 one-byte identifier for FEATURE message"
+  date: 2026-01-30
+  retrieved: 2026-11-17
+  quote: One editorial or organizational question is whether the table should
+    continue being maintained in BIP324.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

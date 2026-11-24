@@ -1,0 +1,27 @@
+id: objection-ajtowns-da5539f3
+bip: 324
+kind: objection
+status: addressed
+area: coordination
+part_of: bip324 one-byte message type id alias assignment
+statement: Resolve the conflict between the proposed one-byte ID for the FEATURE
+  message and utreexo's existing use of short IDs 29-36, for example by
+  recording the utreexo assignments in the BIP 324 message type ID table first.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2092#issuecomment-3822037634
+  type: github
+  title: "BIP 324, 434: Specify p2p v2 one-byte identifier for FEATURE message"
+  date: 2026-01-30
+  retrieved: 2026-11-17
+  quote: "This assignment conflicts with utreexo's usage of short ids 29-36 in
+    #1923 (the `uproof` message in particular). I think those are in active use,
+    so it may make more sense to add those assignments to bip 324 first?"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

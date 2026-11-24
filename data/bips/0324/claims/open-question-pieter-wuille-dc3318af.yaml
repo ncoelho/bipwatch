@@ -1,0 +1,25 @@
+id: open-question-pieter-wuille-dc3318af
+bip: 324
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether removing the separate garbage authentication packet
+  (authenticating garbage via the first packet's AAD) is worth a breaking change
+  to the protocol.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1498#issuecomment-1732615102
+  type: github
+  title: "bip324: Remove garbage authentication packet (breaking change)"
+  date: 2023-09-24
+  retrieved: 2026-11-17
+  quote: I'm not sure whether this minor improvement is worth the breaking change
+    at this point.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

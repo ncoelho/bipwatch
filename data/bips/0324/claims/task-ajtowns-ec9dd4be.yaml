@@ -1,0 +1,26 @@
+id: task-ajtowns-ec9dd4be
+bip: 324
+kind: task
+status: addressed
+area: coordination
+part_of: bip324 one-byte message type id alias assignment
+statement: Move new one-byte message type ID assignments out of the BIP 324 text
+  into a separate, non-authoritative table file (e.g. bip-0324/message_types.md)
+  that helps BIPs coordinate and avoid ID conflicts.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 1.0.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2092#issuecomment-3822360741
+  type: github
+  title: "BIP 324, 434: Specify p2p v2 one-byte identifier for FEATURE message"
+  date: 2026-01-30
+  retrieved: 2026-11-17
+  quote: An easy option might be to move new assignments to outside of the bip 324
+    text itself, and into say bip-0324/message_types.md or similar.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
