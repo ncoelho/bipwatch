@@ -6,7 +6,8 @@
 // Without JavaScript every panel renders, one after another, and the tab bar
 // is a row of in-page links. The script turns it into ARIA tabs: one panel at
 // a time, chosen by the URL hash (#overview, #needs, #positions, or the id of
-// anything inside a panel), with arrow keys between tabs.
+// anything inside a panel), with arrow keys between tabs. The page opens on
+// the overview, and the fact rail shows only there.
 import { dataChecks, loadPrStates, loadSpecHistory, type BipBundle } from '@bipwatch/data';
 import AtAGlance from '../components/frame/AtAGlance.astro';
 import ApplicationsHero from '../components/layer/ApplicationsHero.astro';
@@ -44,7 +45,8 @@ const TABS = [
   { id: 'needs', label: 'What it needs', count: tracked ? openWork : undefined, hot: true },
   { id: 'positions', label: 'Positions', count: stances },
 ];
-const first = tracked ? 'needs' : 'overview';
+// Every BIP opens on the overview; #needs or #positions opens the others.
+const first = 'overview';
 const sections = [
   { id: 'problem', title: 'Why it exists', items: byKind(bundle, 'problem') },
   { id: 'tradeoffs', title: 'Trade-offs', items: byKind(bundle, 'tradeoff') },
@@ -129,6 +131,8 @@ const sections = [
   if (bar) {
     const tabs = [...bar.querySelectorAll<HTMLAnchorElement>('[role="tab"]')];
     const panels = tabs.map((t) => document.getElementById(t.dataset.tab!)!);
+    // The fact rail belongs to the overview; the other tabs use the full width.
+    const rail = document.querySelector<HTMLElement>('.body > .rail');
     document.documentElement.classList.add('js-tabs');
     for (const t of tabs) t.removeAttribute('href');
 
@@ -140,6 +144,7 @@ const sections = [
         panels[i].hidden = !on;
         if (on && focus) t.focus();
       });
+      if (rail) rail.hidden = id !== 'overview';
     };
     // A hash names a tab, or something inside a panel (a claim, a section).
     const fromHash = () => {
