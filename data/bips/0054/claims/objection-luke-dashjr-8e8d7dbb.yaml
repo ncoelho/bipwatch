@@ -1,0 +1,26 @@
+id: objection-luke-dashjr-8e8d7dbb
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Resolve Luke Dashjr's concern that requiring the coinbase nLockTime
+  to hold the block height takes away a location that could serve as a cheap
+  extranonce for ASICs or microcontrollers.
+subject:
+  name: Luke Dashjr
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#discussion_r2036465290
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-04-10
+  retrieved: 2026-11-21
+  quote: But this particular location, as @darosior says, minimises the need to
+    re-hash a lot of data to roll it. That means it can more practically be done
+    on ASICs or MCUs with nearly no latency.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-21
+  reviewed_by: null

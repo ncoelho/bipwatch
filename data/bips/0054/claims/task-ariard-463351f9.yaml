@@ -1,0 +1,26 @@
+id: task-ariard-463351f9
+bip: 54
+kind: task
+status: open
+area: testing
+statement: Extend the sigops test vector that mixes inputs reaching exactly 2500
+  BIP54 sigops with a future Segwit program input so it covers future Segwit
+  versions beyond 0, 1 and 2 (for example up to version 16).
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2015#discussion_r2508436000
+  type: github
+  title: "BIP54: Consensus Cleanup test vectors"
+  date: 2025-11-10
+  retrieved: 2026-11-21
+  quote: I think it could be valuable to multiply it for the whole range of future
+    Segwit program (i.e from OP_02 to OP_16) to ensure the `CheckSigopsBIP54`
+    parser works well.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-21
+  reviewed_by: null

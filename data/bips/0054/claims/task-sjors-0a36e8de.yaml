@@ -1,0 +1,26 @@
+id: task-sjors-0a36e8de
+bip: 54
+kind: task
+status: open
+area: engineering
+part_of: mining pool support
+statement: Update mining pool software (Stratum v1 stacks relying on
+  getblocktemplate) to craft coinbase transactions with the required nLockTime
+  and nSequence before activation.
+subject:
+  name: Sjors
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#discussion_r2024342720
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-04-02
+  retrieved: 2026-11-21
+  quote: upgrading their stratum v1 stack to something that supports a completely
+    new BIP, otherwise they won't set `nLockTime`, is absolutely critical
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-21
+  reviewed_by: null
