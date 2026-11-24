@@ -1,0 +1,27 @@
+id: task-ajtowns-f894f238
+bip: 54
+kind: task
+status: open
+area: engineering
+part_of: adoption tracking
+statement: Add an efficient way in Bitcoin Core (not just Inquisition) to query
+  coinbase nLockTime values, so node operators can track whether miners have
+  adopted the BIP54 coinbase locktime rule before activation.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#issuecomment-3787878040
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-01-23
+  retrieved: 2026-11-24
+  quote: node operators should be able to easily evaluate whether activating BIP54
+    is safe, and being able to answer "have miners adopted the proposed
+    nlocktime changes?" is important for that.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

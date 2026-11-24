@@ -1,0 +1,26 @@
+id: objection-ariard-466feab0
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Resolve the objection that requiring a non-final coinbase nSequence
+  is superfluous and that relying on proof-of-work ordering would be a simpler
+  way to avoid coinbase duplicates.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#issuecomment-3888545797
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-02-12
+  retrieved: 2026-11-24
+  quote: I’m still thinking you can make a simpler assumption by just relying on
+    the PoW ordering mechanism itself. There can be only and only one block
+    valid at a given chain height.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null
