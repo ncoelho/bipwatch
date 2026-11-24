@@ -1,0 +1,25 @@
+id: task-hunter-beast-d7c3552a
+bip: 360
+kind: task
+status: addressed
+area: writing
+statement: Update the BIP to capture review and mailing-list discussion, adding
+  a rationale explaining why it is an imperfect solution and why it does not
+  need to be perfect (e.g. leaving signature aggregation to a separate BIP).
+subject:
+  name: Hunter Beast
+  type: person
+applies_to_version: 0.6.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r1968029317
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2025-02-24
+  retrieved: 2026-11-24
+  quote: I'd like to add a rationale for why this is an imperfect solution, and
+    why it doesn't need to be perfect.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

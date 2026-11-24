@@ -1,0 +1,25 @@
+id: objection-jonasnick-10ef385a
+bip: 360
+kind: objection
+status: addressed
+area: design
+statement: Justify or drop the use of double SHA-256 (HASH256) for the output
+  commitment, since hashing twice adds no meaningful resistance to Grover's
+  algorithm.
+subject:
+  name: jonasnick
+  type: person
+applies_to_version: 0.6.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r1969542643
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2025-02-25
+  retrieved: 2026-11-24
+  quote: I don't see how it would make a difference. It would just result in
+    running SHA256 twice per Grover iteration instead of once.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

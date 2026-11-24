@@ -1,0 +1,27 @@
+id: task-mraksoll4-007a2f80
+bip: 360
+kind: task
+status: open
+area: design
+part_of: pq signature bip
+statement: Specify a hardened-only key derivation scheme for post-quantum keys
+  (e.g. KMAC over SHAKE256), since non-hardened public key derivation is
+  impossible and watch-only wallets cannot derive key trees.
+subject:
+  name: mraksoll4
+  type: person
+applies_to_version: 0.6.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r1970171127
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2025-02-25
+  retrieved: 2026-11-24
+  quote: need to do a hardened key derevation on the KMAC function (using
+    shake256), no manupulation with public keys is possible at all, so it cannot
+    be non-hardened derevation.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

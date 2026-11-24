@@ -1,0 +1,25 @@
+id: objection-jonasnick-17ec1ddd
+bip: 360
+kind: objection
+status: addressed
+area: writing
+statement: Give the script validation section a clear algorithmic specification,
+  including how the Merkle root is computed from a proof using inner nodes,
+  instead of prose that implies a flat hash of public key hashes.
+subject:
+  name: jonasnick
+  type: person
+applies_to_version: 0.6.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r1970506078
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2025-02-25
+  retrieved: 2026-11-24
+  quote: My overall point is that the script validation section should have a
+    clear algorithmic specification.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null
