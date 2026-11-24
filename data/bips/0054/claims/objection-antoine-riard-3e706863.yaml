@@ -1,0 +1,28 @@
+id: objection-antoine-riard-3e706863
+bip: 54
+kind: objection
+status: addressed
+area: research
+statement: Before relying on 64-byte transaction invalidity for faster block
+  malleability checks, develop a full fast block-malleability validation
+  algorithm and benchmark it in Bitcoin Core, since the benefit is
+  implementation dependent.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/3f0064f9-54bd-46a7-9d9a-c54b99aca7b2n@googlegroups.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-06-29
+  retrieved: 2026-11-17
+  quote: it would be more constructive to come out with a full-fleshout "fast
+    block malleability validation" algorithm in the sense of SipHash (-- and see
+    to have this implemented and benchmarked in core) before to consider more
+    the 64 byte transaction invalidity at the consensus level.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

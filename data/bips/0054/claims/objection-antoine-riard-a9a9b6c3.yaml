@@ -1,0 +1,25 @@
+id: objection-antoine-riard-a9a9b6c3
+bip: 54
+kind: objection
+status: addressed
+area: writing
+statement: Decide whether to split the consensus cleanup into four separate BIPs
+  (timewarp, worst-case validation time, Merkle tree weakness, duplicate
+  transactions), so that fixes could be deployed separately if some lack
+  consensus.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/87360fbe-30dd-4e18-acbf-7416c47ebc61n@googlegroups.com/
+  type: mailing-list
+  title: Update on the Great Consensus Cleanup Revival
+  date: 2025-02-11
+  retrieved: 2026-11-17
+  quote: There is (a) to have 4 distinct BIPs for each fix
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

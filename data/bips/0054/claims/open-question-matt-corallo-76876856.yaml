@@ -1,0 +1,25 @@
+id: open-question-matt-corallo-76876856
+bip: 54
+kind: open-question
+status: addressed
+area: research
+statement: Provide worst-case block validation time figures under the proposed
+  sigops mitigation when the attacker uses only one preparation block, to judge
+  the impact on cheap miner hardware.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/58247311-171f-4228-8db9-53363f764880@mattcorallo.com/
+  type: mailing-list
+  title: Update on the Great Consensus Cleanup Revival
+  date: 2025-02-26
+  retrieved: 2026-11-17
+  quote: Do you happen to have numbers handy for the worst-case with, for example,
+    one block of prep?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

@@ -1,0 +1,28 @@
+id: task-antoine-riard-12d831c6
+bip: 54
+kind: task
+status: open
+area: engineering
+part_of: mining pool support
+statement: Check, and update where needed, each block template provider other
+  than Bitcoin Core (other getblocktemplate implementations, Stratum V2) so it
+  sets the first block's timestamp of a difficulty period in line with the
+  timewarp fix.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/e045e415-9f0b-4f90-9c65-3aeeecca785bn@googlegroups.com/
+  type: mailing-list
+  title: Timewarp fix, Mining software and Clocks
+  date: 2024-08-25
+  retrieved: 2026-11-17
+  quote: this upgrade behavior is far from being ported in any other block
+    template providers (e.g getblocktemplate other implementations, stratum v2)
+    in the mining ecosystem
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

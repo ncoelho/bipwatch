@@ -1,0 +1,24 @@
+id: task-murch-723240e9
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: Explain in the BIP's Rationale why the timewarp grace period was
+  raised from 600 to 7200 seconds.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/ff82fe21-8e02-42df-8760-c3e358a12766@murch.one/
+  type: mailing-list
+  title: Update on the Great Consensus Cleanup Revival
+  date: 2025-02-06
+  retrieved: 2026-11-17
+  quote: share here or in the BIP’s Rationale what convinced you to change the
+    grace period from 600 seconds to 7200 seconds
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: open-question-matt-corallo-b441e524
+bip: 54
+kind: open-question
+status: addressed
+area: research
+statement: Quantify the worst-case block validation time with the 40x sigops
+  mitigation and with the further 7x rule, to decide whether the additional rule
+  is worth its confiscation surface.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/25482CCA-1F9D-4971-914F-674DF15C3414@mattcorallo.com/
+  type: mailing-list
+  title: Update on the Great Consensus Cleanup Revival
+  date: 2025-02-21
+  retrieved: 2026-11-17
+  quote: Can you put numbers to this? How long does it take to validate a full
+    block with this 40x decrease and how long would it take with the further 7x
+    decrease?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

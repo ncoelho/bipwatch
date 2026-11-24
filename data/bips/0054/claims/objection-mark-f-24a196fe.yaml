@@ -1,0 +1,27 @@
+id: objection-mark-f-24a196fe
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Mark F objected that fixing the timewarp bug would permanently rule
+  out forward-blocks-style soft forks for flexible block size and subsidy
+  smoothing, so the fix needed to be justified against giving up that
+  capability.
+subject:
+  name: Mark F
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/67ec72f6-b89f-4f8d-8629-0ebc8bdb7acfn@googlegroups.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-04-30
+  retrieved: 2026-11-17
+  quote: fixing the timewarp bug will _permanently_ cutoff the bitcoin community
+    from ever having the ability to scale on-chain in a backwards-compatible
+    way, now or decades or centuries into the future.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

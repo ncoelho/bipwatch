@@ -1,0 +1,24 @@
+id: task-antoine-riard-3d04900d
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: Document what miners and block template software must do with
+  timestamps to avoid producing blocks that break the new timewarp rule.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/e045e415-9f0b-4f90-9c65-3aeeecca785bn@googlegroups.com/
+  type: mailing-list
+  title: Timewarp fix, Mining software and Clocks
+  date: 2024-08-25
+  retrieved: 2026-11-17
+  quote: I don't know if it should be further documented or implemented (e.g
+    addendum to bip23 ?)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

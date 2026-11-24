@@ -1,0 +1,26 @@
+id: objection-mark-f-4f21e9d6
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Decide whether the timewarp fix is worth closing off forward blocks,
+  which Mark F calls the only known way to raise effective block size while
+  staying fully compatible with un-upgraded nodes.
+subject:
+  name: Mark F
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/62640263-077c-4ac7-98a6-d9c17913fca0n@googlegroups.com/
+  type: mailing-list
+  title: Great Consensus Cleanup Revival
+  date: 2024-04-18
+  retrieved: 2026-11-17
+  quote: with the tradeoff of removing the only known mechanism for upgrading the
+    bitcoin protocol to larger effective block sizes while staying 100%
+    compatible with un-upgraded nodes
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
