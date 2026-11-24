@@ -1,0 +1,24 @@
+id: task-ariard-1e83ab1d
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: Explain in the BIP why the coinbase nLockTime must be set to the
+  block height minus 1, and how this interacts with the nSequence requirement
+  and timelock finality rules.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#discussion_r2636788599
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2025-12-20
+  retrieved: 2026-11-24
+  quote: BIP54 does not really document why `nHeight - 1` is picked up.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

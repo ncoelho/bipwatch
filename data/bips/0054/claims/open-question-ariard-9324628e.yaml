@@ -1,0 +1,25 @@
+id: open-question-ariard-9324628e
+bip: 54
+kind: open-question
+status: addressed
+area: writing
+statement: Explain in the BIP 54 rationale why enforcing the coinbase timelock
+  (a finality restriction) guarantees coinbase uniqueness, rather than relying
+  on the height commitment alone.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#discussion_r2663177293
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-01-06
+  retrieved: 2026-11-24
+  quote: This is not clear from the BIP54 rational how temporal restraint of the
+    validity of a coinbase transaction ensure its uniqueness.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

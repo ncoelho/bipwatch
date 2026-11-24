@@ -1,0 +1,26 @@
+id: task-antoine-poinsot-3dac3bb0
+bip: 54
+kind: task
+status: addressed
+area: engineering
+part_of: bitcoin inquisition
+statement: Move the BIP54 legacy sigops check into CheckTxInputs in the Bitcoin
+  Inquisition implementation, so the check lives in a single place for both
+  mempool and block validation.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#discussion_r2627834970
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2025-12-17
+  retrieved: 2026-11-24
+  quote: Here is the diff to achieve this. It's clearly more Right, but is bigger
+    and touches more files. What do you think?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

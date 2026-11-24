@@ -1,0 +1,24 @@
+id: objection-ariard-5bb2e8de
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Resolve the objection that requiring the coinbase nSequence to differ
+  from 0xffffffff is superfluous if the BIP 54 activation height is buried and
+  BIP 30 checks are disabled past it.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#issuecomment-3903141040
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-02-15
+  retrieved: 2026-11-24
+  quote: Point is the additional check in nsequence field is superflous imho.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

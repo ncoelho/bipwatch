@@ -1,0 +1,26 @@
+id: task-sebastian-falbesoner-e453e442
+bip: 54
+kind: task
+status: open
+area: testing
+statement: Adjust the generated BIP 54 sigops limit test vectors so they don't
+  fail block validation for unrelated reasons, such as missing outputs or a
+  non-final transaction caused by BIP68.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#issuecomment-3791777756
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-01-23
+  retrieved: 2026-11-24
+  quote: But the smaller adaptions in the unit tests might be worth it to add, so
+    that the vectors are more useful, in the sense that they don't unnecessarily
+    fail in a block validation context for other reasons.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null
