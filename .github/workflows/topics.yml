@@ -1,0 +1,58 @@
+name: topics
+
+# Weekly: group open work items that ask for the same thing (npm run topics)
+# for every tracked BIP with work extracted since its last grouping, and open
+# one pull request with the topics.yaml files. One model call per BIP (about
+# 15k billed tokens for the largest). Off while EXTRACT_ENABLED is not "true",
+# like the other model jobs.
+
+on:
+  schedule:
+    - cron: '21 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      all:
+        description: Regroup every tracked BIP, changed or not
+        type: boolean
+        default: false
+
+concurrency:
+  group: topics
+  cancel-in-progress: false
+
+jobs:
+  topics:
+    if: vars.EXTRACT_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+      - name: Fetch bitcoin/bips history
+        run: git clone --filter=blob:none --no-checkout https://github.com/bitcoin/bips.git ../bips
+      - uses: ./.github/actions/setup
+
+      - name: Group
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ALL: ${{ inputs.all }}
+        run: |
+          if [ "$ALL" = "true" ]; then npm run topics; else npm run topics -- --if-changed; fi
+
+      - name: Validate
+        run: npm run validate -- --bips ../bips
+
+      - name: Open the pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+          branch: bot/topics/run-${{ github.run_id }}
+          add-paths: data/bips/*/topics.yaml
+          commit-message: 'Group repeated open work into topics, pending review'
+          title: 'Group repeated open work into topics, pending review'
+          body: |
+            Regenerated `topics.yaml` for tracked BIPs with open work newer than their last grouping (`npm run topics`). Each topic lists items that ask for the same thing; the site shows them once, as "raised N times". All are pending review: check that each group really is one request, and remove an item from a topic if it is not.
+
+            🤖 Opened by the topics workflow
+          labels: claims

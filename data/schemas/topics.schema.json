@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bipwatch.com/schemas/topics.schema.json",
+  "title": "Topics",
+  "description": "Open work items that ask for the same thing, grouped so a reader sees each request once. Only groups of two or more are listed; every other item stands alone. Every id must be a task, open question or objection in the same BIP folder, on the same piece, and in at most one topic. bips/<NNNN>/topics.yaml.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["bip", "grouped", "provenance", "topics"],
+  "properties": {
+    "bip": { "type": "integer", "minimum": 1 },
+    "grouped": { "type": "string", "format": "date" },
+    "provenance": { "$ref": "claim.schema.json#/properties/provenance" },
+    "topics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "items"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "maxLength": 80 },
+          "title": { "description": "One plain sentence naming the shared request, written by whoever grouped it; not a quote.", "type": "string", "minLength": 10, "maxLength": 160 },
+          "items": { "type": "array", "items": { "type": "string" }, "minItems": 2, "uniqueItems": true }
+        }
+      }
+    }
+  }
+}

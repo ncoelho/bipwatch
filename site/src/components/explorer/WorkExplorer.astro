@@ -14,6 +14,7 @@ import {
   isPending, isStale, versionLabel, workModel,
 } from '../../lib/view.ts';
 import { TIERS, TIER_HINT, TIER_LABEL, triager, type Tier } from '../../lib/triage.ts';
+import { raisedLabel, topicRows } from '../../lib/topics.ts';
 
 interface Props { bundle: BipBundle; }
 const { bundle } = Astro.props;
@@ -36,7 +37,14 @@ const triage = triager(bundle, new Date());
 const tierOf = new Map(m.items.filter((c) => c.status !== 'addressed').map((c) => [c.id, triage(c)]));
 const rank = (c: (typeof m.items)[number]) => { const t = tierOf.get(c.id); return t ? TIERS.indexOf(t.tier) : TIERS.length; };
 const listed = m.items.map((c, i) => ({ c, i })).sort((a, b) => rank(a.c) - rank(b.c) || a.i - b.i).map(({ c }) => c);
-const tierCount = (t: Tier) => [...tierOf.values()].filter((x) => x.tier === t).length;
+// Items that ask for the same thing (topics.yaml) show once, under their best item.
+const isOpen = (c: (typeof m.items)[number]) => c.status !== 'addressed';
+const rows = [
+  ...topicRows(listed.filter(isOpen), bundle.topics, (c) => c.subject?.name ?? 'the authors'),
+  ...listed.filter((c) => !isOpen(c)).map((c) => ({ lead: c, others: [] as typeof m.items, people: 1 })),
+];
+const openRows = rows.filter((r) => isOpen(r.lead));
+const tierCount = (t: Tier) => openRows.filter((r) => tierOf.get(r.lead.id)?.tier === t).length;
 // The page opens on the first group that has anything in it.
 const firstTier = TIERS.find((t) => tierCount(t) > 0) ?? 'attention';
 const kindMark = (k: string) => (k === 'objection' ? 'sq' : k === 'open-question' ? 'dia' : 'bar');
@@ -46,7 +54,7 @@ const kinds = [
   { key: 'open-question', label: 'Open question' },
   { key: 'objection', label: 'Objection' },
 ]
-  .map((k) => ({ ...k, open: m.items.filter((i) => i.kind === k.key && i.status !== 'addressed').length, any: m.items.some((i) => i.kind === k.key) }))
+  .map((k) => ({ ...k, open: openRows.filter((r) => r.lead.kind === k.key).length, any: m.items.some((i) => i.kind === k.key) }))
   .filter((k) => k.any);
 const msgLink = (url: string) => url;
 ---
@@ -155,7 +163,7 @@ const msgLink = (url: string) => url;
         {TIERS.map((t) => (
           <button type="button" class:list={['tbtn', t]} data-tier-filter={t} aria-pressed="false" title={TIER_HINT[t]}>{TIER_LABEL[t]} <span class="mono tn" data-tier-count>{tierCount(t)}</span></button>
         ))}
-        <button type="button" class="tbtn" data-tier-filter="all" aria-pressed="false">All <span class="mono tn" data-tier-count>{m.open}</span></button>
+        <button type="button" class="tbtn" data-tier-filter="all" aria-pressed="false">All <span class="mono tn" data-tier-count>{openRows.length}</span></button>
       </div>
       <p class="tier-hint"><span data-tier-hint>{TIER_HINT[firstTier]}</span>. Grouped by BipWatch from the type of work, the needs scores, the BIP's status and the item's age; nobody has reviewed these items yet.</p>
     </div>
@@ -172,18 +180,22 @@ const msgLink = (url: string) => url;
           {m.addressed > 0 && <button type="button" class="done" data-done aria-pressed="false"><span class="mark sq closed" aria-hidden="true"></span><span data-done-label>Show {m.addressed} addressed</span></button>}
         </div>
         <ol class="list">
-          {listed.map((c) => {
+          {rows.map((r) => {
+            const c = r.lead;
             const open = c.status !== 'addressed';
             const t = tierOf.get(c.id);
             const piece = m.pieceOf(c);
             const stale = open && !c.part_of && isStale(c.applies_to_version, bip.version);
+            const raised = raisedLabel(r);
+            const mentions = [c, ...r.others];
             return (
-              <li id={c.id} data-row data-tier={t?.tier ?? ''} data-kind={c.kind} data-area={c.area ?? ''} data-piece={piece} data-open={open ? '1' : '0'}>
+              <li id={c.id} data-row data-members={r.others.map((o) => o.id).join(' ') || undefined} data-tier={t?.tier ?? ''} data-kind={c.kind} data-area={c.area ?? ''} data-piece={piece} data-open={open ? '1' : '0'}>
+                {r.others.map((o) => <span id={o.id} class="anchor"></span>)}
                 <button type="button" class="rowbtn" data-select={c.id}>
                   <span class:list={['mark', kindMark(c.kind), { closed: !open }]} aria-hidden="true"></span>
                   <span class="rt">
-                    <span>{c.statement}</span>
-                    {t && <span class="why"><span class:list={['tchip', t.tier]}>{TIER_LABEL[t.tier]}</span>{t.reasons.map((r) => <span class="reason">{r}</span>)}</span>}
+                    <span>{r.topic?.title ?? c.statement}</span>
+                    {t && <span class="why"><span class:list={['tchip', t.tier]}>{TIER_LABEL[t.tier]}</span>{raised && <span class="times">{raised}</span>}{t.reasons.map((x) => <span class="reason">{x}</span>)}</span>}
                     <span class="meta">{WORK_KIND_LABEL[c.kind]} · {c.area ? AREA_LABEL[c.area] : 'no type'}{m.useGrid ? ` · ${piece}` : ''} · {c.subject?.name} · {c.source.date ?? 'undated'}{open ? '' : ' · addressed'}</span>
                   </span>
                 </button>
@@ -193,16 +205,33 @@ const msgLink = (url: string) => url;
                     <span class="pill">{WORK_KIND_LABEL[c.kind]}</span>
                     {c.area && <span class="pill">{AREA_LABEL[c.area]}</span>}
                     <span class:list={['pill', open ? 'accent' : 'good']}>{c.status}</span>
-                    {isPending(c) && <span class="pill warn">pending review</span>}
+                    {(isPending(c) || (r.others.length > 0 && bundle.topics && isPending(bundle.topics))) && <span class="pill warn">pending review</span>}
                   </div>
-                  <div class="dt">{c.statement}</div>
-                  {t && <div class="dwhy"><span class:list={['tchip', t.tier]}>{TIER_LABEL[t.tier]}</span> {t.reasons.join(' · ')}</div>}
-                  {c.source.quote && (
-                    <blockquote>“{c.source.quote}”{c.source.verified && <span class="matched">quote matched</span>}</blockquote>
+                  <div class="dt">{r.topic?.title ?? c.statement}</div>
+                  {t && <div class="dwhy"><span class:list={['tchip', t.tier]}>{TIER_LABEL[t.tier]}</span> {[raised, ...t.reasons].filter(Boolean).join(' · ')}</div>}
+                  {r.others.length > 0 ? (
+                    <>
+                      <div class="mhead">Grouped as one request by BipWatch, not yet reviewed. Each message:</div>
+                      <ol class="mentions">
+                        {mentions.map((x) => (
+                          <li>
+                            <p>{x.statement}</p>
+                            {x.source.quote && <blockquote>“{x.source.quote}”{x.source.verified && <span class="matched">quote matched</span>}</blockquote>}
+                            <div class="who"><strong>{x.subject?.name}</strong> · {x.source.date ?? 'undated'} · {SOURCE_LABEL[x.source.type]}{x.source.title ? ` · ${x.source.title}` : ''} · <a href={msgLink(x.source.url)} rel="noopener">Open the message</a></div>
+                          </li>
+                        ))}
+                      </ol>
+                    </>
+                  ) : (
+                    <>
+                      {c.source.quote && (
+                        <blockquote>“{c.source.quote}”{c.source.verified && <span class="matched">quote matched</span>}</blockquote>
+                      )}
+                      <div class="who">Raised by <strong>{c.subject?.name}</strong> · {c.source.date ?? 'undated'} · {SOURCE_LABEL[c.source.type]}{c.source.title ? ` · ${c.source.title}` : ''}</div>
+                    </>
                   )}
-                  <div class="who">Raised by <strong>{c.subject?.name}</strong> · {c.source.date ?? 'undated'} · {SOURCE_LABEL[c.source.type]}{c.source.title ? ` · ${c.source.title}` : ''}</div>
                   {stale && <div class="stale">Raised on {versionLabel(c.applies_to_version)}. The spec is now at v{bip.version}; check it still applies.</div>}
-                  <a href={msgLink(c.source.url)} rel="noopener">Open the message</a>
+                  {r.others.length === 0 && <a href={msgLink(c.source.url)} rel="noopener">Open the message</a>}
                 </div>
               </li>
             );
@@ -290,6 +319,12 @@ const msgLink = (url: string) => url;
   .tchip { font-size: 11.5px; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--inset); color: var(--muted); }
   .tchip.attention { background: var(--accent-soft); color: var(--accent-ink); }
   .tchip.important { background: var(--info-ground); color: var(--info-ink); }
+  .times { font-size: 12px; font-weight: 600; color: var(--fg-2); }
+  .times + .reason::before { content: '· '; color: var(--faint); }
+  .anchor { display: block; scroll-margin-top: 16px; }
+  .mhead { font-size: 12.5px; color: var(--muted); }
+  .mentions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .mentions > li { background: var(--inset); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; }
   .dwhy { font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
   .list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
   .list li { scroll-margin-top: 16px; border-radius: 10px; }

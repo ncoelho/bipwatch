@@ -9,7 +9,8 @@
 import { canonicalName, isoWeek, loadAll, loadPeople, loadPrStates, loadWeek, loadWeekly } from '@bipwatch/data';
 import Base from '../layouts/Base.astro';
 import { AREA_LABEL, bipHref, isPending, storyTile, weekRange } from '../lib/view.ts';
-import { workItems } from '../lib/work.ts';
+import { raisedLabel } from '../lib/topics.ts';
+import { workItems, workRows } from '../lib/work.ts';
 
 const week = loadWeek();
 const all = loadAll();
@@ -25,8 +26,9 @@ const bipChip = (n: number) => (byNumber.has(n) ? { href: bipHref(n), label: `BI
 // Open work across tracked BIPs: what needs attention first (lib/triage.ts),
 // newest first, then the next group if that one is short.
 const work = workItems(all, canonicalName(loadPeople()), now);
-const attention = work.filter((i) => i.tier === 'attention');
-const workList = [...attention, ...work.filter((i) => i.tier === 'important')].slice(0, 6);
+const rowsOf = workRows(work, all);
+const attention = rowsOf.filter((r) => r.lead.tier === 'attention');
+const workList = [...attention, ...rowsOf.filter((r) => r.lead.tier === 'important')].slice(0, 6);
 
 const LABEL_CHIP: Record<string, string> = { 'Proposed BIP modification': 'info', 'BIP Update by Owner': 'info', 'New BIP': 'layer', Fixups: '', Process: '', 'Bug fix': 'accent' };
 const mainLabel = (labels: string[]) => labels.find((l) => l in LABEL_CHIP) ?? labels[0] ?? '';
@@ -139,11 +141,11 @@ const year = week ? week.to.slice(0, 4) : String(now.getUTCFullYear());
             <div class="ch"><h2 id="h-work">Needs attention</h2><a href="/work/">{attention.length} across tracked BIPs</a></div>
             <p class="note">Open work that holds a BIP back and was raised in the last 90 days. Grouped by BipWatch; nobody has reviewed these items yet.</p>
             <div class="cl">
-            {workList.map((i) => (
+            {workList.map(({ lead: i, ...r }) => (
               <a class="item" href={i.bipHref}>
                 <span class="ih"><span class="pill accent">{i.area ? AREA_LABEL[i.area] : 'Work'}</span><span class="mono faint">BIP {i.bip}{i.piece ? ` · ${i.piece}` : ''}</span></span>
-                <span class="it">{i.statement}</span>
-                <span class="iw">{i.reasons.join(' · ')}</span>
+                <span class="it">{r.topic?.title ?? i.statement}</span>
+                <span class="iw">{[raisedLabel({ lead: i, ...r }), ...i.reasons].filter(Boolean).join(' · ')}</span>
                 <span class="iw">{i.who} · {i.date ?? 'in the spec'}{i.pending && <> · <span class="warn">pending review</span></>}</span>
               </a>
             ))}

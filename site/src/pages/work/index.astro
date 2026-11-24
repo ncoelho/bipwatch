@@ -13,8 +13,9 @@ import { canonicalName, loadAll, loadPeople, NEED_DIMENSIONS } from '@bipwatch/d
 import Base from '../../layouts/Base.astro';
 import { DIMENSION_LABEL } from '../../lib/view.ts';
 import { TIERS, TIER_HINT, TIER_LABEL } from '../../lib/triage.ts';
+import { raisedLabel } from '../../lib/topics.ts';
 import {
-  AREA_HINT, AREA_SHORT, age, areaLabel, gridRows, mapLead, pieceName, piecesLead, shade, topPieces, usedAreas, workItems, workStats,
+  AREA_HINT, AREA_SHORT, age, areaLabel, gridRows, mapLead, pieceName, piecesLead, shade, topPieces, usedAreas, workItems, workRows, workStats,
   type Area,
 } from '../../lib/work.ts';
 
@@ -32,7 +33,9 @@ const built = today.toLocaleDateString('en-GB', { day: 'numeric', month: 'short'
 const short = (d?: string) => (d ? new Date(`${d}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) : 'in the spec');
 const aKey = (a: Area) => a || 'none';
 const kindMark = (k: string) => (k === 'objection' ? 'sq' : k === 'open-question' ? 'dia' : 'bar');
-const siblings = (key: string) => items.filter((i) => i.pieceKey === key).length;
+const siblings = (key: string) => listRows.filter((r) => r.lead.pieceKey === key).length;
+// One row per request: items in a topic (topics.yaml) show once.
+const listRows = workRows(items, all);
 const KINDS = [
   { key: '', label: 'All' },
   { key: 'task', label: 'Tasks' },
@@ -130,8 +133,12 @@ const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d
       <div class="split">
         <div class="listcol">
           <ol class="list" data-list>
-            {items.map((i) => (
-              <li id={`w-${i.id}`} data-row data-id={i.id} data-bip={i.bip} data-area={aKey(i.area)} data-piece={i.pieceKey} data-piece-name={i.piece} data-kind={i.kind} data-tier={i.tier} data-date={i.date ?? ''}>
+            {listRows.map((r) => {
+              const i = r.lead;
+              const raised = raisedLabel(r);
+              const title = r.topic?.title ?? i.statement;
+              return (
+              <li id={`w-${i.id}`} data-row data-id={i.id} data-members={r.others.map((o) => o.id).join(' ') || undefined} data-bip={i.bip} data-area={aKey(i.area)} data-piece={i.pieceKey} data-piece-name={i.piece} data-kind={i.kind} data-tier={i.tier} data-date={i.date ?? ''}>
                 <button type="button" class="rowbtn" data-select aria-pressed="false">
                   <span class:list={['mark', kindMark(i.kind)]} aria-hidden="true"></span>
                   <span class="rt">
@@ -140,8 +147,8 @@ const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d
                       <span class="pc">{i.piece || 'the BIP itself'}</span>
                       <span class:list={['age', 'mono', { oldage: i.old }]}>{age(i.date, today)}</span>
                     </span>
-                    <span class="st">{i.statement}</span>
-                    <span class="why"><span class:list={['tchip', i.tier]}>{TIER_LABEL[i.tier]}</span>{i.reasons.map((r) => <span class="reason">{r}</span>)}</span>
+                    <span class="st">{title}</span>
+                    <span class="why"><span class:list={['tchip', i.tier]}>{TIER_LABEL[i.tier]}</span>{raised && <span class="times">{raised}</span>}{i.reasons.map((x) => <span class="reason">{x}</span>)}</span>
                     <span class="meta">{i.kindLabel} · {i.areaLabel} · {i.who} · {i.venue}{i.status === 'unknown' ? ' · status unknown' : ''}{i.old ? ' · may be out of date' : ''}</span>
                   </span>
                 </button>
@@ -154,12 +161,29 @@ const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d
                     <span class:list={['pill', { warn: i.status === 'unknown' }]}>{i.status === 'unknown' ? 'Status unknown' : 'Open'}</span>
                     {i.pending && <span class="pill warn">pending review</span>}
                   </div>
-                  <div class="dt">{i.statement}</div>
-                  <div class="dwhy"><span class:list={['tchip', i.tier]}>{TIER_LABEL[i.tier]}</span> {i.reasons.join(' · ')}</div>
-                  {i.quote && (
-                    <blockquote>“{i.quote}”<span class:list={['q', { ok: i.quoteMatched }]}>{i.quoteMatched ? 'quote matched' : 'quote not matched yet'}</span></blockquote>
+                  <div class="dt">{title}</div>
+                  <div class="dwhy"><span class:list={['tchip', i.tier]}>{TIER_LABEL[i.tier]}</span> {[raised, ...i.reasons].filter(Boolean).join(' · ')}</div>
+                  {r.others.length > 0 ? (
+                    <>
+                      <div class="mhead">Grouped as one request by BipWatch, not yet reviewed. Each message:</div>
+                      <ol class="mentions">
+                        {[i, ...r.others].map((x) => (
+                          <li>
+                            <p>{x.statement}</p>
+                            {x.quote && <blockquote>“{x.quote}”<span class:list={['q', { ok: x.quoteMatched }]}>{x.quoteMatched ? 'quote matched' : 'quote not matched yet'}</span></blockquote>}
+                            <div class="who"><strong>{x.who}</strong> · {short(x.date)} · {x.venue}{x.venueTitle ? ` · ${x.venueTitle}` : ''} · <a href={x.url} rel="noopener">Open the message</a></div>
+                          </li>
+                        ))}
+                      </ol>
+                    </>
+                  ) : (
+                    <>
+                      {i.quote && (
+                        <blockquote>“{i.quote}”<span class:list={['q', { ok: i.quoteMatched }]}>{i.quoteMatched ? 'quote matched' : 'quote not matched yet'}</span></blockquote>
+                      )}
+                      <div class="who">Raised by <strong>{i.who}</strong> · {short(i.date)} · {i.venue}{i.venueTitle ? ` · ${i.venueTitle}` : ''}</div>
+                    </>
                   )}
-                  <div class="who">Raised by <strong>{i.who}</strong> · {short(i.date)} · {i.venue}{i.venueTitle ? ` · ${i.venueTitle}` : ''}</div>
                   {i.old && <div class="warnbox">Raised {age(i.date, today)} ago on a BIP that is now {i.bipStatus}, with no later discussion recorded. It may be settled or obsolete: check the thread before picking it up.</div>}
                   {i.stale && <div class="warnbox">Raised against {i.staleLabel}; the spec is now at v{i.bipVersion}. Check it still applies.</div>}
                   <div class="actions">
@@ -172,7 +196,8 @@ const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d
                   <div class="foot">Nobody is assigned to items here. Reply where it was raised so the authors know someone is on it.</div>
                 </div>
               </li>
-            ))}
+              );
+            })}
           </ol>
           <div class="nothing" data-nothing hidden>Nothing open matches these filters. <button type="button" class="linkbtn" data-clear-inline>Show everything</button></div>
         </div>
@@ -308,6 +333,11 @@ const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d
   .tchip { font-size: 11.5px; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--inset); color: var(--muted); }
   .tchip.attention { background: var(--accent-soft); color: var(--accent-ink); }
   .tchip.important { background: var(--info-ground); color: var(--info-ink); }
+  .times { font-size: 12px; font-weight: 600; color: var(--fg-2); }
+  .times + .reason::before { content: '· '; color: var(--faint); }
+  .mhead { font-size: 12.5px; color: var(--muted); }
+  .mentions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .mentions > li { background: var(--inset); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; }
   .dwhy { font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
   .kn { font-size: 11.5px; opacity: 0.8; }
   .sort { display: flex; gap: 4px; padding: 3px; border-radius: 999px; background: var(--card); }

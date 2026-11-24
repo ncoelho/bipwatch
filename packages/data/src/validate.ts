@@ -15,7 +15,7 @@ import { parse } from 'yaml';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import { canonicalName, findDataDir, folderFor, loadPeople } from './index.ts';
-import type { BipRecord, Claim, Fixes, NeedsAssessment, Road, WeeklyStory } from './types.ts';
+import type { BipRecord, Claim, Fixes, NeedsAssessment, Road, Topics, WeeklyStory } from './types.ts';
 
 type Level = 'error' | 'warn';
 const findings: { level: Level; file: string; msg: string }[] = [];
@@ -58,6 +58,7 @@ const validators = {
   fixes: ajv.getSchema('fixes.schema.json')!,
   road: ajv.getSchema('road.schema.json')!,
   weekly: ajv.getSchema('weekly.schema.json')!,
+  topics: ajv.getSchema('topics.schema.json')!,
 };
 
 function check<T>(kind: keyof typeof validators, file: string): T | null {
@@ -228,6 +229,32 @@ for (const folder of folders) {
     }
   } else if (bip?.bipwatch.tracked) {
     report('warn', rel(base), 'tracked BIP has no needs.yaml yet');
+  }
+
+  // topics: groups of work items in this folder, on one piece, each item once
+  const topicsFile = join(base, 'topics.yaml');
+  if (existsSync(topicsFile)) {
+    const tp = check<Topics>('topics', topicsFile);
+    if (tp) {
+      if (tp.bip !== n) report('error', rel(topicsFile), `bip ${tp.bip} does not match folder ${folder}`);
+      const byId = new Map(loadedClaims.map((c) => [c.id, c]));
+      const seen = new Map<string, string>();
+      const topicIds = new Set<string>();
+      for (const t of tp.topics) {
+        if (topicIds.has(t.id)) report('error', rel(topicsFile), `topic id "${t.id}" is used twice`);
+        topicIds.add(t.id);
+        const pieces = new Set<string>();
+        for (const id of t.items) {
+          const c = byId.get(id);
+          if (!c) report('error', rel(topicsFile), `${t.id} lists unknown claim "${id}"`);
+          else if (!['task', 'open-question', 'objection'].includes(c.kind)) report('error', rel(topicsFile), `${t.id} lists "${id}", a ${c.kind}; only open work groups into topics`);
+          else pieces.add(c.part_of ?? '');
+          if (seen.has(id)) report('error', rel(topicsFile), `"${id}" is in both ${seen.get(id)} and ${t.id}`);
+          seen.set(id, t.id);
+        }
+        if (pieces.size > 1) report('error', rel(topicsFile), `${t.id} mixes pieces (${[...pieces].map((p) => p || 'the BIP itself').join(', ')})`);
+      }
+    }
   }
 
   // fixes: spec quotes at the record's revision, and the fix:<key> tags
