@@ -1,0 +1,25 @@
+id: open-question-jvgelder-a9249925
+bip: 352
+kind: open-question
+status: addressed
+area: design
+part_of: BIP 392
+statement: Decide whether sp() descriptors should allow arbitrary label sets or
+  only consecutive label ranges.
+subject:
+  name: jvgelder
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2047#issuecomment-3696258888
+  type: github
+  title: "BIP392: Silent Payment Output Script Descriptors"
+  date: 2025-12-29
+  retrieved: 2026-11-19
+  quote: Do we still want arbitrary labels or do we want them to be consecutive?
+    This would make it easier to parse in my opinion.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null

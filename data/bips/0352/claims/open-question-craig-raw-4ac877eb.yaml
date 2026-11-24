@@ -1,0 +1,25 @@
+id: open-question-craig-raw-4ac877eb
+bip: 352
+kind: open-question
+status: addressed
+area: design
+part_of: BIP 392
+statement: Decide whether sp() descriptors should support both a single encoded
+  key expression and a two-key form for specifying the scan and spend keys.
+subject:
+  name: Craig Raw
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2047#issuecomment-3748870815
+  type: github
+  title: "BIP392: Silent Payment Output Script Descriptors"
+  date: 2026-01-14
+  retrieved: 2026-11-19
+  quote: I notice you did not respond to my suggestion of supporting both
+    approaches to specifying the scan and spend keys?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null
