@@ -1,0 +1,26 @@
+id: open-question-macgyver13-fb01a6ea
+bip: 352
+kind: open-question
+status: addressed
+area: design
+part_of: BIP 392
+statement: Decide whether sp() descriptors should support both the single
+  encoded key form (spscan/spspend) and the two-argument key expression form, or
+  only one of them.
+subject:
+  name: macgyver13
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2047#issuecomment-3872264043
+  type: github
+  title: "BIP392: Silent Payment Output Script Descriptors"
+  date: 2026-02-09
+  retrieved: 2026-11-20
+  quote: I'd like to hear from implementers on whether this is practical or if one
+    format should win.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null

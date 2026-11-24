@@ -1,0 +1,27 @@
+id: task-craig-raw-aa570f40
+bip: 352
+kind: task
+status: addressed
+area: design
+part_of: BIP 376
+statement: Specify how the signer obtains the spend private key when spending
+  silent payment outputs via PSBT, by adding a PSBT_IN_SP_SPEND_BIP32_DERIVATION
+  field carrying the spend key's BIP32 derivation path for hardware wallets.
+subject:
+  name: Craig Raw
+  type: person
+applies_to_version: 1.0.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2089#issuecomment-3858549864
+  type: github
+  title: "BIP376: Spending Silent Payment outputs with PSBTs"
+  date: 2026-02-06
+  retrieved: 2026-11-20
+  quote: To avoid this I suggest creating a new field called
+    `PSBT_IN_SP_SPEND_BIP32_DERIVATION` which contains the same keydata and
+    valuedata definitions used for `PSBT_IN_BIP32_DERIVATION`.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null
