@@ -1,7 +1,7 @@
 /**
  * The /work/ island (work page spec). The page is complete without it: every
- * row and its detail are rendered, newest first, and the tiles, grid cells
- * and piece rows are links to the filtered URL. This script only filters,
+ * row and its detail are rendered, newest first, and the tiles and piece
+ * rows are links to the filtered URL. This script only filters,
  * re-sorts by moving the rendered rows, selects an item into the side panel,
  * keeps the counts that depend on other filters current, and mirrors the
  * state in the query string:
@@ -39,9 +39,6 @@ export function initWorkExplorer() {
   const tierHint = root.querySelector<HTMLElement>('[data-tier-hint]');
   const firstTier = root.querySelector<HTMLElement>('[data-first-tier]')?.dataset.firstTier ?? 'all';
   const sorts = $$<HTMLButtonElement>('[data-sort]');
-  const gridHeads = $$<HTMLAnchorElement>('[data-grid-bip]');
-  const cells = $$<HTMLElement>('[data-cell-bip]');
-  const cols = $$<HTMLElement>('[data-col]');
   const pieceRows = $$<HTMLAnchorElement>('[data-piece-row]');
   const clear = root.querySelector<HTMLButtonElement>('[data-clear]')!;
   const nothing = root.querySelector<HTMLElement>('[data-nothing]')!;
@@ -49,9 +46,9 @@ export function initWorkExplorer() {
   const count = root.querySelector<HTMLElement>('[data-list-count]')!;
 
   // Links become toggle buttons once the script runs.
-  for (const el of [...tiles, ...gridHeads, ...pieceRows, ...cells.filter((c) => c.tagName === 'A')]) {
+  for (const el of [...tiles, ...pieceRows]) {
     el.setAttribute('role', 'button');
-    if (!el.dataset.cellBip) el.setAttribute('aria-pressed', 'false');
+    el.setAttribute('aria-pressed', 'false');
   }
 
   const q = new URLSearchParams(location.search);
@@ -157,13 +154,7 @@ export function initWorkExplorer() {
     }
     for (const s of sorts) s.setAttribute('aria-pressed', String(s.dataset.sort === st.sort));
 
-    // Grid and pieces.
-    for (const h of gridHeads) h.setAttribute('aria-pressed', String(h.dataset.gridBip === st.bip));
-    for (const c of cells) {
-      c.classList.toggle('on', c.dataset.cellBip === st.bip && c.dataset.cellArea === st.area);
-      c.classList.toggle('dimmed', (!!st.bip && c.dataset.cellBip !== st.bip) || (!!st.area && c.dataset.cellArea !== st.area));
-    }
-    for (const c of cols) c.classList.toggle('on', c.dataset.col === st.area);
+    // Pieces.
     for (const p of pieceRows) p.setAttribute('aria-pressed', String(p.dataset.pieceRow === st.piece));
 
     // What is filtered, for the clear button.
@@ -236,27 +227,6 @@ export function initWorkExplorer() {
     setPiece(a.dataset.pieceLink!);
     render();
   });
-  for (const h of gridHeads)
-    h.addEventListener('click', (e) => {
-      e.preventDefault();
-      st.bip = st.bip === h.dataset.gridBip ? '' : h.dataset.gridBip!;
-      st.piece = '';
-      st.item = '';
-      render();
-      root.querySelector('#list')!.scrollIntoView({ block: 'start' });
-    });
-  for (const c of cells.filter((x) => x.tagName === 'A'))
-    c.addEventListener('click', (e) => {
-      e.preventDefault();
-      const hit = st.bip === c.dataset.cellBip && st.area === c.dataset.cellArea;
-      st.bip = hit ? '' : c.dataset.cellBip!;
-      st.area = hit ? '' : c.dataset.cellArea!;
-      st.piece = '';
-      st.kind = '';
-      st.item = '';
-      render();
-      root.querySelector('#list')!.scrollIntoView({ block: 'start' });
-    });
   for (const p of pieceRows)
     p.addEventListener('click', (e) => {
       e.preventDefault();

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { BipBundle, Claim } from '@bipwatch/data';
-import { age, gridRows, isOld, mapLead, pieceKey, piecesLead, sortItems, topPieces, usedAreas, workItems, workStats } from '../src/lib/work.ts';
+import { age, isOld, pieceKey, piecesLead, sortItems, topPieces, usedAreas, workItems, workStats } from '../src/lib/work.ts';
 
 const today = new Date('2026-11-16T12:00:00Z');
 let n = 0;
@@ -87,15 +87,9 @@ describe('counts', () => {
     expect(s).toMatchObject({ open: 5, tasks: 3, questions: 1, objections: 1, tracked: 3, withOpen: 2, nothingOpen: [22], recent: 2, newest: '2026-11-10', old: 1, oldByBip: [[352, 1]], addressed: 1, pending: true });
   });
 
-  it('builds the grid, top pieces and leads from the same items', () => {
-    const areas = usedAreas(items);
-    expect(areas).toEqual(['design', 'research', 'activation', '']);
-    const rows = gridRows(items, all, areas);
-    expect(rows.map((r) => [r.bip, r.open])).toEqual([[352, 4], [54, 1], [22, 0]]);
-    expect(rows[0].cells.find((c) => c.area === 'design')!.n).toBe(2);
-    expect(rows[0].needs).toEqual([null, null, null, null, null, null]);
+  it('builds the type-of-work tiles, top pieces and lead from the same items', () => {
+    expect(usedAreas(items)).toEqual(['design', 'research', 'activation', '']);
     expect(topPieces(items)[0]).toMatchObject({ key: '352|', open: 3 });
-    expect(mapLead(items, rows, areas)).toMatch(/^BIP 352 holds 80% of the open work\. Protocol design is the biggest need \(2 items\)\./);
     expect(piecesLead(items)).toMatch(/^Only 4 of 5 open items/);
   });
 });

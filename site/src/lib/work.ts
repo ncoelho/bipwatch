@@ -2,7 +2,7 @@
 // over the loaded bundles: the open work items, their sort orders, ages and
 // flags, and every number the page shows. The page template stays thin and
 // the island (work-explorer.ts) only filters what is rendered here.
-import { NEED_DIMENSIONS, WORK_AREAS, type BipBundle, type Claim, type WorkArea } from '@bipwatch/data';
+import { WORK_AREAS, type BipBundle, type Claim, type WorkArea } from '@bipwatch/data';
 import { TIERS, triager, withTopicChoices, type Tier, type Triage } from './triage.ts';
 import { topicRows, type TopicRow } from './topics.ts';
 import { AREA_LABEL, SOURCE_LABEL, WORK_KIND_LABEL, WORK_KINDS, bipHref, isPending, isStale, versionLabel } from './view.ts';
@@ -56,20 +56,6 @@ export const AREA_HINT: Record<WorkArea | 'none', string> = {
   coordination: 'Get the right people talking',
   activation: 'Deployment and miner readiness',
   none: 'No type of work recorded',
-};
-
-/** Short column labels for the grid. */
-export const AREA_SHORT: Record<WorkArea | 'none', string> = {
-  design: 'Design',
-  writing: 'Writing',
-  engineering: 'Eng.',
-  research: 'Research',
-  review: 'Review',
-  ux: 'UX',
-  testing: 'Testing',
-  coordination: 'Coord.',
-  activation: 'Activ.',
-  none: 'Unsorted',
 };
 
 export const areaLabel = (a: Area) => (a ? AREA_LABEL[a] : 'Not sorted yet');
@@ -210,35 +196,6 @@ export function workStats(items: WorkItem[], bundles: BipBundle[], today: Date):
   };
 }
 
-export interface GridRow {
-  bip: number;
-  title: string;
-  open: number;
-  cells: { area: Area; n: number }[];
-  /** Six needs scores in NEED_DIMENSIONS order; null when not scored or no needs.yaml. */
-  needs: (number | null)[];
-}
-
-/** Every tracked BIP by open count, with open items per used area. */
-export function gridRows(items: WorkItem[], bundles: BipBundle[], areas: Area[]): GridRow[] {
-  return bundles
-    .filter((b) => b.bip.bipwatch.tracked)
-    .map((b) => {
-      const mine = items.filter((i) => i.bip === b.bip.number);
-      return {
-        bip: b.bip.number,
-        title: b.bip.title,
-        open: mine.length,
-        cells: areas.map((area) => ({ area, n: mine.filter((i) => i.area === area).length })),
-        needs: NEED_DIMENSIONS.map((d) => b.needs?.dimensions[d].score ?? null),
-      };
-    })
-    .sort((a, b) => b.open - a.open || a.bip - b.bip);
-}
-
-/** The four-step blue scale: 1, 2–4, 5–14, 15 and up; 0 is empty. */
-export const shade = (n: number) => (n <= 0 ? 's0' : n === 1 ? 's1' : n <= 4 ? 's2' : n <= 14 ? 's3' : 's4');
-
 export interface Piece { key: string; bip: number; piece: string; open: number; topAreas: [Area, number][] }
 
 /** Pieces by open count across all BIPs, with their two biggest areas. */
@@ -259,23 +216,6 @@ export function topPieces(items: WorkItem[], limit = 10): Piece[] {
     })
     .sort((a, b) => b.open - a.open || a.bip - b.bip || a.piece.localeCompare(b.piece))
     .slice(0, limit);
-}
-
-/** "Where help is needed" lead, computed. */
-export function mapLead(items: WorkItem[], rows: GridRow[], areas: Area[]): string {
-  if (!items.length) return 'Nothing is open on the tracked BIPs.';
-  const top = rows[0];
-  const pct = Math.round((top.open / items.length) * 100);
-  const counts = areas.map((a) => [a, items.filter((i) => i.area === a).length] as const).filter(([, n]) => n > 0);
-  const biggest = [...counts].sort((a, b) => b[1] - a[1])[0];
-  const smallest = [...counts].sort((a, b) => a[1] - b[1]).slice(0, 2);
-  const parts = [`BIP ${top.bip} holds ${pct}% of the open work.`, `${areaLabel(biggest[0])} is the biggest need (${biggest[1]} items).`];
-  if (smallest.length === 2 && smallest[0][0] !== biggest[0]) {
-    const [a, b] = smallest;
-    const n = a[1] === b[1] ? `${a[1]} each` : `${a[1]} and ${b[1]}`;
-    parts.push(`${areaLabel(a[0])} and ${areaLabel(b[0]).toLowerCase()} have the fewest open items recorded (${n}).`);
-  }
-  return parts.join(' ');
 }
 
 /** "Biggest open pieces" lead, computed. */
