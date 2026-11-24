@@ -3,7 +3,8 @@
 // flags, and every number the page shows. The page template stays thin and
 // the island (work-explorer.ts) only filters what is rendered here.
 import { NEED_DIMENSIONS, WORK_AREAS, type BipBundle, type Claim, type WorkArea } from '@bipwatch/data';
-import { triager, type Tier } from './triage.ts';
+import { TIERS, triager, type Tier } from './triage.ts';
+import { topicRows, type TopicRow } from './topics.ts';
 import { AREA_LABEL, SOURCE_LABEL, WORK_KIND_LABEL, WORK_KINDS, bipHref, isPending, isStale, versionLabel } from './view.ts';
 
 export type Area = WorkArea | '';
@@ -136,6 +137,18 @@ function toItem(c: Claim, b: BipBundle, canonical: (name: string) => string, tod
     pending: isPending(c),
     bipHref: `${bipHref(b.bip.number)}#needs?item=${c.id}`,
   };
+}
+
+/**
+ * One row per request: items in a topic (topics.yaml) fold under their best
+ * member (priority group, then newest). Rows keep the order of `items`.
+ */
+export function workRows(items: WorkItem[], bundles: BipBundle[]): TopicRow<WorkItem>[] {
+  const pos = new Map(items.map((i, k) => [i.id, k]));
+  const best = [...items].sort((a, b) => TIERS.indexOf(a.tier) - TIERS.indexOf(b.tier) || (b.date ?? '').localeCompare(a.date ?? '') || pos.get(a.id)! - pos.get(b.id)!);
+  return bundles
+    .flatMap((b) => topicRows(best.filter((i) => i.bip === b.bip.number), b.topics, (i) => i.who))
+    .sort((a, b) => pos.get(a.lead.id)! - pos.get(b.lead.id)!);
 }
 
 /** Newest or oldest first (undated last either way), or by BIP, piece, then newest. */

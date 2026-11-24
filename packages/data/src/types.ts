@@ -149,10 +149,22 @@ export interface NeedsAssessment {
   >;
 }
 
+/**
+ * bips/<NNNN>/topics.yaml: open work items that ask for the same thing. Only
+ * groups of two or more are listed; any other item stands alone.
+ */
+export interface Topics {
+  bip: number;
+  grouped: string;
+  provenance: Provenance;
+  topics: { id: string; title: string; items: string[] }[];
+}
+
 export interface BipBundle {
   bip: BipRecord;
   claims: Claim[];
   needs: NeedsAssessment | null;
+  topics?: Topics | null;
   fixes?: Fixes | null;
   road?: Road | null;
 }

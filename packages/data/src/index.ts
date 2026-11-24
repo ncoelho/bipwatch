@@ -1,7 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { parse } from 'yaml';
-import type { BipBundle, BipRecord, Claim, Fixes, Freshness, NeedsAssessment, People, PrStates, Road, SpecHistory, WeekData, WeeklyStory } from './types.ts';
+import type { BipBundle, BipRecord, Claim, Fixes, Freshness, NeedsAssessment, People, PrStates, Road, SpecHistory, Topics, WeekData, WeeklyStory } from './types.ts';
 
 export * from './types.ts';
 export { dataChecks, type DataCheck } from './checks.ts';
@@ -53,7 +53,7 @@ export function loadBip(folder: string, dataDir = findDataDir()): BipBundle {
   const needsFile = join(base, 'needs.yaml');
   const needs = existsSync(needsFile) ? readYaml<NeedsAssessment>(needsFile) : null;
   const opt = <T>(name: string) => (existsSync(join(base, name)) ? readYaml<T>(join(base, name)) : null);
-  return { bip, claims, needs, fixes: opt<Fixes>('fixes.yaml'), road: opt<Road>('road.yaml') };
+  return { bip, claims, needs, fixes: opt<Fixes>('fixes.yaml'), road: opt<Road>('road.yaml'), topics: opt<Topics>('topics.yaml') };
 }
 
 export function loadAll(dataDir = findDataDir()): BipBundle[] {

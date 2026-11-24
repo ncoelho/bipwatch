@@ -60,6 +60,8 @@ function workExplorer(root: HTMLElement) {
   const firstTier = root.querySelector<HTMLElement>('[data-first-tier]')?.dataset.firstTier ?? 'all';
   const st: WorkState = { tier: firstTier, dim: '', area: '', piece: '', kind: '', item: '', done: false };
 
+  // A row stands for its own item and, for a topic, the items folded into it.
+  const rowOf = (id: string) => (id ? rows.find((r) => r.id === id || (r.dataset.members ?? '').split(' ').includes(id)) : undefined);
   const cardOf = (dim: string) => cards.find((c) => c.dataset.card === dim);
   // Addressed items have no group; they show whenever "Show addressed" is on.
   const inTier = (r: HTMLElement) => st.tier === 'all' || r.dataset.open === '0' || r.dataset.tier === st.tier;
@@ -80,7 +82,7 @@ function workExplorer(root: HTMLElement) {
   const render = (scroll = false) => {
     const visible = rows.filter((r) => matches(r) && (st.done || r.dataset.open === '1'));
     // A selected item stays visible even when a filter would hide it.
-    const sel = rows.find((r) => r.id === st.item) ?? visible[0];
+    const sel = rowOf(st.item) ?? visible[0];
     for (const r of rows) {
       r.hidden = !(visible.includes(r) || r === sel);
       r.classList.toggle('sel', r === sel);
@@ -178,7 +180,7 @@ function workExplorer(root: HTMLElement) {
   });
 
   return {
-    has: (id: string) => rows.some((r) => r.id === id),
+    has: (id: string) => !!rowOf(id),
     fromHash(tab: string, p: URLSearchParams) {
       if (tab === 'needs') {
         st.tier = p.get('tier') ?? firstTier;
@@ -188,10 +190,12 @@ function workExplorer(root: HTMLElement) {
         st.kind = p.get('kind') ?? '';
         st.item = p.get('item') ?? '';
         st.done = p.get('done') === '1';
-      } else if (rows.some((r) => r.id === tab)) {
+      } else if (rowOf(tab)) {
         st.item = tab;
       }
-      const it = rows.find((r) => r.id === st.item);
+      const it = rowOf(st.item);
+      // An item folded into a topic selects the topic's row.
+      if (it) st.item = it.id;
       if (it && it.dataset.open === '0') st.done = true;
       // A linked item opens in its own group.
       if (it && it.dataset.open === '1' && st.tier !== 'all' && it.dataset.tier !== st.tier) st.tier = it.dataset.tier!;

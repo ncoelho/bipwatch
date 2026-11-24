@@ -64,8 +64,9 @@ export function initWorkExplorer() {
     sort: (['new', 'old', 'bip'].includes(q.get('sort') ?? '') ? q.get('sort') : 'new') as Sort,
     item: q.get('item') ?? '',
   };
-  // A linked item opens in its own group.
-  const linked = rows.find((r) => r.dataset.id === st.item);
+  // A linked item opens in its own group; an item folded into a topic selects the topic's row.
+  const linked = st.item ? rows.find((r) => r.dataset.id === st.item || (r.dataset.members ?? '').split(' ').includes(st.item)) : undefined;
+  if (linked) st.item = linked.dataset.id!;
   if (linked && !q.get('tier') && linked.dataset.tier !== st.tier) st.tier = linked.dataset.tier!;
 
   type Dim = 'tier' | 'area' | 'bip' | 'kind' | 'piece';
