@@ -6,14 +6,16 @@
  * keeps the counts that depend on other filters current, and mirrors the
  * state in the query string:
  *
- *   /work/?area=design&bip=352&kind=task&piece=352|light-client%20index&sort=old&item=<id>
+ *   /work/?tier=important&area=design&bip=352&kind=task&piece=352|light-client%20index&sort=old&item=<id>
  *
- * area=none means no type of work recorded. Past about 1,000 items, render
+ * tier is the priority group (lib/triage.ts); without it the list opens on the
+ * first group that has items, and tier=all shows them all. area=none means no
+ * type of work recorded. Past about 1,000 items, render
  * the first 200 in the current order with a "Show 200 more" button here.
  */
 
 type Sort = 'new' | 'old' | 'bip';
-interface State { area: string; bip: string; kind: string; piece: string; sort: Sort; item: string }
+interface State { tier: string; area: string; bip: string; kind: string; piece: string; sort: Sort; item: string }
 
 const KIND_LABEL: Record<string, string> = { task: 'Tasks', 'open-question': 'Open questions', objection: 'Objections' };
 
@@ -33,6 +35,9 @@ export function initWorkExplorer() {
   const tiles = $$<HTMLAnchorElement>('[data-area-tile]');
   const tileLabel = new Map(tiles.map((t) => [t.dataset.areaTile!, t.querySelector('.rl')!.textContent!]));
   const kindPills = $$<HTMLButtonElement>('[data-kind-pill]');
+  const tierPills = $$<HTMLButtonElement>('[data-tier-pill]');
+  const tierHint = root.querySelector<HTMLElement>('[data-tier-hint]');
+  const firstTier = root.querySelector<HTMLElement>('[data-first-tier]')?.dataset.firstTier ?? 'all';
   const sorts = $$<HTMLButtonElement>('[data-sort]');
   const gridHeads = $$<HTMLAnchorElement>('[data-grid-bip]');
   const cells = $$<HTMLElement>('[data-cell-bip]');
@@ -51,6 +56,7 @@ export function initWorkExplorer() {
 
   const q = new URLSearchParams(location.search);
   const st: State = {
+    tier: q.get('tier') ?? firstTier,
     area: q.get('area') ?? '',
     bip: q.get('bip') ?? '',
     kind: q.get('kind') ?? '',
@@ -58,9 +64,13 @@ export function initWorkExplorer() {
     sort: (['new', 'old', 'bip'].includes(q.get('sort') ?? '') ? q.get('sort') : 'new') as Sort,
     item: q.get('item') ?? '',
   };
+  // A linked item opens in its own group.
+  const linked = rows.find((r) => r.dataset.id === st.item);
+  if (linked && !q.get('tier') && linked.dataset.tier !== st.tier) st.tier = linked.dataset.tier!;
 
-  type Dim = 'area' | 'bip' | 'kind' | 'piece';
+  type Dim = 'tier' | 'area' | 'bip' | 'kind' | 'piece';
   const matches = (r: HTMLElement, skip?: Dim) =>
+    (skip === 'tier' || st.tier === 'all' || r.dataset.tier === st.tier) &&
     (skip === 'area' || !st.area || r.dataset.area === st.area) &&
     (skip === 'bip' || !st.bip || r.dataset.bip === st.bip) &&
     (skip === 'kind' || !st.kind || r.dataset.kind === st.kind) &&
@@ -83,6 +93,7 @@ export function initWorkExplorer() {
 
   const write = () => {
     const p = new URLSearchParams();
+    if (st.tier !== firstTier) p.set('tier', st.tier);
     for (const k of ['area', 'bip', 'kind', 'piece'] as const) if (st[k]) p.set(k, st[k]);
     if (st.sort !== 'new') p.set('sort', st.sort);
     if (st.item) p.set('item', st.item);
@@ -127,7 +138,7 @@ export function initWorkExplorer() {
       t.setAttribute('aria-pressed', String(st.area === key));
     }
     for (const o of options) {
-      const n = rows.filter((r) => (!st.area || r.dataset.area === st.area) && (!st.kind || r.dataset.kind === st.kind) && (!o.value || r.dataset.bip === o.value)).length;
+      const n = rows.filter((r) => (st.tier === 'all' || r.dataset.tier === st.tier) && (!st.area || r.dataset.area === st.area) && (!st.kind || r.dataset.kind === st.kind) && (!o.value || r.dataset.bip === o.value)).length;
       o.textContent = `${optionLabel.get(o.value)} · ${n} open`;
     }
     select.value = st.bip;
@@ -136,6 +147,12 @@ export function initWorkExplorer() {
       const key = p.dataset.kindPill!;
       p.querySelector('[data-count]')!.textContent = String(rows.filter((r) => matches(r, 'kind') && (!key || r.dataset.kind === key)).length);
       p.setAttribute('aria-pressed', String(st.kind === key));
+    }
+    for (const p of tierPills) {
+      const key = p.dataset.tierPill!;
+      p.setAttribute('aria-pressed', String(key === st.tier));
+      p.querySelector('[data-count]')!.textContent = String(rows.filter((r) => matches(r, 'tier') && (key === 'all' || r.dataset.tier === key)).length);
+      if (key === st.tier && tierHint) tierHint.textContent = p.title || 'Every open item';
     }
     for (const s of sorts) s.setAttribute('aria-pressed', String(s.dataset.sort === st.sort));
 
@@ -182,6 +199,12 @@ export function initWorkExplorer() {
     st.item = '';
     render();
   });
+  for (const p of tierPills)
+    p.addEventListener('click', () => {
+      st.tier = p.dataset.tierPill!;
+      st.item = '';
+      render();
+    });
   for (const p of kindPills)
     p.addEventListener('click', () => {
       st.kind = p.dataset.kindPill!;

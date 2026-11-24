@@ -3,6 +3,7 @@
 // flags, and every number the page shows. The page template stays thin and
 // the island (work-explorer.ts) only filters what is rendered here.
 import { NEED_DIMENSIONS, WORK_AREAS, type BipBundle, type Claim, type WorkArea } from '@bipwatch/data';
+import { triager, type Tier } from './triage.ts';
 import { AREA_LABEL, SOURCE_LABEL, WORK_KIND_LABEL, WORK_KINDS, bipHref, isPending, isStale, versionLabel } from './view.ts';
 
 export type Area = WorkArea | '';
@@ -36,6 +37,9 @@ export interface WorkItem {
   old: boolean;
   pending: boolean;
   bipHref: string;
+  /** Priority group and why (lib/triage.ts). */
+  tier: Tier;
+  reasons: string[];
 }
 
 /** Hints for the type-of-work tiles. */
@@ -92,15 +96,16 @@ export function workItems(bundles: BipBundle[], canonical: (name: string) => str
   const out: WorkItem[] = [];
   for (const b of bundles) {
     if (!b.bip.bipwatch.tracked) continue;
+    const triage = triager(b, today);
     for (const c of b.claims) {
       if (!WORK_KINDS.includes(c.kind) || c.status === 'addressed') continue;
-      out.push(toItem(c, b, canonical, today));
+      out.push({ ...toItem(c, b, canonical, today), ...triage(c) });
     }
   }
   return sortItems(out, 'new');
 }
 
-function toItem(c: Claim, b: BipBundle, canonical: (name: string) => string, today: Date): WorkItem {
+function toItem(c: Claim, b: BipBundle, canonical: (name: string) => string, today: Date): Omit<WorkItem, 'tier' | 'reasons'> {
   const area: Area = c.area ?? '';
   const piece = c.part_of ?? '';
   const stale = isStale(c.applies_to_version, b.bip.version);

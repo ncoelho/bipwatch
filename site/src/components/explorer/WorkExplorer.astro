@@ -1,7 +1,7 @@
 ---
 // "What it needs" tab (page templates spec): the needs cards, then the work
-// view (area bars, or the piece × area grid when open work spans two or more
-// pieces), then the list with a detail panel.
+// view (area bars, or chips for type of work and piece when open work spans
+// two or more pieces), then the list with a detail panel.
 //
 // Static first: every card, bar, cell, row and item detail is in the HTML;
 // without JavaScript the rows show their full detail. explorer.ts adds
@@ -13,6 +13,7 @@ import {
   AREA_LABEL, DIMENSION_LABEL, SOURCE_LABEL, WORK_KIND_LABEL,
   isPending, isStale, versionLabel, workModel,
 } from '../../lib/view.ts';
+import { TIERS, TIER_HINT, TIER_LABEL, triager, type Tier } from '../../lib/triage.ts';
 
 interface Props { bundle: BipBundle; }
 const { bundle } = Astro.props;
@@ -23,9 +24,6 @@ const openPieces = m.pieces.filter((p) => p.open > 0);
 const itself = `BIP ${bip.number} itself`;
 const onlyItself = m.pieces.length === 1 && m.pieces[0].name === itself;
 const maxArea = Math.max(1, ...m.areas.map((a) => a.open + a.addressed));
-const gridAreas = m.areas.filter((a) => a.open > 0);
-const maxCell = Math.max(1, ...openPieces.flatMap((p) => gridAreas.map((a) => m.cell(p.name, a.area))));
-const shade = (n: number) => (n === 0 ? '' : ['s1', 's2', 's3', 's4'][Math.min(3, Math.ceil((n / maxCell) * 4) - 1)]);
 const top = openPieces[0];
 const lede = onlyItself
   ? `All ${m.items.length} items are about BIP ${bip.number} itself.`
@@ -33,7 +31,23 @@ const lede = onlyItself
     ? `${top.name} has the most open work (${top.open} of ${m.open}); ${m.pieces.find((p) => p.name === itself)?.open ?? 0} open items are about BIP ${bip.number}'s own text.`
     : `Most open work is about BIP ${bip.number} itself, across ${openPieces.length} pieces.`;
 const dimAreas = (d: (typeof NEED_DIMENSIONS)[number]) => NEED_AREAS[d].filter((a) => m.areas.some((x) => x.area === a));
+// Priority groups (lib/triage.ts): open items by tier, then newest; addressed last.
+const triage = triager(bundle, new Date());
+const tierOf = new Map(m.items.filter((c) => c.status !== 'addressed').map((c) => [c.id, triage(c)]));
+const rank = (c: (typeof m.items)[number]) => { const t = tierOf.get(c.id); return t ? TIERS.indexOf(t.tier) : TIERS.length; };
+const listed = m.items.map((c, i) => ({ c, i })).sort((a, b) => rank(a.c) - rank(b.c) || a.i - b.i).map(({ c }) => c);
+const tierCount = (t: Tier) => [...tierOf.values()].filter((x) => x.tier === t).length;
+// The page opens on the first group that has anything in it.
+const firstTier = TIERS.find((t) => tierCount(t) > 0) ?? 'attention';
 const kindMark = (k: string) => (k === 'objection' ? 'sq' : k === 'open-question' ? 'dia' : 'bar');
+// The kinds present, for the list's key; each one filters the list.
+const kinds = [
+  { key: 'task', label: 'Task' },
+  { key: 'open-question', label: 'Open question' },
+  { key: 'objection', label: 'Objection' },
+]
+  .map((k) => ({ ...k, open: m.items.filter((i) => i.kind === k.key && i.status !== 'addressed').length, any: m.items.some((i) => i.kind === k.key) }))
+  .filter((k) => k.any);
 const msgLink = (url: string) => url;
 ---
 {needs && (
@@ -101,40 +115,22 @@ const msgLink = (url: string) => url;
 
     {m.useGrid ? (
       <>
-        <div class="area-chips" role="group" aria-label="Types of work">
-          {m.areas.map((a) => (
-            <button type="button" class="achip" data-area={a.area} aria-pressed="false">{AREA_LABEL[a.area]} <span class="mono">{a.open}</span></button>
-          ))}
+        <div class="filters">
+          <span class="fk" id="fk-area">Type of work</span>
+          <div class="area-chips" role="group" aria-labelledby="fk-area">
+            {m.areas.filter((a) => a.open > 0).map((a) => (
+              <button type="button" class="achip" data-area={a.area} aria-pressed="false">{AREA_LABEL[a.area]} <span class="mono">{a.open}</span></button>
+            ))}
+          </div>
+          <label class="fk" for="piece-select">Piece</label>
+          <div class="sel-wrap">
+            <select id="piece-select" class="psel" data-piece-select>
+              <option value="">All pieces · {m.open} open</option>
+              {openPieces.map((p) => <option value={p.name}>{p.name} · {p.open} open</option>)}
+            </select>
+            <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </div>
         </div>
-        <div class="scroll">
-          <table class="grid">
-            <caption class="sr">Open items by piece and type of work</caption>
-            <thead>
-              <tr>
-                <th scope="col" class="corner">Open items by piece</th>
-                {gridAreas.map((a) => <th scope="col">{AREA_LABEL[a.area]}</th>)}
-              </tr>
-            </thead>
-            <tbody>
-              {openPieces.map((p) => (
-                <tr>
-                  <th scope="row"><button type="button" class="prow" data-piece={p.name} aria-pressed="false"><span class="pn">{p.name}</span><span class="mono">{p.open}</span></button></th>
-                  {gridAreas.map((a) => {
-                    const n = m.cell(p.name, a.area);
-                    return (
-                      <td>
-                        {n > 0 ? (
-                          <button type="button" class:list={['cell', shade(n)]} data-piece={p.name} data-area={a.area} aria-label={`${p.name}, ${AREA_LABEL[a.area]}: ${n} open`}>{n}</button>
-                        ) : <span class="cell empty" aria-hidden="true"></span>}
-                      </td>
-                    );
-                  })}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div class="legend"><span>Fewer</span><span class="ramp" aria-hidden="true"><i class="s1"></i><i class="s2"></i><i class="s3"></i><i class="s4"></i></span><span>More open items</span><span class="faint">Pick a row, a column or a cell to filter.</span></div>
       </>
     ) : (
       <>
@@ -154,23 +150,40 @@ const msgLink = (url: string) => url;
       </>
     )}
 
+    <div class="tiers-wrap">
+      <div class="tiers" role="group" aria-label="Priority" data-first-tier={firstTier}>
+        {TIERS.map((t) => (
+          <button type="button" class:list={['tbtn', t]} data-tier-filter={t} aria-pressed="false" title={TIER_HINT[t]}>{TIER_LABEL[t]} <span class="mono tn" data-tier-count>{tierCount(t)}</span></button>
+        ))}
+        <button type="button" class="tbtn" data-tier-filter="all" aria-pressed="false">All <span class="mono tn" data-tier-count>{m.open}</span></button>
+      </div>
+      <p class="tier-hint"><span data-tier-hint>{TIER_HINT[firstTier]}</span>. Grouped by BipWatch from the type of work, the needs scores, the BIP's status and the item's age; nobody has reviewed these items yet.</p>
+    </div>
+
     <div class="split">
       <div class="listcol">
         <div class="listhead">
           <span class="count" data-count>{m.open} open items</span>
-          {m.addressed > 0 && <button type="button" class="done" data-done aria-pressed="false">Show {m.addressed} addressed</button>}
+          <span class="key" role="group" aria-label="Filter by kind">
+            {kinds.map((k) => (
+              <button type="button" class="kbtn" data-kind-filter={k.key} aria-pressed="false"><span class:list={['mark', kindMark(k.key)]} aria-hidden="true"></span>{k.label} <span class="mono kn">{k.open}</span></button>
+            ))}
+          </span>
+          {m.addressed > 0 && <button type="button" class="done" data-done aria-pressed="false"><span class="mark sq closed" aria-hidden="true"></span><span data-done-label>Show {m.addressed} addressed</span></button>}
         </div>
         <ol class="list">
-          {m.items.map((c) => {
+          {listed.map((c) => {
             const open = c.status !== 'addressed';
+            const t = tierOf.get(c.id);
             const piece = m.pieceOf(c);
             const stale = open && !c.part_of && isStale(c.applies_to_version, bip.version);
             return (
-              <li id={c.id} data-row data-area={c.area ?? ''} data-piece={piece} data-open={open ? '1' : '0'}>
+              <li id={c.id} data-row data-tier={t?.tier ?? ''} data-kind={c.kind} data-area={c.area ?? ''} data-piece={piece} data-open={open ? '1' : '0'}>
                 <button type="button" class="rowbtn" data-select={c.id}>
                   <span class:list={['mark', kindMark(c.kind), { closed: !open }]} aria-hidden="true"></span>
                   <span class="rt">
                     <span>{c.statement}</span>
+                    {t && <span class="why"><span class:list={['tchip', t.tier]}>{TIER_LABEL[t.tier]}</span>{t.reasons.map((r) => <span class="reason">{r}</span>)}</span>}
                     <span class="meta">{WORK_KIND_LABEL[c.kind]} · {c.area ? AREA_LABEL[c.area] : 'no type'}{m.useGrid ? ` · ${piece}` : ''} · {c.subject?.name} · {c.source.date ?? 'undated'}{open ? '' : ' · addressed'}</span>
                   </span>
                 </button>
@@ -183,6 +196,7 @@ const msgLink = (url: string) => url;
                     {isPending(c) && <span class="pill warn">pending review</span>}
                   </div>
                   <div class="dt">{c.statement}</div>
+                  {t && <div class="dwhy"><span class:list={['tchip', t.tier]}>{TIER_LABEL[t.tier]}</span> {t.reasons.join(' · ')}</div>}
                   {c.source.quote && (
                     <blockquote>“{c.source.quote}”{c.source.verified && <span class="matched">quote matched</span>}</blockquote>
                   )}
@@ -196,7 +210,7 @@ const msgLink = (url: string) => url;
         </ol>
         <div class="nothing" data-nothing hidden>Nothing open here. <button type="button" class="linkbtn" data-done-inline>Show what was addressed</button></div>
       </div>
-      <aside class="side" aria-live="polite" data-panel hidden></aside>
+      <div class="side" role="region" aria-label="Selected item" aria-live="polite" data-panel hidden></div>
     </div>
   </section>
 )}
@@ -210,7 +224,9 @@ const msgLink = (url: string) => url;
   .lede strong { color: var(--fg); }
   .row { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px 24px; flex-wrap: wrap; }
   .clear { min-height: 32px; padding: 4px 12px; border-radius: 999px; border: 0; font-size: 13px; background: var(--info-ground); color: var(--info-ink); }
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px; margin-top: 4px; }
+  .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 4px; }
+  @media (max-width: 980px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 620px) { .cards { grid-template-columns: minmax(0, 1fr); } }
   .card { display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 14px; background: var(--card); min-width: 0; }
   .card.unscored { background: var(--inset); }
   .card.on { background: var(--info-ground); box-shadow: inset 0 0 0 1.5px var(--info); }
@@ -227,22 +243,19 @@ const msgLink = (url: string) => url;
   .ev { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; padding: 0 6px; border-radius: 6px; background: var(--inset); color: var(--fg-2); font-family: var(--mono); font-size: 11.5px; text-decoration: none; }
   .ev:hover { background: var(--line-strong); }
   .none { font-size: 12px; color: var(--faint); }
+  .filters { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 14px; align-items: start; }
+  .fk { font-size: 12px; color: var(--faint); padding-top: 9px; }
+  @media (max-width: 620px) { .filters { grid-template-columns: minmax(0, 1fr); } .fk { padding-top: 4px; } }
   .area-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sel-wrap { position: relative; max-width: 100%; width: fit-content; }
+  .psel { appearance: none; min-height: 40px; max-width: 100%; padding: 0 36px 0 14px; border-radius: 10px; border: 0; background: var(--card); color: var(--fg); font: inherit; font-size: 13.5px; text-overflow: ellipsis; cursor: pointer; }
+  .psel.on { background: var(--info-ground); color: var(--info-ink); box-shadow: inset 0 0 0 1.5px var(--info); }
+  .psel:focus-visible { outline: 2px solid var(--info); outline-offset: 2px; }
+  .chev { position: absolute; right: 12px; top: 50%; width: 12px; height: 12px; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
   .achip { min-height: 36px; padding: 4px 12px; border-radius: 999px; border: 0; font-size: 13px; background: var(--card); color: var(--fg-2); }
-  .achip[aria-pressed='true'], .barrow[aria-pressed='true'], .prow[aria-pressed='true'] { background: var(--info-ground); color: var(--info-ink); box-shadow: inset 0 0 0 1.5px var(--info); }
-  .scroll { overflow-x: auto; }
-  .grid { border-collapse: separate; border-spacing: 3px; min-width: 700px; width: 100%; font-size: 12.5px; }
-  .grid th { font-weight: 500; color: var(--faint); text-align: center; font-size: 11.5px; padding: 0 4px; }
-  .grid .corner { text-align: left; }
-  .grid tbody th { text-align: left; }
-  .prow { display: flex; justify-content: space-between; gap: 8px; width: 210px; min-height: 36px; padding: 0 10px; border: 0; border-radius: 8px; background: var(--card); color: var(--fg); font-size: 13px; text-align: left; }
-  .pn { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .cell { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 36px; border: 0; border-radius: 6px; font-family: var(--mono); font-size: 12.5px; color: var(--fg); background: var(--inset); }
-  .cell.empty { background: transparent; box-shadow: inset 0 0 0 1px var(--line); }
-  .s1 { background: #16233F; } .s2 { background: #22406F; } .s3 { background: #3A66B3; } .s4 { background: #5E9BFF; color: #06101F; }
-  .cell.dim, .prow.dim, .barrow.dim, .achip.dim { opacity: 0.35; }
+  .achip[aria-pressed='true'], .barrow[aria-pressed='true'] { background: var(--info-ground); color: var(--info-ink); box-shadow: inset 0 0 0 1.5px var(--info); }
+  .barrow.dim, .achip.dim { opacity: 0.35; }
   .legend { display: flex; gap: 8px 10px; align-items: center; flex-wrap: wrap; font-size: 12px; color: var(--fg-2); }
-  .ramp { display: flex; gap: 2px; } .ramp i { width: 18px; height: 10px; border-radius: 2px; }
   .faint { color: var(--faint); }
   .sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
   .sw.o { background: var(--accent); } .sw.d { background: #3A3A40; }
@@ -261,6 +274,23 @@ const msgLink = (url: string) => url;
   .listhead { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; font-size: 13px; color: var(--fg-2); }
   .done { min-height: 36px; padding: 4px 12px; border-radius: 999px; border: 0; font-size: 13px; background: var(--card); color: var(--fg-2); }
   .done[aria-pressed='true'] { background: var(--good-soft); color: var(--good-ink); }
+  /* Priority groups. */
+  .tiers-wrap { display: flex; flex-direction: column; gap: 8px; padding-top: 4px; border-top: 1px solid var(--line); }
+  .tiers { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 12px; }
+  .tbtn { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border: 0; border-radius: 10px; background: var(--card); color: var(--fg-2); font: inherit; font-size: 13.5px; cursor: pointer; }
+  .tbtn:hover { color: var(--fg); }
+  .tn { font-size: 12px; color: var(--faint); }
+  .tbtn[aria-pressed='true'] { background: var(--info-ground); color: var(--info-ink); box-shadow: inset 0 0 0 1.5px var(--info); font-weight: 600; }
+  .tbtn[aria-pressed='true'] .tn { color: var(--info-ink); }
+  .tbtn.attention .tn { color: var(--accent-ink); }
+  .tier-hint { font-size: 12.5px; color: var(--muted); }
+  .why { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; margin-top: 2px; }
+  .reason { font-size: 12px; color: var(--muted); }
+  .reason + .reason::before { content: '· '; color: var(--faint); }
+  .tchip { font-size: 11.5px; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--inset); color: var(--muted); }
+  .tchip.attention { background: var(--accent-soft); color: var(--accent-ink); }
+  .tchip.important { background: var(--info-ground); color: var(--info-ink); }
+  .dwhy { font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
   .list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
   .list li { scroll-margin-top: 16px; border-radius: 10px; }
   .rowbtn { display: flex; gap: 10px; align-items: flex-start; width: 100%; min-height: 44px; text-align: left; padding: 9px 10px; border: 0; border-radius: 10px; background: transparent; color: var(--fg-2); font-size: 13.5px; }
@@ -273,6 +303,15 @@ const msgLink = (url: string) => url;
   .mark.sq { width: 10px; height: 10px; border-radius: 2px; }
   .mark.dia { width: 9px; height: 9px; transform: rotate(45deg); }
   .mark.bar { width: 14px; height: 5px; border-radius: 2px; margin-top: 8px; }
+  /* Key for the marks, in the list header. */
+  .key { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-right: auto; font-size: 12px; color: var(--muted); }
+  .kbtn { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 0 10px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: 12.5px; cursor: pointer; }
+  .kbtn:hover { background: var(--card); color: var(--fg); }
+  .kbtn[aria-pressed='true'] { background: var(--info-ground); color: var(--info-ink); box-shadow: inset 0 0 0 1.5px var(--info); }
+  .kn { color: var(--faint); font-size: 11.5px; }
+  .kbtn[aria-pressed='true'] .kn { color: var(--info-ink); }
+  .key .mark, .done .mark { margin-top: 0; }
+  .done { display: inline-flex; align-items: center; gap: 7px; }
   .detail { margin: 2px 0 10px 24px; padding: 14px 16px; border-radius: 12px; background: var(--card); display: flex; flex-direction: column; gap: 10px; }
   :global(html.js-explore) .list .detail { display: none; }
   .side { flex: 2 1 280px; min-width: 0; position: sticky; top: 16px; }

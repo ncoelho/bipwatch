@@ -12,6 +12,7 @@
 import { canonicalName, loadAll, loadPeople, NEED_DIMENSIONS } from '@bipwatch/data';
 import Base from '../../layouts/Base.astro';
 import { DIMENSION_LABEL } from '../../lib/view.ts';
+import { TIERS, TIER_HINT, TIER_LABEL } from '../../lib/triage.ts';
 import {
   AREA_HINT, AREA_SHORT, age, areaLabel, gridRows, mapLead, pieceName, piecesLead, shade, topPieces, usedAreas, workItems, workStats,
   type Area,
@@ -38,6 +39,8 @@ const KINDS = [
   { key: 'open-question', label: 'Open questions' },
   { key: 'objection', label: 'Objections' },
 ] as const;
+// Priority groups: the list opens on the first group that has items.
+const firstTier = TIERS.find((t) => items.some((i) => i.tier === t)) ?? 'attention';
 const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d, i) => `${DIMENSION_LABEL[d]} ${needs[i] ?? 'not scored'}`).join(', ')}`;
 ---
 <Base title="What needs doing · BipWatch" current="work" description="Every open task, open question and objection across the BIPs BipWatch tracks, by type of work, BIP and piece. Each links to where it was raised.">
@@ -87,6 +90,15 @@ const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d
         <h2 id="h-list"><span data-list-title>Open work</span> <span class="sub">· <span data-list-count>{items.length}</span> open</span></h2>
         <button type="button" class="clear" data-clear hidden>Show all ✕</button>
       </div>
+      <div class="tiers-wrap">
+        <div class="tiers" role="group" aria-label="Priority" data-first-tier={firstTier}>
+          {TIERS.map((t) => (
+            <button type="button" class:list={['tbtn', t]} data-tier-pill={t} aria-pressed={t === firstTier ? 'true' : 'false'} title={TIER_HINT[t]}>{TIER_LABEL[t]} <span class="mono tn" data-count>{items.filter((i) => i.tier === t).length}</span></button>
+          ))}
+          <button type="button" class="tbtn" data-tier-pill="all" aria-pressed="false">All <span class="mono tn" data-count>{items.length}</span></button>
+        </div>
+        <p class="tier-hint"><span data-tier-hint>{TIER_HINT[firstTier]}</span>. Grouped by BipWatch from the type of work, each BIP's needs scores and status, and the item's age; nobody has reviewed these items yet.</p>
+      </div>
       <div class="controls">
         <div class="left">
           <label class="bipsel">
@@ -119,7 +131,7 @@ const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d
         <div class="listcol">
           <ol class="list" data-list>
             {items.map((i) => (
-              <li id={`w-${i.id}`} data-row data-id={i.id} data-bip={i.bip} data-area={aKey(i.area)} data-piece={i.pieceKey} data-piece-name={i.piece} data-kind={i.kind} data-date={i.date ?? ''}>
+              <li id={`w-${i.id}`} data-row data-id={i.id} data-bip={i.bip} data-area={aKey(i.area)} data-piece={i.pieceKey} data-piece-name={i.piece} data-kind={i.kind} data-tier={i.tier} data-date={i.date ?? ''}>
                 <button type="button" class="rowbtn" data-select aria-pressed="false">
                   <span class:list={['mark', kindMark(i.kind)]} aria-hidden="true"></span>
                   <span class="rt">
@@ -129,6 +141,7 @@ const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d
                       <span class:list={['age', 'mono', { oldage: i.old }]}>{age(i.date, today)}</span>
                     </span>
                     <span class="st">{i.statement}</span>
+                    <span class="why"><span class:list={['tchip', i.tier]}>{TIER_LABEL[i.tier]}</span>{i.reasons.map((r) => <span class="reason">{r}</span>)}</span>
                     <span class="meta">{i.kindLabel} · {i.areaLabel} · {i.who} · {i.venue}{i.status === 'unknown' ? ' · status unknown' : ''}{i.old ? ' · may be out of date' : ''}</span>
                   </span>
                 </button>
@@ -142,6 +155,7 @@ const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d
                     {i.pending && <span class="pill warn">pending review</span>}
                   </div>
                   <div class="dt">{i.statement}</div>
+                  <div class="dwhy"><span class:list={['tchip', i.tier]}>{TIER_LABEL[i.tier]}</span> {i.reasons.join(' · ')}</div>
                   {i.quote && (
                     <blockquote>“{i.quote}”<span class:list={['q', { ok: i.quoteMatched }]}>{i.quoteMatched ? 'quote matched' : 'quote not matched yet'}</span></blockquote>
                   )}
@@ -278,6 +292,23 @@ const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d
   .kinds { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
   .kpill { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 4px 12px; border-radius: 999px; border: 0; font-size: 13px; background: var(--card); color: var(--fg-2); }
   .kpill[aria-pressed='true'] { background: var(--fg); color: #000; font-weight: 600; }
+  /* Priority groups (lib/triage.ts). */
+  .tiers-wrap { display: flex; flex-direction: column; gap: 8px; }
+  .tiers { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tbtn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 0; border-radius: 12px; background: var(--card); color: var(--fg-2); font: inherit; font-size: 14px; cursor: pointer; }
+  .tbtn:hover { color: var(--fg); }
+  .tn { font-size: 12px; color: var(--faint); }
+  .tbtn.attention .tn { color: var(--accent-ink); }
+  .tbtn[aria-pressed='true'] { background: var(--info-ground); color: var(--info-ink); box-shadow: inset 0 0 0 1.5px var(--info); font-weight: 600; }
+  .tbtn[aria-pressed='true'] .tn { color: var(--info-ink); }
+  .tier-hint { font-size: 12.5px; color: var(--muted); }
+  .why { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; }
+  .reason { font-size: 12px; color: var(--muted); }
+  .reason + .reason::before { content: '· '; color: var(--faint); }
+  .tchip { font-size: 11.5px; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--inset); color: var(--muted); }
+  .tchip.attention { background: var(--accent-soft); color: var(--accent-ink); }
+  .tchip.important { background: var(--info-ground); color: var(--info-ink); }
+  .dwhy { font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
   .kn { font-size: 11.5px; opacity: 0.8; }
   .sort { display: flex; gap: 4px; padding: 3px; border-radius: 999px; background: var(--card); }
   .sort button { min-height: 32px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font-size: 13px; }
