@@ -1,0 +1,24 @@
+id: task-mzumsande-69e022da
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: Reword the timewarp rule so it is clear that the 7200 seconds are
+  subtracted from the timestamp of block N-1, not from the height N-1.
+subject:
+  name: mzumsande
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#discussion_r2015007365
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-03-26
+  retrieved: 2026-11-20
+  quote: Maybe reword this to make it clearer that `minus 7200`  is subtracted
+    from the value of `nTime`, and not from `height N-1`
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null

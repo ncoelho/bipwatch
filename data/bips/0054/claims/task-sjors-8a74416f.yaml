@@ -1,0 +1,27 @@
+id: task-sjors-8a74416f
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: State explicitly that the new signature-operation limit ignores the
+  witness and applies no 4x scaling for non-segwit scripts, unlike existing
+  sigops accounting.
+subject:
+  name: Sjors
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1800#discussion_r2016082978
+  type: github
+  title: "BIP 54: Consensus Cleanup"
+  date: 2025-03-27
+  retrieved: 2026-11-20
+  quote: |-
+    Let's also explictly state that, unlike sigops accounting:
+    1. The witness is ignored 
+    2. There is no 4x adjustment for non-segwit, because of (1)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null

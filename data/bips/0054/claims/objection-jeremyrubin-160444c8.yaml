@@ -1,0 +1,25 @@
+id: objection-jeremyrubin-160444c8
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Jeremy Rubin objected to invalidating 64-byte witness-stripped
+  transactions to benefit SPV users, arguing that better alternatives exist; the
+  BIP authors needed to decide between invalidation and those alternatives.
+subject:
+  name: JeremyRubin
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2177#issuecomment-4568079777
+  type: github
+  title: Consensus Cleanup Protocol Changes as Independent BIPs
+  date: 2026-05-28
+  retrieved: 2026-11-20
+  quote: I think removing 64 byte witness stripped transactions from Bitcoin to
+    benefit SPV users is a mistake, and a mistake with better alternatives.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null
