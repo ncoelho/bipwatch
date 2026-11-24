@@ -1,0 +1,24 @@
+id: task-ariard-b667c296
+bip: 54
+kind: task
+status: open
+area: testing
+statement: Test the BIP 54 implementation for unintended interactions between
+  the new consensus code and other components such as p2p.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2015#issuecomment-3594569866
+  type: github
+  title: "BIP54: Consensus Cleanup test vectors"
+  date: 2025-12-01
+  retrieved: 2026-11-19
+  quote: verify there is no unintended interaction of the novel code with things
+    like p2p
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null

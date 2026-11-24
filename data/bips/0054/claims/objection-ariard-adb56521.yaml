@@ -1,0 +1,26 @@
+id: objection-ariard-adb56521
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Decide whether the coinbase rule can drop the requirement that
+  nSequence be non-final and rely on the nLockTime height alone to guarantee
+  coinbase uniqueness.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2122#pullrequestreview-3951249287
+  type: github
+  title: BIP 54 test vectors improvements following review in Inquisition
+  date: 2026-03-16
+  retrieved: 2026-11-19
+  quote: I’m still thinking the change can be simplified by not enforcing
+    non-finality of the `nSequence` field due to the order of checks in
+    `IsFinalTx()`, while still ensuring uniqueness.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null

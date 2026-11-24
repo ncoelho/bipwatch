@@ -1,0 +1,23 @@
+id: objection-antoine-poinsot-3af76948
+bip: 54
+kind: objection
+status: addressed
+area: writing
+statement: Decide whether the spec should use a general retarget-interval value
+  instead of hardcoding 2016 in the timestamp rules.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2015#issuecomment-3773345379
+  type: github
+  title: "BIP54: Consensus Cleanup test vectors"
+  date: 2026-01-20
+  retrieved: 2026-11-19
+  quote: regarding hardcoding 2016
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null
