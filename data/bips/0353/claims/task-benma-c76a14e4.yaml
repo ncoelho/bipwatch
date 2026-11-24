@@ -1,0 +1,26 @@
+id: task-benma-c76a14e4
+bip: 353
+kind: task
+status: open
+area: writing
+statement: Extend the motivation with concrete use cases for DNS payment
+  instructions, and state which use cases (such as per-user deposit addresses at
+  exchanges or merchants) are not covered or are a poor fit.
+subject:
+  name: benma
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#discussion_r1486287099
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-12
+  retrieved: 2026-11-17
+  quote: It would be very helpful if this section was extended with a number of
+    concrete use cases and also mention which use cases are not covered or not a
+    good fit.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

@@ -1,0 +1,25 @@
+id: task-dzdidi-847b8837
+bip: 353
+kind: task
+status: addressed
+area: writing
+statement: Address DNS caching in the address-rotation guidance, recommending
+  short TTLs so that rotated addresses take effect and unwanted reuse is
+  minimized.
+subject:
+  name: dzdidi
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#discussion_r1486114025
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-12
+  retrieved: 2026-11-17
+  quote: There is no mention of caching which may happen on multiple layers. TTLs
+    (label specific) can be leveraged to minimize potential non-desired reuse.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

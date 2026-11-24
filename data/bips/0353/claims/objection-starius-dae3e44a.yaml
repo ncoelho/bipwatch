@@ -1,0 +1,25 @@
+id: objection-starius-dae3e44a
+bip: 353
+kind: objection
+status: addressed
+area: design
+statement: Justify using static DNS records instead of a .well-known HTTP
+  approach, since an HTTP server could hand out a fresh address on every request
+  and avoid address reuse entirely.
+subject:
+  name: starius
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1551#discussion_r1488720328
+  type: github
+  title: "Add BIP 353: DNS Payment Instructions"
+  date: 2024-02-13
+  retrieved: 2026-11-17
+  quote: "`.well-known` approach can prevent address reuse completely, if HTTP
+    server generates new address for every request."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
