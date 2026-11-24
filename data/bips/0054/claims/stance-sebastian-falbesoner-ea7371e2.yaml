@@ -1,0 +1,28 @@
+id: stance-sebastian-falbesoner-ea7371e2
+bip: 54
+kind: stance
+stance: ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bitcoin/pull/35793
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+statement: Sebastian Falbesoner approved the consensus changes in the Bitcoin
+  Core pull request implementing BIP 54 without mainnet activation, while noting
+  he has yet to review the tests closely.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#pullrequestreview-5944266956
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-11-17
+  retrieved: 2026-11-20
+  quote: ACK on the actual consensus changes, planning to look closer to the tests
+    within the next days
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null
