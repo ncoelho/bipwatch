@@ -1,0 +1,27 @@
+id: task-pieter-wuille-d318c045
+bip: 324
+kind: task
+status: open
+area: design
+part_of: set324alias
+statement: Consider designing a later feature in which a sender announces its
+  own one-byte to message-type mapping once per connection, so that short
+  message type IDs no longer need ecosystem-wide coordination.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1378#discussion_r990783540
+  type: github
+  title: "Add BIP324: v2 P2P Transport Protocol"
+  date: 2022-10-09
+  retrieved: 2026-11-18
+  quote: An alternative is adding a feature later where the sender just announces
+    their mapping once ("I will use byte `<byte>` for message type `<string>`),
+    possibly so that any byte not listed retains its original assignment.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

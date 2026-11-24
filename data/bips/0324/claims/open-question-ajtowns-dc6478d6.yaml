@@ -1,0 +1,27 @@
+id: open-question-ajtowns-dc6478d6
+bip: 324
+kind: open-question
+status: addressed
+area: design
+part_of: bip324 one-byte message type id alias assignment
+statement: Decide how the one-byte message type ID mapping can be updated later,
+  for example through versioned mapping tables that peers negotiate before
+  VERACK.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1378#discussion_r990740263
+  type: github
+  title: "Add BIP324: v2 P2P Transport Protocol"
+  date: 2022-10-09
+  retrieved: 2026-11-18
+  quote: I guess updating the mapping as a whole (this bip specifies table version
+    0, then later define table version 1 mapping 13..255 to some particular set
+    of messages, then version 2 later provides some other mapping)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

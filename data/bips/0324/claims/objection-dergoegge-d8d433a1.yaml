@@ -1,0 +1,25 @@
+id: objection-dergoegge-d8d433a1
+bip: 324
+kind: objection
+status: addressed
+area: design
+statement: Decide whether v2 support should be signaled through a new BIP155
+  network type rather than a service flag, which would remove the need for
+  inbound v1 downgrade detection.
+subject:
+  name: dergoegge
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1378#discussion_r1032822396
+  type: github
+  title: "Add BIP324: v2 P2P Transport Protocol"
+  date: 2022-11-26
+  retrieved: 2026-11-18
+  quote: Could it make more sense to introduce a new BIP155 network type instead
+    of using the service flags?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
