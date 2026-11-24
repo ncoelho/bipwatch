@@ -1,0 +1,27 @@
+id: stance-viniciuscestarii-a534f2aa
+bip: 54
+kind: stance
+stance: concept-ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bitcoin/pull/35793
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+statement: ViniciusCestarii gave a Concept ACK on the pull request implementing
+  BIP 54 (Consensus Cleanup) without mainnet activation, noting the reviewed
+  commits are well structured so far.
+subject:
+  name: ViniciusCestarii
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#pullrequestreview-5601224617
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-10-21
+  retrieved: 2026-11-18
+  quote: Concept ACK
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

@@ -1,0 +1,23 @@
+id: stance-antoine-poinsot-c3a81d42
+bip: 54
+kind: stance
+stance: ack
+scope: proposal
+statement: Antoine Poinsot, the BIP's author, moved BIP 54 (Consensus Cleanup)
+  to Complete status, indicating he considers the specification finished.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/commit/c47655654c4d32158e1a3ab40ce2bb37992333ad
+  type: github
+  title: "bip-0054: move to complete"
+  date: 2026-05-22
+  retrieved: 2026-11-18
+  quote: "bip-0054: move to complete"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
