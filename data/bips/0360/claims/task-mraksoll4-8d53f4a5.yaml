@@ -1,0 +1,26 @@
+id: task-mraksoll4-8d53f4a5
+bip: 360
+kind: task
+status: open
+area: design
+part_of: wallet support
+statement: Design wallet key storage and a descriptor format for single,
+  non-derivable post-quantum keys such as Falcon, kept separate from
+  elliptic-curve keys.
+subject:
+  name: mraksoll4
+  type: person
+applies_to_version: 0.5.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#issuecomment-2596302452
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2025-01-16
+  retrieved: 2026-11-20
+  quote: Naturally, the descriptor would also need to be designed to handle single
+    keys, ensuring compatibility with Falcon .
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null

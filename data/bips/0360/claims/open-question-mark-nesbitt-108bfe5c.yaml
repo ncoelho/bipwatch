@@ -1,0 +1,26 @@
+id: open-question-mark-nesbitt-108bfe5c
+bip: 360
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether to drop the proposal's built-in multisig support for
+  quantum-resistant keys and instead require all chosen keys to sign, to
+  simplify the BIP.
+subject:
+  name: mark-nesbitt
+  type: person
+applies_to_version: 0.6.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#issuecomment-2706475073
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2025-03-07
+  retrieved: 2026-11-20
+  quote: "Have you considered eliminating the additional complexity required to
+    support multisig?  Perhaps it would be a simpler, cleaner BIP to address one
+    and only one need: quantum resistance."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-20
+  reviewed_by: null
