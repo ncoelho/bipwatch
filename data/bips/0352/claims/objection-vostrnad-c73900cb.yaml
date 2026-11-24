@@ -1,0 +1,26 @@
+id: objection-vostrnad-c73900cb
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Resolve the parity mismatch where an even-parity BIP340 scan key
+  combined with an arbitrary-parity input key sum gives different ECDH shared
+  secrets for sender and receiver about half the time.
+subject:
+  name: vostrnad
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1231325070
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-15
+  retrieved: 2026-11-24
+  quote: in about half the cases _ecdh_shared_secret_ is different for sender and
+    receiver. Isn't there a step missing that corrects for this, or am I missing
+    something?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

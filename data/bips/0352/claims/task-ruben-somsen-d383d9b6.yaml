@@ -1,0 +1,27 @@
+id: task-ruben-somsen-d383d9b6
+bip: 352
+kind: task
+status: addressed
+area: writing
+statement: Add a footnote explaining the alternative of adding each label point
+  to P0 and comparing to outputs, which is faster when eligible outputs
+  outnumber labels in use.
+subject:
+  name: Ruben Somsen
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1254371356
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-07-06
+  retrieved: 2026-11-24
+  quote: Alternatively, ''m·G'' could be added to ''P<sub>0</sub>'' for each label
+    ''m'' and compared to the transaction outputs. This is more performant in
+    cases where the number of eligible outputs exceeds the number of labels in
+    use.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

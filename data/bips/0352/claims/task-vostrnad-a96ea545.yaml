@@ -1,0 +1,24 @@
+id: task-vostrnad-a96ea545
+bip: 352
+kind: task
+status: addressed
+area: writing
+statement: Add an explicit sender step to negate taproot input private keys
+  whose public keys have an odd Y coordinate.
+subject:
+  name: vostrnad
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1246911474
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-29
+  retrieved: 2026-11-24
+  quote: doesn't the sender need to negate the taproot private keys whose public
+    keys have an odd Y coordinate?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

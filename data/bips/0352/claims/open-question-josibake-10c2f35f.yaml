@@ -1,0 +1,25 @@
+id: open-question-josibake-10c2f35f
+bip: 352
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether the 4-byte output index/counter integer is serialized
+  little-endian or big-endian, and how the serialization function is named.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1231913130
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-16
+  retrieved: 2026-11-24
+  quote: I'd prefer to keep it little-endian, as it's more consistent with the
+    rest of the BIP and consistent with how Bitcoin Core serializes `uint32_t`
+    types.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

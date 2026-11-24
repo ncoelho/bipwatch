@@ -1,0 +1,26 @@
+id: objection-ruben-somsen-2c1f395a
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Decide whether silent payment v0 addresses should allow optional
+  embedded metadata (such as a pseudonym) rather than forcing such data into a
+  v1 address.
+subject:
+  name: Ruben Somsen
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1254380682
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-07-06
+  retrieved: 2026-11-24
+  quote: I can imagine people will end up wanting to embed optional metadata in
+    the address, such as their pseudonym. The way it's written now, we'd force
+    them to use v1 for that...
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null
