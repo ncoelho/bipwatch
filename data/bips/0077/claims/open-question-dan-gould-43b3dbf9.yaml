@@ -1,0 +1,23 @@
+id: open-question-dan-gould-43b3dbf9
+bip: 77
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether the receiver fragment parameters in the Payjoin URI
+  must appear in a fixed order.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#discussion_r2096658265
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2025-05-20
+  retrieved: 2026-11-18
+  quote: The order is not fixed. Should it be?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

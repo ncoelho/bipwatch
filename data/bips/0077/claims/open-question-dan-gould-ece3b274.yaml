@@ -1,0 +1,25 @@
+id: open-question-dan-gould-ece3b274
+bip: 77
+kind: open-question
+status: addressed
+area: writing
+statement: Determine whether BIP 77 needs any accommodations for BIP 321 URIs
+  beyond mentioning them, and whether BIP 321 should be listed as a dependency
+  in the preamble.
+subject:
+  name: Dan Gould
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1483#discussion_r2110079715
+  type: github
+  title: "BIP 77: Async Payjoin"
+  date: 2025-05-27
+  retrieved: 2026-11-18
+  quote: Are you convinced this one change is all that is necessary (plus Depends
+    on BIP 321 in the preamble)?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
