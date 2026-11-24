@@ -1,0 +1,27 @@
+id: task-ariard-5b4a0cb1
+bip: 54
+kind: task
+status: open
+area: testing
+part_of: bitcoin core implementation
+statement: Add a test that exercises the sigops counting with a P2SH
+  redeemScript containing deeply nested control flow (e.g. 10-deep OP_IF/OP_ELSE
+  around OP_CHECKSIG), since fuzzing may never generate such structured scripts.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#discussion_r3739713347
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-08-08
+  retrieved: 2026-11-23
+  quote: getting tortuous and valid control flow redeemScript with 10-depth OP_IF
+    then the OP_CHECKSIG, then 10-depth OP_ENDIF, or with OP_ELSE to exerciser
+    the consensus sigops script parser
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null

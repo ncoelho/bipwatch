@@ -1,0 +1,26 @@
+id: task-ajtowns-b2b04800
+bip: 54
+kind: task
+status: open
+area: engineering
+part_of: bitcoin core implementation
+statement: Add a faster way in Bitcoin Core to query coinbase nLockTime values,
+  such as a dedicated RPC or a runtime cache of the last ~4032 blocks' coinbase
+  nLockTimes.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#issuecomment-3766931484
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-01-19
+  retrieved: 2026-11-23
+  quote: IMO we should add either some rpc that's faster; if necessary adding a
+    runtime cache of the last 4032 (?) blocks' coinbases' nlocktimes.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null

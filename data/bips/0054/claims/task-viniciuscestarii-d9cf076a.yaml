@@ -1,0 +1,27 @@
+id: task-viniciuscestarii-d9cf076a
+bip: 54
+kind: task
+status: open
+area: testing
+statement: Add tests to the Bitcoin Core BIP 54 implementation that check the
+  sigops limit, timewarp rule and coinbase locktime rule start applying at
+  exactly the activation block, so the three surviving mutants that shift
+  enforcement by one block are caught.
+subject:
+  name: ViniciusCestarii
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#issuecomment-6443600738
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-10-27
+  retrieved: 2026-11-23
+  quote: I ran some mutation testing and found 3 live mutants besides
+    https://github.com/bitcoin/bitcoin/pull/35793#discussion_r4338365979. These
+    3 move BIP54 enforcement by one block at activation.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null

@@ -1,0 +1,25 @@
+id: task-fjahr-efcbeddc
+bip: 54
+kind: task
+status: open
+area: engineering
+statement: Make Bitcoin Core's block template generation enforce the BIP 54
+  Murch–Zawy timestamp rule, with an accompanying test, submitted as a separate
+  pull request.
+subject:
+  name: fjahr
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#discussion_r3702441350
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-08-03
+  retrieved: 2026-11-23
+  quote: The miner currently does not enforce the murch-zawy rule but I think it
+    should.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null

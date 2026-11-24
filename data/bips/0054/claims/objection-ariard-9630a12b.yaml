@@ -1,0 +1,26 @@
+id: objection-ariard-9630a12b
+bip: 54
+kind: objection
+status: addressed
+area: engineering
+part_of: bitcoin core implementation
+statement: Ensure that, around activation, transactions violating the BIP 54
+  sigops limit cannot sit in a mempool and later be selected into a block
+  template that would make the block invalid.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#discussion_r3739728084
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-08-08
+  retrieved: 2026-11-23
+  quote: a tx might be okay at mempool reception, is stuck in the mempools, and
+    even after few blocks is selected in a template rendering it invalid.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null
