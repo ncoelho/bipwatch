@@ -1,0 +1,25 @@
+# Open work items that ask for the same thing, grouped by `npm run topics`;
+# pending review. Items not listed here stand alone.
+bip: 77
+grouped: 2026-11-24
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null
+topics:
+  - id: mitigate-ohttp-relay-timing-correlation-that-can-link-sender
+    title: Mitigate OHTTP relay timing correlation that can link sender and receiver IPs
+    items:
+      - objection-bitgould-292e16fd
+      - task-bitgould-07db9a16
+  - id: copy-the-bip-78-checklists-bip-77-relies-on-into-bip-77-inst
+    title: Copy the BIP 78 checklists BIP 77 relies on into BIP 77 instead of only referencing them
+    items:
+      - open-question-murch-322769c8
+      - open-question-murch-bb65d5c0
+      - task-murch-7c2690eb
+  - id: document-the-receiver-side-utxo-probing-attack-and-its-mitig
+    title: Document the receiver-side UTXO probing attack and its mitigations explicitly in BIP 77
+    items:
+      - task-yuval-kogman-3ad66470
+      - task-yuval-kogman-93383276

@@ -1,0 +1,47 @@
+# Open work items that ask for the same thing, grouped by `npm run topics`;
+# pending review. Items not listed here stand alone.
+bip: 22
+grouped: 2026-11-24
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null
+topics:
+  - id: write-the-bip-54-getblocktemplate-coinbase-locktime-and-sequ
+    title: Write the BIP 54 getblocktemplate coinbase locktime and sequence changes as a separate
+      extension BIP, like BIP 145
+    items:
+      - objection-melvincarvalho-98aa3b87
+      - open-question-sjors-76e603a8
+      - task-antoine-poinsot-efdf0a64
+      - task-murch-121d3eb6
+      - task-sjors-26ebf4f3
+  - id: add-an-overview-of-the-request-build-propose-and-submit-work
+    title: Add an overview of the request, build, propose and submit workflow to BIP 22
+    items:
+      - task-pieter-wuille-75a406c5
+      - task-pieter-wuille-bcccfc48
+      - task-pieter-wuille-c12c1ec9
+  - id: justify-reduce-or-separate-the-many-optional-features-in-the
+    title: Justify, reduce or separate the many optional features in the getblocktemplate specification
+    items:
+      - objection-gavin-andresen-7fae8ee3
+      - objection-pieter-wuille-ef124732
+  - id: specify-the-coinbase-witness-reserved-value-and-segwit-commi
+    title: Specify the coinbase witness reserved value and SegWit commitment in getblocktemplate in a
+      new BIP
+    items:
+      - objection-sjors-0518c9d3
+      - task-sjors-provoost-3b4720c6
+  - id: bundle-a-getblocktemplate-capable-miner-with-bitcoin-core-to
+    title: Bundle a getblocktemplate-capable miner with Bitcoin Core to replace getwork-based mining
+    items:
+      - task-gregory-maxwell-84f71fcc
+      - task-gregory-maxwell-9b504155
+  - id: add-getblocktemplate-support-in-mining-and-pool-tools-so-poo
+    title: Add getblocktemplate support in mining and pool tools so pooled miners can choose their own
+      block transactions
+    items:
+      - task-mark-friedenbach-44d3fb93
+      - task-mike-hearn-5b1ad83e
+      - task-mike-hearn-5f7d961d

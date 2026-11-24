@@ -1,0 +1,204 @@
+# Open work items that ask for the same thing, grouped by `npm run topics`;
+# pending review. Items not listed here stand alone.
+bip: 360
+grouped: 2026-11-24
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null
+topics:
+  - id: address-the-concern-that-p2mr-spends-cost-more-than-p2tr-key
+    title: Address the concern that P2MR spends cost more than P2TR key-path spends and so discourage
+      adoption and migration
+    items:
+      - objection-antoine-poinsot-ccb1adde
+      - objection-antoine-poinsot-f58252b1
+      - objection-boris-nagaev-837ce85c
+      - objection-matt-corallo-89636c89
+      - objection-pieter-wuille-40a74b2a
+      - objection-pieter-wuille-5729a2ac
+      - objection-pieter-wuille-b7a440fe
+      - objection-sjors-provoost-f6200986
+  - id: address-the-objection-that-address-reuse-defeats-p2mr-s-long
+    title: Address the objection that address reuse defeats P2MR's long-exposure protection for most
+      wallets
+    items:
+      - objection-matt-corallo-08a21095
+      - objection-matt-corallo-4706c1a7
+      - objection-matt-corallo-49c59868
+      - objection-matt-corallo-71b62bfe
+      - objection-matt-corallo-af3fe266
+      - objection-matt-corallo-314e8e42
+  - id: qualify-p2mr-s-quantum-protection-which-holds-only-for-users
+    title: Qualify P2MR's quantum protection, which holds only for users who never share public keys or
+      xpubs
+    items:
+      - objection-pieter-wuille-21ed62e0
+      - objection-pieter-wuille-a0bdb257
+      - objection-pieter-wuille-ccbf137b
+  - id: decide-whether-p2mr-must-come-with-an-expected-p2mr-only-dis
+    title: Decide whether P2MR must come with an expected, P2MR-only disabling of EC spends to be useful
+      for key-sharing workflows
+    items:
+      - objection-pieter-wuille-669b59ca
+      - objection-pieter-wuille-88bbb204
+      - objection-pieter-wuille-f672ec12
+      - objection-boris-nagaev-bde6ac59
+      - open-question-pieter-wuille-8e122a41
+  - id: justify-choosing-p2mr-over-a-key-path-preserving-p2trv2-alte
+    title: Justify choosing P2MR over a key-path-preserving P2TRv2 alternative that signals future key
+      path disabling
+    items:
+      - objection-matt-corallo-8710e321
+      - objection-matt-corallo-f87c0c28
+      - open-question-matt-corallo-ea23f0fd
+      - objection-jonas-nick-f216164f
+      - objection-matt-corallo-f44f0dab
+  - id: deploy-p2mr-together-with-a-post-quantum-signature-scheme-in
+    title: Deploy P2MR together with a post-quantum signature scheme in one soft fork
+    items:
+      - objection-anthony-towns-5718b5db
+      - task-conduition-929aa357
+  - id: explain-why-p2mr-is-worthwhile-on-its-own-before-any-post-qu
+    title: Explain why P2MR is worthwhile on its own before any post-quantum signature scheme exists
+    items:
+      - objection-leishman-d29f3893
+      - objection-pieter-wuille-011b0be8
+  - id: address-the-concern-that-non-pq-use-of-p2mr-would-make-a-lat
+    title: Address the concern that non-PQ use of P2MR would make a later EC-disabling soft fork
+      confiscatory and hard to justify
+    items:
+      - objection-antoine-poinsot-7419b581
+      - objection-antoine-poinsot-cff2eb05
+  - id: address-the-loss-of-taproot-s-key-path-privacy-benefits-from
+    title: Address the loss of Taproot's key-path privacy benefits from removing the key path in P2MR
+    items:
+      - objection-antoine-poinsot-bdd3845b
+      - objection-antoine-poinsot-cd8e6458
+      - objection-matt-corallo-d66e58da
+  - id: add-an-explicit-fail-clause-for-a-control-byte-whose-low-bit
+    title: Add an explicit fail clause for a control byte whose low bit is not 1, or reword the footnote
+    items:
+      - open-question-jeanpablojp-68d04f67
+      - open-question-jeanpablojp-8c89bc5d
+      - task-jeanpablojp-c1696102
+  - id: update-reference-implementations-and-test-vectors-so-depth-z
+    title: Update reference implementations and test vectors so depth-zero script trees are
+      anyone-can-spend
+    items:
+      - task-conduition-c3838657
+      - task-hunter-beast-5ee8fe08
+  - id: fix-the-test-vector-control-block-byte-to-encode-the-declare
+    title: Fix the test vector control block byte to encode the declared non-default leaf version
+    items:
+      - task-jasonandjay-475195be
+      - task-murch-dd6892b2
+  - id: add-and-review-p2mr-spend-path-test-vectors-with-valid-and-i
+    title: Add and review P2MR spend-path test vectors with valid and invalid cases
+    items:
+      - task-jeanpablojp-9b65c2e6
+      - task-jeanpablojp-9e686122
+      - task-jeanpablojp-3676c0a9
+      - task-jeanpablojp-70388110
+  - id: resolve-the-segwit-version-2-collision-between-bip-360-and-b
+    title: Resolve the SegWit version 2 collision between BIP 360 and BIP 460 (CISA)
+    items:
+      - open-question-fjahr-8a092902
+      - task-jonatack-c4a8d494
+  - id: pair-p2mr-with-a-new-witness-style-so-ecc-leaf-spends-cost-t
+    title: Pair P2MR with a new witness style so ECC leaf spends cost the same as P2TR key path spends
+    items:
+      - open-question-pieter-wuille-afeb94d6
+      - task-pieter-wuille-57efb2a0
+  - id: work-out-xpub-style-public-child-key-derivation-for-post-qua
+    title: Work out xpub-style public child key derivation for post-quantum signature keys for
+      watch-only wallets
+    items:
+      - objection-mraksoll4-67e8c452
+      - objection-mraksoll4-bb1a471c
+      - open-question-hunter-beast-1892efa4
+      - open-question-hunter-beast-2119c2b6
+      - open-question-hunter-beast-6b8abc64
+      - open-question-mraksoll4-e1ca1795
+      - task-mraksoll4-bc18d0ed
+  - id: decide-whether-and-how-post-quantum-signatures-should-suppor
+    title: Decide whether and how post-quantum signatures should support cross-input signature aggregation
+    items:
+      - open-question-ethan-heilman-076ef311
+      - open-question-moonsettler-2f969e3e
+      - open-question-hunter-beast-0075f86a
+  - id: write-the-companion-bip-specifying-ml-dsa-and-slh-dsa-signat
+    title: Write the companion BIP specifying ML-DSA and SLH-DSA signature opcodes for P2MR tapscript
+    items:
+      - task-ethan-heilman-41ed91c6
+      - task-ethan-heilman-844ef057
+      - task-conduition-08b400e8
+      - task-conduition-01b1c9d4
+      - task-ethan-heilman-e1f2a441
+  - id: specify-a-hash-based-slh-dsa-checksig-opcode-usable-in-p2mr
+    title: Specify a hash-based (SLH-DSA) CHECKSIG opcode usable in P2MR leaf scripts
+    items:
+      - task-conduition-7d7cd291
+      - task-matt-corallo-fa94777b
+      - task-ethan-heilman-7cd0d05c
+      - task-ethan-heilman-a334d21b
+  - id: choose-smaller-bitcoin-tailored-slh-dsa-parameter-sets-to-sh
+    title: Choose smaller Bitcoin-tailored SLH-DSA parameter sets to shrink hash-based signatures
+    items:
+      - open-question-bas-westerbaan-23f2b386
+      - task-conduition-e46e9bec
+  - id: create-a-new-hd-wallet-standard-replacing-bip32-xpubs-for-de
+    title: Create a new HD wallet standard replacing BIP32 xpubs for deriving post-quantum keys in P2MR
+    items:
+      - task-ethan-heilman-7ff3252c
+      - task-ethan-heilman-fa7eeca5
+      - task-conduition-13de004d
+      - task-conduition-0f8e4c57
+  - id: find-a-way-to-derive-child-post-quantum-public-keys-from-a-m
+    title: Find a way to derive child post-quantum public keys from a master public key
+    items:
+      - open-question-conduition-53e4e228
+      - open-question-mraksoll4-cb500368
+  - id: add-wallet-mechanisms-that-warn-about-and-prevent-public-key
+    title: Add wallet mechanisms that warn about and prevent public key reuse for P2MR outputs
+    items:
+      - task-ethan-heilman-39f401d6
+      - task-ethan-heilman-ad7967f3
+  - id: implement-wallet-code-to-generate-slh-dsa-keys-and-build-a-p
+    title: Implement wallet code to generate SLH-DSA keys and build a P2MR tree with one leaf per
+      algorithm
+    items:
+      - task-ethan-heilman-770b91e4
+      - task-ethan-heilman-ca23666e
+  - id: resolve-the-loss-of-batch-validation-and-signature-abstracti
+    title: Resolve the loss of batch validation and signature abstraction from EC-leaf public key recovery
+    items:
+      - objection-pieter-wuille-3071acfb
+      - objection-pieter-wuille-4a698055
+  - id: analyze-whether-a-bip340-variant-not-committing-to-the-publi
+    title: Analyze whether a BIP340 variant not committing to the public key breaks higher-level
+      security proofs
+    items:
+      - open-question-pieter-wuille-b5ae2d7c
+      - task-boris-nagaev-7aaf4fd2
+  - id: develop-a-security-model-and-proof-for-the-recoverable-ec-le
+    title: Develop a security model and proof for the recoverable EC-leaf signature scheme
+    items:
+      - task-conduition-45f9e8ad
+      - task-conduition-ef45ffa6
+  - id: define-an-authenticated-outer-header-with-version-and-kdf-pa
+    title: Define an authenticated outer header with version and KDF parameters for the encrypted backup
+      format
+    items:
+      - objection-anzus-gemwallet-880b2713
+      - task-coldtest-berlin-9210ac25
+  - id: report-backup-aead-decryption-failure-as-authentication-fail
+    title: Report backup AEAD decryption failure as authentication failed rather than wrong password
+    items:
+      - task-anzus-gemwallet-f8f20426
+      - task-coldtest-berlin-79a379b2
+  - id: add-test-vectors-for-corrupted-encrypted-p2mr-backups
+    title: Add test vectors for corrupted encrypted P2MR backups
+    items:
+      - task-anzus-gemwallet-1fe6f824
+      - task-coldtest-berlin-025e3c70
