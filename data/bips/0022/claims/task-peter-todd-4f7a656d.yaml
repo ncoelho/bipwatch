@@ -1,7 +1,7 @@
 id: task-peter-todd-4f7a656d
 bip: 22
 kind: task
-status: open
+status: addressed
 area: engineering
 part_of: pooled-solo mining
 statement: Implement automatic fallback to local solo mining when the pool
@@ -20,6 +20,12 @@ source:
     We also want an automatic fallback to local solo mining if the pool
     can't be contacted.
   verified: true
+resolution:
+  url: https://gnusha.org/pi/bitcoindev/201306102123.15732.luke@dashjr.org/
+  quote: Failover already functions, but probably could use a rewrite...
+  date: 2013-06-10
+  found_by: model:claude-opus-5-5
+  found: 2026-11-24
 provenance:
   extracted_by: model:claude-opus-5-5
   extracted: 2026-11-14

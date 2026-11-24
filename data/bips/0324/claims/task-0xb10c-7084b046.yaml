@@ -1,7 +1,7 @@
 id: task-0xb10c-7084b046
 bip: 324
 kind: task
-status: open
+status: addressed
 area: engineering
 part_of: rust bip324 library
 statement: Implement BIP324 in Rust, for example inside rust-bitcoin or as a
@@ -22,6 +22,14 @@ source:
     [rust-bitcoin](https://github.com/rust-bitcoin/rust-bitcoin) library or some
     other place in their ecosystem (e.g. rust-bitcoin/bip324).
   verified: true
+resolution:
+  url: https://delvingbitcoin.org/t/bip324-proxy-easy-integration-of-v2-transport-protocol-for-light-clients-poc/678/11
+  quote: "@rustaceanrob and I have been hacking along in our BIP324 repo and have
+    a working rust-based v2 proxy (heavily influenced by your Python version) I
+    thought you might find interesting!"
+  date: 2024-04-14
+  found_by: model:claude-opus-5-5
+  found: 2026-11-24
 provenance:
   extracted_by: model:claude-opus-5-5
   extracted: 2026-11-14
