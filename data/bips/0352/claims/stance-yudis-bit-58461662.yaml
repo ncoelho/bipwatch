@@ -1,0 +1,28 @@
+id: stance-yudis-bit-58461662
+bip: 352
+kind: stance
+stance: ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2323
+  title: "BIP-352: add test vectors for malleated p2pkh pubkey extraction"
+statement: Yudis-bit approved the change adding BIP 352 test vectors for
+  malleated P2PKH pubkey extraction, after running the reference implementation
+  against the new vectors and checking the scriptSig encodings, hashes, tweaks
+  and signatures.
+subject:
+  name: Yudis-bit
+  type: person
+applies_to_version: 1.1.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2323#issuecomment-7074240074
+  type: github
+  title: "BIP-352: add test vectors for malleated p2pkh pubkey extraction"
+  date: 2026-11-22
+  retrieved: 2026-11-22
+  quote: ACK e8603368af23ae185eb81500923fa23421d650c8
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null
