@@ -1,0 +1,26 @@
+id: open-question-murch-07c60942
+bip: 360
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether the transaction flag for witness and attestation
+  sections should be a bit field, and whether an attestation can appear without
+  a witness section.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.5.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r1894391770
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2024-12-20
+  retrieved: 2026-11-23
+  quote: Should the flag not be considered a boolean array? 0x01 for witness, 0x02
+    for attestation, 0x03 for witness and attestation? Is it possible for an
+    attestation to appear without a witness section?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null

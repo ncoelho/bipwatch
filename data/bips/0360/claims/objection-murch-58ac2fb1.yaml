@@ -1,0 +1,26 @@
+id: objection-murch-58ac2fb1
+bip: 360
+kind: objection
+status: addressed
+area: design
+statement: Reconsider the Canary / Satoshi's Shield section, which strays from
+  the main topic and wrongly assumes attackers would target Satoshi's coins
+  first rather than large reused-address holdings.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.5.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r1894366970
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2024-12-20
+  retrieved: 2026-11-23
+  quote: This whole part about the Canary and Satoshi’s Shield feels a bit like an
+    excursion from the main topic. Anyway, if I were to attack anything, I
+    wouldn’t go after Satoshi’s coins.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null
