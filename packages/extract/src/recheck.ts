@@ -8,8 +8,10 @@ import { z } from 'zod';
  * an item addressed only by quoting, verbatim, the message or spec passage
  * that shows it; code checks the quote is really there before anything is
  * written. Everything else stays open. Items come in batches: one per thread
- * with new messages, and (with --spec) batches of items raised on an older
- * spec version, checked against the current text alone.
+ * with new messages, judged on those messages alone, and (with --spec)
+ * batches of items raised on an older spec version, judged on the current
+ * spec text. Only spec batches carry the spec: it is most of a prompt's
+ * tokens, and a thread batch rarely needs it.
  */
 
 export const RECHECK_VERSION = 1;
@@ -40,16 +42,33 @@ export const recheckable = (c: Claim) => WORK.includes(c.kind) && c.status !== '
 const clip = (s: string, n: number) => (s.length > n ? `${s.slice(0, n - 1)}…` : s);
 const oneLine = (s: string) => s.replace(/\s+/g, ' ').trim();
 
-export function recheckSystem(bip: BipRecord, specText: string | undefined): string {
-  return `You check whether open work on a Bitcoin Improvement Proposal has since been addressed, for BipWatch, a public site that lists the work that would move each BIP forward. Each item is a task, open question or objection someone raised in public discussion. Since then, the thread may have gone on and the spec may have changed.
+/**
+ * The instructions for one kind of batch. Thread batches judge items on the
+ * later messages alone; spec batches (withSpec) on the current spec text,
+ * which goes in the system prompt so it is cached across a BIP's batches.
+ */
+export function recheckSystem(bip: BipRecord, specText: string | undefined, withSpec: boolean): string {
+  const intro = `You check whether open work on Bitcoin Improvement Proposal ${bip.number} (${bip.title}) has since been addressed, for BipWatch, a public site that lists the work that would move each BIP forward. Each item is a task, open question or objection someone raised in public discussion.`;
+  const rules = `Be strict: an item marked addressed disappears from the list of open work, so mark it only when the quote alone would convince a reader. When unsure, it is open. Answer for every item in the batch.`;
+  if (!withSpec)
+    return `${intro} Since then, the thread went on.
 
-You get a batch of items, each with the date it was raised and the words it was raised in, and the messages posted later in the same thread, numbered. The current text of BIP ${bip.number} (${bip.title}) is below.
+You get a batch of items, each with the date it was raised and the words it was raised in, and the messages posted later in the same thread, numbered.
 
 For each item, decide:
-- addressed: something after it settles it. The task was done, the question was answered and the answer accepted, the objection was resolved or withdrawn, or the spec now says what the item asked for. Give the evidence: the number of the message, or "spec", and a quote copied exactly from it, one or two sentences that show it is settled.
-- open: nothing shows it settled. This includes replies that only agree, discuss, promise to do it later, or disagree. A message posted before the item was raised cannot settle it.
+- addressed: a later message settles it. The task was done, the question was answered and the answer accepted, or the objection was resolved or withdrawn. Give the evidence: the number of the message, and a quote copied exactly from it, one or two sentences that show it is settled.
+- open: nothing shows it settled. This includes replies that only agree, discuss, promise to do it later, or disagree, and changes to the spec you cannot see here. A message posted before the item was raised cannot settle it.
 
-Be strict: an item marked addressed disappears from the list of open work, so mark it only when the quote alone would convince a reader. When unsure, it is open. Answer for every item in the batch.
+${rules}`;
+  return `${intro} They were raised against an older version of the spec, which has changed since.
+
+You get a batch of items, each with the date it was raised, the spec version it was raised against and the words it was raised in. The current text of the spec is below.
+
+For each item, decide:
+- addressed: the current spec now does what the item asked for, or answers its question, or no longer contains what it objected to. Give the evidence: "spec", and a quote copied exactly from the spec, one or two sentences that show it is settled.
+- open: the spec does not show it settled.
+
+${rules}
 
 <spec bip="${bip.number}" revision="${bip.spec.revision.slice(0, 7)}">
 ${specText ? clip(specText, MAX_SPEC_CHARS) : '(not available)'}
@@ -107,6 +126,11 @@ export function checkRecheck(out: RecheckOutput, b: Batch, specText: string | un
     if (it.status !== 'addressed') continue;
     if (it.evidence === null || !it.quote) {
       errors.push(`${it.id}: addressed needs evidence (a message number or "spec") and a quote`);
+      continue;
+    }
+    // Each kind of batch sees one kind of evidence.
+    if ((it.evidence === 'spec') !== (b.thread === 'spec')) {
+      errors.push(`${it.id}: ${b.thread === 'spec' ? 'quote the spec ("spec")' : 'quote one of the numbered messages'}`);
       continue;
     }
     const text = evidenceText(b, it.evidence, specText);
