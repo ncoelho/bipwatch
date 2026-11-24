@@ -1,0 +1,24 @@
+id: open-question-matt-corallo-cb8164b7
+bip: 352
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether silent payment instructions in BIP 21 URIs/QR codes
+  could reuse the fallback taproot address as one of the public keys (a
+  split-pubkey address) instead of adding two extra keys.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#issuecomment-1954819980
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2024-02-20
+  retrieved: 2026-11-17
+  quote: Have you considered a split-pubkey address for BIP 21/QR Codes?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

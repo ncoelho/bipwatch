@@ -1,0 +1,26 @@
+id: task-matt-corallo-7b3cd853
+bip: 352
+kind: task
+status: open
+area: ux
+part_of: bip21 update
+statement: "Specify a standard way to put silent payment addresses in bitcoin:
+  URIs, such as an `sp` parameter, with or without a fallback on-chain address,
+  so wallets handle them consistently."
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#issuecomment-1971294765
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2024-02-29
+  retrieved: 2026-11-17
+  quote: Either way, please write it down so that we don't have wallets doing 20
+    different things.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

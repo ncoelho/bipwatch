@@ -1,0 +1,27 @@
+id: task-matt-corallo-5179ef45
+bip: 352
+kind: task
+status: open
+area: ux
+part_of: bip21 update
+statement: Specify a standard BIP21 URI parameter key where wallets look for a
+  silent payment address, keeping a fallback address usable by wallets that do
+  not support silent payments.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#issuecomment-1969999939
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2024-02-28
+  retrieved: 2026-11-17
+  quote: This BIP (or some BIP) needs to specify a standard place to look for a a
+    silent payment in a URI (with the features users want, presumably including
+    the ability to have backwards compatibility with existing wallets).
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

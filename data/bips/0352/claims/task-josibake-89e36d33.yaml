@@ -1,0 +1,26 @@
+id: task-josibake-89e36d33
+bip: 352
+kind: task
+status: open
+area: design
+part_of: multiparty silent payments
+statement: Write an updated recommendation or a new wallet BIP that standardizes
+  silent payment key derivation for FROST/MuSig wallets and scan key export.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#issuecomment-1885832157
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2024-01-10
+  retrieved: 2026-11-17
+  quote: I fully expect we will need to updated this recommendation or propose a
+    new wallet BIP for defining standards around FROST/Musig, exporting the scan
+    key, etc.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
