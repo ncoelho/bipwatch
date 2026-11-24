@@ -1,0 +1,24 @@
+id: objection-murch-d8aec43d
+bip: 360
+kind: objection
+status: addressed
+area: design
+statement: Reconsider whether introducing four different post-quantum signature
+  schemes at once is too ambitious for a single proposal.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.3.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#pullrequestreview-2430740303
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2024-11-12
+  retrieved: 2026-11-19
+  quote: I’m wondering whether introducing four different signature schemes at
+    once may be a bit too ambitious.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null

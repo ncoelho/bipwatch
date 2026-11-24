@@ -1,0 +1,26 @@
+id: task-jonatack-03ff1247
+bip: 360
+kind: task
+status: addressed
+area: writing
+statement: Fill in the sections marked TBD and add a backwards compatibility
+  section describing incompatibilities, their severity and suggested
+  mitigations.
+subject:
+  name: jonatack
+  type: person
+applies_to_version: 0.2.2
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#issuecomment-2386654766
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2024-10-01
+  retrieved: 2026-11-19
+  quote: Can you begin to write up the sections currently marked as TBD, along
+    with a backwards compatibility section (to describe incompatibilities,
+    severity, and suggest mitigations, where applicable/relevant)?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null

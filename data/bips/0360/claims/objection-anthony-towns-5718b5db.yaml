@@ -1,0 +1,27 @@
+id: objection-anthony-towns-5718b5db
+bip: 360
+kind: objection
+status: open
+area: design
+statement: Anthony Towns objects that introducing P2MR without also enabling a
+  quantum-safe spending path from day one has limited utility; P2MR should be
+  deployed together with post-quantum signatures.
+subject:
+  name: Anthony Towns
+  type: person
+applies_to_version: 0.12.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/ajN9be00Br-O3-9R@erisian.com.au/
+  type: mailing-list
+  title: Aligning privacy incentives in P2MR
+  date: 2026-06-18
+  retrieved: 2026-11-19
+  quote: |-
+    Personally, that leaves me at a minimum very skeptical of the utility
+    of introducing either P2MR or P2TRv2 (etc) approaches that don't also
+    introduce a quantum-safe spending path on day one.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null

@@ -1,0 +1,27 @@
+id: objection-pieter-wuille-f672ec12
+bip: 360
+kind: objection
+status: open
+area: design
+statement: Address that P2MR without an expected or codified EC-disabling
+  mechanism leaves users with onerous restrictions on sharing public keys to
+  stay CRQC-safe.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.12.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/yHRpA2LEJ2AugT4W2KiWO3ggSims4GuHBkr6rWtE-e1uVC2wh3ZqD4bUDyxXq1iEuPrezhZZeqDoG7uBLNvjbW0sk_UTorI1Pkz6LcKhXRA=@wuille.net/
+  type: mailing-list
+  title: "Giving teeth to expected EC disabling: P2XX(-T)(-ML)"
+  date: 2026-06-25
+  retrieved: 2026-11-19
+  quote: |-
+    P2MR as formulated doesn't need/have such an
+    expectation, but would still benefit from it, as users are otherwise
+    restricted to (IMO) extremely onerous restrictions on public key sharing.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-19
+  reviewed_by: null
