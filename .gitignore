@@ -8,3 +8,6 @@ site/.astro/
 data/freshness.json
 .env.anthropic
 data/generated/
+
+# Local Claude Code settings (preview launch config)
+.claude/
