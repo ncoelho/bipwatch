@@ -1,0 +1,27 @@
+id: open-question-matt-corallo-ea23f0fd
+bip: 360
+kind: open-question
+status: open
+area: design
+statement: Decide whether P2MR is preferable to a new taproot version with
+  identical semantics that signals a PQC pubkey exists in a leaf, so the key
+  path can later be disabled.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/cba894e1-f830-4ad5-9498-09f04faaadf7@mattcorallo.com/
+  type: mailing-list
+  title: In defense of a PQ output type
+  date: 2026-04-09
+  retrieved: 2026-11-18
+  quote: a new taproot "version" could be added which has identical semantics to
+    today's taproot but signals through an alternative version number (or maybe
+    there's a cleverer way to encode a bit somewhere that we should prefer) that
+    a PQC pubkey exist in a taproot leaf somewhere
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
