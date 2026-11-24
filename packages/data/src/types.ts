@@ -77,6 +77,10 @@ export interface Claim {
   kind: ClaimKind;
   statement: string;
   status?: 'open' | 'addressed' | 'disputed' | 'unknown';
+  /** Why an item raised open is now addressed: a later message or the spec, quoted. */
+  resolution?: { url: string; quote: string; date?: string; found_by: string; found: string };
+  /** A person's choice of priority group, overriding the computed one. Never set by an extractor. */
+  priority?: { tier: PriorityTier; by: string; on: string; note?: string };
   /** Tasks, open questions and objections: the kind of work it calls for. */
   area?: WorkArea;
   /**
@@ -112,6 +116,10 @@ export interface Claim {
   provenance: Provenance;
   tags?: string[];
 }
+
+/** Priority groups for open work; the site computes one unless a person set it (Claim.priority). */
+export const PRIORITY_TIERS = ['attention', 'important', 'later', 'outdated'] as const;
+export type PriorityTier = (typeof PRIORITY_TIERS)[number];
 
 export const NEED_DIMENSIONS = [
   'problem_evidence',

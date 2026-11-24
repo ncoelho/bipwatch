@@ -9,6 +9,7 @@
   },
   "scripts": {
     "validate": "tsx src/validate.ts",
+    "prioritise": "tsx src/prioritise.ts",
     "typecheck": "tsc --noEmit",
     "tracked": "tsx src/tracked.ts",
     "test": "vitest run"

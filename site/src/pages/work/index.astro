@@ -100,7 +100,7 @@ const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d
           ))}
           <button type="button" class="tbtn" data-tier-pill="all" aria-pressed="false">All <span class="mono tn" data-count>{items.length}</span></button>
         </div>
-        <p class="tier-hint"><span data-tier-hint>{TIER_HINT[firstTier]}</span>. Grouped by BipWatch from the type of work, each BIP's needs scores and status, and the item's age; nobody has reviewed these items yet.</p>
+        <p class="tier-hint"><span data-tier-hint>{TIER_HINT[firstTier]}</span>. Grouped by BipWatch from the type of work, each BIP's needs scores and status, and the item's age, unless a person set the group; nobody has reviewed these items yet.</p>
       </div>
       <div class="controls">
         <div class="left">
@@ -148,7 +148,7 @@ const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d
                       <span class:list={['age', 'mono', { oldage: i.old }]}>{age(i.date, today)}</span>
                     </span>
                     <span class="st">{title}</span>
-                    <span class="why"><span class:list={['tchip', i.tier]}>{TIER_LABEL[i.tier]}</span>{raised && <span class="times">{raised}</span>}{i.reasons.map((x) => <span class="reason">{x}</span>)}</span>
+                    <span class="why"><span class:list={['tchip', i.tier, { chosen: i.chosen }]}>{TIER_LABEL[i.tier]}</span>{raised && <span class="times">{raised}</span>}{i.reasons.map((x) => <span class="reason">{x}</span>)}</span>
                     <span class="meta">{i.kindLabel} · {i.areaLabel} · {i.who} · {i.venue}{i.status === 'unknown' ? ' · status unknown' : ''}{i.old ? ' · may be out of date' : ''}</span>
                   </span>
                 </button>
@@ -333,6 +333,7 @@ const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d
   .tchip { font-size: 11.5px; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--inset); color: var(--muted); }
   .tchip.attention { background: var(--accent-soft); color: var(--accent-ink); }
   .tchip.important { background: var(--info-ground); color: var(--info-ink); }
+  .tchip.chosen { box-shadow: inset 0 0 0 1.5px currentColor; }
   .times { font-size: 12px; font-weight: 600; color: var(--fg-2); }
   .times + .reason::before { content: '· '; color: var(--faint); }
   .mhead { font-size: 12.5px; color: var(--muted); }

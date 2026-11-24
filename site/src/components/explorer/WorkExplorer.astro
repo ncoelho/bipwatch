@@ -13,7 +13,7 @@ import {
   AREA_LABEL, DIMENSION_LABEL, SOURCE_LABEL, WORK_KIND_LABEL,
   isPending, isStale, versionLabel, workModel,
 } from '../../lib/view.ts';
-import { TIERS, TIER_HINT, TIER_LABEL, triager, type Tier } from '../../lib/triage.ts';
+import { TIERS, TIER_HINT, TIER_LABEL, triager, withTopicChoices, type Tier } from '../../lib/triage.ts';
 import { raisedLabel, topicRows } from '../../lib/topics.ts';
 
 interface Props { bundle: BipBundle; }
@@ -34,7 +34,7 @@ const lede = onlyItself
 const dimAreas = (d: (typeof NEED_DIMENSIONS)[number]) => NEED_AREAS[d].filter((a) => m.areas.some((x) => x.area === a));
 // Priority groups (lib/triage.ts): open items by tier, then newest; addressed last.
 const triage = triager(bundle, new Date());
-const tierOf = new Map(m.items.filter((c) => c.status !== 'addressed').map((c) => [c.id, triage(c)]));
+const tierOf = withTopicChoices(new Map(m.items.filter((c) => c.status !== 'addressed').map((c) => [c.id, triage(c)])), bundle.claims, bundle.topics);
 const rank = (c: (typeof m.items)[number]) => { const t = tierOf.get(c.id); return t ? TIERS.indexOf(t.tier) : TIERS.length; };
 const listed = m.items.map((c, i) => ({ c, i })).sort((a, b) => rank(a.c) - rank(b.c) || a.i - b.i).map(({ c }) => c);
 // Items that ask for the same thing (topics.yaml) show once, under their best item.
@@ -165,7 +165,7 @@ const msgLink = (url: string) => url;
         ))}
         <button type="button" class="tbtn" data-tier-filter="all" aria-pressed="false">All <span class="mono tn" data-tier-count>{openRows.length}</span></button>
       </div>
-      <p class="tier-hint"><span data-tier-hint>{TIER_HINT[firstTier]}</span>. Grouped by BipWatch from the type of work, the needs scores, the BIP's status and the item's age; nobody has reviewed these items yet.</p>
+      <p class="tier-hint"><span data-tier-hint>{TIER_HINT[firstTier]}</span>. Grouped by BipWatch from the type of work, the needs scores, the BIP's status and the item's age, unless a person set the group; nobody has reviewed these items yet.</p>
     </div>
 
     <div class="split">
@@ -195,7 +195,7 @@ const msgLink = (url: string) => url;
                   <span class:list={['mark', kindMark(c.kind), { closed: !open }]} aria-hidden="true"></span>
                   <span class="rt">
                     <span>{r.topic?.title ?? c.statement}</span>
-                    {t && <span class="why"><span class:list={['tchip', t.tier]}>{TIER_LABEL[t.tier]}</span>{raised && <span class="times">{raised}</span>}{t.reasons.map((x) => <span class="reason">{x}</span>)}</span>}
+                    {t && <span class="why"><span class:list={['tchip', t.tier, { chosen: t.chosen }]}>{TIER_LABEL[t.tier]}</span>{raised && <span class="times">{raised}</span>}{t.reasons.map((x) => <span class="reason">{x}</span>)}</span>}
                     <span class="meta">{WORK_KIND_LABEL[c.kind]} · {c.area ? AREA_LABEL[c.area] : 'no type'}{m.useGrid ? ` · ${piece}` : ''} · {c.subject?.name} · {c.source.date ?? 'undated'}{open ? '' : ' · addressed'}</span>
                   </span>
                 </button>
@@ -229,6 +229,13 @@ const msgLink = (url: string) => url;
                       )}
                       <div class="who">Raised by <strong>{c.subject?.name}</strong> · {c.source.date ?? 'undated'} · {SOURCE_LABEL[c.source.type]}{c.source.title ? ` · ${c.source.title}` : ''}</div>
                     </>
+                  )}
+                  {!open && c.resolution && (
+                    <div class="resolved">
+                      <div class="rk">Addressed{c.resolution.date ? ` on ${c.resolution.date}` : ''}{/^(model|bot):/.test(c.resolution.found_by) ? ' · found by BipWatch, not yet reviewed' : ''}</div>
+                      <blockquote>“{c.resolution.quote}”</blockquote>
+                      <a href={c.resolution.url} rel="noopener">{/\/blob\//.test(c.resolution.url) ? 'Read the spec' : 'Open the reply'}</a>
+                    </div>
                   )}
                   {stale && <div class="stale">Raised on {versionLabel(c.applies_to_version)}. The spec is now at v{bip.version}; check it still applies.</div>}
                   {r.others.length === 0 && <a href={msgLink(c.source.url)} rel="noopener">Open the message</a>}
@@ -319,9 +326,13 @@ const msgLink = (url: string) => url;
   .tchip { font-size: 11.5px; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--inset); color: var(--muted); }
   .tchip.attention { background: var(--accent-soft); color: var(--accent-ink); }
   .tchip.important { background: var(--info-ground); color: var(--info-ink); }
+  /* Set by a person: a ring, so it reads as a decision, not a computation. */
+  .tchip.chosen { box-shadow: inset 0 0 0 1.5px currentColor; }
   .times { font-size: 12px; font-weight: 600; color: var(--fg-2); }
   .times + .reason::before { content: '· '; color: var(--faint); }
   .anchor { display: block; scroll-margin-top: 16px; }
+  .resolved { display: flex; flex-direction: column; gap: 6px; padding: 10px 12px; border-radius: 10px; background: var(--good-soft); }
+  .rk { font-size: 12.5px; font-weight: 600; color: var(--good-ink); }
   .mhead { font-size: 12.5px; color: var(--muted); }
   .mentions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
   .mentions > li { background: var(--inset); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; }
