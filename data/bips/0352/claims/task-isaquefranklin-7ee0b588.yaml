@@ -1,0 +1,28 @@
+id: task-isaquefranklin-7ee0b588
+bip: 352
+kind: task
+status: open
+area: writing
+statement: Clarify in the sender's output-creation steps that the K_max limit
+  caps the total number of outputs created per scan key (B_scan), not the number
+  of distinct addresses, so senders cannot create more outputs than the receiver
+  will scan.
+subject:
+  name: IsaqueFranklin
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2153#issuecomment-4608234694
+  type: github
+  title: "bip352: clarify/fix specification to disallow sender to create outputs
+    the receiver can't find"
+  date: 2026-06-03
+  retrieved: 2026-11-22
+  quote: it would be very nice to clarify in the BIP the true nature of `k_max`,
+    and that the really important check would be the one in the number of
+    outputs for a `B_scan`
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

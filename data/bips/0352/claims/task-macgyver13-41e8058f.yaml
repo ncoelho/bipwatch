@@ -1,0 +1,26 @@
+id: task-macgyver13-41e8058f
+bip: 352
+kind: task
+status: addressed
+area: testing
+part_of: BIP 375
+statement: Fix the BIP 375 test vectors and reference validator so that k is
+  assigned by sorting silent payment codes sharing a scan key lexicographically,
+  as the spec text requires, rather than by output index.
+subject:
+  name: macgyver13
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2256#issuecomment-5894753232
+  type: github
+  title: "bip-0375: assign k in output index order, fix labeled test vectors"
+  date: 2026-09-29
+  retrieved: 2026-11-22
+  quote: The BIP-375 test vectors that assign `k` across multiple outputs sharing
+    a scan key, and the reference validator's `k` assignment, are wrong
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

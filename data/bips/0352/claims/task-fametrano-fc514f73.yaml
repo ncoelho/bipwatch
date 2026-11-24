@@ -1,0 +1,28 @@
+id: task-fametrano-fc514f73
+bip: 352
+kind: task
+status: addressed
+area: writing
+part_of: BIP 375
+statement: Clarify that the version-byte-prefixed serialization applies to the
+  substitute output script used for unique identification, not to the
+  PSBT_OUT_SP_V0_INFO field itself.
+subject:
+  name: fametrano
+  type: person
+applies_to_version: 1.1.1
+source:
+  url: https://github.com/bitcoin/bips/pull/2207#issuecomment-5296095285
+  type: github
+  title: "BIP-375: correct labeled test vectors to include labeled-spend key in
+    PSBT_OUT_SP_V0_INFO"
+  date: 2026-08-14
+  retrieved: 2026-11-22
+  quote: |-
+    Since the sentence names the field rather than
+    the substitution, one line of disambiguation would help.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null
