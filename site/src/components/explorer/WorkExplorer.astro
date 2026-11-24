@@ -230,6 +230,13 @@ const msgLink = (url: string) => url;
                       <div class="who">Raised by <strong>{c.subject?.name}</strong> · {c.source.date ?? 'undated'} · {SOURCE_LABEL[c.source.type]}{c.source.title ? ` · ${c.source.title}` : ''}</div>
                     </>
                   )}
+                  {!open && c.resolution && (
+                    <div class="resolved">
+                      <div class="rk">Addressed{c.resolution.date ? ` on ${c.resolution.date}` : ''}{/^(model|bot):/.test(c.resolution.found_by) ? ' · found by BipWatch, not yet reviewed' : ''}</div>
+                      <blockquote>“{c.resolution.quote}”</blockquote>
+                      <a href={c.resolution.url} rel="noopener">{/\/blob\//.test(c.resolution.url) ? 'Read the spec' : 'Open the reply'}</a>
+                    </div>
+                  )}
                   {stale && <div class="stale">Raised on {versionLabel(c.applies_to_version)}. The spec is now at v{bip.version}; check it still applies.</div>}
                   {r.others.length === 0 && <a href={msgLink(c.source.url)} rel="noopener">Open the message</a>}
                 </div>
@@ -324,6 +331,8 @@ const msgLink = (url: string) => url;
   .times { font-size: 12px; font-weight: 600; color: var(--fg-2); }
   .times + .reason::before { content: '· '; color: var(--faint); }
   .anchor { display: block; scroll-margin-top: 16px; }
+  .resolved { display: flex; flex-direction: column; gap: 6px; padding: 10px 12px; border-radius: 10px; background: var(--good-soft); }
+  .rk { font-size: 12.5px; font-weight: 600; color: var(--good-ink); }
   .mhead { font-size: 12.5px; color: var(--muted); }
   .mentions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
   .mentions > li { background: var(--inset); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; }

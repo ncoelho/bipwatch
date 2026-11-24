@@ -32,6 +32,19 @@
       "description": "Lifecycle of tasks, objections and open questions: open (raised, not yet resolved as far as BipWatch knows), addressed (resolved, with the source showing it), disputed, unknown.",
       "enum": ["open", "addressed", "disputed", "unknown"]
     },
+    "resolution": {
+      "description": "Why an item that was raised open is now addressed: a later message in its thread, or the current spec text, quoted verbatim. Written by npm run recheck (found_by model:...) or by a person (human:...).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "quote", "found_by", "found"],
+      "properties": {
+        "url": { "description": "The later message, or the spec file at the revision quoted.", "type": "string", "format": "uri" },
+        "quote": { "type": "string", "minLength": 20, "maxLength": 600 },
+        "date": { "description": "When the message was posted.", "type": "string", "format": "date" },
+        "found_by": { "type": "string", "pattern": "^(human|model|bot):[A-Za-z0-9._-]+$" },
+        "found": { "type": "string", "format": "date" }
+      }
+    },
     "priority": {
       "description": "A person's choice of priority group for open work, overriding the one BipWatch computes. Set only by a person (npm run prioritise), never by an extractor. On an item in a topic it sets the whole topic's group; the latest choice wins.",
       "type": "object",

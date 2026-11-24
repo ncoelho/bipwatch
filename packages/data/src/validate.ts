@@ -185,6 +185,8 @@ for (const folder of folders) {
         report('error', rel(file), 'part_of is for tasks, open questions and objections only');
       if (claim.priority && !['task', 'open-question', 'objection'].includes(claim.kind))
         report('error', rel(file), 'priority is for tasks, open questions and objections only');
+      if (claim.resolution && claim.status !== 'addressed')
+        report('error', rel(file), 'resolution is only for addressed items');
       if (claim.priority && claim.status === 'addressed')
         report('warn', rel(file), 'priority set on an addressed item has no effect');
       if (claim.part_of && new RegExp(`^BIP[ -]?0*${claim.bip}$`, 'i').test(claim.part_of.trim()))

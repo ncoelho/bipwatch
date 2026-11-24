@@ -129,7 +129,7 @@ export async function finishRun(
 /** Field order for claim files, so diffs stay readable. */
 const ORDER: (keyof Claim)[] = [
   'id', 'bip', 'kind', 'status', 'priority', 'area', 'part_of', 'stance', 'condition', 'scope', 'change', 'statement', 'subject',
-  'implementation', 'applies_to_version', 'source', 'provenance', 'tags',
+  'implementation', 'applies_to_version', 'source', 'resolution', 'provenance', 'tags',
 ];
 
 export function claimYaml(c: Claim): string {

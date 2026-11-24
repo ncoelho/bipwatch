@@ -1,0 +1,73 @@
+name: recheck
+
+# Weekly: close open work that later messages or the current spec show
+# settled (npm run recheck, triage step 4). For each tracked BIP, the threads
+# of its open items with messages archived since the last recheck; with
+# "spec", also items raised on an older spec version. An item is closed only
+# with a verbatim quote that code finds in the message or spec. One pull
+# request lists every closed item with its quote. Off while EXTRACT_ENABLED
+# is not "true", like the other model jobs.
+
+on:
+  schedule:
+    - cron: '11 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      bip:
+        description: Only this BIP number (default every tracked BIP)
+        required: false
+      spec:
+        description: Also check items raised on an older spec version against the current text
+        type: boolean
+        default: false
+
+concurrency:
+  group: recheck
+  cancel-in-progress: false
+
+jobs:
+  recheck:
+    if: vars.EXTRACT_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+      - name: Fetch bitcoin/bips history
+        run: git clone --filter=blob:none --no-checkout https://github.com/bitcoin/bips.git ../bips
+      - uses: ./.github/actions/setup
+
+      - name: Recheck open work
+        id: run
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BUDGET: ${{ vars.RECHECK_BUDGET_TOKENS || '400000' }}
+          ONLY: ${{ inputs.bip }}
+          SPEC: ${{ inputs.spec }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ] || [ -z "$DATABASE_URL" ]; then
+            echo "::error::EXTRACT_ENABLED is true but ANTHROPIC_API_KEY or DATABASE_URL is not set"; exit 1
+          fi
+          args=(--budget "$BUDGET" --summary "$RUNNER_TEMP/summary.md")
+          if [ -n "$ONLY" ]; then args+=(--bip "$ONLY"); fi
+          if [ "$SPEC" = "true" ]; then args+=(--spec); fi
+          npm run recheck -- "${args[@]}"
+          if [ -f "$RUNNER_TEMP/summary.md" ]; then echo "closed=true" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Validate
+        if: steps.run.outputs.closed == 'true'
+        run: npm run validate -- --bips ../bips
+
+      - name: Open the pull request
+        if: steps.run.outputs.closed == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+          branch: bot/recheck/run-${{ github.run_id }}
+          add-paths: data/bips/*/claims/*.yaml
+          commit-message: 'Close open work that later messages show settled, pending review'
+          title: 'Close open work that later messages show settled, pending review'
+          body-path: ${{ runner.temp }}/summary.md
+          labels: claims
