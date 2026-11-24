@@ -1,0 +1,26 @@
+id: objection-brandon-black-a051171e
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Decide how P2TR inputs spent via script path are treated in shared
+  secret derivation, avoiding a rule that excludes otherwise allowable inputs
+  from the sender's tweak.
+subject:
+  name: Brandon Black
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1221870669
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-07
+  retrieved: 2026-11-23
+  quote: Hmm, can we instead put it on the recipient to exclude P2TR inputs from
+    the tweak if they are spent with script path, but let the sender include
+    them?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null

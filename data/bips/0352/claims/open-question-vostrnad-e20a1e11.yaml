@@ -1,0 +1,24 @@
+id: open-question-vostrnad-e20a1e11
+bip: 352
+kind: open-question
+status: open
+area: writing
+statement: Clarify in the spec how receivers should extract the public key from
+  non-standard P2PKH scriptSigs, and whether this requires a Script interpreter.
+subject:
+  name: vostrnad
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1222118313
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-07
+  retrieved: 2026-11-23
+  quote: How exactly is the parsing of public keys from non-standard scriptSigs
+    supposed to be done?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null

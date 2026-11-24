@@ -1,0 +1,26 @@
+id: objection-brandon-black-d0717be9
+bip: 352
+kind: objection
+status: addressed
+area: writing
+statement: Phrase the sender's P2TR input exclusion rule in terms of whether the
+  ECDH share can be computed for the input, so that aggregate keys such as
+  MuSig2 key paths are not needlessly excluded.
+subject:
+  name: Brandon Black
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1220408854
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-06
+  retrieved: 2026-11-23
+  quote: |-
+    Should this read
+    > Exclude ''P2TR'' outputs for whom `ax * Bscan` cannot be computed
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null

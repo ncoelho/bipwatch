@@ -1,0 +1,24 @@
+id: objection-brandon-black-8105318e
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Resolve whether skipping script-path inputs only when the internal
+  key is exactly the NUMS point H is acceptable, given that BIP 341 recommends
+  using H + rG to avoid revealing that key-path spending is impossible.
+subject:
+  name: Brandon Black
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1220411253
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-06
+  retrieved: 2026-11-23
+  quote: It seems inadvisable to specify `H` directly in this BIP.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null

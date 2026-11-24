@@ -1,0 +1,25 @@
+id: open-question-brandon-black-afa06a23
+bip: 352
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether taproot script-path spends can be included in shared
+  secret derivation as long as the sender can compute the key-path ECDH share,
+  skipping only inputs whose internal key is H.
+subject:
+  name: Brandon Black
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1222069440
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-07
+  retrieved: 2026-11-23
+  quote: can't we still include the script path spend as long as the keypath `ax *
+    Bscan` is included in the tweak?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-23
+  reviewed_by: null
