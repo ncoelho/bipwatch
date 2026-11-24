@@ -1,0 +1,27 @@
+id: objection-vostrnad-5a7e37ae
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Fix the parity mismatch from using x-only scan keys, either by
+  negating the scan private key with correct notation or by switching addresses
+  to 33-byte compressed keys.
+subject:
+  name: vostrnad
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1235694848
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-20
+  retrieved: 2026-11-24
+  quote: I don't have a strong opinion on how to correct the parity mismatch, but
+    "if _has_even_y(B<sub>scan</sub>)_ is false, negate _b<sub>scan</sub>_" has
+    the same problem as mentioned below that B<sub>scan</sub> is not an EC point
+    but a byte array.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

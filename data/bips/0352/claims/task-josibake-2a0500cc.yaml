@@ -1,0 +1,24 @@
+id: task-josibake-2a0500cc
+bip: 352
+kind: task
+status: addressed
+area: writing
+statement: Rework the spec's notation to clearly distinguish byte arrays from
+  elliptic curve points.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1236765323
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-21
+  retrieved: 2026-11-24
+  quote: I need to rework the notation a bit, per your point about byte arrays vs
+    EC points.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

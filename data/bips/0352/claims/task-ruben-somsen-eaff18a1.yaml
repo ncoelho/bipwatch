@@ -1,0 +1,27 @@
+id: task-ruben-somsen-eaff18a1
+bip: 352
+kind: task
+status: addressed
+area: writing
+statement: Clarify that every silent-payment-eligible transaction must be
+  scanned, and point back to the list of conditions under which a transaction is
+  skipped.
+subject:
+  name: Ruben Somsen
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1254449842
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-07-06
+  retrieved: 2026-11-24
+  quote: More precisely, any tx that is an eligible SP tx should be scanned. This
+    should also refer back to "A transaction is not a Silent Payments v0
+    transaction and should be skipped entirely when scanning if any of the
+    following are true"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

@@ -1,0 +1,24 @@
+id: objection-vostrnad-a49d66a5
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Make the ser32 serialization big-endian, matching its meaning in
+  BIP32, instead of redefining the reused notation as little-endian.
+subject:
+  name: vostrnad
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1231325561
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-15
+  retrieved: 2026-11-24
+  quote: In BIP32, ser<sub>32</sub>(i) is a big-endian serialization. Since we're
+    reusing the notation here, shouldn't we also reuse the meaning?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: objection-vostrnad-95540c5f
+bip: 352
+kind: objection
+status: addressed
+area: writing
+statement: Fix the specification's notation so that BIP340 x-only public keys,
+  which are byte arrays, are not treated as elliptic curve points in its
+  expressions.
+subject:
+  name: vostrnad
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1232861515
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-06-16
+  retrieved: 2026-11-24
+  quote: BIP340 public keys are byte arrays, not EC points, so I believe this and
+    all other expressions that implicitly treat them as such are technically
+    wrong
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-24
+  reviewed_by: null
