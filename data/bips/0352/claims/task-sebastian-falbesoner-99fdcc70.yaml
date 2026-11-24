@@ -1,0 +1,27 @@
+id: task-sebastian-falbesoner-99fdcc70
+bip: 352
+kind: task
+status: addressed
+area: engineering
+statement: Restructure the BIP 352 reference implementation so the sender's
+  private key sum check (a = 0) is reachable instead of being preempted by
+  public key summing during the input hash calculation.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1620#issuecomment-2179541859
+  type: github
+  title: "BIP-352: handle invalid privkey / pubkey sums for sending / scanning,
+    add changelog"
+  date: 2024-06-19
+  retrieved: 2026-11-18
+  quote: "that code part is currently unreachable, as the pubkey summing is done
+    first in the course of the input hash calculation, which seems a bit
+    odd/unintuitive (see PR #1622)"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
