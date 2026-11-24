@@ -18,6 +18,19 @@ describe('noMentions', () => {
   });
 });
 
+describe('noMentions on links in quotes', () => {
+  it('routes links to other repos through redirect.github.com, as in the recheck quote', () => {
+    const q = 'the former was actually based on this PR, see https://github.com/bitcoin/bips/pull/2047)), it seems';
+    expect(noMentions(q)).toBe('the former was actually based on this PR, see https://redirect.github.com/bitcoin/bips/pull/2047)), it seems');
+    expect(noMentions('[PR](https://github.com/bitcoin/bitcoin/pull/35793#issuecomment-1)')).toBe('[PR](https://redirect.github.com/bitcoin/bitcoin/pull/35793#issuecomment-1)');
+  });
+  it('puts owner/repo#123 in a code span, but not this repo or files', () => {
+    expect(noMentions('see bitcoin/bips#2232 and cryptoquick/bips#21.')).toBe('see `bitcoin/bips#2232` and `cryptoquick/bips#21`.');
+    expect(noMentions('ncoelho/bipwatch#20 and `bitcoin/bips#1` stay')).toBe('ncoelho/bipwatch#20 and `bitcoin/bips#1` stay');
+    expect(noMentions('https://github.com/bitcoin/bips/blob/master/bip-0352.mediawiki#specification')).toBe('https://github.com/bitcoin/bips/blob/master/bip-0352.mediawiki#specification');
+  });
+});
+
 describe('noBacklink', () => {
   it('routes other repos’ issues, pull requests and commits through redirect.github.com', () => {
     expect(noBacklink('https://github.com/bitcoin/bips/pull/1405')).toBe('https://redirect.github.com/bitcoin/bips/pull/1405');

@@ -14,15 +14,27 @@ const MENTION = /(^|[^\w`/@.-])@([A-Za-z0-9](?:[A-Za-z0-9-]{0,38}))(?![\w-]*`)/g
 
 const URL = /(https?:\/\/[^\s)\]>|]+)/;
 
+// owner/repo#123, which GitHub also turns into a cross-reference.
+const SHORT_REF = /(^|[^\w`/.-])([A-Za-z0-9][\w.-]*\/[\w.-]+#\d+)(?![\w`])/g;
+
 /**
- * Quoted text with every @login made inert. URLs are left whole: an @ inside
- * one (a mailing-list archive link, say) is not a mention, and a code span
- * there would break the link.
+ * Quoted or model-written text made safe to post: every @login and every
+ * owner/repo#123 goes in a code span, and every link to another repository's
+ * issue, pull request or commit goes through noBacklink. Quotes are where
+ * these hide: a reply that links the PR it talks about would otherwise post
+ * "mentioned this" there. An @ inside a URL (a mailing-list archive link,
+ * say) is not a mention and is left alone.
  */
 export function noMentions(text: string): string {
   return text
     .split(URL)
-    .map((part, i) => (i % 2 ? part : part.replace(MENTION, (_, pre: string, login: string) => `${pre}\`@${login}\``)))
+    .map((part, i) =>
+      i % 2
+        ? noBacklink(part)
+        : part
+            .replace(MENTION, (_, pre: string, login: string) => `${pre}\`@${login}\``)
+            .replace(SHORT_REF, (_, pre: string, ref: string) => (ref.toLowerCase().startsWith('ncoelho/bipwatch#') ? `${pre}${ref}` : `${pre}\`${ref}\``)),
+    )
     .join('');
 }
 
