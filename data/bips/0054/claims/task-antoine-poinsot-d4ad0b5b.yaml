@@ -1,0 +1,26 @@
+id: task-antoine-poinsot-d4ad0b5b
+bip: 54
+kind: task
+status: open
+area: research
+statement: Find someone with enough hashrate to demonstrate a Murch–Zawy attack
+  on testnet4 by privately mining at least three difficulty adjustment periods.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2015#discussion_r2560287424
+  type: github
+  title: "BIP54: Consensus Cleanup test vectors"
+  date: 2025-11-25
+  retrieved: 2026-11-22
+  quote: |-
+    A Murch-Zawy can also be done on testnet4, for what it's worth.
+
+    If we can find someone with some hashrate that could be interesting to do.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

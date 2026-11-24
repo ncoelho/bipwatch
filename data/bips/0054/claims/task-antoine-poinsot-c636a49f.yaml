@@ -1,0 +1,24 @@
+id: task-antoine-poinsot-c636a49f
+bip: 54
+kind: task
+status: open
+area: testing
+statement: Add a BIP 54 test vector covering a Segwit version 16 case, beyond
+  the existing versions 0, 1 and 2.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2015#discussion_r2560370500
+  type: github
+  title: "BIP54: Consensus Cleanup test vectors"
+  date: 2025-11-25
+  retrieved: 2026-11-22
+  quote: Maybe i could add a version 16 in a followup if you really think it's
+    worthwhile.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

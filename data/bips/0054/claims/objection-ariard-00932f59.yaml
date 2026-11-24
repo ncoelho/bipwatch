@@ -1,0 +1,29 @@
+id: objection-ariard-00932f59
+bip: 54
+kind: objection
+status: open
+area: design
+statement: Address the concern that invalidating 64-byte transactions forces
+  layer-2 protocols that assemble transactions from several parties'
+  contributions to check that the result is never exactly 64 bytes, and removes
+  burn and anyone-can-spend constructions that protocols such as spacechains and
+  miner fee bumping use.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/2159#discussion_r3345304118
+  type: github
+  title: "BIP 54: clarify 64-byte transactions item description and rationale"
+  date: 2026-06-03
+  retrieved: 2026-11-22
+  quote: if you're a l2 client and you're receiving txn contributions from another
+    party, now you have to be sure that result(txn_contributions) != 64 byte.
+    and yes burning funds as been used few times to design protocols e.g
+    spacechain it's an interesting primitive.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null

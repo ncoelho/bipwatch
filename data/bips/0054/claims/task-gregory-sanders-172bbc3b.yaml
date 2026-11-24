@@ -1,0 +1,25 @@
+id: task-gregory-sanders-172bbc3b
+bip: 54
+kind: task
+status: open
+area: testing
+statement: Add tests to the Bitcoin Core BIP 54 implementation that catch each
+  rule being enforced one block later than the activation height, since the
+  existing test suites do not detect this.
+subject:
+  name: Gregory Sanders
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#pullrequestreview-5601022293
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-10-21
+  retrieved: 2026-11-22
+  quote: only thing that wasn't killed was a test where rules are enforced *one
+    block late, for each rule*.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-22
+  reviewed_by: null
