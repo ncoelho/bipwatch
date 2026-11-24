@@ -1,0 +1,27 @@
+id: open-question-conduition-53e4e228
+bip: 360
+kind: open-question
+status: open
+area: research
+part_of: wallet support
+statement: Find a way to derive child post-quantum public keys (e.g. with ML-DSA
+  or isogenies) so wallets can derive BIP 360 script trees from a 'post-quantum
+  xpub', since SLH-DSA cannot emulate BIP32.
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.10.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/0e2402c5-d593-49ff-b002-5ab348b46964n@googlegroups.com/
+  type: mailing-list
+  title: Hash-Based Signatures for Bitcoin's Post-Quantum Future
+  date: 2025-12-09
+  retrieved: 2026-11-17
+  quote: I'm personally hoping that we'll find a way to derive child pubkeys using
+    lattices (ML-DSA) and/or isogenies (SQIsign), but I haven't heard of any
+    solid proposals yet.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null

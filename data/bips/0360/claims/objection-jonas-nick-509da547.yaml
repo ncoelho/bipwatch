@@ -1,0 +1,29 @@
+id: objection-jonas-nick-509da547
+bip: 360
+kind: objection
+status: open
+area: design
+part_of: pq signature bip
+statement: Weigh whether the post-quantum signature companion should use a more
+  efficient hash-based scheme instead of SLH-DSA, since network verification
+  cost and signature size (about 50% smaller) may matter more than an existing
+  ecosystem.
+subject:
+  name: Jonas Nick
+  type: person
+applies_to_version: 0.11.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/ea3a12db-e3fd-44b2-a22c-b960ed7ec6d3@gmail.com/
+  type: mailing-list
+  title: Algorithm Agility for Bitcoin to maintain security in the face of quantum
+    and classic breaks in the signature algorithms
+  date: 2026-02-10
+  retrieved: 2026-11-17
+  quote: |-
+    The downside is that SLH-DSA is less efficient for Bitcoin than alternative
+    hash-based signatures.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-17
+  reviewed_by: null
