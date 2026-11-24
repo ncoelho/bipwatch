@@ -1,0 +1,24 @@
+id: task-matt-corallo-e8f7777d
+bip: 353
+kind: task
+status: addressed
+area: writing
+statement: Spell out the serialization of the RFC 9102 proof carried in the PSBT
+  DNSSEC proof field instead of relying only on the RFC reference.
+subject:
+  name: Matt Corallo
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1657#discussion_r1730194647
+  type: github
+  title: Add a PSBT per-output field for BIP 353 DNSSEC Proofs
+  date: 2024-08-25
+  retrieved: 2026-11-18
+  quote: But I find the RFC to be a bit vague here, so it might be easier to just
+    write out what the serialization is supposed to be?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
