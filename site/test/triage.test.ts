@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { NEED_DIMENSIONS, type BipBundle, type Claim, type NeedsAssessment } from '@bipwatch/data';
-import { triager, weakDimensions } from '../src/lib/triage.ts';
+import { triager, weakDimensions, withTopicChoices, type Triage } from '../src/lib/triage.ts';
 
 const today = new Date('2026-11-24T12:00:00Z');
 let n = 0;
@@ -63,5 +63,27 @@ describe('triage', () => {
     const d = triager(bundle('Draft', null), today);
     expect(d(claim({ kind: 'objection', area: 'design' }))).toEqual({ tier: 'attention', reasons: ['Objection to a draft', 'Raised 2 weeks ago'] });
     expect(d(claim({ kind: 'task', area: 'design' })).tier).toBe('later');
+  });
+});
+
+describe('a person\'s choice', () => {
+  const t = triager(bundle('Complete', needs({ implementations: 1 })), today);
+  const p = { tier: 'later' as const, by: 'nuno', on: '2026-11-20', note: 'Waits for the index spec' };
+
+  it('wins over the rules, with who and why as the reasons', () => {
+    expect(t(claim({ priority: p }))).toEqual({ tier: 'later', reasons: ['Set by nuno on 2026-11-20', 'Waits for the index spec'], chosen: { by: 'nuno', on: '2026-11-20', note: 'Waits for the index spec' } });
+  });
+
+  it('sets the whole topic, the latest choice winning', () => {
+    const a = claim({ id: 'ta' });
+    const b = claim({ id: 'tb', priority: p });
+    const c = claim({ id: 'tc', priority: { tier: 'important', by: 'ann', on: '2026-11-22' } });
+    const lone = claim({ id: 'lone' });
+    const map = new Map<string, Triage>([a, b, c, lone].map((x) => [x.id, t(x)]));
+    const topics = { bip: 352, grouped: '2026-11-24', provenance: { extracted_by: 'model:m', extracted: '2026-11-24', reviewed_by: null }, topics: [{ id: 'x', title: 'Same thing here', items: ['ta', 'tb', 'tc'] }] };
+    withTopicChoices(map, [a, b, c, lone], topics);
+    expect(['ta', 'tb', 'tc'].map((id) => map.get(id)!.tier)).toEqual(['important', 'important', 'important']);
+    expect(map.get('ta')!.reasons[0]).toBe('Set by ann on 2026-11-22');
+    expect(map.get('lone')!.tier).toBe('attention');
   });
 });

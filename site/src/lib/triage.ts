@@ -17,9 +17,11 @@
 //   important  holds back
 //   later      everything else
 //
-// Nobody has reviewed the items yet (they are machine-extracted), so the
-// pages say these groups are computed.
-import { NEED_AREAS, NEED_DIMENSIONS, type BipBundle, type Claim, type NeedDimension } from '@bipwatch/data';
+// A person can set an item's group instead (Claim.priority, npm run
+// prioritise); that always wins, and on an item in a topic it sets the whole
+// topic (the latest choice wins). Otherwise the pages say the group is
+// computed, since nobody has reviewed the items yet.
+import { NEED_AREAS, NEED_DIMENSIONS, type BipBundle, type Claim, type NeedDimension, type Topics } from '@bipwatch/data';
 import { DIMENSION_LABEL, isStale, versionLabel } from './view.ts';
 
 export type Tier = 'attention' | 'important' | 'later' | 'outdated';
@@ -44,7 +46,18 @@ const NOT_YET_GOOD = 4;
 export const FRESH_DAYS = 90;
 export const OLD_DAYS = 730;
 
-export interface Triage { tier: Tier; reasons: string[] }
+export interface Triage {
+  tier: Tier;
+  reasons: string[];
+  /** Set when a person chose the group rather than the rules. */
+  chosen?: { by: string; on: string; note?: string };
+}
+
+const chosenBy = (p: NonNullable<Claim['priority']>): Triage => ({
+  tier: p.tier,
+  reasons: [`Set by ${p.by} on ${p.on}`, ...(p.note ? [p.note] : [])],
+  chosen: { by: p.by, on: p.on, ...(p.note ? { note: p.note } : {}) },
+});
 
 const DAY = 86_400_000;
 const daysAgo = (date: string, today: Date) => Math.floor((today.getTime() - Date.parse(`${date}T00:00:00Z`)) / DAY);
@@ -77,6 +90,7 @@ export function triager(b: BipBundle, today: Date): (c: Claim) => Triage {
   const draft = b.bip.status === 'Draft';
 
   return (c) => {
+    if (c.priority) return chosenBy(c.priority);
     const age = c.source.date ? daysAgo(c.source.date, today) : null;
     if (age !== null && age > OLD_DAYS) return { tier: 'outdated', reasons: [`Raised ${ago(age)}`] };
     // Only the BIP's own text has versions; companion pieces have their own.
@@ -97,4 +111,22 @@ export function triager(b: BipBundle, today: Date): (c: Claim) => Triage {
     if (holds.length) return { tier: 'important', reasons: [...holds, ...when] };
     return { tier: 'later', reasons: age === null ? ['From the spec text'] : when };
   };
+}
+
+/**
+ * A person's choice on any item in a topic sets the group of every item in it
+ * (the latest choice wins), so the topic's row shows what the person chose.
+ */
+export function withTopicChoices(triage: Map<string, Triage>, claims: Claim[], topics: Topics | null | undefined): Map<string, Triage> {
+  if (!topics) return triage;
+  const byId = new Map(claims.map((c) => [c.id, c]));
+  for (const t of topics.topics) {
+    const choice = t.items
+      .map((id) => byId.get(id)?.priority)
+      .filter((p): p is NonNullable<Claim['priority']> => !!p)
+      .sort((a, b) => b.on.localeCompare(a.on))[0];
+    if (!choice) continue;
+    for (const id of t.items) if (triage.has(id)) triage.set(id, chosenBy(choice));
+  }
+  return triage;
 }

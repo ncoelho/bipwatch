@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "validate": "npm run validate --workspace @bipwatch/data --",
+    "prioritise": "npm run prioritise --workspace @bipwatch/data --",
     "dev": "npm run dev --workspace site",
     "build": "npm run validate && npm run build --workspace site",
     "test": "npm test --workspaces --if-present",

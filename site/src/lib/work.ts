@@ -3,7 +3,7 @@
 // flags, and every number the page shows. The page template stays thin and
 // the island (work-explorer.ts) only filters what is rendered here.
 import { NEED_DIMENSIONS, WORK_AREAS, type BipBundle, type Claim, type WorkArea } from '@bipwatch/data';
-import { TIERS, triager, type Tier } from './triage.ts';
+import { TIERS, triager, withTopicChoices, type Tier, type Triage } from './triage.ts';
 import { topicRows, type TopicRow } from './topics.ts';
 import { AREA_LABEL, SOURCE_LABEL, WORK_KIND_LABEL, WORK_KINDS, bipHref, isPending, isStale, versionLabel } from './view.ts';
 
@@ -41,6 +41,7 @@ export interface WorkItem {
   /** Priority group and why (lib/triage.ts). */
   tier: Tier;
   reasons: string[];
+  chosen?: Triage['chosen'];
 }
 
 /** Hints for the type-of-work tiles. */
@@ -98,9 +99,10 @@ export function workItems(bundles: BipBundle[], canonical: (name: string) => str
   for (const b of bundles) {
     if (!b.bip.bipwatch.tracked) continue;
     const triage = triager(b, today);
-    for (const c of b.claims) {
-      if (!WORK_KINDS.includes(c.kind) || c.status === 'addressed') continue;
-      out.push({ ...toItem(c, b, canonical, today), ...triage(c) });
+    const open = b.claims.filter((c) => WORK_KINDS.includes(c.kind) && c.status !== 'addressed');
+    const tri = withTopicChoices(new Map(open.map((c) => [c.id, triage(c)])), b.claims, b.topics);
+    for (const c of open) {
+      out.push({ ...toItem(c, b, canonical, today), ...tri.get(c.id)! });
     }
   }
   return sortItems(out, 'new');
