@@ -1,0 +1,30 @@
+id: task-antoine-poinsot-02d6f05b
+bip: 54
+kind: task
+status: addressed
+area: testing
+part_of: slow blocks signet demo
+statement: Create and publicly share a slow-but-not-worst-case block on Signet
+  to demonstrate that it is invalid on Inquisition with BIP 54 active.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/wJZkcSEOQD5Z8rsel8TJCSkUJiwn7YepjyOfSDHKt3P_4Fvh9MFu_oiva3G6C-Q_1CmRTCj6lqmVm6ZeZG8WbdVrCo4IZUFg3VazRdJ48AQ=@protonmail.com/
+  type: mailing-list
+  title: BIP 54 active on Bitcoin Inquisition
+  date: 2026-02-13
+  retrieved: 2026-11-18
+  quote: >-
+    Perhaps we could create a Signet block that is slow but
+
+    not quite as bad as the worst case, and share it here to demonstrate it is
+    now invalid on
+
+    Inquisition?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

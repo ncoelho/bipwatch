@@ -1,0 +1,26 @@
+id: objection-josh-doman-a8f32f4e
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Decide whether BIP 54's timewarp fix should be kept, expired after
+  some block height, or dropped, given that it rules out a future soft fork that
+  fixes the u32 timestamp overflow.
+subject:
+  name: Josh Doman
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/2ac708f3-8e73-4cd5-ba62-be64a2acea04n@googlegroups.com/
+  type: mailing-list
+  title: Does GCC preclude a soft fork to handle timestamp overflow?
+  date: 2025-12-14
+  retrieved: 2026-11-18
+  quote: Is the possibility of a soft fork worth forgoing the timewarp fix? I'm
+    not sure. A compromise could be to expire the timewarp fix after a certain
+    block height
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

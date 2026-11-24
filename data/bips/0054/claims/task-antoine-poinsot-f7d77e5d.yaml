@@ -1,0 +1,31 @@
+id: task-antoine-poinsot-f7d77e5d
+bip: 54
+kind: task
+status: open
+area: activation
+statement: Hold off BIP 54 activation until there is good reason to believe the
+  vast majority of hashrate will not mine blocks containing transactions that
+  exceed the 2500 legacy sigop limit.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/49dyqqkf5NqGlGdinp6SELIoxzE_ONh3UIj6-EB8S804Id5yROq-b1uGK8DUru66eIlWuhb5R3nhRRutwuYjemiuOOBS2FQ4KWDnEh0wLuA=@protonmail.com/
+  type: mailing-list
+  title: Make pathological transactions with more than 2500 legacy signature
+    operations non-standard
+  date: 2025-07-02
+  retrieved: 2026-11-18
+  quote: >-
+    hold off activation of
+
+    BIP54 until we have good reasons to believe that the vast majority of the
+    hashrate won't create a
+
+    block containing such a transaction
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

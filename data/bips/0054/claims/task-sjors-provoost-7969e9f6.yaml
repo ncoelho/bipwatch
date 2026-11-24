@@ -1,0 +1,26 @@
+id: task-sjors-provoost-7969e9f6
+bip: 54
+kind: task
+status: open
+area: design
+part_of: mining pool support
+statement: Specify getblocktemplate fields (coinbase_locktime and
+  coinbase_sequence) so node software tells mining pools the coinbase nLockTime
+  and nSequence values that BIP 54 requires.
+subject:
+  name: Sjors Provoost
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/1A3B8BFA-41A6-4D0F-BBE6-E791F9785A5E@sprovoost.nl/
+  type: mailing-list
+  title: "Bip54: add sequence, timestamp (and version) to GBT"
+  date: 2026-02-09
+  retrieved: 2026-11-18
+  quote: it seems appropriate and convenient to have node software provide these
+    values via the getblocktemplate RPC.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

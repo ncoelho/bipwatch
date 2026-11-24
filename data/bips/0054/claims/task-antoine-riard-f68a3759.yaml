@@ -1,0 +1,27 @@
+id: task-antoine-riard-f68a3759
+bip: 54
+kind: task
+status: open
+area: writing
+statement: Document for wallet and off-chain protocol developers how they are
+  affected by the 2500 signature operation limit on pre-segwit scripts and by
+  the 64-byte transaction rule.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/CALZpt+GwkE1gH2-yrJXt=oqkrYR_ubdrMur0PG6aZvziJCHMLg@mail.gmail.com/
+  type: mailing-list
+  title: Getting BIP54 past the finish line
+  date: 2026-10-02
+  retrieved: 2026-11-18
+  quote: some parts of the BIP would be better to be more documented for any
+    wallet or off-chain protocol, in function of what they're doing it's good
+    for them to be aware of the proposed new 2500 pre-segwit script tx limit,
+    and the 64 byte outlawing rule
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

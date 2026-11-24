@@ -1,0 +1,27 @@
+id: objection-antoine-riard-be97141a
+bip: 54
+kind: objection
+status: open
+area: activation
+statement: Decide whether to split the four fixes into separate proposals, each
+  with its own deployment bit, instead of a single bundled activation.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/05f5b0ee-b487-4733-9860-ac0705b6b901n@googlegroups.com/
+  type: mailing-list
+  title: Addressing remaining points on BIP 54
+  date: 2026-01-08
+  retrieved: 2026-11-18
+  quote: |-
+    separating
+    the consensus changes in 4 distinct proposals is better development and 
+    deployment
+    practice
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

@@ -1,0 +1,25 @@
+id: objection-antoine-riard-4f13580d
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Justify or reconsider invalidating 64-byte transactions, given that
+  contract toolchains such as Lightning would have to rule out that size, for
+  example when burning funds to fees.
+subject:
+  name: Antoine Riard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/05f5b0ee-b487-4733-9860-ac0705b6b901n@googlegroups.com/
+  type: mailing-list
+  title: Addressing remaining points on BIP 54
+  date: 2026-01-08
+  retrieved: 2026-11-18
+  quote: the 64-byte limit size comes with a corner case, when you're burning
+    funds as additional fees to bump the confirmation of a time-sensitive tx.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null

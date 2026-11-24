@@ -1,0 +1,27 @@
+id: task-antoine-poinsot-7d152476
+bip: 54
+kind: task
+status: addressed
+area: writing
+statement: Narrow BIP 54's claim so it says invalidating 64-byte transactions
+  fixes the Merkle weakness without changes only for SPV verifiers that expect
+  proofs of transactions that cannot be 64 bytes.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://gnusha.org/pi/bitcoindev/zsUBtB2e_nQ-rup8cdIacq139Y1FznGRLQfq8XQ2lM-6SZNk3Kfucj2pxvX0YQ0QW1G2liAhenj8xYBFGqvzGLvtwZYFE5r1Xo2Y91O_Mz8=@protonmail.com/
+  type: mailing-list
+  title: Prohibit Merkle Internal Node Preimages That Encode Minimal 64-Byte
+    Transactions
+  date: 2026-06-05
+  retrieved: 2026-11-18
+  quote: BIP 54 should only claim that invalidating 64-byte transactions addresses
+    the issue with no change to SPV verifiers for those SPV verifiers that
+    expect proofs for transactions that cannot be 64-byte
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-18
+  reviewed_by: null
