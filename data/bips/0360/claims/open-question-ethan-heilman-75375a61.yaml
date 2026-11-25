@@ -1,0 +1,25 @@
+id: open-question-ethan-heilman-75375a61
+bip: 360
+kind: open-question
+status: open
+area: research
+part_of: pq signature bip
+statement: Check whether any existing scripts use OP_DUP on signatures, which
+  would break if duplicating stack elements larger than 520 bytes were
+  disallowed to support large post-quantum keys and signatures.
+subject:
+  name: Ethan Heilman
+  type: person
+applies_to_version: 0.9.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r2248427947
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2025-08-01
+  retrieved: 2026-11-25
+  quote: Does anyone do OP_DUP on signatures? This wouldn't break for PQ public keys.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null
