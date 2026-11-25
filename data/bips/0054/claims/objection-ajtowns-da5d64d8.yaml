@@ -1,0 +1,28 @@
+id: objection-ajtowns-da5d64d8
+bip: 54
+kind: objection
+status: addressed
+area: writing
+statement: Reword the BIP's description of the sigop limit so it does not say
+  'potentially executed' signature operations, and instead define the static
+  count (1 per CHECKSIG, 1-16 for OP_1..OP_16 CHECKMULTISIG, 20 otherwise,
+  including VERIFY variants).
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#discussion_r2703817811
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-01-19
+  retrieved: 2026-11-25
+  quote: Better to call it something like "the number of sigops in the script (one
+    for each `CHECKSIG` opcode, 1-16 for a `OP_1..OP_16 CHECKMULTISIG`, 20 for
+    any other instance of `CHECKMULTISIG`, including the `VERIFY` variants of
+    both)"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null

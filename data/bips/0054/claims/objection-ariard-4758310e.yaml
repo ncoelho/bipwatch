@@ -1,0 +1,25 @@
+id: objection-ariard-4758310e
+bip: 54
+kind: objection
+status: addressed
+area: design
+statement: Decide whether to drop the rule that the coinbase nSequence must not
+  be 0xffffffff, since the nLockTime height check alone makes the coinbase final
+  and nSequence could stay free as an extranonce.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#discussion_r2744549863
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-01-30
+  retrieved: 2026-11-25
+  quote: we can dissociate “coinbase finality” from “coinbase uniqueness” and
+    preserve the 32-bit nSequence field as an extranonce.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null

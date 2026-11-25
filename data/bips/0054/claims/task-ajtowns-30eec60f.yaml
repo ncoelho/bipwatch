@@ -1,0 +1,26 @@
+id: task-ajtowns-30eec60f
+bip: 54
+kind: task
+status: open
+area: engineering
+part_of: bitcoin inquisition
+statement: Refactor the timewarp checks into standalone functions so unit tests
+  can check them directly on header chains rebuilt from timestamps alone. This
+  would avoid PoW and -vbparams setup and shrink the test JSON file by about
+  3.6MB.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#discussion_r2704103926
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-01-19
+  retrieved: 2026-11-25
+  quote: I think it would be better to expose these tests as separate functions
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null
