@@ -1,0 +1,25 @@
+id: task-josibake-1d30afd9
+bip: 352
+kind: task
+status: addressed
+area: writing
+statement: Explain in the spec's testing section and in the reference
+  implementation that the B_m values must be sorted to get deterministic test
+  outputs, while noting the protocol itself does not need this sorting.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1279186166
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-07-31
+  retrieved: 2026-11-25
+  quote: I'll add a sorting step, but also a footnote that mentions that sorting
+    is not necessary for the protocol but useful for determinism in testing.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null

@@ -1,0 +1,24 @@
+id: task-vostrnad-39294f25
+bip: 352
+kind: task
+status: open
+area: writing
+statement: Add a footnote explaining why the scan key is independent rather than
+  derived from the spend key, including the role this plays for labels.
+subject:
+  name: vostrnad
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1283755572
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-08-03
+  retrieved: 2026-11-25
+  quote: There should be a footnote explaining the rationale for having an
+    independent scan key, as opposed to deriving it from the spend key.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null

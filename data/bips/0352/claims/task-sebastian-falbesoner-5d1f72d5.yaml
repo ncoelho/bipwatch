@@ -1,0 +1,24 @@
+id: task-sebastian-falbesoner-5d1f72d5
+bip: 352
+kind: task
+status: addressed
+area: writing
+statement: Add a footnote breaking down how the silent payment address length is
+  derived (HRP, separator, version, 66-byte payload, checksum).
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1271312933
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-07-22
+  retrieved: 2026-11-25
+  quote: I was wondering how exactly we end up with a limit of 117 characters,
+    maybe it's worth it to include a short breakdown (e.g. as a foot note)?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null
