@@ -1,0 +1,24 @@
+id: task-murch-5c1fbf04
+bip: 352
+kind: task
+status: addressed
+area: writing
+statement: Clarify that the SegWit version > 1 restriction applies only to
+  inputs spending unknown output types, not to outputs of unknown type in the
+  transaction.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1282031389
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-08-02
+  retrieved: 2026-11-25
+  quote: Could you clarify whether an output with an unknown type would be an issue?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null

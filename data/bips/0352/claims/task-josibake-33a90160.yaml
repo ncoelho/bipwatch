@@ -1,0 +1,25 @@
+id: task-josibake-33a90160
+bip: 352
+kind: task
+status: addressed
+area: writing
+statement: Clarify that scanning for the change label and other labels is only
+  needed when re-scanning or recovering from backup, not for a new wallet that
+  knows it does not use them.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1283099456
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-08-03
+  retrieved: 2026-11-25
+  quote: This is only relevant when re-scanning, so I think we should mention
+    something there.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null

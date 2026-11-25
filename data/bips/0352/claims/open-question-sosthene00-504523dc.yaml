@@ -1,0 +1,24 @@
+id: open-question-sosthene00-504523dc
+bip: 352
+kind: open-question
+status: addressed
+area: design
+statement: Specify exactly how a label m is defined and converted into the
+  32-byte scalar used to tweak the spend key.
+subject:
+  name: Sosthene00
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1273235873
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-07-25
+  retrieved: 2026-11-25
+  quote: Since we need to convert it to a 32 bytes scalar to tweak the spend key
+    wouldn't it be clearer and easier to specify it explicitly as such?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null
