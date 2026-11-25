@@ -1,0 +1,26 @@
+id: task-murch-7bab17ce
+bip: 360
+kind: task
+status: addressed
+area: writing
+statement: Replace the misleading term "tapleaf Merkle root" for the witness
+  program with accurate terminology, since the value described was a hash of the
+  Merkle root rather than the root itself.
+subject:
+  name: Murch
+  type: person
+applies_to_version: 0.8.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r2205980108
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2025-07-14
+  retrieved: 2026-11-25
+  quote: I would encourage you to find a different monicker than "tapleaf Merkle
+    root" given that it is not the Merkle root, but a hash of the Merkle root.
+    It might otherwise be confusing to implementers.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null

@@ -1,0 +1,26 @@
+id: task-achow101-9bd84037
+bip: 360
+kind: task
+status: addressed
+area: writing
+statement: Move the normative output and witness construction details out of the
+  Introduction/Design section into the Specification section so implementers do
+  not miss them.
+subject:
+  name: achow101
+  type: person
+applies_to_version: 0.8.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r2211523067
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2025-07-16
+  retrieved: 2026-11-25
+  quote: As an implementer, I will absolutely miss this relevant part of the
+    specification because I skipped past it to go to the section titled
+    "Specification".
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null

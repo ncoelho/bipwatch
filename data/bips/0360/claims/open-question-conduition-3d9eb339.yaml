@@ -1,0 +1,25 @@
+id: open-question-conduition-3d9eb339
+bip: 360
+kind: open-question
+status: open
+area: design
+part_of: pq signature bip
+statement: Decide how many years of continuous repeated signing an SLH-DSA key
+  must withstand while keeping 2^128 forgery security, to guide parameter
+  selection.
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.9.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r2248573220
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2025-08-01
+  retrieved: 2026-11-25
+  quote: I don't know what the magic number `X` is there.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null
