@@ -2,20 +2,19 @@
 // What needs doing (work page spec): every open task, open question and
 // objection across tracked BIPs, by type of work, BIP and piece. Everything
 // is derived at build time in lib/work.ts and rendered complete; without
-// JavaScript every row shows its detail and the tiles and grid cells are
-// links to the filtered URL. lib/work-explorer.ts only filters, sorts,
+// JavaScript every row shows its detail and the tiles and pieces are links
+// to the filtered URL. lib/work-explorer.ts only filters, sorts,
 // selects and mirrors the state in the query string.
 //
 // Rendering every row statically is fine at today's size. Past about 1,000
 // items, show the first 200 in the current order with a "Show 200 more"
 // button in work-explorer.ts.
-import { canonicalName, loadAll, loadPeople, NEED_DIMENSIONS } from '@bipwatch/data';
+import { canonicalName, loadAll, loadPeople } from '@bipwatch/data';
 import Base from '../../layouts/Base.astro';
-import { DIMENSION_LABEL } from '../../lib/view.ts';
 import { TIERS, TIER_HINT, TIER_LABEL } from '../../lib/triage.ts';
 import { raisedLabel } from '../../lib/topics.ts';
 import {
-  AREA_HINT, AREA_SHORT, age, areaLabel, gridRows, mapLead, pieceName, piecesLead, shade, topPieces, usedAreas, workItems, workRows, workStats,
+  AREA_HINT, age, areaLabel, pieceName, piecesLead, topPieces, usedAreas, workItems, workRows, workStats,
   type Area,
 } from '../../lib/work.ts';
 
@@ -24,7 +23,6 @@ const all = loadAll();
 const items = workItems(all, canonicalName(loadPeople()), today);
 const stats = workStats(items, all, today);
 const areas = usedAreas(items);
-const rows = gridRows(items, all, areas);
 const pieces = topPieces(items, 10);
 const maxPiece = Math.max(1, ...pieces.map((p) => p.open));
 const bipsWithOpen = [...new Set(items.map((i) => i.bip))].sort((a, b) => a - b);
@@ -44,7 +42,6 @@ const KINDS = [
 ] as const;
 // Priority groups: the list opens on the first group that has items.
 const firstTier = TIERS.find((t) => items.some((i) => i.tier === t)) ?? 'attention';
-const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d, i) => `${DIMENSION_LABEL[d]} ${needs[i] ?? 'not scored'}`).join(', ')}`;
 ---
 <Base title="What needs doing · BipWatch" current="work" description="Every open task, open question and objection across the BIPs BipWatch tracks, by type of work, BIP and piece. Each links to where it was raised.">
   <div class="shell page" data-work>
@@ -207,48 +204,11 @@ const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d
 
     <div class="section-head">
       <div class="eyebrow">Across all tracked BIPs</div>
-      <h2>Where help is needed</h2>
-      <p class="lead">{mapLead(items, rows, areas)}</p>
+      <h2 id="h-pieces">Biggest open pieces</h2>
+      <p class="lead">{piecesLead(items)} Pick one to filter the list above.</p>
     </div>
 
-    <section class="panel" aria-labelledby="h-map">
-      <div class="lh"><h2 id="h-map">Open items by BIP and type of work</h2><span class="sub">Pick a cell to filter the list above</span></div>
-      <div class="scroll">
-        <div class="grid" style={`--cols:${areas.length}`}>
-          <div class="grow ghead">
-            <span class="gl">BIP · needs, 5 = no help needed</span>
-            {areas.map((a) => <span class="gc" data-col={aKey(a)}>{AREA_SHORT[aKey(a) as keyof typeof AREA_SHORT]}</span>)}
-            <span class="gt">Open</span>
-          </div>
-          {rows.map((r) => (
-            <div class="grow" data-grid-row={r.bip}>
-              <a href={r.open ? `?bip=${r.bip}#list` : undefined} class:list={['ghd', { zero: !r.open }]} data-grid-bip={r.open ? r.bip : undefined}>
-                <span class="gn"><span class="mono">{r.bip}</span><span class="gtitle">{r.title}</span></span>
-                <span class="needs" role="img" aria-label={needsAria(r.needs)}>
-                  {r.needs.map((s) => <span class="ng">{[0, 1, 2, 3, 4].map((x) => <i class:list={[{ on: s !== null && x < s, hollow: s === null }]}></i>)}</span>)}
-                </span>
-              </a>
-              {r.cells.map((c) =>
-                c.n ? (
-                  <a href={`?bip=${r.bip}&area=${aKey(c.area)}#list`} class:list={['cell', 'mono', shade(c.n)]} data-cell-bip={r.bip} data-cell-area={aKey(c.area)} aria-label={`BIP ${r.bip}, ${areaLabel(c.area)}: ${c.n} open`}>{c.n}</a>
-                ) : (
-                  <span class="cell mono s0" role="img" data-cell-bip={r.bip} data-cell-area={aKey(c.area)} aria-label={`BIP ${r.bip}, ${areaLabel(c.area)}: 0 open`}>·</span>
-                ),
-              )}
-              <span class="gtot mono">{r.open}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div class="legend">
-        <span>Fewer</span><span class="ramp" aria-hidden="true"><i class="s1"></i><i class="s2"></i><i class="s3"></i><i class="s4"></i></span><span>More open items</span>
-        <span class="ln">Needs dots, in order: problem evidence, technical maturity, UX, implementations, ecosystem awareness, coordination. Hollow = not scored.</span>
-      </div>
-    </section>
-
     <section class="panel" aria-labelledby="h-pieces">
-      <h2 id="h-pieces">Biggest open pieces <span class="sub">· the BIP itself or a companion project</span></h2>
-      <p class="plead">{piecesLead(items)}</p>
       <div class="pieces">
         {pieces.map((p) => (
           <a href={`?piece=${encodeURIComponent(p.key)}#list`} class="prow" data-piece-row={p.key} data-bip={p.bip}>
@@ -390,41 +350,6 @@ const needsAria = (needs: (number | null)[]) => `Needs: ${NEED_DIMENSIONS.map((d
   .linkbtn { border: 0; background: transparent; padding: 0; color: var(--link); text-decoration: underline; font-size: 14px; }
   .section-head { margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
   .section-head .lead { margin-top: 10px; max-width: 720px; }
-  .scroll { overflow-x: auto; }
-  .grid { min-width: 900px; display: flex; flex-direction: column; gap: 3px; }
-  .grow { display: grid; grid-template-columns: minmax(250px, 2.6fr) repeat(var(--cols), minmax(52px, 1fr)) 52px; gap: 3px; align-items: stretch; }
-  .ghead span { font-size: 11.5px; color: var(--faint); padding: 4px 2px; }
-  .gc { text-align: center; border-radius: 6px; }
-  .gc.on { background: var(--info-ground); color: var(--info-ink); font-weight: 600; }
-  .gt { text-align: right; padding: 0 6px; }
-  .ghd { display: flex; flex-direction: column; justify-content: center; gap: 5px; padding: 8px 10px; border-radius: 8px; background: var(--inset); color: var(--fg); text-decoration: none; min-width: 0; min-height: 44px; }
-  .ghd[aria-pressed='true'] { background: var(--info-ground); box-shadow: inset 0 0 0 1.5px var(--info); }
-  .ghd.zero, .ghd.zero .gtitle { color: var(--faint); }
-  .ghd.zero .gn .mono { color: var(--faint); }
-  .gn { display: flex; gap: 8px; align-items: baseline; min-width: 0; }
-  .gn .mono { font-size: 12px; color: var(--muted); flex: none; }
-  .gtitle { font-size: 13.5px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .needs { display: flex; gap: 6px; align-items: center; }
-  .ng { display: flex; gap: 2px; }
-  .ng i { display: block; width: 5px; height: 5px; border-radius: 50%; background: #3A2A20; }
-  .ng i.on { background: var(--accent); }
-  .ng i.hollow { background: transparent; box-shadow: inset 0 0 0 1px #5A5A63; }
-  .cell { display: flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 6px; font-size: 13px; font-weight: 600; text-decoration: none; }
-  .cell.s0 { background: var(--inset); color: #5A5A63; }
-  .cell.s1 { --sc: #16233F; background: #16233F; color: var(--info-ink); }
-  .cell.s2 { --sc: #22406F; background: #22406F; color: #D6E4FF; }
-  .cell.s3 { --sc: #3A66B3; background: #3A66B3; color: #fff; }
-  .cell.s4 { --sc: #5E9BFF; background: #5E9BFF; color: #06101F; }
-  .cell.on { outline: 2px solid var(--fg); outline-offset: -2px; }
-  /* Outside the filter: the shade stays as a ring, the number stays readable. */
-  .cell.dimmed:not(.s0) { background: var(--inset); color: var(--muted); box-shadow: inset 0 0 0 1.5px var(--sc); }
-  .gtot { align-self: center; text-align: right; padding: 0 6px; font-size: 13px; font-weight: 600; color: var(--accent-ink); }
-  .legend { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 12px; color: var(--faint); }
-  .ramp { display: flex; gap: 2px; }
-  .ramp i { width: 18px; height: 10px; border-radius: 2px; }
-  .ramp .s1 { background: #16233F; } .ramp .s2 { background: #22406F; } .ramp .s3 { background: #3A66B3; } .ramp .s4 { background: #5E9BFF; }
-  .ln { margin-left: 8px; }
-  .plead { font-size: 14px; color: var(--muted); }
   .pieces { display: flex; flex-direction: column; gap: 4px; }
   .prow { display: grid; grid-template-columns: minmax(200px, 280px) 1fr 40px; gap: 14px; align-items: center; width: 100%; min-height: 44px; padding: 8px 10px; border-radius: 10px; color: var(--fg); text-decoration: none; }
   .prow:hover { background: var(--inset); }
