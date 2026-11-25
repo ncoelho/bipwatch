@@ -1,0 +1,25 @@
+id: objection-ariard-dea1ecc6
+bip: 54
+kind: objection
+status: addressed
+area: research
+statement: Check whether early Bitcoin versions (such as 0.1.5) enforced
+  nLockTime finality during block validation, which affects the argument that
+  nLockTime-based coinbase uniqueness rules out past duplicates.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#discussion_r2744572458
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-01-30
+  retrieved: 2026-11-25
+  quote: at least on branch 0.1.5, `IsFinal()` sounds only to be verified at block
+    generation, not validation
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null

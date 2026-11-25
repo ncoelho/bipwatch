@@ -1,0 +1,27 @@
+id: task-ajtowns-19022354
+bip: 54
+kind: task
+status: addressed
+area: testing
+part_of: bitcoin core implementation
+statement: Fix the BIP54 fuzz test's handling of coinbase-like transactions,
+  either by dropping the coinbase assertion in CheckSigopsBIP54 or by returning
+  early for coinbases before calling CheckTxInputs.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#discussion_r2762938900
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-02-04
+  retrieved: 2026-11-25
+  quote: Alternatively, having `if (transaction.IsCoinBase()) { /* Not allowed to
+    call CheckTxInputs on a coinbase */ return; }` before setting
+    `enforce_bip54` could also make sense, I think.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null

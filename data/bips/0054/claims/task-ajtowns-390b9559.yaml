@@ -1,0 +1,26 @@
+id: task-ajtowns-390b9559
+bip: 54
+kind: task
+status: open
+area: testing
+statement: Shrink the BIP 54 timewarp header test vector JSON by dropping
+  redundant data (repeated headers, null coinbases, prevhash, fixed
+  version/nbits) so the vectors are easier to use.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#discussion_r2719629822
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-01-23
+  retrieved: 2026-11-25
+  quote: Even keeping the header checks, the json file is pretty absurd; dropping
+    the redundancies (repeated headers, null coinbases, prevhash, fixed
+    version/nbits etc) to reduce the file size is probably worth doing.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-25
+  reviewed_by: null
