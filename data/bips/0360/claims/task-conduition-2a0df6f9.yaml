@@ -1,0 +1,24 @@
+id: task-conduition-2a0df6f9
+bip: 360
+kind: task
+status: open
+area: writing
+statement: Add a warning to the address format section that P2MR and P2TR
+  addresses differ only by segwit version, so senders must parse and respect the
+  version number or risk burning coins.
+subject:
+  name: conduition
+  type: person
+applies_to_version: 0.10.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r2700501001
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2026-01-17
+  retrieved: 2026-11-26
+  quote: possibly insert a warning into this section of the spec document
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null
