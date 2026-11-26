@@ -1,0 +1,25 @@
+id: open-question-hunter-beast-6e9de84e
+bip: 360
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether P2MR addresses should use a new checksum constant (a
+  bech32m variant such as "bech32n" or "bech32q") so that unprepared wallets
+  cannot send funds to them and lose them.
+subject:
+  name: Hunter Beast
+  type: person
+applies_to_version: 0.10.1
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r2714402488
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2026-01-21
+  retrieved: 2026-11-26
+  quote: Another option is to punt on this problem, tweak the bech32m BCH coding
+    constant slightly, call it, idk, bech32n or bech32q.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

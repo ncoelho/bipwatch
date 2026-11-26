@@ -1,0 +1,27 @@
+id: objection-vostrnad-b086c694
+bip: 360
+kind: objection
+status: addressed
+area: writing
+statement: Make validation explicitly fail when there are exactly two witness
+  elements and the last starts with 0x50, rather than relying on the leaf
+  version bit requirement, to avoid a subtle divergence from P2TR annex
+  handling.
+subject:
+  name: vostrnad
+  type: person
+applies_to_version: 0.10.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1670#discussion_r2670806351
+  type: github
+  title: BIP 360 - Pay to Merkle Root (P2MR)
+  date: 2026-01-08
+  retrieved: 2026-11-26
+  quote: It just so happens that this will always fail because the 0x50 byte
+    doesn't meet the leaf version requirement that the lowest bit be set to 1,
+    but it might be preferable to make this explicit.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null
