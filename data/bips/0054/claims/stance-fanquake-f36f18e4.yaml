@@ -1,0 +1,26 @@
+id: stance-fanquake-f36f18e4
+bip: 54
+kind: stance
+stance: ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bitcoin/pull/35793
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+statement: fanquake approved the pull request implementing BIP 54 (Consensus
+  Cleanup) without mainnet activation, at a specific commit.
+subject:
+  name: fanquake
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#issuecomment-7170660097
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-11-25
+  retrieved: 2026-11-26
+  quote: ACK 58b418f85582b559ad9ac718e42251e5bc5aab3a
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null
