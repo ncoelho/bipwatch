@@ -1,0 +1,25 @@
+id: task-vostrnad-eb9a2fa8
+bip: 352
+kind: task
+status: addressed
+area: writing
+statement: Correct the spec's statement about hybrid public keys, since SegWit
+  requires compressed keys and hybrid keys could only appear in P2PKH inputs.
+subject:
+  name: vostrnad
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1328107599
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-09-17
+  retrieved: 2026-11-26
+  quote: Hybrid pubkeys are only supported in P2PKH, as SegWit requires compressed
+    keys by consensus. The sentence should probably be rewritten and placed
+    under the P2PKH section
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

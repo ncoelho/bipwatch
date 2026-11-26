@@ -1,0 +1,26 @@
+id: objection-benma-6386c7a7
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Avoid requiring hardware wallets to load and sort all outpoints when
+  computing the input hash, since memory-constrained signers cannot easily do
+  this.
+subject:
+  name: benma
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1337755627
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-09-26
+  retrieved: 2026-11-26
+  quote: Hardware wallets are constrained in memory and may not be able to load
+    all outpoints and sort them. As a result, they would have to restrict
+    transactions to already have sorted inputs at signing time
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

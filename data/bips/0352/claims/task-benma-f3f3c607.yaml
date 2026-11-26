@@ -1,0 +1,24 @@
+id: task-benma-f3f3c607
+bip: 352
+kind: task
+status: addressed
+area: research
+statement: Have a cryptographer assess whether an order-independent sum of
+  outpoint hashes is a safe replacement for hashing sorted outpoints.
+subject:
+  name: benma
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1337755627
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-09-26
+  retrieved: 2026-11-26
+  quote: It would be great if a cryptographer could validate if the above or
+    something similar works and if it is safe.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

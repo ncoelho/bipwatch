@@ -1,0 +1,25 @@
+id: objection-ruben-somsen-10078521
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Require wallets to always scan for the change label during recovery
+  instead of relying on the backup recording whether change labels were used.
+subject:
+  name: Ruben Somsen
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1285268297
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-08-06
+  retrieved: 2026-11-26
+  quote: I think we should just always scan for change. I don't see much of a
+    downside and it simplifies things. What if a user switches from a non-change
+    wallet to a change wallet. Do they now have to redo the backup?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

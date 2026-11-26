@@ -1,0 +1,26 @@
+id: objection-pieter-wuille-3433cffc
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Replace the input hash built by summing per-outpoint hashes, since an
+  adversary can cheaply find outpoint sets whose hash sums collide, with a
+  construction that resists deliberate collisions.
+subject:
+  name: Pieter Wuille
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1344033487
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-10-03
+  retrieved: 2026-11-26
+  quote: Deliberately constructing a set of say 32 (valid) outpoints such that the
+    sum of their hashes matches a fixed value is completely feasible (I'd guess
+    a few hours of CPU time). Collisions are even easier.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

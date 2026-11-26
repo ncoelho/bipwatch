@@ -1,0 +1,24 @@
+id: objection-benma-c0536af8
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Decide how the input hash commits to the transaction's outpoints so
+  that memory-constrained hardware wallets can compute it, for example by
+  summing per-outpoint hashes instead of hashing all sorted outpoints.
+subject:
+  name: benma
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1343740137
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-10-03
+  retrieved: 2026-11-26
+  quote: In that case, summing instead of hashing should still work.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

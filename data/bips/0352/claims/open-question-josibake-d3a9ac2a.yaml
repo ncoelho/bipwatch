@@ -1,0 +1,26 @@
+id: open-question-josibake-d3a9ac2a
+bip: 352
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether computing the input hash by hashing each outpoint and
+  summing the hashes is collision-resistant enough to guarantee a unique scalar
+  per set of UTXOs from a reused scriptPubKey, or choose a different
+  construction.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1343735751
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-10-03
+  retrieved: 2026-11-26
+  quote: the concern here with hashing each outpoint and summing is that we might
+    end up with the same scalar for two different sets of UTXOs?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

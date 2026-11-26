@@ -1,0 +1,25 @@
+id: open-question-ruben-somsen-d0b24692
+bip: 352
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether SegWit versions above 1 are the only spent output
+  types that should cause a transaction to be skipped for forward compatibility,
+  or whether other output types also matter.
+subject:
+  name: Ruben Somsen
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1285267239
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-08-06
+  retrieved: 2026-11-26
+  quote: Should `e.g. SegWit versions > 1` be `i.e. SegWit versions > 1`? Are
+    there others that matter?
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null
