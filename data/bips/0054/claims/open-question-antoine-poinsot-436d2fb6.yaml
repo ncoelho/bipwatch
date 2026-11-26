@@ -1,0 +1,26 @@
+id: open-question-antoine-poinsot-436d2fb6
+bip: 54
+kind: open-question
+status: open
+area: engineering
+part_of: bitcoin core implementation
+statement: Decide whether the Bitcoin Core implementation should report both the
+  64-byte transaction and tx-sigops violations as consensus errors or as
+  standardness errors, so that the two are consistent.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#discussion_r3545299042
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-07-08
+  retrieved: 2026-11-26
+  quote: Either way the 64-byte transaction error and the tx-sigops error need to
+    be consistent with each other.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

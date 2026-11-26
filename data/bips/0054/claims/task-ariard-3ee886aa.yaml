@@ -1,0 +1,27 @@
+id: task-ariard-3ee886aa
+bip: 54
+kind: task
+status: open
+area: review
+part_of: bitcoin core implementation
+statement: Check whether the BIP152 compact block reception code validates the
+  prefilled coinbase against the new rule before committing resources after
+  CMPCTBLOCK.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#discussion_r4672543560
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-11-23
+  retrieved: 2026-11-26
+  quote: This is unsure if the compact block validation code already sanitize on
+    the reception of a coinbase (to avoid fulfilling resources after the
+    `CMPCTBLOCK`)
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

@@ -1,0 +1,27 @@
+id: task-ariard-a16bb15f
+bip: 54
+kind: task
+status: open
+area: review
+part_of: bitcoin core implementation
+statement: Review the Bitcoin Core BIP 54 implementation for bad interactions
+  with the disconnectpool during reorgs caused by the new coinbase rules or the
+  sigops limit on spends of old inputs.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#pullrequestreview-6030139872
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-11-23
+  retrieved: 2026-11-26
+  quote: re-check if there is no bad interactions with the `disconnectpool` due to
+    the new rules applying on the coinbase or the max sigops for old inputs
+    spends
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

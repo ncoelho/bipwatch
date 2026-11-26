@@ -1,0 +1,28 @@
+id: open-question-antoine-poinsot-6f00149a
+bip: 54
+kind: open-question
+status: open
+area: engineering
+part_of: bitcoin core implementation
+statement: Decide whether the implementation should return consensus errors for
+  BIP 54 violations only once BIP 54 is active, which would mean duplicating the
+  checks outside `CheckTxInputs` instead of failing them as consensus errors
+  before activation.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#discussion_r3545217188
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-07-08
+  retrieved: 2026-11-26
+  quote: If we think it's important to only return a consensus error after 54
+    becomes active, then we should go back to duplicating the check instead of
+    having it as part of `CheckTxInputs`
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null
