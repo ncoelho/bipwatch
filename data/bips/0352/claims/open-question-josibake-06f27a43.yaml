@@ -1,0 +1,26 @@
+id: open-question-josibake-06f27a43
+bip: 352
+kind: open-question
+status: addressed
+area: design
+statement: Determine whether hashing and summing the outpoints for the input
+  hash is collision-resistant, or choose a different outpoint commitment.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1344018654
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-10-03
+  retrieved: 2026-11-26
+  quote: "I think the more important question is whether or not this approach is
+    collision-resistant: if hashing and summing a large number of outpoints,
+    what is this risk we end up with the same hash as a different set of
+    outpoints when spending from the same `scriptPubKey`?"
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

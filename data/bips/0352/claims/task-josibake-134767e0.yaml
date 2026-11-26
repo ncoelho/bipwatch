@@ -1,0 +1,24 @@
+id: task-josibake-134767e0
+bip: 352
+kind: task
+status: addressed
+area: writing
+statement: Clarify how input outpoints are sorted when computing the input hash,
+  e.g. by stating lexicographic ordering explicitly.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1284087831
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-08-04
+  retrieved: 2026-11-26
+  quote: It was mentioned by another reviewer offline that how to sort the
+    outpoints was a bit unclear
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

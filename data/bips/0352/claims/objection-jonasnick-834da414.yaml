@@ -1,0 +1,26 @@
+id: objection-jonasnick-834da414
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Replace the input hash built by summing per-outpoint hashes. Wagner's
+  generalized birthday algorithm makes that construction neither preimage- nor
+  collision-resistant against an adversary.
+subject:
+  name: jonasnick
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1343671220
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-10-03
+  retrieved: 2026-11-26
+  quote: See [Wagner's
+    algorithm](https://www.enseignement.polytechnique.fr/informatique/profs/Francois.Morain/Master1/Crypto/projects/Wagner02.pdf)
+    for the generalized birthday problem.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

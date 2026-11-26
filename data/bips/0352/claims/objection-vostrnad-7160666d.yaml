@@ -1,0 +1,27 @@
+id: objection-vostrnad-7160666d
+bip: 352
+kind: objection
+status: addressed
+area: writing
+statement: Explicitly list which output types the protocol covers, rather than
+  implicitly relying on policy-standard types, and say how non-standard but
+  consensus-valid scripts (e.g. large bare multisig, bare OP_1 anchors) are
+  treated.
+subject:
+  name: vostrnad
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1285273043
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-08-06
+  retrieved: 2026-11-26
+  quote: More importantly, we never specify what the "defined output types" are. I
+    automatically read this as all policy-standard output types, but
+    standardness rules can change.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null
