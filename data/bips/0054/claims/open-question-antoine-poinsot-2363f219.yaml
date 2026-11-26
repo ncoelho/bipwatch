@@ -1,0 +1,27 @@
+id: open-question-antoine-poinsot-2363f219
+bip: 54
+kind: open-question
+status: open
+area: engineering
+part_of: bitcoin core implementation
+statement: Decide whether the implementation should report BIP 54 violations as
+  consensus errors or standardness errors before BIP 54 activation, keeping the
+  sigops and 64-byte transaction errors consistent.
+subject:
+  name: Antoine Poinsot
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin-inquisition/bitcoin/pull/99#discussion_r3545099895
+  type: github
+  title: BIP54 "Consensus Cleanup" implementation
+  date: 2026-07-08
+  retrieved: 2026-11-26
+  quote: Actually this approach makes it so this now reports a consensus error
+    rather than a standardness one before 54 activation. So it's not clear to me
+    that it's better.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

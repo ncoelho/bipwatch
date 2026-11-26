@@ -1,0 +1,26 @@
+id: open-question-ariard-1b5bfb96
+bip: 54
+kind: open-question
+status: open
+area: engineering
+part_of: bitcoin core implementation
+statement: Decide whether the stateless coinbase nSequence check should be
+  performed in CheckTransaction() or CheckBlock() so that badly crafted
+  coinbases are rejected early.
+subject:
+  name: ariard
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#discussion_r4672543560
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-11-23
+  retrieved: 2026-11-26
+  quote: E.g I wonder if the check should be added in `CheckTransaction()` and be
+    used in the `PreChecks()` code path
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null

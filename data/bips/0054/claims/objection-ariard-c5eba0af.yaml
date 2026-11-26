@@ -1,0 +1,28 @@
+id: objection-ariard-c5eba0af
+bip: 54
+kind: objection
+status: open
+area: testing
+part_of: bitcoin core implementation
+statement: Test whether a relayed valid block can be mutated by changing the
+  coinbase nSequence so that it is wrongly treated as invalid, given that
+  CheckBlock() runs before ContextualCheckBlock() in some code paths such as
+  AcceptBlock().
+subject:
+  name: ariard
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#discussion_r4672543560
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-11-23
+  retrieved: 2026-11-26
+  quote: I have not test it but lacking to do so, it sounds you can mutate a valid
+    coinbase to alter its nSequence field and provoke the invalidity of the
+    whole block.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-26
+  reviewed_by: null
