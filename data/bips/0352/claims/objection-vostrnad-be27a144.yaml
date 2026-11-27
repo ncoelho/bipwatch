@@ -1,0 +1,25 @@
+id: objection-vostrnad-be27a144
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Reconsider including P2PK as an input type for shared secret
+  derivation, given its rare use and lack of a standard address format versus
+  the implementation burden.
+subject:
+  name: vostrnad
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1380861931
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-11-02
+  retrieved: 2026-11-27
+  quote: Why was P2PK recently added as an allowed input type? Is it really worth
+    the implementation burden
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-27
+  reviewed_by: null
