@@ -1,0 +1,27 @@
+id: task-ajtowns-df9fef07
+bip: 54
+kind: task
+status: open
+area: engineering
+part_of: bitcoin core implementation
+statement: Investigate why ContextualCheckBlock can be reached with a null
+  pindexPrev during ImportBlocks (seen in the kernel test), and make sure the
+  BIP 54 checks handle that case safely.
+subject:
+  name: ajtowns
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#discussion_r4715848996
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-11-27
+  retrieved: 2026-11-27
+  quote: I seem to get an error around `test/kernel/test_kernel.cpp(935)` (so
+    `chainman->ImportBlocks`) if I add a `pindexPrev != nullptr` assert at the
+    top of `ContextualCheckBlock`; haven't looked in any further detail.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-27
+  reviewed_by: null

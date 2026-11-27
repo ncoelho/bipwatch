@@ -1,0 +1,28 @@
+id: task-sebastian-falbesoner-38cddfd2
+bip: 54
+kind: task
+status: open
+area: testing
+part_of: bitcoin core implementation
+statement: In the Bitcoin Core BIP 54 tests, disable the deployment with a
+  NEVER_ACTIVE start time (-vbparams=consensuscleanup:-2:0) instead of 0:0, so
+  it cannot lock in and activate when the node mines enough signalling blocks
+  itself.
+subject:
+  name: Sebastian Falbesoner
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#discussion_r4709573327
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-11-26
+  retrieved: 2026-11-27
+  quote: I think for disabling BIP 54, setting the start time to -2
+    ([NEVER_ACTIVE](https://github.com/bitcoin/bitcoin/blob/63a3c03235b3263cda1ded2459188106c838438d/src/consensus/params.h#L82)),
+    e.g. `-vbparams=consensuscleanup:-2:0`, would be more robust here.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-27
+  reviewed_by: null
