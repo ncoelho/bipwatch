@@ -1,0 +1,26 @@
+id: open-question-josibake-f8a4e67b
+bip: 352
+kind: open-question
+status: addressed
+area: design
+statement: Decide whether to prevent a sender from forcing address reuse while
+  still following the protocol, since this could undermine confidence in silent
+  payments.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1378764969
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-11-01
+  retrieved: 2026-11-27
+  quote: perhaps the "malice" here is not to force address reuse for the receiver,
+    but to erode confidence in the protocol by forcing address reuse while still
+    following the protocol
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-27
+  reviewed_by: null

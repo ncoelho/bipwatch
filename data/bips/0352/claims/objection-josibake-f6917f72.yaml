@@ -1,0 +1,26 @@
+id: objection-josibake-f6917f72
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Replace the input hash scheme of sorting, concatenating and hashing
+  all outpoints, which is complex for memory-constrained hardware wallets, with
+  hashing only the lexicographically smallest outpoint.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1360613737
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-10-16
+  retrieved: 2026-11-27
+  quote: The issue with the old solution (sort the outpoints, concatenate, then
+    hash) is that it is generally complex and specifically difficult for
+    memory-constrained devices such as hardware wallets.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-27
+  reviewed_by: null

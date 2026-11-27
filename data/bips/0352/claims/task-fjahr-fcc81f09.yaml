@@ -1,0 +1,26 @@
+id: task-fjahr-fcc81f09
+bip: 352
+kind: task
+status: addressed
+area: writing
+statement: Note that anyone with two labeled addresses of the same receiver can
+  compute the difference between their spend keys, which may reveal how labels
+  are used.
+subject:
+  name: fjahr
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1372851725
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-10-26
+  retrieved: 2026-11-27
+  quote: given two different SP addresses with the same spend key the users could
+    calculate the "label diff". That may give some hints on the usage of labels
+    that is interesting for attackers.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-27
+  reviewed_by: null

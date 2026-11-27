@@ -1,0 +1,26 @@
+id: objection-fjahr-865e0804
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Prevent third parties from computing a receiver's labeled spend keys
+  (B1, B2, ...) from incrementing integers, because otherwise anyone can send to
+  them and labels cannot reliably identify the source of a payment.
+subject:
+  name: fjahr
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1372851725
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-10-26
+  retrieved: 2026-11-27
+  quote: It is also possible to spam labels if incremented integers are used as
+    recemmended, right? E.g. given B0 I can calculate B1, B2 etc. myself by just
+    adding `G` and send funds there to see what happens with them.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-27
+  reviewed_by: null

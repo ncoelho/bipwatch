@@ -1,0 +1,24 @@
+id: task-vostrnad-59255793
+bip: 352
+kind: task
+status: addressed
+area: design
+statement: Change the input hash to commit to only the lexicographically
+  smallest outpoint rather than all outpoints, keeping the benefits of sorting.
+subject:
+  name: vostrnad
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1355179828
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-10-11
+  retrieved: 2026-11-27
+  quote: we might as well use the lowest (lexicographically) outpoint and retain
+    the benefits of sorting
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-27
+  reviewed_by: null
