@@ -1,0 +1,27 @@
+id: stance-ismaelsadeeq-f7011bb9
+bip: 54
+kind: stance
+stance: ack
+scope: implementation
+change:
+  url: https://github.com/bitcoin/bitcoin/pull/35793
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+statement: ismaelsadeeq ACKed the pull request implementing BIP 54 consensus
+  rules without mainnet activation, having cross-checked the rules against the
+  specification and found they mirror it correctly.
+subject:
+  name: ismaelsadeeq
+  type: person
+applies_to_version: 1.0.0
+source:
+  url: https://github.com/bitcoin/bitcoin/pull/35793#pullrequestreview-6076845171
+  type: github
+  title: Implement BIP 54 (Consensus Cleanup) without mainnet activation
+  date: 2026-11-26
+  retrieved: 2026-11-27
+  quote: ACK 58b418f85582b559ad9ac718e42251e5bc5aab3a
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-27
+  reviewed_by: null
