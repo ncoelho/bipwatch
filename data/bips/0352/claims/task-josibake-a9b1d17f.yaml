@@ -1,0 +1,26 @@
+id: task-josibake-a9b1d17f
+bip: 352
+kind: task
+status: addressed
+area: design
+statement: Change the input hash to commit to only the lexicographically
+  smallest outpoint concatenated with the summed input public key A, i.e.
+  hash(outpoint || A), instead of hashing all outpoints.
+subject:
+  name: josibake
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1416760553
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-12-06
+  retrieved: 2026-11-28
+  quote: I don't see any issues with your proposal of `hash(outpoint || A)·A`. The
+    only correction would be we can concatenate the `outpoint` and `A` directly
+    (no need to hash the outpoint first).
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-28
+  reviewed_by: null

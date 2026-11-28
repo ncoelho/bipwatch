@@ -1,0 +1,26 @@
+id: objection-ruben-somsen-37203756
+bip: 352
+kind: objection
+status: addressed
+area: design
+statement: Hashing only one outpoint removes the circular reference that stops a
+  malicious sender from choosing a key that forces address reuse, so the input
+  hash needed to commit to the summed input key A (the fix the current spec
+  adopts).
+subject:
+  name: Ruben Somsen
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1395934177
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-11-16
+  retrieved: 2026-11-28
+  quote: It seems to me that another way to fix this is by reintroducing the
+    circular reference with `P0 = B + hash(hash(outpoint_hash || A)·b·A || 0)·G`
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-28
+  reviewed_by: null

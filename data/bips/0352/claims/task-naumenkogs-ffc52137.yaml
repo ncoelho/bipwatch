@@ -1,0 +1,24 @@
+id: task-naumenkogs-ffc52137
+bip: 352
+kind: task
+status: open
+area: writing
+statement: State explicitly in the labels section that a sender must not be able
+  to derive a labeled spend key B_m on the receiver's behalf.
+subject:
+  name: naumenkogs
+  type: person
+applies_to_version: 0.0.0
+source:
+  url: https://github.com/bitcoin/bips/pull/1458#discussion_r1390712673
+  type: github
+  title: "BIP 352: Silent Payments"
+  date: 2023-11-13
+  retrieved: 2026-11-28
+  quote: "This sets a requirement to the protocol: sender should not be able to
+    produce B_m on behalf of Bob. Should be more clear i think."
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-28
+  reviewed_by: null
