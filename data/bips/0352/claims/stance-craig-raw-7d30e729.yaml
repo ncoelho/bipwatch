@@ -1,0 +1,29 @@
+id: stance-craig-raw-7d30e729
+bip: 352
+kind: stance
+stance: concept-ack
+scope: change
+change:
+  url: https://github.com/bitcoin/bips/pull/2372
+  title: "BIP352: require the scan key path"
+statement: Craig Raw proposes amending BIP 352 to require wallets to derive the
+  scan key at m/352'/coin_type'/account'/1'/0 and to reserve that branch for
+  scan keys only. He argues this makes exporting the scan key safe and keeps
+  funds recoverable from a seed without scanning with several candidate keys.
+subject:
+  name: Craig Raw
+  type: person
+applies_to_version: 1.1.2
+source:
+  url: https://github.com/bitcoin/bips/pull/2372
+  type: github
+  title: "BIP352: require the scan key path"
+  date: 2026-11-27
+  retrieved: 2026-11-28
+  quote: Requiring the defined path, which is hardened, and reserving its branch
+    ensures that exporting the scan key exposes nothing else.
+  verified: true
+provenance:
+  extracted_by: model:claude-opus-5-5
+  extracted: 2026-11-28
+  reviewed_by: null
